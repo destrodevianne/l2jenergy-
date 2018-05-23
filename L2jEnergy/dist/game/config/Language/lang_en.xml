@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @author u3games -->
+<localization lang="English">
+	
+	<!-- Lang Setting -->
+	<message id="lang_current_successfully" text="Language successfully set to:"/>
+	
+	<!-- Recipes Data -->
+	<message id="no_recipe_id" text="No recipe for: %s%."/>
+	
+	<!-- Clan -->
+	<message id="clan_create_units_fail" text="You can't create any more sub-units of this type."/>
+	<message id="clan_leader_fail" text="Leader is not correct."/>
+	<message id="clan_alliance_done" text="Alliance %s% has been created."/>
+	<message id="clan_academy_member_grade" text="You cannot change academy member grade."/>
+	<message id="clan_file_transfer_error" text="File transfer error."/>
+	<message id="clan_no_such" text="No such clan."/>
+	<message id="clan_no_war" text="You aren't at war with this clan."/>
+	
+	<!-- Dimensional -->
+	<message id="dimensional_rift_full" text="Rift is full. Try later.."/>
+	<message id="no_invite_in_rift" text="You cannot invite a player when you are in the Dimensional Rift."/>
+	<message id="no_dismiss_player_in_rift" text="You can't dismiss party member when you are in Dimensional Rift."/>
+	
+	<!-- Duel -->
+	<message id="duel_canceled" text="The duel was canceled because a duelist engaged in PvP combat."/>
+	<message id="duel_no_action" text="You cannot do this while duelling."/>
+	
+	<!-- Events -->
+	<message id="event_no_register_in_other_event" text="Couldnt register you due other event participation."/>
+	<message id="event_team_blue_full" text="The Blue Team is full."/>
+	<message id="event_team_red_full" text="The Red Team is full."/>
+	<message id="event_time_register_over" text="The registration period for this event is over."/>
+	<message id="event_max_ip_reached" text="You have reached the maximum allowed participants per IP."/>
+	<message id="event_no_logout" text="A superior power doesn't allow you to leave the event."/>
+	<message id="event_team_need_points" text="Your team must have at least 10 points in total."/>
+	<message id="event_no_participant" text="That player is not an event participant."/>
+	<message id="event_no_observation" text="Cannot use while current Event."/>
+	<message id="event_no_observe_games" text="You can not observe games while registered on an event."/>
+	<message id="event_no_unregister" text="You cannot unregister to this event."/>
+	
+	<!-- Territory War -->
+	<message id="tw_not_register" text="Non participants can't pickup Territory Wards!"/>
+	<message id="tw_register_id" text="Registred TerrId: %s%."/>
+	<message id="tw_no_points" text="No points for you!"/>
+	<message id="tw_jobs" text="Your Territory's jobs:"/>
+	
+	<!-- Auctions -->
+	<message id="auction_wrong_conditions" text="Wrong conditions."/>
+	<message id="auction_canceled" text="Your auction has been canceled."/>
+	<message id="auction_invalid" text="Invalid Auction!"/>
+	<message id="auction_invalid_bid" text="Invalid bid!"/>
+	<message id="auction_invalid_duration" text="Invalid auction duration!"/>
+	<message id="auction_bidded" text="You have been out bidded."/>
+	<message id="auction_won" text="Congratulation you have won ClanHall!"/>
+	<message id="auction_fast" text="You are bidding too fast."/>
+	<message id="auction_next" text="The next auction will begin on the %s%."/>
+	
+	<!-- Clan Hall -->
+	<message id="ch_no_owner" text="This clan hall has no owner, you cannot change the configuration."/>
+	<message id="ch_cursed_weapon" text="The wielder of a cursed weapon cannot receive outside heals or buffs."/>
+	
+	<!-- Clan Hall Sieges -->
+	<message id="chs_level_restriction" text="Only clans of level %s% or higher may register for a Siegable Hall."/>
+	<message id="no_register_defender" text="You cannot register as a defender because %s% is owned by NPC."/>
+	
+	<!-- Frestress -->
+	<message id="fort_no_owner" text="This fortress has no owner, you cannot change the configuration."/>
+	
+	<!-- Castle -->
+	<message id="castle_no_lord_open_door" text="Only Castle doors can be open."/>
+	<message id="castle_no_lord_closed_door" text="Only Castle doors can be closed."/>
+	<message id="castle_no_clan_own" text="Your clan does not own a castle."/>
+	<message id="castle_gate_closed" text="The gate is being closed."/>
+	<message id="castle_manor_deactivated" text="Manor system is deactivated."/>
+	
+	<!-- Seven Signs -->
+	<message id="ss_teleported_nearest_seal" text="You have been teleported to the nearest town due to the beginning of the Seal Validation period."/>
+	<message id="ss_teleported_nearest_cabal" text="You have been teleported to the nearest town because you have not signed for any cabal."/>
+	<message id="ss_festival_ended_time" text="The Festival of Darkness will end in %s% minute(s)."/>
+	<message id="ss_festival_ended" text="The festival has ended. Your party leader must now register your score before the next festival takes place."/>
+	<message id="ss_remove_player" text="You have been removed from the festival arena."/>
+	<message id="ss_remove_party" text="%s% has been removed from the upcoming Festival."/>
+	<message id="ss_no_logout_player" text="You cannot log out while you are a participant in a Festival."/>
+	<message id="ss_no_restart_player" text="You cannot restart while you are a participant in a festival."/>
+	<message id="ss_no_resurrect_player" text="You may not resurrect participants in a festival."/>
+	<message id="ss_no_sign_up" text="You cannot sign up while a festival is in progress."/>
+	<message id="ss_no_register" text="You cannot register a score while a festival is in progress."/>
+	<message id="ss_no_contribute" text="You do not have any blood offerings to contribute."/>
+	<message id="ss_no_leave_party" text="Only the party leader can leave a festival when a party has minimum number of members."/>
+	<message id="ss_no_bonus" text="Bonuses cannot be paid during the competition period."/>
+	
+	<!-- Teleport -->
+	<message id="teleport_no_level" text="You don't have the sufficient access level to teleport there."/>
+	<message id="teleport_go_away" text="Go away, you're not welcome here."/>
+	<message id="respawn_in_seconds" text="You will be re-spawned in %s% seconds."/>
+	<message id="coords_fail" text="Error with your coords, Please ask a GM for help!"/>
+	
+	<!-- Village -->
+	<message id="no_sub_classes_available" text="There are no sub classes available at this time."/>
+	<message id="no_sub_classes_add" text="The sub class could not be added, you have been reverted to your base class."/>
+	<message id="pledge_name_change" text="Pledge name changed."/>
+	<message id="pledge_no_exists" text="Pledge don't exists."/>
+	
+	<!-- Illegal Action -->
+	<message id="info_illegal_action" text="ANTI-CHEAT: Illegal action performed!"/>
+	<message id="jail_player_illegal_action" text="ANTI-CHEAT: You will be teleported to GM Consultation Service area and jailed."/>
+	<message id="kick_player_illegal_action" text="ANTI-CHEAT: You will be kicked for illegal action, GM informed."/>
+	<message id="ban_player_illegal_action" text="ANTI-CHEAT: You are banned for illegal action, GM informed."/>
+	<message id="cheat_detected" text="ANTI-CHEAT: Ohh Cheat dont work? You have a problem now!"/>
+	
+	<!-- Petition -->
+	<message id="engage_accepted" text="Request to Engage has been -ACCEPTED-"/>
+	<message id="engage_denied" text="Request to Engage has been -DENIED-"/>
+	<message id="petition_fail" text="Your petition was rejected. Please try again later."/>
+	
+	<!-- Action -->
+	<message id="target_null" text="Not selected any target."/>
+	<message id="sit_forced" text="A dark force beyond your mortal understanding makes your knees to shake when you try to stand up..."/>
+	<message id="item_cannot_use" text="You cannot use this item."/>
+	<message id="remove_previous_connection" text="Remove previous connections first."/>
+	<message id="get_item_pet_too_fast" text="You get items from pet too fast."/>
+	<message id="give_item_pet_too_fast" text="You are giving items to pet too fast."/>
+	<message id="depositing_too_fast" text="You depositing items too fast."/>
+	<message id="withdrawing_too_fast" text="You are withdrawing items too fast."/>
+	<message id="trading_too_fast" text="You are trading too fast."/>
+	<message id="buying_too_fast" text="You are buying too fast."/>
+	<message id="refund_too_fast" text="You are using refund too fast."/>
+	<message id="buying_seeds_too_fast" text="You are buying seeds too fast."/>
+	<message id="selling_too_fast" text="You are selling items too fast."/>
+	<message id="crystallizing_too_fast" text="You are crystallizing too fast."/>
+	<message id="destroying_items_too_fast" text="You are destroying items too fast."/>
+	<message id="no_adena_count" text="You do not have enough Adena."/>
+	<message id="no_trade_mode" text="That person is in trade refusal mode."/>
+	<message id="no_trade_in_olys" text="A user currently participating in the Olympiad cannot accept or request a trade."/>
+	<message id="no_trade_in_chaotic_state" text="You cannot trade while you are in a chaotic state."/>
+	<message id="no_tradet_to_chaotic_target" text="You cannot request a trade while your target is in a chaotic state."/>
+	<message id="no_drop_in_jail" text="You cannot drop items in Jail."/>
+	<message id="no_trade_in_jail" text="You cannot trade while you are in in Jail."/>
+	<message id="no_invite_in_jail" text="You cannot invite a player while is in Jail."/>
+	<message id="no_chat_in_jail" text="You can not chat with players outside of the jail."/>
+	<message id="no_elemental_power_trading" text="You cannot add elemental power while trading."/>
+	<message id="no_recipe_while_trading" text="You may not alter your recipe book while trading."/>
+	<message id="no_exchange_items" text="You cannot exchange items while trading."/>
+	<message id="no_create_while_trading" text="You cannot create items while trading."/>
+	<message id="no_restart_while_trading" text="Cannot restart while trading."/>
+	<message id="transactions_disabled" text="Transactions are disabled for your Access Level."/>
+	<message id="no_pickup_mercenaries_party" text="You cannot pickup mercenaries while in a party."/>
+	<message id="no_pickup_mercenaries_lord" text="Only the castle lord can pickup mercenaries."/>
+	<message id="password_no_repeated" text="The new password doesn't match with the repeated one!"/>
+	<message id="password_shorter" text="The new password is shorter than 3 chars! Please try with a longer one."/>
+	<message id="password_longer" text="The new password is longer than 30 chars! Please try with a shorter one."/>
+	<message id="password_invalid" text="Invalid password data! You have to fill all boxes."/>
+	<message id="password_problem" text="A problem occured while changing password!"/>
+	<message id="no_hero_speak" text="Action failed. Heroes are only able to speak in the global channel once every 10 seconds."/>
+	<message id="no_spam_channel" text="Do not spam shout channel."/>
+	<message id="no_summon_wyvern_in_siege" text="You cannot summon wyvern while in siege."/>
+	<message id="no_buff_adventurer" text="Only adventurers who have not completed their 3rd class transfer may receive these buffs."/>
+	<message id="no_unstuck_in_jail" text="You cannot use unstuck while you are in jail."/>
+	<message id="unstuck_time_minutes" text="You use Escape: %s% minutes."/>
+	<message id="unstuck_time_seconds" text="You use Escape: %s% seconds."/>
+	
+	<!-- Command -->
+	<message id="command_channel_declined" text="The player declined to join your Command Channel."/>
+	<message id="command_channel_no_party" text="%s% doesn't have party and cannot be invited to Command Channel."/>
+	<message id="command_channel_invite" text="You invited %s% to your Command Channel."/>
+	
+	<!-- Pets -->
+	<message id="pet_name_check" text="Your pet's name can be up to 16 characters in length."/>
+	<message id="no_mount_in_flag_mode" text="You cannot mount a steed while holding a flag."/>
+	
+	<!-- Craft -->
+	<message id="item_creation_disabled" text="Item creation is currently disabled."/>
+	<message id="item_manufacture_aborted" text="Manufacture aborted."/>
+	<message id="item_creation_aborted" text="Item creation aborted."/>
+	<message id="item_manufacture_used" text="Manufacturer by %s%: used %c% - %i%."/>
+	<message id="item_manufacture_error" text="Recipe error!!!, please tell this to your GM."/>
+	
+	<!-- OutPost -->
+	<message id="outpost_residence_id" text="You must be on fort or castle ground to construct an outpost or flag."/>
+	<message id="outpost_siege_active" text="You can only construct an outpost or flag on siege field."/>
+	<message id="outpost_only_leader" text="You must be a clan leader to construct an outpost or flag."/>
+	
+	<!-- Zones -->
+	<message id="zone_temporary_enter" text="You have entered a temporary zone!"/>
+	<message id="zone_temporary_exit" text="You have left a temporary zone!"/>
+	<message id="zone_jail_no_out" text="You cannot cheat your way out of here. You must wait until your jail time is over!"/>
+	
+	<!-- Skills -->
+	<message id="skill_invalid_level" text="Invalid skill level, contact your admin!"/>
+	<message id="skill_learned" text="You have learned %s% new skills."/>
+	<message id="skill_sit_down" text="Cannot sit while casting."/>
+	<message id="skill_target_null" text="Target type of skill is not currently handled."/>
+	
+	<!-- Modes -->
+	<message id="player_already_block" text="Already in ignore list."/>
+	<message id="player_target_block" text="You are in target's block list."/>
+	<message id="player_no_connect" text="%s% isn't in the World."/>
+	<message id="player_offline" text="Player is in offline mode."/>
+	<message id="player_craft_mode" text="You are currently in Craft Mode."/>
+	<message id="player_kicked" text="You are kicked by gm."/>
+	<message id="player_chat_banned_time" text="You've been chat banned for %s%"/>
+	<message id="player_chat_banned_forever" text="You've been chat banned forever."/>
+	<message id="player_chat_banned_lifted" text="Your Chat ban has been lifted."/>
+	<message id="player_jail_time" text="You've been jailed for %s%"/>
+	<message id="player_jail_forever" text="You've been jailed forever."/>
+	<message id="player_jailed" text="Player is in jail."/>
+	<message id="player_debug_on" text="Debugging disabled."/>
+	<message id="player_debug_off" text="Debugging enabled."/>
+	<message id="player_fishing_off" text="Fishing is disabled!"/>
+	
+	<!-- Login -->
+	<message id="enter_in_mode_invulnerable" text="Entering world in Invulnerable mode."/>
+	<message id="enter_in_mode_invisible" text="Entering world in Invisible mode."/>
+	<message id="enter_in_mode_silence" text="Entering world in Silence mode."/>
+	<message id="enter_with_partner" text="Your Partner has logged in."/>
+	
+	<!-- Others -->
+	<message id="feature_disabled" text="This feature is disabled."/>
+	<message id="fish_dot_defined" text="Error - Fish are not defined."/>
+	<message id="teleport_protection_ended" text="Teleport spawn protection ended."/>
+	
+	<!-- Request Engage -->
+	<message id="request_engage_accepted" text="Request to Engage has been Accepted!"/>
+	<message id="request_engage_denied" text="Request to Engage has been Denied!"/>
+	
+	<!-- GM -->
+	<message id="gm_buy_list_info" text="Buy List [%s%]"/>
+	<message id="gm_remove_object" text="Removed NPC: %s%"/>
+	<message id="gm_add_object" text="Added NPC: %s%"/>
+	<message id="gm_command_disabled" text="User commandID %s% not implemented yet."/>
+	<message id="gm_command_not_exist" text="The command %s% does not exist!"/>
+	<message id="gm_command_not_access" text="You don't have the access rights to use this command!"/>
+	
+	<!-- ALL IA -->
+	<message id="dp_ia_skipping" text=": Skipping waiting time ..."/>
+	<message id="dp_ia_no_skip" text=": You can't skip waiting time right now!"/>
+	<message id="dp_ia_aborted" text=": Fight has been aborted!"/>
+	<message id="dp_ia_no_aborted" text=": You can't abort fight right now!"/>
+	<message id="dp_ia_minions" text=": All minions have been deleted!"/>
+	<message id="dp_ia_no_minions" text=": You can't despawn minions right now!"/>
+	
+	<!-- Antharas IA -->
+	<message id="dp_ia_antharas_respaw" text=": Antharas has been respawned."/>
+	<message id="dp_ia_antharas_live" text=": You can't respawn antharas while antharas is alive!"/>
+	
+	<!-- Baium IA -->
+	<message id="dp_ia_baium_no_respawn" text=": You cant respawn Baium while Baium is alive"/>
+	
+	<!-- Wedding -->
+	<message id="dp_wedding_married" text="Congratulations you are married!"/>
+	<message id="dp_wedding_married_notice" text="Congratulations to %s% and %i%! They have been married."/>
+	<message id="dp_wedding_declined" text="You declined your partner's marriage request."/>
+	<message id="dp_wedding_declined_notice" text="Your partner declined your marriage request."/>
+	
+	<!-- HANDLER -->
+	<message id="dp_handler_jail_error" text="You cannot use this function while you are jailed."/>
+	<message id="dp_handler_time" text="Server time is: %s%"/>
+	<message id="dp_handler_unstuck_time_m" text="You use Escape: %s% minutes."/>
+	<message id="dp_handler_unstuck_time_s" text="You use Escape: %s% seconds."/>
+	<message id="dp_handler_hellbound_locked" text="Hellbound is currently locked."/>
+	<message id="dp_handler_hellbound_level" text="Hellbound level: %s%"/>
+	<message id="dp_handler_setvcmd_clan_privileges" text="Your clan privileges have been set to %s% by %i%."/>
+</localization>

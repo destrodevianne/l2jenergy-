@@ -1,0 +1,35 @@
+<html>
+	<title>..:: * Mods Engine * ::..</title>
+	<body>
+	<center>
+		<table width=280 border=0 bgcolor=484848>
+			<tr>
+				<td width=130 align=center><font color=0582CA>L2JDevs Mods Engine</font></td>
+			</tr>
+		</table>
+		<br>
+		This is a channels engine for L2J servers that allows<br1>
+		you add new features to your server without<br1>
+		any effort.<br>
+		
+		Here you can see the whole channels loaded.<br1>
+		You can load or unload them at any time.
+		<br>
+		Load a new mod <br1>(write the jar name without .jar)
+		<br>
+		<multiedit var="newmod" width=200 height=21> 
+		<br>
+		<button value="Load" action="bypass -h admin_mods_load $newmod" width="70" height="21" back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF">
+		<br>
+		<img src="L2UI_CH3.herotower_deco" width=256 height=32>
+		<br><br>
+
+		<font color="LEVEL">
+		<table width=200>
+			%list%
+		</table></font>
+
+		<br><br>
+		<img src="L2UI_CH3.herotower_deco" width=256 height=32>
+	</body>
+</html>
