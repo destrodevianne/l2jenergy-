@@ -26,8 +26,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
@@ -38,7 +39,7 @@ import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
  */
 public abstract class IdFactory
 {
-	protected final Logger _log = Logger.getLogger(getClass().getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(IdFactory.class);
 	
 	@Deprecated
 	protected static final String[] ID_UPDATES =
@@ -133,7 +134,7 @@ public abstract class IdFactory
 	public static final int LAST_OID = 0x7FFFFFFF;
 	public static final int FREE_OBJECT_ID_SIZE = LAST_OID - FIRST_OID;
 	
-	protected static final IdFactory _instance;
+	protected static final IdFactory _instance = new BitSetIDFactory();
 	
 	protected IdFactory()
 	{
@@ -149,26 +150,6 @@ public abstract class IdFactory
 		cleanUpTimeStamps();
 	}
 	
-	static
-	{
-		switch (Config.IDFACTORY_TYPE)
-		{
-			case Compaction:
-				throw new UnsupportedOperationException("Compaction IdFactory is disabled.");
-				// _instance = new CompactionIDFactory();
-				// break;
-			case BitSet:
-				_instance = new BitSetIDFactory();
-				break;
-			case Stack:
-				_instance = new StackIDFactory();
-				break;
-			default:
-				_instance = null;
-				break;
-		}
-	}
-	
 	/**
 	 * Sets all character offline
 	 */
@@ -178,11 +159,11 @@ public abstract class IdFactory
 			Statement s = con.createStatement())
 		{
 			s.executeUpdate("UPDATE characters SET online = 0");
-			_log.info("Updated characters online status.");
+			LOG.info("Updated characters online status.");
 		}
 		catch (SQLException e)
 		{
-			_log.log(Level.WARNING, "Could not update characters online status: " + e.getMessage(), e);
+			LOG.warn("Could not update characters online status!", e);
 		}
 	}
 	
@@ -295,11 +276,11 @@ public abstract class IdFactory
 			stmt.executeUpdate("UPDATE clanhall SET ownerId=0, paidUntil=0, paid=0 WHERE clanhall.ownerId NOT IN (SELECT clan_id FROM clan_data);");
 			stmt.executeUpdate("UPDATE fort SET owner=0 WHERE owner NOT IN (SELECT clan_id FROM clan_data);");
 			
-			_log.info("Cleaned " + cleanCount + " elements from database in " + ((System.currentTimeMillis() - cleanupStart) / 1000) + " s");
+			LOG.info("Cleaned {} elements from database in {} s", cleanCount, ((System.currentTimeMillis() - cleanupStart) / 1000));
 		}
 		catch (SQLException e)
 		{
-			_log.log(Level.WARNING, "Could not clean up database: " + e.getMessage(), e);
+			LOG.warn("Could not clean up database!", e);
 		}
 	}
 	
@@ -310,11 +291,11 @@ public abstract class IdFactory
 		{
 			s.executeUpdate("DELETE FROM mods_wedding WHERE player1Id NOT IN (SELECT charId FROM characters)");
 			s.executeUpdate("DELETE FROM mods_wedding WHERE player2Id NOT IN (SELECT charId FROM characters)");
-			_log.info("Cleaned up invalid Weddings.");
+			LOG.info("Cleaned up invalid Weddings.");
 		}
 		catch (SQLException e)
 		{
-			_log.log(Level.WARNING, "Could not clean up invalid Weddings: " + e.getMessage(), e);
+			LOG.warn("Could not clean up invalid Weddings!", e);
 		}
 	}
 	
@@ -331,7 +312,7 @@ public abstract class IdFactory
 					cleanCount += stmt.executeUpdate();
 				}
 			}
-			_log.info("Cleaned " + cleanCount + " expired timestamps from database.");
+			LOG.info("Cleaned {} expired timestamps from database.", cleanCount);
 		}
 		catch (SQLException e)
 		{

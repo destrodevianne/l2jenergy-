@@ -25,6 +25,7 @@ import com.l2jserver.gameserver.dao.ItemReuseDAO;
 import com.l2jserver.gameserver.dao.PetDAO;
 import com.l2jserver.gameserver.dao.PetSkillSaveDAO;
 import com.l2jserver.gameserver.dao.PlayerDAO;
+import com.l2jserver.gameserver.dao.PlayerMinigameScoreDAO;
 import com.l2jserver.gameserver.dao.PlayerSkillSaveDAO;
 import com.l2jserver.gameserver.dao.PremiumItemDAO;
 import com.l2jserver.gameserver.dao.RecipeBookDAO;
@@ -43,6 +44,7 @@ import com.l2jserver.gameserver.dao.impl.mysql.ItemReuseDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.PetDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.PetSkillSaveDAOMySQL;
 import com.l2jserver.gameserver.dao.impl.mysql.PlayerDAOMySQLImpl;
+import com.l2jserver.gameserver.dao.impl.mysql.PlayerMinigameScoreDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.PlayerSkillSaveDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.PremiumItemDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.RecipeBookDAOMySQLImpl;
@@ -69,6 +71,7 @@ enum MySQLDAOFactory implements IDAOFactory
 	private final PetDAO petDAO = new PetDAOMySQLImpl();
 	private final PetSkillSaveDAO petSkillSaveDAO = new PetSkillSaveDAOMySQL();
 	private final PlayerDAO playerDAO = new PlayerDAOMySQLImpl();
+	private final PlayerMinigameScoreDAO playerMinigameScoreDAO = new PlayerMinigameScoreDAOMySQLImpl();
 	private final PlayerSkillSaveDAO playerSkillSaveDAO = new PlayerSkillSaveDAOMySQLImpl();
 	private final PremiumItemDAO premiumItemDAO = new PremiumItemDAOMySQLImpl();
 	private final RecipeBookDAO recipeBookDAO = new RecipeBookDAOMySQLImpl();
@@ -120,6 +123,12 @@ enum MySQLDAOFactory implements IDAOFactory
 	public PlayerDAO getPlayerDAO()
 	{
 		return playerDAO;
+	}
+	
+	@Override
+	public PlayerMinigameScoreDAO getPlayerMinigameScoreDAO()
+	{
+		return playerMinigameScoreDAO;
 	}
 	
 	@Override

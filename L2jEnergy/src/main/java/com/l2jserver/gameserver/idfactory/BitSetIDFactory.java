@@ -58,7 +58,7 @@ public class BitSetIDFactory extends IdFactory
 			ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new BitSetCapacityCheck(), 30000, 30000);
 			initialize();
 		}
-		_log.info(getClass().getSimpleName() + ": " + _freeIds.size() + " id's available.");
+		LOG.info("{}: {} id's available.", getClass().getSimpleName(), _freeIds.size());
 	}
 	
 	public void initialize()
@@ -74,7 +74,7 @@ public class BitSetIDFactory extends IdFactory
 				int objectID = usedObjectId - FIRST_OID;
 				if (objectID < 0)
 				{
-					_log.warning(getClass().getSimpleName() + ": Object ID " + usedObjectId + " in DB is less than minimum ID of " + FIRST_OID);
+					LOG.warn("{}: Object ID {} in DB is less than minimum ID of {}", getClass().getSimpleName(), usedObjectId, FIRST_OID);
 					continue;
 				}
 				_freeIds.set(usedObjectId - FIRST_OID);
@@ -87,7 +87,7 @@ public class BitSetIDFactory extends IdFactory
 		catch (Exception e)
 		{
 			_initialized = false;
-			_log.severe(getClass().getSimpleName() + ": Could not be initialized properly: " + e.getMessage());
+			LOG.error("{}: Could not be initialized properly!", getClass().getSimpleName(), e);
 		}
 	}
 	
@@ -101,7 +101,7 @@ public class BitSetIDFactory extends IdFactory
 		}
 		else
 		{
-			_log.warning(getClass().getSimpleName() + ": Release objectID " + objectID + " failed (< " + FIRST_OID + ")");
+			LOG.warn("{}: Release objectID {] failed (< {})", getClass().getSimpleName(), objectID, FIRST_OID);
 		}
 	}
 	

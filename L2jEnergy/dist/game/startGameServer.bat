@@ -1,9 +1,8 @@
 @echo off
-title Game Server Console
+COLOR 0b
+title L2jEnergy Server Console
 
 :start
-echo Starting L2J Game Server.
-echo.
 
 java -Xms1024m -Xmx1792m -cp ./../libs/*;l2jserver.jar com.l2jserver.gameserver.GameServer
 

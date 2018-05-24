@@ -68,6 +68,7 @@ import com.l2jserver.gameserver.data.xml.impl.HitConditionBonusData;
 import com.l2jserver.gameserver.data.xml.impl.InitialEquipmentData;
 import com.l2jserver.gameserver.data.xml.impl.InitialShortcutData;
 import com.l2jserver.gameserver.data.xml.impl.KarmaData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.MultisellData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.data.xml.impl.OptionData;
@@ -126,6 +127,7 @@ import com.l2jserver.gameserver.instancemanager.SiegeManager;
 import com.l2jserver.gameserver.instancemanager.TerritoryWarManager;
 import com.l2jserver.gameserver.instancemanager.WalkingManager;
 import com.l2jserver.gameserver.instancemanager.ZoneManager;
+import com.l2jserver.gameserver.instancemanager.games.MiniGameScoreManager;
 import com.l2jserver.gameserver.model.AutoSpawnHandler;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.PartyMatchRoomList;
@@ -242,6 +244,7 @@ public final class GameServer
 		// Multi-Language System
 		printSection("Languages");
 		LanguageData.getInstance();
+		MessagesData.getInstance();
 		
 		printSection("Clans");
 		ClanTable.getInstance();
@@ -356,6 +359,11 @@ public final class GameServer
 		if (Config.L2JMOD_ALLOW_WEDDING)
 		{
 			CoupleManager.getInstance();
+		}
+		
+		if (Config.EX_JAPAN_MINIGAME)
+		{
+			MiniGameScoreManager.getInstance();
 		}
 		
 		TaskManager.getInstance();

@@ -1,9 +1,8 @@
 @echo off
-title Login Server Console
+COLOR 0b
+title L2jEnergy Login Console
 
 :start
-echo Starting L2J Login Server.
-echo.
 
 java -Xms128m -Xmx256m -cp ./../libs/*;l2jlogin.jar com.l2jserver.loginserver.L2LoginServer
 

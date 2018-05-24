@@ -25,6 +25,7 @@ import com.l2jserver.gameserver.dao.ItemReuseDAO;
 import com.l2jserver.gameserver.dao.PetDAO;
 import com.l2jserver.gameserver.dao.PetSkillSaveDAO;
 import com.l2jserver.gameserver.dao.PlayerDAO;
+import com.l2jserver.gameserver.dao.PlayerMinigameScoreDAO;
 import com.l2jserver.gameserver.dao.PlayerSkillSaveDAO;
 import com.l2jserver.gameserver.dao.PremiumItemDAO;
 import com.l2jserver.gameserver.dao.RecipeBookDAO;
@@ -55,6 +56,8 @@ public interface IDAOFactory
 	PetSkillSaveDAO getPetSkillSaveDAO();
 	
 	PlayerDAO getPlayerDAO();
+	
+	PlayerMinigameScoreDAO getPlayerMinigameScoreDAO();
 	
 	PlayerSkillSaveDAO getPlayerSkillSaveDAO();
 	

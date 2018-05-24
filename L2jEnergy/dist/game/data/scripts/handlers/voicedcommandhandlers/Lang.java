@@ -21,6 +21,7 @@ package handlers.voicedcommandhandlers;
 import java.util.StringTokenizer;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.LanguageData;
 import com.l2jserver.gameserver.handler.IVoicedCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -65,7 +66,7 @@ public class Lang implements IVoicedCommandHandler
 			{
 				// Multi-Language System
 				LanguageData.getInstance().setLanguage(activeChar, lang);
-				activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "lang_current_successfully") + " " + lang);
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "lang_current_successfully") + " " + lang);
 				
 				msg.setFile(activeChar.getHtmlPrefix(), "data/html/mods/Lang/Ok.htm");
 				activeChar.sendPacket(msg);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="L2jEnergy_HF" default="dist" basedir=".">
+<project name="L2jEnergy" default="dist" basedir=".">
 	
-    <property name="src" location="java" />
+    <property name="src" location="src/main/java" />
     <property name="lib" location="lib" />
     <property name="build" location="build" />
     <property name="build.classes" location="${build}/classes" />

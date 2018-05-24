@@ -91,7 +91,6 @@ public final class Config
 	public static final String FORTSIEGE_CONFIGURATION_FILE = "./config/FortSiege.properties";
 	public static final String GENERAL_CONFIG_FILE = "./config/General.properties";
 	public static final String HEXID_FILE = "./config/hexid.txt";
-	public static final String ID_CONFIG_FILE = "./config/IdFactory.properties";
 	public static final String L2JMOD_CONFIG_FILE = "./config/L2JMods.properties";
 	public static final String LOGIN_CONFIGURATION_FILE = "./config/LoginServer.properties";
 	public static final String NPC_CONFIG_FILE = "./config/NPC.properties";
@@ -512,6 +511,7 @@ public final class Config
 	public static int MIN_MONSTER_ANIMATION;
 	public static int MAX_MONSTER_ANIMATION;
 	public static boolean ENABLE_FALLING_DAMAGE;
+	public static boolean EX_JAPAN_MINIGAME;
 	public static boolean GRIDS_ALWAYS_ON;
 	public static int GRID_NEIGHBOR_TURNON_TIME;
 	public static int GRID_NEIGHBOR_TURNOFF_TIME;
@@ -989,16 +989,6 @@ public final class Config
 	public static List<String> GAME_SERVER_HOSTS;
 	public static int PVP_NORMAL_TIME;
 	public static int PVP_PVP_TIME;
-	
-	public static enum IdFactoryType
-	{
-		Compaction,
-		BitSet,
-		Stack
-	}
-	
-	public static IdFactoryType IDFACTORY_TYPE;
-	public static boolean BAD_ID_CHECKING;
 	
 	public static double ENCHANT_CHANCE_ELEMENT_STONE;
 	public static double ENCHANT_CHANCE_ELEMENT_CRYSTAL;
@@ -1717,12 +1707,6 @@ public final class Config
 			MMO_HELPER_BUFFER_COUNT = mmoSettings.getInt("HelperBufferCount", 20);
 			MMO_TCP_NODELAY = mmoSettings.getBoolean("TcpNoDelay", false);
 			
-			// Load IdFactory L2Properties file (if exists)
-			final PropertiesParser IdFactory = new PropertiesParser(ID_CONFIG_FILE);
-			
-			IDFACTORY_TYPE = IdFactory.getEnum("IDFactory", IdFactoryType.class, IdFactoryType.BitSet);
-			BAD_ID_CHECKING = IdFactory.getBoolean("BadIdChecking", true);
-			
 			// Load General L2Properties file (if exists)
 			final PropertiesParser General = new PropertiesParser(GENERAL_CONFIG_FILE);
 			EVERYBODY_HAS_ADMIN_RIGHTS = General.getBoolean("EverybodyHasAdminRights", false);
@@ -1967,6 +1951,7 @@ public final class Config
 			BOTREPORT_REPORT_DELAY = General.getInt("BotReportDelay", 30) * 60000;
 			BOTREPORT_ALLOW_REPORTS_FROM_SAME_CLAN_MEMBERS = General.getBoolean("AllowReportsFromSameClanMembers", false);
 			ENABLE_FALLING_DAMAGE = General.getBoolean("EnableFallingDamage", true);
+			EX_JAPAN_MINIGAME = General.getBoolean("JapanMinigame", false);
 			
 			// Load FloodProtector L2Properties file
 			final PropertiesParser FloodProtectors = new PropertiesParser(FLOOD_PROTECTOR_FILE);
