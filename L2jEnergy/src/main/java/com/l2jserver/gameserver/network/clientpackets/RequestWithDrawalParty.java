@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.L2Party;
 import com.l2jserver.gameserver.model.L2Party.messageType;
 import com.l2jserver.gameserver.model.PartyMatchRoom;
@@ -57,7 +57,7 @@ public final class RequestWithDrawalParty extends L2GameClientPacket
 		{
 			if (party.isInDimensionalRift() && !party.getDimensionalRift().getRevivedAtWaitingRoom().contains(player))
 			{
-				player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "no_dismiss_player_in_rift"));
+				player.sendMessage(MessagesData.getInstance().getMessage(player, "no_dismiss_player_in_rift"));
 			}
 			else
 			{

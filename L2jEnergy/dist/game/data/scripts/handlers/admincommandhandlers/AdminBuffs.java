@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2Object;
@@ -79,7 +80,7 @@ public class AdminBuffs implements IAdminCommandHandler
 					showBuffs(activeChar, player, page, command.endsWith("_ps"));
 					return true;
 				}
-				activeChar.sendMessage("The player " + playername + " is not online.");
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_player_not_online").replace("%s%", playername + ""));
 				return false;
 			}
 			else if ((activeChar.getTarget() != null) && activeChar.getTarget().isCharacter())
@@ -108,8 +109,8 @@ public class AdminBuffs implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Failed removing effect: " + e.getMessage());
-				activeChar.sendMessage("Usage: //stopbuff <objectId> <skillId>");
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_failed_removing_effect").replace("%s%", e.getMessage() + ""));
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_stopbuff"));
 				return false;
 			}
 		}
@@ -125,8 +126,8 @@ public class AdminBuffs implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Failed removing all effects: " + e.getMessage());
-				activeChar.sendMessage("Usage: //stopallbuffs <objectId>");
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_failed_removing_all_effect").replace("%s%", e.getMessage() + ""));
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_stopallbuffs"));
 				return false;
 			}
 		}
@@ -146,13 +147,12 @@ public class AdminBuffs implements IAdminCommandHandler
 						knownChar.stopAllEffects();
 					}
 				}
-				
-				activeChar.sendMessage("All effects canceled within radius " + radius);
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_canceled_all_effect_radius").replace("%s%", radius + ""));
 				return true;
 			}
 			catch (NumberFormatException e)
 			{
-				activeChar.sendMessage("Usage: //areacancel <radius>");
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_areacancel"));
 				return false;
 			}
 		}
@@ -192,7 +192,7 @@ public class AdminBuffs implements IAdminCommandHandler
 			{
 				creature.sendPacket(new SkillCoolTime(creature.getActingPlayer()));
 			}
-			activeChar.sendMessage("Skill reuse was removed from " + creature.getName() + ".");
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_skill_reuse_removed_from").replace("%s%", creature.getName() + ""));
 			return true;
 		}
 		else if (command.startsWith("admin_switch_gm_buffs"))
@@ -202,10 +202,10 @@ public class AdminBuffs implements IAdminCommandHandler
 				final boolean toAuraSkills = activeChar.getKnownSkill(7041) != null;
 				switchSkills(activeChar, toAuraSkills);
 				activeChar.sendSkillList();
-				activeChar.sendMessage("You have succefully changed to target " + (toAuraSkills ? "aura" : "one") + " special skills.");
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_you_have_succefully_changed_target").replace("%s%", (toAuraSkills ? "aura" : "one")));
 				return true;
 			}
-			activeChar.sendMessage("There is nothing to switch.");
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_nothing_switch"));
 			return false;
 		}
 		return true;
@@ -347,7 +347,7 @@ public class AdminBuffs implements IAdminCommandHandler
 			if (target.isAffectedBySkill(skillId))
 			{
 				target.stopSkillEffects(true, skillId);
-				activeChar.sendMessage("Removed skill ID: " + skillId + " effects from " + target.getName() + " (" + objId + ").");
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_removed_skill_id").replace("%s%", skillId + "").replace("%c%", target.getName() + "").replace("%i%", objId + ""));
 			}
 			
 			showBuffs(activeChar, target, 1, false);
@@ -372,7 +372,7 @@ public class AdminBuffs implements IAdminCommandHandler
 		if (target != null)
 		{
 			target.stopAllEffects();
-			activeChar.sendMessage("Removed all effects from " + target.getName() + " (" + objId + ")");
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_removed_all_effects").replace("%c%", target.getName() + "").replace("%i%", objId + ""));
 			showBuffs(activeChar, target, 1, false);
 			if (Config.GMAUDIT)
 			{

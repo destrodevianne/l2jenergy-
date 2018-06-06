@@ -20,7 +20,7 @@ package com.l2jserver.gameserver.model.zone.type;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -81,7 +81,7 @@ public class L2JailZone extends L2ZoneType
 			{
 				// when a player wants to exit jail even if he is still jailed, teleport him back to jail
 				ThreadPoolManager.getInstance().scheduleGeneral(new TeleportTask(player, JAIL_IN_LOC), 2000);
-				character.sendMessage(LanguageData.getInstance().getMsgByLang(character, "zone_jail_no_out"));
+				character.sendMessage(MessagesData.getInstance().getMessage(null, "zone_jail_no_out"));
 			}
 			if (Config.JAIL_DISABLE_TRANSACTION)
 			{

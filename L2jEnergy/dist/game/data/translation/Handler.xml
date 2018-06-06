@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?> 
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/Messages.xsd">
+    <!-- HANDLER  Messages -->
+    <message id="dp_handler_jail_error">
+        <set lang="en" val="You cannot use this function while you are jailed." />
+		<set lang="ru" val="Вы не можете использовать эту функцию во время заключения в тюрьме." />
+	</message>
+    <message id="dp_handler_time">
+        <set lang="en" val="Server time is: %s%" />
+		<set lang="ru" val="Время сервера: %s%" />
+    </message>
+    <message id="dp_handler_unstuck_time_m">
+        <set lang="en" val="You use Escape: %s% minutes." />
+		<set lang="ru" val="Вы используете Бегство: %s% минут(ы)." />
+    </message>
+    <message id="dp_handler_unstuck_time_s">
+        <set lang="en" val="You use Escape: %s% seconds." />
+		<set lang="ru" val="Вы используете Бегство: %s% секунд(ы)." />
+    </message>
+	<!-- Wedding  Messages -->
+	<message id="dp_wedding_married">
+        <set lang="en" val="Congratulations you are married!" />
+		<set lang="ru" val="Поздравляем вы женаты!" />
+	</message>
+    <message id="dp_wedding_married_notice">
+        <set lang="en" val="Congratulations to %s% and %i%! They have been married." />
+		<set lang="ru" val="Поздравляем %s% и %i%! Они поженились." />
+    </message>
+    <message id="dp_wedding_declined">
+        <set lang="en" val="You declined your partner's marriage request." />
+		<set lang="ru" val="Вы отклонили запрос брака от своего партнера." />
+    </message>
+    <message id="dp_wedding_declined_notice">
+        <set lang="en" val="Your partner declined your marriage request." />
+		<set lang="ru" val="Ваш партнер отклонил ваш запрос на брак." />
+    </message>
+</list>

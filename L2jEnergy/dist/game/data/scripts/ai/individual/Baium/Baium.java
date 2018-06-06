@@ -20,7 +20,7 @@ package ai.individual.Baium;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.CategoryType;
 import com.l2jserver.gameserver.enums.MountType;
 import com.l2jserver.gameserver.enums.audio.Music;
@@ -427,7 +427,7 @@ public final class Baium extends AbstractNpcAI
 				}
 				else
 				{
-					player.sendMessage(LanguageData.getInstance().getMsgByLang(player, getClass().getSimpleName() + "dp_ia_baium_no_respawn"));
+					player.sendMessage(MessagesData.getInstance().getMessage(player, getClass().getSimpleName() + "dp_ia_baium_no_respawn"));
 				}
 				break;
 			}
@@ -438,11 +438,11 @@ public final class Baium extends AbstractNpcAI
 					_baium = null;
 					notifyEvent("CLEAR_ZONE", null, null);
 					notifyEvent("CLEAR_STATUS", null, null);
-					player.sendMessage(LanguageData.getInstance().getMsgByLang(player, getClass().getSimpleName() + "dp_ia_aborted"));
+					player.sendMessage(MessagesData.getInstance().getMessage(player, getClass().getSimpleName() + "dp_ia_aborted"));
 				}
 				else
 				{
-					player.sendMessage(LanguageData.getInstance().getMsgByLang(player, getClass().getSimpleName() + "dp_ia_no_aborted"));
+					player.sendMessage(MessagesData.getInstance().getMessage(player, getClass().getSimpleName() + "dp_ia_no_aborted"));
 				}
 				cancelQuestTimers("CHECK_ATTACK");
 				cancelQuestTimers("SELECT_TARGET");
@@ -461,12 +461,12 @@ public final class Baium extends AbstractNpcAI
 					}
 					if (player != null)
 					{
-						player.sendMessage(LanguageData.getInstance().getMsgByLang(player, getClass().getSimpleName() + "dp_ia_minions"));
+						player.sendMessage(MessagesData.getInstance().getMessage(player, getClass().getSimpleName() + "dp_ia_minions"));
 					}
 				}
 				else if (player != null)
 				{
-					player.sendMessage(LanguageData.getInstance().getMsgByLang(player, getClass().getSimpleName() + "dp_ia_no_minions"));
+					player.sendMessage(MessagesData.getInstance().getMessage(player, getClass().getSimpleName() + "dp_ia_no_minions"));
 				}
 				break;
 			}

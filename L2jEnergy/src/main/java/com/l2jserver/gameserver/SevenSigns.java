@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.model.AutoSpawnHandler;
 import com.l2jserver.gameserver.model.AutoSpawnHandler.AutoSpawnInstance;
@@ -1420,7 +1420,7 @@ public class SevenSigns
 				{
 					player.teleToLocation(TeleportWhereType.TOWN);
 					player.setIsIn7sDungeon(false);
-					player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "ss_teleported_nearest_seal"));
+					player.sendMessage(MessagesData.getInstance().getMessage(player, "ss_teleported_nearest_seal"));
 				}
 			}
 			else
@@ -1429,7 +1429,7 @@ public class SevenSigns
 				{
 					player.teleToLocation(TeleportWhereType.TOWN);
 					player.setIsIn7sDungeon(false);
-					player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "ss_teleported_nearest_cabal"));
+					player.sendMessage(MessagesData.getInstance().getMessage(player, "ss_teleported_nearest_cabal"));
 				}
 			}
 		}

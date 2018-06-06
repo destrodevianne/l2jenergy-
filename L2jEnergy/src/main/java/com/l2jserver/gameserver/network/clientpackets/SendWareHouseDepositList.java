@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.l2jserver.Config;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.holders.ItemHolder;
@@ -87,7 +87,7 @@ public final class SendWareHouseDepositList extends L2GameClientPacket
 		
 		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("deposit"))
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "depositing_too_fast"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "depositing_too_fast"));
 			return;
 		}
 		
@@ -106,7 +106,7 @@ public final class SendWareHouseDepositList extends L2GameClientPacket
 		
 		if (!isPrivate && !player.getAccessLevel().allowTransaction())
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "transactions_disabled"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "transactions_disabled"));
 			return;
 		}
 		

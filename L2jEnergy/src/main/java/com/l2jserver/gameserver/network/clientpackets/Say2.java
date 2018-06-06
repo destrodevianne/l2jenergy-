@@ -23,7 +23,7 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import com.l2jserver.Config;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.ChatHandler;
 import com.l2jserver.gameserver.handler.IChatHandler;
 import com.l2jserver.gameserver.model.L2Object;
@@ -223,7 +223,7 @@ public final class Say2 extends L2GameClientPacket
 		{
 			if ((_type == TELL) || (_type == SHOUT) || (_type == TRADE) || (_type == HERO_VOICE))
 			{
-				activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "no_chat_in_jail"));
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "no_chat_in_jail"));
 				return;
 			}
 		}

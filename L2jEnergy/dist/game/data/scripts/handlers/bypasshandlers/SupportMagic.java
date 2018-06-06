@@ -18,7 +18,7 @@
  */
 package handlers.bypasshandlers;
 
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.CategoryType;
 import com.l2jserver.gameserver.handler.IBypassHandler;
 import com.l2jserver.gameserver.model.actor.L2Character;
@@ -117,7 +117,7 @@ public class SupportMagic implements IBypassHandler
 		}
 		else if (player.getClassId().level() == 3)
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "no_buff_adventurer")); // Custom message
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "no_buff_adventurer")); // Custom message
 			return;
 		}
 		

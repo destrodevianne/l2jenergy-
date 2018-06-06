@@ -20,7 +20,7 @@ package handlers.bypasshandlers;
 
 import java.util.logging.Level;
 
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IBypassHandler;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -87,7 +87,7 @@ public class OlympiadObservation implements IBypassHandler
 				
 				if (activeChar.isOnEvent())
 				{
-					activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "event_no_observe_games"));
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "event_no_observe_games"));
 					return false;
 				}
 				

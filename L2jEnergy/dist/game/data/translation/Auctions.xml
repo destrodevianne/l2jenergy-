@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Auctions Messages -->
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/Messages.xsd">
+    <message id="auction_wrong_conditions">
+        <set lang="en" val="Wrong conditions." />
+		<set lang="ru" val="Неправильные условия." />
+	</message>
+    <message id="auction_canceled">
+        <set lang="en" val="Your auction has been canceled." />
+		<set lang="ru" val="Ваш аукцион был отменен." />
+    </message>
+    <message id="auction_invalid">
+        <set lang="en" val="Invalid Auction!" />
+		<set lang="ru" val="Недействительный аукцион!" />
+    </message>
+    <message id="auction_invalid_bid">
+        <set lang="en" val="Invalid bid!" />
+		<set lang="ru" val="Недопустимая ставка!" />
+    </message>
+    <message id="auction_invalid_duration">
+        <set lang="en" val="Invalid auction duration!" />
+		<set lang="ru" val="Недопустимая продолжительность аукциона!" />
+    </message>
+    <message id="auction_bidded">
+	    <set lang="en" val="You have been out bidded." />
+		<set lang="ru" val="Вы были вне закона." />
+	</message>
+	<message id="auction_won">
+	    <set lang="en" val="Congratulation you have won ClanHall!" />
+		<set lang="ru" val="Поздравляем, вы выиграли Холл Клана!" />
+	</message>
+	<message id="auction_fast">
+	    <set lang="en" val="You are bidding too fast." />
+		<set lang="ru" val="Вы предлагаете ставку слишком быстро." />
+	</message>
+	<message id="auction_next">
+	    <set lang="en" val="The next auction will begin on the %s%." />
+		<set lang="ru" val="Следующий аукцион начнется на %s%." />
+	</message>
+</list>

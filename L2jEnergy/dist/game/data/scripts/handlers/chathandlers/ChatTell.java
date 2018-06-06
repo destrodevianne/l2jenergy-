@@ -19,7 +19,7 @@
 package handlers.chathandlers;
 
 import com.l2jserver.Config;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IChatHandler;
 import com.l2jserver.gameserver.model.BlockList;
 import com.l2jserver.gameserver.model.L2World;
@@ -73,7 +73,7 @@ public class ChatTell implements IChatHandler
 		{
 			if (Config.JAIL_DISABLE_CHAT && receiver.isJailed() && !activeChar.canOverrideCond(PcCondOverride.CHAT_CONDITIONS))
 			{
-				activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "player_jailed"));
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "player_jailed"));
 				return;
 			}
 			if (receiver.isChatBanned())
@@ -83,7 +83,7 @@ public class ChatTell implements IChatHandler
 			}
 			if ((receiver.getClient() == null) || receiver.getClient().isDetached())
 			{
-				activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "player_offline"));
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "player_offline"));
 				return;
 			}
 			if (!BlockList.isBlocked(receiver, activeChar))

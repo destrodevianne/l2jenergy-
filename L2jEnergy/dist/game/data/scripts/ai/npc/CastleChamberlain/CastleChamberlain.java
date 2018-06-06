@@ -29,7 +29,7 @@ import com.l2jserver.Config;
 import com.l2jserver.gameserver.SevenSigns;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.sql.impl.TeleportLocationTable;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.instancemanager.CastleManorManager;
 import com.l2jserver.gameserver.instancemanager.FortManager;
 import com.l2jserver.gameserver.instancemanager.TerritoryWarManager;
@@ -1169,7 +1169,7 @@ public final class CastleChamberlain extends AbstractNpcAI
 				}
 				else
 				{
-					player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "castle_manor_deactivated"));
+					player.sendMessage(MessagesData.getInstance().getMessage(player, "castle_manor_deactivated"));
 				}
 				break;
 			}

@@ -35,8 +35,8 @@ import java.util.logging.Logger;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.cache.HtmCache;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
-import com.l2jserver.gameserver.datatables.LanguageData;
 import com.l2jserver.gameserver.datatables.SpawnTable;
 import com.l2jserver.gameserver.instancemanager.AntiFeedManager;
 import com.l2jserver.gameserver.model.L2Spawn;
@@ -253,7 +253,7 @@ public class L2Event
 	{
 		if (eventState != EventState.STANDBY)
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "event_time_register_over"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "event_time_register_over"));
 			return;
 		}
 		
@@ -263,7 +263,7 @@ public class L2Event
 		}
 		else
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "event_max_ip_reached"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "event_max_ip_reached"));
 			return;
 		}
 		

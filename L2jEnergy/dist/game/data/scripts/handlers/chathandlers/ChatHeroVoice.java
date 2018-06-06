@@ -19,7 +19,7 @@
 package handlers.chathandlers;
 
 import com.l2jserver.Config;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IChatHandler;
 import com.l2jserver.gameserver.model.BlockList;
 import com.l2jserver.gameserver.model.L2World;
@@ -56,7 +56,7 @@ public class ChatHeroVoice implements IChatHandler
 			
 			if (!activeChar.getFloodProtectors().getHeroVoice().tryPerformAction("hero voice"))
 			{
-				activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "no_hero_speak"));
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "no_hero_speak"));
 				return;
 			}
 			

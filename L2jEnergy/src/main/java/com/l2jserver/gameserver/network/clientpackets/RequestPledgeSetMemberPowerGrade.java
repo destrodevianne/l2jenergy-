@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.ClanPrivilege;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2ClanMember;
@@ -75,7 +75,7 @@ public final class RequestPledgeSetMemberPowerGrade extends L2GameClientPacket
 		if (member.getPledgeType() == L2Clan.SUBUNIT_ACADEMY)
 		{
 			// also checked from client side
-			activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "clan_academy_member_grade"));
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "clan_academy_member_grade"));
 			return;
 		}
 		

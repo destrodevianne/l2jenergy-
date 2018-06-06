@@ -1,12 +1,25 @@
-<html><title>L2J Events Menu</title><body>
+<html><title>Server Control Panel</title><body>
 <center>
-<table width=270 border=0 bgcolor="444444">
-<tr>
-<td><button value="Main" action="bypass -h admin_admin" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
-<td><button value="Char" action="bypass -h admin_admin6" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
-<td><button value="Game" action="bypass -h admin_admin2" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
-<td><button value="GM" action="bypass -h admin_admin7" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
-</tr>
-</table><br>
+<!-- top menu -->
+<table width=270><tr>
+<td width=45><button value="Main" action="bypass -h admin_admin" width=45 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+<td width=190><center><font color=LEVEL>--- [ GM Events Menu ] ---</font></center></td>
+<td width=45><button value="Back" action="bypass -h admin_html events.htm" width=45 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+</tr></table>
+<br>
+<br>
 %LIST%
+<br>
+<br>
+<font color="LEVEL">-= GM Event =-<br1>
+For give the character aura<br1></font><br>
+
+<table width=240 border=0 bgcolor="666666">
+<tr>
+<td><button value="BlueAura" action="bypass -h admin_setteam blue" width=60 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+<td><button value="RedAura" action="bypass -h admin_setteam red" width=60 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+<td><button value="NoneAura" action="bypass -h admin_setteam none" width=60 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+</tr>
+</table> 
+<br>
 </center></body></html>

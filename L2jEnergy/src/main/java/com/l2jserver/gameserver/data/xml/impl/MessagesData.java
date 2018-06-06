@@ -24,6 +24,7 @@ import java.util.Map;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import com.l2jserver.gameserver.model.TranslationMessage;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.util.data.xml.IXmlReader;
 
@@ -36,12 +37,6 @@ public class MessagesData implements IXmlReader
 	
 	protected MessagesData()
 	{
-		load();
-	}
-	
-	public void reload()
-	{
-		_translation.clear();
 		load();
 	}
 	
@@ -93,32 +88,6 @@ public class MessagesData implements IXmlReader
 			return _translation.get(id).getMessageByLang(player.getLang());
 		}
 		return _translation.get(id).getMessageByLang("en");
-	}
-	
-	public class TranslationMessage
-	{
-		private final String _id;
-		private final Map<String, String> _messages = new HashMap<>();
-		
-		public TranslationMessage(String id)
-		{
-			_id = id;
-		}
-		
-		public void addNewMessage(String lang, String message)
-		{
-			_messages.put(lang, message);
-		}
-		
-		public String getTranslationId()
-		{
-			return _id;
-		}
-		
-		public String getMessageByLang(String lang)
-		{
-			return _messages.get(lang);
-		}
 	}
 	
 	public static MessagesData getInstance()

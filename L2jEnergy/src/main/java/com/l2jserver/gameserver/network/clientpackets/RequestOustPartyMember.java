@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.L2Party.messageType;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
@@ -51,7 +51,7 @@ public final class RequestOustPartyMember extends L2GameClientPacket
 		{
 			if (activeChar.getParty().isInDimensionalRift() && !activeChar.getParty().getDimensionalRift().getRevivedAtWaitingRoom().contains(activeChar))
 			{
-				activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "no_dismiss_player_in_rift"));
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "no_dismiss_player_in_rift"));
 			}
 			else
 			{

@@ -37,6 +37,7 @@ import com.l2jserver.Config;
 import com.l2jserver.Server;
 import com.l2jserver.UPnPService;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.versioning.Version;
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.json.ExperienceData;
@@ -88,7 +89,6 @@ import com.l2jserver.gameserver.datatables.AugmentationData;
 import com.l2jserver.gameserver.datatables.BotReportTable;
 import com.l2jserver.gameserver.datatables.EventDroplist;
 import com.l2jserver.gameserver.datatables.ItemTable;
-import com.l2jserver.gameserver.datatables.LanguageData;
 import com.l2jserver.gameserver.datatables.MerchantPriceConfigTable;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.datatables.SpawnTable;
@@ -148,6 +148,7 @@ import com.l2jserver.mmocore.SelectorThread;
 import com.l2jserver.status.Status;
 import com.l2jserver.util.DeadLockDetector;
 import com.l2jserver.util.IPv4Filter;
+import com.l2jserver.util.MemoryWatchDog;
 import com.l2jserver.util.Util;
 
 public final class GameServer
@@ -158,6 +159,8 @@ public final class GameServer
 	private static final String DATAPACK = "-dp";
 	private static final String GEODATA = "-gd";
 	
+	private final Version _version;
+	public static long _upTime = 0L;
 	private final SelectorThread<L2GameClient> _selectorThread;
 	private final L2GamePacketHandler _gamePacketHandler;
 	private final DeadLockDetector _deadDetectThread;
@@ -167,8 +170,7 @@ public final class GameServer
 	public GameServer() throws Exception
 	{
 		long serverLoadStart = System.currentTimeMillis();
-		
-		LOG.info("{}: Used memory: {}MB.", getClass().getSimpleName(), getUsedMemoryMB());
+		_version = new Version(GameServer.class);
 		
 		if (!IdFactory.getInstance().isInitialized())
 		{
@@ -242,8 +244,7 @@ public final class GameServer
 		CharSummonTable.getInstance().init();
 		
 		// Multi-Language System
-		printSection("Languages");
-		LanguageData.getInstance();
+		printSection("Messages");
 		MessagesData.getInstance();
 		
 		printSection("Clans");
@@ -400,11 +401,6 @@ public final class GameServer
 			_deadDetectThread = null;
 		}
 		System.gc();
-		// maxMemory is the upper limit the jvm can use, totalMemory the size of
-		// the current allocation pool, freeMemory the unused memory in the allocation pool
-		long freeMem = ((Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory()) + Runtime.getRuntime().freeMemory()) / 1048576;
-		long totalMem = Runtime.getRuntime().maxMemory() / 1048576;
-		LOG.info("{}: Started, free memory {} Mb of {} Mb", getClass().getSimpleName(), freeMem, totalMem);
 		Toolkit.getDefaultToolkit().beep();
 		LoginServerThread.getInstance().start();
 		
@@ -444,8 +440,14 @@ public final class GameServer
 		}
 		
 		LOG.info("{}: Maximum numbers of connected players: {}", getClass().getSimpleName(), Config.MAXIMUM_ONLINE_USERS);
+		LOG.info("{}: Started, free memory {} of {}", getClass().getSimpleName(), MemoryWatchDog.getMemFreeMb(), MemoryWatchDog.getMemMaxMb());
+		LOG.info("{}: Used memory: {}", getClass().getSimpleName(), MemoryWatchDog.getMemUsedMb());
+		LOG.info("Revision: ................ {}", getVersion().getRevisionNumber());
+		LOG.info("Builded: ................. {}", getVersion().getBuildDate());
+		LOG.info("Compiler version: ........ {}", getVersion().getBuildJdk());
+		LOG.info("Forum: ................... L2jEnergy.ru");
 		LOG.info("{}: Server loaded in {} seconds.", getClass().getSimpleName(), TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis() - serverLoadStart));
-		
+		_upTime = System.currentTimeMillis();
 		printSection("UPnP");
 		UPnPService.getInstance();
 	}
@@ -495,11 +497,6 @@ public final class GameServer
 		}
 	}
 	
-	public long getUsedMemoryMB()
-	{
-		return (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576;
-	}
-	
 	public SelectorThread<L2GameClient> getSelectorThread()
 	{
 		return _selectorThread;
@@ -513,6 +510,11 @@ public final class GameServer
 	public DeadLockDetector getDeadLockDetectorThread()
 	{
 		return _deadDetectThread;
+	}
+	
+	public Version getVersion()
+	{
+		return _version;
 	}
 	
 	public static void printSection(String s)

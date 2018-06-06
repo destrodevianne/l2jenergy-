@@ -27,7 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.ITelnetHandler;
 import com.l2jserver.gameserver.instancemanager.PunishmentManager;
 import com.l2jserver.gameserver.model.L2World;
@@ -73,7 +73,7 @@ public class PlayerHandler implements ITelnetHandler
 				L2PcInstance player = L2World.getInstance().getPlayer(command);
 				if (player != null)
 				{
-					player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "player_kicked"));
+					player.sendMessage(MessagesData.getInstance().getMessage(player, "player_kicked"));
 					player.logout();
 					_print.println("Player kicked");
 				}

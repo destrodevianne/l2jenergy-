@@ -42,7 +42,7 @@ import com.l2jserver.gameserver.communitybbs.Manager.ForumsBBSManager;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.sql.impl.CrestTable;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.FortManager;
@@ -1861,13 +1861,13 @@ public class L2Clan implements IIdentifiable, INamable
 			}
 			else
 			{
-				player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "clan_create_units_fail"));
+				player.sendMessage(MessagesData.getInstance().getMessage(player, "clan_create_units_fail"));
 			}
 			return null;
 		}
 		if (_leader.getObjectId() == leaderId)
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "clan_leader_fail"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "clan_leader_fail"));
 			return null;
 		}
 		
@@ -2466,7 +2466,7 @@ public class L2Clan implements IIdentifiable, INamable
 		player.sendPacket(new ExBrExtraUserInfo(player));
 		
 		// TODO: Need correct message id
-		player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "clan_alliance_done").replace("%s%", allyName + ""));
+		player.sendMessage(MessagesData.getInstance().getMessage(player, "clan_alliance_done").replace("%s%", allyName + ""));
 	}
 	
 	public void dissolveAlly(L2PcInstance player)

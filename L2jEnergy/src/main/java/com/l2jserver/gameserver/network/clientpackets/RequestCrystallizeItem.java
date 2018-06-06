@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.Config;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.model.L2World;
@@ -65,7 +65,7 @@ public final class RequestCrystallizeItem extends L2GameClientPacket
 		
 		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("crystallize"))
 		{
-			activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "crystallizing_too_fast"));
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "crystallizing_too_fast"));
 			return;
 		}
 		
@@ -128,7 +128,7 @@ public final class RequestCrystallizeItem extends L2GameClientPacket
 		
 		if (!activeChar.getInventory().canManipulateWithItemId(itemToRemove.getId()))
 		{
-			activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "item_cannot_use"));
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "item_cannot_use"));
 			return;
 		}
 		

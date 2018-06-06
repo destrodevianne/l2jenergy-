@@ -23,7 +23,7 @@ import java.util.Map;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.SevenSigns;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.Fort;
@@ -257,7 +257,7 @@ public final class WyvernManager extends AbstractNpcAI
 				{
 					if (!Config.ALLOW_WYVERN_DURING_SIEGE && (isInSiege(npc) || player.isInSiege()))
 					{
-						player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "no_summon_wyvern_in_siege"));
+						player.sendMessage(MessagesData.getInstance().getMessage(player, "no_summon_wyvern_in_siege"));
 						return null;
 					}
 					if ((MANAGERS.get(npc.getId()) == ManagerType.CASTLE) && SevenSigns.getInstance().isSealValidationPeriod() && ((SevenSigns.getInstance()).getSealOwner(SevenSigns.SEAL_STRIFE) == SevenSigns.CABAL_DUSK))

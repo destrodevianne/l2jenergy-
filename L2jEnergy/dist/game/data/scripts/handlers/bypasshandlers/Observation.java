@@ -20,7 +20,7 @@ package handlers.bypasshandlers;
 
 import java.util.logging.Level;
 
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IBypassHandler;
 import com.l2jserver.gameserver.instancemanager.SiegeManager;
 import com.l2jserver.gameserver.model.Location;
@@ -105,7 +105,7 @@ public class Observation implements IBypassHandler
 		}
 		if (activeChar.isOnEvent())
 		{
-			activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "event_no_observation"));
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "event_no_observation"));
 			return false;
 		}
 		

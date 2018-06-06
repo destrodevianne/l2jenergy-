@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.IllegalActionPunishmentType;
 import com.l2jserver.gameserver.instancemanager.PunishmentManager;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -53,7 +53,7 @@ public final class IllegalPlayerActionTask implements Runnable
 		{
 			case KICK:
 			{
-				_actor.sendMessage(LanguageData.getInstance().getMsgByLang(_actor, "kick_player_illegal_action"));
+				_actor.sendMessage(MessagesData.getInstance().getMessage(_actor, "kick_player_illegal_action"));
 				break;
 			}
 			case KICKBAN:
@@ -63,13 +63,13 @@ public final class IllegalPlayerActionTask implements Runnable
 					_actor.setAccessLevel(-1);
 					_actor.setAccountAccesslevel(-1);
 				}
-				_actor.sendMessage(LanguageData.getInstance().getMsgByLang(_actor, "ban_player_illegal_action"));
+				_actor.sendMessage(MessagesData.getInstance().getMessage(_actor, "ban_player_illegal_action"));
 				break;
 			}
 			case JAIL:
 			{
-				_actor.sendMessage(LanguageData.getInstance().getMsgByLang(_actor, "info_illegal_action"));
-				_actor.sendMessage(LanguageData.getInstance().getMsgByLang(_actor, "jail_player_illegal_action"));
+				_actor.sendMessage(MessagesData.getInstance().getMessage(_actor, "info_illegal_action"));
+				_actor.sendMessage(MessagesData.getInstance().getMessage(_actor, "jail_player_illegal_action"));
 				break;
 			}
 		}

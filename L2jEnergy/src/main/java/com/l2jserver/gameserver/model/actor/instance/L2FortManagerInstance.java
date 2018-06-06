@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.data.sql.impl.TeleportLocationTable;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.model.ClanPrivilege;
@@ -375,7 +375,7 @@ public class L2FortManagerInstance extends L2MerchantInstance
 						{
 							if (getFort().getOwnerClan() == null)
 							{
-								player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "fort_no_owner"));
+								player.sendMessage(MessagesData.getInstance().getMessage(player, "fort_no_owner"));
 								return;
 							}
 							val = st.nextToken();
@@ -661,7 +661,7 @@ public class L2FortManagerInstance extends L2MerchantInstance
 						{
 							if (getFort().getOwnerClan() == null)
 							{
-								player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "fort_no_owner"));
+								player.sendMessage(MessagesData.getInstance().getMessage(player, "fort_no_owner"));
 								return;
 							}
 							val = st.nextToken();
@@ -925,12 +925,12 @@ public class L2FortManagerInstance extends L2MerchantInstance
 					}
 					catch (Exception e)
 					{
-						player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "skill_invalid_level"));
+						player.sendMessage(MessagesData.getInstance().getMessage(player, "skill_invalid_level"));
 					}
 				}
 				catch (Exception e)
 				{
-					player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "skill_invalid_level"));
+					player.sendMessage(MessagesData.getInstance().getMessage(player, "skill_invalid_level"));
 				}
 				return;
 			}

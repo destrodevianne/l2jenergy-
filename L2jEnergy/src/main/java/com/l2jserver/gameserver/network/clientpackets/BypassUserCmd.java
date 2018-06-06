@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IUserCommandHandler;
 import com.l2jserver.gameserver.handler.UserCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -54,7 +54,7 @@ public class BypassUserCmd extends L2GameClientPacket
 		{
 			if (player.isGM())
 			{
-				player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "gm_command_disabled").replace("%s%", _command + ""));
+				player.sendMessage(MessagesData.getInstance().getMessage(player, "gm_command_disabled").replace("%s%", _command + ""));
 			}
 		}
 		else

@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.Config;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.model.Elementals;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -81,7 +81,7 @@ public class RequestExEnchantItemAttribute extends L2GameClientPacket
 			// Cancel trade
 			player.cancelActiveTrade();
 			player.setActiveEnchantAttrItemId(L2PcInstance.ID_NONE);
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "no_elemental_power_trading"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "no_elemental_power_trading"));
 			return;
 		}
 		

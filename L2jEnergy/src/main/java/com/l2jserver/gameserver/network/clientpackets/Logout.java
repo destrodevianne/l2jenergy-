@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.SevenSignsFestival;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.L2Event;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -93,7 +93,7 @@ public final class Logout extends L2GameClientPacket
 		
 		if (L2Event.isParticipant(player))
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "event_no_logout"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "event_no_logout"));
 			player.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
@@ -105,7 +105,7 @@ public final class Logout extends L2GameClientPacket
 		{
 			if (SevenSignsFestival.getInstance().isFestivalInitialized())
 			{
-				player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "ss_no_logout_player"));
+				player.sendMessage(MessagesData.getInstance().getMessage(player, "ss_no_logout_player"));
 				player.sendPacket(ActionFailed.STATIC_PACKET);
 				return;
 			}

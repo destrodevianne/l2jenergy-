@@ -26,8 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.ItemTable;
-import com.l2jserver.gameserver.datatables.LanguageData;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.CastleManorManager;
 import com.l2jserver.gameserver.model.SeedProduction;
@@ -84,7 +84,7 @@ public class RequestBuySeed extends L2GameClientPacket
 		}
 		else if (!getClient().getFloodProtectors().getManor().tryPerformAction("BuySeed"))
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "buying_seeds_too_fast"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "buying_seeds_too_fast"));
 			return;
 		}
 		else if (_items == null)

@@ -1,20 +1,19 @@
-<html><title>L2J Mods Panel</title><body>
+<html><title>Server Control Panel</title><body>
 <center>
 <table width=270><tr>
 <td width=45><button value="Main" action="bypass -h admin_admin" width=45 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
-<td width=180><center>L2j Mods Menu</center></td>
-<td width=45><button value="Back" action="bypass -h admin_admin4" width=45 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+<td width=180><center>Mods Events Menu</center></td>
+<td width=45><button value="Back" action="bypass -h admin_html events.htm" width=45 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
 </tr></table><br>
-<table width=240>
+<table width=270>
 <tr>
-<td>QuickBox:</td>
-<td><edit var="qbox" width=120 height=15></td>
-<td><button value="Help" action="bypass -h admin_html help/mods_menu.htm" width=45 height=20 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+<td width=50><font color="LEVEL">TextBox- </font></td>
+<td width=160><edit var="qbox" width=170 height=15></td>
+<td width=50><font color="LEVEL"> -TextBox</font></td>
 </tr>
 </table>
 <br>
-<font color="LEVEL">L2J WEDDING MOD
-<a action="bypass -h admin_html help/l2jmod/wedding.htm">Help</a></font>
+<font color="LEVEL">WEDDING MOD</font><br>
 <table width=240 border=0 bgcolor="666666">
 <tr>
 <td><button value="Enable" action="bypass -h admin_set_mod AllowWedding=true" width=60 height=20 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
@@ -34,8 +33,7 @@
 </tr>
 </table>
 <br>
-<font color="LEVEL">L2J CHAMPION MOBS MOD
-<a action="bypass -h admin_html help/l2jmod/champions.htm">Help</a></font>
+<font color="LEVEL">CHAMPION MOBS MOD</font><br>
 <table width=240 border=0 bgcolor="666666">
 <tr>
 <td><button value="Enable" action="bypass -h admin_set_mod ChampionEnable=true" width=60 height=20 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
@@ -57,8 +55,7 @@
 </tr>
 </table>
 <br>
-<font color="LEVEL">L2J TvT EVENT MOD
-<a action="bypass -h admin_html help/l2jmod/tvt.htm">Help</a></font>
+<font color="LEVEL">TvT EVENT MOD</font><br>
 <table width=240 border=0 bgcolor="666666">
 <tr>
 <td><button value="Enable" action="bypass -h admin_set_mod TvTEventEnabled=true" width=60 height=20 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
@@ -70,7 +67,6 @@
 <td><button value="Disable" action="bypass -h admin_set_mod TvTEventEnabled=false" width=60 height=20 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
 <td><button value="EventNpc" action="bypass -h admin_set_mod TvTEventParticipationNpcId=$qbox" width=60 height=20 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
 </tr>
-</table>
-<br>
+</table> 
 </center>
 </body></html>

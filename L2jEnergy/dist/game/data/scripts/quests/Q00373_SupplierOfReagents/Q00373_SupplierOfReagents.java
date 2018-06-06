@@ -458,23 +458,23 @@ public final class Q00373_SupplierOfReagents extends Quest
 	
 	private static final class Entry
 	{
-		private final int item;
-		private final String html;
+		private final int _item;
+		private final String _html;
 		
 		public Entry(int item, String html)
 		{
-			this.item = item;
-			this.html = html;
+			_item = item;
+			_html = html;
 		}
 		
 		public int getItem()
 		{
-			return item;
+			return _item;
 		}
 		
 		public String getHtml()
 		{
-			return html;
+			return _html;
 		}
 	}
 }

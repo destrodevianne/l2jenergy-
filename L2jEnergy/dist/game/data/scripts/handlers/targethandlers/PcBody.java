@@ -21,7 +21,7 @@ package handlers.targethandlers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.ITargetTypeHandler;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.L2Character;
@@ -92,7 +92,7 @@ public class PcBody implements ITargetTypeHandler
 						if (targetPlayer.isFestivalParticipant()) // Check to see if the current player target is in a festival.
 						{
 							condGood = false;
-							activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(player, "ss_no_resurrect_player"));
+							activeChar.sendMessage(MessagesData.getInstance().getMessage(player, "ss_no_resurrect_player"));
 						}
 					}
 				}

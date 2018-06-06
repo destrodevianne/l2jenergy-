@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.instancemanager.ItemAuctionManager;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.itemauction.ItemAuction;
@@ -54,7 +54,7 @@ public final class RequestBidItemAuction extends L2GameClientPacket
 		// can't use auction fp here
 		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("auction"))
 		{
-			activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "auction_fast"));
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "auction_fast"));
 			return;
 		}
 		

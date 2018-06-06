@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.actor.L2Character;
@@ -131,7 +131,7 @@ public final class CHSiegeManager
 	{
 		if (clan.getLevel() < Config.CHS_CLAN_MINLEVEL)
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "chs_level_restriction").replace("%s%", Config.CHS_CLAN_MINLEVEL + ""));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "chs_level_restriction").replace("%s%", Config.CHS_CLAN_MINLEVEL + ""));
 		}
 		else if (hall.isWaitingBattle())
 		{

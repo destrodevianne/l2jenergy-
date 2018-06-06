@@ -32,6 +32,7 @@ import com.l2jserver.gameserver.data.xml.impl.BuyListData;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
 import com.l2jserver.gameserver.data.xml.impl.EnchantItemData;
 import com.l2jserver.gameserver.data.xml.impl.EnchantItemGroupsData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.MultisellData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.data.xml.impl.PlayerCreationPointData;
@@ -57,8 +58,6 @@ public class AdminReload implements IAdminCommandHandler
 		"admin_reload"
 	};
 	
-	private static final String RELOAD_USAGE = "Usage: //reload <config|access|npc|quest [quest_id|quest_name]|walker|htm[l] [file|directory]|multisell|buylist|teleport|skill|item|door|effect|handler|enchant|creationpoint>";
-	
 	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
@@ -69,7 +68,7 @@ public class AdminReload implements IAdminCommandHandler
 			if (!st.hasMoreTokens())
 			{
 				AdminHtml.showAdminHtml(activeChar, "reload.htm");
-				activeChar.sendMessage(RELOAD_USAGE);
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_reload"));
 				return true;
 			}
 			
@@ -114,7 +113,7 @@ public class AdminReload implements IAdminCommandHandler
 					else
 					{
 						QuestManager.getInstance().reloadAllScripts();
-						activeChar.sendMessage("All scripts have been reloaded.");
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_all_scripts_have_been_reloaded"));
 						AdminData.getInstance().broadcastMessageToGMs(activeChar.getName() + ": Reloaded Quests.");
 					}
 					break;
@@ -122,7 +121,7 @@ public class AdminReload implements IAdminCommandHandler
 				case "walker":
 				{
 					WalkingManager.getInstance().load();
-					activeChar.sendMessage("All walkers have been reloaded");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_all_walkers_have_been_reloaded"));
 					AdminData.getInstance().broadcastMessageToGMs(activeChar.getName() + ": Reloaded Walkers.");
 					break;
 				}
@@ -140,13 +139,13 @@ public class AdminReload implements IAdminCommandHandler
 						}
 						else
 						{
-							activeChar.sendMessage("File or Directory does not exist.");
+							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_file_or_directory_does_not_exist"));
 						}
 					}
 					else
 					{
 						HtmCache.getInstance().reload();
-						activeChar.sendMessage("Cache[HTML]: " + HtmCache.getInstance().getMemoryUsage() + " megabytes on " + HtmCache.getInstance().getLoadedFiles() + " files loaded");
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_cache_html_megabytes_on_files_loaded").replace("%s%", HtmCache.getInstance().getMemoryUsage() + "").replace("%i%", HtmCache.getInstance().getLoadedFiles() + ""));
 						AdminData.getInstance().broadcastMessageToGMs(activeChar.getName() + ": Reloaded Htms.");
 					}
 					break;
@@ -155,6 +154,12 @@ public class AdminReload implements IAdminCommandHandler
 				{
 					MultisellData.getInstance().load();
 					AdminData.getInstance().broadcastMessageToGMs(activeChar.getName() + ": Reloaded Multisells.");
+					break;
+				}
+				case "messages":
+				{
+					MessagesData.getInstance().load();
+					AdminData.getInstance().broadcastMessageToGMs(activeChar.getName() + ": Reloaded Messages.");
 					break;
 				}
 				case "buylist":
@@ -216,7 +221,7 @@ public class AdminReload implements IAdminCommandHandler
 					catch (ScriptException e)
 					{
 						L2ScriptEngineManager.getInstance().reportScriptFileError(file, e);
-						activeChar.sendMessage("There was an error while loading handlers.");
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_there_was_error_while_loading_handlers"));
 					}
 					break;
 				}
@@ -231,7 +236,7 @@ public class AdminReload implements IAdminCommandHandler
 					catch (ScriptException e)
 					{
 						L2ScriptEngineManager.getInstance().reportScriptFileError(file, e);
-						activeChar.sendMessage("There was an error while loading handlers.");
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_there_was_error_while_loading_handlers"));
 					}
 					break;
 				}
@@ -256,11 +261,11 @@ public class AdminReload implements IAdminCommandHandler
 				}
 				default:
 				{
-					activeChar.sendMessage(RELOAD_USAGE);
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_reload"));
 					return true;
 				}
 			}
-			activeChar.sendMessage("WARNING: There are several known issues regarding this feature. Reloading server data during runtime is STRONGLY NOT RECOMMENDED for live servers, just for developing environments.");
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_warn_reloding"));
 		}
 		return true;
 	}
@@ -270,5 +275,4 @@ public class AdminReload implements IAdminCommandHandler
 	{
 		return ADMIN_COMMANDS;
 	}
-	
 }

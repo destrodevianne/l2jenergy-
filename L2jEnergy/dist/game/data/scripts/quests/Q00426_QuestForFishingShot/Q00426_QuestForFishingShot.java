@@ -337,13 +337,29 @@ public class Q00426_QuestForFishingShot extends Quest
 	
 	private static class ChanceReward
 	{
-		final int chance;
-		final int reward;
+		private final int _chance;
+		private final int _reward;
 		
 		ChanceReward(int chance, int reward)
 		{
-			this.chance = chance;
-			this.reward = reward;
+			_chance = chance;
+			_reward = reward;
+		}
+		
+		/**
+		 * @return the _chance
+		 */
+		public int getChance()
+		{
+			return _chance;
+		}
+		
+		/**
+		 * @return the _reward
+		 */
+		public int getReward()
+		{
+			return _reward;
 		}
 	}
 	
@@ -387,21 +403,21 @@ public class Q00426_QuestForFishingShot extends Quest
 		{
 			if (MOBS_SPECIAL.containsKey(npc.getId()))
 			{
-				if (Rnd.get(1000) <= MOBS_SPECIAL.get(npc.getId()).chance)
+				if (Rnd.get(1000) <= MOBS_SPECIAL.get(npc.getId()).getChance())
 				{
-					rewardItems(qs.getPlayer(), SWEET_FLUID, MOBS_SPECIAL.get(npc.getId()).reward + 1);
+					rewardItems(qs.getPlayer(), SWEET_FLUID, MOBS_SPECIAL.get(npc.getId()).getReward() + 1);
 				}
 				else
 				{
-					rewardItems(qs.getPlayer(), SWEET_FLUID, MOBS_SPECIAL.get(npc.getId()).reward);
+					rewardItems(qs.getPlayer(), SWEET_FLUID, MOBS_SPECIAL.get(npc.getId()).getReward());
 				}
 				playSound(qs.getPlayer(), Sound.ITEMSOUND_QUEST_ITEMGET);
 			}
 			else
 			{
-				if (Rnd.get(1000) <= MOBS.get(npc.getId()).chance)
+				if (Rnd.get(1000) <= MOBS.get(npc.getId()).getChance())
 				{
-					rewardItems(qs.getPlayer(), SWEET_FLUID, MOBS.get(npc.getId()).reward);
+					rewardItems(qs.getPlayer(), SWEET_FLUID, MOBS.get(npc.getId()).getReward());
 					playSound(qs.getPlayer(), Sound.ITEMSOUND_QUEST_ITEMGET);
 				}
 			}

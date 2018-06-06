@@ -755,7 +755,6 @@ public final class Config
 	public static boolean WELCOME_MESSAGE_ENABLED;
 	public static String WELCOME_MESSAGE_TEXT;
 	public static int WELCOME_MESSAGE_TIME;
-	public static boolean FOUNDERS_AND_TEAM_LICENSE_MESSAGE_ENABLED;
 	public static boolean L2JMOD_ANTIFEED_ENABLE;
 	public static boolean L2JMOD_ANTIFEED_DUALBOX;
 	public static boolean L2JMOD_ANTIFEED_DISCONNECTED_AS_DUALBOX;
@@ -2419,7 +2418,6 @@ public final class Config
 			WELCOME_MESSAGE_ENABLED = L2JModSettings.getBoolean("ScreenWelcomeMessageEnable", false);
 			WELCOME_MESSAGE_TEXT = L2JModSettings.getString("ScreenWelcomeMessageText", "Welcome to L2J server!");
 			WELCOME_MESSAGE_TIME = L2JModSettings.getInt("ScreenWelcomeMessageTime", 10) * 1000;
-			FOUNDERS_AND_TEAM_LICENSE_MESSAGE_ENABLED = L2JModSettings.getBoolean("FoundersAndTeamLicenseMessageEnable", true);
 			
 			L2JMOD_ANTIFEED_ENABLE = L2JModSettings.getBoolean("AntiFeedEnable", false);
 			L2JMOD_ANTIFEED_DUALBOX = L2JModSettings.getBoolean("AntiFeedDualbox", true);

@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.instancemanager.CHSiegeManager;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.ClanHallManager;
@@ -104,7 +104,7 @@ public final class RequestRestartPoint extends L2GameClientPacket
 				ThreadPoolManager.getInstance().scheduleGeneral(new DeathTask(activeChar), castle.getSiege().getAttackerRespawnDelay());
 				if (castle.getSiege().getAttackerRespawnDelay() > 0)
 				{
-					activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "respawn_in_seconds").replace("%s%", (castle.getSiege().getAttackerRespawnDelay() / 1000) + ""));
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "respawn_in_seconds").replace("%s%", (castle.getSiege().getAttackerRespawnDelay() / 1000) + ""));
 				}
 				return;
 			}

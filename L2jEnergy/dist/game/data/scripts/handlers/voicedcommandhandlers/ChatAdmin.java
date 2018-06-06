@@ -22,6 +22,7 @@ import java.util.StringTokenizer;
 
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IVoicedCommandHandler;
 import com.l2jserver.gameserver.instancemanager.PunishmentManager;
 import com.l2jserver.gameserver.model.L2World;
@@ -51,7 +52,7 @@ public class ChatAdmin implements IVoicedCommandHandler
 		{
 			if (params == null)
 			{
-				activeChar.sendMessage("Usage: .banchat name [minutes]");
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_usage_banchat_name"));
 				return true;
 			}
 			StringTokenizer st = new StringTokenizer(params);
@@ -74,45 +75,46 @@ public class ChatAdmin implements IVoicedCommandHandler
 					L2PcInstance player = L2World.getInstance().getPlayer(objId);
 					if ((player == null) || !player.isOnline())
 					{
-						activeChar.sendMessage("Player not online !");
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_player_not_online"));
 						return false;
 					}
 					if (player.isChatBanned())
 					{
-						activeChar.sendMessage("Player is already punished !");
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_player_already_punished"));
 						return false;
 					}
 					if (player == activeChar)
 					{
-						activeChar.sendMessage("You can't ban yourself !");
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_you_can_ban_yourself"));
 						return false;
 					}
 					if (player.isGM())
 					{
-						activeChar.sendMessage("You can't ban GM !");
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_you_can_ban_gm"));
 						return false;
 					}
 					if (AdminData.getInstance().hasAccess(command, player.getAccessLevel()))
 					{
-						activeChar.sendMessage("You can't ban moderator !");
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_you_can_ban_moderator"));
 						return false;
 					}
 					
 					PunishmentManager.getInstance().startPunishment(new PunishmentTask(objId, PunishmentAffect.CHARACTER, PunishmentType.CHAT_BAN, expirationTime, "Chat banned by moderator", activeChar.getName()));
-					player.sendMessage("Chat banned by moderator " + activeChar.getName());
+					
+					player.sendMessage(MessagesData.getInstance().getMessage(player, "dp_handler_chat_banned_moderator").replace("%s%", activeChar.getName() + ""));
 					
 					if (expirationTime > 0)
 					{
-						activeChar.sendMessage("Player " + player.getName() + " chat banned for " + expirationTime + " minutes.");
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_player_chat_banned_for_minutes").replace("%s%", player.getName() + "").replace("%i%", expirationTime + ""));
 					}
 					else
 					{
-						activeChar.sendMessage("Player " + player.getName() + " chat banned forever.");
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_player_chat_banned_forever").replace("%s%", player.getName() + ""));
 					}
 				}
 				else
 				{
-					activeChar.sendMessage("Player not found !");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_player_not_found"));
 					return false;
 				}
 			}
@@ -121,7 +123,7 @@ public class ChatAdmin implements IVoicedCommandHandler
 		{
 			if (params == null)
 			{
-				activeChar.sendMessage("Usage: .unbanchat name");
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_usage_unbanchat_name"));
 				return true;
 			}
 			StringTokenizer st = new StringTokenizer(params);
@@ -135,23 +137,23 @@ public class ChatAdmin implements IVoicedCommandHandler
 					L2PcInstance player = L2World.getInstance().getPlayer(objId);
 					if ((player == null) || !player.isOnline())
 					{
-						activeChar.sendMessage("Player not online !");
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_player_not_online"));
 						return false;
 					}
 					if (!player.isChatBanned())
 					{
-						activeChar.sendMessage("Player is not chat banned !");
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_player_not_chat_banned"));
 						return false;
 					}
 					
 					PunishmentManager.getInstance().stopPunishment(objId, PunishmentAffect.CHARACTER, PunishmentType.CHAT_BAN);
 					
-					activeChar.sendMessage("Player " + player.getName() + " chat unbanned.");
-					player.sendMessage("Chat unbanned by moderator " + activeChar.getName());
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_player_chat_unbanned").replace("%s%", player.getName() + ""));
+					player.sendMessage(MessagesData.getInstance().getMessage(player, "dp_handler_chat_unbanned_moderator").replace("%s%", activeChar.getName() + ""));
 				}
 				else
 				{
-					activeChar.sendMessage("Player not found !");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_player_not_found"));
 					return false;
 				}
 			}

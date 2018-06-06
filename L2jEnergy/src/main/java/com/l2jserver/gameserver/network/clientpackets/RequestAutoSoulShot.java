@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.Config;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
@@ -72,7 +72,7 @@ public final class RequestAutoSoulShot extends L2GameClientPacket
 			{
 				if (!activeChar.getInventory().canManipulateWithItemId(item.getId()))
 				{
-					activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "item_cannot_use"));
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "item_cannot_use"));
 					return;
 				}
 				

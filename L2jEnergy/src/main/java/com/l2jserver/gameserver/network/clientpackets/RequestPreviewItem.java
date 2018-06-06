@@ -25,7 +25,7 @@ import java.util.logging.Level;
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.data.xml.impl.BuyListData;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2MerchantInstance;
@@ -124,7 +124,7 @@ public final class RequestPreviewItem extends L2GameClientPacket
 		
 		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("buy"))
 		{
-			activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "buying_too_fast"));
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "buying_too_fast"));
 			return;
 		}
 		
@@ -137,8 +137,8 @@ public final class RequestPreviewItem extends L2GameClientPacket
 		// Check current target of the player and the INTERACTION_DISTANCE
 		L2Object target = activeChar.getTarget();
 		if (!activeChar.isGM() && ((target == null // No target (i.e. GM Shop)
-			) || !((target instanceof L2MerchantInstance)) // Target not a merchant
-		|| !activeChar.isInsideRadius(target, L2Npc.INTERACTION_DISTANCE, false, false) // Distance is too far
+		) || !((target instanceof L2MerchantInstance)) // Target not a merchant
+			|| !activeChar.isInsideRadius(target, L2Npc.INTERACTION_DISTANCE, false, false) // Distance is too far
 		))
 		{
 			return;

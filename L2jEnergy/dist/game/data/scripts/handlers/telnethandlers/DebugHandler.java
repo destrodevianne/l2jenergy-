@@ -63,10 +63,10 @@ public class DebugHandler implements ITelnetHandler
 		"debug"
 	};
 	
-	private int uptime = 0;
+	private int _uptime = 0;
 	
 	@Override
-	public boolean useCommand(String command, PrintWriter _print, Socket _cSocket, int _uptime)
+	public boolean useCommand(String command, PrintWriter _print, Socket _cSocket, int uptime)
 	{
 		if (command.startsWith("debug") && (command.length() > 6))
 		{
@@ -167,7 +167,7 @@ public class DebugHandler implements ITelnetHandler
 					StringBuilder sb = new StringBuilder();
 					sb.append(sdf.format(cal.getTime()));
 					sb.append("\n\n");
-					uptime = _uptime;
+					_uptime = uptime;
 					sb.append(getServerStatus());
 					sb.append("\n\n");
 					sb.append("\n## Java Platform Information ##");
@@ -426,7 +426,7 @@ public class DebugHandler implements ITelnetHandler
 		sb.append("\r\n  +.......... L2Door: " + doorCount);
 		sb.append("\r\n  +.......... L2Char: " + charCount);
 		sb.append("\r\n  --->   Ingame Time: " + gameTime());
-		sb.append("\r\n  ---> Server Uptime: " + getUptime(uptime));
+		sb.append("\r\n  ---> Server Uptime: " + getUptime(_uptime));
 		sb.append("\r\n  --->      GM Count: " + getOnlineGMS());
 		sb.append("\r\n  --->       Threads: " + Thread.activeCount());
 		sb.append("\r\n  RAM Used: " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576)); // 1024 * 1024 = 1048576

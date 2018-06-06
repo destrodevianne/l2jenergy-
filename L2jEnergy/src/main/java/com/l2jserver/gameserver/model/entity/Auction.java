@@ -33,7 +33,7 @@ import java.util.logging.Logger;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.AuctionItemType;
 import com.l2jserver.gameserver.idfactory.IdFactory;
 import com.l2jserver.gameserver.instancemanager.AuctionManager;
@@ -377,7 +377,7 @@ public class Auction
 				}
 				if (L2World.getInstance().getPlayer(_highestBidderName) != null)
 				{
-					L2World.getInstance().getPlayer(_highestBidderName).sendMessage(LanguageData.getInstance().getMsgByLang(L2World.getInstance().getPlayer(_highestBidderName), "auction_bidded"));
+					L2World.getInstance().getPlayer(_highestBidderName).sendMessage(MessagesData.getInstance().getMessage(L2World.getInstance().getPlayer(_highestBidderName), "auction_bidded"));
 				}
 			}
 			
@@ -425,7 +425,7 @@ public class Auction
 			{
 				if (L2World.getInstance().getPlayer(b.getName()) != null)
 				{
-					L2World.getInstance().getPlayer(b.getName()).sendMessage(LanguageData.getInstance().getMsgByLang(L2World.getInstance().getPlayer(b.getName()), "auction_won"));
+					L2World.getInstance().getPlayer(b.getName()).sendMessage(MessagesData.getInstance().getMessage(L2World.getInstance().getPlayer(b.getName()), "auction_won"));
 				}
 			}
 			ClanTable.getInstance().getClanByName(b.getClanName()).setAuctionBiddedAt(0, true);

@@ -25,6 +25,7 @@ import java.sql.SQLException;
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2AccessLevel;
 import com.l2jserver.gameserver.model.L2World;
@@ -61,7 +62,7 @@ public final class AdminChangeAccessLevel implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Usage: //changelvl <target_new_level> | <player_name> <new_level>");
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_changelvl"));
 			}
 		}
 		else if (parts.length == 3)
@@ -84,16 +85,16 @@ public final class AdminChangeAccessLevel implements IAdminCommandHandler
 					
 					if (ps.getUpdateCount() == 0)
 					{
-						activeChar.sendMessage("Character not found or access level unaltered.");
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_character_not_found_access_level"));
 					}
 					else
 					{
-						activeChar.sendMessage("Character's access level is now set to " + lvl);
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_character_access_level_now_set").replace("%s%", lvl + ""));
 					}
 				}
 				catch (SQLException se)
 				{
-					activeChar.sendMessage("SQLException while changing character's access level");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_changing_sqlexception_character_access_level"));
 					if (Config.DEBUG)
 					{
 						se.printStackTrace();
@@ -123,18 +124,18 @@ public final class AdminChangeAccessLevel implements IAdminCommandHandler
 			{
 				final L2AccessLevel acccessLevel = AdminData.getInstance().getAccessLevel(lvl);
 				player.setAccessLevel(lvl);
-				player.sendMessage("Your access level has been changed to " + acccessLevel.getName() + " (" + acccessLevel.getLevel() + ").");
-				activeChar.sendMessage(player.getName() + "'s access level has been changed to " + acccessLevel.getName() + " (" + acccessLevel.getLevel() + ").");
+				player.sendMessage(MessagesData.getInstance().getMessage(player, "admin_your_access_level_has_been_changed_to").replace("%c%", acccessLevel.getName() + "").replace("%i%", acccessLevel.getName() + ""));
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "players_access_level_has_been_changed_to").replace("%s%", player.getName() + "").replace("%c%", acccessLevel.getName() + "").replace("%i%", acccessLevel.getName() + ""));
 			}
 			else
 			{
-				activeChar.sendMessage("You are trying to set unexisting access level: " + lvl + " please try again with a valid one!");
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_you_trying_set_unexisting_access_level").replace("%s%", lvl + ""));
 			}
 		}
 		else
 		{
 			player.setAccessLevel(lvl);
-			player.sendMessage("Your character has been banned. Bye.");
+			player.sendMessage(MessagesData.getInstance().getMessage(activeChar, "player_your_character_banned"));
 			player.logout();
 		}
 	}

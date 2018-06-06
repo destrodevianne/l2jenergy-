@@ -215,9 +215,9 @@ public final class Race extends Event
 		}
 		_players.clear();
 		// Despawn NPCs
-		for (L2Npc _npc : _npcs)
+		for (L2Npc npc : _npcs)
 		{
-			_npc.deleteMe();
+			npc.deleteMe();
 		}
 		_npcs.clear();
 		// Announce event end

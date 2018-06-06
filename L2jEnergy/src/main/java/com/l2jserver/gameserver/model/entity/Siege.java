@@ -35,8 +35,8 @@ import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.SiegeScheduleData;
-import com.l2jserver.gameserver.datatables.LanguageData;
 import com.l2jserver.gameserver.enums.SiegeTeleportWhoType;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.MercTicketManager;
@@ -387,8 +387,8 @@ public class Siege implements Siegable
 			}
 			
 			if (getDefenderClans().isEmpty() && // If defender doesn't exist (Pc vs Npc)
-			(getAttackerClans().size() == 1 // Only 1 attacker
-			))
+				(getAttackerClans().size() == 1 // Only 1 attacker
+				))
 			{
 				L2SiegeClan sc_newowner = getAttackerClan(getCastle().getOwnerId());
 				removeAttacker(sc_newowner);
@@ -948,7 +948,7 @@ public class Siege implements Siegable
 	{
 		if (getCastle().getOwnerId() <= 0)
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "no_register_defender").replace("%s%", getCastle().getName() + ""));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "no_register_defender").replace("%s%", getCastle().getName() + ""));
 			return;
 		}
 		

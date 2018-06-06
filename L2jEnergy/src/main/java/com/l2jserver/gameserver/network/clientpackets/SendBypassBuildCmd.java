@@ -20,7 +20,7 @@ package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.AdminCommandHandler;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -66,7 +66,7 @@ public final class SendBypassBuildCmd extends L2GameClientPacket
 		{
 			if (activeChar.isGM())
 			{
-				activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "gm_command_not_exist").replace("%s%", command.substring(6) + ""));
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "gm_command_not_exist").replace("%s%", command.substring(6) + ""));
 			}
 			
 			_log.warning("No handler registered for admin command '" + command + "'");
@@ -75,7 +75,7 @@ public final class SendBypassBuildCmd extends L2GameClientPacket
 		
 		if (!AdminData.getInstance().hasAccess(command, activeChar.getAccessLevel()))
 		{
-			activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "gm_command_not_access"));
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "gm_command_not_access"));
 			_log.warning("Character " + activeChar.getName() + " tryed to use admin command " + command + ", but have no access to it!");
 			return;
 		}

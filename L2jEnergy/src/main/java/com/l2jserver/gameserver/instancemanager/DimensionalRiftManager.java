@@ -37,7 +37,7 @@ import org.w3c.dom.Node;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.SpawnTable;
 import com.l2jserver.gameserver.model.DimensionalRiftRoom;
 import com.l2jserver.gameserver.model.L2Spawn;
@@ -290,7 +290,7 @@ public final class DimensionalRiftManager
 		// max parties inside is rooms count - 1
 		if (!isAllowedEnter(type))
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "dimensional_rift_full"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "dimensional_rift_full"));
 			return;
 		}
 		

@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.Config;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PetInstance;
@@ -56,7 +56,7 @@ public final class RequestGiveItemToPet extends L2GameClientPacket
 		
 		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("giveitemtopet"))
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "give_item_pet_too_fast"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "give_item_pet_too_fast"));
 			return;
 		}
 		
@@ -72,7 +72,7 @@ public final class RequestGiveItemToPet extends L2GameClientPacket
 		
 		if (player.getPrivateStoreType() != PrivateStoreType.NONE)
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "no_exchange_items"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "no_exchange_items"));
 			return;
 		}
 		
@@ -84,7 +84,8 @@ public final class RequestGiveItemToPet extends L2GameClientPacket
 		
 		if (_amount > item.getCount())
 		{
-			Util.handleIllegalPlayerAction(player, getClass().getSimpleName() + ": Character " + player.getName() + " of account " + player.getAccountName() + " tried to get item with oid " + _objectId + " from pet but has invalid count " + _amount + " item count: " + item.getCount(), Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(player, getClass().getSimpleName() + ": Character " + player.getName() + " of account " + player.getAccountName() + " tried to get item with oid " + _objectId + " from pet but has invalid count " + _amount + " item count: "
+				+ item.getCount(), Config.DEFAULT_PUNISH);
 			return;
 		}
 		

@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.model.zone.type;
 
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.instancemanager.ZoneManager;
 import com.l2jserver.gameserver.model.L2WorldRegion;
 import com.l2jserver.gameserver.model.actor.L2Character;
@@ -65,7 +65,7 @@ public class L2DynamicZone extends L2ZoneType
 	{
 		if (character.isPlayer())
 		{
-			character.sendMessage(LanguageData.getInstance().getMsgByLang(character, "zone_temporary_enter"));
+			character.sendMessage(MessagesData.getInstance().getMessage(null, "zone_temporary_enter"));
 		}
 		if (_owner != null)
 		{
@@ -78,7 +78,7 @@ public class L2DynamicZone extends L2ZoneType
 	{
 		if (character.isPlayer())
 		{
-			character.sendMessage(LanguageData.getInstance().getMsgByLang(character, "zone_temporary_exit")); // TODO: Custom message?
+			character.sendMessage(MessagesData.getInstance().getMessage(null, "zone_temporary_exit")); // TODO: Custom message?
 		}
 		
 		if (character == _owner)

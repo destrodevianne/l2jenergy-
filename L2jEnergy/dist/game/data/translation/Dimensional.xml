@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Dimensional Messages -->
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/Messages.xsd">
+    <message id="dimensional_rift_full">
+        <set lang="en" val="Rift is full. Try later.." />
+		<set lang="ru" val="Разлом между мирами заполнен. Попробуй позже.." />
+	</message>
+    <message id="no_invite_in_rift">
+        <set lang="en" val="You cannot invite a player when you are in the Dimensional Rift." />
+		<set lang="ru" val="Вы не можете приглашать игрока, когда находитесь в Разломе между мирами." />
+    </message>
+    <message id="no_dismiss_player_in_rift">
+        <set lang="en" val="You can't dismiss party member when you are in Dimensional Rift." />
+		<set lang="ru" val="Вы не можете исключить члена пати, когда находитесь в Разломе между мирами." />
+    </message>
+</list>

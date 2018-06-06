@@ -19,7 +19,7 @@
 package handlers.voicedcommandhandlers;
 
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IVoicedCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
@@ -43,12 +43,12 @@ public class Debug implements IVoicedCommandHandler
 			if (activeChar.isDebug())
 			{
 				activeChar.setDebug(null);
-				activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "player_debug_on"));
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_player_debug_on"));
 			}
 			else
 			{
 				activeChar.setDebug(activeChar);
-				activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "player_debug_off"));
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_player_debug_off"));
 			}
 		}
 		return true;

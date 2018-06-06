@@ -18,16 +18,16 @@
  */
 package handlers.admincommandhandlers;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.Shutdown;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
-import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
+import com.l2jserver.gameserver.util.DifferentMethods;
 import com.l2jserver.gameserver.util.Util;
+import com.l2jserver.util.MemoryWatchDog;
 
 /**
  * This class handles following admin commands: - server_shutdown [sec] = shows menu or shuts down server in sec seconds
@@ -58,7 +58,7 @@ public class AdminShutdown implements IAdminCommandHandler
 				}
 				else
 				{
-					activeChar.sendMessage("Usage: //server_shutdown <seconds>");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_server_shutdown"));
 					sendHtmlForm(activeChar);
 				}
 			}
@@ -78,7 +78,7 @@ public class AdminShutdown implements IAdminCommandHandler
 				}
 				else
 				{
-					activeChar.sendMessage("Usage: //server_restart <seconds>");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_server_restart"));
 					sendHtmlForm(activeChar);
 				}
 			}
@@ -91,7 +91,6 @@ public class AdminShutdown implements IAdminCommandHandler
 		{
 			serverAbort(activeChar);
 		}
-		
 		return true;
 	}
 	
@@ -104,17 +103,20 @@ public class AdminShutdown implements IAdminCommandHandler
 	private void sendHtmlForm(L2PcInstance activeChar)
 	{
 		final NpcHtmlMessage adminReply = new NpcHtmlMessage();
-		int t = GameTimeController.getInstance().getGameTime();
-		int h = t / 60;
-		int m = t % 60;
-		SimpleDateFormat format = new SimpleDateFormat("h:mm a");
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.HOUR_OF_DAY, h);
-		cal.set(Calendar.MINUTE, m);
 		adminReply.setFile(activeChar.getHtmlPrefix(), "data/html/admin/shutdown.htm");
-		adminReply.replace("%count%", String.valueOf(L2World.getInstance().getAllPlayersCount()));
-		adminReply.replace("%used%", String.valueOf(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()));
-		adminReply.replace("%time%", String.valueOf(format.format(cal.getTime())));
+		adminReply.replace("%onlineAll%", String.valueOf(DifferentMethods.getPlayersCount("ALL")));
+		adminReply.replace("%offlineTrade%", String.valueOf(DifferentMethods.getPlayersCount("OFF_TRADE")));
+		adminReply.replace("%onlineGM%", String.valueOf(DifferentMethods.getPlayersCount("GM")));
+		adminReply.replace("%onlineReal%", String.valueOf(DifferentMethods.getPlayersCount("ALL_REAL")));
+		adminReply.replace("%used%", String.valueOf(MemoryWatchDog.getMemUsedMb()));
+		adminReply.replace("%free%", String.valueOf(MemoryWatchDog.getMemFreeMb()));
+		adminReply.replace("%max%", String.valueOf(MemoryWatchDog.getMemMaxMb()));
+		adminReply.replace("%os%", System.getProperty("os.name"));
+		adminReply.replace("%gameTime%", GameTimeController.getInstance().getGameHour() + ":" + GameTimeController.getInstance().getGameMinute());
+		adminReply.replace("%dayNight%", GameTimeController.getInstance().isNight() ? "Night" : "Day");
+		adminReply.replace("%timeserv%", String.valueOf(DifferentMethods.getServerUpTime()));
+		adminReply.replace("%maxonline%", String.valueOf(DifferentMethods.getPlayersCount("ALL") + "/" + Config.MAXIMUM_ONLINE_USERS));
+		adminReply.replace("%geo%", Config.PATHFINDING > 0 ? "Loading" : "Disabled");
 		activeChar.sendPacket(adminReply);
 	}
 	
@@ -127,5 +129,4 @@ public class AdminShutdown implements IAdminCommandHandler
 	{
 		Shutdown.getInstance().abort(activeChar);
 	}
-	
 }

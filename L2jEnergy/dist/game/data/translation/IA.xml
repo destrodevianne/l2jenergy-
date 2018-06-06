@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/Messages.xsd">
+    <!-- ALL IA Messages -->
+    <message id="dp_ia_skipping">
+        <set lang="en" val=": Skipping waiting time ..." />
+		<set lang="ru" val=": Пропуск времени ожидания ..." />
+	</message>
+    <message id="dp_ia_no_skip">
+        <set lang="en" val=": You can't skip waiting time right now!" />
+		<set lang="ru" val=": Вы не можете пропустить время ожидания прямо сейчас!" />
+    </message>
+    <message id="dp_ia_aborted">
+        <set lang="en" val=": Fight has been aborted!" />
+		<set lang="ru" val=": Бой был прерван!" />
+    </message>
+    <message id="dp_ia_no_aborted">
+        <set lang="en" val=": You can't abort fight right now!" />
+		<set lang="ru" val=": Вы не можете прекратить бой прямо сейчас!" />
+    </message>
+    <message id="dp_ia_minions">
+        <set lang="en" val=": All minions have been deleted!" />
+		<set lang="ru" val=": Все монстры были удалены!" />
+    </message>
+    <message id="dp_ia_no_minions">
+	    <set lang="en" val=": You can't despawn minions right now!" />
+		<set lang="ru" val=": Вы не можете уничтожить монстров прямо сейчас!" />
+	</message>
+	<!-- Antharas IA -->
+	<message id="dp_ia_antharas_respaw">
+	    <set lang="en" val=": Antharas has been respawned." />
+		<set lang="ru" val=": Антарас возродился." />
+	</message>
+	<message id="dp_ia_antharas_live">
+	    <set lang="en" val=": You can't respawn antharas while antharas is alive!" />
+		<set lang="ru" val=": Вы не можете возродить Антараса, пока Антарас жив!" />
+	</message>
+	<!-- Baium IA -->
+	<message id="dp_ia_baium_no_respawn">
+	    <set lang="en" val=": You cant respawn Baium while Baium is alive!" />
+		<set lang="ru" val=": Вы не можете возродить Баюма, пока Баюм жив!" />
+	</message>
+</list>

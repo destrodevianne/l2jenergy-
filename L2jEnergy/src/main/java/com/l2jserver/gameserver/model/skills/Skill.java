@@ -31,8 +31,8 @@ import java.util.logging.Logger;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.GeoData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
-import com.l2jserver.gameserver.datatables.LanguageData;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.enums.MountType;
 import com.l2jserver.gameserver.enums.ShotType;
@@ -1027,7 +1027,7 @@ public class Skill implements IIdentifiable
 			}
 		}
 		
-		activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "skill_target_null"));
+		activeChar.sendMessage(MessagesData.getInstance().getMessage(null, "skill_target_null"));
 		return EMPTY_TARGET_LIST;
 	}
 	

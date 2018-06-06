@@ -1,0 +1,55 @@
+<html><title>Server Control Panel</title><body>
+<center>
+<!-- top menu -->
+<table width=270><tr>
+<td width=45><button value="Main" action="bypass -h admin_admin" width=45 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+<td width=190><center><font color=LEVEL>--- [ Special Raid Events ] ---</font></center></td>
+<td width=45><button value="Back" action="bypass -h admin_html events/other_events.htm" width=45 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+</tr></table>
+<br>
+<!-- Windows Info -->
+<table width=270>
+<tr>
+<td width=50><font color="LEVEL">TextBox- </font></td>
+<td width=160><edit var="qbox" width=170 height=15></td>
+<td width=50><font color="LEVEL"> -TextBox</font></td>
+</tr>
+</table>
+<br>
+<font color="LEVEL">Special Raid Events</font>
+<br>
+<table width=240 border=0 bgcolor="666666">
+<tr>
+<td><button value="Enable" action="bypass -h admin_set EnableRaidEvent=true" width=60 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+<td><button value="Disable" action="bypass -h admin_set EnableRaidEvent=false" width=60 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+<td><button value="Interval" action="bypass -h admin_set RaidEventInterval=$qbox" width=60 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+<td><button value="PartTime" action="bypass -h admin_set RaidEventParticipationTime=$qbox" width=60 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+</tr>
+<tr>
+<td><button value="RunTime" action="bypass -h admin_set RaidEventRunningTime=$qbox" width=60 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+<td><button value="Start" action="bypass -h admin_raid_start" width=60 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+<td><button value="Stop" action="bypass -h admin_raid_end" width=60 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+</tr>
+</table> 
+<br>
+Teleport location spawn Special Boss
+<br>
+<table width=240 border=0 bgcolor="666666">
+<tr>
+<tr>
+<td align=center><button action="bypass -h admin_move_to 71640 117976 -3680" value="Dragon Valley" width=120 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+<td align=center><button action="bypass -h admin_move_to 54184 44440 -3584" value="The Outsides of EV" width=120 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+</tr>
+<tr>
+<td align=center><button action="bypass -h admin_move_to 26648 247144 -3232" value="Hellbound Island" width=120 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+<td align=center><button action="bypass -h admin_move_to 52456 -79512 -3104" value="Beast Farm" width=120 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+</tr>
+<tr>
+<td align=center><button action="bypass -h admin_move_to 170728 85352 -1984" value="Anghel Waterfall" width=120 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+<td align=center><button action="bypass -h admin_move_to 114648 16088 6992" value="TOI 11 Floor" width=120 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+</tr>
+</table> 
+<br>
+Not implemented (Test)<br1>
+<br>
+</center></body></html>

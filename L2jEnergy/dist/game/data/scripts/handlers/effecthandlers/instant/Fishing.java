@@ -20,7 +20,7 @@ package handlers.effecthandlers.instant;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.GeoData;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.instancemanager.ZoneManager;
 import com.l2jserver.gameserver.model.PcCondOverride;
 import com.l2jserver.gameserver.model.StatsSet;
@@ -82,7 +82,7 @@ public final class Fishing extends AbstractEffect
 		
 		if (!Config.ALLOWFISHING && !player.canOverrideCond(PcCondOverride.SKILL_CONDITIONS))
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "player_fishing_off"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "player_fishing_off"));
 			return;
 		}
 		

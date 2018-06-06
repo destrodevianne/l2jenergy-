@@ -39,7 +39,7 @@ import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.SpawnTable;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2Party;
@@ -1916,7 +1916,7 @@ public class SevenSignsFestival implements SpawnListener
 					}
 					else
 					{
-						festivalInst.sendMessageToParticipants(LanguageData.getInstance().getMsgByLang(null, "ss_festival_ended_time").replace("%s%", end + ""));
+						festivalInst.sendMessageToParticipants(MessagesData.getInstance().getMessage(null, "ss_festival_ended_time").replace("%s%", end + ""));
 					}
 				}
 				
@@ -2322,7 +2322,7 @@ public class SevenSignsFestival implements SpawnListener
 						}
 						
 						relocatePlayer(participant, false);
-						participant.sendMessage(LanguageData.getInstance().getMsgByLang(participant, "ss_festival_ended"));
+						participant.sendMessage(MessagesData.getInstance().getMessage(participant, "ss_festival_ended"));
 					}
 					catch (NullPointerException e)
 					{
@@ -2377,7 +2377,7 @@ public class SevenSignsFestival implements SpawnListener
 				
 				participant.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
 				participant.teleToLocation(new Location(origPosition._x, origPosition._y, origPosition._z), true);
-				participant.sendMessage(LanguageData.getInstance().getMsgByLang(participant, "ss_remove_player"));
+				participant.sendMessage(MessagesData.getInstance().getMessage(participant, "ss_remove_player"));
 			}
 			catch (Exception e)
 			{
@@ -2385,7 +2385,7 @@ public class SevenSignsFestival implements SpawnListener
 				try
 				{
 					participant.teleToLocation(TeleportWhereType.TOWN);
-					participant.sendMessage(LanguageData.getInstance().getMsgByLang(participant, "ss_remove_player"));
+					participant.sendMessage(MessagesData.getInstance().getMessage(participant, "ss_remove_player"));
 				}
 				catch (NullPointerException e2)
 				{

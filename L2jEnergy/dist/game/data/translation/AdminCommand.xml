@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="UTF-8"?> 
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/Messages.xsd">
+    <!-- AdminAdmin Messages -->
+	<message id="admin_reg_gm_list">
+        <set lang="en" val="Registered into gm list." />
+		<set lang="ru" val="Зарегистрирований в списке Гм." />
+    </message>
+	<message id="admin_unreg_gm_list">
+        <set lang="en" val="Removed from gm list." />
+		<set lang="ru" val="Удалено из списка Гм." />
+    </message>
+    <message id="admin_save_oly_sys">
+	    <set lang="en" val="Olympiad system saved." />
+		<set lang="ru" val="Система Олимпиады сохранена." />
+	</message>
+	<message id="admin_hero_formed">
+        <set lang="en" val="Heroes formed." />
+		<set lang="ru" val="Герои формируются." />
+    </message>
+	<message id="admin_hero_status_already_claimed">
+        <set lang="en" val="This player has already claimed the hero status." />
+		<set lang="ru" val="Этот игрок уже имеет статус героя." />
+    </message>
+	<message id="admin_hero_status_cannot_claimed">
+        <set lang="en" val="This player cannot claim the hero status." />
+		<set lang="ru" val="Этот игрок не может претендовать на статус героя." />
+    </message>
+	<message id="admin_diet_on">
+        <set lang="en" val="Diet mode on." />
+		<set lang="ru" val="Режим увеличение веса включен." />
+    </message>
+    <message id="admin_diet_off">
+	    <set lang="en" val="Diet mode off." />
+		<set lang="ru" val="Режим увеличение веса выключен." />
+	</message>
+	<message id="admin_trade_on">
+        <set lang="en" val="Trade refusal enabled." />
+		<set lang="ru" val="Запрет торговли включен." />
+    </message>
+	<message id="admin_trade_off">
+        <set lang="en" val="Trade refusal disabled." />
+		<set lang="ru" val="Запрет торговли выключен." />
+    </message>
+	<message id="admin_config_parameter_set_to">
+        <set lang="en" val="Config parameter %s% set to %i%" />
+		<set lang="ru" val="Параметр конфигурации %s% установлен на %i%" />
+    </message>
+	<message id="admin_invalid_parameter">
+	    <set lang="en" val="Invalid parameter!" />
+		<set lang="ru" val="Неверный параметр!" />
+	</message>
+	<message id="admin_usage_set_config">
+		<set lang="en" val="Usage: //setconfig [parameter] [value]" />
+		<set lang="ru" val="Применение: //setconfig [parameter] [value]" />
+	</message>
+    <message id="admin_parameter_succesfully_set_to">
+	    <set lang="en" val="parameter %s% succesfully set to %i%" />
+		<set lang="ru" val="Параметр %s% успешно установлен на %i%" />
+	</message>
+	<message id="admin_usage_set_parameter">
+        <set lang="en" val="Usage: //set parameter=value" />
+		<set lang="ru" val="Применение: //set parameter=value" />
+    </message>
+	<!-- AdminAnnouncements Messages -->
+	<message id="admin_usage_announce_text">
+        <set lang="en" val="Usage: //announce [text to announce here]" />
+		<set lang="ru" val="Применение: //announce [text to announce here]" />
+    </message>
+	<message id="admin_usage_announce_add">
+        <set lang="en" val="Usage: //announces add [type] [delay] [repeat] [text]" />
+		<set lang="ru" val="Применение: //announces add [type] ]delay] [repeat] [text]" />
+    </message>
+	<message id="admin_announce_delay_cannot_10_sec">
+        <set lang="en" val="Delay cannot be less then 10 seconds!" />
+		<set lang="ru" val="Задержка не может быть меньше 10 секунд!" />
+    </message>
+    <message id="admin_announce_been_successfully_added">
+	    <set lang="en" val="Announcement has been successfully added!" />
+		<set lang="ru" val="Объявление успешно добавлено!" />
+	</message>
+	<message id="admin_announce_type_changed_auto">
+        <set lang="en" val="Announce type can be changed only to AUTO_NORMAL or AUTO_CRITICAL!" />
+		<set lang="ru" val="Тип объявления может быть изменен только на AUTO_NORMAL или AUTO_CRITICAL!" />
+    </message>
+	<message id="admin_announce_type_changed_normal">
+        <set lang="en" val="Announce type can be changed only to NORMAL or CRITICAL!" />
+		<set lang="ru" val="Тип объявления может быть изменен только на NORMAL или CRITICAL!" />
+    </message>
+    <message id="admin_announce_been_successfully_edited">
+	    <set lang="en" val="Announcement has been successfully edited!" />
+		<set lang="ru" val="Объявление успешно изменено!" />
+	</message>
+	<message id="admin_usage_announce_remove">
+        <set lang="en" val="Usage: //announces remove [announcement id]" />
+		<set lang="ru" val="Применение: //announces remove [announcement id]" />
+    </message>
+	<message id="admin_announce_been_successfully_removed">
+        <set lang="en" val="Announcement has been successfully removed!" />
+		<set lang="ru" val="Объявление успешно удалено!" />
+    </message>
+    <message id="admin_announce_doesnt_exists">
+	    <set lang="en" val="Announcement doesnt exists!" />
+		<set lang="ru" val="Объявление не существует!" />
+	</message>
+	<message id="admin_announce_been_successfully_restarted">
+        <set lang="en" val="Auto announcements has been successfully restarted." />
+		<set lang="ru" val="Авто объявления были успешно перезапущены." />
+    </message>
+	<message id="admin_usage_announce_show">
+        <set lang="en" val="Usage: //announces show [announcement id]" />
+		<set lang="ru" val="Применение: //announces show [announcement id]" />
+    </message>
+    <message id="admin_announce_option_effect_only_announcements">
+	    <set lang="en" val="This option has effect only on auto announcements!" />
+		<set lang="ru" val="Этот параметр влияет только на авто объявления!" />
+	</message>
+	<!-- AdminBuffs AdminBuffs -->
+	<message id="admin_player_not_online">
+	    <set lang="en" val="The player %s% is not online." />
+		<set lang="ru" val="Игрок %s% сейчас не в онлайне." />
+	</message>
+	<message id="admin_failed_removing_effect">
+	    <set lang="en" val="Failed removing effect: %s%" />
+		<set lang="ru" val="Не удалось удалить эффект: %s%" />
+	</message>
+	<message id="admin_usage_stopbuff">
+	    <set lang="en" val="Usage: //stopbuff [objectId] [skillId]" />
+		<set lang="ru" val="Применение: //stopbuff [objectId] [skillId]" />
+	</message>
+	<message id="admin_failed_removing_all_effect">
+	    <set lang="en" val="Failed removing all effects: %s%" />
+		<set lang="ru" val="Не удалось удалить все эффекты: %s%" />
+	</message>
+	<message id="admin_usage_stopallbuffs">
+	    <set lang="en" val="Usage: //stopallbuffs [objectId]" />
+		<set lang="ru" val="Применение: //stopallbuffs [objectId]" />
+	</message>
+	<message id="admin_canceled_all_effect_radius">
+	    <set lang="en" val="All effects canceled within radius %s%" />
+		<set lang="ru" val="Все эффекты, отмененные в радиусе %s%" />
+	</message>
+	<message id="admin_usage_areacancel">
+	    <set lang="en" val="Usage: //areacancel [radius]" />
+		<set lang="ru" val="Применение: //areacancel [radius]" />
+	</message>
+	<message id="admin_skill_reuse_removed_from">
+	    <set lang="en" val="Skill reuse was removed from %s%" />
+		<set lang="ru" val="Повторное использование умений было удалено из %s%" />
+	</message>
+	<message id="admin_you_have_succefully_changed_target">
+	    <set lang="en" val="You have succefully changed to target %s% special skills." />
+		<set lang="ru" val="Вы успешно изменили у цели %s% специальных навыков." />
+	</message>
+	<message id="admin_nothing_switch">
+	    <set lang="en" val="There is nothing to switch." />
+		<set lang="ru" val="Нечего непроизошло." />
+	</message>
+	<message id="admin_removed_skill_id">
+	    <set lang="en" val="Removed skill ID: %s% effects from %c% (%i%)" />
+		<set lang="ru" val="Удалены умение ID: %s% эффекты от %c% (%i%)" />
+	</message>
+	<message id="admin_removed_all_effects">
+	    <set lang="en" val="Removed all effects from %c% (%i%)" />
+		<set lang="ru" val="Удалены все эффекты из %c% (%i%)" />
+	</message>
+	<!-- AdminCamera Messages -->
+	<message id="admin_usage_cam_1">
+	    <set lang="en" val="Usage: //cam force angle1 angle2 time range duration relYaw relPitch isWide relAngle" />
+		<set lang="ru" val="Применение: //cam force angle1 angle2 time range duration relYaw relPitch isWide relAngle" />
+	</message>
+	<message id="admin_usage_cam_2">
+	    <set lang="en" val="Usage: //camex force angle1 angle2 time duration relYaw relPitch isWide relAngle" />
+		<set lang="ru" val="Применение: //camex force angle1 angle2 time duration relYaw relPitch isWide relAngle" />
+	</message>
+	<message id="admin_usage_cam_3">
+	    <set lang="en" val="Usage: //cam3 force angle1 angle2 time range duration relYaw relPitch isWide relAngle unk" />
+		<set lang="ru" val="Применение: //cam3 force angle1 angle2 time range duration relYaw relPitch isWide relAngle unk" />
+	</message>
+	<!-- AdminChangeAccessLevel -->
+	<message id="admin_usage_changelvl">
+	    <set lang="en" val="Usage: //changelvl [target_new_level] | [player_name] [new_level]" />
+		<set lang="ru" val="Применение: //changelvl [target_new_level] | [player_name] [new_level]" />
+	</message>
+	<message id="admin_character_not_found_access_level">
+	    <set lang="en" val="Character not found or access level unaltered." />
+		<set lang="ru" val="Персонаж не найден или уровень доступа не изменелся." />
+	</message>
+	<message id="admin_character_access_level_now_set">
+	    <set lang="en" val="Character's access level is now set to %s%" />
+		<set lang="ru" val="Уровень доступа персонажа теперь установлен на %s%" />
+	</message>
+	<message id="admin_changing_sqlexception_character_access_level">
+	    <set lang="en" val="SQLException while changing character's access level" />
+		<set lang="ru" val="Исключение SQL при изменении уровня доступа персонажа" />
+	</message>
+	<message id="players_access_level_has_been_changed_to">
+	    <set lang="en" val="%s% 's access level has been changed to %c% (%i%)" />
+		<set lang="ru" val="%s% уровень доступа был изменен на %c% (%i%)" />
+	</message>
+	<message id="admin_your_access_level_has_been_changed_to">
+	    <set lang="en" val="Your access level has been changed to %c% (%i%)" />
+		<set lang="ru" val="Уровень доступа был изменен на %c% (%i%)" />
+	</message>
+	<message id="admin_you_trying_set_unexisting_access_level">
+	    <set lang="en" val="You are trying to set unexisting access level: %s% please try again with a valid one!" />
+		<set lang="ru" val="Вы пытаетесь установить более высокий уровень доступа: %s% повторите попытку с действительным!" />
+	</message>
+	<message id="player_your_character_banned">
+	    <set lang="en" val="Your character has been banned. Bye." />
+		<set lang="ru" val="Ваш персонаж заблокирован. До свидания." />
+	</message>
+	<!-- AdminShutdown -->
+	<message id="admin_usage_server_shutdown">
+	    <set lang="en" val="Usage: //server_shutdown [seconds]" />
+		<set lang="ru" val="Применение: //server_shutdown [seconds]" />
+	</message>
+	<message id="admin_usage_server_restart">
+	    <set lang="en" val="Usage: //server_restart [seconds]" />
+		<set lang="ru" val="Применение: //server_restart [seconds]" />
+	</message>
+	<!-- AdminReload -->
+	<message id="admin_usage_reload">
+	    <set lang="en" val="Usage: //reload [config|access|npc|quest [quest_id|quest_name]|walker|htm[l] [file|directory]|multisell|buylist|teleport|skill|item|door|effect|handler|enchant|creationpoint]" />
+		<set lang="ru" val="Применение: //reload [config|access|npc|quest [quest_id|quest_name]|walker|htm[l] [file|directory]|multisell|buylist|teleport|skill|item|door|effect|handler|enchant|creationpoint]" />
+	</message>
+	<message id="admin_file_or_directory_does_not_exist">
+	    <set lang="en" val="File or Directory does not exist." />
+		<set lang="ru" val="Файл или каталог не существует." />
+	</message>
+	<message id="admin_all_scripts_have_been_reloaded">
+	    <set lang="en" val="All scripts have been reloaded." />
+		<set lang="ru" val="Все скрипты перезагружены." />
+	</message>
+	<message id="admin_all_walkers_have_been_reloaded">
+	    <set lang="en" val="All walkers have been reloaded." />
+		<set lang="ru" val="Все walkers были перезагружены." />
+	</message>
+	<message id="admin_cache_html_megabytes_on_files_loaded">
+	    <set lang="en" val="Cache[HTML]: %s% megabytes on %i% files loaded" />
+		<set lang="ru" val="Кеш [HTML]: %s% мегабайт на %i% загруженных файлов" />
+	</message>
+	<message id="admin_there_was_error_while_loading_handlers">
+	    <set lang="en" val="There was an error while loading handlers." />
+		<set lang="ru" val="При загрузке обработчиков произошла ошибка." />
+	</message>
+	<message id="admin_warn_reloding">
+	    <set lang="en" val="WARNING: There are several known issues regarding this feature. Reloading server data during runtime is STRONGLY NOT RECOMMENDED for live servers, just for developing environments." />
+		<set lang="ru" val="ВНИМАНИЕ: Существует несколько известных проблем, связанных с этой функцией. Перезагрузка данных сервера во время его работы СИЛЬНО НЕ РЕКОМЕНДУЕТСЯ для открытых серверов, только для среды разработки." />
+	</message>
+</list>

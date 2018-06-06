@@ -382,14 +382,14 @@ public final class Q00421_LittleWingsBigAdventure extends Quest
 			if (isSummon)
 			{
 				final NpcData data = NPC_DATA.get(npc.getId());
-				if ((qs.getMemoState() % data.memoStateMod) < data.memoStateValue)
+				if ((qs.getMemoState() % data.getMemoStateMod()) < data.getMemoStateValue())
 				{
 					if (attacker.getSummon().getControlObjectId() == qs.getInt("fluteObjectId"))
 					{
 						final int hits = qs.getInt("hits") + 1;
 						qs.set("hits", hits);
 						
-						if (hits < data.minHits)
+						if (hits < data.getMinHits())
 						{
 							if ((npc.getId() == TREE_OF_ABYSS) && (getRandom(100) < 2))
 							{
@@ -403,7 +403,7 @@ public final class Q00421_LittleWingsBigAdventure extends Quest
 							{
 								npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.GIVE_ME_A_FAIRY_LEAF));
 								takeItems(attacker, FAIRY_LEAF, 1);
-								qs.setMemoState(qs.getMemoState() + data.memoStateValue);
+								qs.setMemoState(qs.getMemoState() + data.getMemoStateValue());
 								qs.unset("hits");
 								playSound(attacker, Sound.ITEMSOUND_QUEST_MIDDLE);
 								
@@ -423,7 +423,7 @@ public final class Q00421_LittleWingsBigAdventure extends Quest
 							npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.WHY_DO_YOU_BOTHER_ME_AGAIN));
 							break;
 						case 1:
-							npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, data.message));
+							npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, data.getMessage()));
 							break;
 						case 2:
 							npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.LEAVE_NOW_BEFORE_YOU_INCUR_THE_WRATH_OF_THE_GUARDIAN_GHOST));
@@ -488,17 +488,49 @@ public final class Q00421_LittleWingsBigAdventure extends Quest
 	
 	private static final class NpcData
 	{
-		public final NpcStringId message;
-		public final int memoStateMod;
-		public final int memoStateValue;
-		public final int minHits;
+		private final NpcStringId _message;
+		private final int _memoStateMod;
+		private final int _memoStateValue;
+		private final int _minHits;
 		
 		public NpcData(NpcStringId message, int memoStateMod, int memoStateValue, int minHits)
 		{
-			this.message = message;
-			this.memoStateMod = memoStateMod;
-			this.memoStateValue = memoStateValue;
-			this.minHits = minHits;
+			_message = message;
+			_memoStateMod = memoStateMod;
+			_memoStateValue = memoStateValue;
+			_minHits = minHits;
+		}
+		
+		/**
+		 * @return the _message
+		 */
+		public NpcStringId getMessage()
+		{
+			return _message;
+		}
+		
+		/**
+		 * @return the _memoStateMod
+		 */
+		public int getMemoStateMod()
+		{
+			return _memoStateMod;
+		}
+		
+		/**
+		 * @return the _memoStateValue
+		 */
+		public int getMemoStateValue()
+		{
+			return _memoStateValue;
+		}
+		
+		/**
+		 * @return the _minHits
+		 */
+		public int getMinHits()
+		{
+			return _minHits;
 		}
 	}
 }

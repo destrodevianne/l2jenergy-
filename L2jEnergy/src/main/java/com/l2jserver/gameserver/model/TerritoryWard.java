@@ -19,8 +19,8 @@
 package com.l2jserver.gameserver.model;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.ItemTable;
-import com.l2jserver.gameserver.datatables.LanguageData;
 import com.l2jserver.gameserver.instancemanager.TerritoryWarManager;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -131,7 +131,7 @@ public class TerritoryWard
 		}
 		else if (TerritoryWarManager.getInstance().getRegisteredTerritoryId(player) == 0)
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "tw_not_register"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "tw_not_register"));
 			player.destroyItem("CombatFlag", item, null, true);
 			spawnMe();
 			return false;

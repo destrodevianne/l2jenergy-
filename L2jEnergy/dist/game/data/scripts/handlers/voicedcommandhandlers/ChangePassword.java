@@ -23,7 +23,7 @@ import java.util.logging.Level;
 
 import com.l2jserver.gameserver.LoginServerThread;
 import com.l2jserver.gameserver.cache.HtmCache;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IVoicedCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
@@ -64,17 +64,17 @@ public class ChangePassword implements IVoicedCommandHandler
 				{
 					if (!newpass.equals(repeatnewpass))
 					{
-						activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "password_no_repeated"));
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "password_no_repeated"));
 						return false;
 					}
 					if (newpass.length() < 3)
 					{
-						activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "password_shorter"));
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "password_shorter"));
 						return false;
 					}
 					if (newpass.length() > 30)
 					{
-						activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "password_longer"));
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "password_longer"));
 						return false;
 					}
 					
@@ -82,13 +82,13 @@ public class ChangePassword implements IVoicedCommandHandler
 				}
 				else
 				{
-					activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "password_invalid"));
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "password_invalid"));
 					return false;
 				}
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "password_problem"));
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "password_problem"));
 				_log.log(Level.WARNING, "", e);
 			}
 		}

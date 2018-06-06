@@ -18,6 +18,7 @@
  */
 package handlers.admincommandhandlers;
 
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -54,7 +55,7 @@ public class AdminCamera implements IAdminCommandHandler
 			{
 				if (com.length != 12)
 				{
-					activeChar.sendMessage("Usage: //cam force angle1 angle2 time range duration relYaw relPitch isWide relAngle");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_cam_1"));
 					return false;
 				}
 				AbstractScript.specialCamera(activeChar, target, Integer.parseInt(com[1]), Integer.parseInt(com[2]), Integer.parseInt(com[3]), Integer.parseInt(com[4]), Integer.parseInt(com[5]), Integer.parseInt(com[6]), Integer.parseInt(com[7]), Integer.parseInt(com[8]), Integer.parseInt(com[9]), Integer.parseInt(com[10]));
@@ -64,7 +65,7 @@ public class AdminCamera implements IAdminCommandHandler
 			{
 				if (com.length != 10)
 				{
-					activeChar.sendMessage("Usage: //camex force angle1 angle2 time duration relYaw relPitch isWide relAngle");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_cam_2"));
 					return false;
 				}
 				AbstractScript.specialCameraEx(activeChar, target, Integer.parseInt(com[1]), Integer.parseInt(com[2]), Integer.parseInt(com[3]), Integer.parseInt(com[4]), Integer.parseInt(com[5]), Integer.parseInt(com[6]), Integer.parseInt(com[7]), Integer.parseInt(com[8]), Integer.parseInt(com[9]));
@@ -74,7 +75,7 @@ public class AdminCamera implements IAdminCommandHandler
 			{
 				if (com.length != 12)
 				{
-					activeChar.sendMessage("Usage: //cam3 force angle1 angle2 time range duration relYaw relPitch isWide relAngle unk");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_cam_3"));
 					return false;
 				}
 				AbstractScript.specialCamera3(activeChar, target, Integer.parseInt(com[1]), Integer.parseInt(com[2]), Integer.parseInt(com[3]), Integer.parseInt(com[4]), Integer.parseInt(com[5]), Integer.parseInt(com[6]), Integer.parseInt(com[7]), Integer.parseInt(com[8]), Integer.parseInt(com[9]), Integer.parseInt(com[10]), Integer.parseInt(com[11]));

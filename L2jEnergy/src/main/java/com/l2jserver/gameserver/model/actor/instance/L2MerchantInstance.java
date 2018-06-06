@@ -22,7 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.data.xml.impl.BuyListData;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.MerchantPriceConfigTable;
 import com.l2jserver.gameserver.datatables.MerchantPriceConfigTable.MerchantPriceConfig;
 import com.l2jserver.gameserver.enums.InstanceType;
@@ -110,7 +110,7 @@ public class L2MerchantInstance extends L2NpcInstance
 		player.setInventoryBlockingStatus(true);
 		if (player.isGM())
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "gm_buy_list_info").replace("%s%", buyList.getListId() + ""));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "gm_buy_list_info").replace("%s%", buyList.getListId() + ""));
 		}
 		player.sendPacket(new BuyList(buyList, player.getAdena(), taxRate));
 		player.sendPacket(new ExBuySellList(player, false));

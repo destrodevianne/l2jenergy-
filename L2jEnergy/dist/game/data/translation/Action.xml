@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Action Messages -->
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/Messages.xsd">
+    <message id="target_null">
+        <set lang="en" val="Not selected any target." />
+		<set lang="ru" val="Не выбрано ни одной цели." />
+	</message>
+    <message id="sit_forced">
+        <set lang="en" val="A dark force beyond your mortal understanding makes your knees to shake when you try to stand up..." />
+		<set lang="ru" val="Темная сила за пределами вашего смертного понимания заставляет ваши колени дрожать, когда вы пытаетесь встать ..." />
+    </message>
+    <message id="item_cannot_use">
+        <set lang="en" val="You cannot use this item." />
+		<set lang="ru" val="Вы не можете использовать этот элемент." />
+    </message>
+    <message id="remove_previous_connection">
+        <set lang="en" val="Remove previous connections first." />
+		<set lang="ru" val="Сначала удалите предыдущие подключения." />
+    </message>
+    <message id="get_item_pet_too_fast">
+        <set lang="en" val="You get items from pet too fast." />
+		<set lang="ru" val="Вы получаете предметы от питомца слишком быстро." />
+    </message>
+    <message id="give_item_pet_too_fast">
+	    <set lang="en" val="You are giving items to pet too fast." />
+		<set lang="ru" val="Вы даете предметы питомцу слишком быстро." />
+	</message>
+	<message id="depositing_too_fast">
+	    <set lang="en" val="You depositing items too fast." />
+		<set lang="ru" val="Вы ложите переметы слишком быстро." />
+	</message>
+	<message id="withdrawing_too_fast">
+        <set lang="en" val="You are withdrawing items too fast." />
+		<set lang="ru" val="Вы забираете предметы слишком быстро." />
+	</message>
+    <message id="trading_too_fast">
+        <set lang="en" val="You are trading too fast." />
+		<set lang="ru" val="Вы торгуете слишком быстро." />
+    </message>
+    <message id="buying_too_fast">
+        <set lang="en" val="You are buying too fast." />
+		<set lang="ru" val="Вы покупаете слишком быстро." />
+    </message>
+    <message id="refund_too_fast">
+        <set lang="en" val="You are using refund too fast." />
+		<set lang="ru" val="Вы используете возврат слишком быстро." />
+    </message>
+    <message id="buying_seeds_too_fast">
+        <set lang="en" val="You are buying seeds too fast." />
+		<set lang="ru" val="Вы покупаете семена слишком быстро." />
+    </message>
+    <message id="selling_too_fast">
+	    <set lang="en" val="You are selling items too fast." />
+		<set lang="ru" val="Вы продаете предметы слишком быстро." />
+	</message>
+	<message id="crystallizing_too_fast">
+	    <set lang="en" val="You are crystallizing too fast." />
+		<set lang="ru" val="Вы слишком быстро кристаллизируете предметы." />
+	</message>
+	<message id="destroying_items_too_fast">
+        <set lang="en" val="You are destroying items too fast." />
+		<set lang="ru" val="Вы слишком быстро уничтожаете предметы." />
+	</message>
+    <message id="no_adena_count">
+        <set lang="en" val="You do not have enough Adena." />
+		<set lang="ru" val="У вас недостаточно Адены." />
+    </message>
+    <message id="no_trade_mode">
+        <set lang="en" val="That person is in trade refusal mode." />
+		<set lang="ru" val="Этот игрок находится в режиме отказа от торговли." />
+    </message>
+    <message id="no_trade_in_olys">
+        <set lang="en" val="A user currently participating in the Olympiad cannot accept or request a trade." />
+		<set lang="ru" val="Игрок, который в настоящее время участвует в Олимпиаде, не может принять или запросить сделку." />
+    </message>
+    <message id="no_trade_in_chaotic_state">
+        <set lang="en" val="You cannot trade while you are in a chaotic state." />
+		<set lang="ru" val="Вы не можете торговать, пока находитесь в хаотическом состоянии." />
+    </message>
+    <message id="no_tradet_to_chaotic_target">
+	    <set lang="en" val="You cannot request a trade while your target is in a chaotic state." />
+		<set lang="ru" val="Вы не можете запросить сделку, пока ваша цель находится в хаотичном состоянии." />
+	</message>
+	<message id="no_drop_in_jail">
+	    <set lang="en" val="You cannot drop items in Jail." />
+		<set lang="ru" val="Вы не можете бросать предметы в тюрьме." />
+	</message>
+	<message id="no_trade_in_jail">
+        <set lang="en" val="You cannot trade while you are in in Jail." />
+		<set lang="ru" val="Вы не можете торговать, когда находитесь в тюрьме." />
+	</message>
+    <message id="no_invite_in_jail">
+        <set lang="en" val="You cannot invite a player while is in Jail." />
+		<set lang="ru" val="Вы не можете пригласить игрока в тюрьму." />
+    </message>
+    <message id="no_chat_in_jail">
+        <set lang="en" val="You can not chat with players outside of the jail." />
+		<set lang="ru" val="Вы не можете общаться с игроками вне тюрьмы." />
+    </message>
+    <message id="no_elemental_power_trading">
+        <set lang="en" val="You cannot add elemental power while trading." />
+		<set lang="ru" val="Вы не можете добавлять элементную мощность при торговле." />
+    </message>
+    <message id="no_recipe_while_trading">
+        <set lang="en" val="You may not alter your recipe book while trading." />
+		<set lang="ru" val="Вы не можете изменять свою книгу рецептов во время торговли." />
+    </message>
+    <message id="no_exchange_items">
+	    <set lang="en" val="You cannot exchange items while trading." />
+		<set lang="ru" val="Вы не можете обменивать товар во время торговли." />
+	</message>
+	<message id="no_create_while_trading">
+	    <set lang="en" val="You cannot create items while trading." />
+		<set lang="ru" val="Вы не можете создавать товары во время торговли." />
+	</message>
+	<message id="no_restart_while_trading">
+        <set lang="en" val="Cannot restart while trading." />
+		<set lang="ru" val="Невозможно перезайти во время торговли." />
+	</message>
+    <message id="transactions_disabled">
+        <set lang="en" val="Transactions are disabled for your Access Level." />
+		<set lang="ru" val="Транзакции отключены для вашего уровня доступа." />
+    </message>
+    <message id="no_pickup_mercenaries_party">
+        <set lang="en" val="You cannot pickup mercenaries while in a party." />
+		<set lang="ru" val="Вы не можете набирать наемников во время пати." />
+    </message>
+    <message id="no_pickup_mercenaries_lord">
+        <set lang="en" val="Only the castle lord can pickup mercenaries." />
+		<set lang="ru" val="Только Лорд замка может набирать наемников." />
+    </message>
+    <message id="password_no_repeated">
+        <set lang="en" val="The new password doesn't match with the repeated one!" />
+		<set lang="ru" val="Новый пароль не совпадает с повторным!" />
+    </message>
+    <message id="password_shorter">
+	    <set lang="en" val="The new password is shorter than 3 chars! Please try with a longer one." />
+		<set lang="ru" val="Новый пароль короче 3 символов! Попробуйте более длинный." />
+	</message>
+	<message id="password_longer">
+	    <set lang="en" val="The new password is longer than 30 chars! Please try with a shorter one." />
+		<set lang="ru" val="Новый пароль длиннее 30 символов! Попробуйте более короткий вариант." />
+	</message>
+	<message id="password_invalid">
+        <set lang="en" val="Invalid password data! You have to fill all boxes." />
+		<set lang="ru" val="Неверные данные пароля! Вы должны заполнить все поля." />
+	</message>
+    <message id="password_problem">
+        <set lang="en" val="A problem occured while changing password!" />
+		<set lang="ru" val="При смене пароля возникла проблема!" />
+    </message>
+    <message id="no_hero_speak">
+        <set lang="en" val="Action failed. Heroes are only able to speak in the global channel once every 10 seconds." />
+		<set lang="ru" val="Действие не выполнено. Герои могут говорить только в глобальном чате каждые 10 секунд." />
+    </message>
+    <message id="no_spam_channel">
+        <set lang="en" val="Do not spam shout channel." />
+		<set lang="ru" val="Не спам в общий чат." />
+    </message>
+    <message id="no_summon_wyvern_in_siege">
+        <set lang="en" val="You cannot summon wyvern while in siege." />
+		<set lang="ru" val="Вы не можете призвать Виверну, находясь на осаде." />
+    </message>
+    <message id="no_buff_adventurer">
+	    <set lang="en" val="Only adventurers who have not completed their 3rd class transfer may receive these buffs." />
+		<set lang="ru" val="Только искатели приключений, которые не закончили переход на третью професию, могут получить эти баффы." />
+	</message>
+	<message id="no_unstuck_in_jail">
+	    <set lang="en" val="You cannot use unstuck while you are in jail." />
+		<set lang="ru" val="Вы не можете использовать Бегство, пока находитесь в тюрьме." />
+	</message>
+	<message id="unstuck_time_minutes">
+	    <set lang="en" val="You use Escape: %s% minutes." />
+		<set lang="ru" val="Вы используете Бегство: %s% минут(ы)." />
+	</message>
+	<message id="unstuck_time_seconds">
+	    <set lang="en" val="You use Escape: %s% seconds." />
+		<set lang="ru" val="Вы используете Бегство: %s% секунд(ы)." />
+	</message>
+</list>

@@ -26,7 +26,7 @@ import java.util.Set;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.Team;
 import com.l2jserver.gameserver.instancemanager.tasks.PenaltyRemoveTask;
 import com.l2jserver.gameserver.model.ArenaParticipantsHolder;
@@ -175,7 +175,7 @@ public final class HandysBlockCheckerManager
 			
 			if (player.isOnEvent() || player.isInOlympiadMode())
 			{
-				player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "event_no_register_in_other_event"));
+				player.sendMessage(MessagesData.getInstance().getMessage(player, "event_no_register_in_other_event"));
 				return false;
 			}
 			
@@ -261,12 +261,12 @@ public final class HandysBlockCheckerManager
 			
 			if (isFromRed && (holder.getBlueTeamSize() == 6))
 			{
-				player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "event_team_red_full"));
+				player.sendMessage(MessagesData.getInstance().getMessage(player, "event_team_red_full"));
 				return;
 			}
 			else if (!isFromRed && (holder.getRedTeamSize() == 6))
 			{
-				player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "event_team_blue_full"));
+				player.sendMessage(MessagesData.getInstance().getMessage(player, "event_team_blue_full"));
 				return;
 			}
 			

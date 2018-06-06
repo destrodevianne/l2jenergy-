@@ -27,8 +27,8 @@ import java.util.logging.Logger;
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.xml.impl.ClassListData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
-import com.l2jserver.gameserver.datatables.LanguageData;
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
@@ -389,7 +389,7 @@ public class L2VillageMasterInstance extends L2NpcInstance
 							else
 							{
 								// TODO: Retail message
-								player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "no_sub_classes_available"));
+								player.sendMessage(MessagesData.getInstance().getMessage(player, "no_sub_classes_available"));
 							}
 							return;
 						}
@@ -600,7 +600,7 @@ public class L2VillageMasterInstance extends L2NpcInstance
 						if ((subsAvailable == null) || subsAvailable.isEmpty())
 						{
 							// TODO: Retail message
-							player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "no_sub_classes_available"));
+							player.sendMessage(MessagesData.getInstance().getMessage(player, "no_sub_classes_available"));
 							return;
 						}
 						
@@ -661,7 +661,7 @@ public class L2VillageMasterInstance extends L2NpcInstance
 							 */
 							player.changeActiveClass(0); // Also updates _classIndex plus switching _classid to baseclass.
 							
-							player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "no_sub_classes_add"));
+							player.sendMessage(MessagesData.getInstance().getMessage(player, "no_sub_classes_add"));
 							return;
 						}
 						break;
@@ -1060,7 +1060,7 @@ public class L2VillageMasterInstance extends L2NpcInstance
 		
 		if (subPledge == null)
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "pledge_name_change"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "pledge_name_change"));
 			return;
 		}
 		if (!isValidName(pledgeName) || (pledgeName.length() < 2))
@@ -1077,7 +1077,7 @@ public class L2VillageMasterInstance extends L2NpcInstance
 		subPledge.setName(pledgeName);
 		clan.updateSubPledgeInDB(subPledge.getId());
 		clan.broadcastClanStatus();
-		player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "pledge_name_change"));
+		player.sendMessage(MessagesData.getInstance().getMessage(player, "pledge_name_change"));
 	}
 	
 	private static final void assignSubPledgeLeader(L2PcInstance player, String clanName, String leaderName)

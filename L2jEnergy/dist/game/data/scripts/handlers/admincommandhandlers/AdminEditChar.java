@@ -913,7 +913,7 @@ public class AdminEditChar implements IAdminCommandHandler
 		final PageResult result = HtmlUtil.createPage(players, page, 20, i ->
 		{
 			return "<td align=center><a action=\"bypass -h admin_show_characters " + i + "\">Page " + (i + 1) + "</a></td>";
-		} , player ->
+		}, player ->
 		{
 			StringBuilder sb = new StringBuilder();
 			sb.append("<tr>");
@@ -1362,7 +1362,7 @@ public class AdminEditChar implements IAdminCommandHandler
 		final StringBuilder results = new StringBuilder();
 		for (IpPack dualboxIP : keys)
 		{
-			StringUtil.append(results, "<a action=\"bypass -h admin_find_ip " + dualboxIP.ip + "\">" + dualboxIP.ip + " (" + dualboxIPs.get(dualboxIP) + ")</a><br1>");
+			StringUtil.append(results, "<a action=\"bypass -h admin_find_ip " + dualboxIP.getIp() + "\">" + dualboxIP.getIp() + " (" + dualboxIPs.get(dualboxIP) + ")</a><br1>");
 		}
 		
 		final NpcHtmlMessage adminReply = new NpcHtmlMessage();
@@ -1375,13 +1375,13 @@ public class AdminEditChar implements IAdminCommandHandler
 	
 	private final class IpPack
 	{
-		String ip;
-		int[][] tracert;
+		private final String _ip;
+		private final int[][] _tracert;
 		
 		public IpPack(String ip, int[][] tracert)
 		{
-			this.ip = ip;
-			this.tracert = tracert;
+			_ip = ip;
+			_tracert = tracert;
 		}
 		
 		@Override
@@ -1389,8 +1389,8 @@ public class AdminEditChar implements IAdminCommandHandler
 		{
 			final int prime = 31;
 			int result = 1;
-			result = (prime * result) + ((ip == null) ? 0 : ip.hashCode());
-			for (int[] array : tracert)
+			result = (prime * result) + ((getIp() == null) ? 0 : getIp().hashCode());
+			for (int[] array : getTracert())
 			{
 				result = (prime * result) + Arrays.hashCode(array);
 			}
@@ -1417,22 +1417,22 @@ public class AdminEditChar implements IAdminCommandHandler
 			{
 				return false;
 			}
-			if (ip == null)
+			if (getIp() == null)
 			{
-				if (other.ip != null)
+				if (other.getIp() != null)
 				{
 					return false;
 				}
 			}
-			else if (!ip.equals(other.ip))
+			else if (!getIp().equals(other.getIp()))
 			{
 				return false;
 			}
-			for (int i = 0; i < tracert.length; i++)
+			for (int i = 0; i < getTracert().length; i++)
 			{
-				for (int o = 0; o < tracert[0].length; o++)
+				for (int o = 0; o < getTracert()[0].length; o++)
 				{
-					if (tracert[i][o] != other.tracert[i][o])
+					if (getTracert()[i][o] != other.getTracert()[i][o])
 					{
 						return false;
 					}
@@ -1444,6 +1444,16 @@ public class AdminEditChar implements IAdminCommandHandler
 		private AdminEditChar getOuterType()
 		{
 			return AdminEditChar.this;
+		}
+		
+		public String getIp()
+		{
+			return _ip;
+		}
+		
+		public int[][] getTracert()
+		{
+			return _tracert;
 		}
 	}
 	

@@ -329,8 +329,8 @@ public class NpcViewMod implements IBypassHandler
 						sb.append("</font></td></tr><tr><td width=32></td><td width=259><table width=253 cellpadding=0 cellspacing=0>");
 						sb.append("<tr><td width=48 align=right valign=top><font color=\"LEVEL\">Amount:</font></td><td width=205 align=center>");
 						MinMax minMax = getPreciseMinMax(normalized.getChance(), generalDropItem.getMin(npc), generalDropItem.getMax(npc), generalDropItem.isPreciseCalculated());
-						final long min = minMax.min;
-						final long max = minMax.max;
+						final long min = minMax.getMin();
+						final long max = minMax.getMax();
 						if (min == max)
 						{
 							sb.append(amountFormat.format(min));
@@ -409,8 +409,8 @@ public class NpcViewMod implements IBypassHandler
 		sb.append("<td width=247 align=center>");
 		MinMax minMax = getPreciseMinMax(dropItem.getChance(npc, activeChar), dropItem.getMin(npc), dropItem.getMax(npc), dropItem.isPreciseCalculated());
 		
-		final long min = minMax.min;
-		final long max = minMax.max;
+		final long min = minMax.getMin();
+		final long max = minMax.getMax();
 		if (min == max)
 		{
 			sb.append(amountFormat.format(min));
@@ -430,15 +430,24 @@ public class NpcViewMod implements IBypassHandler
 	
 	private static class MinMax
 	{
-		public final long min, max;
+		private final long _min;
+		private final long _max;
 		
 		public MinMax(long min, long max)
 		{
-			this.min = min;
-			this.max = max;
-			
+			_min = min;
+			_max = max;
 		}
 		
+		public long getMin()
+		{
+			return _min;
+		}
+		
+		public long getMax()
+		{
+			return _max;
+		}
 	}
 	
 	private static MinMax getPreciseMinMax(double chance, long min, long max, boolean isPrecise)

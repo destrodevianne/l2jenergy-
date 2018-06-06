@@ -20,7 +20,7 @@ package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.sql.impl.CrestTable;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2Crest;
 import com.l2jserver.gameserver.model.L2Crest.CrestType;
@@ -61,7 +61,7 @@ public final class RequestSetAllyCrest extends L2GameClientPacket
 		
 		if (_length < 0)
 		{
-			activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "clan_file_transfer_error"));
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "clan_file_transfer_error"));
 			return;
 		}
 		

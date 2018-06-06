@@ -24,7 +24,7 @@ import java.util.Map;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.MountType;
 import com.l2jserver.gameserver.enums.audio.Music;
 import com.l2jserver.gameserver.instancemanager.GrandBossManager;
@@ -517,11 +517,11 @@ public final class Antharas extends AbstractNpcAI
 				{
 					cancelQuestTimer("SPAWN_ANTHARAS", null, null);
 					notifyEvent("SPAWN_ANTHARAS", null, null);
-					player.sendMessage(LanguageData.getInstance().getMsgByLang(player, getClass().getSimpleName() + "dp_ia_skipping"));
+					player.sendMessage(MessagesData.getInstance().getMessage(player, getClass().getSimpleName() + "dp_ia_skipping"));
 				}
 				else
 				{
-					player.sendMessage(LanguageData.getInstance().getMsgByLang(player, getClass().getSimpleName() + "dp_ia_no_skip"));
+					player.sendMessage(MessagesData.getInstance().getMessage(player, getClass().getSimpleName() + "dp_ia_no_skip"));
 				}
 				break;
 			}
@@ -532,11 +532,11 @@ public final class Antharas extends AbstractNpcAI
 					setRespawn(0);
 					cancelQuestTimer("CLEAR_STATUS", null, null);
 					notifyEvent("CLEAR_STATUS", null, null);
-					player.sendMessage(LanguageData.getInstance().getMsgByLang(player, getClass().getSimpleName() + "dp_ia_antharas_respaw"));
+					player.sendMessage(MessagesData.getInstance().getMessage(player, getClass().getSimpleName() + "dp_ia_antharas_respaw"));
 				}
 				else
 				{
-					player.sendMessage(LanguageData.getInstance().getMsgByLang(player, getClass().getSimpleName() + "dp_ia_antharas_live"));
+					player.sendMessage(MessagesData.getInstance().getMessage(player, getClass().getSimpleName() + "dp_ia_antharas_live"));
 				}
 				break;
 			}
@@ -554,12 +554,12 @@ public final class Antharas extends AbstractNpcAI
 					}
 					if (player != null) // Player dont will be null just when is this event called from GM command
 					{
-						player.sendMessage(LanguageData.getInstance().getMsgByLang(player, getClass().getSimpleName() + "dp_ia_minions"));
+						player.sendMessage(MessagesData.getInstance().getMessage(player, getClass().getSimpleName() + "dp_ia_minions"));
 					}
 				}
 				else if (player != null) // Player dont will be null just when is this event called from GM command
 				{
-					player.sendMessage(LanguageData.getInstance().getMsgByLang(player, getClass().getSimpleName() + "dp_ia_no_minions"));
+					player.sendMessage(MessagesData.getInstance().getMessage(player, getClass().getSimpleName() + "dp_ia_no_minions"));
 				}
 				break;
 			}
@@ -592,11 +592,11 @@ public final class Antharas extends AbstractNpcAI
 						}
 					}
 					
-					player.sendMessage(LanguageData.getInstance().getMsgByLang(player, getClass().getSimpleName() + "dp_ia_aborted"));
+					player.sendMessage(MessagesData.getInstance().getMessage(player, getClass().getSimpleName() + "dp_ia_aborted"));
 				}
 				else
 				{
-					player.sendMessage(LanguageData.getInstance().getMsgByLang(player, getClass().getSimpleName() + "dp_ia_no_aborted"));
+					player.sendMessage(MessagesData.getInstance().getMessage(player, getClass().getSimpleName() + "dp_ia_no_aborted"));
 				}
 				break;
 			}

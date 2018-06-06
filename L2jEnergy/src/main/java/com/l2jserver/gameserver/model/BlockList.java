@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
@@ -184,7 +184,7 @@ public class BlockList
 		
 		if (listOwner.getBlockList().getBlockList().contains(targetId))
 		{
-			listOwner.sendMessage(LanguageData.getInstance().getMsgByLang(listOwner, "player_already_block"));
+			listOwner.sendMessage(MessagesData.getInstance().getMessage(listOwner, "player_already_block"));
 			return;
 		}
 		

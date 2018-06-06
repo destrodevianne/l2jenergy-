@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.BlockList;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -70,7 +70,7 @@ public final class RequestFriendInvite extends L2GameClientPacket
 		// Target blocked active player.
 		if (BlockList.isBlocked(friend, activeChar))
 		{
-			activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "player_target_block"));
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "player_target_block"));
 			return;
 		}
 		SystemMessage sm;

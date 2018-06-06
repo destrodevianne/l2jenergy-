@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.Config;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.TradeList;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -49,7 +49,7 @@ public final class TradeDone extends L2GameClientPacket
 		
 		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("trade"))
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "trading_too_fast"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "trading_too_fast"));
 			return;
 		}
 		

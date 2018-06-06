@@ -18,7 +18,7 @@
  */
 package handlers.voicedcommandhandlers;
 
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IVoicedCommandHandler;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -43,7 +43,7 @@ public class StatsVCmd implements IVoicedCommandHandler
 	{
 		if (!command.equals("stats") || (params == null) || params.isEmpty())
 		{
-			activeChar.sendMessage("Usage: .stats <player name>");
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_usage_info_stats"));
 			return false;
 		}
 		
@@ -64,11 +64,12 @@ public class StatsVCmd implements IVoicedCommandHandler
 		
 		if (!L2Event.isParticipant(pc) || (pc.getEventStatus() == null))
 		{
-			activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "event_no_participant"));
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "event_no_participant"));
 			return false;
 		}
 		
-		final StringBuilder replyMSG = StringUtil.startAppend(300 + (pc.getEventStatus().getKills().size() * 50), "<html><body>" + "<center><font color=\"LEVEL\">[ L2J EVENT ENGINE ]</font></center><br><br>Statistics for player <font color=\"LEVEL\">", pc.getName(), "</font><br>Total kills <font color=\"FF0000\">", String.valueOf(pc.getEventStatus().getKills().size()), "</font><br><br>Detailed list: <br>");
+		final StringBuilder replyMSG = StringUtil.startAppend(300 + (pc.getEventStatus().getKills().size() * 50), "<html><body>"
+			+ "<center><font color=\"LEVEL\">[ L2J EVENT ENGINE ]</font></center><br><br>Statistics for player <font color=\"LEVEL\">", pc.getName(), "</font><br>Total kills <font color=\"FF0000\">", String.valueOf(pc.getEventStatus().getKills().size()), "</font><br><br>Detailed list: <br>");
 		for (L2PcInstance plr : pc.getEventStatus().getKills())
 		{
 			StringUtil.append(replyMSG, "<font color=\"FF0000\">", plr.getName(), "</font><br>");

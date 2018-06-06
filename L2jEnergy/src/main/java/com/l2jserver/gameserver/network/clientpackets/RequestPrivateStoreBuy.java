@@ -24,7 +24,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.l2jserver.Config;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.model.ItemRequest;
 import com.l2jserver.gameserver.model.L2Object;
@@ -87,7 +87,7 @@ public final class RequestPrivateStoreBuy extends L2GameClientPacket
 		
 		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("privatestorebuy"))
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "buying_too_fast"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "buying_too_fast"));
 			return;
 		}
 		

@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.L2CommandChannel;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -71,7 +71,7 @@ public final class RequestExAcceptJoinMPCC extends L2GameClientPacket
 			}
 			else
 			{
-				requestor.sendMessage(LanguageData.getInstance().getMsgByLang(requestor, "command_channel_declined"));
+				requestor.sendMessage(MessagesData.getInstance().getMessage(requestor, "command_channel_declined"));
 			}
 			
 			player.setActiveRequester(null);

@@ -19,10 +19,13 @@
 package handlers.admincommandhandlers;
 
 import java.util.StringTokenizer;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.Hero;
@@ -37,7 +40,7 @@ import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
  */
 public class AdminAdmin implements IAdminCommandHandler
 {
-	private static final Logger _log = Logger.getLogger(AdminAdmin.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(AdminAdmin.class);
 	
 	private static final String[] ADMIN_COMMANDS =
 	{
@@ -79,13 +82,13 @@ public class AdminAdmin implements IAdminCommandHandler
 		else if (command.startsWith("admin_gmliston"))
 		{
 			AdminData.getInstance().showGm(activeChar);
-			activeChar.sendMessage("Registered into gm list");
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_reg_gm_list"));
 			AdminHtml.showAdminHtml(activeChar, "gm_menu.htm");
 		}
 		else if (command.startsWith("admin_gmlistoff"))
 		{
 			AdminData.getInstance().hideGm(activeChar);
-			activeChar.sendMessage("Removed from gm list");
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_unreg_gm_list"));
 			AdminHtml.showAdminHtml(activeChar, "gm_menu.htm");
 		}
 		else if (command.startsWith("admin_silence"))
@@ -105,7 +108,7 @@ public class AdminAdmin implements IAdminCommandHandler
 		else if (command.startsWith("admin_saveolymp"))
 		{
 			Olympiad.getInstance().saveOlympiadStatus();
-			activeChar.sendMessage("olympiad system saved.");
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_save_oly_sys"));
 		}
 		else if (command.startsWith("admin_endolympiad"))
 		{
@@ -115,9 +118,9 @@ public class AdminAdmin implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				_log.warning("An error occured while ending olympiad: " + e);
+				LOG.warn("An error occured while ending olympiad!", e);
 			}
-			activeChar.sendMessage("Heroes formed.");
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_hero_formed"));
 		}
 		else if (command.startsWith("admin_sethero"))
 		{
@@ -142,13 +145,13 @@ public class AdminAdmin implements IAdminCommandHandler
 			final L2PcInstance target = activeChar.getTarget().isPlayer() ? activeChar.getTarget().getActingPlayer() : activeChar;
 			if (Hero.getInstance().isHero(target.getObjectId()))
 			{
-				activeChar.sendMessage("This player has already claimed the hero status.");
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_hero_status_already_claimed"));
 				return false;
 			}
 			
 			if (!Hero.getInstance().isUnclaimedHero(target.getObjectId()))
 			{
-				activeChar.sendMessage("This player cannot claim the hero status.");
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_hero_status_cannot_claimed"));
 				return false;
 			}
 			Hero.getInstance().claimHero(target);
@@ -162,12 +165,12 @@ public class AdminAdmin implements IAdminCommandHandler
 				if (st.nextToken().equalsIgnoreCase("on"))
 				{
 					activeChar.setDietMode(true);
-					activeChar.sendMessage("Diet mode on");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_diet_on"));
 				}
 				else if (st.nextToken().equalsIgnoreCase("off"))
 				{
 					activeChar.setDietMode(false);
-					activeChar.sendMessage("Diet mode off");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_diet_off"));
 				}
 			}
 			catch (Exception ex)
@@ -175,12 +178,12 @@ public class AdminAdmin implements IAdminCommandHandler
 				if (activeChar.getDietMode())
 				{
 					activeChar.setDietMode(false);
-					activeChar.sendMessage("Diet mode off");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_diet_off"));
 				}
 				else
 				{
 					activeChar.setDietMode(true);
-					activeChar.sendMessage("Diet mode on");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_diet_on"));
 				}
 			}
 			finally
@@ -197,12 +200,12 @@ public class AdminAdmin implements IAdminCommandHandler
 				if (mode.equalsIgnoreCase("on"))
 				{
 					activeChar.setTradeRefusal(true);
-					activeChar.sendMessage("Trade refusal enabled");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_trade_on"));
 				}
 				else if (mode.equalsIgnoreCase("off"))
 				{
 					activeChar.setTradeRefusal(false);
-					activeChar.sendMessage("Trade refusal disabled");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_trade_off"));
 				}
 			}
 			catch (Exception ex)
@@ -210,12 +213,12 @@ public class AdminAdmin implements IAdminCommandHandler
 				if (activeChar.getTradeRefusal())
 				{
 					activeChar.setTradeRefusal(false);
-					activeChar.sendMessage("Trade refusal disabled");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_trade_off"));
 				}
 				else
 				{
 					activeChar.setTradeRefusal(true);
-					activeChar.sendMessage("Trade refusal enabled");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_trade_on"));
 				}
 			}
 			AdminHtml.showAdminHtml(activeChar, "gm_menu.htm");
@@ -230,16 +233,16 @@ public class AdminAdmin implements IAdminCommandHandler
 				String pValue = st.nextToken();
 				if (Config.setParameterValue(pName, pValue))
 				{
-					activeChar.sendMessage("Config parameter " + pName + " set to " + pValue);
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_config_parameter_set_to").replace("%s%", pName + "").replace("%i%", pValue + ""));
 				}
 				else
 				{
-					activeChar.sendMessage("Invalid parameter!");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_invalid_parameter"));
 				}
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Usage: //setconfig <parameter> <value>");
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_set_config"));
 			}
 			finally
 			{
@@ -257,18 +260,18 @@ public class AdminAdmin implements IAdminCommandHandler
 				String pValue = parameter[1].trim();
 				if (Config.setParameterValue(pName, pValue))
 				{
-					activeChar.sendMessage("parameter " + pName + " succesfully set to " + pValue);
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_parameter_succesfully_set_to").replace("%s%", pName + "").replace("%i%", pValue + ""));
 				}
 				else
 				{
-					activeChar.sendMessage("Invalid parameter!");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_invalid_parameter"));
 				}
 			}
 			catch (Exception e)
 			{
 				if (cmd.length == 2)
 				{
-					activeChar.sendMessage("Usage: //set parameter=value");
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_set_parameter"));
 				}
 			}
 			finally
@@ -339,19 +342,26 @@ public class AdminAdmin implements IAdminCommandHandler
 	public void showConfigPage(L2PcInstance activeChar)
 	{
 		final NpcHtmlMessage adminReply = new NpcHtmlMessage();
-		StringBuilder replyMSG = new StringBuilder("<html><title>L2J :: Config</title><body>");
+		StringBuilder replyMSG = new StringBuilder("<html><title>Config</title><body>");
 		replyMSG.append("<center><table width=270><tr><td width=60><button value=\"Main\" action=\"bypass -h admin_admin\" width=60 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td><td width=150>Config Server Panel</td><td width=60><button value=\"Back\" action=\"bypass -h admin_admin4\" width=60 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table></center><br>");
 		replyMSG.append("<center><table width=260><tr><td width=140></td><td width=40></td><td width=40></td></tr>");
 		replyMSG.append("<tr><td><font color=\"00AA00\">Drop:</font></td><td></td><td></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate EXP</font> = " + Config.RATE_XP + "</td><td><edit var=\"param1\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_setconfig RateXp $param1\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate SP</font> = " + Config.RATE_SP + "</td><td><edit var=\"param2\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_setconfig RateSp $param2\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate Drop Spoil</font> = " + Config.RATE_CORPSE_DROP_CHANCE_MULTIPLIER + "</td><td><edit var=\"param4\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_setconfig RateDropSpoil $param4\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate EXP</font> = " + Config.RATE_XP
+			+ "</td><td><edit var=\"param1\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_setconfig RateXp $param1\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate SP</font> = " + Config.RATE_SP
+			+ "</td><td><edit var=\"param2\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_setconfig RateSp $param2\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate Drop Spoil</font> = " + Config.RATE_CORPSE_DROP_CHANCE_MULTIPLIER
+			+ "</td><td><edit var=\"param4\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_setconfig RateDropSpoil $param4\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
 		replyMSG.append("<tr><td width=140></td><td width=40></td><td width=40></td></tr>");
 		replyMSG.append("<tr><td><font color=\"00AA00\">Enchant:</font></td><td></td><td></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Enchant Element Stone</font> = " + Config.ENCHANT_CHANCE_ELEMENT_STONE + "</td><td><edit var=\"param8\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_setconfig EnchantChanceElementStone $param8\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Enchant Element Crystal</font> = " + Config.ENCHANT_CHANCE_ELEMENT_CRYSTAL + "</td><td><edit var=\"param9\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_setconfig EnchantChanceElementCrystal $param9\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Enchant Element Jewel</font> = " + Config.ENCHANT_CHANCE_ELEMENT_JEWEL + "</td><td><edit var=\"param10\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_setconfig EnchantChanceElementJewel $param10\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Enchant Element Energy</font> = " + Config.ENCHANT_CHANCE_ELEMENT_ENERGY + "</td><td><edit var=\"param11\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_setconfig EnchantChanceElementEnergy $param11\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Enchant Element Stone</font> = " + Config.ENCHANT_CHANCE_ELEMENT_STONE
+			+ "</td><td><edit var=\"param8\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_setconfig EnchantChanceElementStone $param8\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Enchant Element Crystal</font> = " + Config.ENCHANT_CHANCE_ELEMENT_CRYSTAL
+			+ "</td><td><edit var=\"param9\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_setconfig EnchantChanceElementCrystal $param9\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Enchant Element Jewel</font> = " + Config.ENCHANT_CHANCE_ELEMENT_JEWEL
+			+ "</td><td><edit var=\"param10\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_setconfig EnchantChanceElementJewel $param10\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Enchant Element Energy</font> = " + Config.ENCHANT_CHANCE_ELEMENT_ENERGY
+			+ "</td><td><edit var=\"param11\" width=40 height=15></td><td><button value=\"Set\" action=\"bypass -h admin_setconfig EnchantChanceElementEnergy $param11\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
 		
 		replyMSG.append("</table></body></html>");
 		adminReply.setHtml(replyMSG.toString());

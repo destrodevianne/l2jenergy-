@@ -27,7 +27,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.l2jserver.gameserver.datatables.LanguageData;
 import com.l2jserver.gameserver.model.L2RecipeInstance;
 import com.l2jserver.gameserver.model.L2RecipeList;
 import com.l2jserver.gameserver.model.L2RecipeStatInstance;
@@ -257,7 +256,7 @@ public class RecipeData implements IXmlReader
 		L2RecipeList recipeList = _recipes.get(id);
 		if ((recipeList == null) || (recipeList.getRecipes().length == 0))
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "no_recipe_id").replace("%s%", id + ""));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "no_recipe_id").replace("%s%", id + ""));
 			player.isInCraftMode(false);
 			return null;
 		}

@@ -52,14 +52,14 @@ public class StatusHandler implements ITelnetHandler
 		"gmlist"
 	};
 	
-	private int uptime;
+	private int _uptime;
 	
 	@Override
-	public boolean useCommand(String command, PrintWriter _print, Socket _cSocket, int _uptime)
+	public boolean useCommand(String command, PrintWriter _print, Socket _cSocket, int uptime)
 	{
 		if (command.equals("status"))
 		{
-			uptime = _uptime;
+			_uptime = uptime;
 			_print.print(getServerStatus());
 			_print.flush();
 		}
@@ -213,7 +213,7 @@ public class StatusHandler implements ITelnetHandler
 		sb.append("\r\n  +.......... L2Door: " + doorCount);
 		sb.append("\r\n  +.......... L2Char: " + charCount);
 		sb.append("\r\n  --->   Ingame Time: " + gameTime());
-		sb.append("\r\n  ---> Server Uptime: " + getUptime(uptime));
+		sb.append("\r\n  ---> Server Uptime: " + getUptime(_uptime));
 		sb.append("\r\n  --->      GM Count: " + getOnlineGMS());
 		sb.append("\r\n  --->       Threads: " + Thread.activeCount());
 		sb.append("\r\n  RAM Used: " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576)); // 1024 * 1024 = 1048576

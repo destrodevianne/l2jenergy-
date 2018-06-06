@@ -24,7 +24,7 @@ import static com.l2jserver.gameserver.model.itemcontainer.Inventory.MAX_ADENA;
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.instancemanager.MailManager;
 import com.l2jserver.gameserver.model.BlockList;
@@ -128,7 +128,7 @@ public final class RequestSendPost extends L2GameClientPacket
 		
 		if (!activeChar.getAccessLevel().allowTransaction())
 		{
-			activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "transactions_disabled"));
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "transactions_disabled"));
 			return;
 		}
 		

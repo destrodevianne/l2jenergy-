@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model.conditions;
 
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.FortManager;
 import com.l2jserver.gameserver.instancemanager.TerritoryWarManager;
@@ -68,17 +68,17 @@ public class ConditionPlayerCanCreateOutpost extends Condition
 		
 		if (((fort != null) && (fort.getResidenceId() == 0)) || ((castle != null) && (castle.getResidenceId() == 0)))
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "outpost_residence_id"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "outpost_residence_id"));
 			canCreateOutpost = false;
 		}
 		else if (((fort != null) && !fort.getZone().isActive()) || ((castle != null) && !castle.getZone().isActive()))
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "outpost_siege_active"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "outpost_siege_active"));
 			canCreateOutpost = false;
 		}
 		else if (!player.isClanLeader())
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "outpost_only_leader"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "outpost_only_leader"));
 			canCreateOutpost = false;
 		}
 		else if (TerritoryWarManager.getInstance().getHQForClan(player.getClan()) != null)

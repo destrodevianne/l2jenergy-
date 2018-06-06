@@ -26,7 +26,7 @@ import java.util.List;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.BuyListData;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2MerchantInstance;
@@ -84,7 +84,7 @@ public final class RequestBuyItem extends L2GameClientPacket
 		
 		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("buy"))
 		{
-			player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "buying_too_fast"));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "buying_too_fast"));
 			return;
 		}
 		
@@ -186,7 +186,7 @@ public final class RequestBuyItem extends L2GameClientPacket
 			
 			if ((price == 0) && !player.isGM() && Config.ONLY_GM_ITEMS_FREE)
 			{
-				player.sendMessage(LanguageData.getInstance().getMsgByLang(player, "cheat_detected"));
+				player.sendMessage(MessagesData.getInstance().getMessage(player, "cheat_detected"));
 				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried buy item for 0 adena.", Config.DEFAULT_PUNISH);
 				return;
 			}

@@ -18,7 +18,7 @@
  */
 package handlers.voicedcommandhandlers;
 
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IVoicedCommandHandler;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -68,7 +68,7 @@ public class SetVCmd implements IVoicedCommandHandler
 				}
 				
 				player.getClanPrivileges().setBitmask(n);
-				activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "dp_handler_setvcmd_clan_privileges").replace("%s%", n + "").replace("%i%", activeChar.getName() + ""));
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_setvcmd_clan_privileges").replace("%s%", n + "").replace("%i%", activeChar.getName() + ""));
 			}
 			else if (params.startsWith("title"))
 			{

@@ -19,7 +19,7 @@
 package handlers.chathandlers;
 
 import com.l2jserver.Config;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IChatHandler;
 import com.l2jserver.gameserver.instancemanager.MapRegionManager;
 import com.l2jserver.gameserver.model.BlockList;
@@ -69,7 +69,7 @@ public class ChatTrade implements IChatHandler
 		{
 			if (!activeChar.canOverrideCond(PcCondOverride.CHAT_CONDITIONS) && !activeChar.getFloodProtectors().getGlobalChat().tryPerformAction("global chat"))
 			{
-				activeChar.sendMessage(LanguageData.getInstance().getMsgByLang(activeChar, "no_spam_channel"));
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "no_spam_channel"));
 				return;
 			}
 			

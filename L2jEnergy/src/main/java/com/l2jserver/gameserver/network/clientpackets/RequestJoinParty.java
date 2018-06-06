@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.Config;
-import com.l2jserver.gameserver.datatables.LanguageData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.PartyDistributionType;
 import com.l2jserver.gameserver.model.BlockList;
 import com.l2jserver.gameserver.model.L2Party;
@@ -67,7 +67,7 @@ public final class RequestJoinParty extends L2GameClientPacket
 		
 		if ((target.getClient() == null) || target.getClient().isDetached())
 		{
-			requestor.sendMessage(LanguageData.getInstance().getMsgByLang(requestor, "player_offline"));
+			requestor.sendMessage(MessagesData.getInstance().getMessage(requestor, "player_offline"));
 			return;
 		}
 		
@@ -123,7 +123,7 @@ public final class RequestJoinParty extends L2GameClientPacket
 		
 		if (target.isJailed() || requestor.isJailed())
 		{
-			requestor.sendMessage(LanguageData.getInstance().getMsgByLang(requestor, "no_invite_in_jail"));
+			requestor.sendMessage(MessagesData.getInstance().getMessage(requestor, "no_invite_in_jail"));
 			return;
 		}
 		
@@ -148,7 +148,7 @@ public final class RequestJoinParty extends L2GameClientPacket
 		{
 			if (requestor.getParty().isInDimensionalRift())
 			{
-				requestor.sendMessage(LanguageData.getInstance().getMsgByLang(requestor, "no_invite_in_rift"));
+				requestor.sendMessage(MessagesData.getInstance().getMessage(requestor, "no_invite_in_rift"));
 			}
 			else
 			{
