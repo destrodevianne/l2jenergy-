@@ -36,6 +36,7 @@ import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.MultisellData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.data.xml.impl.PlayerCreationPointData;
+import com.l2jserver.gameserver.data.xml.impl.ProductItemData;
 import com.l2jserver.gameserver.data.xml.impl.TransformData;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.datatables.SkillData;
@@ -257,6 +258,12 @@ public class AdminReload implements IAdminCommandHandler
 				{
 					PlayerCreationPointData.getInstance().load();
 					AdminData.getInstance().broadcastMessageToGMs(activeChar.getName() + ": Reloaded creation points data.");
+					break;
+				}
+				case "itemmall":
+				{
+					ProductItemData.getInstance().load();
+					AdminData.getInstance().broadcastMessageToGMs(activeChar.getName() + ": Reloaded item mall data.");
 					break;
 				}
 				default:

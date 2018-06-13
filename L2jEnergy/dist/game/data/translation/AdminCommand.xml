@@ -220,8 +220,8 @@
 	</message>
 	<!-- AdminReload -->
 	<message id="admin_usage_reload">
-	    <set lang="en" val="Usage: //reload [config|access|npc|quest [quest_id|quest_name]|walker|htm[l] [file|directory]|multisell|buylist|teleport|skill|item|door|effect|handler|enchant|creationpoint]" />
-		<set lang="ru" val="Применение: //reload [config|access|npc|quest [quest_id|quest_name]|walker|htm[l] [file|directory]|multisell|buylist|teleport|skill|item|door|effect|handler|enchant|creationpoint]" />
+	    <set lang="en" val="Usage: //reload [config|access|npc|quest [quest_id|quest_name]|walker|htm[l] [file|directory]|multisell|buylist|teleport|skill|item|door|effect|handler|enchant|creationpoint|itemmall|messages]" />
+		<set lang="ru" val="Применение: //reload [config|access|npc|quest [quest_id|quest_name]|walker|htm[l] [file|directory]|multisell|buylist|teleport|skill|item|door|effect|handler|enchant|creationpoint|itemmall|messages]" />
 	</message>
 	<message id="admin_file_or_directory_does_not_exist">
 	    <set lang="en" val="File or Directory does not exist." />
@@ -246,5 +246,50 @@
 	<message id="admin_warn_reloding">
 	    <set lang="en" val="WARNING: There are several known issues regarding this feature. Reloading server data during runtime is STRONGLY NOT RECOMMENDED for live servers, just for developing environments." />
 		<set lang="ru" val="ВНИМАНИЕ: Существует несколько известных проблем, связанных с этой функцией. Перезагрузка данных сервера во время его работы СИЛЬНО НЕ РЕКОМЕНДУЕТСЯ для открытых серверов, только для среды разработки." />
+	</message>
+	<!-- AdminGamePoints -->
+	<message id="admin_invalid_value">
+	    <set lang="en" val="Invalid Value!" />
+		<set lang="ru" val="Неверное значение!" />
+	</message>
+	<message id="target_set_your_prime_point">
+	    <set lang="en" val="Admin set your Prime Point(s) to %s%!" />
+		<set lang="ru" val="Администратор установил ваши Prime Point(s) на значение %s%!" />
+	</message>
+	<message id="admin_set_your_prime_point">
+	    <set lang="en" val="You set %s% Prime Point(s) to player %c%." />
+		<set lang="ru" val="Вы устанавливаете значение Prime Point(s) на %s% игроку %c%." />
+	</message>
+	<message id="target_already_have_max_count_prime_point">
+	    <set lang="en" val="%c% already have max count of Prime Point(s)!" />
+		<set lang="ru" val="Игрок %c% уже имеет максимальное количество Prime Point(s)! " />
+	</message>
+	<message id="target_increase_your_prime_point">
+	    <set lang="en" val="Admin increase your Prime Point(s) by %s%!" />
+		<set lang="ru" val="Администратор увеличил ваше количество Prime Point(s) на %s%!" />
+	</message>
+	<message id="admin_increased_your_prime_point">
+	    <set lang="en" val="You increased Prime Point(s) of %c% by %s%!" />
+		<set lang="ru" val="Вы увеличили игроку %c% количество Prime Point(s) на %s%!" />
+	</message>
+	<message id="target_already_have_min_count_prime_point">
+	    <set lang="en" val="%c% already have min count of Prime Points(s)!" />
+		<set lang="ru" val="%c% уже имеет минимальное количество Prime Point(s)!" />
+	</message>
+	<message id="target_decreased_your_prime_point">
+	    <set lang="en" val="Admin decreased your Prime Point(s) by %s%!" />
+		<set lang="ru" val="Администратор уменьшил ваше количество Prime Point(s) на %s%!" />
+	</message>
+	<message id="admin_increased_your_prime_point_all_online">
+	    <set lang="en" val="You increased Prime Point(s) of all online players %i% by %s%!" />
+		<set lang="ru" val="Вы увеличили количество Prime Point(s) для %i% онлайн-игроков на %s%!" />
+	</message>
+	<message id="admin_increased_your_prime_point_all_players">
+	    <set lang="en" val="You increased Prime Point(s) of all players %i% in range %r% by %s%!" />
+		<set lang="ru" val="Вы увеличили количество Prime Point(s) %i% игроков в радиусе %r% на %s%!" />
+	</message>
+	<message id="admin_increase_your_prime_point">
+	    <set lang="en" val="Admin increase your Prime Point(s) by %s%!" />
+		<set lang="ru" val="Администратор увеличил ваше количество Prime Point(s) на %s%!" />
 	</message>
 </list>

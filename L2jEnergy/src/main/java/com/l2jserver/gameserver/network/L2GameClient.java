@@ -458,6 +458,12 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 				ps.execute();
 			}
 			
+			try (PreparedStatement ps = con.prepareStatement("DELETE FROM character_minigame_score WHERE charId=?"))
+			{
+				ps.setInt(1, objid);
+				ps.execute();
+			}
+			
 			try (PreparedStatement ps = con.prepareStatement("DELETE FROM character_quests WHERE charId=?"))
 			{
 				ps.setInt(1, objid);
@@ -495,6 +501,12 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 			}
 			
 			try (PreparedStatement ps = con.prepareStatement("DELETE FROM character_subclasses WHERE charId=?"))
+			{
+				ps.setInt(1, objid);
+				ps.execute();
+			}
+			
+			try (PreparedStatement ps = con.prepareStatement("DELETE FROM character_item_mall_transactions WHERE charId=?"))
 			{
 				ps.setInt(1, objid);
 				ps.execute();

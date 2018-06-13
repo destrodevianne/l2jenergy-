@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='utf-8'?>
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/product.xsd">
+	<product id="1080201" name="Sudden Agathion 7 Day Pack" category="3" price="338" is_new="true" on_sale="true" max_stock="1">
+		<item id="139" count="1" />
+	</product>
+	<product id="1080202" name="Shiny Agathion 7 Day Pack" category="3" price="338" is_new="true" on_sale="true" max_stock="1">
+		<item id="140" count="1" />
+	</product>
+	<product id="1080203" name="Sobbing Agathion 7 Day Pack" category="3" price="338" is_new="true" on_sale="true" max_stock="1">
+		<item id="141" count="1" />
+	</product>
+	<product id="1080204" name="Agathion of Love 7 Day Pack" category="3" price="228" is_new="true" on_sale="true" max_stock="1">
+		<item id="13280" count="1" />
+	</product>
+	<product id="1080205" name="Pumpkin Transformation Stick 7 Day Pack" category="3" price="254" is_new="true" on_sale="true" max_stock="1">
+		<item id="13281" count="1" />
+	</product>
+	<product id="1080206" name="Kat the Cat Hat 7 Day Pack" category="3" price="169" is_new="true" on_sale="true">
+		<item id="13282" count="1" />
+	</product>
+	<product id="1080207" name="Feline Queen Hat 7 Day Pack" category="3" price="169" is_new="true" on_sale="true">
+		<item id="13283" count="1" />
+	</product>
+	<product id="1080208" name="Monster Eye Hat 7 Day Pack" category="3" price="169" is_new="true" on_sale="true">
+		<item id="13284" count="1" />
+	</product>
+	<product id="1080209" name="Brown Bear Hat 7 Day Pack" category="3" price="169" is_new="true" on_sale="true">
+		<item id="13285" count="1" />
+	</product>
+	<product id="1080210" name="Fungus Hat 7 Day Pack" category="3" price="169" is_new="true" on_sale="true">
+		<item id="13286" count="1" />
+	</product>
+	<product id="1080211" name="Skull Hat 7 Day Pack" category="3" price="169" is_new="true" on_sale="true">
+		<item id="13287" count="1" />
+	</product>
+	<product id="1080212" name="Ornithomimus Hat 7 Day Pack" category="3" price="169" is_new="true" on_sale="true">
+		<item id="13288" count="1" />
+	</product>
+	<product id="1080213" name="Feline King Hat 7 Day Pack" category="3" price="169" is_new="true" on_sale="true">
+		<item id="13289" count="1" />
+	</product>
+	<product id="1080214" name="Kai the Cat Hat 7 Day Pack" category="3" price="169" is_new="true" on_sale="true">
+		<item id="13290" count="1" />
+	</product>
+	<product id="1080215" name="Goggle Pack" category="3" price="338" is_new="true" on_sale="true">
+		<item id="20315" count="1" />
+	</product>
+	<product id="1080216" name="Napoleon Hat Pack" category="3" price="338" is_best="true" is_new="true" on_sale="true">
+		<item id="20316" count="1" />
+	</product>
+	<product id="1080217" name="Black Gem Mask Pack" category="3" price="338" is_new="true" on_sale="true">
+		<item id="20318" count="1" />
+	</product>
+	<product id="1080218" name="Afro Hair Pack - Gold" category="3" price="338" is_new="true" on_sale="true">
+		<item id="20278" count="1" />
+	</product>
+	<product id="1080219" name="Afro Hair Pack - Pink" category="3" price="338" is_new="true" on_sale="true">
+		<item id="20279" count="1" />
+	</product>
+	<product id="1080220" name="Horn Rimmed Glasses Pack" category="3" price="338" is_new="true" on_sale="true">
+		<item id="20045" count="1" />
+	</product>
+	<product id="1080221" name="Afro Hair Pack " category="3" price="338" is_new="true" on_sale="true">
+		<item id="20046" count="1" />
+	</product>
+	<product id="1080222" name="Afro Hair Pack - Big Head, Firework" category="3" price="338" is_new="true" on_sale="true">
+		<item id="20047" count="1" />
+	</product>
+	<product id="1080223" name="Afro Hair Pack - Wind Walk" category="3" price="338" is_new="true" on_sale="true">
+		<item id="20048" count="1" />
+	</product>
+	<product id="1080224" name="Uniform Hat Pack" category="3" price="338" is_new="true" on_sale="true">
+		<item id="20049" count="1" />
+	</product>
+	<product id="1080225" name="Assassins Bamboo Hat Pack" category="3" price="338" is_new="true" on_sale="true">
+		<item id="20050" count="1" />
+	</product>
+	<product id="1080226" name="Ruthless Tribe Mask Pack" category="3" price="338" is_new="true" on_sale="true">
+		<item id="20051" count="1" />
+	</product>
+	<product id="1080227" name="Ribbon Hairband Pack" category="3" price="338" is_new="true" on_sale="true">
+		<item id="20052" count="1" />
+	</product>
+	<product id="1080228" name="Visor Pack" category="3" price="338" is_new="true" on_sale="true">
+		<item id="20053" count="1" />
+	</product>
+</list>

@@ -21,6 +21,7 @@ package com.l2jserver.gameserver.dao.factory;
 import com.l2jserver.gameserver.dao.FriendDAO;
 import com.l2jserver.gameserver.dao.HennaDAO;
 import com.l2jserver.gameserver.dao.ItemDAO;
+import com.l2jserver.gameserver.dao.ItemMallDAO;
 import com.l2jserver.gameserver.dao.ItemReuseDAO;
 import com.l2jserver.gameserver.dao.PetDAO;
 import com.l2jserver.gameserver.dao.PetSkillSaveDAO;
@@ -48,6 +49,8 @@ public interface IDAOFactory
 	HennaDAO getHennaDAO();
 	
 	ItemDAO getItemDAO();
+	
+	ItemMallDAO getItemMallDAO();
 	
 	ItemReuseDAO getItemReuseDAO();
 	

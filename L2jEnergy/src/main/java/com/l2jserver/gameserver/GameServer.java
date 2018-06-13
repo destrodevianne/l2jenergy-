@@ -77,6 +77,7 @@ import com.l2jserver.gameserver.data.xml.impl.PetDataTable;
 import com.l2jserver.gameserver.data.xml.impl.PlayerCreationPointData;
 import com.l2jserver.gameserver.data.xml.impl.PlayerTemplateData;
 import com.l2jserver.gameserver.data.xml.impl.PlayerXpPercentLostData;
+import com.l2jserver.gameserver.data.xml.impl.ProductItemData;
 import com.l2jserver.gameserver.data.xml.impl.RecipeData;
 import com.l2jserver.gameserver.data.xml.impl.SecondaryAuthData;
 import com.l2jserver.gameserver.data.xml.impl.SiegeScheduleData;
@@ -219,6 +220,10 @@ public final class GameServer
 		EnchantItemHPBonusData.getInstance();
 		MerchantPriceConfigTable.getInstance().loadInstances();
 		BuyListData.getInstance();
+		if (Config.ENABLE_ITEM_MALL)
+		{
+			ProductItemData.getInstance();
+		}
 		MultisellData.getInstance();
 		RecipeData.getInstance();
 		ArmorSetsData.getInstance();

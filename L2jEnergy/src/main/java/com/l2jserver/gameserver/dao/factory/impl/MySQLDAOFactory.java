@@ -21,6 +21,7 @@ package com.l2jserver.gameserver.dao.factory.impl;
 import com.l2jserver.gameserver.dao.FriendDAO;
 import com.l2jserver.gameserver.dao.HennaDAO;
 import com.l2jserver.gameserver.dao.ItemDAO;
+import com.l2jserver.gameserver.dao.ItemMallDAO;
 import com.l2jserver.gameserver.dao.ItemReuseDAO;
 import com.l2jserver.gameserver.dao.PetDAO;
 import com.l2jserver.gameserver.dao.PetSkillSaveDAO;
@@ -40,6 +41,7 @@ import com.l2jserver.gameserver.dao.factory.IDAOFactory;
 import com.l2jserver.gameserver.dao.impl.mysql.FriendDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.HennaDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.ItemDAOMySQLImpl;
+import com.l2jserver.gameserver.dao.impl.mysql.ItemMallDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.ItemReuseDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.PetDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.PetSkillSaveDAOMySQL;
@@ -67,6 +69,7 @@ enum MySQLDAOFactory implements IDAOFactory
 	private final FriendDAO friendDAO = new FriendDAOMySQLImpl();
 	private final HennaDAO hennaDAO = new HennaDAOMySQLImpl();
 	private final ItemDAO itemDAO = new ItemDAOMySQLImpl();
+	private final ItemMallDAO itemMallDAO = new ItemMallDAOMySQLImpl();
 	private final ItemReuseDAO itemReuseDAO = new ItemReuseDAOMySQLImpl();
 	private final PetDAO petDAO = new PetDAOMySQLImpl();
 	private final PetSkillSaveDAO petSkillSaveDAO = new PetSkillSaveDAOMySQL();
@@ -99,6 +102,12 @@ enum MySQLDAOFactory implements IDAOFactory
 	public ItemDAO getItemDAO()
 	{
 		return itemDAO;
+	}
+	
+	@Override
+	public ItemMallDAO getItemMallDAO()
+	{
+		return itemMallDAO;
 	}
 	
 	@Override

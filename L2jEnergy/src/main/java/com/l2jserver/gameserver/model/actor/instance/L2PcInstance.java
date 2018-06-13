@@ -13431,4 +13431,16 @@ public final class L2PcInstance extends L2Playable
 	{
 		_dwarvenRecipeBook.clear();
 	}
+	
+	public long getPrimePoints()
+	{
+		return getAccountVariables().getInt(AccountVariables.PRIME_POINTS, 0);
+	}
+	
+	public void setPrimePoints(long points)
+	{
+		final AccountVariables vars = getAccountVariables();
+		vars.set(AccountVariables.PRIME_POINTS, points);
+		vars.storeMe();
+	}
 }

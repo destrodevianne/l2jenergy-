@@ -512,6 +512,7 @@ public final class Config
 	public static int MAX_MONSTER_ANIMATION;
 	public static boolean ENABLE_FALLING_DAMAGE;
 	public static boolean EX_JAPAN_MINIGAME;
+	public static boolean ENABLE_ITEM_MALL;
 	public static boolean GRIDS_ALWAYS_ON;
 	public static int GRID_NEIGHBOR_TURNON_TIME;
 	public static int GRID_NEIGHBOR_TURNOFF_TIME;
@@ -1951,6 +1952,7 @@ public final class Config
 			BOTREPORT_ALLOW_REPORTS_FROM_SAME_CLAN_MEMBERS = General.getBoolean("AllowReportsFromSameClanMembers", false);
 			ENABLE_FALLING_DAMAGE = General.getBoolean("EnableFallingDamage", true);
 			EX_JAPAN_MINIGAME = General.getBoolean("JapanMinigame", false);
+			ENABLE_ITEM_MALL = General.getBoolean("EnableItemMall", false);
 			
 			// Load FloodProtector L2Properties file
 			final PropertiesParser FloodProtectors = new PropertiesParser(FLOOD_PROTECTOR_FILE);

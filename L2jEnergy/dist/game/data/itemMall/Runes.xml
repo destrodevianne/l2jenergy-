@@ -1,0 +1,87 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/product.xsd">
+	<product id="1080112" name="Rune of Exp. Points 30% - 5 hours" category="1" price="33" on_sale="true">
+		<item id="20335" count="1" />
+	</product>
+	<product id="1080113" name="Rune of Exp. Points 50% - 5 hours" category="1" price="54" on_sale="true">
+		<item id="20336" count="1" />
+	</product>
+	<product id="1080114" name="Rune of Exp. Points 30% - 10 hours" category="1" price="52" on_sale="true" is_event="true">
+		<item id="20337" count="1" />
+	</product>
+	<product id="1080115" name="Rune of Exp. Points 50% - 10 hours" category="1" price="87" on_sale="true">
+		<item id="20338" count="1" />
+	</product>
+	<product id="1080116" name="Rune of Exp. Points 30% - 7 days" category="1" price="697" on_sale="true">
+		<item id="20339" count="1" />
+	</product>
+	<product id="1080117" name="Rune of Exp. Points 50% - 7 days" category="1" price="1161" on_sale="true">
+		<item id="20340" count="1" />
+	</product>
+	<product id="1080118" name="Rune of SP 30% - 5 hours" category="1" price="17" on_sale="true">
+		<item id="20341" count="1" />
+	</product>
+	<product id="1080119" name="Rune of SP 50% - 5 hours" category="1" price="27" on_sale="true">
+		<item id="20342" count="1" />
+	</product>
+	<product id="1080120" name="Rune of SP 30% - 10 hours" category="1" price="26" on_sale="true">
+		<item id="20343" count="1" />
+	</product>
+	<product id="1080121" name="Rune of SP 50% - 10 hours" category="1" price="44" on_sale="true">
+		<item id="20344" count="1" />
+	</product>
+	<product id="1080122" name="Rune of SP 30% - 7 days" category="1" price="349" on_sale="true">
+		<item id="20345" count="1" />
+	</product>
+	<product id="1080123" name="Rune of SP 50% - 7 days" category="1" price="581" on_sale="true">
+		<item id="20346" count="1" />
+	</product>
+	<product id="1080124" name="Rune of Crystal level 3 - 5 hours" category="1" price="33" on_sale="true">
+		<item id="20347" count="1" />
+	</product>
+	<product id="1080125" name="Rune of Crystal level 5 - 5 hours" category="1" price="54" on_sale="true">
+		<item id="20348" count="1" />
+	</product>
+	<product id="1080126" name="Rune of Crystal level 3 - 10 hours" category="1" price="52" on_sale="true">
+		<item id="20349" count="1" />
+	</product>
+	<product id="1080127" name="Rune of Crystal level 5 - 10 hours" category="1" price="87" on_sale="true">
+		<item id="20350" count="1" />
+	</product>
+	<product id="1080128" name="Rune of Crystal level 3 - 7 days" category="1" price="697" on_sale="true">
+		<item id="20351" count="1" />
+	</product>
+	<product id="1080129" name="Rune of Crystal level 5 - 7 days" category="1" price="1161" on_sale="true">
+		<item id="20352" count="1" />
+	</product>
+	<product id="1080130" name="Weapon-type Enhance Backup Stone (D-Grade) " category="1" price="21" on_sale="true">
+		<item id="12362" count="1" />
+	</product>
+	<product id="1080131" name="Weapon-type Enhance Backup Stone (C-Grade) " category="1" price="45" on_sale="true">
+		<item id="12363" count="1" />
+	</product>
+	<product id="1080132" name="Weapon-type Enhance Backup Stone (B-Grade) " category="1" price="203" on_sale="true">
+		<item id="12364" count="1" />
+	</product>
+	<product id="1080133" name="Weapon-type Enhance Backup Stone (A-Grade) " category="1" price="729" on_sale="true">
+		<item id="12365" count="1" />
+	</product>
+	<product id="1080134" name="Weapon-type Enhance Backup Stone (S-Grade) " category="1" price="2025" on_sale="true">
+		<item id="12366" count="1" />
+	</product>
+	<product id="1080135" name="Armor-type Enhance Backup Stone (D-Grade) " category="1" price="4" on_sale="true">
+		<item id="12367" count="1" />
+	</product>
+	<product id="1080136" name="Armor-type Enhance Backup Stone (C-Grade) " category="1" price="7" on_sale="true">
+		<item id="12368" count="1" />
+	</product>
+	<product id="1080137" name="Armor-type Enhance Backup Stone (B-Grade) " category="1" price="29" on_sale="true">
+		<item id="12369" count="1" />
+	</product>
+	<product id="1080138" name="Armor-type Enhance Backup Stone (A-Grade) " category="1" price="104" on_sale="true">
+		<item id="12370" count="1" />
+	</product>
+	<product id="1080139" name="Armor-type Enhance Backup Stone (S-Grade) " category="1" price="290" on_sale="true">
+		<item id="12371" count="1" />
+	</product>
+</list>
