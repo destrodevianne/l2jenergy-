@@ -79,6 +79,7 @@ import com.l2jserver.gameserver.enums.HtmlActionScope;
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.enums.MountType;
 import com.l2jserver.gameserver.enums.PartyDistributionType;
+import com.l2jserver.gameserver.enums.PcCafeType;
 import com.l2jserver.gameserver.enums.PlayerAction;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.enums.Race;
@@ -156,6 +157,7 @@ import com.l2jserver.gameserver.model.actor.tasks.player.FameTask;
 import com.l2jserver.gameserver.model.actor.tasks.player.GameGuardCheckTask;
 import com.l2jserver.gameserver.model.actor.tasks.player.InventoryEnableTask;
 import com.l2jserver.gameserver.model.actor.tasks.player.LookingForFishTask;
+import com.l2jserver.gameserver.model.actor.tasks.player.PCCafePointsTask;
 import com.l2jserver.gameserver.model.actor.tasks.player.PetFeedTask;
 import com.l2jserver.gameserver.model.actor.tasks.player.PvPFlagTask;
 import com.l2jserver.gameserver.model.actor.tasks.player.RecoBonusTaskEnd;
@@ -267,6 +269,7 @@ import com.l2jserver.gameserver.network.serverpackets.ExFishingStart;
 import com.l2jserver.gameserver.network.serverpackets.ExGetBookMarkInfoPacket;
 import com.l2jserver.gameserver.network.serverpackets.ExGetOnAirShip;
 import com.l2jserver.gameserver.network.serverpackets.ExOlympiadMode;
+import com.l2jserver.gameserver.network.serverpackets.ExPCCafePointInfo;
 import com.l2jserver.gameserver.network.serverpackets.ExPrivateStoreSetWholeMsg;
 import com.l2jserver.gameserver.network.serverpackets.ExSetCompassZoneCode;
 import com.l2jserver.gameserver.network.serverpackets.ExStartScenePlayer;
@@ -644,6 +647,7 @@ public final class L2PcInstance extends L2Playable
 	 */
 	private ClassId _learningClass = getClassId();
 	private ScheduledFuture<?> _taskWarnUserTakeBreak;
+	private ScheduledFuture<?> _pcCafePointsTask;
 	private L2Fish _fish;
 	
 	/**
@@ -13442,5 +13446,55 @@ public final class L2PcInstance extends L2Playable
 		final AccountVariables vars = getAccountVariables();
 		vars.set(AccountVariables.PRIME_POINTS, points);
 		vars.storeMe();
+	}
+	
+	public long getPcCafePoints()
+	{
+		return getVariables().getLong(PlayerVariables.PC_CAFE_POINTS, 0);
+	}
+	
+	public void increasePcCafePoints(final long count)
+	{
+		increasePcCafePoints(count, false);
+	}
+	
+	public void increasePcCafePoints(long count, final boolean doubleAmount)
+	{
+		count = doubleAmount ? count * 2 : count;
+		final long newAmount = Math.min(getVariables().getLong(PlayerVariables.PC_CAFE_POINTS, 0) + count, 200_000);
+		getVariables().set(PlayerVariables.PC_CAFE_POINTS, newAmount);
+		sendPacket(SystemMessage.getSystemMessage(doubleAmount ? SystemMessageId.DOUBLE_POINTS_YOU_ACQUIRED_S1_PC_BANG_POINT : SystemMessageId.YOU_ACQUIRED_S1_PC_BANG_POINT).addLong(count));
+		sendPacket(new ExPCCafePointInfo(newAmount, count, 1, doubleAmount ? PcCafeType.DOUBLE_ADD : PcCafeType.ADD, 12));
+	}
+	
+	public boolean decreasePcCafePoints(final long count)
+	{
+		final long newAmount = Math.max(getVariables().getLong(PlayerVariables.PC_CAFE_POINTS, 0) - count, 0);
+		getVariables().set(PlayerVariables.PC_CAFE_POINTS, newAmount);
+		sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(count));
+		sendPacket(new ExPCCafePointInfo(newAmount, -count, 1, PcCafeType.CONSUME, 12));
+		return true;
+	}
+	
+	public void startPcBangPointsTask()
+	{
+		if (!Config.ALT_PCBANG_POINTS_ENABLED || (Config.ALT_PCBANG_POINTS_DELAY <= 0))
+		{
+			return;
+		}
+		
+		if (_pcCafePointsTask == null)
+		{
+			_pcCafePointsTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new PCCafePointsTask(this), Config.ALT_PCBANG_POINTS_DELAY * 60000L, Config.ALT_PCBANG_POINTS_DELAY * 60000L);
+		}
+	}
+	
+	public void stopPcBangPointsTask()
+	{
+		if (_pcCafePointsTask != null)
+		{
+			_pcCafePointsTask.cancel(false);
+		}
+		_pcCafePointsTask = null;
 	}
 }

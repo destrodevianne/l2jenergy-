@@ -43,6 +43,7 @@ public class PlayerVariables extends AbstractVariables
 	private static final String INSERT_QUERY = "INSERT INTO character_variables (charId, var, val) VALUES (?, ?, ?)";
 	
 	private final int _objectId;
+	public static final String PC_CAFE_POINTS = "PC_POINTS";
 	
 	public PlayerVariables(int objectId)
 	{

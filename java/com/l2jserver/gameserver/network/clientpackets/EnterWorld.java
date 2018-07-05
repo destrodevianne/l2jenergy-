@@ -26,6 +26,7 @@ import com.l2jserver.gameserver.data.sql.impl.AnnouncementsTable;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
+import com.l2jserver.gameserver.enums.PcCafeType;
 import com.l2jserver.gameserver.instancemanager.CHSiegeManager;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.ClanHallManager;
@@ -67,6 +68,7 @@ import com.l2jserver.gameserver.network.serverpackets.ExNevitAdventPointInfoPack
 import com.l2jserver.gameserver.network.serverpackets.ExNevitAdventTimeChange;
 import com.l2jserver.gameserver.network.serverpackets.ExNoticePostArrived;
 import com.l2jserver.gameserver.network.serverpackets.ExNotifyPremiumItem;
+import com.l2jserver.gameserver.network.serverpackets.ExPCCafePointInfo;
 import com.l2jserver.gameserver.network.serverpackets.ExShowContactList;
 import com.l2jserver.gameserver.network.serverpackets.ExShowScreenMessage;
 import com.l2jserver.gameserver.network.serverpackets.ExStorageMaxCount;
@@ -348,6 +350,11 @@ public class EnterWorld extends L2GameClientPacket
 		
 		activeChar.checkRecoBonusTask();
 		
+		if (Config.ALT_PCBANG_POINTS_ENABLED)
+		{
+			activeChar.startPcBangPointsTask();
+		}
+		
 		activeChar.broadcastUserInfo();
 		
 		// Send Macro List
@@ -471,6 +478,7 @@ public class EnterWorld extends L2GameClientPacket
 		sendPacket(new ExVoteSystemInfo(activeChar));
 		sendPacket(new ExNevitAdventPointInfoPacket(0));
 		sendPacket(new ExNevitAdventTimeChange(-1)); // only set pause state...
+		sendPacket(new ExPCCafePointInfo(activeChar.getPcCafePoints(), 0, 1, PcCafeType.NORMAL, 12));
 		sendPacket(new ExShowContactList(activeChar));
 		
 		for (L2ItemInstance item : activeChar.getInventory().getItems())

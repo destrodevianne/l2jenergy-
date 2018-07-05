@@ -30,6 +30,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.enums.PcCafeType;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -39,6 +40,7 @@ import com.l2jserver.gameserver.model.multisell.ListContainer;
 import com.l2jserver.gameserver.model.multisell.PreparedListContainer;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.ExBrExtraUserInfo;
+import com.l2jserver.gameserver.network.serverpackets.ExPCCafePointInfo;
 import com.l2jserver.gameserver.network.serverpackets.MultiSellList;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.network.serverpackets.UserInfo;
@@ -282,6 +284,13 @@ public final class MultisellData implements IXmlReader
 	{
 		switch (id)
 		{
+			case PC_BANG_POINTS:
+				if (player.getPcCafePoints() < amount)
+				{
+					player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.SHORT_OF_ACCUMULATED_POINTS));
+					break;
+				}
+				return true;
 			case CLAN_REPUTATION:
 				if (player.getClan() == null)
 				{
@@ -314,6 +323,14 @@ public final class MultisellData implements IXmlReader
 	{
 		switch (id)
 		{
+			case PC_BANG_POINTS: // PcBang points
+				final long cost = player.getPcCafePoints() - (int) (amount);
+				player.decreasePcCafePoints(cost);
+				SystemMessage smsgpc = SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT);
+				smsgpc.addLong((int) amount);
+				player.sendPacket(smsgpc);
+				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), (int) amount, 1, PcCafeType.CONSUME, 12));
+				return true;
 			case CLAN_REPUTATION:
 				player.getClan().takeReputationScore((int) amount, true);
 				SystemMessage smsg = SystemMessage.getSystemMessage(SystemMessageId.S1_DEDUCTED_FROM_CLAN_REP);
@@ -376,6 +393,7 @@ public final class MultisellData implements IXmlReader
 	{
 		switch (ing.getItemId())
 		{
+			case PC_BANG_POINTS:
 			case CLAN_REPUTATION:
 			case FAME:
 				return true;

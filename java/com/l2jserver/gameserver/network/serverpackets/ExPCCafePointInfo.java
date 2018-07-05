@@ -18,38 +18,29 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
+import com.l2jserver.gameserver.enums.PcCafeType;
+
 /**
  * @author KenM
  * @author UnAfraid
  */
 public class ExPCCafePointInfo extends L2GameServerPacket
 {
-	private final int _points;
-	private final int _mAddPoint;
+	private final long _points;
+	private final long _mAddPoint;
 	private final int _mPeriodType;
 	private final int _remainTime;
-	private final int _pointType;
+	private final PcCafeType _pointType;
 	private final int _time;
 	
-	public ExPCCafePointInfo()
-	{
-		_points = 0;
-		_mAddPoint = 0;
-		_remainTime = 0;
-		_mPeriodType = 0;
-		_pointType = 0;
-		_time = 0;
-	}
-	
-	public ExPCCafePointInfo(int points, int pointsToAdd, int time)
+	public ExPCCafePointInfo(final long points, final long mAddPoint, final int mPeriodType, final PcCafeType pointType, final int remainTime)
 	{
 		_points = points;
-		_mAddPoint = pointsToAdd;
-		_mPeriodType = 1;
-		_remainTime = 42; // No idea why but retail sends 42..
-		_pointType = pointsToAdd < 0 ? 3 : 0; // When using points is 3
-		_time = time;
-		
+		_mAddPoint = mAddPoint;
+		_mPeriodType = mPeriodType;
+		_pointType = pointType;
+		_remainTime = remainTime;
+		_time = 0;
 	}
 	
 	@Override
@@ -57,11 +48,11 @@ public class ExPCCafePointInfo extends L2GameServerPacket
 	{
 		writeC(0xFE);
 		writeH(0x32);
-		writeD(_points); // num points
-		writeD(_mAddPoint); // points inc display
+		writeD((int) _points); // num points
+		writeD((int) _mAddPoint); // points inc display
 		writeC(_mPeriodType); // period(0=don't show window,1=acquisition,2=use points)
 		writeD(_remainTime); // period hours left
-		writeC(_pointType); // points inc display color(0=yellow, 1=cyan-blue, 2=red, all other black)
+		writeC(_pointType.ordinal()); // points inc display color(0=yellow, 1=cyan-blue, 2=red, all other black)
 		writeD(_time * 3); // value is in seconds * 3
 	}
 }

@@ -292,4 +292,41 @@
 	    <set lang="en" val="Admin increase your Prime Point(s) by %s%!" />
 		<set lang="ru" val="Администратор увеличил ваше количество Prime Point(s) на %s%!" />
 	</message>
+	<!-- AdminGamePoints Messages -->
+	<message id="target_already_have_max_count_pc_cafe_point">
+	    <set lang="en" val="%c% already have max count of Pc Cafe Points!" />
+		<set lang="ru" val="Игрок %c% уже имеет максимальное количество Очков Игрового Клуба!" />
+	</message>
+	<message id="target_increase_your_pc_cafe_point">
+	    <set lang="en" val="Admin increase your Pc Cafe Point(s) by %s%!" />
+		<set lang="ru" val="Администратор увеличивает ваши Очки Игрового Клуба на %s%!" />
+	</message>
+	<message id="admin_increased_your_pc_cafe_point">
+	    <set lang="en" val="You increased Pc Cafe Point(s) of %c% by %s%!" />
+		<set lang="ru" val="Вы увеличили Очки Игрового Клуба для %c% на %s%!" />
+	</message>
+	<message id="target_already_have_min_count_pc_cafe_point">
+	    <set lang="en" val="%c% already have min count of Pc Cafe Points!" />
+		<set lang="ru" val="Игрок %c% уже имеет минимальное количество Очков Игрового Клуба!" />
+	</message>
+	<message id="target_decreased_your_pc_cafe_point">
+	    <set lang="en" val="Admin decreased your Pc Cafe Point(s) by %s%!" />
+		<set lang="ru" val="Администратор уменьшил ваше количество Очков Игрового Клуба на %s%!" />
+	</message>
+	<message id="admin_decreased_your_pc_cafe_point">
+	    <set lang="en" val="You decreased Pc Cafe Point(s) of %c% by %s%!" />
+		<set lang="ru" val="Вы уменьшили Очки Игрового Клуба для %c% на %s%!" />
+	</message>
+	<message id="admin_increased_your_pc_cafe_point_all_online">
+	    <set lang="en" val="You increased Pc Cafe Point(s) of all online players %i% by %s%!" />
+		<set lang="ru" val="Вы увеличили Очки Игрового Клуба всех онлайн-игроков %i% на %s%!" />
+	</message>
+	<message id="admin_increased_your_pc_cafe_point_all_players">
+	    <set lang="en" val="You increased Pc Cafe Point(s) of all players %i% in range %r% by %s%!" />
+		<set lang="ru" val="Вы увеличили Очки Игрового Клуба всех игроков %i% в радиусе %r% на %s%!" />
+	</message>
+	<message id="admin_increase_your_pc_cafe_point">
+	    <set lang="en" val="Admin increase your Pc Cafe Point(s) by %s%!" />
+		<set lang="ru" val="Администратор увеличил ваше количество Очков Игрового Клуба на %s%!" />
+	</message>
 </list>

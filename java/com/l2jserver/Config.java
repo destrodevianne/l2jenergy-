@@ -110,6 +110,8 @@ public final class Config
 	public static final String EMAIL_CONFIG_FILE = "./config/Email.properties";
 	public static final String CH_SIEGE_FILE = "./config/ConquerableHallSiege.properties";
 	public static final String GEODATA_FILE = "./config/GeoData.properties";
+	
+	public static final String PC_CAFE_CONFIG_FILE = "config/services/PCCafe.properties";
 	// --------------------------------------------------
 	// L2J Variable Definitions
 	// --------------------------------------------------
@@ -1107,6 +1109,12 @@ public final class Config
 	public static Path GEODATA_PATH;
 	public static boolean TRY_LOAD_UNSPECIFIED_REGIONS;
 	public static Map<String, Boolean> GEODATA_REGIONS;
+	
+	public static boolean ALT_PCBANG_POINTS_ENABLED;
+	public static int ALT_PCBANG_POINTS_BONUS;
+	public static int ALT_PCBANG_POINTS_DELAY;
+	public static int ALT_PCBANG_POINTS_MIN_LVL;
+	public static double ALT_PCBANG_POINTS_BONUS_DOUBLE_CHANCE;
 	
 	/**
 	 * This class initializes all global variables for configuration.<br>
@@ -2705,6 +2713,14 @@ public final class Config
 					}
 				}
 			}
+			
+			final PropertiesParser PCCafeSettings = new PropertiesParser(PC_CAFE_CONFIG_FILE);
+			
+			ALT_PCBANG_POINTS_ENABLED = PCCafeSettings.getBoolean("AltPcBangPointsEnabled", false);
+			ALT_PCBANG_POINTS_BONUS = PCCafeSettings.getInt("AltPcBangPointsBonus", 20);
+			ALT_PCBANG_POINTS_DELAY = PCCafeSettings.getInt("AltPcBangPointsDelay", 20);
+			ALT_PCBANG_POINTS_MIN_LVL = PCCafeSettings.getInt("AltPcBangPointsMinLvl", 1);
+			ALT_PCBANG_POINTS_BONUS_DOUBLE_CHANCE = PCCafeSettings.getDouble("AltPcBangPointsDoubleChance", 10);
 		}
 		else if (Server.serverMode == Server.MODE_LOGINSERVER)
 		{

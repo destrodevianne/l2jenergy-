@@ -9971,19 +9971,19 @@ public final class SystemMessageId
 	 * ID: 1707<br>
 	 * Message: You acquired $s1 PC Point(s).
 	 */
-	public static final SystemMessageId ACQUIRED_S1_PCPOINT = new SystemMessageId(1707);
+	public static final SystemMessageId YOU_ACQUIRED_S1_PC_BANG_POINT = new SystemMessageId(1707);
 	
 	/**
 	 * ID: 1708<br>
 	 * Message: Double points! You acquired $s1 PC Point(s).
 	 */
-	public static final SystemMessageId ACQUIRED_S1_PCPOINT_DOUBLE = new SystemMessageId(1708);
+	public static final SystemMessageId DOUBLE_POINTS_YOU_ACQUIRED_S1_PC_BANG_POINT = new SystemMessageId(1708);
 	
 	/**
 	 * ID: 1709<br>
 	 * Message: You are using $s1 PC Point(s).
 	 */
-	public static final SystemMessageId USING_S1_PCPOINT = new SystemMessageId(1709);
+	public static final SystemMessageId YOU_ARE_USING_S1_POINT = new SystemMessageId(1709);
 	
 	/**
 	 * ID: 1710<br>
