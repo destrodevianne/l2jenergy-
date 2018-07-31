@@ -84,6 +84,15 @@ public class Shutdown extends Thread
 		Broadcast.toAllOnlinePlayers(sysm);
 	}
 	
+	public void autoRestart(int time)
+	{
+		_secondsShut = time;
+		countdown();
+		_shutdownMode = GM_RESTART;
+		_counterInstance.setMode(GM_RESTART);
+		System.exit(2);
+	}
+	
 	public void startTelnetShutdown(String IP, int seconds, boolean restart)
 	{
 		LOG.warn("IP: {} issued shutdown command. {} in {} seconds!", IP, MODE_TEXT[_shutdownMode], seconds);

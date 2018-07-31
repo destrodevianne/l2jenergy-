@@ -34,9 +34,6 @@ public final class ScheduledAutoRestart
 {
 	private static final Logger LOG = LoggerFactory.getLogger(ScheduledAutoRestart.class);
 	
-	protected static final String TASK_NAME = ScheduledAutoRestart.class.getSimpleName();
-	private static final int SECONDS_SHUT = 120;
-	
 	public static void main(String[] args)
 	{
 		Calendar now = Calendar.getInstance();
@@ -45,7 +42,7 @@ public final class ScheduledAutoRestart
 		{
 			LOG.info("The scheduled auto restart is starting.");
 			Broadcast.toAllOnlinePlayers("The scheduled auto restart is starting.");
-			Shutdown.getInstance().startTelnetShutdown(TASK_NAME, SECONDS_SHUT, true);
+			Shutdown.getInstance().autoRestart(120);
 		}
 	}
 }
