@@ -9,4 +9,5 @@ CREATE TABLE IF NOT EXISTS `global_tasks` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `global_tasks` VALUES ('101', 'script', 'TYPE_GLOBAL_TASK', '0', '1', '04:00:00', 'ScheduledAutoCleanCharacters.java'); 
+INSERT INTO `global_tasks` VALUES ('101', 'script', 'TYPE_GLOBAL_TASK', '0', '1', '04:00:00', 'ScheduledAutoCleanCharacters.java');
+INSERT INTO `global_tasks` VALUES ('201', 'script', 'TYPE_GLOBAL_TASK', '0', '1', '04:00:00', 'ScheduledAutoRestart.java');
