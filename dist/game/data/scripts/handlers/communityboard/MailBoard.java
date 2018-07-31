@@ -45,7 +45,7 @@ public class MailBoard implements IWriteBoardHandler
 	{
 		CommunityBoardHandler.getInstance().addBypass(activeChar, "Mail Command", command);
 		
-		final String html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/mail.html");
+		final String html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/bbs_mail_list.html");
 		CommunityBoardHandler.separateAndSend(html, activeChar);
 		return true;
 	}

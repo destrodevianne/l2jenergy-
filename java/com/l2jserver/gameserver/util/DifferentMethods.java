@@ -18,7 +18,10 @@
  */
 package com.l2jserver.gameserver.util;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -91,5 +94,17 @@ public class DifferentMethods
 		final long minutes = TimeUnit.MILLISECONDS.toMinutes(time);
 		
 		return days + " Days, " + hours + " Hours, " + minutes + " Minutes";
+	}
+	
+	private static final DateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm");
+	
+	public static String time()
+	{
+		return TIME_FORMAT.format(new Date(System.currentTimeMillis()));
+	}
+	
+	public static String time(long time)
+	{
+		return TIME_FORMAT.format(new Date(time * 1000));
 	}
 }

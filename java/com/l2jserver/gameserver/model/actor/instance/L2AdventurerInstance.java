@@ -18,6 +18,7 @@
  */
 package com.l2jserver.gameserver.model.actor.instance;
 
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.model.actor.templates.L2NpcTemplate;
 
@@ -48,6 +49,10 @@ public class L2AdventurerInstance extends L2NpcInstance
 			pom = npcId + "-" + val;
 		}
 		
+		if (Config.ALT_PCBANG_POINTS_ENABLED)
+		{
+			return "data/html/adventurer_guildsman/" + pom + "-pcbangpoint.htm";
+		}
 		return "data/html/adventurer_guildsman/" + pom + ".htm";
 	}
 }

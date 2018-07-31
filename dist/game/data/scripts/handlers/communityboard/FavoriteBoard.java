@@ -61,7 +61,7 @@ public class FavoriteBoard implements IParseBoardHandler
 		if (command.startsWith("_bbsgetfav"))
 		{
 			// Load Favorite links
-			final String list = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/favorite_list.html");
+			final String list = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/bbs_favoritetpl.html");
 			final StringBuilder sb = new StringBuilder();
 			try (Connection con = ConnectionFactory.getInstance().getConnection();
 				PreparedStatement ps = con.prepareStatement(SELECT_FAVORITES))
@@ -79,7 +79,7 @@ public class FavoriteBoard implements IParseBoardHandler
 						sb.append(link);
 					}
 				}
-				String html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/favorite.html");
+				String html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/bbs_getfavorite.html");
 				html = html.replaceAll("%fav_list%", sb.toString());
 				CommunityBoardHandler.separateAndSend(html, activeChar);
 			}

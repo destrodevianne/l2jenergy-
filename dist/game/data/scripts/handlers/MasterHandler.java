@@ -182,6 +182,8 @@ import handlers.communityboard.HomepageBoard;
 import handlers.communityboard.MailBoard;
 import handlers.communityboard.MemoBoard;
 import handlers.communityboard.RegionBoard;
+import handlers.communityboard.SellBoard;
+import handlers.communityboard.ShopBoard;
 import handlers.custom.CustomAnnouncePkPvP;
 import handlers.itemhandlers.BeastSoulShot;
 import handlers.itemhandlers.BeastSpiritShot;
@@ -470,6 +472,8 @@ public class MasterHandler
 			MailBoard.class,
 			MemoBoard.class,
 			RegionBoard.class,
+			SellBoard.class,
+			ShopBoard.class,
 		},
 		{
 			// Item Handlers

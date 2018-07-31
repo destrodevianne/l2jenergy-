@@ -48,7 +48,7 @@ public class FriendsBoard implements IParseBoardHandler
 		{
 			CommunityBoardHandler.getInstance().addBypass(activeChar, "Friends List", command);
 			
-			final String html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/friends_list.html");
+			final String html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/bbs_friend_list.html");
 			
 			CommunityBoardHandler.separateAndSend(html, activeChar);
 		}
@@ -56,7 +56,7 @@ public class FriendsBoard implements IParseBoardHandler
 		{
 			CommunityBoardHandler.getInstance().addBypass(activeChar, "Ignore list", command);
 			
-			final String html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/friends_block_list.html");
+			final String html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/bbs_block_list.html");
 			
 			CommunityBoardHandler.separateAndSend(html, activeChar);
 		}

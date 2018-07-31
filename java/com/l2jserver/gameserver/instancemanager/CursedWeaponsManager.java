@@ -18,7 +18,6 @@
  */
 package com.l2jserver.gameserver.instancemanager;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,10 +27,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -54,15 +49,13 @@ import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.util.Broadcast;
+import com.l2jserver.util.data.xml.IXmlReader;
 
 /**
- * UnAfraid: TODO: Rewrite with DocumentParser
  * @author Micht
  */
-public final class CursedWeaponsManager
+public final class CursedWeaponsManager implements IXmlReader
 {
-	private static final Logger _log = Logger.getLogger(CursedWeaponsManager.class.getName());
-	
 	private Map<Integer, CursedWeapon> _cursedWeapons;
 	
 	protected CursedWeaponsManager()
@@ -82,7 +75,7 @@ public final class CursedWeaponsManager
 		load();
 		restore();
 		controlPlayers();
-		_log.info(getClass().getSimpleName() + ": Loaded : " + _cursedWeapons.size() + " cursed weapon(s).");
+		
 	}
 	
 	public final void reload()
@@ -90,85 +83,71 @@ public final class CursedWeaponsManager
 		init();
 	}
 	
-	private final void load()
+	@Override
+	public void load()
 	{
-		try
+		_cursedWeapons.clear();
+		parseDatapackFile("data/cursedWeapons.xml");
+		LOG.info("{}: Loaded: {} cursed weapon(s).", getClass().getSimpleName(), _cursedWeapons.size());
+	}
+	
+	@Override
+	public void parseDocument(Document doc)
+	{
+		for (Node n = doc.getFirstChild(); n != null; n = n.getNextSibling())
 		{
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			factory.setValidating(false);
-			factory.setIgnoringComments(true);
-			
-			File file = new File(Config.DATAPACK_ROOT + "/data/cursedWeapons.xml");
-			if (!file.exists())
+			if ("list".equalsIgnoreCase(n.getNodeName()))
 			{
-				_log.log(Level.WARNING, getClass().getSimpleName() + ": Couldn't find data/" + file.getName());
-				return;
-			}
-			
-			Document doc = factory.newDocumentBuilder().parse(file);
-			
-			for (Node n = doc.getFirstChild(); n != null; n = n.getNextSibling())
-			{
-				if ("list".equalsIgnoreCase(n.getNodeName()))
+				for (Node d = n.getFirstChild(); d != null; d = d.getNextSibling())
 				{
-					for (Node d = n.getFirstChild(); d != null; d = d.getNextSibling())
+					if ("item".equalsIgnoreCase(d.getNodeName()))
 					{
-						if ("item".equalsIgnoreCase(d.getNodeName()))
+						NamedNodeMap attrs = d.getAttributes();
+						int id = Integer.parseInt(attrs.getNamedItem("id").getNodeValue());
+						int skillId = Integer.parseInt(attrs.getNamedItem("skillId").getNodeValue());
+						String name = attrs.getNamedItem("name").getNodeValue();
+						
+						CursedWeapon cw = new CursedWeapon(id, skillId, name);
+						
+						int val;
+						for (Node cd = d.getFirstChild(); cd != null; cd = cd.getNextSibling())
 						{
-							NamedNodeMap attrs = d.getAttributes();
-							int id = Integer.parseInt(attrs.getNamedItem("id").getNodeValue());
-							int skillId = Integer.parseInt(attrs.getNamedItem("skillId").getNodeValue());
-							String name = attrs.getNamedItem("name").getNodeValue();
-							
-							CursedWeapon cw = new CursedWeapon(id, skillId, name);
-							
-							int val;
-							for (Node cd = d.getFirstChild(); cd != null; cd = cd.getNextSibling())
+							if ("dropRate".equalsIgnoreCase(cd.getNodeName()))
 							{
-								if ("dropRate".equalsIgnoreCase(cd.getNodeName()))
-								{
-									attrs = cd.getAttributes();
-									val = Integer.parseInt(attrs.getNamedItem("val").getNodeValue());
-									cw.setDropRate(val);
-								}
-								else if ("duration".equalsIgnoreCase(cd.getNodeName()))
-								{
-									attrs = cd.getAttributes();
-									val = Integer.parseInt(attrs.getNamedItem("val").getNodeValue());
-									cw.setDuration(val);
-								}
-								else if ("durationLost".equalsIgnoreCase(cd.getNodeName()))
-								{
-									attrs = cd.getAttributes();
-									val = Integer.parseInt(attrs.getNamedItem("val").getNodeValue());
-									cw.setDurationLost(val);
-								}
-								else if ("disapearChance".equalsIgnoreCase(cd.getNodeName()))
-								{
-									attrs = cd.getAttributes();
-									val = Integer.parseInt(attrs.getNamedItem("val").getNodeValue());
-									cw.setDisapearChance(val);
-								}
-								else if ("stageKills".equalsIgnoreCase(cd.getNodeName()))
-								{
-									attrs = cd.getAttributes();
-									val = Integer.parseInt(attrs.getNamedItem("val").getNodeValue());
-									cw.setStageKills(val);
-								}
+								attrs = cd.getAttributes();
+								val = Integer.parseInt(attrs.getNamedItem("val").getNodeValue());
+								cw.setDropRate(val);
 							}
-							
-							// Store cursed weapon
-							_cursedWeapons.put(id, cw);
+							else if ("duration".equalsIgnoreCase(cd.getNodeName()))
+							{
+								attrs = cd.getAttributes();
+								val = Integer.parseInt(attrs.getNamedItem("val").getNodeValue());
+								cw.setDuration(val);
+							}
+							else if ("durationLost".equalsIgnoreCase(cd.getNodeName()))
+							{
+								attrs = cd.getAttributes();
+								val = Integer.parseInt(attrs.getNamedItem("val").getNodeValue());
+								cw.setDurationLost(val);
+							}
+							else if ("disapearChance".equalsIgnoreCase(cd.getNodeName()))
+							{
+								attrs = cd.getAttributes();
+								val = Integer.parseInt(attrs.getNamedItem("val").getNodeValue());
+								cw.setDisapearChance(val);
+							}
+							else if ("stageKills".equalsIgnoreCase(cd.getNodeName()))
+							{
+								attrs = cd.getAttributes();
+								val = Integer.parseInt(attrs.getNamedItem("val").getNodeValue());
+								cw.setStageKills(val);
+							}
 						}
+						// Store cursed weapon
+						_cursedWeapons.put(id, cw);
 					}
 				}
 			}
-		}
-		catch (Exception e)
-		{
-			_log.log(Level.SEVERE, "Error parsing cursed weapons file.", e);
-			
-			return;
 		}
 	}
 	
@@ -193,7 +172,7 @@ public final class CursedWeaponsManager
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Could not restore CursedWeapons data: " + e.getMessage(), e);
+			LOG.warn("Could not restore CursedWeapons data: ", e);
 		}
 	}
 	
@@ -226,7 +205,7 @@ public final class CursedWeaponsManager
 					{
 						// A player has the cursed weapon in his inventory ...
 						int playerId = rset.getInt("owner_id");
-						_log.info("PROBLEM : Player " + playerId + " owns the cursed weapon " + itemId + " but he shouldn't.");
+						LOG.info("PROBLEM : Player {} owns the cursed weapon {} but he shouldn't.", playerId, itemId);
 						
 						// Delete the item
 						try (PreparedStatement delete = con.prepareStatement("DELETE FROM items WHERE owner_id=? AND item_id=?"))
@@ -235,7 +214,7 @@ public final class CursedWeaponsManager
 							delete.setInt(2, itemId);
 							if (delete.executeUpdate() != 1)
 							{
-								_log.warning("Error while deleting cursed weapon " + itemId + " from userId " + playerId);
+								LOG.warn("Error while deleting cursed weapon {} from userId {}", itemId, playerId);
 							}
 						}
 						
@@ -247,7 +226,7 @@ public final class CursedWeaponsManager
 							update.setInt(3, playerId);
 							if (update.executeUpdate() != 1)
 							{
-								_log.warning("Error while updating karma & pkkills for userId " + cw.getPlayerId());
+								LOG.warn("Error while updating karma & pkkills for userId {}", cw.getPlayerId());
 							}
 						}
 						// clean up the cursed weapons table.
@@ -259,7 +238,7 @@ public final class CursedWeaponsManager
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Could not check CursedWeapons data: " + e.getMessage(), e);
+			LOG.warn("Could not check CursedWeapons data: ", e);
 		}
 	}
 	
@@ -387,7 +366,7 @@ public final class CursedWeaponsManager
 		}
 		catch (SQLException e)
 		{
-			_log.log(Level.SEVERE, "CursedWeaponsManager: Failed to remove data: " + e.getMessage(), e);
+			LOG.error("CursedWeaponsManager: Failed to remove data: ", e);
 		}
 	}
 	

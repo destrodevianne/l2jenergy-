@@ -111,6 +111,7 @@ public final class Config
 	public static final String CH_SIEGE_FILE = "./config/ConquerableHallSiege.properties";
 	public static final String GEODATA_FILE = "./config/GeoData.properties";
 	
+	public static final String COMMUNITY_BOARD_CONFIG_FILE = "config/services/CommunityBoard.properties";
 	public static final String PC_CAFE_CONFIG_FILE = "config/services/PCCafe.properties";
 	// --------------------------------------------------
 	// L2J Variable Definitions
@@ -547,8 +548,6 @@ public final class Config
 	public static boolean ALLOW_MANOR;
 	public static boolean ALLOW_PET_WALKERS;
 	public static boolean SERVER_NEWS;
-	public static boolean ENABLE_COMMUNITY_BOARD;
-	public static String BBS_DEFAULT;
 	public static boolean USE_SAY_FILTER;
 	public static String CHAT_FILTER_CHARS;
 	public static int[] BAN_CHAT_CHANNELS;
@@ -1110,7 +1109,12 @@ public final class Config
 	public static boolean TRY_LOAD_UNSPECIFIED_REGIONS;
 	public static Map<String, Boolean> GEODATA_REGIONS;
 	
+	public static boolean ENABLE_COMMUNITY_BOARD;
+	public static String BBS_DEFAULT;
+	public static boolean CUSTOM_CB_ENABLED;
+	
 	public static boolean ALT_PCBANG_POINTS_ENABLED;
+	public static int MAX_PC_BANG_POINTS;
 	public static int ALT_PCBANG_POINTS_BONUS;
 	public static int ALT_PCBANG_POINTS_DELAY;
 	public static int ALT_PCBANG_POINTS_MIN_LVL;
@@ -1848,8 +1852,6 @@ public final class Config
 			ALLOW_CURSED_WEAPONS = General.getBoolean("AllowCursedWeapons", true);
 			ALLOW_PET_WALKERS = General.getBoolean("AllowPetWalkers", true);
 			SERVER_NEWS = General.getBoolean("ShowServerNews", false);
-			ENABLE_COMMUNITY_BOARD = General.getBoolean("EnableCommunityBoard", true);
-			BBS_DEFAULT = General.getString("BBSDefault", "_bbshome");
 			USE_SAY_FILTER = General.getBoolean("UseChatFilter", false);
 			CHAT_FILTER_CHARS = General.getString("ChatFilterChars", "^_^");
 			String[] propertySplit4 = General.getString("BanChatChannels", "0;1;8;17").trim().split(";");
@@ -2714,9 +2716,20 @@ public final class Config
 				}
 			}
 			
+			final PropertiesParser CommunityBoardSettings = new PropertiesParser(COMMUNITY_BOARD_CONFIG_FILE);
+			
+			ENABLE_COMMUNITY_BOARD = CommunityBoardSettings.getBoolean("EnableCommunityBoard", true);
+			BBS_DEFAULT = CommunityBoardSettings.getString("BBSDefault", "_bbshome");
+			CUSTOM_CB_ENABLED = CommunityBoardSettings.getBoolean("CustomCommunityBoard", false);
+			
 			final PropertiesParser PCCafeSettings = new PropertiesParser(PC_CAFE_CONFIG_FILE);
 			
 			ALT_PCBANG_POINTS_ENABLED = PCCafeSettings.getBoolean("AltPcBangPointsEnabled", false);
+			MAX_PC_BANG_POINTS = PCCafeSettings.getInt("AltPcBangPointsMax", 200000);
+			if (MAX_PC_BANG_POINTS < 0)
+			{
+				MAX_PC_BANG_POINTS = 0;
+			}
 			ALT_PCBANG_POINTS_BONUS = PCCafeSettings.getInt("AltPcBangPointsBonus", 20);
 			ALT_PCBANG_POINTS_DELAY = PCCafeSettings.getInt("AltPcBangPointsDelay", 20);
 			ALT_PCBANG_POINTS_MIN_LVL = PCCafeSettings.getInt("AltPcBangPointsMinLvl", 1);

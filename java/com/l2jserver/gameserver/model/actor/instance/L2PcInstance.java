@@ -13448,32 +13448,31 @@ public final class L2PcInstance extends L2Playable
 		vars.storeMe();
 	}
 	
-	public long getPcCafePoints()
+	public int getPcCafePoints()
 	{
-		return getVariables().getLong(PlayerVariables.PC_CAFE_POINTS, 0);
+		return getVariables().getInt(PlayerVariables.PC_CAFE_POINTS, 0);
 	}
 	
-	public void increasePcCafePoints(final long count)
+	public void increasePcCafePoints(final int count)
 	{
 		increasePcCafePoints(count, false);
 	}
 	
-	public void increasePcCafePoints(long count, final boolean doubleAmount)
+	public void increasePcCafePoints(int count, final boolean doubleAmount)
 	{
 		count = doubleAmount ? count * 2 : count;
-		final long newAmount = Math.min(getVariables().getLong(PlayerVariables.PC_CAFE_POINTS, 0) + count, 200_000);
+		final int newAmount = Math.min(getVariables().getInt(PlayerVariables.PC_CAFE_POINTS, 0) + count, Config.MAX_PC_BANG_POINTS);
 		getVariables().set(PlayerVariables.PC_CAFE_POINTS, newAmount);
 		sendPacket(SystemMessage.getSystemMessage(doubleAmount ? SystemMessageId.DOUBLE_POINTS_YOU_ACQUIRED_S1_PC_BANG_POINT : SystemMessageId.YOU_ACQUIRED_S1_PC_BANG_POINT).addLong(count));
 		sendPacket(new ExPCCafePointInfo(newAmount, count, 1, doubleAmount ? PcCafeType.DOUBLE_ADD : PcCafeType.ADD, 12));
 	}
 	
-	public boolean decreasePcCafePoints(final long count)
+	public void decreasePcCafePoints(final int count)
 	{
-		final long newAmount = Math.max(getVariables().getLong(PlayerVariables.PC_CAFE_POINTS, 0) - count, 0);
+		final int newAmount = Math.max(getVariables().getInt(PlayerVariables.PC_CAFE_POINTS, 0) - count, 0);
 		getVariables().set(PlayerVariables.PC_CAFE_POINTS, newAmount);
 		sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(count));
 		sendPacket(new ExPCCafePointInfo(newAmount, -count, 1, PcCafeType.CONSUME, 12));
-		return true;
 	}
 	
 	public void startPcBangPointsTask()

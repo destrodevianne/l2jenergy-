@@ -58,7 +58,7 @@ public class RegionBoard implements IWriteBoardHandler
 		{
 			CommunityBoardHandler.getInstance().addBypass(activeChar, "Region", command);
 			
-			final String list = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/region_list.html");
+			final String list = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/bbs_regiontpl.html");
 			final StringBuilder sb = new StringBuilder();
 			final List<Castle> castles = CastleManager.getInstance().getCastles();
 			for (int i = 0; i < REGIONS.length; i++)
@@ -73,7 +73,7 @@ public class RegionBoard implements IWriteBoardHandler
 				sb.append(link);
 			}
 			
-			String html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/region.html");
+			String html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/bbs_region_list.html");
 			html = html.replace("%region_list%", sb.toString());
 			CommunityBoardHandler.separateAndSend(html, activeChar);
 		}
