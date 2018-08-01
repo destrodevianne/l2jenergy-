@@ -23,7 +23,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
@@ -173,7 +175,7 @@ public class RecipeController
 	
 	private static class RecipeItemMaker implements Runnable
 	{
-		private static final Logger _log = Logger.getLogger(RecipeItemMaker.class.getName());
+		private static final Logger LOG = LoggerFactory.getLogger(RecipeItemMaker.class);
 		protected boolean _isValid;
 		protected List<TempItem> _items = null;
 		protected final L2RecipeList _recipeList;
@@ -309,14 +311,14 @@ public class RecipeController
 			
 			if ((_player == null) || (_target == null))
 			{
-				_log.warning("player or target == null (disconnected?), aborting" + _target + _player);
+				LOG.warn("player or target == null (disconnected?), aborting {} {}", _target, _player);
 				abort();
 				return;
 			}
 			
 			if (!_player.isOnline() || !_target.isOnline())
 			{
-				_log.warning("player or target is not online, aborting " + _target + _player);
+				LOG.warn("player or target is not online, aborting {} {}", _target, _player);
 				abort();
 				return;
 			}

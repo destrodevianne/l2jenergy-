@@ -22,15 +22,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 
 public class PetNameTable
 {
-	private static Logger LOGGER = Logger.getLogger(PetNameTable.class.getName());
+	private static Logger LOG = LoggerFactory.getLogger(PetNameTable.class);
 	
 	public static PetNameTable getInstance()
 	{
@@ -50,7 +51,7 @@ public class PetNameTable
 		}
 		catch (SQLException e)
 		{
-			LOGGER.log(Level.WARNING, getClass().getSimpleName() + ": Could not check existing petname:" + e.getMessage(), e);
+			LOG.warn("{}: Could not check existing petname!", getClass().getSimpleName(), e);
 		}
 		return false;
 	}

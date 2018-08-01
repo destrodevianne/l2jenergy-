@@ -24,8 +24,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.model.L2Territory;
@@ -36,7 +37,7 @@ import com.l2jserver.gameserver.model.Location;
  */
 public class TerritoryTable
 {
-	private static final Logger LOGGER = Logger.getLogger(TerritoryTable.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(TerritoryTable.class);
 	
 	private static final Map<Integer, L2Territory> _territory = new HashMap<>();
 	
@@ -89,11 +90,11 @@ public class TerritoryTable
 				}
 				terr.add(rset.getInt("loc_x"), rset.getInt("loc_y"), rset.getInt("loc_zmin"), rset.getInt("loc_zmax"), rset.getInt("proc"));
 			}
-			LOGGER.info("TerritoryTable: Loaded " + _territory.size() + " territories from database.");
+			LOG.info("{}: Loaded {} territories from database.", getClass().getSimpleName(), _territory.size());
 		}
 		catch (SQLException e)
 		{
-			LOGGER.log(Level.SEVERE, "TerritoryTable: Failed to load territories from database!", e);
+			LOG.error("{}: Failed to load territories from database!", getClass().getSimpleName(), e);
 		}
 	}
 	

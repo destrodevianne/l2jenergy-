@@ -27,8 +27,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
@@ -68,7 +69,8 @@ import com.l2jserver.util.EnumIntBitmask;
  */
 public class ClanTable
 {
-	private static final Logger _log = Logger.getLogger(ClanTable.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(ClanTable.class);
+	
 	public static final int CLAN_NAME_MAX_LENGHT = 16;
 	
 	private final Map<Integer, L2Clan> _clans = new ConcurrentHashMap<>();
@@ -102,9 +104,9 @@ public class ClanTable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.SEVERE, "Error restoring ClanTable.", e);
+			LOG.error("Error restoring ClanTable.", e);
 		}
-		_log.info(getClass().getSimpleName() + ": Restored " + clanCount + " clans from the database.");
+		LOG.info("{}: Restored {} clans from the database.", getClass().getSimpleName(), clanCount);
 		allianceCheck();
 		restorewars();
 	}
@@ -156,7 +158,7 @@ public class ClanTable
 		
 		if (Config.DEBUG)
 		{
-			_log.info(getClass().getSimpleName() + ": " + player.getObjectId() + "(" + player.getName() + ") requested a clan creation.");
+			LOG.debug("{}: {}({}) requested a clan creation.", getClass().getSimpleName(), player.getObjectId(), player.getName());
 		}
 		
 		if (10 > player.getLevel())
@@ -350,7 +352,7 @@ public class ClanTable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.SEVERE, getClass().getSimpleName() + ": Error removing clan from DB.", e);
+			LOG.error("{}: Error removing clan from DB.", getClass().getSimpleName(), e);
 		}
 		
 		// Notify to scripts
@@ -406,7 +408,7 @@ public class ClanTable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.SEVERE, getClass().getSimpleName() + ": Error storing clan wars data.", e);
+			LOG.error("{}: Error storing clan wars data.", getClass().getSimpleName(), e);
 		}
 		
 		// SystemMessage msg = SystemMessage.getSystemMessage(SystemMessageId.WAR_WITH_THE_S1_CLAN_HAS_BEGUN);
@@ -444,7 +446,7 @@ public class ClanTable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.SEVERE, getClass().getSimpleName() + ": Error removing clan wars data.", e);
+			LOG.error("{}: Error removing clan wars data.", getClass().getSimpleName(), e);
 		}
 		
 		// SystemMessage msg = SystemMessage.getSystemMessage(SystemMessageId.WAR_WITH_THE_S1_CLAN_HAS_ENDED);
@@ -492,13 +494,13 @@ public class ClanTable
 				}
 				else
 				{
-					_log.log(Level.WARNING, getClass().getSimpleName() + ": restorewars one of clans is null clan1:" + clan1 + " clan2:" + clan2);
+					LOG.warn("{}: restorewars one of clans is null clan1:{} clan2:{}", getClass().getSimpleName(), clan1, clan2);
 				}
 			}
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.SEVERE, getClass().getSimpleName() + ": Error restoring clan wars data.", e);
+			LOG.error("{}: Error restoring clan wars data.", getClass().getSimpleName(), e);
 		}
 	}
 	
@@ -518,7 +520,7 @@ public class ClanTable
 					clan.setAllyName(null);
 					clan.changeAllyCrest(0, true);
 					clan.updateClanInDB();
-					_log.info(getClass().getSimpleName() + ": Removed alliance from clan: " + clan);
+					LOG.info("{}: Removed alliance from clan: {}", getClass().getSimpleName(), clan);
 				}
 			}
 		}

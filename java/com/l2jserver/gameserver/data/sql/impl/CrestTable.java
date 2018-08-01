@@ -30,8 +30,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
@@ -46,7 +47,7 @@ import com.l2jserver.util.file.filter.BMPFilter;
  */
 public final class CrestTable
 {
-	private static final Logger LOGGER = Logger.getLogger(CrestTable.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(CrestTable.class);
 	
 	private final Map<Integer, L2Crest> _crests = new ConcurrentHashMap<>();
 	private final AtomicInteger _nextId = new AtomicInteger(1);
@@ -107,19 +108,19 @@ public final class CrestTable
 				}
 				else
 				{
-					LOGGER.warning("Unknown crest type found in database. Type:" + rs.getInt("type"));
+					LOG.warn("Unknown crest type found in database. Type:{}", rs.getInt("type"));
 				}
 			}
 			
 		}
 		catch (SQLException e)
 		{
-			LOGGER.log(Level.WARNING, "There was an error while loading crests from database:", e);
+			LOG.warn("There was an error while loading crests from database:", e);
 		}
 		
 		moveOldCrestsToDb(crestsInUse);
 		
-		LOGGER.info(getClass().getSimpleName() + ": Loaded " + _crests.size() + " Crests.");
+		LOG.info("{}: Loaded {} Crests.", getClass().getSimpleName(), _crests.size());
 		
 		for (L2Clan clan : ClanTable.getInstance().getClans())
 		{
@@ -127,7 +128,7 @@ public final class CrestTable
 			{
 				if (getCrest(clan.getCrestId()) == null)
 				{
-					LOGGER.info("Removing non-existent crest for clan " + clan.getName() + " [" + clan.getId() + "], crestId:" + clan.getCrestId());
+					LOG.info("Removing non-existent crest for clan {} [{}], crestId: {}", clan.getName(), clan.getId(), clan.getCrestId());
 					clan.setCrestId(0);
 					clan.changeClanCrest(0);
 				}
@@ -137,7 +138,7 @@ public final class CrestTable
 			{
 				if (getCrest(clan.getCrestLargeId()) == null)
 				{
-					LOGGER.info("Removing non-existent large crest for clan " + clan.getName() + " [" + clan.getId() + "], crestLargeId:" + clan.getCrestLargeId());
+					LOG.info("Removing non-existent large crest for clan {} [{}], crestLargeId: {}", clan.getName(), clan.getId(), clan.getCrestLargeId());
 					clan.setCrestLargeId(0);
 					clan.changeLargeCrest(0);
 				}
@@ -147,7 +148,7 @@ public final class CrestTable
 			{
 				if (getCrest(clan.getAllyCrestId()) == null)
 				{
-					LOGGER.info("Removing non-existent ally crest for clan " + clan.getName() + " [" + clan.getId() + "], allyCrestId:" + clan.getAllyCrestId());
+					LOG.info("Removing non-existent ally crest for clan {} [{}], allyCrestId: {}", clan.getName(), clan.getId(), clan.getAllyCrestId());
 					clan.setAllyCrestId(0);
 					clan.changeAllyCrest(0, true);
 				}
@@ -237,7 +238,7 @@ public final class CrestTable
 				}
 				catch (Exception e)
 				{
-					LOGGER.log(Level.WARNING, "There was an error while moving crest file " + file.getName() + " to database:", e);
+					LOG.warn("There was an error while moving crest file {} to database!", file.getName(), e);
 				}
 			}
 			crestDir.delete();
@@ -274,7 +275,7 @@ public final class CrestTable
 		}
 		catch (SQLException e)
 		{
-			LOGGER.log(Level.WARNING, "There was an error while saving crest in database:", e);
+			LOG.warn("There was an error while saving crest in database!", e);
 		}
 		return null;
 	}
@@ -302,7 +303,7 @@ public final class CrestTable
 		}
 		catch (SQLException e)
 		{
-			LOGGER.log(Level.WARNING, "There was an error while deleting crest from database:", e);
+			LOG.warn("There was an error while deleting crest from database!", e);
 		}
 	}
 	
