@@ -129,26 +129,6 @@
         <set lang="en" val="Only the castle lord can pickup mercenaries." />
 		<set lang="ru" val="Только Лорд замка может набирать наемников." />
     </message>
-    <message id="password_no_repeated">
-        <set lang="en" val="The new password doesn't match with the repeated one!" />
-		<set lang="ru" val="Новый пароль не совпадает с повторным!" />
-    </message>
-    <message id="password_shorter">
-	    <set lang="en" val="The new password is shorter than 3 chars! Please try with a longer one." />
-		<set lang="ru" val="Новый пароль короче 3 символов! Попробуйте более длинный." />
-	</message>
-	<message id="password_longer">
-	    <set lang="en" val="The new password is longer than 30 chars! Please try with a shorter one." />
-		<set lang="ru" val="Новый пароль длиннее 30 символов! Попробуйте более короткий вариант." />
-	</message>
-	<message id="password_invalid">
-        <set lang="en" val="Invalid password data! You have to fill all boxes." />
-		<set lang="ru" val="Неверные данные пароля! Вы должны заполнить все поля." />
-	</message>
-    <message id="password_problem">
-        <set lang="en" val="A problem occured while changing password!" />
-		<set lang="ru" val="При смене пароля возникла проблема!" />
-    </message>
     <message id="no_hero_speak">
         <set lang="en" val="Action failed. Heroes are only able to speak in the global channel once every 10 seconds." />
 		<set lang="ru" val="Действие не выполнено. Герои могут говорить только в глобальном чате каждые 10 секунд." />

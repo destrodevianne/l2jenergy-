@@ -18,7 +18,9 @@
  */
 package handlers.voicedcommandhandlers;
 
+import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
 import com.l2jserver.gameserver.LoginServerThread;
@@ -33,6 +35,9 @@ import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
  */
 public class ChangePassword implements IVoicedCommandHandler
 {
+	private static final Map<Integer, Long> REUSES = new ConcurrentHashMap<>();
+	private static final int REUSE = 30 * 60 * 1000; // 30 Min
+	
 	private static final String[] _voicedCommands =
 	{
 		"changepassword"
@@ -77,7 +82,13 @@ public class ChangePassword implements IVoicedCommandHandler
 						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "password_longer"));
 						return false;
 					}
-					
+					final Long timeStamp = REUSES.get(activeChar.getObjectId());
+					if ((timeStamp != null) && ((System.currentTimeMillis() - REUSE) < timeStamp.longValue()))
+					{
+						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "new_password_cannot_change_password_often"));
+						return false;
+					}
+					REUSES.put(activeChar.getObjectId(), System.currentTimeMillis());
 					LoginServerThread.getInstance().sendChangePassword(activeChar.getAccountName(), activeChar.getName(), curpass, newpass);
 				}
 				else
