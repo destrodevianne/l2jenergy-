@@ -169,6 +169,12 @@ public final class CommunityBoardHandler implements IHandler<IParseBoardHandler,
 				cmd = "_bbsclan";
 				break;
 			}
+			case "Mail":
+			{
+				cmd = "_maillist_0_1_0_";
+				break;
+			}
+			
 			default:
 			{
 				separateAndSend("<html><body><br><br><center>The command: " + url + " is not implemented yet.</center><br><br></body></html>", player);
@@ -188,7 +194,7 @@ public final class CommunityBoardHandler implements IHandler<IParseBoardHandler,
 			LOG.warning(CommunityBoardHandler.class.getSimpleName() + ": " + cb.getClass().getSimpleName() + " doesn't implement write!");
 			return;
 		}
-		((IWriteBoardHandler) cb).writeCommunityBoardCommand(player, arg1, arg2, arg3, arg4, arg5);
+		((IWriteBoardHandler) cb).writeCommunityBoardCommand(player, url, arg1, arg2, arg3, arg4, arg5);
 	}
 	
 	/**

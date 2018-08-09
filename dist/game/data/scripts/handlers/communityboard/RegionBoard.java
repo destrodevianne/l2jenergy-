@@ -19,6 +19,7 @@
 package handlers.communityboard;
 
 import java.util.List;
+import java.util.StringTokenizer;
 
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
@@ -42,7 +43,9 @@ public class RegionBoard implements IWriteBoardHandler
 	// @formatter:on
 	private static final String[] COMMANDS =
 	{
-		"_bbsloc"
+		"_bbsloc",
+		"_bbsregsearch",
+		"_bbsreglist_"
 	};
 	
 	@Override
@@ -54,7 +57,10 @@ public class RegionBoard implements IWriteBoardHandler
 	@Override
 	public boolean parseCommunityBoardCommand(String command, L2PcInstance activeChar)
 	{
-		if (command.equals("_bbsloc"))
+		StringTokenizer st = new StringTokenizer(command, "_");
+		String cmd = st.nextToken();
+		activeChar.setSessionVar("add_fav", null);
+		if ("bbsloc".equals(cmd))
 		{
 			CommunityBoardHandler.getInstance().addBypass(activeChar, "Region", command);
 			
@@ -77,7 +83,7 @@ public class RegionBoard implements IWriteBoardHandler
 			html = html.replace("%region_list%", sb.toString());
 			CommunityBoardHandler.separateAndSend(html, activeChar);
 		}
-		else if (command.startsWith("_bbsloc;"))
+		else if ("bbsloc".equals(cmd))
 		{
 			CommunityBoardHandler.getInstance().addBypass(activeChar, "Region>", command);
 			
@@ -94,9 +100,32 @@ public class RegionBoard implements IWriteBoardHandler
 	}
 	
 	@Override
-	public boolean writeCommunityBoardCommand(L2PcInstance activeChar, String arg1, String arg2, String arg3, String arg4, String arg5)
+	public boolean writeCommunityBoardCommand(L2PcInstance activeChar, String command, String arg1, String arg2, String arg3, String arg4, String arg5)
 	{
-		// TODO: Implement.
+		StringTokenizer st = new StringTokenizer(command, "_");
+		String cmd = st.nextToken();
+		if ("bbsregsearch".equals(cmd))
+		{
+			int townId = Integer.parseInt(st.nextToken());
+			int type = Integer.parseInt(st.nextToken());
+			String byItem = "Item".equals(arg4) ? "1" : "0";
+			if (arg3 == null)
+			{
+				arg3 = "";
+			}
+			
+			arg3 = arg3.replace("<", "");
+			arg3 = arg3.replace(">", "");
+			arg3 = arg3.replace("&", "");
+			arg3 = arg3.replace("$", "");
+			
+			if (arg3.length() > 30)
+			{
+				arg3 = arg3.substring(0, 30);
+			}
+			
+			parseCommunityBoardCommand("_bbsreglist_" + townId + "_" + type + "_1_" + byItem + "_" + arg3, activeChar);
+		}
 		return false;
 	}
 }

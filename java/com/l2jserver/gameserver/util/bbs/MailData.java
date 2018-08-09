@@ -16,26 +16,45 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.gameserver.handler;
+package com.l2jserver.gameserver.util.bbs;
 
-import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+import java.util.Date;
 
 /**
- * Community Board interface.
- * @author Zoey76
+ * @author Мо3олЬ
  */
-public interface IWriteBoardHandler extends IParseBoardHandler
+public class MailData
 {
-	/**
-	 * Writes a community board command into the client.
-	 * @param player the player
-	 * @param arg1 the first argument
-	 * @param arg2 the second argument
-	 * @param arg3 the third argument
-	 * @param arg4 the fourth argument
-	 * @param arg5 the fifth argument
-	 * @return
-	 */
-	public boolean writeCommunityBoardCommand(L2PcInstance player, String command, String arg1, String arg2, String arg3, String arg4, String arg5);
+	private final String _author;
+	private final String _title;
+	private final String _postDate;
+	private final int _messageId;
 	
+	public MailData(String author, String title, int postDate, int messageId)
+	{
+		_author = author;
+		_title = title;
+		_postDate = String.format(String.format("%1$te-%1$tm-%1$tY", new Date(postDate * 1000L)));
+		_messageId = messageId;
+	}
+	
+	public String getAuthor()
+	{
+		return _author;
+	}
+	
+	public String getTitle()
+	{
+		return _title;
+	}
+	
+	public String getPostDate()
+	{
+		return _postDate;
+	}
+	
+	public int getMessageId()
+	{
+		return _messageId;
+	}
 }

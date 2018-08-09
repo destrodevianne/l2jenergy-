@@ -13496,4 +13496,35 @@ public final class L2PcInstance extends L2Playable
 		}
 		_pcCafePointsTask = null;
 	}
+	
+	/**
+	 * _userSession - испольюзуется для хранения временных переменных.
+	 */
+	private Map<String, String> _userSession;
+	
+	public String getSessionVar(String key)
+	{
+		if (_userSession == null)
+		{
+			return null;
+		}
+		return _userSession.get(key);
+	}
+	
+	public void setSessionVar(String key, String val)
+	{
+		if (_userSession == null)
+		{
+			_userSession = new ConcurrentHashMap<>();
+		}
+		
+		if ((val == null) || val.isEmpty())
+		{
+			_userSession.remove(key);
+		}
+		else
+		{
+			_userSession.put(key, val);
+		}
+	}
 }
