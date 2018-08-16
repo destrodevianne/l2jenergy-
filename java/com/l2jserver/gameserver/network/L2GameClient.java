@@ -1164,6 +1164,11 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 		}
 	}
 	
+	public String getHWID()
+	{
+		return null;
+	}
+	
 	public void setClientTracert(int[][] tracert)
 	{
 		trace = tracert;

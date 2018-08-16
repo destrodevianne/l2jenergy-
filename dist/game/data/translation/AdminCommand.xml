@@ -61,6 +61,18 @@
         <set lang="en" val="Usage: //set parameter=value" />
 		<set lang="ru" val="Применение: //set parameter=value" />
     </message>
+    <message id="admin_html_title_config">
+        <set lang="en" val="Config" />
+		<set lang="ru" val="Настройки" />
+    </message>
+     <message id="admin_html_title_config_panel">
+        <set lang="en" val="Config Server Panel" />
+		<set lang="ru" val="Настройки параметров" />
+    </message>
+    <message id="admin_button_set">
+        <set lang="en" val="Set" />
+		<set lang="ru" val="Уст." />
+    </message>
 	<!-- AdminAnnouncements Messages -->
 	<message id="admin_usage_announce_text">
         <set lang="en" val="Usage: //announce [text to announce here]" />
@@ -113,6 +125,26 @@
     <message id="admin_announce_option_effect_only_announcements">
 	    <set lang="en" val="This option has effect only on auto announcements!" />
 		<set lang="ru" val="Этот параметр влияет только на авто объявления!" />
+	</message>
+	 <message id="admin_announce_edit">
+	    <set lang="en" val="Usage: //announces edit [id]" />
+		<set lang="ru" val="Применение: //announces edit [id]" />
+	</message>
+	<message id="admin_announce_button_restart">
+	    <set lang="en" val="Restart" />
+		<set lang="ru" val="Перезагр." />
+	</message>
+	 <message id="admin_announce_button_show">
+	    <set lang="en" val="Show" />
+		<set lang="ru" val="Показ." />
+	</message>
+	 <message id="admin_announce_button_edit">
+	    <set lang="en" val="Edit" />
+		<set lang="ru" val="Измен." />
+	</message>
+	<message id="admin_announce_button_remove">
+	    <set lang="en" val="Remove" />
+		<set lang="ru" val="Удалить" />
 	</message>
 	<!-- AdminBuffs AdminBuffs -->
 	<message id="admin_player_not_online">
@@ -218,6 +250,23 @@
 	    <set lang="en" val="Usage: //server_restart [seconds]" />
 		<set lang="ru" val="Применение: //server_restart [seconds]" />
 	</message>
+	<message id="admin_geo_loading">
+	    <set lang="en" val="Loading" />
+		<set lang="ru" val="Загружена" />
+	</message>
+	<message id="admin_geo_disabled">
+	    <set lang="en" val="Disabled" />
+		<set lang="ru" val="Выключена" />
+	</message>
+	<message id="admin_game_night">
+	    <set lang="en" val="Night" />
+		<set lang="ru" val="Ночь" />
+	</message>
+	<message id="admin_game_day">
+	    <set lang="en" val="Day" />
+		<set lang="ru" val="День" />
+	</message>
+	
 	<!-- AdminReload -->
 	<message id="admin_usage_reload">
 	    <set lang="en" val="Usage: //reload [config|access|npc|quest [quest_id|quest_name]|walker|htm[l] [file|directory]|multisell|buylist|teleport|skill|item|door|effect|handler|enchant|creationpoint|itemmall|messages]" />

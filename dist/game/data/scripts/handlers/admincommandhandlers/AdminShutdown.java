@@ -113,10 +113,10 @@ public class AdminShutdown implements IAdminCommandHandler
 		adminReply.replace("%max%", String.valueOf(MemoryWatchDog.getMemMaxMb()));
 		adminReply.replace("%os%", System.getProperty("os.name"));
 		adminReply.replace("%gameTime%", GameTimeController.getInstance().getGameHour() + ":" + GameTimeController.getInstance().getGameMinute());
-		adminReply.replace("%dayNight%", GameTimeController.getInstance().isNight() ? "Night" : "Day");
+		adminReply.replace("%dayNight%", GameTimeController.getInstance().isNight() ? MessagesData.getInstance().getMessage(activeChar, "admin_game_night") : MessagesData.getInstance().getMessage(activeChar, "admin_game_day"));
 		adminReply.replace("%timeserv%", String.valueOf(DifferentMethods.getServerUpTime()));
 		adminReply.replace("%maxonline%", String.valueOf(DifferentMethods.getPlayersCount("ALL") + "/" + Config.MAXIMUM_ONLINE_USERS));
-		adminReply.replace("%geo%", Config.PATHFINDING > 0 ? "Loading" : "Disabled");
+		adminReply.replace("%geo%", Config.PATHFINDING > 0 ? MessagesData.getInstance().getMessage(activeChar, "admin_geo_loading") : MessagesData.getInstance().getMessage(activeChar, "admin_geo_disabled"));
 		activeChar.sendPacket(adminReply);
 	}
 	

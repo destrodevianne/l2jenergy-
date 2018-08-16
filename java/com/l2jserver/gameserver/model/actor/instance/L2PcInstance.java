@@ -4032,6 +4032,21 @@ public final class L2PcInstance extends L2Playable
 		return ip;
 	}
 	
+	public String getHWID()
+	{
+		return getHWID(null);
+	}
+	
+	public String getHWID(String defaultIfNotAvailable)
+	{
+		String hwid = defaultIfNotAvailable;
+		if ((_client != null) && (_client.getHWID() != null))
+		{
+			hwid = _client.getHWID();
+		}
+		return hwid;
+	}
+	
 	/**
 	 * Close the active connection with the client.
 	 * @param closeClient
@@ -11202,7 +11217,7 @@ public final class L2PcInstance extends L2Playable
 	public boolean isJailed()
 	{
 		return PunishmentManager.getInstance().hasPunishment(getObjectId(), PunishmentAffect.CHARACTER, PunishmentType.JAIL) || PunishmentManager.getInstance().hasPunishment(getAccountName(), PunishmentAffect.ACCOUNT, PunishmentType.JAIL)
-			|| PunishmentManager.getInstance().hasPunishment(getIPAddress(), PunishmentAffect.IP, PunishmentType.JAIL);
+			|| PunishmentManager.getInstance().hasPunishment(getIPAddress(), PunishmentAffect.IP, PunishmentType.JAIL) || PunishmentManager.getInstance().hasPunishment(getHWID(), PunishmentAffect.HWID, PunishmentType.JAIL);
 	}
 	
 	/**
@@ -11211,7 +11226,7 @@ public final class L2PcInstance extends L2Playable
 	public boolean isChatBanned()
 	{
 		return PunishmentManager.getInstance().hasPunishment(getObjectId(), PunishmentAffect.CHARACTER, PunishmentType.CHAT_BAN) || PunishmentManager.getInstance().hasPunishment(getAccountName(), PunishmentAffect.ACCOUNT, PunishmentType.CHAT_BAN)
-			|| PunishmentManager.getInstance().hasPunishment(getIPAddress(), PunishmentAffect.IP, PunishmentType.CHAT_BAN);
+			|| PunishmentManager.getInstance().hasPunishment(getIPAddress(), PunishmentAffect.IP, PunishmentType.CHAT_BAN) || PunishmentManager.getInstance().hasPunishment(getHWID(), PunishmentAffect.HWID, PunishmentType.CHAT_BAN);
 	}
 	
 	public void startFameTask(long delay, int fameFixRate)

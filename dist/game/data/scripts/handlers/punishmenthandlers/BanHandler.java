@@ -77,6 +77,18 @@ public class BanHandler implements IPunishmentHandler
 				}
 				break;
 			}
+			case HWID:
+			{
+				final String hwid = String.valueOf(task.getKey());
+				for (L2PcInstance player : L2World.getInstance().getPlayers())
+				{
+					if (hwid.equalsIgnoreCase(player.getHWID()))
+					{
+						applyToPlayer(player);
+					}
+				}
+				break;
+			}
 		}
 	}
 	

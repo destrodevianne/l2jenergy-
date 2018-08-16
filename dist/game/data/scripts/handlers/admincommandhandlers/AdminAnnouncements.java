@@ -176,20 +176,20 @@ public class AdminAnnouncements implements IAdminCommandHandler
 					{
 						if (!st.hasMoreTokens())
 						{
-							activeChar.sendMessage("Syntax: //announces edit <id>");
+							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_edit"));
 							break;
 						}
 						String annId = st.nextToken();
 						if (!Util.isDigit(annId))
 						{
-							activeChar.sendMessage("Syntax: //announces edit <id>");
+							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_edit"));
 							break;
 						}
 						int id = Integer.parseInt(annId);
 						final IAnnouncement announce = AnnouncementsTable.getInstance().getAnnounce(id);
 						if (announce == null)
 						{
-							activeChar.sendMessage("Announcement doesnt exists!");
+							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_doesnt_exists"));
 							break;
 						}
 						if (!st.hasMoreTokens())
@@ -474,7 +474,8 @@ public class AdminAnnouncements implements IAdminCommandHandler
 							sb.append("<td width=100>" + announcement.getAuthor() + "</td>");
 							if ((announcement.getType() == AnnouncementType.AUTO_NORMAL) || (announcement.getType() == AnnouncementType.AUTO_CRITICAL))
 							{
-								sb.append("<td width=60><button action=\"bypass -h admin_announces restart " + announcement.getId() + "\" value=\"Restart\" width=\"60\" height=\"21\" back=\"L2UI_CT1.Button_DF_Down\" fore=\"L2UI_CT1.Button_DF\"></td>");
+								sb.append("<td width=60><button action=\"bypass -h admin_announces restart " + announcement.getId() + "\" value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_announce_button_restart")
+									+ "\" width=\"60\" height=\"21\" back=\"L2UI_CT1.Button_DF_Down\" fore=\"L2UI_CT1.Button_DF\"></td>");
 							}
 							else
 							{
@@ -482,15 +483,19 @@ public class AdminAnnouncements implements IAdminCommandHandler
 							}
 							if (announcement.getType() == AnnouncementType.EVENT)
 							{
-								sb.append("<td width=60><button action=\"bypass -h admin_announces show " + announcement.getId() + "\" value=\"Show\" width=\"60\" height=\"21\" back=\"L2UI_CT1.Button_DF_Down\" fore=\"L2UI_CT1.Button_DF\"></td>");
+								sb.append("<td width=60><button action=\"bypass -h admin_announces show " + announcement.getId() + "\" value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_announce_button_show")
+									+ "\" width=\"60\" height=\"21\" back=\"L2UI_CT1.Button_DF_Down\" fore=\"L2UI_CT1.Button_DF\"></td>");
 								sb.append("<td width=60></td>");
 							}
 							else
 							{
-								sb.append("<td width=60><button action=\"bypass -h admin_announces show " + announcement.getId() + "\" value=\"Show\" width=\"60\" height=\"21\" back=\"L2UI_CT1.Button_DF_Down\" fore=\"L2UI_CT1.Button_DF\"></td>");
-								sb.append("<td width=60><button action=\"bypass -h admin_announces edit " + announcement.getId() + "\" value=\"Edit\" width=\"60\" height=\"21\" back=\"L2UI_CT1.Button_DF_Down\" fore=\"L2UI_CT1.Button_DF\"></td>");
+								sb.append("<td width=60><button action=\"bypass -h admin_announces show " + announcement.getId() + "\" value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_announce_button_show")
+									+ "\" width=\"60\" height=\"21\" back=\"L2UI_CT1.Button_DF_Down\" fore=\"L2UI_CT1.Button_DF\"></td>");
+								sb.append("<td width=60><button action=\"bypass -h admin_announces edit " + announcement.getId() + "\" value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_announce_button_edit")
+									+ "\" width=\"60\" height=\"21\" back=\"L2UI_CT1.Button_DF_Down\" fore=\"L2UI_CT1.Button_DF\"></td>");
 							}
-							sb.append("<td width=60><button action=\"bypass -h admin_announces remove " + announcement.getId() + "\" value=\"Remove\" width=\"60\" height=\"21\" back=\"L2UI_CT1.Button_DF_Down\" fore=\"L2UI_CT1.Button_DF\"></td>");
+							sb.append("<td width=60><button action=\"bypass -h admin_announces remove " + announcement.getId() + "\" value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_announce_button_remove")
+								+ "\" width=\"60\" height=\"21\" back=\"L2UI_CT1.Button_DF_Down\" fore=\"L2UI_CT1.Button_DF\"></td>");
 							sb.append("<td width=5></td>");
 							sb.append("</tr>");
 							return sb.toString();

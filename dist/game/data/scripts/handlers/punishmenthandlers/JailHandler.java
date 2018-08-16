@@ -105,6 +105,18 @@ public class JailHandler implements IPunishmentHandler
 				}
 				break;
 			}
+			case HWID:
+			{
+				final String hwid = String.valueOf(task.getKey());
+				for (L2PcInstance player : L2World.getInstance().getPlayers())
+				{
+					if (hwid.equalsIgnoreCase(player.getHWID()))
+					{
+						applyToPlayer(task, player);
+					}
+				}
+				break;
+			}
 		}
 	}
 	
@@ -143,6 +155,18 @@ public class JailHandler implements IPunishmentHandler
 				for (L2PcInstance player : L2World.getInstance().getPlayers())
 				{
 					if (player.getIPAddress().equals(ip))
+					{
+						removeFromPlayer(player);
+					}
+				}
+				break;
+			}
+			case HWID:
+			{
+				final String hwid = String.valueOf(task.getKey());
+				for (L2PcInstance player : L2World.getInstance().getPlayers())
+				{
+					if (hwid.equalsIgnoreCase(player.getHWID()))
 					{
 						removeFromPlayer(player);
 					}
