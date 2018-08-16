@@ -126,7 +126,7 @@ public class MultiSellChoose extends L2GameClientPacket
 			return;
 		}
 		
-		if (!player.isGM() && (npc != null))
+		if (!player.isGM() && (npc != null) && !player.isBBSMultisell())
 		{
 			if (!player.isInsideRadius(npc, INTERACTION_DISTANCE, true, false) || (player.getInstanceId() != npc.getInstanceId()))
 			{

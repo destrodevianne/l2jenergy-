@@ -76,11 +76,6 @@ public final class MultisellData implements IXmlReader
 			parseDatapackDirectory("data/multisell/custom", false);
 		}
 		
-		if (Config.CUSTOM_CB_ENABLED)
-		{
-			parseDatapackDirectory("data/multisell/community", false);
-		}
-		
 		verify();
 		LOG.info("{}: Loaded {} multisell lists.", getClass().getSimpleName(), _entries.size());
 	}

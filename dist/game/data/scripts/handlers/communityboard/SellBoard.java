@@ -40,6 +40,7 @@ public class SellBoard implements IParseBoardHandler
 			{
 				return false;
 			}
+			activeChar.setIsUsingBBSMultisell(true);
 			activeChar.sendPacket(new BuyList(BuyListData.getInstance().getBuyList(423), activeChar.getAdena(), 0)); // null
 			activeChar.sendPacket(new ExBuySellList(activeChar, false));
 		}

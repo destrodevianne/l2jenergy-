@@ -13542,4 +13542,16 @@ public final class L2PcInstance extends L2Playable
 			_userSession.put(key, val);
 		}
 	}
+	
+	private boolean _isBBSMultisell = false;
+	
+	public void setIsUsingBBSMultisell(boolean isBBSMultisell)
+	{
+		_isBBSMultisell = isBBSMultisell;
+	}
+	
+	public boolean isBBSMultisell()
+	{
+		return _isBBSMultisell;
+	}
 }

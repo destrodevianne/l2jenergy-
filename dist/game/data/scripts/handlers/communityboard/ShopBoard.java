@@ -55,6 +55,7 @@ public class ShopBoard implements IParseBoardHandler
 				{
 					parseCommunityBoardCommand(data[1], activeChar);
 				}
+				activeChar.setIsUsingBBSMultisell(true);
 				MultisellData.getInstance().separateAndSend(listId, activeChar, null, false);
 				return false;
 			}

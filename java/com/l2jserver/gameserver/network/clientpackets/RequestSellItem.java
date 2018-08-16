@@ -112,7 +112,7 @@ public final class RequestSellItem extends L2GameClientPacket
 		
 		L2Object target = player.getTarget();
 		L2Character merchant = null;
-		if (!player.isGM())
+		if (!player.isGM() && !player.isBBSMultisell())
 		{
 			if ((target == null) || (!player.isInsideRadius(target, INTERACTION_DISTANCE, true, false)) || (player.getInstanceId() != target.getInstanceId()))
 			{
