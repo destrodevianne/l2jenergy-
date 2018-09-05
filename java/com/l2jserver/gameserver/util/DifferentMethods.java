@@ -27,8 +27,10 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import com.l2jserver.gameserver.GameServer;
+import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 
 public class DifferentMethods
 {
@@ -106,5 +108,22 @@ public class DifferentMethods
 	public static String time(long time)
 	{
 		return TIME_FORMAT.format(new Date(time * 1000));
+	}
+	
+	public static String getItemName(int itemId)
+	{
+		return ItemTable.getInstance().getTemplate(itemId).getName();
+	}
+	
+	// TODO: переделать
+	public static boolean getPay(L2PcInstance activeChar, int itemid, long count)
+	{
+		L2ItemInstance item = activeChar.getInventory().getItemByItemId(itemid);
+		if (item != null)
+		{
+			activeChar.destroyItem("BBS", itemid, count, activeChar, true);
+			return true;
+		}
+		return false;
 	}
 }

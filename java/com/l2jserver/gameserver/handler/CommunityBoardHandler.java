@@ -194,7 +194,7 @@ public final class CommunityBoardHandler implements IHandler<IParseBoardHandler,
 			LOG.warning(CommunityBoardHandler.class.getSimpleName() + ": " + cb.getClass().getSimpleName() + " doesn't implement write!");
 			return;
 		}
-		((IWriteBoardHandler) cb).writeCommunityBoardCommand(player, url, arg1, arg2, arg3, arg4, arg5);
+		((IWriteBoardHandler) cb).writeCommunityBoardCommand(player, arg1, arg2, arg3, arg4, arg5);
 	}
 	
 	/**

@@ -41,6 +41,7 @@ public class AccountVariables extends AbstractVariables
 	private static final String INSERT_QUERY = "INSERT INTO account_gsdata (account_name, var, value) VALUES (?, ?, ?)";
 	
 	public static final String PRIME_POINTS = "PRIME_POINTS";
+	public static final String PREMIUM_ACCOUNT = "PREMIUM_ACCOUNT";
 	
 	private final String _accountName;
 	

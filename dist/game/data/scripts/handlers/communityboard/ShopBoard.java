@@ -36,6 +36,8 @@ public class ShopBoard implements IParseBoardHandler
 	@Override
 	public boolean parseCommunityBoardCommand(String command, L2PcInstance activeChar)
 	{
+		activeChar.setSessionVar("add_fav", null);
+		
 		if (!Config.ENABLE_COMMUNITY_BOARD)
 		{
 			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "community_board_services_disabled"));
@@ -70,8 +72,9 @@ public class ShopBoard implements IParseBoardHandler
 		return true;
 	}
 	
-	public void onWriteCommand(L2PcInstance player, String bypass, String arg1, String arg2, String arg3, String arg4, String arg5)
+	public void writeCommunityBoardCommand(L2PcInstance activeChar, String arg1, String arg2, String arg3, String arg4, String arg5)
 	{
+		
 	}
 	
 	@Override

@@ -85,6 +85,7 @@ $MYL < sql/game/auction_watch.sql &> /dev/null
 $MYL < sql/game/bbs_favorite.sql  &> /dev/null
 $MYL < sql/game/bbs_mail.sql  &> /dev/null
 $MYL < sql/game/bbs_memo.sql  &> /dev/null
+$MYL < sql/game/bbs_teleport.sql  &> /dev/null
 $MYL < sql/game/bot_reported_char_data.sql &> /dev/null
 $MYL < sql/game/buylists.sql &> /dev/null
 $MYL < sql/game/castle.sql &> /dev/null

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="list">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="point" maxOccurs="unbounded" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>AdenDionГиранГлудиоГоддардХейнОренРунаШуттгартТерритории АденаТерритории ДионаТерритории ГиранаТерритории ГлудиоТерритории ГоддардаТерритории ХейнаТерритории ОренаТерритории РуныТерритории ШуттгартаДеревниДеревня Темных эльфовДеревня ГномовДеревня ЭльфовДеревня ФлоранДеревня ГлудинДеревня ЛюдейДеревня ОхотниковДеревня КамаэлейДеревня ОрковТерритории деревеньТерритория Деревни Тёмных ЭльфовТерритория Деревни ГномовТерритория Деревни ГномовТерритория Деревни ГлудинТерритория Деревни ЛюдейТерритория Деревни ОхотниковТерритория Деревни КамаэлейТерритория Деревни КамаэлейТерритория Primeval Island</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="cost">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:byte" name="itemId" use="optional"/>
+                      <xs:attribute type="xs:int" name="count" use="optional"/>
+                      <xs:attribute type="xs:byte" name="premiumItemId" use="optional"/>
+                      <xs:attribute type="xs:short" name="premiumCount" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="coordinates">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:int" name="x" use="optional"/>
+                      <xs:attribute type="xs:int" name="y" use="optional"/>
+                      <xs:attribute type="xs:short" name="z" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:short" name="id" use="optional"/>
+            <xs:attribute type="xs:string" name="name" use="optional"/>
+            <xs:attribute type="xs:byte" name="minLevel" use="optional"/>
+            <xs:attribute type="xs:byte" name="maxLevel" use="optional"/>
+            <xs:attribute type="xs:string" name="pk" use="optional"/>
+            <xs:attribute type="xs:string" name="isPremiumPoint" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -277,9 +277,9 @@ public class MemoBoard implements IWriteBoardHandler
 	}
 	
 	@Override
-	public boolean writeCommunityBoardCommand(L2PcInstance activeChar, String command, String arg1, String arg2, String arg3, String arg4, String arg5)
+	public boolean writeCommunityBoardCommand(L2PcInstance activeChar, String arg1, String arg2, String arg3, String arg4, String arg5)
 	{
-		StringTokenizer st = new StringTokenizer(command, "_");
+		StringTokenizer st = new StringTokenizer(arg1, "_");
 		String cmd = st.nextToken();
 		if ("mmwrite".equals(cmd))
 		{

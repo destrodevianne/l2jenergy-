@@ -1112,6 +1112,14 @@ public final class Config
 	public static boolean ENABLE_COMMUNITY_BOARD;
 	public static String BBS_DEFAULT;
 	public static boolean CUSTOM_CB_ENABLED;
+	public static boolean BBS_TELEPORTS_ENABLE;
+	public static boolean BBS_TELEPORTS_POINT_FOR_PREMIUM;
+	public static int BBS_TELEPORT_MAX_COUNT;
+	public static int BBS_TELEPORT_FREE_LEVEL;
+	public static int BBS_TELEPORT_SAVE_ITEM_ID;
+	public static int BBS_TELEPORT_SAVE_PRICE;
+	public static int BBS_TELEPORT_PREMIUM_SAVE_ITEM_ID;
+	public static int BBS_TELEPORT_PREMIUM_SAVE_PRICE;
 	
 	public static boolean ALT_PCBANG_POINTS_ENABLED;
 	public static int MAX_PC_BANG_POINTS;
@@ -2721,6 +2729,15 @@ public final class Config
 			ENABLE_COMMUNITY_BOARD = CommunityBoardSettings.getBoolean("EnableCommunityBoard", true);
 			BBS_DEFAULT = CommunityBoardSettings.getString("BBSDefault", "_bbshome");
 			CUSTOM_CB_ENABLED = CommunityBoardSettings.getBoolean("CustomCommunityBoard", false);
+			
+			BBS_TELEPORTS_ENABLE = CommunityBoardSettings.getBoolean("CommunityEnableTeleports", true);
+			BBS_TELEPORTS_POINT_FOR_PREMIUM = CommunityBoardSettings.getBoolean("CommunityTeleportsPointForPremium", false);
+			BBS_TELEPORT_SAVE_ITEM_ID = CommunityBoardSettings.getInt("CommunityTeleportsSaveItemId", 57);
+			BBS_TELEPORT_SAVE_PRICE = CommunityBoardSettings.getInt("CommunityTeleportsSavePrice", 5000);
+			BBS_TELEPORT_PREMIUM_SAVE_ITEM_ID = CommunityBoardSettings.getInt("CommunityTeleportsPremiumSaveItemId", 57);
+			BBS_TELEPORT_PREMIUM_SAVE_PRICE = CommunityBoardSettings.getInt("CommunityTeleportPremiumSavePrice", 2500);
+			BBS_TELEPORT_FREE_LEVEL = CommunityBoardSettings.getInt("CommunityTeleportsFreeByLevel", 40);
+			BBS_TELEPORT_MAX_COUNT = CommunityBoardSettings.getInt("CommunityTeleportsMaxPointsCount", 7);
 			
 			final PropertiesParser PCCafeSettings = new PropertiesParser(PC_CAFE_CONFIG_FILE);
 			

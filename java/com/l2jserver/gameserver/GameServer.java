@@ -84,6 +84,7 @@ import com.l2jserver.gameserver.data.xml.impl.SiegeScheduleData;
 import com.l2jserver.gameserver.data.xml.impl.SkillLearnData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.data.xml.impl.StaticObjectData;
+import com.l2jserver.gameserver.data.xml.impl.TeleportBBSData;
 import com.l2jserver.gameserver.data.xml.impl.TransformData;
 import com.l2jserver.gameserver.data.xml.impl.UIData;
 import com.l2jserver.gameserver.datatables.AugmentationData;
@@ -247,7 +248,10 @@ public final class GameServer
 		RaidBossPointsManager.getInstance();
 		PetDataTable.getInstance();
 		CharSummonTable.getInstance().init();
-		
+		if (Config.BBS_TELEPORTS_ENABLE)
+		{
+			TeleportBBSData.getInstance();
+		}
 		// Multi-Language System
 		printSection("Messages");
 		MessagesData.getInstance();

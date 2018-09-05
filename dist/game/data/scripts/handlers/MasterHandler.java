@@ -184,6 +184,7 @@ import handlers.communityboard.MemoBoard;
 import handlers.communityboard.RegionBoard;
 import handlers.communityboard.SellBoard;
 import handlers.communityboard.ShopBoard;
+import handlers.communityboard.TeleportBoard;
 import handlers.custom.CustomAnnouncePkPvP;
 import handlers.itemhandlers.BeastSoulShot;
 import handlers.itemhandlers.BeastSpiritShot;
@@ -474,6 +475,7 @@ public class MasterHandler
 			RegionBoard.class,
 			SellBoard.class,
 			ShopBoard.class,
+			TeleportBoard.class,
 		},
 		{
 			// Item Handlers

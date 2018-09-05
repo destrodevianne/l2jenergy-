@@ -13451,6 +13451,16 @@ public final class L2PcInstance extends L2Playable
 		_dwarvenRecipeBook.clear();
 	}
 	
+	public boolean isPremium()
+	{
+		return getAccountVariables().getBoolean(AccountVariables.PREMIUM_ACCOUNT, false);
+	}
+	
+	public void setPremium(boolean isPremium)
+	{
+		getAccountVariables().set(AccountVariables.PREMIUM_ACCOUNT, isPremium);
+	}
+	
 	public long getPrimePoints()
 	{
 		return getAccountVariables().getInt(AccountVariables.PRIME_POINTS, 0);

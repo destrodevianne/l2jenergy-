@@ -73,6 +73,10 @@
         <set lang="en" val="Set" />
 		<set lang="ru" val="Уст." />
     </message>
+    <message id="admin_button_delete">
+        <set lang="en" val="Delete" />
+		<set lang="ru" val="Удалить" />
+    </message> 
 	<!-- AdminAnnouncements Messages -->
 	<message id="admin_usage_announce_text">
         <set lang="en" val="Usage: //announce [text to announce here]" />
