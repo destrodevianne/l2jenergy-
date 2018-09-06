@@ -57,12 +57,12 @@ public class AdminExpSp implements IAdminCommandHandler
 				String val = command.substring(16);
 				if (!adminAddExpSp(activeChar, val))
 				{
-					activeChar.sendMessage("Usage: //add_exp_sp exp sp");
+					activeChar.sendAdminMessage("Usage: //add_exp_sp exp sp");
 				}
 			}
 			catch (StringIndexOutOfBoundsException e)
 			{ // Case of missing parameter
-				activeChar.sendMessage("Usage: //add_exp_sp exp sp");
+				activeChar.sendAdminMessage("Usage: //add_exp_sp exp sp");
 			}
 		}
 		else if (command.startsWith("admin_remove_exp_sp"))
@@ -72,12 +72,12 @@ public class AdminExpSp implements IAdminCommandHandler
 				String val = command.substring(19);
 				if (!adminRemoveExpSP(activeChar, val))
 				{
-					activeChar.sendMessage("Usage: //remove_exp_sp exp sp");
+					activeChar.sendAdminMessage("Usage: //remove_exp_sp exp sp");
 				}
 			}
 			catch (StringIndexOutOfBoundsException e)
 			{ // Case of missing parameter
-				activeChar.sendMessage("Usage: //remove_exp_sp exp sp");
+				activeChar.sendAdminMessage("Usage: //remove_exp_sp exp sp");
 			}
 		}
 		addExpSp(activeChar);
@@ -152,7 +152,7 @@ public class AdminExpSp implements IAdminCommandHandler
 			player.addExpAndSp(expval, spval);
 			player.broadcastUserInfo();
 			// Admin information
-			activeChar.sendMessage("Added " + expval + " xp and " + spval + " sp to " + player.getName() + ".");
+			activeChar.sendAdminMessage("Added " + expval + " xp and " + spval + " sp to " + player.getName() + ".");
 			if (Config.DEBUG)
 			{
 				_log.fine("GM: " + activeChar.getName() + "(" + activeChar.getObjectId() + ") added " + expval + " xp and " + spval + " sp to " + player.getObjectId() + ".");
@@ -200,7 +200,7 @@ public class AdminExpSp implements IAdminCommandHandler
 			player.removeExpAndSp(expval, spval);
 			player.broadcastUserInfo();
 			// Admin information
-			activeChar.sendMessage("Removed " + expval + " xp and " + spval + " sp from " + player.getName() + ".");
+			activeChar.sendAdminMessage("Removed " + expval + " xp and " + spval + " sp from " + player.getName() + ".");
 			if (Config.DEBUG)
 			{
 				_log.fine("GM: " + activeChar.getName() + "(" + activeChar.getObjectId() + ") removed " + expval + " xp and " + spval + " sp from " + player.getObjectId() + ".");

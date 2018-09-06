@@ -71,7 +71,7 @@ public class AdminQuest implements IAdminCommandHandler
 			String[] parts = command.split(" ");
 			if (parts.length < 2)
 			{
-				activeChar.sendMessage("Usage: //quest_reload <questFolder>.<questSubFolders...>.questName> or //quest_reload <id>");
+				activeChar.sendAdminMessage("Usage: //quest_reload <questFolder>.<questSubFolders...>.questName> or //quest_reload <id>");
 			}
 			else
 			{
@@ -81,22 +81,22 @@ public class AdminQuest implements IAdminCommandHandler
 					int questId = Integer.parseInt(parts[1]);
 					if (QuestManager.getInstance().reload(questId))
 					{
-						activeChar.sendMessage("Quest Reloaded Successfully.");
+						activeChar.sendAdminMessage("Quest Reloaded Successfully.");
 					}
 					else
 					{
-						activeChar.sendMessage("Quest Reloaded Failed");
+						activeChar.sendAdminMessage("Quest Reloaded Failed");
 					}
 				}
 				catch (NumberFormatException e)
 				{
 					if (QuestManager.getInstance().reload(parts[1]))
 					{
-						activeChar.sendMessage("Quest Reloaded Successfully.");
+						activeChar.sendAdminMessage("Quest Reloaded Successfully.");
 					}
 					else
 					{
-						activeChar.sendMessage("Quest Reloaded Failed");
+						activeChar.sendAdminMessage("Quest Reloaded Failed");
 					}
 				}
 			}
@@ -113,7 +113,7 @@ public class AdminQuest implements IAdminCommandHandler
 			if (parts.length < 2)
 			{
 				// activeChar.sendMessage("Example: //script_load <questFolder>/<questSubFolders...>/<filename>.<ext> ");
-				activeChar.sendMessage("Example: //script_load quests/SagasSuperclass/__init__.py");
+				activeChar.sendAdminMessage("Example: //script_load quests/SagasSuperclass/__init__.py");
 			}
 			else
 			{
@@ -136,21 +136,21 @@ public class AdminQuest implements IAdminCommandHandler
 						L2ScriptEngineManager.getInstance().executeScript(file);
 						
 						// This part should be called only when the script is successfully loaded.
-						activeChar.sendMessage("Script Successfully Loaded.");
+						activeChar.sendAdminMessage("Script Successfully Loaded.");
 					}
 					catch (ScriptException e)
 					{
-						activeChar.sendMessage("Failed loading: " + parts[1]);
+						activeChar.sendAdminMessage("Failed loading: " + parts[1]);
 						L2ScriptEngineManager.getInstance().reportScriptFileError(file, e);
 					}
 					catch (Exception e)
 					{
-						activeChar.sendMessage("Failed loading: " + parts[1]);
+						activeChar.sendAdminMessage("Failed loading: " + parts[1]);
 					}
 				}
 				else
 				{
-					activeChar.sendMessage("File Not Found: " + parts[1]);
+					activeChar.sendAdminMessage("File Not Found: " + parts[1]);
 				}
 			}
 			
@@ -160,7 +160,7 @@ public class AdminQuest implements IAdminCommandHandler
 			String[] parts = command.split(" ");
 			if (parts.length < 2)
 			{
-				activeChar.sendMessage("Example: //script_unload questName/questId");
+				activeChar.sendAdminMessage("Example: //script_unload questName/questId");
 			}
 			else
 			{
@@ -170,16 +170,16 @@ public class AdminQuest implements IAdminCommandHandler
 				{
 					if (q.unload())
 					{
-						activeChar.sendMessage("Script Successfully Unloaded [" + q.getName() + "/" + q.getId() + "]");
+						activeChar.sendAdminMessage("Script Successfully Unloaded [" + q.getName() + "/" + q.getId() + "]");
 					}
 					else
 					{
-						activeChar.sendMessage("Failed unloading [" + q.getName() + "/" + q.getId() + "].");
+						activeChar.sendAdminMessage("Failed unloading [" + q.getName() + "/" + q.getId() + "].");
 					}
 				}
 				else
 				{
-					activeChar.sendMessage("The quest [" + parts[1] + "] was not found!.");
+					activeChar.sendAdminMessage("The quest [" + parts[1] + "] was not found!.");
 				}
 			}
 		}
@@ -187,11 +187,11 @@ public class AdminQuest implements IAdminCommandHandler
 		{
 			if (activeChar.getTarget() == null)
 			{
-				activeChar.sendMessage("Get a target first.");
+				activeChar.sendAdminMessage("Get a target first.");
 			}
 			else if (!activeChar.getTarget().isCharacter())
 			{
-				activeChar.sendMessage("Invalid Target.");
+				activeChar.sendAdminMessage("Invalid Target.");
 			}
 			else
 			{
@@ -231,7 +231,7 @@ public class AdminQuest implements IAdminCommandHandler
 			int counter = 0;
 			if (quest == null)
 			{
-				activeChar.sendMessage("Couldn't find quest or script with name " + questName + " !");
+				activeChar.sendAdminMessage("Couldn't find quest or script with name " + questName + " !");
 				return false;
 			}
 			
@@ -292,7 +292,8 @@ public class AdminQuest implements IAdminCommandHandler
 			{
 				for (QuestTimer timer : list)
 				{
-					timers += "<tr><td colspan=\"4\"><table width=270 border=0 bgcolor=131210><tr><td width=270><font color=\"LEVEL\">" + timer.getName() + ":</font> <font color=00FF00>Active: " + timer.getIsActive() + " Repeatable: " + timer.getIsRepeating() + " Player: " + timer.getPlayer() + " Npc: " + timer.getNpc() + "</font></td></tr></table></td></tr>";
+					timers += "<tr><td colspan=\"4\"><table width=270 border=0 bgcolor=131210><tr><td width=270><font color=\"LEVEL\">" + timer.getName() + ":</font> <font color=00FF00>Active: " + timer.getIsActive() + " Repeatable: " + timer.getIsRepeating() + " Player: " + timer.getPlayer()
+						+ " Npc: " + timer.getNpc() + "</font></td></tr></table></td></tr>";
 					counter++;
 					if (counter > 10)
 					{
@@ -305,7 +306,8 @@ public class AdminQuest implements IAdminCommandHandler
 			sb.append("<tr><td colspan=\"4\"><table width=270 border=0 bgcolor=131210><tr><td width=270><font color=\"LEVEL\">ID:</font> <font color=00FF00>" + quest.getId() + "</font></td></tr></table></td></tr>");
 			sb.append("<tr><td colspan=\"4\"><table width=270 border=0 bgcolor=131210><tr><td width=270><font color=\"LEVEL\">Name:</font> <font color=00FF00>" + quest.getName() + "</font></td></tr></table></td></tr>");
 			sb.append("<tr><td colspan=\"4\"><table width=270 border=0 bgcolor=131210><tr><td width=270><font color=\"LEVEL\">Descr:</font> <font color=00FF00>" + quest.getDescr() + "</font></td></tr></table></td></tr>");
-			sb.append("<tr><td colspan=\"4\"><table width=270 border=0 bgcolor=131210><tr><td width=270><font color=\"LEVEL\">Path:</font> <font color=00FF00>" + quest.getClass().getName().substring(0, quest.getClass().getName().lastIndexOf('.')).replaceAll("\\.", "/") + "</font></td></tr></table></td></tr>");
+			sb.append("<tr><td colspan=\"4\"><table width=270 border=0 bgcolor=131210><tr><td width=270><font color=\"LEVEL\">Path:</font> <font color=00FF00>" + quest.getClass().getName().substring(0, quest.getClass().getName().lastIndexOf('.')).replaceAll("\\.", "/")
+				+ "</font></td></tr></table></td></tr>");
 			sb.append("<tr><td colspan=\"4\"><table width=270 border=0 bgcolor=131210><tr><td width=270><font color=\"LEVEL\">Events:</font> <font color=00FF00>" + events + "</font></td></tr></table></td></tr>");
 			if (!npcs.isEmpty())
 			{
@@ -324,7 +326,8 @@ public class AdminQuest implements IAdminCommandHandler
 			final NpcHtmlMessage msg = new NpcHtmlMessage(0, 1);
 			msg.setFile(activeChar.getHtmlPrefix(), "data/html/admin/npc-quests.htm");
 			msg.replace("%quests%", sb.toString());
-			msg.replace("%questName%", "<table><tr><td width=\"50\" align=\"left\"><a action=\"bypass -h admin_script_load " + quest.getName() + "\">Reload</a></td> <td width=\"150\"  align=\"center\"><a action=\"bypass -h admin_quest_info " + quest.getName() + "\">" + quest.getName() + "</a></td> <td width=\"50\" align=\"right\"><a action=\"bypass -h admin_script_unload " + quest.getName() + "\">Unload</a></tr></td></table>");
+			msg.replace("%questName%", "<table><tr><td width=\"50\" align=\"left\"><a action=\"bypass -h admin_script_load " + quest.getName() + "\">Reload</a></td> <td width=\"150\"  align=\"center\"><a action=\"bypass -h admin_quest_info " + quest.getName() + "\">" + quest.getName()
+				+ "</a></td> <td width=\"50\" align=\"right\"><a action=\"bypass -h admin_script_unload " + quest.getName() + "\">Unload</a></tr></td></table>");
 			activeChar.sendPacket(msg);
 		}
 		return true;

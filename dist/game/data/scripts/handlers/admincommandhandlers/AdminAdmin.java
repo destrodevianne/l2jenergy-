@@ -33,11 +33,6 @@ import com.l2jserver.gameserver.model.olympiad.Olympiad;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 
-/**
- * This class handles following admin commands: - admin|admin1/admin2/admin3/admin4/admin5 = slots for the 5 starting admin menus - gmliston/gmlistoff = includes/excludes active character from /gmlist results - silence = toggles private messages acceptance mode - diet = toggles weight penalty mode -
- * tradeoff = toggles trade acceptance mode - reload = reloads specified component from multisell|skill|npc|htm|item - set/set_menu/set_mod = alters specified server setting - saveolymp = saves olympiad state manually - manualhero = cycles olympiad and calculate new heroes.
- * @version $Revision: 1.3.2.1.2.4 $ $Date: 2007/07/28 10:06:06 $
- */
 public class AdminAdmin implements IAdminCommandHandler
 {
 	private static final Logger LOG = LoggerFactory.getLogger(AdminAdmin.class);
@@ -82,13 +77,13 @@ public class AdminAdmin implements IAdminCommandHandler
 		else if (command.startsWith("admin_gmliston"))
 		{
 			AdminData.getInstance().showGm(activeChar);
-			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_reg_gm_list"));
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_reg_gm_list"));
 			AdminHtml.showAdminHtml(activeChar, "gm_menu.htm");
 		}
 		else if (command.startsWith("admin_gmlistoff"))
 		{
 			AdminData.getInstance().hideGm(activeChar);
-			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_unreg_gm_list"));
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_unreg_gm_list"));
 			AdminHtml.showAdminHtml(activeChar, "gm_menu.htm");
 		}
 		else if (command.startsWith("admin_silence"))
@@ -108,7 +103,7 @@ public class AdminAdmin implements IAdminCommandHandler
 		else if (command.startsWith("admin_saveolymp"))
 		{
 			Olympiad.getInstance().saveOlympiadStatus();
-			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_save_oly_sys"));
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_save_oly_sys"));
 		}
 		else if (command.startsWith("admin_endolympiad"))
 		{
@@ -120,7 +115,7 @@ public class AdminAdmin implements IAdminCommandHandler
 			{
 				LOG.warn("An error occured while ending olympiad!", e);
 			}
-			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_hero_formed"));
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_hero_formed"));
 		}
 		else if (command.startsWith("admin_sethero"))
 		{
@@ -145,13 +140,13 @@ public class AdminAdmin implements IAdminCommandHandler
 			final L2PcInstance target = activeChar.getTarget().isPlayer() ? activeChar.getTarget().getActingPlayer() : activeChar;
 			if (Hero.getInstance().isHero(target.getObjectId()))
 			{
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_hero_status_already_claimed"));
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_hero_status_already_claimed"));
 				return false;
 			}
 			
 			if (!Hero.getInstance().isUnclaimedHero(target.getObjectId()))
 			{
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_hero_status_cannot_claimed"));
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_hero_status_cannot_claimed"));
 				return false;
 			}
 			Hero.getInstance().claimHero(target);
@@ -165,12 +160,12 @@ public class AdminAdmin implements IAdminCommandHandler
 				if (st.nextToken().equalsIgnoreCase("on"))
 				{
 					activeChar.setDietMode(true);
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_diet_on"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_diet_on"));
 				}
 				else if (st.nextToken().equalsIgnoreCase("off"))
 				{
 					activeChar.setDietMode(false);
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_diet_off"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_diet_off"));
 				}
 			}
 			catch (Exception ex)
@@ -178,12 +173,12 @@ public class AdminAdmin implements IAdminCommandHandler
 				if (activeChar.getDietMode())
 				{
 					activeChar.setDietMode(false);
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_diet_off"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_diet_off"));
 				}
 				else
 				{
 					activeChar.setDietMode(true);
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_diet_on"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_diet_on"));
 				}
 			}
 			finally
@@ -200,12 +195,12 @@ public class AdminAdmin implements IAdminCommandHandler
 				if (mode.equalsIgnoreCase("on"))
 				{
 					activeChar.setTradeRefusal(true);
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_trade_on"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_trade_on"));
 				}
 				else if (mode.equalsIgnoreCase("off"))
 				{
 					activeChar.setTradeRefusal(false);
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_trade_off"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_trade_off"));
 				}
 			}
 			catch (Exception ex)
@@ -213,12 +208,12 @@ public class AdminAdmin implements IAdminCommandHandler
 				if (activeChar.getTradeRefusal())
 				{
 					activeChar.setTradeRefusal(false);
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_trade_off"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_trade_off"));
 				}
 				else
 				{
 					activeChar.setTradeRefusal(true);
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_trade_on"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_trade_on"));
 				}
 			}
 			AdminHtml.showAdminHtml(activeChar, "gm_menu.htm");
@@ -233,16 +228,16 @@ public class AdminAdmin implements IAdminCommandHandler
 				String pValue = st.nextToken();
 				if (Config.setParameterValue(pName, pValue))
 				{
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_config_parameter_set_to").replace("%s%", pName + "").replace("%i%", pValue + ""));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_config_parameter_set_to").replace("%s%", pName + "").replace("%i%", pValue + ""));
 				}
 				else
 				{
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_invalid_parameter"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_invalid_parameter"));
 				}
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_set_config"));
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_set_config"));
 			}
 			finally
 			{
@@ -260,18 +255,18 @@ public class AdminAdmin implements IAdminCommandHandler
 				String pValue = parameter[1].trim();
 				if (Config.setParameterValue(pName, pValue))
 				{
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_parameter_succesfully_set_to").replace("%s%", pName + "").replace("%i%", pValue + ""));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_parameter_succesfully_set_to").replace("%s%", pName + "").replace("%i%", pValue + ""));
 				}
 				else
 				{
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_invalid_parameter"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_invalid_parameter"));
 				}
 			}
 			catch (Exception e)
 			{
 				if (cmd.length == 2)
 				{
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_set_parameter"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_set_parameter"));
 				}
 			}
 			finally

@@ -49,7 +49,7 @@ public class AdminMessages implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Command format: //msg <SYSTEM_MSG_ID>");
+				activeChar.sendAdminMessage("Command format: //msg <SYSTEM_MSG_ID>");
 			}
 		}
 		else if (command.startsWith("admin_msgx "))
@@ -57,7 +57,7 @@ public class AdminMessages implements IAdminCommandHandler
 			String[] tokens = command.split(" ");
 			if ((tokens.length <= 2) || !Util.isDigit(tokens[1]))
 			{
-				activeChar.sendMessage("Command format: //msgx <SYSTEM_MSG_ID> [item:Id] [skill:Id] [npc:Id] [zone:x,y,x] [castle:Id] [str:'text']");
+				activeChar.sendAdminMessage("Command format: //msgx <SYSTEM_MSG_ID> [item:Id] [skill:Id] [npc:Id] [zone:x,y,x] [castle:Id] [str:'text']");
 				return false;
 			}
 			
@@ -101,7 +101,7 @@ public class AdminMessages implements IAdminCommandHandler
 				}
 				catch (Exception e)
 				{
-					activeChar.sendMessage("Exception: " + e.getMessage());
+					activeChar.sendAdminMessage("Exception: " + e.getMessage());
 					continue;
 				}
 			}

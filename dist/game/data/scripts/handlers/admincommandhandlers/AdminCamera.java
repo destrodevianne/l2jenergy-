@@ -55,7 +55,7 @@ public class AdminCamera implements IAdminCommandHandler
 			{
 				if (com.length != 12)
 				{
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_cam_1"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_cam_1"));
 					return false;
 				}
 				AbstractScript.specialCamera(activeChar, target, Integer.parseInt(com[1]), Integer.parseInt(com[2]), Integer.parseInt(com[3]), Integer.parseInt(com[4]), Integer.parseInt(com[5]), Integer.parseInt(com[6]), Integer.parseInt(com[7]), Integer.parseInt(com[8]), Integer.parseInt(com[9]), Integer.parseInt(com[10]));
@@ -65,7 +65,7 @@ public class AdminCamera implements IAdminCommandHandler
 			{
 				if (com.length != 10)
 				{
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_cam_2"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_cam_2"));
 					return false;
 				}
 				AbstractScript.specialCameraEx(activeChar, target, Integer.parseInt(com[1]), Integer.parseInt(com[2]), Integer.parseInt(com[3]), Integer.parseInt(com[4]), Integer.parseInt(com[5]), Integer.parseInt(com[6]), Integer.parseInt(com[7]), Integer.parseInt(com[8]), Integer.parseInt(com[9]));
@@ -75,7 +75,7 @@ public class AdminCamera implements IAdminCommandHandler
 			{
 				if (com.length != 12)
 				{
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_cam_3"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_cam_3"));
 					return false;
 				}
 				AbstractScript.specialCamera3(activeChar, target, Integer.parseInt(com[1]), Integer.parseInt(com[2]), Integer.parseInt(com[3]), Integer.parseInt(com[4]), Integer.parseInt(com[5]), Integer.parseInt(com[6]), Integer.parseInt(com[7]), Integer.parseInt(com[8]), Integer.parseInt(com[9]), Integer.parseInt(com[10]), Integer.parseInt(com[11]));

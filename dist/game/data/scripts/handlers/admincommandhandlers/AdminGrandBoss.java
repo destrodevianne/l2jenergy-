@@ -95,12 +95,12 @@ public class AdminGrandBoss implements IAdminCommandHandler
 					}
 					else
 					{
-						activeChar.sendMessage("Wrong ID!");
+						activeChar.sendAdminMessage("Wrong ID!");
 					}
 				}
 				else
 				{
-					activeChar.sendMessage("Usage: //grandboss_skip Id");
+					activeChar.sendAdminMessage("Usage: //grandboss_skip Id");
 				}
 				break;
 			}
@@ -126,13 +126,13 @@ public class AdminGrandBoss implements IAdminCommandHandler
 						}
 						default:
 						{
-							activeChar.sendMessage("Wrong ID!");
+							activeChar.sendAdminMessage("Wrong ID!");
 						}
 					}
 				}
 				else
 				{
-					activeChar.sendMessage("Usage: //grandboss_respawn Id");
+					activeChar.sendAdminMessage("Usage: //grandboss_respawn Id");
 				}
 				break;
 			}
@@ -156,13 +156,13 @@ public class AdminGrandBoss implements IAdminCommandHandler
 						}
 						default:
 						{
-							activeChar.sendMessage("Wrong ID!");
+							activeChar.sendAdminMessage("Wrong ID!");
 						}
 					}
 				}
 				else
 				{
-					activeChar.sendMessage("Usage: //grandboss_minions Id");
+					activeChar.sendAdminMessage("Usage: //grandboss_minions Id");
 				}
 				break;
 			}
@@ -188,13 +188,13 @@ public class AdminGrandBoss implements IAdminCommandHandler
 						}
 						default:
 						{
-							activeChar.sendMessage("Wrong ID!");
+							activeChar.sendAdminMessage("Wrong ID!");
 						}
 					}
 				}
 				else
 				{
-					activeChar.sendMessage("Usage: //grandboss_abort Id");
+					activeChar.sendAdminMessage("Usage: //grandboss_abort Id");
 				}
 			}
 				break;
@@ -313,7 +313,7 @@ public class AdminGrandBoss implements IAdminCommandHandler
 		}
 		else
 		{
-			activeChar.sendMessage("Wrong ID!");
+			activeChar.sendAdminMessage("Wrong ID!");
 		}
 	}
 	

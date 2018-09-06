@@ -159,7 +159,7 @@ public class AdminClan implements IAdminCommandHandler
 					}
 					
 					clan.setNewLeader(member);
-					activeChar.sendMessage("Task have been forcely executed.");
+					activeChar.sendAdminMessage("Task have been forcely executed.");
 					break;
 				}
 			}

@@ -59,7 +59,7 @@ public class AdminRide implements IAdminCommandHandler
 		{
 			if (player.isMounted() || player.hasSummon())
 			{
-				activeChar.sendMessage("Target already have a summon.");
+				activeChar.sendAdminMessage("Target already have a summon.");
 				return false;
 			}
 			if (command.startsWith("admin_ride_wyvern"))
@@ -102,7 +102,7 @@ public class AdminRide implements IAdminCommandHandler
 			}
 			else
 			{
-				activeChar.sendMessage("Command '" + command + "' not recognized");
+				activeChar.sendAdminMessage("Command '" + command + "' not recognized");
 				return false;
 			}
 			

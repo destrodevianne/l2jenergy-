@@ -50,7 +50,7 @@ public class AdminVitality implements IAdminCommandHandler
 		
 		if (!Config.ENABLE_VITALITY)
 		{
-			activeChar.sendMessage("Vitality is not enabled on the server!");
+			activeChar.sendAdminMessage("Vitality is not enabled on the server!");
 			return false;
 		}
 		
@@ -73,7 +73,7 @@ public class AdminVitality implements IAdminCommandHandler
 				}
 				catch (Exception e)
 				{
-					activeChar.sendMessage("Incorrect vitality");
+					activeChar.sendAdminMessage("Incorrect vitality");
 				}
 				
 				target.setVitalityPoints(vitality, true);
@@ -87,7 +87,7 @@ public class AdminVitality implements IAdminCommandHandler
 				}
 				catch (Exception e)
 				{
-					activeChar.sendMessage("Incorrect vitality level (0-4)");
+					activeChar.sendAdminMessage("Incorrect vitality level (0-4)");
 				}
 				
 				if ((level >= 0) && (level <= 4))
@@ -105,7 +105,7 @@ public class AdminVitality implements IAdminCommandHandler
 				}
 				else
 				{
-					activeChar.sendMessage("Incorrect vitality level (0-4)");
+					activeChar.sendAdminMessage("Incorrect vitality level (0-4)");
 				}
 			}
 			else if (cmd.equals("admin_full_vitality"))
@@ -123,12 +123,12 @@ public class AdminVitality implements IAdminCommandHandler
 				level = target.getVitalityLevel();
 				vitality = target.getVitalityPoints();
 				
-				activeChar.sendMessage("Player vitality level: " + level);
-				activeChar.sendMessage("Player vitality points: " + vitality);
+				activeChar.sendAdminMessage("Player vitality level: " + level);
+				activeChar.sendAdminMessage("Player vitality points: " + vitality);
 			}
 			return true;
 		}
-		activeChar.sendMessage("Target not found or not a player");
+		activeChar.sendAdminMessage("Target not found or not a player");
 		return false;
 	}
 	

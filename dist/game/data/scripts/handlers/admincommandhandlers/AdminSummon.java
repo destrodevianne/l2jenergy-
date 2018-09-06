@@ -60,7 +60,7 @@ public class AdminSummon implements IAdminCommandHandler
 		}
 		catch (NumberFormatException nfe)
 		{
-			activeChar.sendMessage("Incorrect format for command 'summon'");
+			activeChar.sendAdminMessage("Incorrect format for command 'summon'");
 			return false;
 		}
 		
@@ -70,7 +70,7 @@ public class AdminSummon implements IAdminCommandHandler
 			subCommand = "admin_create_item";
 			if (!AdminData.getInstance().hasAccess(subCommand, activeChar.getAccessLevel()))
 			{
-				activeChar.sendMessage("You don't have the access right to use this command!");
+				activeChar.sendAdminMessage("You don't have the access right to use this command!");
 				_log.warning("Character " + activeChar.getName() + " tryed to use admin command " + subCommand + ", but have no access to it!");
 				return false;
 			}
@@ -82,13 +82,13 @@ public class AdminSummon implements IAdminCommandHandler
 			subCommand = "admin_spawn_once";
 			if (!AdminData.getInstance().hasAccess(subCommand, activeChar.getAccessLevel()))
 			{
-				activeChar.sendMessage("You don't have the access right to use this command!");
+				activeChar.sendAdminMessage("You don't have the access right to use this command!");
 				_log.warning("Character " + activeChar.getName() + " tryed to use admin command " + subCommand + ", but have no access to it!");
 				return false;
 			}
 			IAdminCommandHandler ach = AdminCommandHandler.getInstance().getHandler(subCommand);
 			
-			activeChar.sendMessage("This is only a temporary spawn.  The mob(s) will NOT respawn.");
+			activeChar.sendAdminMessage("This is only a temporary spawn.  The mob(s) will NOT respawn.");
 			id -= 1000000;
 			ach.useAdminCommand(subCommand + " " + id + " " + count, activeChar);
 		}

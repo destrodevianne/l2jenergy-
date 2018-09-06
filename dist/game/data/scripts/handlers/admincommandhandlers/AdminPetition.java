@@ -117,7 +117,7 @@ public class AdminPetition implements IAdminCommandHandler
 			}
 			catch (StringIndexOutOfBoundsException e)
 			{
-				activeChar.sendMessage("Usage: //force_peti text");
+				activeChar.sendAdminMessage("Usage: //force_peti text");
 				return false;
 			}
 		}

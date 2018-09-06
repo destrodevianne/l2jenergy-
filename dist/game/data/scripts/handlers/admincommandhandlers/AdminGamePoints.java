@@ -61,7 +61,7 @@ public class AdminGamePoints implements IAdminCommandHandler
 				catch (Exception e)
 				{
 					showMenuHtml(activeChar);
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_invalid_value"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_invalid_value"));
 					return false;
 				}
 				
@@ -70,7 +70,7 @@ public class AdminGamePoints implements IAdminCommandHandler
 					case "set":
 					{
 						target.setPrimePoints(value);
-						target.sendMessage(MessagesData.getInstance().getMessage(target, "target_set_your_prime_point").replace("%s%", value + ""));
+						target.sendAdminMessage(MessagesData.getInstance().getMessage(target, "target_set_your_prime_point").replace("%s%", value + ""));
 						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_set_your_prime_point").replace("%s%", value + "").replace("%c%", target.getName() + ""));
 						break;
 					}
@@ -89,7 +89,7 @@ public class AdminGamePoints implements IAdminCommandHandler
 							primeCount = Integer.MAX_VALUE;
 						}
 						target.setPrimePoints(primeCount);
-						target.sendMessage(MessagesData.getInstance().getMessage(target, "target_increase_your_prime_point").replace("%s%", value + ""));
+						target.sendAdminMessage(MessagesData.getInstance().getMessage(target, "target_increase_your_prime_point").replace("%s%", value + ""));
 						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_increased_your_prime_point").replace("%c%", target.getName() + "").replace("%s%", value + ""));
 						break;
 					}
@@ -104,7 +104,7 @@ public class AdminGamePoints implements IAdminCommandHandler
 						
 						final long primeCount = Math.max(target.getPrimePoints() - value, 0);
 						target.setPrimePoints(primeCount);
-						target.sendMessage(MessagesData.getInstance().getMessage(target, "target_decreased_your_prime_point").replace("%s%", value + ""));
+						target.sendAdminMessage(MessagesData.getInstance().getMessage(target, "target_decreased_your_prime_point").replace("%s%", value + ""));
 						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_decreased_your_prime_point").replace("%c%", target.getName() + "").replace("%s%", value + ""));
 						break;
 					}

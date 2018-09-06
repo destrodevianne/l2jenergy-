@@ -97,7 +97,7 @@ public class AdminFortSiege implements IAdminCommandHandler
 					}
 					else
 					{
-						player.sendMessage("During registering error occurred!");
+						player.sendAdminMessage("During registering error occurred!");
 					}
 				}
 			}
@@ -111,7 +111,7 @@ public class AdminFortSiege implements IAdminCommandHandler
 			}
 			else if (command.equalsIgnoreCase("admin_list_fortsiege_clans"))
 			{
-				activeChar.sendMessage("Not implemented yet.");
+				activeChar.sendAdminMessage("Not implemented yet.");
 			}
 			else if (command.equalsIgnoreCase("admin_setfort"))
 			{
@@ -133,7 +133,7 @@ public class AdminFortSiege implements IAdminCommandHandler
 				}
 				else
 				{
-					activeChar.sendMessage("Unable to remove fort");
+					activeChar.sendAdminMessage("Unable to remove fort");
 				}
 			}
 			else if (command.equalsIgnoreCase("admin_spawn_fortdoors"))

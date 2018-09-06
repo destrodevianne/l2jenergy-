@@ -61,22 +61,6 @@
         <set lang="en" val="Usage: //set parameter=value" />
 		<set lang="ru" val="Применение: //set parameter=value" />
     </message>
-    <message id="admin_html_title_config">
-        <set lang="en" val="Config" />
-		<set lang="ru" val="Настройки" />
-    </message>
-     <message id="admin_html_title_config_panel">
-        <set lang="en" val="Config Server Panel" />
-		<set lang="ru" val="Настройки параметров" />
-    </message>
-    <message id="admin_button_set">
-        <set lang="en" val="Set" />
-		<set lang="ru" val="Уст." />
-    </message>
-    <message id="admin_button_delete">
-        <set lang="en" val="Delete" />
-		<set lang="ru" val="Удалить" />
-    </message> 
 	<!-- AdminAnnouncements Messages -->
 	<message id="admin_usage_announce_text">
         <set lang="en" val="Usage: //announce [text to announce here]" />
@@ -133,22 +117,6 @@
 	 <message id="admin_announce_edit">
 	    <set lang="en" val="Usage: //announces edit [id]" />
 		<set lang="ru" val="Применение: //announces edit [id]" />
-	</message>
-	<message id="admin_announce_button_restart">
-	    <set lang="en" val="Restart" />
-		<set lang="ru" val="Перезагр." />
-	</message>
-	 <message id="admin_announce_button_show">
-	    <set lang="en" val="Show" />
-		<set lang="ru" val="Показ." />
-	</message>
-	 <message id="admin_announce_button_edit">
-	    <set lang="en" val="Edit" />
-		<set lang="ru" val="Измен." />
-	</message>
-	<message id="admin_announce_button_remove">
-	    <set lang="en" val="Remove" />
-		<set lang="ru" val="Удалить" />
 	</message>
 	<!-- AdminBuffs AdminBuffs -->
 	<message id="admin_player_not_online">
@@ -382,4 +350,50 @@
 	    <set lang="en" val="Admin increase your Pc Cafe Point(s) by %s%!" />
 		<set lang="ru" val="Администратор увеличил ваше количество Очков PC-клуба на %s%!" />
 	</message>
+	
+	<!-- Admin Button -->
+	<message id="admin_button_refresh">
+	    <set lang="en" val="Refresh" />
+		<set lang="ru" val="Обновить" />
+	</message>
+	<message id="admin_announce_button_restart">
+	    <set lang="en" val="Restart" />
+		<set lang="ru" val="Перезагр." />
+	</message>
+	 <message id="admin_announce_button_show">
+	    <set lang="en" val="Show" />
+		<set lang="ru" val="Показ." />
+	</message>
+	 <message id="admin_announce_button_edit">
+	    <set lang="en" val="Edit" />
+		<set lang="ru" val="Измен." />
+	</message>
+	<message id="admin_announce_button_remove">
+	    <set lang="en" val="Remove" />
+		<set lang="ru" val="Удалить" />
+	</message>
+	<message id="admin_html_title_config">
+        <set lang="en" val="Config" />
+		<set lang="ru" val="Настройки" />
+    </message>
+     <message id="admin_html_title_config_panel">
+        <set lang="en" val="Config Server Panel" />
+		<set lang="ru" val="Настройки параметров" />
+    </message>
+    <message id="admin_button_set">
+        <set lang="en" val="Set" />
+		<set lang="ru" val="Уст." />
+    </message>
+    <message id="admin_button_delete">
+        <set lang="en" val="Delete" />
+		<set lang="ru" val="Удалить" />
+    </message>
+    <message id="admin_button_remove_all">
+        <set lang="en" val="Remove All" />
+		<set lang="ru" val="Удалить все" />
+    </message>
+    <message id="admin_button_main">
+        <set lang="en" val="Main" />
+		<set lang="ru" val="Главная" />
+    </message>
 </list>

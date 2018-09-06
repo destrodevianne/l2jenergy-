@@ -33,7 +33,8 @@ import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 /**
  * <B>Pledge Manipulation:</B><BR>
  * <LI>With target in a character without clan:<BR>
- * //pledge create clanname <LI>With target in a clan leader:<BR>
+ * //pledge create clanname
+ * <LI>With target in a clan leader:<BR>
  * //pledge info<BR>
  * //pledge dismiss<BR>
  * //pledge setlevel level<BR>
@@ -85,12 +86,12 @@ public class AdminPledge implements IAdminCommandHandler
 				L2Clan clan = ClanTable.getInstance().createClan(player, parameter);
 				if (clan != null)
 				{
-					activeChar.sendMessage("Clan " + parameter + " created. Leader: " + player.getName());
+					activeChar.sendAdminMessage("Clan " + parameter + " created. Leader: " + player.getName());
 				}
 				else
 				{
 					player.setClanCreateExpiryTime(cet);
-					activeChar.sendMessage("There was a problem while creating the clan.");
+					activeChar.sendAdminMessage("There was a problem while creating the clan.");
 				}
 			}
 			else if (!player.isClanLeader())
@@ -107,11 +108,11 @@ public class AdminPledge implements IAdminCommandHandler
 				L2Clan clan = player.getClan();
 				if (clan == null)
 				{
-					activeChar.sendMessage("Clan disbanded.");
+					activeChar.sendAdminMessage("Clan disbanded.");
 				}
 				else
 				{
-					activeChar.sendMessage("There was a problem while destroying the clan.");
+					activeChar.sendAdminMessage("There was a problem while destroying the clan.");
 				}
 			}
 			else if (action.equals("info"))
@@ -120,7 +121,7 @@ public class AdminPledge implements IAdminCommandHandler
 			}
 			else if (parameter == null)
 			{
-				activeChar.sendMessage("Usage: //pledge <setlevel|rep> <number>");
+				activeChar.sendAdminMessage("Usage: //pledge <setlevel|rep> <number>");
 			}
 			else if (action.equals("setlevel"))
 			{
@@ -128,11 +129,11 @@ public class AdminPledge implements IAdminCommandHandler
 				if ((level >= 0) && (level < 12))
 				{
 					player.getClan().changeLevel(level);
-					activeChar.sendMessage("You set level " + level + " for clan " + player.getClan().getName());
+					activeChar.sendAdminMessage("You set level " + level + " for clan " + player.getClan().getName());
 				}
 				else
 				{
-					activeChar.sendMessage("Level incorrect.");
+					activeChar.sendAdminMessage("Level incorrect.");
 				}
 			}
 			else if (action.startsWith("rep"))
@@ -143,16 +144,16 @@ public class AdminPledge implements IAdminCommandHandler
 					L2Clan clan = player.getClan();
 					if (clan.getLevel() < 5)
 					{
-						activeChar.sendMessage("Only clans of level 5 or above may receive reputation points.");
+						activeChar.sendAdminMessage("Only clans of level 5 or above may receive reputation points.");
 						showMainPage(activeChar);
 						return false;
 					}
 					clan.addReputationScore(points, true);
-					activeChar.sendMessage("You " + (points > 0 ? "add " : "remove ") + Math.abs(points) + " points " + (points > 0 ? "to " : "from ") + clan.getName() + "'s reputation. Their current score is " + clan.getReputationScore());
+					activeChar.sendAdminMessage("You " + (points > 0 ? "add " : "remove ") + Math.abs(points) + " points " + (points > 0 ? "to " : "from ") + clan.getName() + "'s reputation. Their current score is " + clan.getReputationScore());
 				}
 				catch (Exception e)
 				{
-					activeChar.sendMessage("Usage: //pledge <rep> <number>");
+					activeChar.sendAdminMessage("Usage: //pledge <rep> <number>");
 				}
 			}
 		}

@@ -71,11 +71,11 @@ public class AdminTest implements IAdminCommandHandler
 			}
 			catch (NumberFormatException e)
 			{
-				activeChar.sendMessage("Command format is //skill_test <ID>");
+				activeChar.sendAdminMessage("Command format is //skill_test <ID>");
 			}
 			catch (NoSuchElementException nsee)
 			{
-				activeChar.sendMessage("Command format is //skill_test <ID>");
+				activeChar.sendAdminMessage("Command format is //skill_test <ID>");
 			}
 		}
 		else if (command.equals("admin_known on"))

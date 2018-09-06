@@ -126,7 +126,7 @@ public class AdminSkill implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Usage: //add_skill <skill_id> <level>");
+				activeChar.sendAdminMessage("Usage: //add_skill <skill_id> <level>");
 			}
 		}
 		else if (command.startsWith("admin_remove_skill"))
@@ -139,7 +139,7 @@ public class AdminSkill implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Usage: //remove_skill <skill_id>");
+				activeChar.sendAdminMessage("Usage: //remove_skill <skill_id>");
 			}
 		}
 		else if (command.equals("admin_get_skills"))
@@ -179,7 +179,7 @@ public class AdminSkill implements IAdminCommandHandler
 			{
 				player.removeSkill(skill);
 			}
-			activeChar.sendMessage("You have removed all skills from " + player.getName() + ".");
+			activeChar.sendAdminMessage("You have removed all skills from " + player.getName() + ".");
 			player.sendMessage("Admin removed all skills from you.");
 			player.sendSkillList();
 			player.broadcastUserInfo();
@@ -193,7 +193,7 @@ public class AdminSkill implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Usage: //add_clan_skill <skill_id> <level>");
+				activeChar.sendAdminMessage("Usage: //add_clan_skill <skill_id> <level>");
 			}
 		}
 		else if (command.startsWith("admin_setskill"))
@@ -204,7 +204,7 @@ public class AdminSkill implements IAdminCommandHandler
 			Skill skill = SkillData.getInstance().getSkill(id, lvl);
 			activeChar.addSkill(skill);
 			activeChar.sendSkillList();
-			activeChar.sendMessage("You added yourself skill " + skill.getName() + "(" + id + ") level " + lvl);
+			activeChar.sendAdminMessage("You added yourself skill " + skill.getName() + "(" + id + ") level " + lvl);
 		}
 		return true;
 	}
@@ -224,7 +224,7 @@ public class AdminSkill implements IAdminCommandHandler
 		}
 		final L2PcInstance player = target.getActingPlayer();
 		// Notify player and admin
-		activeChar.sendMessage("You gave " + player.giveAvailableSkills(includedByFs, true) + " skills to " + player.getName());
+		activeChar.sendAdminMessage("You gave " + player.giveAvailableSkills(includedByFs, true) + " skills to " + player.getName());
 		player.sendSkillList();
 	}
 	
@@ -272,7 +272,7 @@ public class AdminSkill implements IAdminCommandHandler
 			member.sendSkillList();
 		}
 		
-		activeChar.sendMessage("You gave " + skills.size() + " skills to " + player.getName() + "'s clan " + clan.getName() + ".");
+		activeChar.sendAdminMessage("You gave " + skills.size() + " skills to " + player.getName() + "'s clan " + clan.getName() + ".");
 		player.sendMessage("Your clan received " + skills.size() + " skills.");
 	}
 	
@@ -313,7 +313,11 @@ public class AdminSkill implements IAdminCommandHandler
 		}
 		
 		final NpcHtmlMessage adminReply = new NpcHtmlMessage();
-		final StringBuilder replyMSG = StringUtil.startAppend(500 + (maxPages * 50) + (((skillsEnd - skillsStart) + 1) * 50), "<html><body>" + "<table width=260><tr>" + "<td width=40><button value=\"Main\" action=\"bypass -h admin_admin\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>" + "<td width=180><center>Character Selection Menu</center></td>" + "<td width=40><button value=\"Back\" action=\"bypass -h admin_show_skills\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>" + "</tr></table>" + "<br><br>" + "<center>Editing <font color=\"LEVEL\">", player.getName(), "</font></center>" + "<br><table width=270><tr><td>Lv: ", String.valueOf(player.getLevel()), " ", ClassListData.getInstance().getClass(player.getClassId()).getClientCode(), "</td></tr></table>" + "<br><table width=270><tr><td>Note: Dont forget that modifying players skills can</td></tr>" + "<tr><td>ruin the game...</td></tr></table>" + "<br><center>Click on the skill you wish to remove:</center>" + "<br>" + "<center><table width=270><tr>");
+		final StringBuilder replyMSG = StringUtil.startAppend(500 + (maxPages * 50) + (((skillsEnd - skillsStart) + 1) * 50), "<html><body>" + "<table width=260><tr>"
+			+ "<td width=40><button value=\"Main\" action=\"bypass -h admin_admin\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>" + "<td width=180><center>Character Selection Menu</center></td>"
+			+ "<td width=40><button value=\"Back\" action=\"bypass -h admin_show_skills\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>" + "</tr></table>" + "<br><br>"
+			+ "<center>Editing <font color=\"LEVEL\">", player.getName(), "</font></center>" + "<br><table width=270><tr><td>Lv: ", String.valueOf(player.getLevel()), " ", ClassListData.getInstance().getClass(player.getClassId()).getClientCode(), "</td></tr></table>"
+				+ "<br><table width=270><tr><td>Note: Dont forget that modifying players skills can</td></tr>" + "<tr><td>ruin the game...</td></tr></table>" + "<br><center>Click on the skill you wish to remove:</center>" + "<br>" + "<center><table width=270><tr>");
 		
 		for (int x = 0; x < maxPages; x++)
 		{
@@ -328,7 +332,9 @@ public class AdminSkill implements IAdminCommandHandler
 			StringUtil.append(replyMSG, "<tr><td width=80><a action=\"bypass -h admin_remove_skill ", String.valueOf(skills[i].getId()), "\">", skills[i].getName(), "</a></td><td width=60>", String.valueOf(skills[i].getLevel()), "</td><td width=40>", String.valueOf(skills[i].getId()), "</td></tr>");
 		}
 		
-		replyMSG.append("</table>" + "<br><center><table>" + "Remove skill by ID :" + "<tr><td>Id: </td>" + "<td><edit var=\"id_to_remove\" width=110></td></tr>" + "</table></center>" + "<center><button value=\"Remove skill\" action=\"bypass -h admin_remove_skill $id_to_remove\" width=110 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></center>" + "<br><center><button value=\"Back\" action=\"bypass -h admin_current_player\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></center>" + "</body></html>");
+		replyMSG.append("</table>" + "<br><center><table>" + "Remove skill by ID :" + "<tr><td>Id: </td>" + "<td><edit var=\"id_to_remove\" width=110></td></tr>" + "</table></center>"
+			+ "<center><button value=\"Remove skill\" action=\"bypass -h admin_remove_skill $id_to_remove\" width=110 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></center>"
+			+ "<br><center><button value=\"Back\" action=\"bypass -h admin_current_player\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></center>" + "</body></html>");
 		adminReply.setHtml(replyMSG.toString());
 		activeChar.sendPacket(adminReply);
 	}
@@ -381,7 +387,7 @@ public class AdminSkill implements IAdminCommandHandler
 			{
 				activeChar.addSkill(skill, true);
 			}
-			activeChar.sendMessage("You now have all the skills of " + player.getName() + ".");
+			activeChar.sendAdminMessage("You now have all the skills of " + player.getName() + ".");
 			activeChar.sendSkillList();
 		}
 		showMainPage(activeChar);
@@ -401,7 +407,7 @@ public class AdminSkill implements IAdminCommandHandler
 		final L2PcInstance player = target.getActingPlayer();
 		if (adminSkills == null)
 		{
-			activeChar.sendMessage("You must get the skills of someone in order to do this.");
+			activeChar.sendAdminMessage("You must get the skills of someone in order to do this.");
 		}
 		else
 		{
@@ -423,7 +429,7 @@ public class AdminSkill implements IAdminCommandHandler
 				activeChar.addSkill(skill, true);
 			}
 			player.sendMessage("[GM]" + activeChar.getName() + " updated your skills.");
-			activeChar.sendMessage("You now have all your skills back.");
+			activeChar.sendAdminMessage("You now have all your skills back.");
 			adminSkills = null;
 			activeChar.sendSkillList();
 			player.sendSkillList();
@@ -473,7 +479,7 @@ public class AdminSkill implements IAdminCommandHandler
 				player.addSkill(skill, true);
 				player.sendSkillList();
 				// Admin info.
-				activeChar.sendMessage("You gave the skill " + name + " to " + player.getName() + ".");
+				activeChar.sendAdminMessage("You gave the skill " + name + " to " + player.getName() + ".");
 				if (Config.DEBUG)
 				{
 					_log.fine("[GM]" + activeChar.getName() + " gave skill " + name + " to " + player.getName() + ".");
@@ -482,7 +488,7 @@ public class AdminSkill implements IAdminCommandHandler
 			}
 			else
 			{
-				activeChar.sendMessage("Error: there is no such skill.");
+				activeChar.sendAdminMessage("Error: there is no such skill.");
 			}
 			showMainPage(activeChar); // Back to start
 		}
@@ -508,7 +514,7 @@ public class AdminSkill implements IAdminCommandHandler
 			player.sendMessage("Admin removed the skill " + skillname + " from your skills list.");
 			player.removeSkill(skill);
 			// Admin information
-			activeChar.sendMessage("You removed the skill " + skillname + " from " + player.getName() + ".");
+			activeChar.sendAdminMessage("You removed the skill " + skillname + " from " + player.getName() + ".");
 			if (Config.DEBUG)
 			{
 				_log.fine("[GM]" + activeChar.getName() + " removed skill " + skillname + " from " + player.getName() + ".");
@@ -517,7 +523,7 @@ public class AdminSkill implements IAdminCommandHandler
 		}
 		else
 		{
-			activeChar.sendMessage("Error: there is no such skill.");
+			activeChar.sendAdminMessage("Error: there is no such skill.");
 		}
 		removeSkillsPage(activeChar, 0); // Back to previous page
 	}
@@ -547,7 +553,7 @@ public class AdminSkill implements IAdminCommandHandler
 		}
 		if ((id < 370) || (id > 391) || (level < 1) || (level > 3))
 		{
-			activeChar.sendMessage("Usage: //add_clan_skill <skill_id> <level>");
+			activeChar.sendAdminMessage("Usage: //add_clan_skill <skill_id> <level>");
 			showMainPage(activeChar);
 			return;
 		}
@@ -555,7 +561,7 @@ public class AdminSkill implements IAdminCommandHandler
 		final Skill skill = SkillData.getInstance().getSkill(id, level);
 		if (skill == null)
 		{
-			activeChar.sendMessage("Error: there is no such skill.");
+			activeChar.sendAdminMessage("Error: there is no such skill.");
 			return;
 		}
 		
@@ -566,14 +572,13 @@ public class AdminSkill implements IAdminCommandHandler
 		final L2Clan clan = player.getClan();
 		clan.broadcastToOnlineMembers(sm);
 		clan.addNewSkill(skill);
-		activeChar.sendMessage("You gave the Clan Skill: " + skillname + " to the clan " + clan.getName() + ".");
+		activeChar.sendAdminMessage("You gave the Clan Skill: " + skillname + " to the clan " + clan.getName() + ".");
 		
 		clan.broadcastToOnlineMembers(new PledgeSkillList(clan));
 		for (L2PcInstance member : clan.getOnlineMembers(0))
 		{
 			member.sendSkillList();
 		}
-		
 		showMainPage(activeChar);
 	}
 	

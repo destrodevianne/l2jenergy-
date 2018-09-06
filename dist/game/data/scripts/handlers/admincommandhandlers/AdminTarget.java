@@ -61,12 +61,12 @@ public class AdminTarget implements IAdminCommandHandler
 			}
 			else
 			{
-				activeChar.sendMessage("Player " + targetName + " not found");
+				activeChar.sendAdminMessage("Player " + targetName + " not found");
 			}
 		}
 		catch (IndexOutOfBoundsException e)
 		{
-			activeChar.sendMessage("Please specify correct name.");
+			activeChar.sendAdminMessage("Please specify correct name.");
 		}
 	}
 }

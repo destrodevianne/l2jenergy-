@@ -61,7 +61,7 @@ public class AdminAnnouncements implements IAdminCommandHandler
 			{
 				if (!st.hasMoreTokens())
 				{
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_text"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_text"));
 					return false;
 				}
 				String announce = st.nextToken();
@@ -102,44 +102,44 @@ public class AdminAnnouncements implements IAdminCommandHandler
 						// ************************************
 						if (!st.hasMoreTokens())
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
 							break;
 						}
 						String annInitDelay = st.nextToken();
 						if (!Util.isDigit(annInitDelay))
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
 							break;
 						}
 						int initDelay = Integer.parseInt(annInitDelay) * 1000;
 						// ************************************
 						if (!st.hasMoreTokens())
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
 							break;
 						}
 						String annDelay = st.nextToken();
 						if (!Util.isDigit(annDelay))
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
 							break;
 						}
 						int delay = Integer.parseInt(annDelay) * 1000;
 						if ((delay < (10 * 1000)) && ((type == AnnouncementType.AUTO_NORMAL) || (type == AnnouncementType.AUTO_CRITICAL)))
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_delay_cannot_10_sec"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_delay_cannot_10_sec"));
 							break;
 						}
 						// ************************************
 						if (!st.hasMoreTokens())
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
 							break;
 						}
 						String annRepeat = st.nextToken();
 						if (!Util.isDigit(annRepeat))
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
 							break;
 						}
 						int repeat = Integer.parseInt(annRepeat);
@@ -150,7 +150,7 @@ public class AdminAnnouncements implements IAdminCommandHandler
 						// ************************************
 						if (!st.hasMoreTokens())
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
 							break;
 						}
 						String content = st.nextToken();
@@ -169,27 +169,27 @@ public class AdminAnnouncements implements IAdminCommandHandler
 							announce = new Announcement(type, content, activeChar.getName());
 						}
 						AnnouncementsTable.getInstance().addAnnouncement(announce);
-						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_been_successfully_added"));
+						activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_been_successfully_added"));
 						return useAdminCommand("admin_announces list", activeChar);
 					}
 					case "edit":
 					{
 						if (!st.hasMoreTokens())
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_edit"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_edit"));
 							break;
 						}
 						String annId = st.nextToken();
 						if (!Util.isDigit(annId))
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_edit"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_edit"));
 							break;
 						}
 						int id = Integer.parseInt(annId);
 						final IAnnouncement announce = AnnouncementsTable.getInstance().getAnnounce(id);
 						if (announce == null)
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_doesnt_exists"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_doesnt_exists"));
 							break;
 						}
 						if (!st.hasMoreTokens())
@@ -235,7 +235,7 @@ public class AdminAnnouncements implements IAdminCommandHandler
 									}
 									default:
 									{
-										activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_type_changed_auto"));
+										activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_type_changed_auto"));
 										return false;
 									}
 								}
@@ -253,7 +253,7 @@ public class AdminAnnouncements implements IAdminCommandHandler
 									}
 									default:
 									{
-										activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_type_changed_normal"));
+										activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_type_changed_normal"));
 										return false;
 									}
 								}
@@ -263,44 +263,44 @@ public class AdminAnnouncements implements IAdminCommandHandler
 						// ************************************
 						if (!st.hasMoreTokens())
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
 							break;
 						}
 						String annInitDelay = st.nextToken();
 						if (!Util.isDigit(annInitDelay))
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
 							break;
 						}
 						int initDelay = Integer.parseInt(annInitDelay);
 						// ************************************
 						if (!st.hasMoreTokens())
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
 							break;
 						}
 						String annDelay = st.nextToken();
 						if (!Util.isDigit(annDelay))
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
 							break;
 						}
 						int delay = Integer.parseInt(annDelay);
 						if ((delay < 10) && ((type == AnnouncementType.AUTO_NORMAL) || (type == AnnouncementType.AUTO_CRITICAL)))
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_delay_cannot_10_sec"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_delay_cannot_10_sec"));
 							break;
 						}
 						// ************************************
 						if (!st.hasMoreTokens())
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
 							break;
 						}
 						String annRepeat = st.nextToken();
 						if (!Util.isDigit(annRepeat))
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_add"));
 							break;
 						}
 						int repeat = Integer.parseInt(annRepeat);
@@ -334,26 +334,26 @@ public class AdminAnnouncements implements IAdminCommandHandler
 							autoAnnounce.setRepeat(repeat);
 						}
 						announce.updateMe();
-						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_been_successfully_edited"));
+						activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_been_successfully_edited"));
 						return useAdminCommand("admin_announces list", activeChar);
 					}
 					case "remove":
 					{
 						if (!st.hasMoreTokens())
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_remove"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_remove"));
 							break;
 						}
 						String token = st.nextToken();
 						if (!Util.isDigit(token))
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_remove"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_remove"));
 							break;
 						}
 						int id = Integer.parseInt(token);
 						if (AnnouncementsTable.getInstance().deleteAnnouncement(id))
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_been_successfully_removed"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_been_successfully_removed"));
 						}
 						else
 						{
@@ -373,13 +373,13 @@ public class AdminAnnouncements implements IAdminCommandHandler
 									autoAnnounce.restartMe();
 								}
 							}
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_been_successfully_restarted"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_been_successfully_restarted"));
 							break;
 						}
 						String token = st.nextToken();
 						if (!Util.isDigit(token))
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_show"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_show"));
 							break;
 						}
 						int id = Integer.parseInt(token);
@@ -390,16 +390,16 @@ public class AdminAnnouncements implements IAdminCommandHandler
 							{
 								final AutoAnnouncement autoAnnounce = (AutoAnnouncement) announce;
 								autoAnnounce.restartMe();
-								activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_been_successfully_restarted"));
+								activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_been_successfully_restarted"));
 							}
 							else
 							{
-								activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_option_effect_only_announcements"));
+								activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_option_effect_only_announcements"));
 							}
 						}
 						else
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_doesnt_exists"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_doesnt_exists"));
 						}
 						break;
 					}
@@ -407,13 +407,13 @@ public class AdminAnnouncements implements IAdminCommandHandler
 					{
 						if (!st.hasMoreTokens())
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_show"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_show"));
 							break;
 						}
 						String token = st.nextToken();
 						if (!Util.isDigit(token))
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_show"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_announce_show"));
 							break;
 						}
 						int id = Integer.parseInt(token);
@@ -445,7 +445,7 @@ public class AdminAnnouncements implements IAdminCommandHandler
 							Util.sendCBHtml(activeChar, content);
 							break;
 						}
-						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_doesnt_exists"));
+						activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_announce_doesnt_exists"));
 						return useAdminCommand("admin_announces list", activeChar);
 					}
 					case "list":

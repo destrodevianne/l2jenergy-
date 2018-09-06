@@ -69,7 +69,7 @@ public class AdminReload implements IAdminCommandHandler
 			if (!st.hasMoreTokens())
 			{
 				AdminHtml.showAdminHtml(activeChar, "reload.htm");
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_reload"));
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_reload"));
 				return true;
 			}
 			
@@ -114,7 +114,7 @@ public class AdminReload implements IAdminCommandHandler
 					else
 					{
 						QuestManager.getInstance().reloadAllScripts();
-						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_all_scripts_have_been_reloaded"));
+						activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_all_scripts_have_been_reloaded"));
 						AdminData.getInstance().broadcastMessageToGMs(activeChar.getName() + ": Reloaded Quests.");
 					}
 					break;
@@ -122,7 +122,7 @@ public class AdminReload implements IAdminCommandHandler
 				case "walker":
 				{
 					WalkingManager.getInstance().load();
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_all_walkers_have_been_reloaded"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_all_walkers_have_been_reloaded"));
 					AdminData.getInstance().broadcastMessageToGMs(activeChar.getName() + ": Reloaded Walkers.");
 					break;
 				}
@@ -140,13 +140,13 @@ public class AdminReload implements IAdminCommandHandler
 						}
 						else
 						{
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_file_or_directory_does_not_exist"));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_file_or_directory_does_not_exist"));
 						}
 					}
 					else
 					{
 						HtmCache.getInstance().reload();
-						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_cache_html_megabytes_on_files_loaded").replace("%s%", HtmCache.getInstance().getMemoryUsage() + "").replace("%i%", HtmCache.getInstance().getLoadedFiles() + ""));
+						activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_cache_html_megabytes_on_files_loaded").replace("%s%", HtmCache.getInstance().getMemoryUsage() + "").replace("%i%", HtmCache.getInstance().getLoadedFiles() + ""));
 						AdminData.getInstance().broadcastMessageToGMs(activeChar.getName() + ": Reloaded Htms.");
 					}
 					break;
@@ -222,7 +222,7 @@ public class AdminReload implements IAdminCommandHandler
 					catch (ScriptException e)
 					{
 						L2ScriptEngineManager.getInstance().reportScriptFileError(file, e);
-						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_there_was_error_while_loading_handlers"));
+						activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_there_was_error_while_loading_handlers"));
 					}
 					break;
 				}
@@ -237,7 +237,7 @@ public class AdminReload implements IAdminCommandHandler
 					catch (ScriptException e)
 					{
 						L2ScriptEngineManager.getInstance().reportScriptFileError(file, e);
-						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_there_was_error_while_loading_handlers"));
+						activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_there_was_error_while_loading_handlers"));
 					}
 					break;
 				}
@@ -268,11 +268,11 @@ public class AdminReload implements IAdminCommandHandler
 				}
 				default:
 				{
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_reload"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_reload"));
 					return true;
 				}
 			}
-			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_warn_reloding"));
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_warn_reloding"));
 		}
 		return true;
 	}

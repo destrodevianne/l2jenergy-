@@ -73,12 +73,12 @@ public class AdminPcCondOverride implements IAdminCommandHandler
 								if (activeChar.canOverrideCond(ex))
 								{
 									activeChar.removeOverridedCond(ex);
-									activeChar.sendMessage("You've disabled " + ex.getDescription());
+									activeChar.sendAdminMessage("You've disabled " + ex.getDescription());
 								}
 								else
 								{
 									activeChar.addOverrideCond(ex);
-									activeChar.sendMessage("You've enabled " + ex.getDescription());
+									activeChar.sendAdminMessage("You've enabled " + ex.getDescription());
 								}
 							}
 						}
@@ -95,7 +95,7 @@ public class AdminPcCondOverride implements IAdminCommandHandler
 											activeChar.addOverrideCond(ex);
 										}
 									}
-									activeChar.sendMessage("All condition exceptions have been enabled.");
+									activeChar.sendAdminMessage("All condition exceptions have been enabled.");
 									break;
 								}
 								case "disable_all":
@@ -107,7 +107,7 @@ public class AdminPcCondOverride implements IAdminCommandHandler
 											activeChar.removeOverridedCond(ex);
 										}
 									}
-									activeChar.sendMessage("All condition exceptions have been disabled.");
+									activeChar.sendAdminMessage("All condition exceptions have been disabled.");
 									break;
 								}
 							}

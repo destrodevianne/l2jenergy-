@@ -172,7 +172,10 @@ public class AdminSpawn implements IAdminCommandHandler
 				int instance = Integer.parseInt(st.nextToken());
 				if (instance >= 300000)
 				{
-					final StringBuilder html = StringUtil.startAppend(500 + 1000, "<html><table width=\"100%\"><tr><td width=45><button value=\"Main\" action=\"bypass -h admin_admin\" width=45 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td><td width=180><center>", "<font color=\"LEVEL\">Spawns for " + String.valueOf(instance) + "</font>", "</td><td width=45><button value=\"Back\" action=\"bypass -h admin_current_player\" width=45 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table><br>", "<table width=\"100%\"><tr><td width=200>NpcName</td><td width=70>Action</td></tr>");
+					final StringBuilder html = StringUtil.startAppend(500
+						+ 1000, "<html><table width=\"100%\"><tr><td width=45><button value=\"Main\" action=\"bypass -h admin_admin\" width=45 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td><td width=180><center>", "<font color=\"LEVEL\">Spawns for "
+							+ String.valueOf(instance)
+							+ "</font>", "</td><td width=45><button value=\"Back\" action=\"bypass -h admin_current_player\" width=45 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table><br>", "<table width=\"100%\"><tr><td width=200>NpcName</td><td width=70>Action</td></tr>");
 					int counter = 0;
 					int skiped = 0;
 					Instance inst = InstanceManager.getInstance().getInstance(instance);
@@ -201,17 +204,17 @@ public class AdminSpawn implements IAdminCommandHandler
 					}
 					else
 					{
-						activeChar.sendMessage("Cannot find instance " + instance);
+						activeChar.sendAdminMessage("Cannot find instance " + instance);
 					}
 				}
 				else
 				{
-					activeChar.sendMessage("Invalid instance number.");
+					activeChar.sendAdminMessage("Invalid instance number.");
 				}
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Usage //instance_spawns <instance_number>");
+				activeChar.sendAdminMessage("Usage //instance_spawns <instance_number>");
 			}
 		}
 		else if (command.startsWith("admin_unspawnall"))
@@ -301,7 +304,7 @@ public class AdminSpawn implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Command format is //list_spawns <npcId|npc_name> [tele_index]");
+				activeChar.sendAdminMessage("Command format is //list_spawns <npcId|npc_name> [tele_index]");
 			}
 			if (command.startsWith("admin_list_positions"))
 			{
@@ -364,7 +367,7 @@ public class AdminSpawn implements IAdminCommandHandler
 		
 		if (index == 0)
 		{
-			activeChar.sendMessage(getClass().getSimpleName() + ": No current spawns found.");
+			activeChar.sendAdminMessage(getClass().getSimpleName() + ": No current spawns found.");
 		}
 	}
 	
@@ -435,7 +438,7 @@ public class AdminSpawn implements IAdminCommandHandler
 			// TODO add checks for GrandBossSpawnManager
 			if (RaidBossSpawnManager.getInstance().isDefined(spawn.getId()))
 			{
-				activeChar.sendMessage("You cannot spawn another instance of " + template.getName() + ".");
+				activeChar.sendAdminMessage("You cannot spawn another instance of " + template.getName() + ".");
 			}
 			else
 			{
@@ -454,7 +457,7 @@ public class AdminSpawn implements IAdminCommandHandler
 				{
 					spawn.stopRespawn();
 				}
-				activeChar.sendMessage("Created " + template.getName() + " on " + target.getObjectId());
+				activeChar.sendAdminMessage("Created " + template.getName() + " on " + target.getObjectId());
 			}
 		}
 		catch (Exception e)
@@ -509,7 +512,6 @@ public class AdminSpawn implements IAdminCommandHandler
 		{
 			StringUtil.append(tb, "<br><center><button value=\"Next\" action=\"bypass -h admin_npc_index ", starting, " ", Integer.toString(i), "\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"><button value=\"Back\" action=\"bypass -h admin_show_npcs\" width=40 height=15 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></center></body></html>");
 		}
-		
 		activeChar.sendPacket(new NpcHtmlMessage(tb.toString()));
 	}
 }

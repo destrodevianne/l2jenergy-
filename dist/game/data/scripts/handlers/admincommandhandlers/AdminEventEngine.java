@@ -230,7 +230,7 @@ public class AdminEventEngine implements IAdminCommandHandler
 				
 				final NpcHtmlMessage adminReply = new NpcHtmlMessage();
 				
-				final String replyMSG = StringUtil.concat("<html><title>[ L2J EVENT ENGINE ]</title><body><br>", "<center>The event <font color=\"LEVEL\">", L2Event._eventName, "</font> has been announced, now you can type //event_panel to see the event panel control</center><br>", "</body></html>");
+				final String replyMSG = StringUtil.concat("<html><title>[ EVENT ENGINE ]</title><body><br>", "<center>The event <font color=\"LEVEL\">", L2Event._eventName, "</font> has been announced, now you can type //event_panel to see the event panel control</center><br>", "</body></html>");
 				adminReply.setHtml(replyMSG);
 				activeChar.sendPacket(adminReply);
 			}
@@ -569,7 +569,7 @@ public class AdminEventEngine implements IAdminCommandHandler
 		
 		final NpcHtmlMessage adminReply = new NpcHtmlMessage();
 		StringBuilder sb = new StringBuilder();
-		sb.append("<html><title>[ L2J EVENT ENGINE ]</title><body><br><center>Current event: <font color=\"LEVEL\">");
+		sb.append("<html><title>[ EVENT ENGINE ]</title><body><br><center>Current event: <font color=\"LEVEL\">");
 		sb.append(L2Event._eventName);
 		sb.append("</font></center><br><table cellspacing=-1 width=280><tr><td align=center>Type the team ID(s) that will be affected by the commands. Commands with '*' work with only 1 team ID in the field, while '!' - none.</td></tr><tr><td align=center><edit var=\"team_number\" width=100 height=15></td></tr>");
 		sb.append("<tr><td>&nbsp;</td></tr><tr><td><table width=200>");

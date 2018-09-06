@@ -254,11 +254,13 @@ import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.model.zone.type.L2BossZone;
 import com.l2jserver.gameserver.network.L2GameClient;
 import com.l2jserver.gameserver.network.SystemMessageId;
+import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.AbstractHtmlPacket;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.ChangeWaitType;
 import com.l2jserver.gameserver.network.serverpackets.CharInfo;
 import com.l2jserver.gameserver.network.serverpackets.ConfirmDlg;
+import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
 import com.l2jserver.gameserver.network.serverpackets.EtcStatusUpdate;
 import com.l2jserver.gameserver.network.serverpackets.ExAutoSoulShot;
 import com.l2jserver.gameserver.network.serverpackets.ExBrExtraUserInfo;
@@ -8564,6 +8566,16 @@ public final class L2PcInstance extends L2Playable
 	public void sendMessage(String message)
 	{
 		sendPacket(SystemMessage.sendString(message));
+	}
+	
+	public void sendAdminMessage(final String message)
+	{
+		sendPacket(new CreatureSay(0, Say2.ALL, "SYS", message));
+	}
+	
+	public void sendHTMLMessage(final String message)
+	{
+		sendPacket(new CreatureSay(0, Say2.ALL, "HTML", message));
 	}
 	
 	public void enterObserverMode(Location loc)

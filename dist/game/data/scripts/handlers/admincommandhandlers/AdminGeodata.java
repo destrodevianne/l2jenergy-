@@ -59,11 +59,11 @@ public class AdminGeodata implements IAdminCommandHandler
 				
 				if (GeoData.getInstance().hasGeoPos(geoX, geoY))
 				{
-					activeChar.sendMessage("WorldX: " + worldX + ", WorldY: " + worldY + ", WorldZ: " + worldZ + ", GeoX: " + geoX + ", GeoY: " + geoY + ", GeoZ: " + GeoData.getInstance().getNearestZ(geoX, geoY, worldZ));
+					activeChar.sendAdminMessage("WorldX: " + worldX + ", WorldY: " + worldY + ", WorldZ: " + worldZ + ", GeoX: " + geoX + ", GeoY: " + geoY + ", GeoZ: " + GeoData.getInstance().getNearestZ(geoX, geoY, worldZ));
 				}
 				else
 				{
-					activeChar.sendMessage("There is no geodata at this position.");
+					activeChar.sendAdminMessage("There is no geodata at this position.");
 				}
 				break;
 			}
@@ -77,11 +77,11 @@ public class AdminGeodata implements IAdminCommandHandler
 				
 				if (GeoData.getInstance().hasGeoPos(geoX, geoY))
 				{
-					activeChar.sendMessage("WorldX: " + worldX + ", WorldY: " + worldY + ", WorldZ: " + worldZ + ", GeoX: " + geoX + ", GeoY: " + geoY + ", GeoZ: " + GeoData.getInstance().getSpawnHeight(worldX, worldY, worldZ));
+					activeChar.sendAdminMessage("WorldX: " + worldX + ", WorldY: " + worldY + ", WorldZ: " + worldZ + ", GeoX: " + geoX + ", GeoY: " + geoY + ", GeoZ: " + GeoData.getInstance().getSpawnHeight(worldX, worldY, worldZ));
 				}
 				else
 				{
-					activeChar.sendMessage("There is no geodata at this position.");
+					activeChar.sendAdminMessage("There is no geodata at this position.");
 				}
 				break;
 			}
@@ -92,11 +92,11 @@ public class AdminGeodata implements IAdminCommandHandler
 				{
 					if (GeoData.getInstance().canSeeTarget(activeChar, target))
 					{
-						activeChar.sendMessage("Can move beeline.");
+						activeChar.sendAdminMessage("Can move beeline.");
 					}
 					else
 					{
-						activeChar.sendMessage("Can not move beeline!");
+						activeChar.sendAdminMessage("Can not move beeline!");
 					}
 				}
 				else
@@ -112,7 +112,7 @@ public class AdminGeodata implements IAdminCommandHandler
 				{
 					if (GeoData.getInstance().canSeeTarget(activeChar, target))
 					{
-						activeChar.sendMessage("Can see target.");
+						activeChar.sendAdminMessage("Can see target.");
 					}
 					else
 					{

@@ -63,27 +63,27 @@ public class AdminCursedWeapons implements IAdminCommandHandler
 		{
 			if (!command.contains("menu"))
 			{
-				activeChar.sendMessage("====== Cursed Weapons: ======");
+				activeChar.sendAdminMessage("====== Cursed Weapons: ======");
 				for (CursedWeapon cw : cwm.getCursedWeapons())
 				{
 					activeChar.sendMessage("> " + cw.getName() + " (" + cw.getItemId() + ")");
 					if (cw.isActivated())
 					{
 						L2PcInstance pl = cw.getPlayer();
-						activeChar.sendMessage("  Player holding: " + (pl == null ? "null" : pl.getName()));
-						activeChar.sendMessage("    Player karma: " + cw.getPlayerKarma());
-						activeChar.sendMessage("    Time Remaining: " + (cw.getTimeLeft() / 60000) + " min.");
-						activeChar.sendMessage("    Kills : " + cw.getNbKills());
+						activeChar.sendAdminMessage("  Player holding: " + (pl == null ? "null" : pl.getName()));
+						activeChar.sendAdminMessage("    Player karma: " + cw.getPlayerKarma());
+						activeChar.sendAdminMessage("    Time Remaining: " + (cw.getTimeLeft() / 60000) + " min.");
+						activeChar.sendAdminMessage("    Kills : " + cw.getNbKills());
 					}
 					else if (cw.isDropped())
 					{
-						activeChar.sendMessage("  Lying on the ground.");
-						activeChar.sendMessage("    Time Remaining: " + (cw.getTimeLeft() / 60000) + " min.");
-						activeChar.sendMessage("    Kills : " + cw.getNbKills());
+						activeChar.sendAdminMessage("  Lying on the ground.");
+						activeChar.sendAdminMessage("    Time Remaining: " + (cw.getTimeLeft() / 60000) + " min.");
+						activeChar.sendAdminMessage("    Kills : " + cw.getNbKills());
 					}
 					else
 					{
-						activeChar.sendMessage("  Don't exist in the world.");
+						activeChar.sendAdminMessage("  Don't exist in the world.");
 					}
 					activeChar.sendPacket(SystemMessageId.FRIEND_LIST_FOOTER);
 				}
@@ -103,15 +103,21 @@ public class AdminCursedWeapons implements IAdminCommandHandler
 					if (cw.isActivated())
 					{
 						L2PcInstance pl = cw.getPlayer();
-						StringUtil.append(replyMSG, "<tr><td>Weilder:</td><td>", (pl == null ? "null" : pl.getName()), "</td></tr>" + "<tr><td>Karma:</td><td>", String.valueOf(cw.getPlayerKarma()), "</td></tr>" + "<tr><td>Kills:</td><td>", String.valueOf(cw.getPlayerPkKills()), "/", String.valueOf(cw.getNbKills()), "</td></tr>" + "<tr><td>Time remaining:</td><td>", String.valueOf(cw.getTimeLeft() / 60000), " min.</td></tr>" + "<tr><td><button value=\"Remove\" action=\"bypass -h admin_cw_remove ", String.valueOf(itemId), "\" width=73 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>" + "<td><button value=\"Go\" action=\"bypass -h admin_cw_goto ", String.valueOf(itemId), "\" width=73 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+						StringUtil.append(replyMSG, "<tr><td>Weilder:</td><td>", (pl == null ? "null" : pl.getName()), "</td></tr>" + "<tr><td>Karma:</td><td>", String.valueOf(cw.getPlayerKarma()), "</td></tr>"
+							+ "<tr><td>Kills:</td><td>", String.valueOf(cw.getPlayerPkKills()), "/", String.valueOf(cw.getNbKills()), "</td></tr>" + "<tr><td>Time remaining:</td><td>", String.valueOf(cw.getTimeLeft() / 60000), " min.</td></tr>"
+								+ "<tr><td><button value=\"Remove\" action=\"bypass -h admin_cw_remove ", String.valueOf(itemId), "\" width=73 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>"
+									+ "<td><button value=\"Go\" action=\"bypass -h admin_cw_goto ", String.valueOf(itemId), "\" width=73 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
 					}
 					else if (cw.isDropped())
 					{
-						StringUtil.append(replyMSG, "<tr><td>Position:</td><td>Lying on the ground</td></tr>" + "<tr><td>Time remaining:</td><td>", String.valueOf(cw.getTimeLeft() / 60000), " min.</td></tr>" + "<tr><td>Kills:</td><td>", String.valueOf(cw.getNbKills()), "</td></tr>" + "<tr><td><button value=\"Remove\" action=\"bypass -h admin_cw_remove ", String.valueOf(itemId), "\" width=73 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>" + "<td><button value=\"Go\" action=\"bypass -h admin_cw_goto ", String.valueOf(itemId), "\" width=73 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
+						StringUtil.append(replyMSG, "<tr><td>Position:</td><td>Lying on the ground</td></tr>" + "<tr><td>Time remaining:</td><td>", String.valueOf(cw.getTimeLeft() / 60000), " min.</td></tr>" + "<tr><td>Kills:</td><td>", String.valueOf(cw.getNbKills()), "</td></tr>"
+							+ "<tr><td><button value=\"Remove\" action=\"bypass -h admin_cw_remove ", String.valueOf(itemId), "\" width=73 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>"
+								+ "<td><button value=\"Go\" action=\"bypass -h admin_cw_goto ", String.valueOf(itemId), "\" width=73 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
 					}
 					else
 					{
-						StringUtil.append(replyMSG, "<tr><td>Position:</td><td>Doesn't exist.</td></tr>" + "<tr><td><button value=\"Give to Target\" action=\"bypass -h admin_cw_add ", String.valueOf(itemId), "\" width=130 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td><td></td></tr>");
+						StringUtil.append(replyMSG, "<tr><td>Position:</td><td>Doesn't exist.</td></tr>"
+							+ "<tr><td><button value=\"Give to Target\" action=\"bypass -h admin_cw_add ", String.valueOf(itemId), "\" width=130 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td><td></td></tr>");
 					}
 					
 					replyMSG.append("</table><br>");
@@ -150,12 +156,12 @@ public class AdminCursedWeapons implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Usage: //cw_remove|//cw_goto|//cw_add <itemid|name>");
+				activeChar.sendAdminMessage("Usage: //cw_remove|//cw_goto|//cw_add <itemid|name>");
 			}
 			
 			if (cw == null)
 			{
-				activeChar.sendMessage("Unknown cursed weapon ID.");
+				activeChar.sendAdminMessage("Unknown cursed weapon ID.");
 				return false;
 			}
 			
@@ -171,7 +177,7 @@ public class AdminCursedWeapons implements IAdminCommandHandler
 			{
 				if (cw.isActive())
 				{
-					activeChar.sendMessage("This cursed weapon is already active.");
+					activeChar.sendAdminMessage("This cursed weapon is already active.");
 				}
 				else
 				{
@@ -190,7 +196,7 @@ public class AdminCursedWeapons implements IAdminCommandHandler
 			}
 			else
 			{
-				activeChar.sendMessage("Unknown command.");
+				activeChar.sendAdminMessage("Unknown command.");
 			}
 		}
 		return true;

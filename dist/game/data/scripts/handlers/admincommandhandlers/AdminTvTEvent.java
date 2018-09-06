@@ -47,7 +47,7 @@ public class AdminTvTEvent implements IAdminCommandHandler
 			
 			if (!(target instanceof L2PcInstance))
 			{
-				activeChar.sendMessage("You should select a player!");
+				activeChar.sendAdminMessage("You should select a player!");
 				return true;
 			}
 			
@@ -59,7 +59,7 @@ public class AdminTvTEvent implements IAdminCommandHandler
 			
 			if (!(target instanceof L2PcInstance))
 			{
-				activeChar.sendMessage("You should select a player!");
+				activeChar.sendAdminMessage("You should select a player!");
 				return true;
 			}
 			
@@ -83,13 +83,13 @@ public class AdminTvTEvent implements IAdminCommandHandler
 	{
 		if (playerInstance.isOnEvent())
 		{
-			activeChar.sendMessage("Player already participated in the event!");
+			activeChar.sendAdminMessage("Player already participated in the event!");
 			return;
 		}
 		
 		if (!TvTEvent.addParticipant(playerInstance))
 		{
-			activeChar.sendMessage("Player instance could not be added, it seems to be null!");
+			activeChar.sendAdminMessage("Player instance could not be added, it seems to be null!");
 			return;
 		}
 		
@@ -103,7 +103,7 @@ public class AdminTvTEvent implements IAdminCommandHandler
 	{
 		if (!TvTEvent.removeParticipant(playerInstance.getObjectId()))
 		{
-			activeChar.sendMessage("Player is not part of the event!");
+			activeChar.sendAdminMessage("Player is not part of the event!");
 			return;
 		}
 		

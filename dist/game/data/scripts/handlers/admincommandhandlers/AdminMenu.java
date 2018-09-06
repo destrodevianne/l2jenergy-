@@ -102,7 +102,7 @@ public class AdminMenu implements IAdminCommandHandler
 				}
 				if (!player.isInParty())
 				{
-					activeChar.sendMessage("Player is not in party.");
+					activeChar.sendAdminMessage("Player is not in party.");
 					teleportCharacter(player, activeChar.getLocation(), activeChar, "Admin is teleporting you.");
 					return true;
 				}
@@ -130,7 +130,7 @@ public class AdminMenu implements IAdminCommandHandler
 				L2Clan clan = player.getClan();
 				if (clan == null)
 				{
-					activeChar.sendMessage("Player is not in a clan.");
+					activeChar.sendAdminMessage("Player is not in a clan.");
 					teleportCharacter(player, activeChar.getLocation(), activeChar, "Admin is teleporting you.");
 					return true;
 				}
@@ -192,7 +192,7 @@ public class AdminMenu implements IAdminCommandHandler
 				String subCommand = "admin_ban_char";
 				if (!AdminData.getInstance().hasAccess(subCommand, activeChar.getAccessLevel()))
 				{
-					activeChar.sendMessage("You don't have the access right to use this command!");
+					activeChar.sendAdminMessage("You don't have the access right to use this command!");
 					_log.warning("Character " + activeChar.getName() + " tryed to use admin command " + subCommand + ", but have no access to it!");
 					return false;
 				}
@@ -209,7 +209,7 @@ public class AdminMenu implements IAdminCommandHandler
 				String subCommand = "admin_unban_char";
 				if (!AdminData.getInstance().hasAccess(subCommand, activeChar.getAccessLevel()))
 				{
-					activeChar.sendMessage("You don't have the access right to use this command!");
+					activeChar.sendAdminMessage("You don't have the access right to use this command!");
 					_log.warning("Character " + activeChar.getName() + " tryed to use admin command " + subCommand + ", but have no access to it!");
 					return false;
 				}
@@ -243,7 +243,7 @@ public class AdminMenu implements IAdminCommandHandler
 			if (plyr != null)
 			{
 				target = plyr;
-				activeChar.sendMessage("You killed " + plyr.getName());
+				activeChar.sendAdminMessage("You killed " + plyr.getName());
 			}
 		}
 		if (target != null)
@@ -299,7 +299,7 @@ public class AdminMenu implements IAdminCommandHandler
 		{
 			activeChar.setInstanceId(player.getInstanceId());
 			activeChar.teleToLocation(player.getLocation(), true);
-			activeChar.sendMessage("You're teleporting yourself to character " + player.getName());
+			activeChar.sendAdminMessage("You're teleporting yourself to character " + player.getName());
 		}
 		showMainPage(activeChar);
 	}

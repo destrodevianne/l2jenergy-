@@ -62,7 +62,7 @@ public class AdminScan implements IAdminCommandHandler
 					}
 					catch (NumberFormatException e)
 					{
-						activeChar.sendMessage("Usage: //scan [radius]");
+						activeChar.sendAdminMessage("Usage: //scan [radius]");
 						return false;
 					}
 				}
@@ -74,7 +74,7 @@ public class AdminScan implements IAdminCommandHandler
 			{
 				if (!st.hasMoreElements())
 				{
-					activeChar.sendMessage("Usage: //deletenpcbyobjectid <object_id>");
+					activeChar.sendAdminMessage("Usage: //deletenpcbyobjectid <object_id>");
 					return false;
 				}
 				
@@ -86,7 +86,7 @@ public class AdminScan implements IAdminCommandHandler
 					final L2Npc npc = target instanceof L2Npc ? (L2Npc) target : null;
 					if (npc == null)
 					{
-						activeChar.sendMessage("NPC does not exist or object_id does not belong to an NPC");
+						activeChar.sendAdminMessage("NPC does not exist or object_id does not belong to an NPC");
 						return false;
 					}
 					
@@ -107,11 +107,11 @@ public class AdminScan implements IAdminCommandHandler
 						}
 					}
 					
-					activeChar.sendMessage(npc.getName() + " have been deleted.");
+					activeChar.sendAdminMessage(npc.getName() + " have been deleted.");
 				}
 				catch (NumberFormatException e)
 				{
-					activeChar.sendMessage("object_id must be a number.");
+					activeChar.sendAdminMessage("object_id must be a number.");
 					return false;
 				}
 				

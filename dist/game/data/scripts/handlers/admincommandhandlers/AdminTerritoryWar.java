@@ -67,7 +67,7 @@ public class AdminTerritoryWar implements IAdminCommandHandler
 					int month = cal.get(Calendar.MONTH) + Integer.parseInt(st.nextToken());
 					if ((cal.getActualMinimum(Calendar.MONTH) > month) || (cal.getActualMaximum(Calendar.MONTH) < month))
 					{
-						activeChar.sendMessage("Unable to change Siege Date - Incorrect month value only " + cal.getActualMinimum(Calendar.MONTH) + "-" + cal.getActualMaximum(Calendar.MONTH) + " is accepted!");
+						activeChar.sendAdminMessage("Unable to change Siege Date - Incorrect month value only " + cal.getActualMinimum(Calendar.MONTH) + "-" + cal.getActualMaximum(Calendar.MONTH) + " is accepted!");
 						return false;
 					}
 					cal.set(Calendar.MONTH, month);
@@ -77,7 +77,7 @@ public class AdminTerritoryWar implements IAdminCommandHandler
 					int day = Integer.parseInt(st.nextToken());
 					if ((cal.getActualMinimum(Calendar.DAY_OF_MONTH) > day) || (cal.getActualMaximum(Calendar.DAY_OF_MONTH) < day))
 					{
-						activeChar.sendMessage("Unable to change Siege Date - Incorrect day value only " + cal.getActualMinimum(Calendar.DAY_OF_MONTH) + "-" + cal.getActualMaximum(Calendar.DAY_OF_MONTH) + " is accepted!");
+						activeChar.sendAdminMessage("Unable to change Siege Date - Incorrect day value only " + cal.getActualMinimum(Calendar.DAY_OF_MONTH) + "-" + cal.getActualMaximum(Calendar.DAY_OF_MONTH) + " is accepted!");
 						return false;
 					}
 					cal.set(Calendar.DAY_OF_MONTH, day);
@@ -87,7 +87,7 @@ public class AdminTerritoryWar implements IAdminCommandHandler
 					int hour = Integer.parseInt(st.nextToken());
 					if ((cal.getActualMinimum(Calendar.HOUR_OF_DAY) > hour) || (cal.getActualMaximum(Calendar.HOUR_OF_DAY) < hour))
 					{
-						activeChar.sendMessage("Unable to change Siege Date - Incorrect hour value only " + cal.getActualMinimum(Calendar.HOUR_OF_DAY) + "-" + cal.getActualMaximum(Calendar.HOUR_OF_DAY) + " is accepted!");
+						activeChar.sendAdminMessage("Unable to change Siege Date - Incorrect hour value only " + cal.getActualMinimum(Calendar.HOUR_OF_DAY) + "-" + cal.getActualMaximum(Calendar.HOUR_OF_DAY) + " is accepted!");
 						return false;
 					}
 					cal.set(Calendar.HOUR_OF_DAY, hour);
@@ -97,7 +97,7 @@ public class AdminTerritoryWar implements IAdminCommandHandler
 					int min = Integer.parseInt(st.nextToken());
 					if ((cal.getActualMinimum(Calendar.MINUTE) > min) || (cal.getActualMaximum(Calendar.MINUTE) < min))
 					{
-						activeChar.sendMessage("Unable to change Siege Date - Incorrect minute value only " + cal.getActualMinimum(Calendar.MINUTE) + "-" + cal.getActualMaximum(Calendar.MINUTE) + " is accepted!");
+						activeChar.sendAdminMessage("Unable to change Siege Date - Incorrect minute value only " + cal.getActualMinimum(Calendar.MINUTE) + "-" + cal.getActualMaximum(Calendar.MINUTE) + " is accepted!");
 						return false;
 					}
 					cal.set(Calendar.MINUTE, min);
@@ -105,7 +105,7 @@ public class AdminTerritoryWar implements IAdminCommandHandler
 				
 				if (cal.getTimeInMillis() < Calendar.getInstance().getTimeInMillis())
 				{
-					activeChar.sendMessage("Unable to change TW Date!");
+					activeChar.sendAdminMessage("Unable to change TW Date!");
 				}
 				else if (cal.getTimeInMillis() != TerritoryWarManager.getInstance().getTWStartTimeInMillis())
 				{
@@ -147,7 +147,8 @@ public class AdminTerritoryWar implements IAdminCommandHandler
 					{
 						sb.append("<table width=270><tr>");
 						sb.append("<td width=135 ALIGN=\"LEFT\">" + ward.getPlayer().getActiveWeaponInstance().getItemName() + " - " + ward.getPlayer().getName() + "</td>");
-						sb.append("<td width=135 ALIGN=\"RIGHT\"><button value=\"TeleTo\" action=\"bypass -h admin_move_to " + ward.getPlayer().getX() + " " + ward.getPlayer().getY() + " " + ward.getPlayer().getZ() + "\" width=50 height=20 back=\"L2UI_CT1.Button_DF_Down\" fore=\"L2UI_ct1.button_df\"></td>");
+						sb.append("<td width=135 ALIGN=\"RIGHT\"><button value=\"TeleTo\" action=\"bypass -h admin_move_to " + ward.getPlayer().getX() + " " + ward.getPlayer().getY() + " " + ward.getPlayer().getZ()
+							+ "\" width=50 height=20 back=\"L2UI_CT1.Button_DF_Down\" fore=\"L2UI_ct1.button_df\"></td>");
 						sb.append("</tr></table>");
 					}
 				}

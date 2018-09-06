@@ -320,7 +320,7 @@ public class AdminShowQuests implements IAdminCommandHandler
 		}
 		catch (Exception e)
 		{
-			actor.sendMessage("There was an error.");
+			actor.sendAdminMessage("There was an error.");
 			_log.warning(AdminShowQuests.class.getSimpleName() + ": " + e.getMessage());
 		}
 	}
@@ -346,7 +346,7 @@ public class AdminShowQuests implements IAdminCommandHandler
 					target.sendPacket(new QuestList());
 					target.sendPacket(new ExShowQuestMark(qs.getQuest().getId()));
 					target.delQuestState(qs.getQuestName());
-					actor.sendMessage("Removed quest " + qs.getQuest().getDescr() + " from " + target.getName() + ".");
+					actor.sendAdminMessage("Removed quest " + qs.getQuest().getDescr() + " from " + target.getName() + ".");
 					break;
 				}
 				case "CREATE":

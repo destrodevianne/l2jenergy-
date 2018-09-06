@@ -59,7 +59,7 @@ public class AdminLevel implements IAdminCommandHandler
 			}
 			catch (NumberFormatException e)
 			{
-				activeChar.sendMessage("Wrong Number Format");
+				activeChar.sendAdminMessage("Wrong Number Format");
 			}
 		}
 		else if (actualCommand.equalsIgnoreCase("admin_set_level"))
@@ -86,7 +86,7 @@ public class AdminLevel implements IAdminCommandHandler
 			}
 			catch (NumberFormatException e)
 			{
-				activeChar.sendMessage("Level require number as value!");
+				activeChar.sendAdminMessage("Level require number as value!");
 				return false;
 			}
 		}

@@ -49,7 +49,7 @@ public class AdminHtml implements IAdminCommandHandler
 			{
 				if (!st.hasMoreTokens())
 				{
-					activeChar.sendMessage("Usage: //html path");
+					activeChar.sendAdminMessage("Usage: //html path");
 					return false;
 				}
 				
@@ -61,7 +61,7 @@ public class AdminHtml implements IAdminCommandHandler
 			{
 				if (!st.hasMoreTokens())
 				{
-					activeChar.sendMessage("Usage: //loadhtml path");
+					activeChar.sendAdminMessage("Usage: //loadhtml path");
 					return false;
 				}
 				
@@ -81,6 +81,7 @@ public class AdminHtml implements IAdminCommandHandler
 	public static void showAdminHtml(L2PcInstance activeChar, String path)
 	{
 		showHtml(activeChar, "data/html/admin/" + path, false);
+		activeChar.sendHTMLMessage("data/html/admin/" + path);
 	}
 	
 	/**

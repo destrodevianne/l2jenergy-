@@ -105,14 +105,14 @@ public class AdminPolymorph implements IAdminCommandHandler
 			final String[] parts = command.split(" ");
 			if ((parts.length != 2) || !Util.isDigit(parts[1]))
 			{
-				activeChar.sendMessage("Usage: //transform <id>");
+				activeChar.sendAdminMessage("Usage: //transform <id>");
 				return false;
 			}
 			
 			final int id = Integer.parseInt(parts[1]);
 			if (!TransformData.getInstance().transformPlayer(id, player))
 			{
-				player.sendMessage("Unknown transformation ID: " + id);
+				player.sendAdminMessage("Unknown transformation ID: " + id);
 				return false;
 			}
 		}
@@ -121,7 +121,7 @@ public class AdminPolymorph implements IAdminCommandHandler
 			final String[] parts = command.split(" ");
 			if ((parts.length < 2) || !Util.isDigit(parts[1]))
 			{
-				activeChar.sendMessage("Usage: //polymorph [type] <id>");
+				activeChar.sendAdminMessage("Usage: //polymorph [type] <id>");
 				return false;
 			}
 			
@@ -172,7 +172,7 @@ public class AdminPolymorph implements IAdminCommandHandler
 			// end of animation
 			obj.decayMe();
 			obj.spawnMe(obj.getX(), obj.getY(), obj.getZ());
-			activeChar.sendMessage("Polymorph succeed");
+			activeChar.sendAdminMessage("Polymorph succeed");
 		}
 		else
 		{
@@ -192,7 +192,7 @@ public class AdminPolymorph implements IAdminCommandHandler
 			target.getPoly().setPolyInfo(null, "1");
 			target.decayMe();
 			target.spawnMe(target.getX(), target.getY(), target.getZ());
-			activeChar.sendMessage("Unpolymorph succeed");
+			activeChar.sendAdminMessage("Unpolymorph succeed");
 		}
 		else
 		{

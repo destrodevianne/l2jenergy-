@@ -42,20 +42,20 @@ public class AdminEnchant implements IAdminCommandHandler
 	
 	private static final String[] ADMIN_COMMANDS =
 	{
-		"admin_seteh",// 6
-		"admin_setec",// 10
-		"admin_seteg",// 9
-		"admin_setel",// 11
-		"admin_seteb",// 12
-		"admin_setew",// 7
-		"admin_setes",// 8
-		"admin_setle",// 1
-		"admin_setre",// 2
-		"admin_setlf",// 4
-		"admin_setrf",// 5
-		"admin_seten",// 3
-		"admin_setun",// 0
-		"admin_setba",// 13
+		"admin_seteh", // 6
+		"admin_setec", // 10
+		"admin_seteg", // 9
+		"admin_setel", // 11
+		"admin_seteb", // 12
+		"admin_setew", // 7
+		"admin_setes", // 8
+		"admin_setle", // 1
+		"admin_setre", // 2
+		"admin_setlf", // 4
+		"admin_setrf", // 5
+		"admin_seten", // 3
+		"admin_setun", // 0
+		"admin_setba", // 13
 		"admin_setbe",
 		"admin_enchant"
 	};
@@ -141,7 +141,7 @@ public class AdminEnchant implements IAdminCommandHandler
 					// check value
 					if ((ench < 0) || (ench > 65535))
 					{
-						activeChar.sendMessage("You must set the enchant level to be between 0-65535.");
+						activeChar.sendAdminMessage("You must set the enchant level to be between 0-65535.");
 					}
 					else
 					{
@@ -154,7 +154,7 @@ public class AdminEnchant implements IAdminCommandHandler
 					{
 						_log.warning("Set enchant error: " + e);
 					}
-					activeChar.sendMessage("Please specify a new enchant value.");
+					activeChar.sendAdminMessage("Please specify a new enchant value.");
 				}
 				catch (NumberFormatException e)
 				{
@@ -162,7 +162,7 @@ public class AdminEnchant implements IAdminCommandHandler
 					{
 						_log.warning("Set enchant error: " + e);
 					}
-					activeChar.sendMessage("Please specify a valid new enchant value.");
+					activeChar.sendAdminMessage("Please specify a valid new enchant value.");
 				}
 			}
 			
@@ -221,7 +221,7 @@ public class AdminEnchant implements IAdminCommandHandler
 			player.broadcastPacket(new ExBrExtraUserInfo(player));
 			
 			// informations
-			activeChar.sendMessage("Changed enchantment of " + player.getName() + "'s " + itemInstance.getItem().getName() + " from " + curEnchant + " to " + ench + ".");
+			activeChar.sendAdminMessage("Changed enchantment of " + player.getName() + "'s " + itemInstance.getItem().getName() + " from " + curEnchant + " to " + ench + ".");
 			player.sendMessage("Admin has changed the enchantment of your " + itemInstance.getItem().getName() + " from " + curEnchant + " to " + ench + ".");
 		}
 	}

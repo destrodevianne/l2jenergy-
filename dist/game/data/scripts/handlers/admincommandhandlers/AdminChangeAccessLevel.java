@@ -62,7 +62,7 @@ public final class AdminChangeAccessLevel implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_changelvl"));
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_changelvl"));
 			}
 		}
 		else if (parts.length == 3)
@@ -85,16 +85,16 @@ public final class AdminChangeAccessLevel implements IAdminCommandHandler
 					
 					if (ps.getUpdateCount() == 0)
 					{
-						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_character_not_found_access_level"));
+						activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_character_not_found_access_level"));
 					}
 					else
 					{
-						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_character_access_level_now_set").replace("%s%", lvl + ""));
+						activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_character_access_level_now_set").replace("%s%", lvl + ""));
 					}
 				}
 				catch (SQLException se)
 				{
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_changing_sqlexception_character_access_level"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_changing_sqlexception_character_access_level"));
 					if (Config.DEBUG)
 					{
 						se.printStackTrace();
@@ -125,11 +125,11 @@ public final class AdminChangeAccessLevel implements IAdminCommandHandler
 				final L2AccessLevel acccessLevel = AdminData.getInstance().getAccessLevel(lvl);
 				player.setAccessLevel(lvl);
 				player.sendMessage(MessagesData.getInstance().getMessage(player, "admin_your_access_level_has_been_changed_to").replace("%c%", acccessLevel.getName() + "").replace("%i%", acccessLevel.getName() + ""));
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "players_access_level_has_been_changed_to").replace("%s%", player.getName() + "").replace("%c%", acccessLevel.getName() + "").replace("%i%", acccessLevel.getName() + ""));
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "players_access_level_has_been_changed_to").replace("%s%", player.getName() + "").replace("%c%", acccessLevel.getName() + "").replace("%i%", acccessLevel.getName() + ""));
 			}
 			else
 			{
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_you_trying_set_unexisting_access_level").replace("%s%", lvl + ""));
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_you_trying_set_unexisting_access_level").replace("%s%", lvl + ""));
 			}
 		}
 		else

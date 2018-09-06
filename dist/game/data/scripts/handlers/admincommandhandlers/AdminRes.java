@@ -102,12 +102,12 @@ public class AdminRes implements IAdminCommandHandler
 						doResurrect(knownPlayer);
 					}
 					
-					activeChar.sendMessage("Resurrected all players within a " + radius + " unit radius.");
+					activeChar.sendAdminMessage("Resurrected all players within a " + radius + " unit radius.");
 					return;
 				}
 				catch (NumberFormatException e)
 				{
-					activeChar.sendMessage("Enter a valid player name or radius.");
+					activeChar.sendAdminMessage("Enter a valid player name or radius.");
 					return;
 				}
 			}
@@ -157,7 +157,7 @@ public class AdminRes implements IAdminCommandHandler
 					}
 				}
 				
-				activeChar.sendMessage("Resurrected all non-players within a " + radius + " unit radius.");
+				activeChar.sendAdminMessage("Resurrected all non-players within a " + radius + " unit radius.");
 			}
 		}
 		catch (NumberFormatException e)

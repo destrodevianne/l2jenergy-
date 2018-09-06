@@ -126,13 +126,13 @@ public class AdminEffects implements IAdminCommandHandler
 				activeChar.broadcastUserInfo();
 				activeChar.decayMe();
 				activeChar.spawnMe();
-				activeChar.sendMessage("You are now invisible.");
+				activeChar.sendAdminMessage("You are now invisible.");
 			}
 			else
 			{
 				activeChar.setInvisible(false);
 				activeChar.broadcastUserInfo();
-				activeChar.sendMessage("You are now visible.");
+				activeChar.sendAdminMessage("You are now visible.");
 			}
 			
 			command = "";
@@ -144,13 +144,13 @@ public class AdminEffects implements IAdminCommandHandler
 			activeChar.broadcastUserInfo();
 			activeChar.decayMe();
 			activeChar.spawnMe();
-			activeChar.sendMessage("You are now invisible.");
+			activeChar.sendAdminMessage("You are now invisible.");
 		}
 		else if (command.startsWith("admin_vis"))
 		{
 			activeChar.setInvisible(false);
 			activeChar.broadcastUserInfo();
-			activeChar.sendMessage("You are now visible.");
+			activeChar.sendAdminMessage("You are now visible.");
 		}
 		else if (command.startsWith("admin_setinvis"))
 		{
@@ -161,7 +161,7 @@ public class AdminEffects implements IAdminCommandHandler
 			}
 			final L2Character target = (L2Character) activeChar.getTarget();
 			target.setInvisible(!target.isInvisible());
-			activeChar.sendMessage("You've made " + target.getName() + " " + (target.isInvisible() ? "invisible" : "visible") + ".");
+			activeChar.sendAdminMessage("You've made " + target.getName() + " " + (target.isInvisible() ? "invisible" : "visible") + ".");
 			
 			if (target.isPlayer())
 			{
@@ -181,7 +181,7 @@ public class AdminEffects implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Usage: //earthquake <intensity> <duration>");
+				activeChar.sendAdminMessage("Usage: //earthquake <intensity> <duration>");
 			}
 		}
 		else if (command.startsWith("admin_atmosphere"))
@@ -195,7 +195,7 @@ public class AdminEffects implements IAdminCommandHandler
 			}
 			catch (Exception ex)
 			{
-				activeChar.sendMessage("Usage: //atmosphere <signsky dawn|dusk>|<sky day|night|red> <duration>");
+				activeChar.sendAdminMessage("Usage: //atmosphere <signsky dawn|dusk>|<sky day|night|red> <duration>");
 			}
 		}
 		else if (command.equals("admin_play_sounds"))
@@ -210,7 +210,7 @@ public class AdminEffects implements IAdminCommandHandler
 			}
 			catch (StringIndexOutOfBoundsException e)
 			{
-				activeChar.sendMessage("Usage: //play_sounds <pagenumber>");
+				activeChar.sendAdminMessage("Usage: //play_sounds <pagenumber>");
 			}
 		}
 		else if (command.startsWith("admin_play_sound"))
@@ -221,7 +221,7 @@ public class AdminEffects implements IAdminCommandHandler
 			}
 			catch (StringIndexOutOfBoundsException e)
 			{
-				activeChar.sendMessage("Usage: //play_sound <soundname>");
+				activeChar.sendAdminMessage("Usage: //play_sound <soundname>");
 			}
 		}
 		else if (command.equals("admin_para_all"))
@@ -370,7 +370,7 @@ public class AdminEffects implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Usage: //gmspeed <value> (0=off...4=max)");
+				activeChar.sendAdminMessage("Usage: //gmspeed <value> (0=off...4=max)");
 			}
 			if (command.contains("_menu"))
 			{
@@ -393,7 +393,7 @@ public class AdminEffects implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Usage: //polyself <npcId>");
+				activeChar.sendAdminMessage("Usage: //polyself <npcId>");
 			}
 		}
 		else if (command.startsWith("admin_unpolyself"))
@@ -442,7 +442,7 @@ public class AdminEffects implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Usage: //setteam_close <none|blue|red> [radius]");
+				activeChar.sendAdminMessage("Usage: //setteam_close <none|blue|red> [radius]");
 			}
 		}
 		else if (command.startsWith("admin_setteam"))
@@ -463,7 +463,7 @@ public class AdminEffects implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Usage: //setteam <none|blue|red>");
+				activeChar.sendAdminMessage("Usage: //setteam <none|blue|red>");
 			}
 		}
 		else if (command.startsWith("admin_social"))
@@ -483,7 +483,7 @@ public class AdminEffects implements IAdminCommandHandler
 						{
 							if (performSocial(social, player, activeChar))
 							{
-								activeChar.sendMessage(player.getName() + " was affected by your request.");
+								activeChar.sendAdminMessage(player.getName() + " was affected by your request.");
 							}
 						}
 						else
@@ -499,11 +499,11 @@ public class AdminEffects implements IAdminCommandHandler
 										performSocial(social, object, activeChar);
 									}
 								}
-								activeChar.sendMessage(radius + " units radius affected by your request.");
+								activeChar.sendAdminMessage(radius + " units radius affected by your request.");
 							}
 							catch (NumberFormatException nbe)
 							{
-								activeChar.sendMessage("Incorrect parameter");
+								activeChar.sendAdminMessage("Incorrect parameter");
 							}
 						}
 					}
@@ -527,7 +527,7 @@ public class AdminEffects implements IAdminCommandHandler
 				}
 				else if (!command.contains("menu"))
 				{
-					activeChar.sendMessage("Usage: //social <social_id> [player_name|radius]");
+					activeChar.sendAdminMessage("Usage: //social <social_id> [player_name|radius]");
 				}
 			}
 			catch (Exception e)
@@ -575,14 +575,14 @@ public class AdminEffects implements IAdminCommandHandler
 							performAbnormalVisualEffect(ave, object);
 						}
 					}
-					activeChar.sendMessage("Affected all characters in radius " + param2 + " by " + param1 + " abnormal visual effect.");
+					activeChar.sendAdminMessage("Affected all characters in radius " + param2 + " by " + param1 + " abnormal visual effect.");
 				}
 				else
 				{
 					final L2Object obj = activeChar.getTarget() != null ? activeChar.getTarget() : activeChar;
 					if (performAbnormalVisualEffect(ave, obj))
 					{
-						activeChar.sendMessage(obj.getName() + " affected by " + param1 + " abnormal visual effect.");
+						activeChar.sendAdminMessage(obj.getName() + " affected by " + param1 + " abnormal visual effect.");
 					}
 					else
 					{
@@ -592,7 +592,7 @@ public class AdminEffects implements IAdminCommandHandler
 			}
 			else
 			{
-				activeChar.sendMessage("Usage: //" + command.replace("admin_", "") + " <AbnormalVisualEffect> [radius]");
+				activeChar.sendAdminMessage("Usage: //" + command.replace("admin_", "") + " <AbnormalVisualEffect> [radius]");
 			}
 		}
 		else if (command.startsWith("admin_effect"))
@@ -622,13 +622,13 @@ public class AdminEffects implements IAdminCommandHandler
 				{
 					L2Character target = (L2Character) obj;
 					target.broadcastPacket(new MagicSkillUse(target, activeChar, skill, level, hittime, 0));
-					activeChar.sendMessage(obj.getName() + " performs MSU " + skill + "/" + level + " by your request.");
+					activeChar.sendAdminMessage(obj.getName() + " performs MSU " + skill + "/" + level + " by your request.");
 				}
 				
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Usage: //effect skill [level | level hittime]");
+				activeChar.sendAdminMessage("Usage: //effect skill [level | level hittime]");
 			}
 		}
 		else if (command.startsWith("admin_set_displayeffect"))
@@ -648,7 +648,7 @@ public class AdminEffects implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Usage: //set_displayeffect <id>");
+				activeChar.sendAdminMessage("Usage: //set_displayeffect <id>");
 			}
 		}
 		
@@ -762,7 +762,7 @@ public class AdminEffects implements IAdminCommandHandler
 		}
 		else
 		{
-			activeChar.sendMessage("Usage: //atmosphere <signsky dawn|dusk>|<sky day|night|red> <duration>");
+			activeChar.sendAdminMessage("Usage: //atmosphere <signsky dawn|dusk>|<sky day|night|red> <duration>");
 		}
 		if (packet != null)
 		{
@@ -775,7 +775,7 @@ public class AdminEffects implements IAdminCommandHandler
 		PlaySound _snd = PlaySound.createSound(sound);
 		activeChar.sendPacket(_snd);
 		activeChar.broadcastPacket(_snd);
-		activeChar.sendMessage("Playing " + sound + ".");
+		activeChar.sendAdminMessage("Playing " + sound + ".");
 	}
 	
 	@Override

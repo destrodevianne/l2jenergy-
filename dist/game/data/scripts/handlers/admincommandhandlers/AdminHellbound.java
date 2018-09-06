@@ -65,12 +65,12 @@ public class AdminHellbound implements IAdminCommandHandler
 				}
 				
 				HellboundEngine.getInstance().setLevel(level);
-				activeChar.sendMessage("Hellbound level set to " + level);
+				activeChar.sendAdminMessage("Hellbound level set to " + level);
 				return true;
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage("Usage: //hellbound_setlevel 0-11");
+				activeChar.sendAdminMessage("Usage: //hellbound_setlevel 0-11");
 				return false;
 			}
 		}

@@ -80,7 +80,7 @@ public class AdminBuffs implements IAdminCommandHandler
 					showBuffs(activeChar, player, page, command.endsWith("_ps"));
 					return true;
 				}
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_player_not_online").replace("%s%", playername + ""));
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_player_not_online").replace("%s%", playername + ""));
 				return false;
 			}
 			else if ((activeChar.getTarget() != null) && activeChar.getTarget().isCharacter())
@@ -109,8 +109,8 @@ public class AdminBuffs implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_failed_removing_effect").replace("%s%", e.getMessage() + ""));
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_stopbuff"));
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_failed_removing_effect").replace("%s%", e.getMessage() + ""));
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_stopbuff"));
 				return false;
 			}
 		}
@@ -126,8 +126,8 @@ public class AdminBuffs implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_failed_removing_all_effect").replace("%s%", e.getMessage() + ""));
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_stopallbuffs"));
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_failed_removing_all_effect").replace("%s%", e.getMessage() + ""));
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_stopallbuffs"));
 				return false;
 			}
 		}
@@ -147,12 +147,12 @@ public class AdminBuffs implements IAdminCommandHandler
 						knownChar.stopAllEffects();
 					}
 				}
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_canceled_all_effect_radius").replace("%s%", radius + ""));
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_canceled_all_effect_radius").replace("%s%", radius + ""));
 				return true;
 			}
 			catch (NumberFormatException e)
 			{
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_areacancel"));
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_areacancel"));
 				return false;
 			}
 		}
@@ -192,7 +192,7 @@ public class AdminBuffs implements IAdminCommandHandler
 			{
 				creature.sendPacket(new SkillCoolTime(creature.getActingPlayer()));
 			}
-			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_skill_reuse_removed_from").replace("%s%", creature.getName() + ""));
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_skill_reuse_removed_from").replace("%s%", creature.getName() + ""));
 			return true;
 		}
 		else if (command.startsWith("admin_switch_gm_buffs"))
@@ -202,10 +202,10 @@ public class AdminBuffs implements IAdminCommandHandler
 				final boolean toAuraSkills = activeChar.getKnownSkill(7041) != null;
 				switchSkills(activeChar, toAuraSkills);
 				activeChar.sendSkillList();
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_you_have_succefully_changed_target").replace("%s%", (toAuraSkills ? "aura" : "one")));
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_you_have_succefully_changed_target").replace("%s%", (toAuraSkills ? "aura" : "one")));
 				return true;
 			}
-			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_nothing_switch"));
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_nothing_switch"));
 			return false;
 		}
 		return true;
@@ -254,8 +254,8 @@ public class AdminBuffs implements IAdminCommandHandler
 			max++;
 		}
 		
-		final StringBuilder html = StringUtil.startAppend(500 + (effects.size()
-			* 200), "<html><table width=\"100%\"><tr><td width=45><button value=\"Main\" action=\"bypass -h admin_admin\" width=45 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td><td width=180><center><font color=\"LEVEL\">Effects of ", target.getName(), "</font></td><td width=45><button value=\"Back\" action=\"bypass -h admin_current_player\" width=45 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table><br><table width=\"100%\"><tr><td width=200>Skill</td><td width=30>Rem. Time</td><td width=70>Action</td></tr>");
+		final StringBuilder html = StringUtil.startAppend(500 + (effects.size() * 200), "<html><table width=\"100%\"><tr><td width=45><button value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_button_main")
+			+ "\" action=\"bypass -h admin_admin\" width=45 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td><td width=180><center><font color=\"LEVEL\">Effects of ", target.getName(), "</font></td><td width=45><button value=\"Back\" action=\"bypass -h admin_current_player\" width=45 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table><br><table width=\"100%\"><tr><td width=200>Skill</td><td width=30>Rem. Time</td><td width=70>Action</td></tr>");
 		int start = ((page - 1) * PAGE_LIMIT);
 		int end = Math.min(((page - 1) * PAGE_LIMIT) + PAGE_LIMIT, effects.size());
 		int count = 0;
@@ -299,8 +299,10 @@ public class AdminBuffs implements IAdminCommandHandler
 		html.append("</tr></table>");
 		
 		// Buttons
-		StringUtil.append(html, "<br><center><button value=\"Refresh\" action=\"bypass -h admin_getbuffs", (passive ? "_ps " : " "), target.getName(), "\" width=80 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
-		StringUtil.append(html, "<button value=\"Remove All\" action=\"bypass -h admin_stopallbuffs ", Integer.toString(target.getObjectId()), "\" width=80 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"><br>");
+		StringUtil.append(html, "<br><center><button value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_button_refresh")
+			+ "\" action=\"bypass -h admin_getbuffs", (passive ? "_ps " : " "), target.getName(), "\" width=80 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
+		StringUtil.append(html, "<button value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_button_remove_all")
+			+ "\" action=\"bypass -h admin_stopallbuffs ", Integer.toString(target.getObjectId()), "\" width=80 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"><br>");
 		// Legend
 		if (!passive)
 		{
@@ -347,7 +349,7 @@ public class AdminBuffs implements IAdminCommandHandler
 			if (target.isAffectedBySkill(skillId))
 			{
 				target.stopSkillEffects(true, skillId);
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_removed_skill_id").replace("%s%", skillId + "").replace("%c%", target.getName() + "").replace("%i%", objId + ""));
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_removed_skill_id").replace("%s%", skillId + "").replace("%c%", target.getName() + "").replace("%i%", objId + ""));
 			}
 			
 			showBuffs(activeChar, target, 1, false);
@@ -372,7 +374,7 @@ public class AdminBuffs implements IAdminCommandHandler
 		if (target != null)
 		{
 			target.stopAllEffects();
-			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_removed_all_effects").replace("%c%", target.getName() + "").replace("%i%", objId + ""));
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_removed_all_effects").replace("%c%", target.getName() + "").replace("%i%", objId + ""));
 			showBuffs(activeChar, target, 1, false);
 			if (Config.GMAUDIT)
 			{

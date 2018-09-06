@@ -77,11 +77,11 @@ public class AdminDelete implements IAdminCommandHandler
 				}
 			}
 			
-			activeChar.sendMessage("Deleted " + target.getName() + " from " + target.getObjectId() + ".");
+			activeChar.sendAdminMessage("Deleted " + target.getName() + " from " + target.getObjectId() + ".");
 		}
 		else
 		{
-			activeChar.sendMessage("Incorrect target.");
+			activeChar.sendAdminMessage("Incorrect target.");
 		}
 	}
 }

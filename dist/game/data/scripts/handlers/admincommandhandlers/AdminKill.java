@@ -73,12 +73,12 @@ public class AdminKill implements IAdminCommandHandler
 								kill(activeChar, knownChar);
 							}
 							
-							activeChar.sendMessage("Killed all characters within a " + radius + " unit radius.");
+							activeChar.sendAdminMessage("Killed all characters within a " + radius + " unit radius.");
 							return true;
 						}
 						catch (NumberFormatException e)
 						{
-							activeChar.sendMessage("Invalid radius.");
+							activeChar.sendAdminMessage("Invalid radius.");
 							return false;
 						}
 					}
@@ -99,12 +99,12 @@ public class AdminKill implements IAdminCommandHandler
 							kill(activeChar, knownChar);
 						}
 						
-						activeChar.sendMessage("Killed all characters within a " + radius + " unit radius.");
+						activeChar.sendAdminMessage("Killed all characters within a " + radius + " unit radius.");
 						return true;
 					}
 					catch (NumberFormatException e)
 					{
-						activeChar.sendMessage("Usage: //kill <player_name | radius>");
+						activeChar.sendAdminMessage("Usage: //kill <player_name | radius>");
 						return false;
 					}
 				}

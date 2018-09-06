@@ -61,7 +61,7 @@ public final class AdminPcCafePoints implements IAdminCommandHandler
 				catch (Exception e)
 				{
 					showMenuHtml(activeChar);
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_invalid_value"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_invalid_value"));
 					return false;
 				}
 				
@@ -77,7 +77,7 @@ public final class AdminPcCafePoints implements IAdminCommandHandler
 						}
 						
 						activeChar.increasePcCafePoints(value);
-						target.sendMessage(MessagesData.getInstance().getMessage(target, "target_increase_your_pc_cafe_point").replace("%s%", value + ""));
+						target.sendAdminMessage(MessagesData.getInstance().getMessage(target, "target_increase_your_pc_cafe_point").replace("%s%", value + ""));
 						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_increased_your_pc_cafe_point").replace("%c%", target.getName() + "").replace("%s%", value + ""));
 						break;
 					}
@@ -91,7 +91,7 @@ public final class AdminPcCafePoints implements IAdminCommandHandler
 						}
 						
 						activeChar.decreasePcCafePoints(value);
-						target.sendMessage(MessagesData.getInstance().getMessage(target, "target_decreased_your_pc_cafe_point").replace("%s%", value + ""));
+						target.sendAdminMessage(MessagesData.getInstance().getMessage(target, "target_decreased_your_pc_cafe_point").replace("%s%", value + ""));
 						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_decreased_your_pc_cafe_point").replace("%c%", target.getName() + "").replace("%s%", value + ""));
 						break;
 					}

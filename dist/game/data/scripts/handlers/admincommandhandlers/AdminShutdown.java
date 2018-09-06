@@ -58,7 +58,7 @@ public class AdminShutdown implements IAdminCommandHandler
 				}
 				else
 				{
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_server_shutdown"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_server_shutdown"));
 					sendHtmlForm(activeChar);
 				}
 			}
@@ -78,7 +78,7 @@ public class AdminShutdown implements IAdminCommandHandler
 				}
 				else
 				{
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_server_restart"));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_server_restart"));
 					sendHtmlForm(activeChar);
 				}
 			}

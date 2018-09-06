@@ -183,13 +183,13 @@ public final class AdminPForge implements IAdminCommandHandler
 	
 	private void showValuesUsage(L2PcInstance activeChar)
 	{
-		activeChar.sendMessage("Usage: //forge_values opcode1[ opcode2[ opcode3]] ;[ format]");
+		activeChar.sendAdminMessage("Usage: //forge_values opcode1[ opcode2[ opcode3]] ;[ format]");
 		showMainPage(activeChar);
 	}
 	
 	private void showSendUsage(L2PcInstance activeChar, String[] opCodes, String format)
 	{
-		activeChar.sendMessage("Usage: //forge_send sc|sb|cs opcode1[;opcode2[;opcode3]][ format value1 ... valueN] ");
+		activeChar.sendAdminMessage("Usage: //forge_send sc|sb|cs opcode1[;opcode2[;opcode3]][ format value1 ... valueN] ");
 		if (opCodes == null)
 		{
 			showMainPage(activeChar);
@@ -288,7 +288,7 @@ public final class AdminPForge implements IAdminCommandHandler
 				String[] opCodes = getOpCodes(st);
 				if (!validateOpCodes(opCodes))
 				{
-					activeChar.sendMessage("Invalid op codes!");
+					activeChar.sendAdminMessage("Invalid op codes!");
 					showValuesUsage(activeChar);
 					return false;
 				}
@@ -299,7 +299,7 @@ public final class AdminPForge implements IAdminCommandHandler
 					format = st.nextToken();
 					if (!validateFormat(format))
 					{
-						activeChar.sendMessage("Format invalid!");
+						activeChar.sendAdminMessage("Format invalid!");
 						showValuesUsage(activeChar);
 						return false;
 					}
@@ -330,7 +330,7 @@ public final class AdminPForge implements IAdminCommandHandler
 				String method = st.nextToken();
 				if (!validateMethod(method))
 				{
-					activeChar.sendMessage("Invalid method!");
+					activeChar.sendAdminMessage("Invalid method!");
 					showSendUsage(activeChar, null, null);
 					return false;
 				}
@@ -338,7 +338,7 @@ public final class AdminPForge implements IAdminCommandHandler
 				String[] opCodes = st.nextToken().split(";");
 				if (!validateOpCodes(opCodes))
 				{
-					activeChar.sendMessage("Invalid op codes!");
+					activeChar.sendAdminMessage("Invalid op codes!");
 					showSendUsage(activeChar, null, null);
 					return false;
 				}
@@ -349,7 +349,7 @@ public final class AdminPForge implements IAdminCommandHandler
 					format = st.nextToken();
 					if (!validateFormat(format))
 					{
-						activeChar.sendMessage("Format invalid!");
+						activeChar.sendAdminMessage("Format invalid!");
 						showSendUsage(activeChar, null, null);
 						return false;
 					}
@@ -396,7 +396,7 @@ public final class AdminPForge implements IAdminCommandHandler
 					{
 						if (!st.hasMoreTokens())
 						{
-							activeChar.sendMessage("Not enough values!");
+							activeChar.sendAdminMessage("Not enough values!");
 							showSendUsage(activeChar, null, null);
 							return false;
 						}
