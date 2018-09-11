@@ -13490,6 +13490,13 @@ public final class L2PcInstance extends L2Playable
 		return getVariables().getInt(PlayerVariables.PC_CAFE_POINTS, 0);
 	}
 	
+	public void setPcCafePoints(long points)
+	{
+		final PlayerVariables vars = getVariables();
+		vars.set(PlayerVariables.PC_CAFE_POINTS, points);
+		vars.storeMe();
+	}
+	
 	public void increasePcCafePoints(final int count)
 	{
 		increasePcCafePoints(count, false);
