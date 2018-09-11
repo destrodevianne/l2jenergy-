@@ -30,7 +30,7 @@ import com.l2jserver.gameserver.GameServer;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
+import com.l2jserver.gameserver.network.SystemMessageId;
 
 public class DifferentMethods
 {
@@ -115,15 +115,14 @@ public class DifferentMethods
 		return ItemTable.getInstance().getTemplate(itemId).getName();
 	}
 	
-	// TODO: переделать
 	public static boolean getPay(L2PcInstance activeChar, int itemid, long count)
 	{
-		L2ItemInstance item = activeChar.getInventory().getItemByItemId(itemid);
-		if (item != null)
+		if ((activeChar.getInventory().getItemByItemId(itemid) == null) || (activeChar.getInventory().getItemByItemId(itemid).getCount() < count))
 		{
-			activeChar.destroyItem("BBS", itemid, count, activeChar, true);
-			return true;
+			activeChar.sendPacket(SystemMessageId.NOT_ENOUGH_ITEMS);
+			return false;
 		}
-		return false;
+		activeChar.destroyItemByItemId("BBS", itemid, count, activeChar, true);
+		return true;
 	}
 }
