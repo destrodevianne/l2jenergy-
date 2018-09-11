@@ -47,6 +47,9 @@ public class PCCafePointsTask implements Runnable
 			return;
 		}
 		
-		_player.increasePcCafePoints(Config.ALT_PCBANG_POINTS_BONUS, (Config.ALT_PCBANG_POINTS_BONUS_DOUBLE_CHANCE > 0) && (Rnd.get(100) < Config.ALT_PCBANG_POINTS_BONUS_DOUBLE_CHANCE));
+		if (_player.isPremium())
+		{
+			_player.increasePcCafePoints(Config.ALT_PCBANG_POINTS_BONUS, (Config.ALT_PCBANG_POINTS_BONUS_DOUBLE_CHANCE > 0) && (Rnd.get(100) < Config.ALT_PCBANG_POINTS_BONUS_DOUBLE_CHANCE));
+		}
 	}
 }
