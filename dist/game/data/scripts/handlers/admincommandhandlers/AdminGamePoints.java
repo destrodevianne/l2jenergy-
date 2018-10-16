@@ -21,6 +21,7 @@ package handlers.admincommandhandlers;
 import java.util.Collection;
 import java.util.StringTokenizer;
 
+import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2World;
@@ -60,7 +61,7 @@ public class AdminGamePoints implements IAdminCommandHandler
 				}
 				catch (Exception e)
 				{
-					showMenuHtml(activeChar);
+					AdminHtml.showAdminHtml(activeChar, "game_points.htm");
 					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_invalid_value"));
 					return false;
 				}
@@ -70,15 +71,15 @@ public class AdminGamePoints implements IAdminCommandHandler
 					case "set":
 					{
 						target.setPrimePoints(value);
-						target.sendAdminMessage(MessagesData.getInstance().getMessage(target, "target_set_your_prime_point").replace("%s%", value + ""));
-						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_set_your_prime_point").replace("%s%", value + "").replace("%c%", target.getName() + ""));
+						target.sendMessage(MessagesData.getInstance().getMessage(target, "target_set_your_prime_point").replace("%s%", value + ""));
+						activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_set_your_prime_point").replace("%s%", value + "").replace("%c%", target.getName() + ""));
 						break;
 					}
 					case "increase":
 					{
 						if (target.getPrimePoints() == Integer.MAX_VALUE)
 						{
-							showMenuHtml(activeChar);
+							AdminHtml.showAdminHtml(activeChar, "game_points.htm");
 							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "target_already_have_max_count_prime_point").replace("%c%", target.getName() + ""));
 							return false;
 						}
@@ -89,23 +90,23 @@ public class AdminGamePoints implements IAdminCommandHandler
 							primeCount = Integer.MAX_VALUE;
 						}
 						target.setPrimePoints(primeCount);
-						target.sendAdminMessage(MessagesData.getInstance().getMessage(target, "target_increase_your_prime_point").replace("%s%", value + ""));
-						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_increased_your_prime_point").replace("%c%", target.getName() + "").replace("%s%", value + ""));
+						target.sendMessage(MessagesData.getInstance().getMessage(target, "target_increase_your_prime_point").replace("%s%", value + ""));
+						activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_increased_your_prime_point").replace("%c%", target.getName() + "").replace("%s%", value + ""));
 						break;
 					}
 					case "decrease":
 					{
 						if (target.getPrimePoints() == 0)
 						{
-							showMenuHtml(activeChar);
+							AdminHtml.showAdminHtml(activeChar, "game_points.htm");
 							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "target_already_have_min_count_prime_point").replace("%c%", target.getName() + ""));
 							return false;
 						}
 						
 						final long primeCount = Math.max(target.getPrimePoints() - value, 0);
 						target.setPrimePoints(primeCount);
-						target.sendAdminMessage(MessagesData.getInstance().getMessage(target, "target_decreased_your_prime_point").replace("%s%", value + ""));
-						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_decreased_your_prime_point").replace("%c%", target.getName() + "").replace("%s%", value + ""));
+						target.sendMessage(MessagesData.getInstance().getMessage(target, "target_decreased_your_prime_point").replace("%s%", value + ""));
+						activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_decreased_your_prime_point").replace("%c%", target.getName() + "").replace("%s%", value + ""));
 						break;
 					}
 					case "rewardOnline":
@@ -123,35 +124,31 @@ public class AdminGamePoints implements IAdminCommandHandler
 						if (range <= 0)
 						{
 							final int count = increaseForAll(L2World.getInstance().getPlayers(), value);
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_increased_your_prime_point_all_online").replace("%i%", count + "").replace("%s%", value + ""));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_increased_your_prime_point_all_online").replace("%i%", count + "").replace("%s%", value + ""));
 						}
 						else if (range > 0)
 						{
 							final int count = increaseForAll(activeChar.getKnownList().getKnownPlayers().values(), value);
-							activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_increased_your_prime_point_all_players").replace("%i%", count + "").replace("%r%", range + "").replace("%s%", value + ""));
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_increased_your_prime_point_all_players").replace("%i%", count + "").replace("%r%", range + "").replace("%s%", value + ""));
 						}
 						break;
 					}
 				}
-				showMenuHtml(activeChar);
+				AdminHtml.showAdminHtml(activeChar, "game_points.htm");
 			}
 			else
 			{
-				showMenuHtml(activeChar);
+				AdminHtml.showAdminHtml(activeChar, "game_points.htm");
 			}
 		}
-		return true;
-	}
-	
-	private void showMenuHtml(L2PcInstance activeChar)
-	{
 		final NpcHtmlMessage html = new NpcHtmlMessage();
+		html.setHtml(HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/admin/game_points.htm"));
 		final L2PcInstance target = getTarget(activeChar);
 		final long points = target.getPrimePoints();
-		html.setFile(activeChar.getHtmlPrefix(), "data/html/admin/game_points.htm");
 		html.replace("%points%", Util.formatAdena(points));
 		html.replace("%targetName%", target.getName());
 		activeChar.sendPacket(html);
+		return true;
 	}
 	
 	private L2PcInstance getTarget(L2PcInstance activeChar)
