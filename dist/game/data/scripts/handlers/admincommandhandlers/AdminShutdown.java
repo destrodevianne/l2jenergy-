@@ -29,14 +29,8 @@ import com.l2jserver.gameserver.util.DifferentMethods;
 import com.l2jserver.gameserver.util.Util;
 import com.l2jserver.util.MemoryWatchDog;
 
-/**
- * This class handles following admin commands: - server_shutdown [sec] = shows menu or shuts down server in sec seconds
- * @version $Revision: 1.5.2.1.2.4 $ $Date: 2005/04/11 10:06:06 $
- */
 public class AdminShutdown implements IAdminCommandHandler
 {
-	// private static Logger _log = Logger.getLogger(AdminShutdown.class.getName());
-	
 	private static final String[] ADMIN_COMMANDS =
 	{
 		"admin_server_shutdown",
@@ -59,12 +53,12 @@ public class AdminShutdown implements IAdminCommandHandler
 				else
 				{
 					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_server_shutdown"));
-					sendHtmlForm(activeChar);
+					AdminHtml.showAdminHtml(activeChar, "shutdown.htm");
 				}
 			}
 			catch (StringIndexOutOfBoundsException e)
 			{
-				sendHtmlForm(activeChar);
+				AdminHtml.showAdminHtml(activeChar, "shutdown.htm");
 			}
 		}
 		else if (command.startsWith("admin_server_restart"))
@@ -79,18 +73,35 @@ public class AdminShutdown implements IAdminCommandHandler
 				else
 				{
 					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_server_restart"));
-					sendHtmlForm(activeChar);
+					AdminHtml.showAdminHtml(activeChar, "shutdown.htm");
 				}
 			}
 			catch (StringIndexOutOfBoundsException e)
 			{
-				sendHtmlForm(activeChar);
+				AdminHtml.showAdminHtml(activeChar, "shutdown.htm");
 			}
 		}
 		else if (command.startsWith("admin_server_abort"))
 		{
 			serverAbort(activeChar);
 		}
+		
+		final NpcHtmlMessage html = new NpcHtmlMessage();
+		html.setFile(activeChar.getHtmlPrefix(), "data/html/admin/shutdown.htm");
+		html.replace("%onlineAll%", String.valueOf(DifferentMethods.getPlayersCount("ALL")));
+		html.replace("%offlineTrade%", String.valueOf(DifferentMethods.getPlayersCount("OFF_TRADE")));
+		html.replace("%onlineGM%", String.valueOf(DifferentMethods.getPlayersCount("GM")));
+		html.replace("%onlineReal%", String.valueOf(DifferentMethods.getPlayersCount("ALL_REAL")));
+		html.replace("%used%", String.valueOf(MemoryWatchDog.getMemUsedMb()));
+		html.replace("%free%", String.valueOf(MemoryWatchDog.getMemFreeMb()));
+		html.replace("%max%", String.valueOf(MemoryWatchDog.getMemMaxMb()));
+		html.replace("%os%", System.getProperty("os.name"));
+		html.replace("%gameTime%", GameTimeController.getInstance().getGameHour() + ":" + GameTimeController.getInstance().getGameMinute());
+		html.replace("%dayNight%", GameTimeController.getInstance().isNight() ? MessagesData.getInstance().getMessage(activeChar, "admin_game_night") : MessagesData.getInstance().getMessage(activeChar, "admin_game_day"));
+		html.replace("%timeserv%", String.valueOf(DifferentMethods.getServerUpTime()));
+		html.replace("%maxonline%", String.valueOf(DifferentMethods.getPlayersCount("ALL") + "/" + Config.MAXIMUM_ONLINE_USERS));
+		html.replace("%geo%", Config.PATHFINDING > 0 ? MessagesData.getInstance().getMessage(activeChar, "admin_geo_loading") : MessagesData.getInstance().getMessage(activeChar, "admin_geo_disabled"));
+		activeChar.sendPacket(html);
 		return true;
 	}
 	
@@ -98,26 +109,6 @@ public class AdminShutdown implements IAdminCommandHandler
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
-	}
-	
-	private void sendHtmlForm(L2PcInstance activeChar)
-	{
-		final NpcHtmlMessage adminReply = new NpcHtmlMessage();
-		adminReply.setFile(activeChar.getHtmlPrefix(), "data/html/admin/shutdown.htm");
-		adminReply.replace("%onlineAll%", String.valueOf(DifferentMethods.getPlayersCount("ALL")));
-		adminReply.replace("%offlineTrade%", String.valueOf(DifferentMethods.getPlayersCount("OFF_TRADE")));
-		adminReply.replace("%onlineGM%", String.valueOf(DifferentMethods.getPlayersCount("GM")));
-		adminReply.replace("%onlineReal%", String.valueOf(DifferentMethods.getPlayersCount("ALL_REAL")));
-		adminReply.replace("%used%", String.valueOf(MemoryWatchDog.getMemUsedMb()));
-		adminReply.replace("%free%", String.valueOf(MemoryWatchDog.getMemFreeMb()));
-		adminReply.replace("%max%", String.valueOf(MemoryWatchDog.getMemMaxMb()));
-		adminReply.replace("%os%", System.getProperty("os.name"));
-		adminReply.replace("%gameTime%", GameTimeController.getInstance().getGameHour() + ":" + GameTimeController.getInstance().getGameMinute());
-		adminReply.replace("%dayNight%", GameTimeController.getInstance().isNight() ? MessagesData.getInstance().getMessage(activeChar, "admin_game_night") : MessagesData.getInstance().getMessage(activeChar, "admin_game_day"));
-		adminReply.replace("%timeserv%", String.valueOf(DifferentMethods.getServerUpTime()));
-		adminReply.replace("%maxonline%", String.valueOf(DifferentMethods.getPlayersCount("ALL") + "/" + Config.MAXIMUM_ONLINE_USERS));
-		adminReply.replace("%geo%", Config.PATHFINDING > 0 ? MessagesData.getInstance().getMessage(activeChar, "admin_geo_loading") : MessagesData.getInstance().getMessage(activeChar, "admin_geo_disabled"));
-		activeChar.sendPacket(adminReply);
 	}
 	
 	private void serverShutdown(L2PcInstance activeChar, int seconds, boolean restart)
