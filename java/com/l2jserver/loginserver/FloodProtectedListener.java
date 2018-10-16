@@ -24,8 +24,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 
@@ -34,7 +35,8 @@ import com.l2jserver.Config;
  */
 public abstract class FloodProtectedListener extends Thread
 {
-	private final Logger _log = Logger.getLogger(FloodProtectedListener.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(FloodProtectedListener.class);
+	
 	private final Map<String, ForeignConnection> _floodProtection = new ConcurrentHashMap<>();
 	private ServerSocket _serverSocket;
 	
@@ -65,14 +67,15 @@ public abstract class FloodProtectedListener extends Thread
 					if (fConnection != null)
 					{
 						fConnection.connectionNumber += 1;
-						if (((fConnection.connectionNumber > Config.FAST_CONNECTION_LIMIT) && ((System.currentTimeMillis() - fConnection.lastConnection) < Config.NORMAL_CONNECTION_TIME)) || ((System.currentTimeMillis() - fConnection.lastConnection) < Config.FAST_CONNECTION_TIME) || (fConnection.connectionNumber > Config.MAX_CONNECTION_PER_IP))
+						if (((fConnection.connectionNumber > Config.FAST_CONNECTION_LIMIT) && ((System.currentTimeMillis() - fConnection.lastConnection) < Config.NORMAL_CONNECTION_TIME)) || ((System.currentTimeMillis() - fConnection.lastConnection) < Config.FAST_CONNECTION_TIME)
+							|| (fConnection.connectionNumber > Config.MAX_CONNECTION_PER_IP))
 						{
 							fConnection.lastConnection = System.currentTimeMillis();
 							connection.close();
 							fConnection.connectionNumber -= 1;
 							if (!fConnection.isFlooding)
 							{
-								_log.warning("Potential Flood from " + connection.getInetAddress().getHostAddress());
+								LOG.warn("Potential Flood from {}", connection.getInetAddress().getHostAddress());
 							}
 							fConnection.isFlooding = true;
 							continue;
@@ -80,7 +83,7 @@ public abstract class FloodProtectedListener extends Thread
 						if (fConnection.isFlooding) // if connection was flooding server but now passed the check
 						{
 							fConnection.isFlooding = false;
-							_log.info(connection.getInetAddress().getHostAddress() + " is not considered as flooding anymore.");
+							LOG.info("{} is not considered as flooding anymore.", connection.getInetAddress().getHostAddress());
 						}
 						fConnection.lastConnection = System.currentTimeMillis();
 					}
@@ -104,7 +107,7 @@ public abstract class FloodProtectedListener extends Thread
 					}
 					catch (IOException io)
 					{
-						_log.log(Level.INFO, "", io);
+						LOG.warn("", io);
 					}
 					break;
 				}
@@ -147,7 +150,7 @@ public abstract class FloodProtectedListener extends Thread
 		}
 		else
 		{
-			_log.warning("Removing a flood protection for a GameServer that was not in the connection map??? :" + ip);
+			LOG.warn("Removing a flood protection for a GameServer that was not in the connection map??? :{}", ip);
 		}
 	}
 	
@@ -159,7 +162,7 @@ public abstract class FloodProtectedListener extends Thread
 		}
 		catch (IOException e)
 		{
-			_log.warning(getClass().getSimpleName() + ": " + e.getMessage());
+			LOG.warn("{} ", getClass().getSimpleName(), e);
 		}
 	}
 }

@@ -23,7 +23,9 @@ import java.nio.channels.SocketChannel;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.loginserver.network.L2LoginClient;
 import com.l2jserver.loginserver.network.serverpackets.Init;
@@ -34,12 +36,10 @@ import com.l2jserver.mmocore.MMOConnection;
 import com.l2jserver.mmocore.ReceivablePacket;
 import com.l2jserver.util.IPv4Filter;
 
-/**
- * @author KenM
- */
 public class SelectorHelper implements IMMOExecutor<L2LoginClient>, IClientFactory<L2LoginClient>, IAcceptFilter
 {
-	private static final Logger LOG = Logger.getLogger(LoginController.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
+	
 	private final ThreadPoolExecutor _generalPacketsThreadPool;
 	private final IPv4Filter _ipv4filter;
 	
@@ -72,7 +72,7 @@ public class SelectorHelper implements IMMOExecutor<L2LoginClient>, IClientFacto
 		}
 		catch (UnknownHostException e)
 		{
-			LOG.severe(SelectorHelper.class.getSimpleName() + ": Invalid address: " + sc.socket().getInetAddress() + "; " + e.getMessage());
+			LOG.error("{}: Invalid address: {};", SelectorHelper.class.getSimpleName(), sc.socket().getInetAddress(), e);
 		}
 		return false;
 	}

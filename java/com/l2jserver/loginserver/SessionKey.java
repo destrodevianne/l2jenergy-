@@ -20,15 +20,6 @@ package com.l2jserver.loginserver;
 
 import com.l2jserver.Config;
 
-/**
- * <p>
- * This class is used to represent session keys used by the client to authenticate in the gameserver
- * </p>
- * <p>
- * A SessionKey is made up of two 8 bytes keys. One is send in the {@link com.l2jserver.loginserver.network.serverpackets.LoginOk#LoginOk} packet and the other is sent in {@link com.l2jserver.loginserver.network.serverpackets.PlayOk#PlayOk}
- * </p>
- * @author -Wooden-
- */
 public class SessionKey
 {
 	public int playOkID1;
@@ -55,11 +46,6 @@ public class SessionKey
 		return (loginOkID1 == loginOk1) && (loginOkID2 == loginOk2);
 	}
 	
-	/**
-	 * Only checks the PlayOk part of the session key if server doesn't show the license when player logs in.
-	 * @param o
-	 * @return true if keys are equal.
-	 */
 	@Override
 	public boolean equals(Object o)
 	{

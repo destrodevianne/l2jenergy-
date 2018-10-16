@@ -667,18 +667,11 @@ public final class GameServerTable implements IXmlReader
 		}
 	}
 	
-	/**
-	 * Gets the single instance of GameServerTable.
-	 * @return single instance of GameServerTable
-	 */
 	public static GameServerTable getInstance()
 	{
 		return SingletonHolder._instance;
 	}
 	
-	/**
-	 * The Class SingletonHolder.
-	 */
 	private static class SingletonHolder
 	{
 		protected static final GameServerTable _instance = new GameServerTable();
