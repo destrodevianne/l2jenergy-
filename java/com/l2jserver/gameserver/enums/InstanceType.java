@@ -87,7 +87,6 @@ public enum InstanceType
 	L2DuskPriestInstance(L2SignsPriestInstance),
 	L2DungeonGatekeeperInstance(L2Npc),
 	// City NPCs
-	L2AdventurerInstance(L2NpcInstance),
 	L2AuctioneerInstance(L2Npc),
 	L2ClanHallManagerInstance(L2MerchantInstance),
 	L2FishermanInstance(L2MerchantInstance),

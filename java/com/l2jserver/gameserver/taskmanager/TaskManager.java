@@ -45,6 +45,7 @@ import com.l2jserver.gameserver.taskmanager.tasks.TaskCleanUp;
 import com.l2jserver.gameserver.taskmanager.tasks.TaskDailySkillReuseClean;
 import com.l2jserver.gameserver.taskmanager.tasks.TaskGlobalVariablesSave;
 import com.l2jserver.gameserver.taskmanager.tasks.TaskOlympiadSave;
+import com.l2jserver.gameserver.taskmanager.tasks.TaskPcCafe;
 import com.l2jserver.gameserver.taskmanager.tasks.TaskRaidPointsReset;
 import com.l2jserver.gameserver.taskmanager.tasks.TaskRecom;
 import com.l2jserver.gameserver.taskmanager.tasks.TaskRestart;
@@ -190,6 +191,7 @@ public final class TaskManager
 		registerTask(new TaskDailySkillReuseClean());
 		registerTask(new TaskGlobalVariablesSave());
 		registerTask(new TaskOlympiadSave());
+		registerTask(new TaskPcCafe());
 		registerTask(new TaskRaidPointsReset());
 		registerTask(new TaskRecom());
 		registerTask(new TaskRestart());

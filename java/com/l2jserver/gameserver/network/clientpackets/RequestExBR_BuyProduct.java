@@ -19,12 +19,14 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.xml.impl.ProductItemData;
 import com.l2jserver.gameserver.datatables.ItemTable;
+import com.l2jserver.gameserver.enums.IllegalActionPunishmentType;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.primeshop.L2ProductItem;
@@ -32,6 +34,7 @@ import com.l2jserver.gameserver.model.primeshop.L2ProductItemComponent;
 import com.l2jserver.gameserver.network.serverpackets.ExBR_BuyProduct;
 import com.l2jserver.gameserver.network.serverpackets.ExBR_GamePoint;
 import com.l2jserver.gameserver.network.serverpackets.StatusUpdate;
+import com.l2jserver.gameserver.util.Util;
 
 /**
  * @author Мо3олЬ
@@ -61,18 +64,26 @@ public class RequestExBR_BuyProduct extends L2GameClientPacket
 			return;
 		}
 		
-		if ((_count > 99) || (_count < 0))
+		if ((_count > 1) || (_count < 99))
 		{
+			activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_WRONG_USER_STATE));
+			Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " tried to buy invalid itemcount [" + _count + "] from Prime", IllegalActionPunishmentType.JAIL);
 			return;
 		}
+		
 		L2ProductItem product = ProductItemData.getInstance().getItem(_productId);
 		if (product == null)
 		{
 			activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_WRONG_PRODUCT));
+			Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " tried to buy invalid brId from Prime", IllegalActionPunishmentType.JAIL);
 			return;
 		}
-		
-		if (!ProductItemData.getInstance().calcStartEndTime(product.getProductId()))
+		else if ((Calendar.getInstance().get(Calendar.DAY_OF_WEEK) & product.getDayWeek()) == 0)
+		{
+			activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_NOT_DAY_OF_WEEK));
+			return;
+		}
+		else if (!ProductItemData.getInstance().calcStartEndTime(product.getProductId()))
 		{
 			activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_SALE_PERIOD_ENDED));
 			return;

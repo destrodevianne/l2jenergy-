@@ -45,6 +45,7 @@ import com.l2jserver.gameserver.network.serverpackets.ExShowScreenMessage;
 public final class NpcStringId
 {
 	private static final Logger _log = Logger.getLogger(NpcStringId.class.getName());
+	
 	private static final NSLocalisation[] EMPTY_NSL_ARRAY = new NSLocalisation[0];
 	public static final NpcStringId[] EMPTY_ARRAY = new NpcStringId[0];
 	
@@ -14419,10 +14420,22 @@ public final class NpcStringId
 	public static final NpcStringId THERE_ARE_1_MINUTES_REMAINING_TO_REGISTER_FOR_KRATEIS_CUBE_MATCH;
 	
 	/**
+	 * ID: 1800206<br>
+	 * * Message: The match will begin in $s1 minute(s).
+	 */
+	public static final NpcStringId THE_MATCH_WILL_BEGIN_IN_S1_MINUTES;
+	
+	/**
 	 * ID: 1800207<br>
 	 * Message: The match will begin shortly.
 	 */
 	public static final NpcStringId THE_MATCH_WILL_BEGIN_SHORTLY;
+	
+	/**
+	 * ID: 1800208<br>
+	 * Message: Registration for the next match will end at %s minutes after the hour.
+	 */
+	public static final NpcStringId REGISTRATION_FOR_THE_NEXT_MATCH_WILL_END_AT_S1_MINUTES_AFTER_HOUR;
 	
 	/**
 	 * ID: 1800209<br>
@@ -24014,7 +24027,9 @@ public final class NpcStringId
 		THERE_ARE_5_MINUTES_REMAINING_TO_REGISTER_FOR_KRATEIS_CUBE_MATCH = new NpcStringId(1800203);
 		THERE_ARE_3_MINUTES_REMAINING_TO_REGISTER_FOR_KRATEIS_CUBE_MATCH = new NpcStringId(1800204);
 		THERE_ARE_1_MINUTES_REMAINING_TO_REGISTER_FOR_KRATEIS_CUBE_MATCH = new NpcStringId(1800205);
+		THE_MATCH_WILL_BEGIN_IN_S1_MINUTES = new NpcStringId(1800206);
 		THE_MATCH_WILL_BEGIN_SHORTLY = new NpcStringId(1800207);
+		REGISTRATION_FOR_THE_NEXT_MATCH_WILL_END_AT_S1_MINUTES_AFTER_HOUR = new NpcStringId(1800208);
 		OHHOHOH = new NpcStringId(1800209);
 		FIRE = new NpcStringId(1800210);
 		WATER = new NpcStringId(1800211);

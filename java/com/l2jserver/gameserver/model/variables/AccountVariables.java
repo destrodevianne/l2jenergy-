@@ -42,6 +42,7 @@ public class AccountVariables extends AbstractVariables
 	
 	public static final String PRIME_POINTS = "PRIME_POINTS";
 	public static final String PREMIUM_ACCOUNT = "PREMIUM_ACCOUNT";
+	public static final String PC_CAFE_POINTS_TODAY = "PC_CAFE_POINTS_TODAY";
 	
 	private final String _accountName;
 	

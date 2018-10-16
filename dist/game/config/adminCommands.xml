@@ -597,4 +597,5 @@
 	<!-- ADMIN GAME POINTS & PC POINTS -->
 	<admin command="admin_gamepoints" accessLevel="7" />
 	<admin command="admin_pccafepoints" accessLevel="7" />
+	<admin command="admin_premium" accessLevel="7" />
 </list>
