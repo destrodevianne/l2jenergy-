@@ -43,7 +43,8 @@ public final class HomeBoard implements IParseBoardHandler
 	private static final String[] COMMANDS =
 	{
 		"_bbshome",
-		"_bbstop"
+		"_bbstop",
+		"_bbsopen"
 	};
 	
 	@Override
@@ -68,6 +69,19 @@ public final class HomeBoard implements IParseBoardHandler
 			html = html.replace("<?cb_time?>", String.valueOf(DifferentMethods.time()));
 			html = html.replace("<?cb_online_players?>", String.valueOf(DifferentMethods.getPlayersCount("ALL_REAL")));
 			html = html.replace("<?cb_offtrade_players?>", String.valueOf(DifferentMethods.getPlayersCount("OFF_TRADE")));
+			CommunityBoardHandler.separateAndSend(html, activeChar);
+		}
+		else if (command.startsWith("_bbsopen"))
+		{
+			final String customPath = Config.CUSTOM_CB_ENABLED ? "Custom/" : "";
+			final String[] b = command.split(":");
+			final String folder = b[1];
+			final String page = b[2];
+			final String html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/" + customPath + folder + "/" + page + ".html");
+			if (html == null)
+			{
+				return false;
+			}
 			CommunityBoardHandler.separateAndSend(html, activeChar);
 		}
 		else if (command.startsWith("_bbstop;"))
