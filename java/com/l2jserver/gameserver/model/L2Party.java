@@ -787,6 +787,12 @@ public class L2Party extends AbstractPlayerGroup
 				long addexp = Math.round(xpReward * preCalculation);
 				int addsp = (int) (spReward * preCalculation);
 				
+				if (member.isPremium())
+				{
+					addexp += addexp * (Config.PREMIUM_RATE_XP / validMembers.size());
+					addsp += addsp * (Config.PREMIUM_RATE_SP / validMembers.size());
+				}
+				
 				addexp = calculateExpSpPartyCutoff(member.getActingPlayer(), topLvl, addexp, addsp, useVitalityRate);
 				if (addexp > 0)
 				{

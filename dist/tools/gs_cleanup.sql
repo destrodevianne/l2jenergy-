@@ -9,6 +9,7 @@
 DROP TABLE IF EXISTS 
 account_gsdata,
 airships,
+account_premium,
 auction,
 auction_bid,
 auction_watch,

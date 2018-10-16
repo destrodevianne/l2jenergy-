@@ -113,6 +113,8 @@ public final class Config
 	
 	public static final String COMMUNITY_BOARD_CONFIG_FILE = "config/services/CommunityBoard.properties";
 	public static final String PC_CAFE_CONFIG_FILE = "config/services/PCCafe.properties";
+	public static final String PREMIUM_CONFIG_FILE = "config/services/Premium.properties";
+	
 	// --------------------------------------------------
 	// L2J Variable Definitions
 	// --------------------------------------------------
@@ -1127,6 +1129,21 @@ public final class Config
 	public static int ALT_PCBANG_POINTS_DELAY;
 	public static int ALT_PCBANG_POINTS_MIN_LVL;
 	public static double ALT_PCBANG_POINTS_BONUS_DOUBLE_CHANCE;
+	public static boolean ENABLE_DAILY_BONUS_KEY;
+	public static int ALT_PCBANG_DIALY_BONUS_POINTS;
+	
+	public static boolean PREMIUM_SYSTEM_ENABLED;
+	public static int NEWBIES_PREMIUM_PERIOD;
+	public static boolean PREMIUM_ALLOW_VOICED;
+	public static boolean NOTIFY_PREMIUM_EXPIRATION;
+	public static float PREMIUM_RATE_XP;
+	public static float PREMIUM_RATE_SP;
+	public static float PREMIUM_RATE_DROP_CHANCE;
+	public static float PREMIUM_RATE_DROP_AMOUNT;
+	public static float PREMIUM_RATE_SPOIL_CHANCE;
+	public static float PREMIUM_RATE_SPOIL_AMMOUNT;
+	public static Map<Integer, Float> PREMIUM_RATE_DROP_CHANCE_MULTIPLIER;
+	public static Map<Integer, Float> PREMIUM_RATE_DROP_AMOUNT_MULTIPLIER;
 	
 	/**
 	 * This class initializes all global variables for configuration.<br>
@@ -2751,6 +2768,75 @@ public final class Config
 			ALT_PCBANG_POINTS_DELAY = PCCafeSettings.getInt("AltPcBangPointsDelay", 20);
 			ALT_PCBANG_POINTS_MIN_LVL = PCCafeSettings.getInt("AltPcBangPointsMinLvl", 1);
 			ALT_PCBANG_POINTS_BONUS_DOUBLE_CHANCE = PCCafeSettings.getDouble("AltPcBangPointsDoubleChance", 10);
+			ENABLE_DAILY_BONUS_KEY = PCCafeSettings.getBoolean("AltPcBangDailyBonusEnabled", false);
+			ALT_PCBANG_DIALY_BONUS_POINTS = PCCafeSettings.getInt("AltPcBangDailyBonusPoints", 1000);
+			
+			final PropertiesParser PremiumSettings = new PropertiesParser(PREMIUM_CONFIG_FILE);
+			PREMIUM_SYSTEM_ENABLED = PremiumSettings.getBoolean("EnablePremiumSystem", false);
+			NEWBIES_PREMIUM_PERIOD = PremiumSettings.getInt("NewbiesPremiumPeriod", 0);
+			PREMIUM_ALLOW_VOICED = PremiumSettings.getBoolean("PremiumAllowVoiced", false);
+			NOTIFY_PREMIUM_EXPIRATION = PremiumSettings.getBoolean("NotifyPremiumExpiration", true);
+			
+			PREMIUM_RATE_XP = PremiumSettings.getFloat("PremiumRateXp", 2);
+			PREMIUM_RATE_SP = PremiumSettings.getFloat("PremiumRateSp", 2);
+			PREMIUM_RATE_DROP_CHANCE = PremiumSettings.getFloat("PremiumRateDropChance", 1);
+			PREMIUM_RATE_DROP_AMOUNT = PremiumSettings.getFloat("PremiumRateDropAmount", 2);
+			PREMIUM_RATE_SPOIL_CHANCE = PremiumSettings.getFloat("PremiumRateSpoilChance", 2);
+			PREMIUM_RATE_SPOIL_AMMOUNT = PremiumSettings.getFloat("PremiumRateSpoilAmmount", 1);
+			String[] premiumDropChanceMultiplier = PremiumSettings.getString("PremiumDropChanceMultiplierByItemId", "").split(";");
+			PREMIUM_RATE_DROP_CHANCE_MULTIPLIER = new HashMap<>(premiumDropChanceMultiplier.length);
+			if (!premiumDropChanceMultiplier[0].isEmpty())
+			{
+				for (String item : premiumDropChanceMultiplier)
+				{
+					String[] itemSplit = item.split(",");
+					if (itemSplit.length != 2)
+					{
+						LOG.warn(StringUtil.concat("Config.load(): invalid config property -> PremiumDropChanceMultiplierByItemId \"", item, "\""));
+					}
+					else
+					{
+						try
+						{
+							PREMIUM_RATE_DROP_CHANCE_MULTIPLIER.put(Integer.valueOf(itemSplit[0]), Float.valueOf(itemSplit[1]));
+						}
+						catch (NumberFormatException nfe)
+						{
+							if (!item.isEmpty())
+							{
+								LOG.warn(StringUtil.concat("Config.load(): invalid config property -> PremiumDropChanceMultiplierByItemId \"", item, "\""));
+							}
+						}
+					}
+				}
+			}
+			String[] premiumDropAmountMultiplier = PremiumSettings.getString("PremiumDropAmountMultiplierByItemId", "").split(";");
+			PREMIUM_RATE_DROP_AMOUNT_MULTIPLIER = new HashMap<>(premiumDropAmountMultiplier.length);
+			if (!premiumDropAmountMultiplier[0].isEmpty())
+			{
+				for (String item : premiumDropAmountMultiplier)
+				{
+					String[] itemSplit = item.split(",");
+					if (itemSplit.length != 2)
+					{
+						LOG.warn(StringUtil.concat("Config.load(): invalid config property -> PremiumDropAmountMultiplierByItemId \"", item, "\""));
+					}
+					else
+					{
+						try
+						{
+							PREMIUM_RATE_DROP_AMOUNT_MULTIPLIER.put(Integer.valueOf(itemSplit[0]), Float.valueOf(itemSplit[1]));
+						}
+						catch (NumberFormatException nfe)
+						{
+							if (!item.isEmpty())
+							{
+								LOG.warn(StringUtil.concat("Config.load(): invalid config property -> PremiumDropAmountMultiplierByItemId \"", item, "\""));
+							}
+						}
+					}
+				}
+			}
 		}
 		else if (Server.serverMode == Server.MODE_LOGINSERVER)
 		{

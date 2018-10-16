@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -102,6 +103,7 @@ import com.l2jserver.gameserver.instancemanager.GrandBossManager;
 import com.l2jserver.gameserver.instancemanager.HandysBlockCheckerManager;
 import com.l2jserver.gameserver.instancemanager.InstanceManager;
 import com.l2jserver.gameserver.instancemanager.ItemsOnGroundManager;
+import com.l2jserver.gameserver.instancemanager.PremiumManager;
 import com.l2jserver.gameserver.instancemanager.PunishmentManager;
 import com.l2jserver.gameserver.instancemanager.QuestManager;
 import com.l2jserver.gameserver.instancemanager.SiegeManager;
@@ -264,6 +266,7 @@ import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
 import com.l2jserver.gameserver.network.serverpackets.EtcStatusUpdate;
 import com.l2jserver.gameserver.network.serverpackets.ExAutoSoulShot;
 import com.l2jserver.gameserver.network.serverpackets.ExBrExtraUserInfo;
+import com.l2jserver.gameserver.network.serverpackets.ExBrPremiumState;
 import com.l2jserver.gameserver.network.serverpackets.ExDominionWarStart;
 import com.l2jserver.gameserver.network.serverpackets.ExDuelUpdateUserInfo;
 import com.l2jserver.gameserver.network.serverpackets.ExFishingEnd;
@@ -723,6 +726,11 @@ public final class L2PcInstance extends L2Playable
 		player.setNewbie(1);
 		// Give 20 recommendations
 		player.setRecomLeft(20);
+		
+		if (Config.NEWBIES_PREMIUM_PERIOD > 0)
+		{
+			PremiumManager.getInstance().addPremiumTime(accountName, Config.NEWBIES_PREMIUM_PERIOD, TimeUnit.DAYS);
+		}
 		// Add the player in the characters table of the database
 		return DAOFactory.getInstance().getPlayerDAO().insert(player) ? player : null;
 	}
@@ -5676,6 +5684,12 @@ public final class L2PcInstance extends L2Playable
 			addToSp *= getStat().getSpBonusMultiplier();
 		}
 		
+		if (isPremium())
+		{
+			addToExp *= Config.PREMIUM_RATE_XP;
+			addToSp *= Config.PREMIUM_RATE_SP;
+		}
+		
 		float ratioTakenByPlayer = 0;
 		
 		// if this player has a pet and it is in his range he takes from the owner's Exp, give the pet Exp now
@@ -9577,8 +9591,31 @@ public final class L2PcInstance extends L2Playable
 			LOG.error("{}", e);
 		}
 		
+		if (Config.ENABLE_DAILY_BONUS_KEY)
+		{
+			if (!getAccountVariables().getBoolean(AccountVariables.PC_CAFE_POINTS_TODAY, false))
+			{
+				getAccountVariables().set(AccountVariables.PC_CAFE_POINTS_TODAY, true);
+				increasePcCafePoints(getVariables().getInt(ENABLE_DAILY_BONUS_POINTS_KEY, Config.ALT_PCBANG_DIALY_BONUS_POINTS));
+			}
+		}
+		
+		if (Config.NOTIFY_PREMIUM_EXPIRATION && isPremium())
+		{
+			Date testDate = new Date(PremiumManager.getInstance().getPremiumExpiration(getAccountName()));
+			if (Util.isToday(testDate))
+			{
+				sendMessage(MessagesData.getInstance().getMessage(this, "your_premium_will_expire_today"));
+			}
+			else if (Util.isTomorrow(testDate))
+			{
+				sendMessage(MessagesData.getInstance().getMessage(this, "your_premium_will_expire_tomorrow"));
+			}
+		}
 		EventDispatcher.getInstance().notifyEventAsync(new OnPlayerLogin(this), this);
 	}
+	
+	public static final String ENABLE_DAILY_BONUS_POINTS_KEY = "daily_bonus_points"; // TODO:
 	
 	public long getLastAccess()
 	{
@@ -13465,12 +13502,17 @@ public final class L2PcInstance extends L2Playable
 	
 	public boolean isPremium()
 	{
+		if (!Config.PREMIUM_SYSTEM_ENABLED)
+		{
+			return false;
+		}
 		return getAccountVariables().getBoolean(AccountVariables.PREMIUM_ACCOUNT, false);
 	}
 	
 	public void setPremium(boolean isPremium)
 	{
 		getAccountVariables().set(AccountVariables.PREMIUM_ACCOUNT, isPremium);
+		sendPacket(new ExBrPremiumState(this));
 	}
 	
 	public long getPrimePoints()

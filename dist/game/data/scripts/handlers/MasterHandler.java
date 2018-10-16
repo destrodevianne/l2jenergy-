@@ -107,6 +107,7 @@ import handlers.admincommandhandlers.AdminPcCondOverride;
 import handlers.admincommandhandlers.AdminPetition;
 import handlers.admincommandhandlers.AdminPledge;
 import handlers.admincommandhandlers.AdminPolymorph;
+import handlers.admincommandhandlers.AdminPremium;
 import handlers.admincommandhandlers.AdminPunishment;
 import handlers.admincommandhandlers.AdminQuest;
 import handlers.admincommandhandlers.AdminReload;
@@ -285,6 +286,7 @@ import handlers.voicedcommandhandlers.ChangePassword;
 import handlers.voicedcommandhandlers.ChatAdmin;
 import handlers.voicedcommandhandlers.Debug;
 import handlers.voicedcommandhandlers.Lang;
+import handlers.voicedcommandhandlers.Premium;
 import handlers.voicedcommandhandlers.StatsVCmd;
 import handlers.voicedcommandhandlers.Wedding;
 
@@ -388,6 +390,7 @@ public class MasterHandler
 			AdminPetition.class,
 			AdminPForge.class,
 			AdminPledge.class,
+			AdminPremium.class,
 			AdminPolymorph.class,
 			AdminPunishment.class,
 			AdminQuest.class,
@@ -547,6 +550,7 @@ public class MasterHandler
 			(Config.L2JMOD_MULTILANG_ENABLE && Config.L2JMOD_MULTILANG_VOICED_ALLOW ? Lang.class : null),
 			(Config.L2JMOD_DEBUG_VOICE_COMMAND ? Debug.class : null),
 			(Config.L2JMOD_ALLOW_CHANGE_PASSWORD ? ChangePassword.class : null),
+			(Config.PREMIUM_ALLOW_VOICED ? Premium.class : null),
 		},
 		{
 			// Target Handlers

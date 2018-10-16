@@ -16,28 +16,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.gameserver.network.serverpackets;
+package com.l2jserver.gameserver.instancemanager.tasks;
 
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
 /**
- * @author GodKratos
+ * @author Мо3олЬ
  */
-public class ExBrPremiumState extends L2GameServerPacket
+public class PremiumExpireTask implements Runnable
 {
-	private final L2PcInstance _player;
+	final L2PcInstance _player;
 	
-	public ExBrPremiumState(L2PcInstance player)
+	public PremiumExpireTask(L2PcInstance player)
 	{
 		_player = player;
 	}
 	
 	@Override
-	protected void writeImpl()
+	public void run()
 	{
-		writeC(0xFE);
-		writeH(0xD9);
-		writeD(_player.getObjectId());
-		writeC(_player.isPremium() ? 0x01 : 0x00);
+		_player.setPremium(false);
 	}
 }

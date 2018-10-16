@@ -25,6 +25,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
@@ -994,5 +995,33 @@ public final class Util
 			}
 		}
 		return false;
+	}
+	
+	public static boolean isSameDay(Date firstDate, Date secondDate)
+	{
+		Calendar first = Calendar.getInstance();
+		Calendar second = Calendar.getInstance();
+		first.setTime(firstDate);
+		second.setTime(secondDate);
+		return ((first.get(Calendar.ERA) == second.get(Calendar.ERA)) && (first.get(Calendar.YEAR) == second.get(Calendar.YEAR)) && (first.get(Calendar.DAY_OF_YEAR) == second.get(Calendar.DAY_OF_YEAR)));
+	}
+	
+	public static boolean isToday(Date date)
+	{
+		Calendar now = Calendar.getInstance();
+		Calendar test = Calendar.getInstance();
+		test.setTime(date);
+		
+		return isSameDay(now.getTime(), test.getTime());
+	}
+	
+	public static boolean isTomorrow(Date date)
+	{
+		Calendar now = Calendar.getInstance();
+		now.add(Calendar.DAY_OF_YEAR, 1);
+		Calendar test = Calendar.getInstance();
+		test.setTime(date);
+		
+		return isSameDay(now.getTime(), test.getTime());
 	}
 }

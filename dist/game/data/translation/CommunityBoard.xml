@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/Messages.xsd">
-    <!-- TeleportBoard Messages -->
-    <message id="community_board_services_disabled">
+    <!-- Board Messages -->
+    <message id="community_board_services_disabled_players_private_store">
+        <set lang="en" val="Community disabled for players in Private Store." />
+		<set lang="ru" val="Сервис отключен когда игрок находится в режиме торговля." />
+	</message>
+	<message id="community_board_services_disabled">
         <set lang="en" val="Services disabled." />
 		<set lang="ru" val="Сервис отключен." />
 	</message>
+	<!-- TeleportBoard Messages -->
     <message id="communityboard_teleport_personal_point_only_premium">
         <set lang="en" val="Only Players with premium accounts can use the teleport point." />
 		<set lang="ru" val="Только Игроки с премиум-аккаунтом могут использовать точки телепорта." />

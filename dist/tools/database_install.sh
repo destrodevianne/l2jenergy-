@@ -77,6 +77,7 @@ $MYL < sql/login/accounts_ipauth.sql &> /dev/null
 $MYL < sql/login/gameservers.sql &> /dev/null
 
 $MYL < sql/game/account_gsdata.sql &> /dev/null
+$MYL < sql/game/account_premium.sql &> /dev/null
 $MYL < sql/game/airships.sql &> /dev/null
 $MYL < sql/game/announcements.sql &> /dev/null
 $MYL < sql/game/auction.sql &> /dev/null

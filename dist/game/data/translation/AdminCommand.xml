@@ -301,6 +301,10 @@
 	    <set lang="en" val="Admin decreased your Prime Point(s) by %s%!" />
 		<set lang="ru" val="Администратор уменьшил ваше количество Prime Point(s) на %s%!" />
 	</message>
+	<message id="admin_decreased_your_prime_point">
+	    <set lang="en" val="You decreased Prime Point(s) of %c% by %s%!" />
+		<set lang="ru" val="Вы уменьшили игроку %c% количество Prime Point(s) на %s%!" />
+	</message>
 	<message id="admin_increased_your_prime_point_all_online">
 	    <set lang="en" val="You increased Prime Point(s) of all online players %i% by %s%!" />
 		<set lang="ru" val="Вы увеличили количество Prime Point(s) для %i% онлайн-игроков на %s%!" />
@@ -349,8 +353,48 @@
 	<message id="admin_increase_your_pc_cafe_point">
 	    <set lang="en" val="Admin increase your Pc Cafe Point(s) by %s%!" />
 		<set lang="ru" val="Администратор увеличил ваше количество Очков PC-клуба на %s%!" />
+	</message> 
+	<!-- Admin Premium -->
+	<message id="admin_usage_premium_add1">
+	    <set lang="en" val="Usage: //admin_premium_add1 [account name]" />
+		<set lang="ru" val="Применение: //admin_premium_add1 [имя аккаунта]" />
 	</message>
-	
+	<message id="admin_usage_premium_add2">
+	    <set lang="en" val="Usage: //admin_premium_add2 [account name]" />
+		<set lang="ru" val="Применение: //admin_premium_add2 [имя аккаунта]" />
+	</message>
+	<message id="admin_usage_premium_add3">
+	    <set lang="en" val="Usage: //admin_premium_add3 [account name]" />
+		<set lang="ru" val="Применение: //admin_premium_add3 [имя аккаунта]" />
+	</message>
+	<message id="admin_usage_premium_info">
+	    <set lang="en" val="Usage: //admin_premium_info [account name]" />
+		<set lang="ru" val="Применение: //admin_premium_info [имя аккаунта]" />
+	</message>
+	<message id="admin_usage_premium_remove">
+	    <set lang="en" val="Usage: //admin_premium_remove [account name]" />
+		<set lang="ru" val="Применение: //admin_premium_remove [имя аккаунта]" />
+	</message>
+	<message id="admin_account_will_have_premium_status_ntil">
+	    <set lang="en" val="Account %s% will now have premium status until %i%." />
+		<set lang="ru" val="Аккаунт %s% теперь будет иметь премиум статус до %i%." />
+	</message>
+	<message id="admin_account_has_premium_status_until">
+	    <set lang="en" val="Account %s% has premium status until %i%." />
+		<set lang="ru" val="Аккаунт %s% имеет премиум статус до %i%." />
+	</message>
+	<message id="admin_account_has_no_premium_status">
+	    <set lang="en" val="Account %s% has no premium status." />
+		<set lang="ru" val="Аккаунт %s% не имеет премиум статуса." />
+	</message>
+	<message id="admin_account_has_no_longer_premium_status">
+	    <set lang="en" val="Account %s% has no longer premium status." />
+		<set lang="ru" val="Аккаунт %s% больше не имеет премиум статуса." />
+	</message>
+	<message id="admin_account_has_no_premium_status">
+	    <set lang="en" val="Account %s% has no premium status." />
+		<set lang="ru" val="Аккаунт %s% не имеет премиум статуса." />
+	</message>
 	<!-- Admin Button -->
 	<message id="admin_button_refresh">
 	    <set lang="en" val="Refresh" />

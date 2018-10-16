@@ -121,6 +121,7 @@ import com.l2jserver.gameserver.instancemanager.MailManager;
 import com.l2jserver.gameserver.instancemanager.MapRegionManager;
 import com.l2jserver.gameserver.instancemanager.MercTicketManager;
 import com.l2jserver.gameserver.instancemanager.PetitionManager;
+import com.l2jserver.gameserver.instancemanager.PremiumManager;
 import com.l2jserver.gameserver.instancemanager.PunishmentManager;
 import com.l2jserver.gameserver.instancemanager.QuestManager;
 import com.l2jserver.gameserver.instancemanager.RaidBossPointsManager;
@@ -343,6 +344,11 @@ public final class GameServer
 		CastleManorManager.getInstance();
 		MercTicketManager.getInstance();
 		
+		if (Config.PREMIUM_SYSTEM_ENABLED)
+		{
+			PremiumManager.getInstance();
+		}
+		
 		QuestManager.getInstance().report();
 		
 		if (Config.SAVE_DROPPED_ITEM)
@@ -390,7 +396,6 @@ public final class GameServer
 		Runtime.getRuntime().addShutdownHook(Shutdown.getInstance());
 		
 		LOG.info("IdFactory: Free ObjectID's remaining: {}", IdFactory.getInstance().size());
-		
 		TvTManager.getInstance();
 		KnownListUpdateTaskManager.getInstance();
 		

@@ -535,7 +535,6 @@ public final class L2NpcTemplate extends L2CharTemplate implements IIdentifiable
 			
 			calculatedDrops.addAll(drops);
 		}
-		
 		return calculatedDrops;
 	}
 	

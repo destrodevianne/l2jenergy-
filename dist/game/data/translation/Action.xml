@@ -157,4 +157,12 @@
 	    <set lang="en" val="You use Escape: %s% seconds." />
 		<set lang="ru" val="Вы используете Бегство: %s% секунд(ы)." />
 	</message>
+	<message id="your_premium_will_expire_tomorrow">
+	    <set lang="en" val="Your premium will expire tomorrow." />
+		<set lang="ru" val="Завтра истекает срок действия вашего премиум аккаунта." />
+	</message>
+	<message id="your_premium_will_expire_today">
+	    <set lang="en" val="Your premium will expire today." />
+		<set lang="ru" val="Сегодня истекает срок действия вашего премиум аккаунта." />
+	</message>
 </list>

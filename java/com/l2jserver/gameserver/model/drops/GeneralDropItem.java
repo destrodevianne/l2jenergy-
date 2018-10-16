@@ -20,6 +20,7 @@ package com.l2jserver.gameserver.model.drops;
 
 import java.util.List;
 
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.drops.strategy.IAmountMultiplierStrategy;
 import com.l2jserver.gameserver.model.drops.strategy.IChanceMultiplierStrategy;
@@ -148,8 +149,16 @@ public final class GeneralDropItem implements IDropItem
 	 * @param victim the victim who drops the item
 	 * @return the min modified by any rates.
 	 */
-	public final long getMin(L2Character victim)
+	public final long getMin(L2Character victim, L2Character killer)
 	{
+		if (Config.PREMIUM_SYSTEM_ENABLED && killer.isPlayer() && killer.getActingPlayer().isPremium())
+		{
+			if (Config.PREMIUM_RATE_DROP_AMOUNT_MULTIPLIER.get(_itemId) != null)
+			{
+				return (long) (getMin() * getAmountMultiplier(victim) * Config.PREMIUM_RATE_DROP_AMOUNT_MULTIPLIER.get(_itemId));
+			}
+			return (long) (getMin() * getAmountMultiplier(victim) * Config.PREMIUM_RATE_DROP_AMOUNT);
+		}
 		return (long) (getMin() * getAmountMultiplier(victim));
 	}
 	
@@ -167,8 +176,16 @@ public final class GeneralDropItem implements IDropItem
 	 * @param victim the victim who drops the item
 	 * @return the max modified by any rates.
 	 */
-	public final long getMax(L2Character victim)
+	public final long getMax(L2Character victim, L2Character killer)
 	{
+		if (Config.PREMIUM_SYSTEM_ENABLED && killer.isPlayer() && killer.getActingPlayer().isPremium())
+		{
+			if (Config.PREMIUM_RATE_DROP_AMOUNT_MULTIPLIER.get(_itemId) != null)
+			{
+				return (long) (getMax() * getAmountMultiplier(victim) * Config.PREMIUM_RATE_DROP_AMOUNT_MULTIPLIER.get(_itemId));
+			}
+			return (long) (getMax() * getAmountMultiplier(victim) * Config.PREMIUM_RATE_DROP_AMOUNT);
+		}
 		return (long) (getMax() * getAmountMultiplier(victim));
 	}
 	
@@ -201,7 +218,15 @@ public final class GeneralDropItem implements IDropItem
 	 */
 	public final double getChance(L2Character victim, L2Character killer)
 	{
-		return (getKillerChanceModifier(victim, killer) * getChance(victim));
+		if (Config.PREMIUM_SYSTEM_ENABLED && killer.isPlayer() && killer.getActingPlayer().isPremium())
+		{
+			if (Config.PREMIUM_RATE_DROP_CHANCE_MULTIPLIER.get(_itemId) != null)
+			{
+				return getKillerChanceModifier(victim, killer) * getChance(victim) * Config.PREMIUM_RATE_DROP_CHANCE_MULTIPLIER.get(_itemId);
+			}
+			return getKillerChanceModifier(victim, killer) * getChance(victim) * Config.PREMIUM_RATE_DROP_CHANCE;
+		}
+		return getKillerChanceModifier(victim, killer) * getChance(victim);
 	}
 	
 	@Override
