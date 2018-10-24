@@ -448,6 +448,7 @@ import quests.Q00636_TruthBeyond.Q00636_TruthBeyond;
 import quests.Q00637_ThroughOnceMore.Q00637_ThroughOnceMore;
 import quests.Q00638_SeekersOfTheHolyGrail.Q00638_SeekersOfTheHolyGrail;
 import quests.Q00639_GuardiansOfTheHolyGrail.Q00639_GuardiansOfTheHolyGrail;
+import quests.Q00640_TheZeroHour.Q00640_TheZeroHour;
 import quests.Q00641_AttackSailren.Q00641_AttackSailren;
 import quests.Q00642_APowerfulPrimevalCreature.Q00642_APowerfulPrimevalCreature;
 import quests.Q00643_RiseAndFallOfTheElrokiTribe.Q00643_RiseAndFallOfTheElrokiTribe;
@@ -956,6 +957,7 @@ public class QuestMasterHandler
 		Q00637_ThroughOnceMore.class,
 		Q00638_SeekersOfTheHolyGrail.class,
 		Q00639_GuardiansOfTheHolyGrail.class,
+		Q00640_TheZeroHour.class,
 		Q00641_AttackSailren.class,
 		Q00642_APowerfulPrimevalCreature.class,
 		Q00643_RiseAndFallOfTheElrokiTribe.class,
