@@ -459,16 +459,18 @@ public class Q00125_TheNameOfEvil1 extends Quest
 							htmltext = "32121-01.html";
 							break;
 						case 7:
+							if (st.get("Memo") == null)
+							{
+								htmltext = "32121-02.html";
+								npc.broadcastPacket(new MagicSkillUse(npc, player, 5089, 1, 1000, 0));
+								st.unset("W");
+								st.unset("A");
+								st.unset("G");
+								st.unset("U");
+								break;
+							}
 							switch (st.getInt("Memo"))
 							{
-								case 0:
-									htmltext = "32121-02.html";
-									npc.broadcastPacket(new MagicSkillUse(npc, player, 5089, 1, 1000, 0));
-									st.unset("W");
-									st.unset("A");
-									st.unset("G");
-									st.unset("U");
-									break;
 								case 1:
 									htmltext = "32121-09.html";
 									break;
