@@ -214,7 +214,7 @@ public final class Q00371_ShrieksOfGhosts extends Quest
 		String htmltext = getNoQuestMsg(player);
 		if (qs.isCreated())
 		{
-			htmltext = (player.getLevel() >= MIN_LEVEL) ? "30867-01.htm" : "30867-03.htm";
+			htmltext = (player.getLevel() >= MIN_LEVEL) ? "30867-01.htm" : "30867-03.html";
 		}
 		else if (qs.isStarted())
 		{
