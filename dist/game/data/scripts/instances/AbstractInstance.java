@@ -95,7 +95,7 @@ public abstract class AbstractInstance extends AbstractNpcAI
 			
 			if (Config.DEBUG_INSTANCES)
 			{
-				_log.info("Instance " + inst.getName() + " (" + instance.getTemplateId() + ") has been created by player " + player.getName());
+				LOG.info("Instance {} ({}) has been created by player {}", inst.getName(), instance.getTemplateId(), player.getName());
 			}
 		}
 	}
@@ -230,7 +230,7 @@ public abstract class AbstractInstance extends AbstractNpcAI
 		
 		if (Config.DEBUG_INSTANCES)
 		{
-			_log.info("Time restrictions has been set for player in instance ID: " + world.getInstanceId() + " (" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(time) + ")");
+			LOG.info("Time restrictions has been set for player in instance ID: {} ({})", world.getInstanceId(), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(time));
 		}
 	}
 	

@@ -66,9 +66,9 @@ public final class HellboundEngine extends AbstractNpcAI
 		
 		startQuestTimer(UPDATE_EVENT, 1000, null, null);
 		
-		_log.info(HellboundEngine.class.getSimpleName() + ": Level: " + getLevel());
-		_log.info(HellboundEngine.class.getSimpleName() + ": Trust: " + getTrust());
-		_log.info(HellboundEngine.class.getSimpleName() + ": Status: " + (isLocked() ? "locked." : "unlocked."));
+		LOG.info("{}: Level: {}", HellboundEngine.class, getLevel());
+		LOG.info("{}: Trust: {}", HellboundEngine.class, getTrust());
+		LOG.info("{}: Status: {}", HellboundEngine.class, (isLocked() ? "locked." : "unlocked."));
 	}
 	
 	@Override
@@ -148,11 +148,11 @@ public final class HellboundEngine extends AbstractNpcAI
 		
 		if (added > 0)
 		{
-			_log.info(getClass().getSimpleName() + ": Spawned " + added + " NPCs.");
+			LOG.info("{}: Spawned {} NPCs.", getClass().getSimpleName(), added);
 		}
 		if (deleted > 0)
 		{
-			_log.info(getClass().getSimpleName() + ": Removed " + deleted + " NPCs.");
+			LOG.info("{}: Removed {} NPCs.", getClass().getSimpleName(), deleted);
 		}
 	}
 	
@@ -176,7 +176,7 @@ public final class HellboundEngine extends AbstractNpcAI
 			return;
 		}
 		
-		_log.info(HellboundEngine.class.getSimpleName() + ": Changing level from " + getLevel() + " to " + lvl + ".");
+		LOG.info("{}: Changing level from {} to {}.", HellboundEngine.class, getLevel(), lvl);
 		
 		GlobalVariablesManager.getInstance().set("HBLevel", lvl);
 	}
@@ -286,14 +286,14 @@ public final class HellboundEngine extends AbstractNpcAI
 			}
 			catch (Exception e)
 			{
-				_log.warning(getClass().getSimpleName() + " : Doors problem!" + e.getMessage());
+				LOG.warn("{}: Doors problem!", getClass().getSimpleName(), e);
 			}
 		}
 		
 		if (_cachedLevel > 0)
 		{
 			Broadcast.toAllOnlinePlayers(ANNOUNCEMENT.replace("%lvl%", String.valueOf(newLevel)));
-			_log.info(HellboundEngine.class.getSimpleName() + ": New level: " + newLevel);
+			LOG.info("{}: New level: {}", HellboundEngine.class, newLevel);
 		}
 		_cachedLevel = newLevel;
 	}

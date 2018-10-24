@@ -20,7 +20,6 @@ package instances.ChambersOfDelusion;
 
 import java.util.Calendar;
 import java.util.concurrent.ScheduledFuture;
-import java.util.logging.Level;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
@@ -135,7 +134,7 @@ public abstract class Chamber extends AbstractInstance
 				}
 				catch (Exception e)
 				{
-					_log.log(Level.WARNING, getClass().getSimpleName() + " ChangeRoomTask exception : " + e.getMessage(), e);
+					LOG.warn("{} ChangeRoomTask exception!", getClass().getSimpleName(), e);
 				}
 			}
 		}

@@ -209,7 +209,7 @@ public final class ClassMaster extends AbstractNpcAI
 		}
 		else
 		{
-			_log.warning("Player " + player + " send invalid request [" + event + "]");
+			LOG.warn("Player {} send invalid request [{}]", player, event);
 		}
 		return "";
 	}
@@ -241,7 +241,7 @@ public final class ClassMaster extends AbstractNpcAI
 			}
 			catch (NumberFormatException e)
 			{
-				_log.warning("Player " + player + " send invalid class change request [" + request + "]!");
+				LOG.warn("Player {} send invalid class change request [{}]!", player, request);
 			}
 		}
 		

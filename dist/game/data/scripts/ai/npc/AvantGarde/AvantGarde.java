@@ -231,7 +231,7 @@ public class AvantGarde extends AbstractNpcAI
 									}
 									else
 									{
-										_log.warning("Invalid Sub-Class Skill Id: " + skillIdVar + " for player " + player.getName() + "!");
+										LOG.warn("Invalid Sub-Class Skill Id: {} for player {}!", skillIdVar, player.getName());
 									}
 								}
 								else if (!qvar.isEmpty() && !qvar.equals("0"))
@@ -249,19 +249,19 @@ public class AvantGarde extends AbstractNpcAI
 											itemInstance = player.getWarehouse().getItemByObjectId(itemObjId);
 											if (itemInstance != null)
 											{
-												_log.warning("Somehow " + player.getName() + " put a certification book into warehouse!");
+												LOG.warn("Somehow {} put a certification book into warehouse!", player.getName());
 												player.getWarehouse().destroyItem("CancelCertification", itemInstance, 1, player, false);
 											}
 											else
 											{
-												_log.warning("Somehow " + player.getName() + " deleted a certification book!");
+												LOG.warn("Somehow {} deleted a certification book!", player.getName());
 											}
 										}
 										st.saveGlobalQuestVar(qvarName, "0");
 									}
 									else
 									{
-										_log.warning("Invalid item object Id: " + qvar + " for player " + player.getName() + "!");
+										LOG.warn("Invalid item object Id: {} for player {}!", qvar, player.getName());
 									}
 								}
 							}
@@ -278,7 +278,7 @@ public class AvantGarde extends AbstractNpcAI
 						L2ItemInstance item = player.getInventory().getItemByItemId(itemId);
 						if (item != null)
 						{
-							_log.warning(getClass().getName() + ": player " + player + " had 'extra' certification skill books while cancelling sub-class certifications!");
+							LOG.warn("{]: player {} had 'extra' certification skill books while cancelling sub-class certifications!", getClass().getName(), player);
 							player.destroyItem("CancelCertificationExtraBooks", item, npc, false);
 						}
 					}

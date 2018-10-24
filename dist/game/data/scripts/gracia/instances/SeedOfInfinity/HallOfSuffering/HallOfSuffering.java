@@ -291,7 +291,7 @@ public final class HallOfSuffering extends AbstractInstance
 			case 4:
 				return ROOM_5_MOBS;
 		}
-		_log.warning("");
+		LOG.warn("");
 		return new int[][] {};
 	}
 	
@@ -587,7 +587,7 @@ public final class HallOfSuffering extends AbstractInstance
 			InstanceWorld world = InstanceManager.getInstance().getPlayerWorld(player);
 			if (((HSWorld) world).rewardItemId == -1)
 			{
-				_log.warning("Hall of Suffering: " + player.getName() + "(" + player.getObjectId() + ") is try to cheat!");
+				LOG.warn("Hall of Suffering: {}({}) is try to cheat!", player.getName(), player.getObjectId());
 				return getPtLeaderText(player, (HSWorld) world);
 			}
 			else if (((HSWorld) world).isRewarded)
@@ -617,7 +617,7 @@ public final class HallOfSuffering extends AbstractInstance
 			InstanceWorld world = InstanceManager.getInstance().getPlayerWorld(talker);
 			if (((HSWorld) world).rewardItemId == -1)
 			{
-				_log.warning("Hall of Suffering: " + talker.getName() + "(" + talker.getObjectId() + ") is try to cheat!");
+				LOG.warn("Hall of Suffering: {}({}) is try to cheat!", talker.getName(), talker.getObjectId());
 				return getPtLeaderText(talker, (HSWorld) world);
 			}
 			else if (((HSWorld) world).isRewarded)

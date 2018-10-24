@@ -1701,7 +1701,7 @@ public final class CrystalCaverns extends AbstractInstance
 							startQuestTimer("checkKechiAttack", 1000, kechi, null);
 							return "";
 						default:
-							_log.warning("CrystalCavern-SteamCorridor: status " + world.getStatus() + " error. OracleOrder not found in " + world.getInstanceId());
+							LOG.warn("CrystalCavern-SteamCorridor: status {} error. OracleOrder not found in {}", world.getStatus(), world.getInstanceId());
 							return "";
 					}
 					runSteamOracles(world, oracleOrder);

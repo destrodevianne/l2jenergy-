@@ -112,7 +112,7 @@ public final class Q00511_AwlUnderFoot extends Quest
 			}
 			catch (Exception e)
 			{
-				_log.warning("Fortress AwlUnderFoot Raid Spawn error: " + e);
+				LOG.warn("Fortress AwlUnderFoot Raid Spawn error!", e);
 			}
 		}
 	}
@@ -297,7 +297,7 @@ public final class Q00511_AwlUnderFoot extends Quest
 		world.setStatus(0);
 		dungeon.setReEnterTime(System.currentTimeMillis() + REENTERTIME);
 		InstanceManager.getInstance().addWorld(world);
-		_log.info("Fortress AwlUnderFoot started " + template + " Instance: " + instanceId + " created by player: " + player.getName());
+		LOG.info("Fortress AwlUnderFoot started {} Instance: {} created by player: {}", template, instanceId, player.getName());
 		ThreadPoolManager.getInstance().scheduleGeneral(new spawnRaid((FAUWorld) world), RAID_SPAWN_DELAY);
 		
 		// teleport players

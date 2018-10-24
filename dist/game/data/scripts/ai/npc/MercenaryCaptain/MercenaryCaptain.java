@@ -152,7 +152,7 @@ public final class MercenaryCaptain extends AbstractNpcAI
 						}
 						default:
 						{
-							_log.warning(MercenaryCaptain.class.getSimpleName() + ": Unknown strider type: " + type);
+							LOG.warn("{}: Unknown strider type: {}", MercenaryCaptain.class, type);
 							return null;
 						}
 					}

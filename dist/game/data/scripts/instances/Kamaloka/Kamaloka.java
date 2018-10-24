@@ -24,7 +24,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.logging.Level;
 
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.instancemanager.InstanceManager;
@@ -1539,7 +1538,7 @@ public final class Kamaloka extends AbstractInstance
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "", e);
+			LOG.warn("", e);
 		}
 		return "";
 	}
