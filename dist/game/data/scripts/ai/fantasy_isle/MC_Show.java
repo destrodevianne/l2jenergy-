@@ -311,7 +311,7 @@ public class MC_Show extends AbstractNpcAI
 		if (Config.DEBUG)
 		{
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-			_log.info("Fantasy Isle: MC show script starting at " + format.format(System.currentTimeMillis() + diff) + " and is scheduled each next 4 hours.");
+			LOG.info("Fantasy Isle: MC show script starting at {} and is scheduled each next 4 hours.", format.format(System.currentTimeMillis() + diff));
 		}
 		// TODO startRepeatingQuestTimer("Start", diff, 14400000, null, null);
 		// missing option to provide different initial delay
@@ -369,7 +369,7 @@ public class MC_Show extends AbstractNpcAI
 	{
 		if ((event == null) || event.isEmpty())
 		{
-			_log.warning("MC_Show: Null/Empty event for npc " + npc + " and player " + player + "!");
+			LOG.warn("MC_Show: Null/Empty event for npc {} and player {}!", npc, player);
 			return null;
 		}
 		

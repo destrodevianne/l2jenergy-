@@ -18,8 +18,6 @@
  */
 package ai.group_template;
 
-import java.util.logging.Level;
-
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.model.L2Spawn;
 import com.l2jserver.gameserver.model.Location;
@@ -261,7 +259,7 @@ public final class AltarsOfSacrifice extends AbstractNpcAI
 	@Override
 	public boolean unload(boolean removeFromList)
 	{
-		_log.info(getClass().getSimpleName() + ": Unloading altars due to script unloading.");
+		LOG.info("{}: Unloading altars due to script unloading.", getClass().getSimpleName());
 		
 		for (final Altar altar : _altars)
 		{
@@ -285,7 +283,7 @@ public final class AltarsOfSacrifice extends AbstractNpcAI
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, getClass().getSimpleName() + ": Failed to spawn altar boss.", e);
+				LOG.warn("{}: Failed to spawn altar boss.", getClass().getSimpleName(), e);
 				// let's try again to spawn it in 5 seconds
 				startQuestTimer(event, 5000, null, null);
 			}

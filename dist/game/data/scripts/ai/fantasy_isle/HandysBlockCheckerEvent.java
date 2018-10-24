@@ -101,11 +101,11 @@ public class HandysBlockCheckerEvent extends Quest
 		if (Config.ENABLE_BLOCK_CHECKER_EVENT)
 		{
 			new HandysBlockCheckerEvent();
-			_log.info("Handy's Block Checker Event is enabled");
+			LOG.info("Handy's Block Checker Event is enabled");
 		}
 		else
 		{
-			_log.info("Handy's Block Checker Event is disabled");
+			LOG.info("Handy's Block Checker Event is disabled");
 		}
 	}
 }

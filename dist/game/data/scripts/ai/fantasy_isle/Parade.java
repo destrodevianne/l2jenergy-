@@ -140,7 +140,7 @@ public final class Parade extends AbstractNpcAI
 		// ThreadPoolManager.getInstance().scheduleAiAtFixedRate(new Start(), 180000L, cycle);
 		
 		final SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-		_log.info("Fantasy Isle: Parade starting at " + format.format(System.currentTimeMillis() + diff) + " and is scheduled each next " + (cycle / 3600000) + " hours.");
+		LOG.info("Fantasy Isle: Parade starting at {} and is scheduled each next {} hours.", format.format(System.currentTimeMillis() + diff), (cycle / 3600000));
 	}
 	
 	protected void load()

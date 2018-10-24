@@ -893,7 +893,7 @@ public final class TreasureChest extends AbstractNpcAI
 						final List<ItemChanceHolder> items = DROPS.get(npc.getId());
 						if (items == null)
 						{
-							_log.warning("Tresure Chest ID " + npc.getId() + " doesn't have a drop list!");
+							LOG.warn("Tresure Chest ID {} doesn't have a drop list!", npc.getId());
 						}
 						else
 						{

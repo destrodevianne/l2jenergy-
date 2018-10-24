@@ -122,7 +122,7 @@ public final class DenOfEvil extends AbstractNpcAI
 		L2EffectZone zone = ZoneManager.getInstance().getZone(npc, L2EffectZone.class);
 		if (zone == null)
 		{
-			_log.warning("NPC " + npc + " spawned outside of L2EffectZone, check your zone coords! X:" + npc.getX() + " Y:" + npc.getY() + " Z:" + npc.getZ());
+			LOG.warn("NPC {} spawned outside of L2EffectZone, check your zone coords! X:{} Y:{} Z:{}", npc, npc.getX(), npc.getY(), npc.getZ());
 			return null;
 		}
 		int skillId = getSkillIdByNpcId(npc.getId());
@@ -150,7 +150,7 @@ public final class DenOfEvil extends AbstractNpcAI
 		L2EffectZone zone = ZoneManager.getInstance().getZone(npc, L2EffectZone.class);
 		if (zone == null)
 		{
-			_log.warning("NPC " + npc + " killed outside of L2EffectZone, check your zone coords! X:" + npc.getX() + " Y:" + npc.getY() + " Z:" + npc.getZ());
+			LOG.warn("NPC {} killed outside of L2EffectZone, check your zone coords! X:{} Y:{} Z:{}", npc, npc.getX(), npc.getY(), npc.getZ());
 			return null;
 		}
 		int skillId = getSkillIdByNpcId(npc.getId());
