@@ -66,9 +66,9 @@ public final class HellboundEngine extends AbstractNpcAI
 		
 		startQuestTimer(UPDATE_EVENT, 1000, null, null);
 		
-		LOG.info("{}: Level: {}", HellboundEngine.class, getLevel());
-		LOG.info("{}: Trust: {}", HellboundEngine.class, getTrust());
-		LOG.info("{}: Status: {}", HellboundEngine.class, (isLocked() ? "locked." : "unlocked."));
+		LOG.info("{}: Level: {}", HellboundEngine.class.getName(), getLevel());
+		LOG.info("{}: Trust: {}", HellboundEngine.class.getName(), getTrust());
+		LOG.info("{}: Status: {}", HellboundEngine.class.getName(), (isLocked() ? "locked." : "unlocked."));
 	}
 	
 	@Override
@@ -176,7 +176,7 @@ public final class HellboundEngine extends AbstractNpcAI
 			return;
 		}
 		
-		LOG.info("{}: Changing level from {} to {}.", HellboundEngine.class, getLevel(), lvl);
+		LOG.info("{}: Changing level from {} to {}.", HellboundEngine.class.getName(), getLevel(), lvl);
 		
 		GlobalVariablesManager.getInstance().set("HBLevel", lvl);
 	}
@@ -293,7 +293,7 @@ public final class HellboundEngine extends AbstractNpcAI
 		if (_cachedLevel > 0)
 		{
 			Broadcast.toAllOnlinePlayers(ANNOUNCEMENT.replace("%lvl%", String.valueOf(newLevel)));
-			LOG.info("{}: New level: {}", HellboundEngine.class, newLevel);
+			LOG.info("{}: New level: {}", HellboundEngine.class.getName(), newLevel);
 		}
 		_cachedLevel = newLevel;
 	}
