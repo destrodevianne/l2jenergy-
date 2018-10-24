@@ -187,7 +187,7 @@ public final class Q00420_LittleWing extends Quest
 			}
 			case "30610-12.html":
 			{
-				if (qs.isCond(5))
+				if (qs.isCond(4))
 				{
 					qs.setCond(2, true);
 					qs.set("old_stone", qs.getInt("fairy_stone"));
@@ -199,7 +199,7 @@ public final class Q00420_LittleWing extends Quest
 			}
 			case "30610-13.html":
 			{
-				if (qs.isCond(5))
+				if (qs.isCond(4))
 				{
 					qs.setCond(2, true);
 					qs.set("old_stone", qs.getInt("fairy_stone"));
@@ -232,7 +232,9 @@ public final class Q00420_LittleWing extends Quest
 			{
 				if (qs.isCond(2))
 				{
-					if ((qs.getInt("fairy_stone") == 2) && (getQuestItemsCount(player, COAL) >= 10) && (getQuestItemsCount(player, CHARCOAL) >= 10) && (getQuestItemsCount(player, GEMSTONE_C) >= 1) && (getQuestItemsCount(player, STONE_OF_PURITY) >= 1) && (getQuestItemsCount(player, SILVER_NUGGET) >= 5) && (getQuestItemsCount(player, TOAD_SKIN) >= 20))
+					if ((qs.getInt("fairy_stone") == 2) && (getQuestItemsCount(player, COAL) >= 10) && (getQuestItemsCount(player, CHARCOAL) >= 10) && (getQuestItemsCount(player, GEMSTONE_C) >= 1) && (getQuestItemsCount(player, STONE_OF_PURITY) >= 1)
+						&& (getQuestItemsCount(player, SILVER_NUGGET) >= 5) && (getQuestItemsCount(player, TOAD_SKIN) >= 20))
+					
 					{
 						takeItems(player, DELUXE_STONE_LIST, -1);
 						takeItems(player, COAL, 10);
@@ -481,11 +483,6 @@ public final class Q00420_LittleWing extends Quest
 							}
 							case 4:
 							{
-								htmltext = "30610-09.html";
-								break;
-							}
-							case 5:
-							{
 								if ((getQuestItemsCount(talker, FAIRY_STONE) == 0) && (getQuestItemsCount(talker, DELUXE_FAIRY_STONE) == 0))
 								{
 									htmltext = "30610-10.html";
@@ -494,6 +491,11 @@ public final class Q00420_LittleWing extends Quest
 								{
 									htmltext = "30610-11.html";
 								}
+								break;
+							}
+							case 5:
+							{
+								htmltext = "30610-09.html";
 								break;
 							}
 						}
@@ -505,11 +507,13 @@ public final class Q00420_LittleWing extends Quest
 						{
 							case 2:
 							{
-								if ((qs.getInt("fairy_stone") == 1) && (getQuestItemsCount(talker, COAL) >= 10) && (getQuestItemsCount(talker, CHARCOAL) >= 10) && (getQuestItemsCount(talker, GEMSTONE_D) >= 1) && (getQuestItemsCount(talker, SILVER_NUGGET) >= 3) && (getQuestItemsCount(talker, TOAD_SKIN) >= 10))
+								if ((qs.getInt("fairy_stone") == 1) && (getQuestItemsCount(talker, COAL) >= 10) && (getQuestItemsCount(talker, CHARCOAL) >= 10) && (getQuestItemsCount(talker, GEMSTONE_D) >= 1) && (getQuestItemsCount(talker, SILVER_NUGGET) >= 3)
+									&& (getQuestItemsCount(talker, TOAD_SKIN) >= 10))
 								{
 									htmltext = "30608-02.html";
 								}
-								else if ((qs.getInt("fairy_stone") == 2) && (getQuestItemsCount(talker, COAL) >= 10) && (getQuestItemsCount(talker, CHARCOAL) >= 10) && (getQuestItemsCount(talker, GEMSTONE_C) >= 1) && (getQuestItemsCount(talker, STONE_OF_PURITY) >= 1) && (getQuestItemsCount(talker, SILVER_NUGGET) >= 5) && (getQuestItemsCount(talker, TOAD_SKIN) >= 20))
+								else if ((qs.getInt("fairy_stone") == 2) && (getQuestItemsCount(talker, COAL) >= 10) && (getQuestItemsCount(talker, CHARCOAL) >= 10) && (getQuestItemsCount(talker, GEMSTONE_C) >= 1) && (getQuestItemsCount(talker, STONE_OF_PURITY) >= 1)
+									&& (getQuestItemsCount(talker, SILVER_NUGGET) >= 5) && (getQuestItemsCount(talker, TOAD_SKIN) >= 20))
 								{
 									htmltext = "30608-04.html";
 								}
