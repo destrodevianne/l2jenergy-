@@ -4692,14 +4692,6 @@ public final class L2PcInstance extends L2Playable
 	@Override
 	public void doCast(Skill skill)
 	{
-		if (getCurrentSkill() != null)
-		{
-			if (!checkUseMagicConditions(skill, getCurrentSkill().isCtrlPressed(), getCurrentSkill().isShiftPressed()))
-			{
-				setIsCastingNow(false);
-				return;
-			}
-		}
 		super.doCast(skill);
 		setRecentFakeDeath(false);
 	}
@@ -7560,6 +7552,11 @@ public final class L2PcInstance extends L2Playable
 			// just ignore the passive skill request. why does the client send it anyway ??
 			// Send a Server->Client packet ActionFailed to the L2PcInstance
 			sendPacket(ActionFailed.STATIC_PACKET);
+			return false;
+		}
+		
+		if (!checkUseMagicConditions(skill, forceUse, dontMove))
+		{
 			return false;
 		}
 		
@@ -13570,8 +13567,9 @@ public final class L2PcInstance extends L2Playable
 		
 		if (_pcCafePointsTask == null)
 		{
-			_pcCafePointsTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new PCCafePointsTask(this), Config.ALT_PCBANG_POINTS_DELAY * 60000L, Config.ALT_PCBANG_POINTS_DELAY * 60000L);
+			_pcCafePointsTask.cancel(false);
 		}
+		_pcCafePointsTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new PCCafePointsTask(this), Config.ALT_PCBANG_POINTS_DELAY * 60000L, Config.ALT_PCBANG_POINTS_DELAY * 60000L);
 	}
 	
 	public void stopPcBangPointsTask()
