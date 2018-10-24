@@ -36,10 +36,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.script.ScriptException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.GameTimeController;
@@ -156,7 +157,8 @@ import com.l2jserver.util.Util;
  */
 public abstract class AbstractScript implements INamable
 {
-	public static final Logger _log = Logger.getLogger(AbstractScript.class.getName());
+	public static final Logger LOG = LoggerFactory.getLogger(AbstractScript.class);
+	
 	private final Map<ListenerRegisterType, Set<Integer>> _registeredIds = new ConcurrentHashMap<>();
 	private final List<AbstractEventListener> _listeners = new CopyOnWriteArrayList<>();
 	private final File _scriptFile;
@@ -182,17 +184,17 @@ public abstract class AbstractScript implements INamable
 				final EventType eventType = listener.value();
 				if (method.getParameterCount() != 1)
 				{
-					_log.log(Level.WARNING, getClass().getSimpleName() + ": Non properly defined annotation listener on method: " + method.getName() + " expected parameter count is 1 but found: " + method.getParameterCount());
+					LOG.warn("{}: Non properly defined annotation listener on method: {} expected parameter count is 1 but found: {}", getClass().getSimpleName(), method.getName(), method.getParameterCount());
 					continue;
 				}
 				else if (!eventType.isEventClass(method.getParameterTypes()[0]))
 				{
-					_log.log(Level.WARNING, getClass().getSimpleName() + ": Non properly defined annotation listener on method: " + method.getName() + " expected parameter to be type of: " + eventType.getEventClass().getSimpleName() + " but found: " + method.getParameterTypes()[0].getSimpleName());
+					LOG.warn("{}: Non properly defined annotation listener on method: {} expected parameter to be type of: {} but found: {}", getClass().getSimpleName(), method.getName(), eventType.getEventClass().getSimpleName(), method.getParameterTypes()[0].getSimpleName());
 					continue;
 				}
 				else if (!eventType.isReturnClass(method.getReturnType()))
 				{
-					_log.log(Level.WARNING, getClass().getSimpleName() + ": Non properly defined annotation listener on method: " + method.getName() + " expected return type to be one of: " + Arrays.toString(eventType.getReturnClasses()) + " but found: " + method.getReturnType().getSimpleName());
+					LOG.warn("{}: Non properly defined annotation listener on method: {} expected return type to be one of: {} but found: {}", getClass().getSimpleName(), method.getName(), Arrays.toString(eventType.getReturnClasses()), method.getReturnType().getSimpleName());
 					continue;
 				}
 				
@@ -228,7 +230,7 @@ public abstract class AbstractScript implements INamable
 						final Range range = (Range) annotation;
 						if (range.from() > range.to())
 						{
-							_log.log(Level.WARNING, getClass().getSimpleName() + ": Wrong " + annotation.getClass().getSimpleName() + " from is higher then to!");
+							LOG.warn("{}: Wrong {} from is higher then to!", getClass().getSimpleName(), annotation.getClass().getSimpleName());
 							continue;
 						}
 						
@@ -244,7 +246,7 @@ public abstract class AbstractScript implements INamable
 						{
 							if (range.from() > range.to())
 							{
-								_log.log(Level.WARNING, getClass().getSimpleName() + ": Wrong " + annotation.getClass().getSimpleName() + " from is higher then to!");
+								LOG.warn("{}: Wrong {} from is higher then to!", getClass().getSimpleName(), annotation.getClass().getSimpleName());
 								continue;
 							}
 							
@@ -259,12 +261,12 @@ public abstract class AbstractScript implements INamable
 						final NpcLevelRange range = (NpcLevelRange) annotation;
 						if (range.from() > range.to())
 						{
-							_log.log(Level.WARNING, getClass().getSimpleName() + ": Wrong " + annotation.getClass().getSimpleName() + " from is higher then to!");
+							LOG.warn("{}: Wrong {} from is higher then to!", getClass().getSimpleName(), annotation.getClass().getSimpleName());
 							continue;
 						}
 						else if (type != ListenerRegisterType.NPC)
 						{
-							_log.log(Level.WARNING, getClass().getSimpleName() + ": ListenerRegisterType " + type + " for " + annotation.getClass().getSimpleName() + " NPC is expected!");
+							LOG.warn("{}: ListenerRegisterType {} for {} NPC is expected!", getClass().getSimpleName(), type, annotation.getClass().getSimpleName());
 							continue;
 						}
 						
@@ -282,12 +284,12 @@ public abstract class AbstractScript implements INamable
 						{
 							if (range.from() > range.to())
 							{
-								_log.log(Level.WARNING, getClass().getSimpleName() + ": Wrong " + annotation.getClass().getSimpleName() + " from is higher then to!");
+								LOG.warn("{}: Wrong {} from is higher then to!", getClass().getSimpleName(), annotation.getClass().getSimpleName());
 								continue;
 							}
 							else if (type != ListenerRegisterType.NPC)
 							{
-								_log.log(Level.WARNING, getClass().getSimpleName() + ": ListenerRegisterType " + type + " for " + annotation.getClass().getSimpleName() + " NPC is expected!");
+								LOG.warn("{}: ListenerRegisterType {} for {} NPC is expected!", getClass().getSimpleName(), type, annotation.getClass().getSimpleName());
 								continue;
 							}
 							
@@ -1410,7 +1412,7 @@ public abstract class AbstractScript implements INamable
 					}
 					default:
 					{
-						_log.log(Level.WARNING, getClass().getSimpleName() + ": Unhandled register type: " + registerType);
+						LOG.warn("{}: Unhandled register type: {}", getClass().getSimpleName(), registerType);
 					}
 				}
 				
@@ -1522,7 +1524,7 @@ public abstract class AbstractScript implements INamable
 					}
 					default:
 					{
-						_log.log(Level.WARNING, getClass().getSimpleName() + ": Unhandled register type: " + registerType);
+						LOG.warn("{}: Unhandled register type: {}", getClass().getSimpleName(), registerType);
 					}
 				}
 			}
@@ -1794,7 +1796,7 @@ public abstract class AbstractScript implements INamable
 		{
 			if ((x == 0) && (y == 0))
 			{
-				_log.log(Level.SEVERE, "addSpawn(): invalid spawn coordinates for NPC #" + npcId + "!");
+				LOG.error("addSpawn(): invalid spawn coordinates for NPC #{}!", npcId);
 				return null;
 			}
 			
@@ -1837,9 +1839,8 @@ public abstract class AbstractScript implements INamable
 		}
 		catch (Exception e)
 		{
-			_log.warning("Could not spawn NPC #" + npcId + "; error: " + e.getMessage());
+			LOG.warn("Could not spawn NPC #{}; error!", npcId, e);
 		}
-		
 		return null;
 	}
 	
@@ -3115,7 +3116,7 @@ public abstract class AbstractScript implements INamable
 		final L2DoorInstance door = getDoor(doorId, instanceId);
 		if (door == null)
 		{
-			_log.log(Level.WARNING, getClass().getSimpleName() + ": called openDoor(" + doorId + ", " + instanceId + "); but door wasnt found!", new NullPointerException());
+			LOG.warn("{}: called openDoor({}, {}); but door wasnt found!", getClass().getSimpleName(), doorId, instanceId, new NullPointerException());
 		}
 		else if (!door.getOpen())
 		{
@@ -3133,7 +3134,7 @@ public abstract class AbstractScript implements INamable
 		final L2DoorInstance door = getDoor(doorId, instanceId);
 		if (door == null)
 		{
-			_log.log(Level.WARNING, getClass().getSimpleName() + ": called closeDoor(" + doorId + ", " + instanceId + "); but door wasnt found!", new NullPointerException());
+			LOG.warn("{}: called closeDoor({}, {}); but door wasnt found!", getClass().getSimpleName(), doorId, instanceId, new NullPointerException());
 		}
 		else if (door.getOpen())
 		{

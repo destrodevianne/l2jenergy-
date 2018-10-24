@@ -32,7 +32,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 import java.util.function.Predicate;
-import java.util.logging.Level;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
@@ -501,7 +500,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 			{
 				showError(trigger.getActingPlayer(), e);
 			}
-			_log.log(Level.WARNING, "Exception on onTrapAction() in notifyTrapAction(): " + e.getMessage(), e);
+			LOG.warn("Exception on onTrapAction() in notifyTrapAction()!", e);
 			return;
 		}
 		if (trigger.getActingPlayer() != null)
@@ -521,7 +520,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception on onSpawn() in notifySpawn(): " + e.getMessage(), e);
+			LOG.warn("Exception on onSpawn() in notifySpawn()!", e);
 		}
 	}
 	
@@ -536,7 +535,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception on onTeleport() in notifyTeleport(): " + e.getMessage(), e);
+			LOG.warn("Exception on onTeleport() in notifyTeleport()!", e);
 		}
 	}
 	
@@ -889,7 +888,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception on onEventReceived() in notifyEventReceived(): " + e.getMessage(), e);
+			LOG.warn("Exception on onEventReceived() in notifyEventReceived()!", e);
 		}
 	}
 	
@@ -958,7 +957,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Execution on onOlympiadMatchFinish() in notifyOlympiadMatch(): " + e.getMessage(), e);
+			LOG.warn("Execution on onOlympiadMatchFinish() in notifyOlympiadMatch()!", e);
 		}
 	}
 	
@@ -973,7 +972,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception on onMoveFinished() in notifyMoveFinished(): " + e.getMessage(), e);
+			LOG.warn("Exception on onMoveFinished() in notifyMoveFinished()!", e);
 		}
 	}
 	
@@ -988,7 +987,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception on onNodeArrived() in notifyNodeArrived(): " + e.getMessage(), e);
+			LOG.warn("Exception on onNodeArrived() in notifyNodeArrived()!", e);
 		}
 	}
 	
@@ -1003,7 +1002,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception on onRouteFinished() in notifyRouteFinished(): " + e.getMessage(), e);
+			LOG.warn("Exception on onRouteFinished() in notifyRouteFinished()!", e);
 		}
 	}
 	
@@ -1020,7 +1019,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception on onCanSeeMe() in notifyOnCanSeeMe(): " + e.getMessage(), e);
+			LOG.warn("Exception on onCanSeeMe() in notifyOnCanSeeMe()!", e);
 		}
 		return false;
 	}
@@ -1485,10 +1484,10 @@ public class Quest extends AbstractScript implements IIdentifiable
 	 */
 	public boolean showError(L2PcInstance player, Throwable t)
 	{
-		_log.log(Level.WARNING, getScriptFile().getAbsolutePath(), t);
+		LOG.warn("", getScriptFile().getAbsolutePath(), t);
 		if (t.getMessage() == null)
 		{
-			_log.warning(getClass().getSimpleName() + ": " + t.getMessage());
+			LOG.warn("", getClass().getSimpleName(), t);
 		}
 		if ((player != null) && player.getAccessLevel().isGm())
 		{
@@ -1575,7 +1574,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 					Quest q = QuestManager.getInstance().getQuest(questId);
 					if (q == null)
 					{
-						_log.finer("Unknown quest " + questId + " for player " + player.getName());
+						LOG.warn("Unknown quest {} for player {}", questId, player.getName());
 						if (Config.AUTODELETE_INVALID_QUEST_DATA)
 						{
 							invalidQuestData.setInt(1, player.getObjectId());
@@ -1606,7 +1605,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 						QuestState qs = player.getQuestState(questId);
 						if (qs == null)
 						{
-							_log.finer("Lost variable " + var + " in quest " + questId + " for player " + player.getName());
+							LOG.info("Lost variable {} in quest {} for player {}", var, questId, player.getName());
 							if (Config.AUTODELETE_INVALID_QUEST_DATA)
 							{
 								invalidQuestDataVar.setInt(1, player.getObjectId());
@@ -1624,7 +1623,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "could not insert char quest:", e);
+			LOG.warn("Could not insert char quest!", e);
 		}
 		
 		// events
@@ -1653,7 +1652,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "could not insert global quest variable:", e);
+			LOG.warn("Could not insert global quest variable!", e);
 		}
 	}
 	
@@ -1684,7 +1683,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "could not load global quest variable:", e);
+			LOG.warn("Could not load global quest variable!", e);
 		}
 		return result;
 	}
@@ -1704,7 +1703,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "could not delete global quest variable:", e);
+			LOG.warn("Could not delete global quest variable!", e);
 		}
 	}
 	
@@ -1721,7 +1720,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "could not delete global quest variables:", e);
+			LOG.warn("Could not delete global quest variables!", e);
 		}
 	}
 	
@@ -1745,7 +1744,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "could not insert char quest:", e);
+			LOG.warn("Could not insert char quest!", e);
 		}
 	}
 	
@@ -1768,7 +1767,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "could not update char quest:", e);
+			LOG.warn("Could not update char quest!", e);
 		}
 	}
 	
@@ -1789,7 +1788,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "could not delete char quest:", e);
+			LOG.warn("Could not delete char quest!", e);
 		}
 	}
 	
@@ -1813,7 +1812,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Unable to delete char quest!", e);
+			LOG.warn("Unable to delete char quest!", e);
 		}
 	}
 	
