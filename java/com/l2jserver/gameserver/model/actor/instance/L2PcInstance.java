@@ -13567,9 +13567,8 @@ public final class L2PcInstance extends L2Playable
 		
 		if (_pcCafePointsTask == null)
 		{
-			_pcCafePointsTask.cancel(false);
+			_pcCafePointsTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new PCCafePointsTask(this), Config.ALT_PCBANG_POINTS_DELAY * 60000L, Config.ALT_PCBANG_POINTS_DELAY * 60000L);
 		}
-		_pcCafePointsTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new PCCafePointsTask(this), Config.ALT_PCBANG_POINTS_DELAY * 60000L, Config.ALT_PCBANG_POINTS_DELAY * 60000L);
 	}
 	
 	public void stopPcBangPointsTask()
