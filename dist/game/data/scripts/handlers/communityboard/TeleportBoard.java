@@ -29,13 +29,11 @@ import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.TeleportBBSData;
-import com.l2jserver.gameserver.enums.Team;
 import com.l2jserver.gameserver.handler.CommunityBoardHandler;
 import com.l2jserver.gameserver.handler.IParseBoardHandler;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.zone.ZoneId;
-import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.util.DifferentMethods;
 import com.l2jserver.gameserver.util.Util;
 import com.l2jserver.gameserver.util.bbs.TeleportPoint;
@@ -150,7 +148,7 @@ public class TeleportBoard implements IParseBoardHandler
 			player.sendMessage(MessagesData.getInstance().getMessage(player, "communityboard_teleport_personal_point_only_premium"));
 			return;
 		}
-		if (!checkFirstConditions(player))
+		if (!DifferentMethods.checkFirstConditions(player))
 		{
 			return;
 		}
@@ -240,7 +238,7 @@ public class TeleportBoard implements IParseBoardHandler
 			return;
 		}
 		
-		if (!checkFirstConditions(activeChar))
+		if (!DifferentMethods.checkFirstConditions(activeChar))
 		{
 			return;
 		}
@@ -320,46 +318,6 @@ public class TeleportBoard implements IParseBoardHandler
 		{
 			LOG.warning("SQL Error: " + e);
 		}
-	}
-	
-	private static boolean checkFirstConditions(L2PcInstance activeChar)
-	{
-		if (activeChar == null)
-		{
-			return false;
-		}
-		
-		if (activeChar.isInSiege() || (activeChar.getSiegeState() != 0) || activeChar.isInCombat() || (activeChar.getPvpFlag() != 0) || activeChar.isParalyzed() || activeChar.isDead() || activeChar.isAlikeDead() || activeChar.isInWater() || activeChar.isInBoat()
-			|| activeChar.isInsideZone(ZoneId.NO_BOOKMARK) || activeChar.isCastingNow() || activeChar.isInCombat() || activeChar.isAttackingNow() || activeChar.isJailed() || activeChar.isFlying() || (activeChar.getKarma() > 0) || activeChar.isInDuel())
-		{
-			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "communityboard_you_can_teleported_now"));
-			return false;
-		}
-		
-		if (activeChar.getTeam() != Team.NONE)
-		{
-			// activeChar.sendPacket //TODO: Fix
-			return false;
-		}
-		
-		if (activeChar.isCursedWeaponEquipped())
-		{
-			// activeChar.sendPacket //TODO: Fix
-			return false;
-		}
-		
-		if (activeChar.isInStoreMode() || activeChar.getTradeRefusal())
-		{
-			activeChar.sendMessage("You cannot teleport while trading!"); // TODO: Fix
-			return false;
-		}
-		
-		if (activeChar.isInOlympiadMode())
-		{
-			activeChar.sendPacket(SystemMessageId.YOU_CANNOT_USE_MY_TELEPORTS_WHILE_PARTICIPATING_IN_AN_OLYMPIAD_MATCH); // TODO: Fix
-			return false;
-		}
-		return true;
 	}
 	
 	public void writeCommunityBoardCommand(L2PcInstance activeChar, String arg1, String arg2, String arg3, String arg4, String arg5)

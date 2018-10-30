@@ -25,6 +25,7 @@ import com.l2jserver.gameserver.data.xml.impl.MultisellData;
 import com.l2jserver.gameserver.handler.CommunityBoardHandler;
 import com.l2jserver.gameserver.handler.IParseBoardHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jserver.gameserver.util.DifferentMethods;
 
 public class ShopBoard implements IParseBoardHandler
 {
@@ -42,6 +43,11 @@ public class ShopBoard implements IParseBoardHandler
 		{
 			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "community_board_services_disabled"));
 			parseCommunityBoardCommand("_bbshome", activeChar);
+			return false;
+		}
+		
+		if (!DifferentMethods.checkFirstConditions(activeChar))
+		{
 			return false;
 		}
 		

@@ -2,8 +2,24 @@
 <list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/Messages.xsd">
     <!-- Board Messages -->
     <message id="community_board_services_disabled_players_private_store">
-        <set lang="en" val="Community disabled for players in Private Store." />
-		<set lang="ru" val="Сервис отключен когда игрок находится в режиме торговля." />
+        <set lang="en" val="You cannot use Community Board when you are in Private Store." />
+		<set lang="ru" val="Вы не можете использовать АЛТ+Б когда находитесь в режиме торговли." />
+	</message>
+	<message id="community_board_services_disabled_players_olympiad">
+        <set lang="en" val="You cannot use Community Board when you are in Olympiad Match." />
+		<set lang="ru" val="Вы не можете использовать АЛТ+Б когда находитесь на олимпиаде." />
+	</message>
+	<message id="community_board_services_disabled_players_events">
+        <set lang="en" val="You cannot use Community Board when you are in Events." />
+		<set lang="ru" val="Вы не можете использовать АЛТ+Б когда находитесь на Эвенте." />
+	</message>
+	<message id="community_board_services_disabled_players_cursed_weapon">
+        <set lang="en" val="You cannot use Community Board when you have the Cursed Weapon." />
+		<set lang="ru" val="Вы не можете использовать АЛТ+Б когда имеете Проклятое оружие." />
+	</message>
+	<message id="community_board_services_disabled_players_now">
+        <set lang="en" val="You can't be community board now" />
+		<set lang="ru" val="Вы не можете использовать АЛТ+Б сейчас" />
 	</message>
 	<message id="community_board_services_disabled">
         <set lang="en" val="Services disabled." />
@@ -53,10 +69,6 @@
 	<message id="communityboard_teleport_point_success_location">
         <set lang="en" val="You have successfully moved to the point %s%." />
 		<set lang="ru" val="Вы успешно перемещены в точку %s%." />
-	</message>
-	<message id="communityboard_you_can_teleported_now">
-        <set lang="en" val="You can't be teleported now" />
-		<set lang="ru" val="Вы не можете быть телепортированы сейчас" />
 	</message>
 	<message id="communityboard_teleport_point_success_location">
         <set lang="en" val="You have successfully moved to the point %s%" />

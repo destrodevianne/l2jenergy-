@@ -27,9 +27,12 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import com.l2jserver.gameserver.GameServer;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.ItemTable;
+import com.l2jserver.gameserver.enums.Team;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.network.SystemMessageId;
 
 public class DifferentMethods
@@ -117,12 +120,58 @@ public class DifferentMethods
 	
 	public static boolean getPay(L2PcInstance activeChar, int itemid, long count)
 	{
+		if (activeChar == null)
+		{
+			return false;
+		}
+		
 		if ((activeChar.getInventory().getItemByItemId(itemid) == null) || (activeChar.getInventory().getItemByItemId(itemid).getCount() < count))
 		{
 			activeChar.sendPacket(SystemMessageId.NOT_ENOUGH_ITEMS);
 			return false;
 		}
 		activeChar.destroyItemByItemId("BBS", itemid, count, activeChar, true);
+		return true;
+	}
+	
+	public static boolean checkFirstConditions(L2PcInstance activeChar)
+	{
+		if (activeChar == null)
+		{
+			return false;
+		}
+		
+		if (activeChar.isInSiege() || (activeChar.getSiegeState() != 0) || (activeChar.getInstanceId() > 0) || activeChar.isTransformed() || activeChar.isFishing() || (activeChar.getPvpFlag() != 0) || activeChar.isParalyzed() || activeChar.isDead() || activeChar.isAlikeDead()
+			|| activeChar.isInWater() || activeChar.isInBoat() || activeChar.isInsideZone(ZoneId.NO_BOOKMARK) || activeChar.isCastingNow() || activeChar.isInCombat() || activeChar.isAttackingNow() || activeChar.isJailed() || activeChar.isFlying() || activeChar.isFlyingMounted()
+			|| (activeChar.getKarma() > 0) || activeChar.isInDuel())
+		{
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "community_board_services_disabled_players_now"));
+			return false;
+		}
+		
+		if (activeChar.getTeam() != Team.NONE)
+		{
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "community_board_services_disabled_players_events"));
+			return false;
+		}
+		
+		if (activeChar.isCursedWeaponEquipped())
+		{
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "community_board_services_disabled_players_cursed_weapon"));
+			return false;
+		}
+		
+		if (activeChar.isInStoreMode() || activeChar.getTradeRefusal())
+		{
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "community_board_services_disabled_players_private_store"));
+			return false;
+		}
+		
+		if (activeChar.isInOlympiadMode())
+		{
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "community_board_services_disabled_players_olympiad"));
+			return false;
+		}
 		return true;
 	}
 }
