@@ -1376,7 +1376,7 @@
 			<height normal="32" />
 		</collision>
 	</npc>
-	<npc id="13135" level="55" type="L2Npc" name="Pumpkin Ghost">
+	<npc id="13135" level="55" type="L2Monster" name="Pumpkin Ghost">
 		<!-- Confirmed CT2.5 -->
 		<race>CONSTRUCT</race>
 		<sex>MALE</sex>

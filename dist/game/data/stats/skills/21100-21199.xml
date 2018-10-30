@@ -627,7 +627,7 @@
 		<!-- Increase max HP by 40%, max MP by 40%, attack speed by 20%, attack power by 10% for 1 hour.Increase dark attack resistance by 20. Reuse Delay 2 hours. -->
 		<set name="abnormalLvl" val="26" />
 		<set name="abnormalTime" val="3600" />
-		<set name="abnormalType" val="BR_EVENT_BUF1" />
+		<set name="abnormalType" val="BR_EVENT_BUF10" />
 		<set name="blockedInOlympiad" val="true" />
 		<set name="hitTime" val="4000" />
 		<set name="icon" val="icon.skill1528" />
@@ -658,7 +658,7 @@
 		<!-- Increase max HP by 40%, max MP by 40%, chance of critical by 10%, critical damage by 10% for 1 hour. Increase dark attack resistance by 20. Reuse Delay 2 hours. -->
 		<set name="abnormalLvl" val="26" />
 		<set name="abnormalTime" val="3600" />
-		<set name="abnormalType" val="BR_EVENT_BUF1" />
+		<set name="abnormalType" val="BR_EVENT_BUF10" />
 		<set name="blockedInOlympiad" val="true" />
 		<set name="hitTime" val="4000" />
 		<set name="icon" val="icon.skill1528" />
@@ -689,7 +689,7 @@
 		<!-- Increase max HP by 40%, max MP by 40%, speed by 10% for 1 hour. Bestows the ability to recover as HP 5% of the standard short-range physical damage inflicted on the enemy. Increase dark attack resistance by 20. Reuse Delay 2 hours. -->
 		<set name="abnormalLvl" val="26" />
 		<set name="abnormalTime" val="3600" />
-		<set name="abnormalType" val="BR_EVENT_BUF1" />
+		<set name="abnormalType" val="BR_EVENT_BUF10" />
 		<set name="blockedInOlympiad" val="true" />
 		<set name="hitTime" val="4000" />
 		<set name="icon" val="icon.skill1528" />
@@ -720,7 +720,7 @@
 		<!-- Increase max HP by 40%, max MP by 40%, speed by 20% for 1 hour. Reduce consumed MP for skill usage by 5%. Increase dark attack resistance by 20. Reuse Delay 2 hours. -->
 		<set name="abnormalLvl" val="26" />
 		<set name="abnormalTime" val="3600" />
-		<set name="abnormalType" val="BR_EVENT_BUF1" />
+		<set name="abnormalType" val="BR_EVENT_BUF10" />
 		<set name="blockedInOlympiad" val="true" />
 		<set name="hitTime" val="4000" />
 		<set name="icon" val="icon.skill1528" />
@@ -752,7 +752,7 @@
 		<!-- Increase max HP by 40%, max MP by 40%, casting speed by 20% for 1 hour. Increases chance of prominent damage by Damage Magic by 2. Increase dark attack resistance by 20. Reuse Delay 2 hours. -->
 		<set name="abnormalLvl" val="26" />
 		<set name="abnormalTime" val="3600" />
-		<set name="abnormalType" val="BR_EVENT_BUF1" />
+		<set name="abnormalType" val="BR_EVENT_BUF10" />
 		<set name="blockedInOlympiad" val="true" />
 		<set name="hitTime" val="4000" />
 		<set name="icon" val="icon.skill1528" />

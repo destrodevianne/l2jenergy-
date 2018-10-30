@@ -964,7 +964,7 @@
 	</npc>
 	<npc id="125" level="80" type="L2Npc" name="Halloween Event Manager">
 		<!-- Confirmed H5 -->
-		<race>CONSTRUCT</race>
+		<race>ETC</race>
 		<sex>MALE</sex>
 		<stats str="40" int="21" dex="30" wit="20" con="43" men="20">
 			<vitals hp="2880.37628" hpRegen="8.5" mp="1674.8" mpRegen="3" />
@@ -994,8 +994,8 @@
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<collision>
-			<radius normal="0.1" />
-			<height normal="0.1" />
+			<radius normal="4.2" />
+			<height normal="5.0" />
 		</collision>
 	</npc>
 	<npc id="126" level="80" type="L2Npc" name="Kadomas">
