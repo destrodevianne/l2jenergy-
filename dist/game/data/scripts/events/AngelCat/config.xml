@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<event name="Angel Cat" active="12 09 2006-19 09 2006" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../xsd/eventConfig.xsd">
+<event name="Angel Cat" active="12 09-19 09" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../xsd/eventConfig.xsd">
 	<spawnlist>
 		<add npc="4308" x="148557" y="26745" z="-2200" heading="32768" />
 		<add npc="4308" x="147476" y="-55385" z="-2728" heading="49151" />

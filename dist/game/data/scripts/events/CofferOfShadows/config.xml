@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<event name="Coffer of Shadows" active="24 10 2006-07 11 2006" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../xsd/eventConfig.xsd">
+<event name="Coffer of Shadows" active="24 10-07 11" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../xsd/eventConfig.xsd">
 	<spawnlist>
 		<add npc="32091" x="-14823" y="123567" z="-3143" heading="8192"/> <!-- Gludio -->
 		<add npc="32091" x="-83159" y="150914" z="-3155" heading="49152"/> <!-- Gludin -->
