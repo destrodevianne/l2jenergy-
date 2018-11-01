@@ -567,7 +567,9 @@ public class EnterWorld extends L2GameClientPacket
 		{
 			activeChar.sendPacket(ExNotifyPremiumItem.STATIC_PACKET);
 		}
-		
+		activeChar.setCurrentCp(activeChar._currCp);
+		activeChar.setCurrentHp(activeChar._currHp);
+		activeChar.setCurrentMp(activeChar._currMp);
 		// Unstuck players that had client open when server crashed.
 		activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 	}

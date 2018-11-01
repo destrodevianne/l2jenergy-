@@ -655,6 +655,10 @@ public final class L2PcInstance extends L2Playable
 	private ScheduledFuture<?> _pcCafePointsTask;
 	private L2Fish _fish;
 	
+	public double _currCp = .0;
+	public double _currHp = .0;
+	public double _currMp = .0;
+	
 	/**
 	 * Creates a player.
 	 * @param objectId the object ID

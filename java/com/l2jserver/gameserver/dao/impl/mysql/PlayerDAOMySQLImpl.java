@@ -108,6 +108,10 @@ public class PlayerDAOMySQLImpl implements PlayerDAO
 					player.setFistsWeaponItem(player.findFistsWeaponItem(activeClassId));
 					player.setUptime(System.currentTimeMillis());
 					
+					player._currCp = rset.getDouble("curCp");
+					player._currHp = rset.getDouble("curHp");
+					player._currMp = rset.getDouble("curMp");
+					
 					player.setCurrentCp(rset.getDouble("curCp"));
 					player.setCurrentHp(rset.getDouble("curHp"));
 					player.setCurrentMp(rset.getDouble("curMp"));
