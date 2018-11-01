@@ -37,7 +37,7 @@ public class PCCafePointsTask implements Runnable
 	@Override
 	public void run()
 	{
-		if (_player == null)
+		if ((_player == null) || (_player.getClient() == null))
 		{
 			return;
 		}
