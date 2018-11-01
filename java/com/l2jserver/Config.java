@@ -1140,6 +1140,7 @@ public final class Config
 	public static float PREMIUM_RATE_SP;
 	public static float PREMIUM_RATE_DROP_CHANCE;
 	public static float PREMIUM_RATE_DROP_AMOUNT;
+	public static int PREMIUM_RATE_DROP_MANOR;
 	public static float PREMIUM_RATE_SPOIL_CHANCE;
 	public static float PREMIUM_RATE_SPOIL_AMMOUNT;
 	public static Map<Integer, Float> PREMIUM_RATE_DROP_CHANCE_MULTIPLIER;
@@ -2781,6 +2782,7 @@ public final class Config
 			PREMIUM_RATE_SP = PremiumSettings.getFloat("PremiumRateSp", 2);
 			PREMIUM_RATE_DROP_CHANCE = PremiumSettings.getFloat("PremiumRateDropChance", 1);
 			PREMIUM_RATE_DROP_AMOUNT = PremiumSettings.getFloat("PremiumRateDropAmount", 2);
+			PREMIUM_RATE_DROP_MANOR = PremiumSettings.getInt("PremiumRateDropManor", 2);
 			PREMIUM_RATE_SPOIL_CHANCE = PremiumSettings.getFloat("PremiumRateSpoilChance", 2);
 			PREMIUM_RATE_SPOIL_AMMOUNT = PremiumSettings.getFloat("PremiumRateSpoilAmmount", 1);
 			String[] premiumDropChanceMultiplier = PremiumSettings.getString("PremiumDropChanceMultiplierByItemId", "").split(";");
