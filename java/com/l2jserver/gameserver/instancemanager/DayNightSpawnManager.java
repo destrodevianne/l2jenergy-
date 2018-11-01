@@ -22,8 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.model.L2Spawn;
@@ -36,18 +37,13 @@ import com.l2jserver.gameserver.model.actor.instance.L2RaidBossInstance;
 public final class DayNightSpawnManager
 {
 	
-	private static Logger _log = Logger.getLogger(DayNightSpawnManager.class.getName());
+	private static Logger LOG = LoggerFactory.getLogger(DayNightSpawnManager.class);
 	
 	private final List<L2Spawn> _dayCreatures = new ArrayList<>();
 	private final List<L2Spawn> _nightCreatures = new ArrayList<>();
 	private final Map<L2Spawn, L2RaidBossInstance> _bosses = new ConcurrentHashMap<>();
 	
 	// private static int _currentState; // 0 = Day, 1 = Night
-	
-	public static DayNightSpawnManager getInstance()
-	{
-		return SingletonHolder._instance;
-	}
 	
 	protected DayNightSpawnManager()
 	{
@@ -109,7 +105,7 @@ public final class DayNightSpawnManager
 						i++;
 					}
 				}
-				_log.info("DayNightSpawnManager: Removed " + i + " " + UnspawnLogInfo + " creatures");
+				LOG.info("DayNightSpawnManager: Removed {} {} creatures", i, UnspawnLogInfo);
 			}
 			
 			int i = 0;
@@ -123,12 +119,11 @@ public final class DayNightSpawnManager
 				spawnDat.doSpawn();
 				i++;
 			}
-			
-			_log.info("DayNightSpawnManager: Spawned " + i + " " + SpawnLogInfo + " creatures");
+			LOG.info("DayNightSpawnManager: Spawned {} {} creatures", i, SpawnLogInfo);
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Error while spawning creatures: " + e.getMessage(), e);
+			LOG.warn("Error while spawning creatures!", e);
 		}
 	}
 	
@@ -150,7 +145,7 @@ public final class DayNightSpawnManager
 				specialNightBoss(1);
 				break;
 			default:
-				_log.warning("DayNightSpawnManager: Wrong mode sent");
+				LOG.warn("DayNightSpawnManager: Wrong mode sent");
 				break;
 		}
 	}
@@ -177,7 +172,7 @@ public final class DayNightSpawnManager
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Error while notifyChangeMode(): " + e.getMessage(), e);
+			LOG.warn("Error while notifyChangeMode()", e);
 		}
 	}
 	
@@ -218,7 +213,7 @@ public final class DayNightSpawnManager
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Error while specialNoghtBoss(): " + e.getMessage(), e);
+			LOG.warn("Error while specialNoghtBoss()", e);
 		}
 	}
 	
@@ -228,14 +223,14 @@ public final class DayNightSpawnManager
 		{
 			case 0:
 				boss.deleteMe();
-				_log.info(getClass().getSimpleName() + ": Deleting Hellman raidboss");
+				LOG.info("{}: Deleting Hellman raidboss", getClass().getSimpleName());
 				break;
 			case 1:
 				if (!boss.isVisible())
 				{
 					boss.spawnMe();
 				}
-				_log.info(getClass().getSimpleName() + ": Spawning Hellman raidboss");
+				LOG.info("{}: Spawning Hellman raidboss", getClass().getSimpleName());
 				break;
 		}
 	}
@@ -255,6 +250,11 @@ public final class DayNightSpawnManager
 			return raidboss;
 		}
 		return null;
+	}
+	
+	public static DayNightSpawnManager getInstance()
+	{
+		return SingletonHolder._instance;
 	}
 	
 	private static class SingletonHolder

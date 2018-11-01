@@ -22,7 +22,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -30,8 +29,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -42,7 +42,11 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
  */
 public class RaidBossPointsManager
 {
-	private static final Logger _log = Logger.getLogger(RaidBossPointsManager.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(RaidBossPointsManager.class);
+	
+	private static final String SELECT = "SELECT charId, boss_id, points FROM character_raid_points";
+	private static final String REPLACE = "REPLACE INTO character_raid_points (charId, boss_id, points) VALUES (?, ?, ?)";
+	private static final String DELETE = "DELETE from character_raid_points WHERE charId > 0";
 	
 	private final Map<Integer, Map<Integer, Integer>> _list = new ConcurrentHashMap<>();
 	
@@ -54,14 +58,14 @@ public class RaidBossPointsManager
 	private final void init()
 	{
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
-			Statement s = con.createStatement();
-			ResultSet rs = s.executeQuery("SELECT `charId`,`boss_id`,`points` FROM `character_raid_points`"))
+			PreparedStatement ps = con.prepareStatement(SELECT);
+			ResultSet rset = ps.executeQuery())
 		{
-			while (rs.next())
+			while (rset.next())
 			{
-				int charId = rs.getInt("charId");
-				int bossId = rs.getInt("boss_id");
-				int points = rs.getInt("points");
+				int charId = rset.getInt("charId");
+				int bossId = rset.getInt("boss_id");
+				int points = rset.getInt("points");
 				Map<Integer, Integer> values = _list.get(charId);
 				if (values == null)
 				{
@@ -70,18 +74,18 @@ public class RaidBossPointsManager
 				values.put(bossId, points);
 				_list.put(charId, values);
 			}
-			_log.info(getClass().getSimpleName() + ": Loaded " + _list.size() + " Characters Raid Points.");
+			LOG.info("{}: Loaded {} Character Raid Points.", getClass().getSimpleName(), _list.size());
 		}
 		catch (SQLException e)
 		{
-			_log.log(Level.WARNING, getClass().getSimpleName() + ": Couldnt load raid points ", e);
+			LOG.warn("{}: Couldn't load raid points {}", getClass().getSimpleName(), e);
 		}
 	}
 	
 	public final void updatePointsInDB(L2PcInstance player, int raidId, int points)
 	{
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
-			PreparedStatement ps = con.prepareStatement("REPLACE INTO character_raid_points (`charId`,`boss_id`,`points`) VALUES (?,?,?)"))
+			PreparedStatement ps = con.prepareStatement(REPLACE))
 		{
 			ps.setInt(1, player.getObjectId());
 			ps.setInt(2, raidId);
@@ -90,7 +94,7 @@ public class RaidBossPointsManager
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, getClass().getSimpleName() + ": Couldn't update char raid points for player: " + player, e);
+			LOG.warn("{}: Couldn't update char raid points for player: {} {}", getClass().getSimpleName(), player, e);
 		}
 	}
 	
@@ -102,7 +106,7 @@ public class RaidBossPointsManager
 	
 	public final int getPointsByOwnerId(int ownerId)
 	{
-		Map<Integer, Integer> tmpPoint = _list.get(ownerId);
+		final Map<Integer, Integer> tmpPoint = _list.get(ownerId);
 		int totalPoints = 0;
 		
 		if ((tmpPoint == null) || tmpPoint.isEmpty())
@@ -125,20 +129,20 @@ public class RaidBossPointsManager
 	public final void cleanUp()
 	{
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
-			Statement s = con.createStatement())
+			PreparedStatement ps = con.prepareStatement(DELETE))
 		{
-			s.executeUpdate("DELETE from character_raid_points WHERE charId > 0");
+			ps.executeUpdate();
 			_list.clear();
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, getClass().getSimpleName() + ": Couldn't clean raid points", e);
+			LOG.warn("{}: Couldn't clean raid points. {}", getClass().getSimpleName(), e);
 		}
 	}
 	
 	public final int calculateRanking(int playerObjId)
 	{
-		Map<Integer, Integer> rank = getRankList();
+		final Map<Integer, Integer> rank = getRankList();
 		if (rank.containsKey(playerObjId))
 		{
 			return rank.get(playerObjId);

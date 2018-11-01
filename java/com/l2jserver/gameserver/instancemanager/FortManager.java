@@ -23,8 +23,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.InstanceListManager;
@@ -34,7 +35,7 @@ import com.l2jserver.gameserver.model.entity.Fort;
 
 public final class FortManager implements InstanceListManager
 {
-	protected static final Logger _log = Logger.getLogger(FortManager.class.getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(FortManager.class);
 	
 	private final List<Fort> _forts = new ArrayList<>();
 	
@@ -171,7 +172,7 @@ public final class FortManager implements InstanceListManager
 				_forts.add(new Fort(rs.getInt("id")));
 			}
 			
-			_log.info(getClass().getSimpleName() + ": Loaded: " + _forts.size() + " fortress");
+			LOG.info("{}: Loaded: {} fortress", getClass().getSimpleName(), _forts.size());
 			for (Fort fort : _forts)
 			{
 				fort.getSiege().getSiegeGuardManager().loadSiegeGuard();
@@ -179,7 +180,7 @@ public final class FortManager implements InstanceListManager
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception: loadFortData(): " + e.getMessage(), e);
+			LOG.warn("Exception: loadFortData()", e);
 		}
 	}
 	

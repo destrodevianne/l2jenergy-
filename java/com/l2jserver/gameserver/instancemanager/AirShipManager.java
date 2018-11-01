@@ -25,8 +25,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.model.AirShipTeleportList;
@@ -40,7 +41,7 @@ import com.l2jserver.gameserver.network.serverpackets.ExAirShipTeleportList;
 
 public class AirShipManager
 {
-	private static final Logger _log = Logger.getLogger(AirShipManager.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(AirShipManager.class);
 	
 	private static final String LOAD_DB = "SELECT * FROM airships";
 	private static final String ADD_DB = "INSERT INTO airships (owner_id,fuel) VALUES (?,?)";
@@ -180,11 +181,11 @@ public class AirShipManager
 			}
 			catch (SQLException e)
 			{
-				_log.log(Level.WARNING, getClass().getSimpleName() + ": Could not add new airship license: " + e.getMessage(), e);
+				LOG.warn("{}: Could not add new airship license!", getClass().getSimpleName(), e);
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, getClass().getSimpleName() + ": Error while initializing: " + e.getMessage(), e);
+				LOG.warn("{}: Error while initializing!", getClass().getSimpleName(), e);
 			}
 		}
 	}
@@ -281,13 +282,13 @@ public class AirShipManager
 		}
 		catch (SQLException e)
 		{
-			_log.log(Level.WARNING, getClass().getSimpleName() + ": Could not load airships table: " + e.getMessage(), e);
+			LOG.warn("{}: Could not load airships table!", getClass().getSimpleName(), e);
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, getClass().getSimpleName() + ": Error while initializing: " + e.getMessage(), e);
+			LOG.warn("{}: Error while initializing!", getClass().getSimpleName(), e);
 		}
-		_log.info(getClass().getSimpleName() + ": Loaded " + _airShipsInfo.size() + " private airships");
+		LOG.info("{}: Loaded {} private airships", getClass().getSimpleName(), _airShipsInfo.size());
 	}
 	
 	private void storeInDb(int ownerId)
@@ -307,11 +308,11 @@ public class AirShipManager
 		}
 		catch (SQLException e)
 		{
-			_log.log(Level.WARNING, getClass().getSimpleName() + ": Could not update airships table: " + e.getMessage(), e);
+			LOG.warn("{}: Could not update airships table!", getClass().getSimpleName(), e);
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, getClass().getSimpleName() + ": Error while save: " + e.getMessage(), e);
+			LOG.warn("{}: Error while save!", getClass().getSimpleName(), e);
 		}
 	}
 	

@@ -23,7 +23,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
@@ -43,7 +45,8 @@ import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
  */
 public final class CHSiegeManager
 {
-	private static final Logger _log = Logger.getLogger(CHSiegeManager.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(CHSiegeManager.class);
+	
 	private static final String SQL_LOAD_HALLS = "SELECT * FROM siegable_clanhall";
 	
 	private final Map<Integer, SiegableHall> _siegableHalls = new HashMap<>();
@@ -79,11 +82,11 @@ public final class CHSiegeManager
 				_siegableHalls.put(id, hall);
 				ClanHallManager.addClanHall(hall);
 			}
-			_log.info(getClass().getSimpleName() + ": Loaded " + _siegableHalls.size() + " conquerable clan halls.");
+			LOG.info("{}: Loaded {} conquerable clan halls.", getClass().getSimpleName(), _siegableHalls.size());
 		}
 		catch (Exception e)
 		{
-			_log.warning("CHSiegeManager: Could not load siegable clan halls!:" + e.getMessage());
+			LOG.warn("CHSiegeManager: Could not load siegable clan halls!", e);
 		}
 	}
 	

@@ -19,7 +19,9 @@
 package com.l2jserver.gameserver.instancemanager;
 
 import java.util.Calendar;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
@@ -28,7 +30,7 @@ import com.l2jserver.gameserver.model.quest.Quest;
 
 public final class GraciaSeedsManager
 {
-	private static final Logger _log = Logger.getLogger(GraciaSeedsManager.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(GraciaSeedsManager.class);
 	
 	public static String ENERGY_SEEDS = "EnergySeeds";
 	
@@ -65,7 +67,7 @@ public final class GraciaSeedsManager
 				// Seed of Annihilation
 				break;
 			default:
-				_log.warning(getClass().getSimpleName() + ": Unknown SeedType in SaveData: " + seedType);
+				LOG.warn("{}: Unknown SeedType in SaveData: {}", getClass().getSimpleName(), seedType);
 				break;
 		}
 	}
@@ -111,7 +113,7 @@ public final class GraciaSeedsManager
 				setSoDState(1, true);
 				break;
 			default:
-				_log.warning(getClass().getSimpleName() + ": Unknown Seed of Destruction state(" + _SoDState + ")! ");
+				LOG.warn("{}: Unknown Seed of Destruction state({})! ", getClass().getSimpleName(), _SoDState);
 		}
 	}
 	
@@ -120,7 +122,7 @@ public final class GraciaSeedsManager
 		final Quest quest = QuestManager.getInstance().getQuest(ENERGY_SEEDS);
 		if (quest == null)
 		{
-			_log.warning(getClass().getSimpleName() + ": missing EnergySeeds Quest!");
+			LOG.warn("{}: missing EnergySeeds Quest!", getClass().getSimpleName());
 		}
 		else
 		{
@@ -141,7 +143,7 @@ public final class GraciaSeedsManager
 			Quest esQuest = QuestManager.getInstance().getQuest(ENERGY_SEEDS);
 			if (esQuest == null)
 			{
-				_log.warning(getClass().getSimpleName() + ": missing EnergySeeds Quest!");
+				LOG.warn("{}: missing EnergySeeds Quest!", getClass().getSimpleName());
 			}
 			else
 			{
@@ -157,7 +159,7 @@ public final class GraciaSeedsManager
 	
 	public void setSoDState(int value, boolean doSave)
 	{
-		_log.info(getClass().getSimpleName() + ": New Seed of Destruction state -> " + value + ".");
+		LOG.info("{}: New Seed of Destruction state -> {}.", getClass().getSimpleName(), value);
 		_SoDLastStateChangeDate.setTimeInMillis(System.currentTimeMillis());
 		_SoDState = value;
 		// reset number of Tiat kills

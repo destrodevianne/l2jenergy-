@@ -24,8 +24,9 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
@@ -43,7 +44,7 @@ import com.l2jserver.gameserver.model.zone.type.L2ClanHallZone;
  */
 public final class ClanHallManager
 {
-	protected static final Logger _log = Logger.getLogger(ClanHallManager.class.getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(ClanHallManager.class);
 	
 	private final Map<Integer, AuctionableHall> _clanHall = new ConcurrentHashMap<>();
 	private final Map<Integer, AuctionableHall> _freeClanHall = new ConcurrentHashMap<>();
@@ -103,13 +104,13 @@ public final class ClanHallManager
 					AuctionManager.getInstance().initNPC(id);
 				}
 			}
-			_log.info(getClass().getSimpleName() + ": Loaded: " + getClanHalls().size() + " clan halls");
-			_log.info(getClass().getSimpleName() + ": Loaded: " + getFreeClanHalls().size() + " free clan halls");
+			LOG.info("{}: Loaded: {} clan halls", getClass().getSimpleName(), getClanHalls().size());
+			LOG.info("{}: Loaded: {} free clan halls", getClass().getSimpleName(), getFreeClanHalls().size());
 			_loaded = true;
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception: ClanHallManager.load(): " + e.getMessage(), e);
+			LOG.warn("Exception: ClanHallManager.load()", e);
 		}
 	}
 	

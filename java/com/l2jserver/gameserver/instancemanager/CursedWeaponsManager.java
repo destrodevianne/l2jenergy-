@@ -172,7 +172,7 @@ public final class CursedWeaponsManager implements IXmlReader
 		}
 		catch (Exception e)
 		{
-			LOG.warn("Could not restore CursedWeapons data: ", e);
+			LOG.warn("Could not restore CursedWeapons data", e);
 		}
 	}
 	
@@ -366,7 +366,7 @@ public final class CursedWeaponsManager implements IXmlReader
 		}
 		catch (SQLException e)
 		{
-			LOG.error("CursedWeaponsManager: Failed to remove data: ", e);
+			LOG.error("CursedWeaponsManager: Failed to remove data", e);
 		}
 	}
 	

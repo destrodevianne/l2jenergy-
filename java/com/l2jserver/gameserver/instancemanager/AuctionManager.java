@@ -23,8 +23,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.model.entity.Auction;
@@ -34,7 +35,8 @@ import com.l2jserver.gameserver.model.entity.Auction;
  */
 public final class AuctionManager
 {
-	protected static final Logger _log = Logger.getLogger(AuctionManager.class.getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(AuctionManager.class);
+	
 	private final List<Auction> _auctions = new ArrayList<>();
 	
 	private static final String[] ITEM_INIT_DATA =
@@ -108,11 +110,11 @@ public final class AuctionManager
 			{
 				_auctions.add(new Auction(rs.getInt("id")));
 			}
-			_log.info(getClass().getSimpleName() + ": Loaded: " + _auctions.size() + " auction(s)");
+			LOG.info("{}: Loaded: {} auction(s)", getClass().getSimpleName(), _auctions.size());
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, getClass().getSimpleName() + ": Exception: AuctionManager.load(): " + e.getMessage(), e);
+			LOG.warn("{}: Exception: AuctionManager.load()!", getClass().getSimpleName(), e);
 		}
 	}
 	
@@ -161,7 +163,7 @@ public final class AuctionManager
 		}
 		if ((i >= ItemInitDataId.length) || (ItemInitDataId[i] != id))
 		{
-			_log.warning(getClass().getSimpleName() + ": Clan Hall auction not found for Id :" + id);
+			LOG.warn("{}: Clan Hall auction not found for Id: {}", getClass().getSimpleName(), id);
 			return;
 		}
 		
@@ -170,11 +172,11 @@ public final class AuctionManager
 		{
 			s.executeUpdate("INSERT INTO `auction` VALUES " + ITEM_INIT_DATA[i]);
 			_auctions.add(new Auction(id));
-			_log.info(getClass().getSimpleName() + ": Created auction for ClanHall: " + id);
+			LOG.info("{}: Created auction for ClanHall: {}", getClass().getSimpleName(), id);
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.SEVERE, getClass().getSimpleName() + ": Exception: Auction.initNPC(): " + e.getMessage(), e);
+			LOG.error("{}: Exception: Auction.initNPC()!", getClass().getSimpleName(), e);
 		}
 	}
 	

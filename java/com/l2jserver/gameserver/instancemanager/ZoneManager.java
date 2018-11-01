@@ -101,7 +101,7 @@ public final class ZoneManager implements IXmlReader
 			}
 		}
 		GrandBossManager.getInstance().getZones().clear();
-		LOG.info("{}: Removed zones in " + count + " regions.", getClass().getSimpleName());
+		LOG.info("{}: Removed zones in {} regions.", getClass().getSimpleName(), count);
 		
 		// Load the zones
 		load();
