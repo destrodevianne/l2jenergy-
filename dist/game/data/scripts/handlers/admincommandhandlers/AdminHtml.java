@@ -81,7 +81,6 @@ public class AdminHtml implements IAdminCommandHandler
 	public static void showAdminHtml(L2PcInstance activeChar, String path)
 	{
 		showHtml(activeChar, "data/html/admin/" + path, false);
-		activeChar.sendHTMLMessage("data/html/admin/" + path);
 	}
 	
 	/**
@@ -111,6 +110,7 @@ public class AdminHtml implements IAdminCommandHandler
 		{
 			html.setHtml("<html><body>My text is missing:<br>" + path + "</body></html>");
 		}
+		activeChar.sendHTMLMessage(path);
 		activeChar.sendPacket(html);
 	}
 	
