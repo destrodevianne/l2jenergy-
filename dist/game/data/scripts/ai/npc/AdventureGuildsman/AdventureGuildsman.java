@@ -28,6 +28,7 @@ import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2ServitorInstance;
 import com.l2jserver.gameserver.model.skills.CommonSkill;
+import com.l2jserver.gameserver.model.variables.PlayerVariables;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.ExPCCafePointInfo;
 import com.l2jserver.gameserver.network.serverpackets.ExShowQuestInfo;
@@ -46,12 +47,11 @@ public class AdventureGuildsman extends AbstractNpcAI
 	
 	// Items
 	private static final int PCCAFE_LOTTERY_TICKET_30DAYS = 15358;
-	private static final int PCCAFE_1ST_LOTTERY_TICKET_30DAYS = 15359;
-	private static final int PCCAFE_2ND_LOTTERY_TICKET_30DAYS = 15360;
-	private static final int PCCAFE_3RD_LOTTERY_TICKET_30DAYS = 15361;
-	private static final int PCCAFE_4TH_LOTTERY_TICKET_30DAYS = 15362;
-	private static final int PCCAFE_5TH_LOTTERY_TICKET_30DAYS = 15363;
-	private static final String USED_PC_LOTTERY_TICKET = "USED_PC_LOTTERY_TICKET";
+	private static final int PCCAFE_1ST_LOTTERY_TICKET_30DAYS = 15359; // билет на выдачу 100000 очков РС-клуба
+	private static final int PCCAFE_2ND_LOTTERY_TICKET_30DAYS = 15360; // билет на выдачу 10000 очков РС-клуба
+	private static final int PCCAFE_3RD_LOTTERY_TICKET_30DAYS = 15361; // билет на выдачу 2000 очков РС-клуба
+	private static final int PCCAFE_4TH_LOTTERY_TICKET_30DAYS = 15362; // билет на выдачу 1000 очков РС-клуба
+	private static final int PCCAFE_5TH_LOTTERY_TICKET_30DAYS = 15363; // билет на выдачу 100 очков РС-клуба
 	
 	// @formatter:off
 	private static final int[] ADVENTURERS_GUILDSMAN =
@@ -68,24 +68,61 @@ public class AdventureGuildsman extends AbstractNpcAI
  
 	static
 	{
-		// Player Skill                      ID   LV  QTY Points
-		POINTSSKILL.put("S4391", new int[] { 4391, 2, 300 }); // Wind Walk - 300 points
-		POINTSSKILL.put("S4392", new int[] { 4392, 3, 200 }); // Shield - 200 points
-		POINTSSKILL.put("S4393", new int[] { 4393, 3, 400 }); // Might - 400 points
-		POINTSSKILL.put("S4394", new int[] { 4394, 4, 400 }); // Blessed Body - 400 points
-		POINTSSKILL.put("S4395", new int[] { 4395, 4, 400 }); // Blessed Soul - 400 points
-		POINTSSKILL.put("S4396", new int[] { 4396, 2, 400 }); // Magic Barrier - 400 points
-		POINTSSKILL.put("S4397", new int[] { 4397, 2, 500 }); // Berserker Spirit - 500 points
-		POINTSSKILL.put("S4398", new int[] { 4398, 3, 200 }); // Bless Shield - 200 points
-		POINTSSKILL.put("S4399", new int[] { 4399, 3, 400 }); // Vampiric Rage - 400 points
-		POINTSSKILL.put("S4440", new int[] { 4400, 3, 950 }); // Acumen - 950 points
-		POINTSSKILL.put("S4401", new int[] { 4401, 3, 400 }); // Empower - 400 points
-		POINTSSKILL.put("S4402", new int[] { 4402, 2, 950 }); // Haste - 950 points
-		POINTSSKILL.put("S4403", new int[] { 4403, 3, 400 }); // Guidance - 400 points
-		POINTSSKILL.put("S4404", new int[] { 4404, 3, 800 }); // Focus - 800 points
-		POINTSSKILL.put("S4405", new int[] { 4405, 3, 950 }); // Death Whisper - 950 points
-		POINTSSKILL.put("S4406", new int[] { 4406, 3, 400 }); // Agility - 400 points
-				
+		//TODO: Реализовать баф для персонажей ниже 40, 40-54, 55 и выше ур.
+		// баф для персонажей ниже 40 ур.    ID   LV  Points
+		POINTSSKILL.put("S401", new int[] { 4397, 1, 300 }); // Berserker Spirit - 300 points
+		POINTSSKILL.put("S402", new int[] { 4393, 1, 200 }); // Might - 200 points
+		POINTSSKILL.put("S403", new int[] { 4392, 1, 100 }); // Shield - 100 points
+		POINTSSKILL.put("S404", new int[] { 4391, 1, 200 }); // Wind Walk - 200 points
+		POINTSSKILL.put("S405", new int[] { 4404, 1, 550 }); // Focus - 550 points
+		POINTSSKILL.put("S406", new int[] { 4396, 1, 300 }); // Magic Barrier - 300 points
+		POINTSSKILL.put("S407", new int[] { 4405, 1, 650 }); // Death Whisper - 650 points
+		POINTSSKILL.put("S408", new int[] { 4403, 1, 200 }); // Guidance - 200 points
+		POINTSSKILL.put("S409", new int[] { 4398, 1, 100 }); // Bless Shield - 100 points
+		POINTSSKILL.put("S410", new int[] { 4394, 1, 200 }); // Blessed Body - 200 points
+		POINTSSKILL.put("S411", new int[] { 4395, 1, 200 }); // Blessed Soul - 200 points
+		POINTSSKILL.put("S412", new int[] { 4402, 1, 400 }); // Haste - 400 points
+		POINTSSKILL.put("S413", new int[] { 4406, 1, 200 }); // Agility - 200 points
+		POINTSSKILL.put("S414", new int[] { 4399, 1, 200 }); // Vampiric Rage - 200 points
+		POINTSSKILL.put("S415", new int[] { 4401, 1, 200 }); // Empower - 200 points
+		POINTSSKILL.put("S416", new int[] { 4400, 1, 400 }); // Acumen - 400 points
+
+		//баф для персонажей 40-54 ур.      ID   LV  Points
+		POINTSSKILL.put("S417", new int[] { 4397, 1, 300 }); // Berserker Spirit - 300 points
+		POINTSSKILL.put("S418", new int[] { 4393, 2, 300 }); // Might - 300 points
+		POINTSSKILL.put("S419", new int[] { 4392, 2, 150 }); // Shield - 150 points
+		POINTSSKILL.put("S420", new int[] { 4391, 2, 300 }); // Wind Walk - 300 points
+		POINTSSKILL.put("S421", new int[] { 4404, 2, 650 }); // Focus - 650 points
+		POINTSSKILL.put("S422", new int[] { 4396, 1, 300 }); // Magic Barrier - 300 points
+		POINTSSKILL.put("S423", new int[] { 4405, 2, 800 }); // Death Whisper - 800 points
+		POINTSSKILL.put("S424", new int[] { 4403, 2, 300 }); // Guidance - 300 points
+		POINTSSKILL.put("S425", new int[] { 4398, 2, 150 }); // Bless Shield - 150 points
+		POINTSSKILL.put("S426", new int[] { 4394, 3, 300 }); // Blessed Body - 300 points
+		POINTSSKILL.put("S427", new int[] { 4395, 3, 300 }); // Blessed Soul - 300 points
+		POINTSSKILL.put("S428", new int[] { 4402, 1, 400 }); // Haste - 400 points
+		POINTSSKILL.put("S429", new int[] { 4406, 2, 300 }); // Agility - 300 points
+		POINTSSKILL.put("S430", new int[] { 4399, 2, 300 }); // Vampiric Rage - 300 points
+		POINTSSKILL.put("S431", new int[] { 4401, 2, 300 }); // Empower - 300 points
+		POINTSSKILL.put("S432", new int[] { 4400, 2, 600 }); // Acumen - 600 points
+		
+		//баф для персонажей 55 и выше ур.  ID   LV  Points
+		POINTSSKILL.put("S433", new int[] { 4397, 2, 500 }); // Berserker Spirit - 500 points
+		POINTSSKILL.put("S434", new int[] { 4393, 3, 400 }); // Might - 400 points
+		POINTSSKILL.put("S435", new int[] { 4392, 3, 200 }); // Shield - 200 points
+		POINTSSKILL.put("S436", new int[] { 4391, 2, 300 }); // Wind Walk - 300 points
+		POINTSSKILL.put("S437", new int[] { 4404, 3, 800 }); // Focus - 800 points
+		POINTSSKILL.put("S438", new int[] { 4396, 2, 400 }); // Magic Barrier - 400 points
+		POINTSSKILL.put("S439", new int[] { 4405, 3, 950 }); // Death Whisper - 950 points
+		POINTSSKILL.put("S440", new int[] { 4403, 3, 400 }); // Guidance - 400 points
+		POINTSSKILL.put("S441", new int[] { 4398, 3, 200 }); // Bless Shield - 200 points
+		POINTSSKILL.put("S442", new int[] { 4394, 4, 400 }); // Blessed Body - 400 points
+		POINTSSKILL.put("S443", new int[] { 4395, 4, 400 }); // Blessed Soul - 400 points
+		POINTSSKILL.put("S444", new int[] { 4402, 2, 950 }); // Haste - 950 points
+		POINTSSKILL.put("S445", new int[] { 4406, 3, 400 }); // Agility - 400 points
+		POINTSSKILL.put("S446", new int[] { 4399, 3, 400 }); // Vampiric Rage - 400 points
+		POINTSSKILL.put("S447", new int[] { 4401, 3, 400 }); // Empower - 400 points
+		POINTSSKILL.put("S448", new int[] { 4400, 3, 950 }); // Acumen - 950 points
+
 		// Pet Skill                      ID   LV  QTY Points
 		PETSKILL.put("P4391", new int[] { 4391, 2, 300 }); // Wind Walk - 300 points
 		PETSKILL.put("P4392", new int[] { 4392, 2, 150 }); // Shield - 150 points
@@ -268,7 +305,7 @@ public class AdventureGuildsman extends AbstractNpcAI
 			case "pccafe_help_inzone001.htm":
 			case "pccafe_help_lottery001.htm":
 			case "pccafe_help_lottery002.htm":
-			case "pccafe_wyvern.htm":
+			case "pccafe_wyvern001.htm":
 			{
 				htmltext = event;
 				break;
@@ -280,9 +317,9 @@ public class AdventureGuildsman extends AbstractNpcAI
 			}
 			case "give_lottery_ticket":
 			{
-				if (!player.getVariables().getBoolean(USED_PC_LOTTERY_TICKET, false))
+				if (!player.getVariables().getBoolean(PlayerVariables.USED_PC_LOTTERY_TICKET, false))
 				{
-					player.getVariables().set(USED_PC_LOTTERY_TICKET, true);
+					player.getVariables().set(PlayerVariables.USED_PC_LOTTERY_TICKET, true);
 					giveItems(player, PCCAFE_LOTTERY_TICKET_30DAYS, 1);
 				}
 				else
@@ -291,29 +328,29 @@ public class AdventureGuildsman extends AbstractNpcAI
 				}
 				break;
 			}
-			case "trade_10":
-			{
-				htmltext = tradeItem(player, PCCAFE_5TH_LOTTERY_TICKET_30DAYS, 10);
-				break;
-			}
 			case "trade_100":
 			{
-				htmltext = tradeItem(player, PCCAFE_4TH_LOTTERY_TICKET_30DAYS, 100);
-				break;
-			}
-			case "trade_200":
-			{
-				htmltext = tradeItem(player, PCCAFE_3RD_LOTTERY_TICKET_30DAYS, 200);
+				htmltext = tradeItem(player, PCCAFE_5TH_LOTTERY_TICKET_30DAYS, 100);
 				break;
 			}
 			case "trade_1000":
 			{
-				htmltext = tradeItem(player, PCCAFE_2ND_LOTTERY_TICKET_30DAYS, 1000);
+				htmltext = tradeItem(player, PCCAFE_4TH_LOTTERY_TICKET_30DAYS, 1000);
+				break;
+			}
+			case "trade_2000":
+			{
+				htmltext = tradeItem(player, PCCAFE_3RD_LOTTERY_TICKET_30DAYS, 2000);
 				break;
 			}
 			case "trade_10000":
 			{
-				htmltext = tradeItem(player, PCCAFE_1ST_LOTTERY_TICKET_30DAYS, 10000);
+				htmltext = tradeItem(player, PCCAFE_2ND_LOTTERY_TICKET_30DAYS, 10000);
+				break;
+			}
+			case "trade_100000":
+			{
+				htmltext = tradeItem(player, PCCAFE_1ST_LOTTERY_TICKET_30DAYS, 100000);
 				break;
 			}
 		}
@@ -381,15 +418,15 @@ public class AdventureGuildsman extends AbstractNpcAI
 		}
 		else if (event.equalsIgnoreCase("warrior"))
 		{
-			if (player.getLevel() < 55)
+			if (player.getLevel() < 40)
 			{
 				htmltext = "pccafe_skill_nolevel.html";
 			}
-			else if (player.getPcCafePoints() >= 5600)
+			else if (player.getPcCafePoints() >= 3100)
 			{
-				player.setPcCafePoints(player.getPcCafePoints() - 5600);
+				player.setPcCafePoints(player.getPcCafePoints() - 3100);
 				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(5600));
-				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), 5600, 1, PcCafeType.CONSUME, 12));
+				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -3100, 1, PcCafeType.CONSUME, 12));
 				npc.setTarget(player);
 				npc.doCast(SkillData.getInstance().getSkill(4397, 2));
 				npc.doCast(SkillData.getInstance().getSkill(4393, 3));
@@ -421,7 +458,7 @@ public class AdventureGuildsman extends AbstractNpcAI
 			{
 				player.setPcCafePoints(player.getPcCafePoints() - 4000);
 				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(4000));
-				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), 4000, 1, PcCafeType.CONSUME, 12));
+				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -4000, 1, PcCafeType.CONSUME, 12));
 				npc.setTarget(player.getSummon());
 				npc.doCast(SkillData.getInstance().getSkill(4397, 1));
 				npc.doCast(SkillData.getInstance().getSkill(4393, 2));
@@ -445,24 +482,24 @@ public class AdventureGuildsman extends AbstractNpcAI
 		}
 		else if (event.equalsIgnoreCase("mage"))
 		{
-			if (player.getLevel() < 55)
+			if (player.getLevel() < 40)
 			{
 				htmltext = "pccafe_skill_nolevel.htm";
 			}
-			else if (player.getPcCafePoints() >= 3000)
+			else if (player.getPcCafePoints() >= 1600)
 			{
-				player.setPcCafePoints(player.getPcCafePoints() - 3000);
+				player.setPcCafePoints(player.getPcCafePoints() - 1600);
 				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(3000));
-				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), 3000, 1, PcCafeType.CONSUME, 12));
+				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -1600, 1, PcCafeType.CONSUME, 12));
 				npc.setTarget(player);
-				npc.doCast(SkillData.getInstance().getSkill(4397, 2));
-				npc.doCast(SkillData.getInstance().getSkill(4396, 2));
-				npc.doCast(SkillData.getInstance().getSkill(4392, 2));
-				npc.doCast(SkillData.getInstance().getSkill(4391, 2));
-				npc.doCast(SkillData.getInstance().getSkill(4395, 4));
-				npc.doCast(SkillData.getInstance().getSkill(4401, 3));
-				npc.doCast(SkillData.getInstance().getSkill(4400, 3));
-				htmltext = "pccafe_skill_info.htm";
+				npc.doCast(SkillData.getInstance().getSkill(4397, 1));
+				npc.doCast(SkillData.getInstance().getSkill(4396, 1));
+				npc.doCast(SkillData.getInstance().getSkill(4392, 1));
+				npc.doCast(SkillData.getInstance().getSkill(4391, 1));
+				npc.doCast(SkillData.getInstance().getSkill(4395, 1));
+				npc.doCast(SkillData.getInstance().getSkill(4401, 1));
+				npc.doCast(SkillData.getInstance().getSkill(4400, 1));
+				htmltext = "pccafe_buff_1001.htm";
 			}
 			else
 			{
@@ -479,7 +516,7 @@ public class AdventureGuildsman extends AbstractNpcAI
 			{
 				player.setPcCafePoints(player.getPcCafePoints() - 2100);
 				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(2100));
-				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), 2100, 1, PcCafeType.CONSUME, 12));
+				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -2100, 1, PcCafeType.CONSUME, 12));
 				npc.setTarget(player.getSummon());
 				npc.doCast(SkillData.getInstance().getSkill(4397, 1));
 				npc.doCast(SkillData.getInstance().getSkill(4396, 1));
@@ -497,6 +534,7 @@ public class AdventureGuildsman extends AbstractNpcAI
 		}
 		else if (event.equalsIgnoreCase("wyvern"))
 		{
+			// TODO: Реализовать проверку если кто-то уже взял на прокат pccafe_no_wyvern001.htm
 			if (player.hasSummon())
 			{
 				player.getSummon().unSummon(player);
@@ -511,7 +549,7 @@ public class AdventureGuildsman extends AbstractNpcAI
 			{
 				player.setPcCafePoints(player.getPcCafePoints() - 2500);
 				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(2500));
-				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), 2500, 1, PcCafeType.CONSUME, 12));
+				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -2500, 1, PcCafeType.CONSUME, 12));
 				player.dismount();
 				player.mount(12621, 0, true);
 				player.addSkill(CommonSkill.WYVERN_BREATH.getSkill());
@@ -529,9 +567,17 @@ public class AdventureGuildsman extends AbstractNpcAI
 			return "pccafe_help_lottery_fail2.htm";
 		}
 		
+		if ((player.getInventory().getItemByItemId(itemId) == null))
+		{
+			player.sendPacket(SystemMessageId.NOT_ENOUGH_ITEMS);
+			return "pccafe_help_lottery_fail.htm";
+		}
+		
 		if (takeItems(player, itemId, 1))
 		{
 			player.setPcCafePoints(player.getPcCafePoints() + points);
+			player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ACQUIRED_S1_PC_BANG_POINT).addLong(points));
+			player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), points, 1, PcCafeType.ADD, 12));
 			return "pccafe_help_lottery003.htm";
 		}
 		return "pccafe_help_lottery_fail.htm";
@@ -540,16 +586,11 @@ public class AdventureGuildsman extends AbstractNpcAI
 	@Override
 	public String onFirstTalk(L2Npc npc, L2PcInstance player)
 	{
-		final String htmltext;
-		if (Config.ALT_PCBANG_POINTS_ENABLED)
+		if ((player.getPcCafePoints() > 0) && Config.ALT_PCBANG_POINTS_ENABLED)
 		{
-			htmltext = npc.getId() + "-pcbangpoint.htm";
+			return npc.getId() + "-pcbangpoint.htm";
 		}
-		else
-		{
-			htmltext = npc.getId() + ".htm";
-		}
-		return htmltext;
+		return npc.getId() + ".htm";
 	}
 	
 	private AdventureGuildsman()
