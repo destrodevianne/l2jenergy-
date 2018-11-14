@@ -21,8 +21,9 @@ package com.l2jserver.gameserver.taskmanager;
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
@@ -35,7 +36,7 @@ import com.l2jserver.gameserver.model.actor.instance.L2GuardInstance;
 
 public class KnownListUpdateTaskManager
 {
-	protected static final Logger _log = Logger.getLogger(KnownListUpdateTaskManager.class.getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(KnownListUpdateTaskManager.class);
 	
 	private static final int FULL_UPDATE_TIMER = 100;
 	public static boolean updatePass = true;
@@ -81,7 +82,7 @@ public class KnownListUpdateTaskManager
 						}
 						catch (Exception e)
 						{
-							_log.log(Level.WARNING, "KnownListUpdateTaskManager: updateRegion(" + _fullUpdateTimer + "," + updatePass + ") failed for region " + r.getName() + ". Full update scheduled. " + e.getMessage(), e);
+							LOG.warn("KnownListUpdateTaskManager: updateRegion({},{}) failed for region {}. Full update scheduled. ", _fullUpdateTimer, updatePass, r.getName(), e);
 							FAILED_REGIONS.add(r);
 						}
 					}
@@ -99,7 +100,7 @@ public class KnownListUpdateTaskManager
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "", e);
+				LOG.warn("", e);
 			}
 		}
 	}

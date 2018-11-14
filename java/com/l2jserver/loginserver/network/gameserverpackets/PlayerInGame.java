@@ -18,10 +18,6 @@
  */
 package com.l2jserver.loginserver.network.gameserverpackets;
 
-import java.util.logging.Logger;
-
-import com.l2jserver.Config;
-import com.l2jserver.loginserver.GameServerTable;
 import com.l2jserver.loginserver.GameServerThread;
 import com.l2jserver.util.network.BaseRecievePacket;
 
@@ -30,12 +26,6 @@ import com.l2jserver.util.network.BaseRecievePacket;
  */
 public class PlayerInGame extends BaseRecievePacket
 {
-	private static Logger _log = Logger.getLogger(PlayerInGame.class.getName());
-	
-	/**
-	 * @param decrypt
-	 * @param server
-	 */
 	public PlayerInGame(byte[] decrypt, GameServerThread server)
 	{
 		super(decrypt);
@@ -44,10 +34,6 @@ public class PlayerInGame extends BaseRecievePacket
 		{
 			String account = readS();
 			server.addAccountOnGameServer(account);
-			if (Config.DEBUG)
-			{
-				_log.info("Account " + account + " logged in GameServer: [" + server.getServerId() + "] " + GameServerTable.getInstance().getServerNameById(server.getServerId()));
-			}
 			server.broadcastToTelnet("Account " + account + " logged in GameServer " + server.getServerId());
 		}
 	}

@@ -95,7 +95,7 @@ public final class RequestAcquireSkill extends L2GameClientPacket
 		if ((_level < 1) || (_level > 1000) || (_id < 1) || (_id > 32000))
 		{
 			Util.handleIllegalPlayerAction(activeChar, "Wrong Packet Data in Aquired Skill", Config.DEFAULT_PUNISH);
-			_log.warning("Recived Wrong Packet Data in Aquired Skill - id: " + _id + " level: " + _level + " for " + activeChar);
+			LOG.warn("Recived Wrong Packet Data in Aquired Skill - id: {} level: {} for {}", _id, _level, activeChar);
 			return;
 		}
 		
@@ -113,7 +113,7 @@ public final class RequestAcquireSkill extends L2GameClientPacket
 		final Skill skill = SkillData.getInstance().getSkill(_id, _level);
 		if (skill == null)
 		{
-			_log.warning(RequestAcquireSkill.class.getSimpleName() + ": Player " + activeChar.getName() + " is trying to learn a null skill Id: " + _id + " level: " + _level + "!");
+			LOG.warn("{}: Player {} is trying to learn a null skill Id: {} level: {}!", RequestAcquireSkill.class.getSimpleName(), activeChar.getName(), _id, _level);
 			return;
 		}
 		
@@ -268,7 +268,7 @@ public final class RequestAcquireSkill extends L2GameClientPacket
 					}
 					else
 					{
-						_log.warning("Null SubClassSkills quest, for Sub-Class skill Id: " + _id + " level: " + _level + " for player " + activeChar.getName() + "!");
+						LOG.warn("Null SubClassSkills quest, for Sub-Class skill Id: {} level: {} for player {}!", _id, _level, activeChar.getName());
 						return;
 					}
 				}
@@ -302,12 +302,12 @@ public final class RequestAcquireSkill extends L2GameClientPacket
 								}
 								else
 								{
-									_log.warning("Inexistent item for object Id " + itemObjId + ", for Sub-Class skill Id: " + _id + " level: " + _level + " for player " + activeChar.getName() + "!");
+									LOG.warn("Inexistent item for object Id {}, for Sub-Class skill Id: {} level: {} for player {}!", itemObjId, _id, _level, activeChar.getName());
 								}
 							}
 							else
 							{
-								_log.warning("Invalid item object Id " + itemOID + ", for Sub-Class skill Id: " + _id + " level: " + _level + " for player " + activeChar.getName() + "!");
+								LOG.warn("Invalid item object Id {}, for Sub-Class skill Id: {} level: {} for player {}!", itemOID, _id, _level, activeChar.getName());
 							}
 						}
 					}
@@ -328,7 +328,7 @@ public final class RequestAcquireSkill extends L2GameClientPacket
 			}
 			default:
 			{
-				_log.warning("Recived Wrong Packet Data in Aquired Skill, unknown skill type:" + _skillType);
+				LOG.warn("Recived Wrong Packet Data in Aquired Skill, unknown skill type: {}", _skillType);
 				break;
 			}
 		}
@@ -395,7 +395,7 @@ public final class RequestAcquireSkill extends L2GameClientPacket
 			{
 				if (prevSkillLevel == _level)
 				{
-					_log.warning("Player " + activeChar.getName() + " is trying to learn a skill that already knows, Id: " + _id + " level: " + _level + "!");
+					LOG.warn("Player {} is trying to learn a skill that already knows, Id: {} level: {}!", activeChar.getName(), _id, _level);
 					return false;
 				}
 				if ((_level != 1) && (prevSkillLevel != (_level - 1)))

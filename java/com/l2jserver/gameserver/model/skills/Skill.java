@@ -26,8 +26,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.GeoData;
@@ -72,7 +73,7 @@ import com.l2jserver.util.Rnd;
 
 public class Skill implements IIdentifiable
 {
-	private static final Logger _log = Logger.getLogger(Skill.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(Skill.class);
 	
 	private static final L2Object[] EMPTY_TARGET_LIST = new L2Object[0];
 	
@@ -248,10 +249,6 @@ public class Skill implements IIdentifiable
 		
 		if (Config.ENABLE_MODIFY_SKILL_REUSE && Config.SKILL_REUSE_LIST.containsKey(_id))
 		{
-			if (Config.DEBUG)
-			{
-				_log.info("*** Skill " + _name + " (" + _level + ") changed reuse from " + set.getInt("reuseDelay", 0) + " to " + Config.SKILL_REUSE_LIST.get(_id) + " seconds.");
-			}
 			_reuseDelay = Config.SKILL_REUSE_LIST.get(_id);
 		}
 		else
@@ -276,7 +273,7 @@ public class Skill implements IIdentifiable
 					}
 					catch (Exception e)
 					{
-						_log.warning("Bad data in rideState for skill " + this + " !\n" + e);
+						LOG.warn("Bad data in rideState for skill {} !\n", this, e);
 					}
 				}
 			}
@@ -334,9 +331,8 @@ public class Skill implements IIdentifiable
 		{
 			if (capsuled_items.isEmpty())
 			{
-				_log.warning("Empty Extractable Item Skill data in Skill Id: " + _id);
+				LOG.warn("Empty Extractable Item Skill data in Skill Id: {}", _id);
 			}
-			
 			_extractableItems = parseExtractableSkill(_id, _level, capsuled_items);
 		}
 		
@@ -1023,11 +1019,10 @@ public class Skill implements IIdentifiable
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "Exception in L2Skill.getTargetList(): " + e.getMessage(), e);
+				LOG.warn("Exception in L2Skill.getTargetList()!", e);
 			}
 		}
-		
-		activeChar.sendMessage(MessagesData.getInstance().getMessage(null, "skill_target_null"));
+		activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar.getActingPlayer(), "skill_target_null"));
 		return EMPTY_TARGET_LIST;
 	}
 	
@@ -1619,7 +1614,7 @@ public class Skill implements IIdentifiable
 			prodData = prodList.split(",");
 			if (prodData.length < 3)
 			{
-				_log.warning("Extractable skills data: Error in Skill Id: " + skillId + " Level: " + skillLvl + " -> wrong seperator!");
+				LOG.warn("Extractable skills data: Error in Skill Id: {} Level: {} -> wrong seperator!", skillId, skillLvl);
 			}
 			List<ItemHolder> items = null;
 			double chance = 0;
@@ -1633,7 +1628,7 @@ public class Skill implements IIdentifiable
 					final int quantity = Integer.parseInt(prodData[j + 1]);
 					if ((prodId <= 0) || (quantity <= 0))
 					{
-						_log.warning("Extractable skills data: Error in Skill Id: " + skillId + " Level: " + skillLvl + " wrong production Id: " + prodId + " or wrond quantity: " + quantity + "!");
+						LOG.warn("Extractable skills data: Error in Skill Id: {} Level: {} wrong production Id: {} or wrond quantity: {}!", skillId, skillLvl, prodId, quantity);
 					}
 					items.add(new ItemHolder(prodId, quantity));
 				}
@@ -1641,14 +1636,14 @@ public class Skill implements IIdentifiable
 			}
 			catch (Exception e)
 			{
-				_log.warning("Extractable skills data: Error in Skill Id: " + skillId + " Level: " + skillLvl + " -> incomplete/invalid production data or wrong seperator!");
+				LOG.warn("Extractable skills data: Error in Skill Id: {} Level: {} -> incomplete/invalid production data or wrong seperator!", skillId, skillLvl);
 			}
 			products.add(new L2ExtractableProductItem(items, chance));
 		}
 		
 		if (products.isEmpty())
 		{
-			_log.warning("Extractable skills data: Error in Skill Id: " + skillId + " Level: " + skillLvl + " -> There are no production items!");
+			LOG.warn("Extractable skills data: Error in Skill Id: {} Level: {} -> There are no production items!", skillId, skillLvl);
 		}
 		return new L2ExtractableSkill(SkillData.getSkillHashCode(skillId, skillLvl), products);
 	}

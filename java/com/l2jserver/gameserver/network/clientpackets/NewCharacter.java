@@ -18,7 +18,6 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.PlayerTemplateData;
 import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.network.serverpackets.NewCharacterSuccess;
@@ -39,11 +38,6 @@ public final class NewCharacter extends L2GameClientPacket
 	@Override
 	protected void runImpl()
 	{
-		if (Config.DEBUG)
-		{
-			_log.fine(_C__13_NEWCHARACTER);
-		}
-		
 		final NewCharacterSuccess ct = new NewCharacterSuccess();
 		ct.addChar(PlayerTemplateData.getInstance().getTemplate(ClassId.fighter)); // Human Figther
 		ct.addChar(PlayerTemplateData.getInstance().getTemplate(ClassId.mage)); // Human Mystic

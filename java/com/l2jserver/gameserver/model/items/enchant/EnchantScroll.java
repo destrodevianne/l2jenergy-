@@ -20,7 +20,6 @@ package com.l2jserver.gameserver.model.items.enchant;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
 
 import com.l2jserver.gameserver.data.xml.impl.EnchantItemGroupsData;
 import com.l2jserver.gameserver.model.StatsSet;
@@ -136,14 +135,14 @@ public final class EnchantScroll extends AbstractEnchantItem
 	{
 		if (EnchantItemGroupsData.getInstance().getScrollGroup(_scrollGroupId) == null)
 		{
-			_log.log(Level.WARNING, getClass().getSimpleName() + ": Unexistent enchant scroll group specified for enchant scroll: " + getId());
+			LOG.warn("{}: Unexistent enchant scroll group specified for enchant scroll: {}", getClass().getSimpleName(), getId());
 			return -1;
 		}
 		
 		final EnchantItemGroup group = EnchantItemGroupsData.getInstance().getItemGroup(enchantItem.getItem(), _scrollGroupId);
 		if (group == null)
 		{
-			_log.log(Level.WARNING, getClass().getSimpleName() + ": Couldn't find enchant item group for scroll: " + getId() + " requested by: " + player);
+			LOG.warn("{}: Couldn't find enchant item group for scroll: {} requested by: {}", getClass().getSimpleName(), getId(), player);
 			return -1;
 		}
 		return group.getChance(enchantItem.getEnchantLevel());

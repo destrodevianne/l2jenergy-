@@ -21,7 +21,6 @@ package handlers.voicedcommandhandlers;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
 
 import com.l2jserver.gameserver.LoginServerThread;
 import com.l2jserver.gameserver.cache.HtmCache;
@@ -100,7 +99,7 @@ public class ChangePassword implements IVoicedCommandHandler
 			catch (Exception e)
 			{
 				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "password_problem"));
-				_log.log(Level.WARNING, "", e);
+				LOG.warn("", e);
 			}
 		}
 		else

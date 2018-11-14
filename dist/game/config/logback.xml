@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss} [%-5level] %msg%n</pattern>
+		</encoder>
+	</appender>
+	 <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/java.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/java_%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+       <encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5level] [%thread] %logger - %msg%n</pattern>
+		</encoder>
+    </appender>
+	<appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+		<file>logs/error.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+		  <!-- rollover daily -->
+		  <fileNamePattern>logs/error_%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter"> 
+			<level>WARN</level>
+			<level>ERROR</level> 
+		</filter>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5level] [%thread] %logger - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="CHAT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="com.l2jserver.gameserver.util.logging.ChatFilter"/>
+        <file>logs/game/chat.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/game/chat_%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+         <encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}: %msg%n</pattern>
+		</encoder>
+    </appender>
+	
+	<appender name="ACCOUNT_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+	    <filter class="com.l2jserver.gameserver.util.logging.AccountingFilter"/>
+		<file>logs/game/account.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> 
+			<fileNamePattern>logs/game/account_%d{yyyy-MM-dd}.log</fileNamePattern> 
+		</rollingPolicy> 
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5level] %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="ITEM_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+	    <filter class="com.l2jserver.gameserver.util.logging.ItemFilter"/>
+		<file>logs/game/items.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> 
+			<fileNamePattern>logs/game/items_%d{yyyy-MM-dd}.log</fileNamePattern> 
+		</rollingPolicy> 
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5level] %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="OLYMPIAD_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+	    <filter class="com.l2jserver.gameserver.util.logging.OlympiadFilter"/>
+		<file>logs/game/olympiad.csv</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> 
+			<fileNamePattern>logs/game/olympiad_%d{yyyy-MM-dd}.csv</fileNamePattern> 
+		</rollingPolicy> 
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5level] %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	 <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+		<appender-ref ref="FILE_ERROR"/>
+		<appender-ref ref="CHAT"/>
+		<appender-ref ref="ACCOUNT_FILE"/>
+		<appender-ref ref="ITEM_FILE"/>
+		<appender-ref ref="OLYMPIAD_FILE"/>
+    </root>
+</configuration>

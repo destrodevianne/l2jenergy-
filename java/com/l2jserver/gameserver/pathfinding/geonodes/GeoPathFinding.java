@@ -33,8 +33,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.GeoData;
@@ -51,14 +52,10 @@ import com.l2jserver.gameserver.util.Util;
  */
 public class GeoPathFinding extends PathFinding
 {
-	private static Logger _log = Logger.getLogger(GeoPathFinding.class.getName());
+	private static Logger LOG = LoggerFactory.getLogger(GeoPathFinding.class);
+	
 	private static Map<Short, ByteBuffer> _pathNodes = new HashMap<>();
 	private static Map<Short, IntBuffer> _pathNodesIndex = new HashMap<>();
-	
-	public static GeoPathFinding getInstance()
-	{
-		return SingletonHolder._instance;
-	}
 	
 	@Override
 	public boolean pathNodesExist(short regionoffset)
@@ -355,7 +352,7 @@ public class GeoPathFinding extends PathFinding
 		idx += (layer * 10) + 1;// byte + layer*10byte
 		if (nodes < layer)
 		{
-			_log.warning("SmthWrong!");
+			LOG.warn("SmthWrong!");
 		}
 		short node_z = pn.getShort(idx);
 		idx += 2;
@@ -397,7 +394,7 @@ public class GeoPathFinding extends PathFinding
 	{
 		try
 		{
-			_log.info("Path Engine: - Loading Path Nodes...");
+			LOG.info("Path Engine: - Loading Path Nodes...");
 			//@formatter:off
 			Files.lines(Paths.get(Config.PATHNODE_DIR.getPath(), "pn_index.txt"), StandardCharsets.UTF_8)
 				.map(String::trim)
@@ -409,7 +406,7 @@ public class GeoPathFinding extends PathFinding
 						|| !Util.isDigit(parts[0])
 						|| !Util.isDigit(parts[1]))
 					{
-						_log.warning("Invalid pathnode entry: '" + line + "', must be in format 'XX_YY', where X and Y - integers");
+						LOG.warn("Invalid pathnode entry: '{}', must be in format 'XX_YY', where X and Y - integers",line);
 						return;
 					}
 					
@@ -421,7 +418,7 @@ public class GeoPathFinding extends PathFinding
 		}
 		catch (IOException e)
 		{
-			_log.log(Level.WARNING, "", e);
+			LOG.warn("", e);
 			throw new Error("Failed to read pn_index file.");
 		}
 	}
@@ -430,12 +427,12 @@ public class GeoPathFinding extends PathFinding
 	{
 		if ((rx < L2World.TILE_X_MIN) || (rx > L2World.TILE_X_MAX) || (ry < L2World.TILE_Y_MIN) || (ry > L2World.TILE_Y_MAX))
 		{
-			_log.warning("Failed to Load PathNode File: invalid region " + rx + "," + ry + Config.EOL);
+			LOG.warn("Failed to Load PathNode File: invalid region {}, {}", rx, ry + Config.EOL);
 			return;
 		}
 		short regionoffset = getRegionOffset(rx, ry);
 		File file = new File(Config.PATHNODE_DIR, rx + "_" + ry + ".pn");
-		_log.info("Path Engine: - Loading: " + file.getName() + " -> region offset: " + regionoffset + " X: " + rx + " Y: " + ry);
+		LOG.info("Path Engine: - Loading: {} -> region offset: {} X: {} Y: {}", file.getName(), regionoffset, rx, ry);
 		int node = 0, size, index = 0;
 		
 		// Create a read-only memory-mapped file
@@ -468,8 +465,13 @@ public class GeoPathFinding extends PathFinding
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Failed to Load PathNode File: " + file.getAbsolutePath() + " : " + e.getMessage(), e);
+			LOG.warn("Failed to Load PathNode File: {}", file.getAbsolutePath(), e);
 		}
+	}
+	
+	public static GeoPathFinding getInstance()
+	{
+		return SingletonHolder._instance;
 	}
 	
 	private static class SingletonHolder

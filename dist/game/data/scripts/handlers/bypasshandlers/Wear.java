@@ -19,7 +19,6 @@
 package handlers.bypasshandlers;
 
 import java.util.StringTokenizer;
-import java.util.logging.Level;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.BuyListData;
@@ -65,7 +64,7 @@ public class Wear implements IBypassHandler
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception in " + getClass().getSimpleName(), e);
+			LOG.warn("Exception in {}", getClass().getSimpleName(), e);
 		}
 		return false;
 	}
@@ -75,7 +74,7 @@ public class Wear implements IBypassHandler
 		final L2BuyList buyList = BuyListData.getInstance().getBuyList(val);
 		if (buyList == null)
 		{
-			_log.warning("BuyList not found! BuyListId:" + val);
+			LOG.warn("BuyList not found! BuyListId: {}", val);
 			player.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}

@@ -72,7 +72,7 @@ public final class FlySelf extends AbstractEffect
 		double distance = Math.hypot(dx, dy);
 		if (distance > 2000)
 		{
-			_log.info("EffectEnemyCharge was going to use invalid coordinates for characters, getEffector: " + curX + "," + curY + " and getEffected: " + target.getX() + "," + target.getY());
+			LOG.info("EffectEnemyCharge was going to use invalid coordinates for characters, getEffector: {},{} and getEffected: {}, {}", curX, curY, target.getX(), target.getY());
 			return;
 		}
 		

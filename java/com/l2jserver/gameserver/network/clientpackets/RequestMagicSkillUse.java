@@ -78,7 +78,7 @@ public final class RequestMagicSkillUse extends L2GameClientPacket
 				if (skill == null)
 				{
 					activeChar.sendPacket(ActionFailed.STATIC_PACKET);
-					_log.warning("Skill Id " + _magicId + " not found in player : " + activeChar);
+					LOG.warn("Skill Id {} not found in player: {}", _magicId, activeChar);
 					return;
 				}
 			}

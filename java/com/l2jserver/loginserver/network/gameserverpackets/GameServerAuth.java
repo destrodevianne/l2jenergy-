@@ -19,7 +19,6 @@
 package com.l2jserver.loginserver.network.gameserverpackets;
 
 import java.util.Arrays;
-import java.util.logging.Logger;
 
 import com.l2jserver.Config;
 import com.l2jserver.loginserver.GameServerTable;
@@ -42,11 +41,11 @@ import com.l2jserver.util.network.BaseRecievePacket;
  * d hexid size
  * b hexid
  * </pre>
+ * 
  * @author -Wooden-
  */
 public class GameServerAuth extends BaseRecievePacket
 {
-	protected static Logger _log = Logger.getLogger(GameServerAuth.class.getName());
 	GameServerThread _server;
 	private final byte[] _hexId;
 	private final int _desiredId;
@@ -79,19 +78,10 @@ public class GameServerAuth extends BaseRecievePacket
 			_hosts[i] = readS();
 		}
 		
-		if (Config.DEBUG)
-		{
-			_log.info("Auth request received");
-		}
-		
 		if (handleRegProcess())
 		{
 			AuthResponse ar = new AuthResponse(server.getGameServerInfo().getId());
 			server.sendPacket(ar);
-			if (Config.DEBUG)
-			{
-				_log.info("Authed: id: " + server.getGameServerInfo().getId());
-			}
 			server.broadcastToTelnet("GameServer [" + server.getServerId() + "] " + GameServerTable.getInstance().getServerNameById(server.getServerId()) + " is connected");
 			server.setLoginConnectionState(GameServerState.AUTHED);
 		}

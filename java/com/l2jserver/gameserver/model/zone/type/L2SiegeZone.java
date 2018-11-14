@@ -142,7 +142,7 @@ public class L2SiegeZone extends L2ZoneType
 			SiegableHall hall = CHSiegeManager.getInstance().getConquerableHalls().get(getSettings().getSiegeableId());
 			if (hall == null)
 			{
-				_log.warning("L2SiegeZone: Siegable clan hall with id " + value + " does not exist!");
+				LOG.warn("L2SiegeZone: Siegable clan hall with id {} does not exist!", value);
 			}
 			else
 			{

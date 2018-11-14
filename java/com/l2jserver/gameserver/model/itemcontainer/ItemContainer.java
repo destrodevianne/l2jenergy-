@@ -24,8 +24,9 @@ import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
@@ -43,7 +44,7 @@ import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
  */
 public abstract class ItemContainer
 {
-	protected static final Logger _log = Logger.getLogger(ItemContainer.class.getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(ItemContainer.class);
 	
 	protected final List<L2ItemInstance> _items = new CopyOnWriteArrayList<>();
 	
@@ -344,7 +345,7 @@ public abstract class ItemContainer
 				L2Item template = ItemTable.getInstance().getTemplate(itemId);
 				if (template == null)
 				{
-					_log.log(Level.WARNING, (actor != null ? "[" + actor.getName() + "] " : "") + "Invalid ItemId requested: ", itemId);
+					LOG.warn("{} Invalid ItemId requested: {}", (actor != null ? "[" + actor.getName() + "] " : ""), itemId);
 					return null;
 				}
 				
@@ -694,7 +695,7 @@ public abstract class ItemContainer
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "could not restore container:", e);
+			LOG.warn("Could not restore container!", e);
 		}
 	}
 	

@@ -23,8 +23,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.cache.HtmCache;
@@ -75,18 +76,28 @@ public class TvTEvent
 		REWARDING
 	}
 	
-	protected static final Logger _log = Logger.getLogger(TvTEvent.class.getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(TvTEvent.class);
 	/** html path **/
 	private static final String htmlPath = "data/scripts/custom/events/TvT/TvTManager/";
-	/** The teams of the TvTEvent<br> */
+	/**
+	 * The teams of the TvTEvent<br>
+	 */
 	private static TvTEventTeam[] _teams = new TvTEventTeam[2];
-	/** The state of the TvTEvent<br> */
+	/**
+	 * The state of the TvTEvent<br>
+	 */
 	private static EventState _state = EventState.INACTIVE;
-	/** The spawn of the participation npc<br> */
+	/**
+	 * The spawn of the participation npc<br>
+	 */
 	private static L2Spawn _npcSpawn = null;
-	/** the npc instance of the participation npc<br> */
+	/**
+	 * the npc instance of the participation npc<br>
+	 */
 	private static L2Npc _lastNpcSpawn = null;
-	/** Instance id<br> */
+	/**
+	 * Instance id<br>
+	 */
 	private static int _TvTEventInstance = 0;
 	
 	private TvTEvent()
@@ -136,7 +147,7 @@ public class TvTEvent
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "TvTEventEngine[TvTEvent.startParticipation()]: exception: " + e.getMessage(), e);
+			LOG.warn("TvTEventEngine[TvTEvent.startParticipation()]: exception", e);
 			return false;
 		}
 		
@@ -276,7 +287,7 @@ public class TvTEvent
 			catch (Exception e)
 			{
 				_TvTEventInstance = 0;
-				_log.log(Level.WARNING, "TvTEventEngine[TvTEvent.createDynamicInstance]: exception: " + e.getMessage(), e);
+				LOG.warn("TvTEventEngine[TvTEvent.createDynamicInstance]: exception", e);
 			}
 		}
 		

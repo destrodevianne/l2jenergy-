@@ -16,15 +16,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.log.handler;
+package com.l2jserver.gameserver.util.logging;
 
-import java.io.IOException;
-import java.util.logging.FileHandler;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.filter.Filter;
+import ch.qos.logback.core.spi.FilterReply;
 
-public class EnchantSkillLogHandler extends FileHandler
+/**
+ * @author Tatanka
+ */
+public class AuditFilter extends Filter<ILoggingEvent>
 {
-	public EnchantSkillLogHandler() throws IOException, SecurityException
+	@Override
+	public FilterReply decide(ILoggingEvent event)
 	{
-		super();
+		if ("audit".equals(event.getLoggerName()))
+		{
+			return FilterReply.ACCEPT;
+		}
+		return FilterReply.DENY;
 	}
 }

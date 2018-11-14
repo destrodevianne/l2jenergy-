@@ -18,9 +18,6 @@
  */
 package com.l2jserver.loginserver.network.gameserverpackets;
 
-import java.util.logging.Logger;
-
-import com.l2jserver.Config;
 import com.l2jserver.loginserver.LoginController;
 import com.l2jserver.util.network.BaseRecievePacket;
 
@@ -29,11 +26,6 @@ import com.l2jserver.util.network.BaseRecievePacket;
  */
 public class PlayerTracert extends BaseRecievePacket
 {
-	protected static Logger _log = Logger.getLogger(PlayerTracert.class.getName());
-	
-	/**
-	 * @param decrypt
-	 */
 	public PlayerTracert(byte[] decrypt)
 	{
 		super(decrypt);
@@ -45,9 +37,5 @@ public class PlayerTracert extends BaseRecievePacket
 		String hop4 = readS();
 		
 		LoginController.getInstance().setAccountLastTracert(account, pcIp, hop1, hop2, hop3, hop4);
-		if (Config.DEBUG)
-		{
-			_log.info("Saved " + account + " last tracert");
-		}
 	}
 }

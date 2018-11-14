@@ -20,7 +20,6 @@ package handlers.bypasshandlers;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.sql.impl.NpcBufferTable;
@@ -233,7 +232,7 @@ public class OlympiadManagerLink implements IBypassHandler
 						OlympiadManager.getInstance().registerNoble(activeChar, CompetitionType.TEAMS);
 						break;
 					default:
-						_log.warning("Olympiad System: Couldnt send packet for request " + val);
+						LOG.warn("Olympiad System: Couldnt send packet for request {}", val);
 						break;
 				}
 			}
@@ -250,21 +249,21 @@ public class OlympiadManagerLink implements IBypassHandler
 				
 				if (!Util.isDigit(params[1]))
 				{
-					_log.warning("Olympiad Buffer Warning: npcId = " + target.getId() + " has invalid buffGroup set in the bypass for the buff selected: " + params[1]);
+					LOG.warn("Olympiad Buffer Warning: npcId = {} has invalid buffGroup set in the bypass for the buff selected: {}", target.getId(), params[1]);
 					return false;
 				}
 				
 				final int index = Integer.parseInt(params[1]);
 				if ((index < 0) || (index > BUFFS.length))
 				{
-					_log.warning("Olympiad Buffer Warning: npcId = " + target.getId() + " has invalid index sent in the bypass: " + index);
+					LOG.warn("Olympiad Buffer Warning: npcId = {} has invalid index sent in the bypass: {}", target.getId(), index);
 					return false;
 				}
 				
 				final NpcBufferData npcBuffGroupInfo = NpcBufferTable.getInstance().getSkillInfo(target.getId(), BUFFS[index]);
 				if (npcBuffGroupInfo == null)
 				{
-					_log.warning("Olympiad Buffer Warning: npcId = " + target.getId() + " Location: " + target.getX() + ", " + target.getY() + ", " + target.getZ() + " Player: " + activeChar.getName() + " has tried to use skill group (" + params[1] + ") not assigned to the NPC Buffer!");
+					LOG.warn("Olympiad Buffer Warning: npcId = {} Location: {}, {}, {} Player: {} has tried to use skill group ({}) not assigned to the NPC Buffer!", target.getId(), target.getX(), target.getY(), target.getZ(), activeChar.getName(), params[1]);
 					return false;
 				}
 				
@@ -355,16 +354,15 @@ public class OlympiadManagerLink implements IBypassHandler
 						activeChar.sendPacket(reply);
 						break;
 					default:
-						_log.warning("Olympiad System: Couldnt send packet for request " + val);
+						LOG.warn("Olympiad System: Couldnt send packet for request {}", val);
 						break;
 				}
 			}
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception in " + getClass().getSimpleName(), e);
+			LOG.warn("Exception in {}", getClass().getSimpleName(), e);
 		}
-		
 		return true;
 	}
 	

@@ -201,7 +201,7 @@ public class TeleportBoard implements IParseBoardHandler
 		}
 		catch (SQLException e)
 		{
-			LOG.warning("SQL Error: " + e);
+			LOG.warn("", e);
 		}
 		
 		final String customPath = Config.CUSTOM_CB_ENABLED ? "Custom/" : "";
@@ -226,7 +226,7 @@ public class TeleportBoard implements IParseBoardHandler
 		}
 		catch (SQLException e)
 		{
-			LOG.warning("SQL Error: " + e);
+			LOG.warn("", e);
 		}
 	}
 	
@@ -316,7 +316,7 @@ public class TeleportBoard implements IParseBoardHandler
 		}
 		catch (SQLException e)
 		{
-			LOG.warning("SQL Error: " + e);
+			LOG.warn("", e);
 		}
 	}
 	

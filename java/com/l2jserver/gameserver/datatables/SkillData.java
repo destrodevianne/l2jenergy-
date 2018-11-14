@@ -22,8 +22,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
@@ -35,7 +36,7 @@ import com.l2jserver.gameserver.model.skills.Skill;
  */
 public final class SkillData
 {
-	private static Logger LOGGER = Logger.getLogger(SkillData.class.getName());
+	private static Logger LOG = LoggerFactory.getLogger(SkillData.class);
 	
 	private final Map<Integer, Skill> _skills = new HashMap<>();
 	private final Map<Integer, Integer> _skillMaxLevel = new HashMap<>();
@@ -121,12 +122,12 @@ public final class SkillData
 		{
 			if (Config.DEBUG)
 			{
-				LOGGER.log(Level.WARNING, getClass().getSimpleName() + ": call to unexisting skill level id: " + skillId + " requested level: " + level + " max level: " + maxLvl, new Throwable());
+				LOG.warn("{}: call to unexisting skill level id: {} requested level: {} max level: {}", getClass().getSimpleName(), skillId, level, maxLvl, new Throwable());
 			}
 			return _skills.get(getSkillHashCode(skillId, maxLvl));
 		}
 		
-		LOGGER.warning(getClass().getSimpleName() + ": No skill info found for skill id " + skillId + " and skill level " + level + ".");
+		LOG.warn("{}: No skill info found for skill id {} and skill level {}.", getClass().getSimpleName(), skillId, level);
 		return null;
 	}
 	

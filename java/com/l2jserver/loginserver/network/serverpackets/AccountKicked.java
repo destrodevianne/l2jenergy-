@@ -45,9 +45,6 @@ public final class AccountKicked extends L2LoginServerPacket
 	
 	private final AccountKickedReason _reason;
 	
-	/**
-	 * @param reason
-	 */
 	public AccountKicked(AccountKickedReason reason)
 	{
 		_reason = reason;

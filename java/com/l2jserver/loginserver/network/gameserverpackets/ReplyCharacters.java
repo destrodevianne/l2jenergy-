@@ -22,16 +22,8 @@ import com.l2jserver.loginserver.GameServerThread;
 import com.l2jserver.loginserver.LoginController;
 import com.l2jserver.util.network.BaseRecievePacket;
 
-/**
- * Thanks to mochitto.
- * @author mrTJO
- */
 public class ReplyCharacters extends BaseRecievePacket
 {
-	/**
-	 * @param decrypt
-	 * @param server
-	 */
 	public ReplyCharacters(byte[] decrypt, GameServerThread server)
 	{
 		super(decrypt);

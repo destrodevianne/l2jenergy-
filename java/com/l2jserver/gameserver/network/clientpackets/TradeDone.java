@@ -18,7 +18,6 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.TradeList;
@@ -56,10 +55,6 @@ public final class TradeDone extends L2GameClientPacket
 		final TradeList trade = player.getActiveTradeList();
 		if (trade == null)
 		{
-			if (Config.DEBUG)
-			{
-				_log.warning("player.getTradeList == null in " + getType() + " for player " + player.getName());
-			}
 			return;
 		}
 		

@@ -43,6 +43,7 @@ import com.l2jserver.geodriver.GeoDriver;
 public class GeoData
 {
 	private static final Logger LOG = LoggerFactory.getLogger(GeoData.class);
+	
 	private static final String FILE_NAME_FORMAT = "%d_%d.l2j";
 	private static final int ELEVATED_SEE_OVER_DISTANCE = 2;
 	private static final int MAX_SEE_OVER_HEIGHT = 48;

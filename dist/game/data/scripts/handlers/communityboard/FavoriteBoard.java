@@ -85,7 +85,7 @@ public class FavoriteBoard implements IParseBoardHandler
 			}
 			catch (Exception e)
 			{
-				LOG.warning(FavoriteBoard.class.getSimpleName() + ": Couldn't load favorite links for player " + activeChar.getName());
+				LOG.warn("{}: Couldn't load favorite links for player {}", FavoriteBoard.class.getSimpleName(), activeChar.getName());
 			}
 		}
 		else if (command.startsWith("bbs_add_fav"))
@@ -96,7 +96,7 @@ public class FavoriteBoard implements IParseBoardHandler
 				final String[] parts = bypass.split("&", 2);
 				if (parts.length != 2)
 				{
-					LOG.warning(FavoriteBoard.class.getSimpleName() + ": Couldn't add favorite link, " + bypass + " it's not a valid bypass!");
+					LOG.warn("{}: Couldn't add favorite link, {} it's not a valid bypass!", FavoriteBoard.class.getSimpleName(), bypass);
 					return false;
 				}
 				
@@ -112,7 +112,7 @@ public class FavoriteBoard implements IParseBoardHandler
 				}
 				catch (Exception e)
 				{
-					LOG.warning(FavoriteBoard.class.getSimpleName() + ": Couldn't add favorite link " + bypass + " for player " + activeChar.getName());
+					LOG.warn("{}: Couldn't add favorite link {} for player {}", FavoriteBoard.class.getSimpleName(), bypass, activeChar.getName());
 				}
 			}
 		}
@@ -121,7 +121,7 @@ public class FavoriteBoard implements IParseBoardHandler
 			final String favId = command.replaceAll("_bbsdelfav_", "");
 			if (!Util.isDigit(favId))
 			{
-				LOG.warning(FavoriteBoard.class.getSimpleName() + ": Couldn't delete favorite link, " + favId + " it's not a valid ID!");
+				LOG.warn("{}: Couldn't delete favorite link, {} it's not a valid ID!", FavoriteBoard.class.getSimpleName(), favId);
 				return false;
 			}
 			
@@ -136,7 +136,7 @@ public class FavoriteBoard implements IParseBoardHandler
 			}
 			catch (Exception e)
 			{
-				LOG.warning(FavoriteBoard.class.getSimpleName() + ": Couldn't delete favorite link ID " + favId + " for player " + activeChar.getName());
+				LOG.warn("{}: Couldn't delete favorite link ID {} for player {}", FavoriteBoard.class.getSimpleName(), favId, activeChar.getName());
 			}
 		}
 		return true;

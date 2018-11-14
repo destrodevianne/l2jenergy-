@@ -20,9 +20,6 @@ package com.l2jserver.loginserver.network.serverpackets;
 
 import com.l2jserver.loginserver.SessionKey;
 
-/**
- *
- */
 public final class PlayOk extends L2LoginServerPacket
 {
 	private final int _playOk1, _playOk2;

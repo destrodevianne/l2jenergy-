@@ -19,7 +19,6 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
@@ -92,11 +91,6 @@ public final class UseItem extends L2GameClientPacket
 		if (activeChar == null)
 		{
 			return;
-		}
-		
-		if (Config.DEBUG)
-		{
-			_log.log(Level.INFO, activeChar + ": use item " + _objectId);
 		}
 		
 		// Flood protect UseItem
@@ -344,11 +338,11 @@ public final class UseItem extends L2GameClientPacket
 			{
 				if ((etcItem != null) && (etcItem.getHandlerName() != null))
 				{
-					_log.log(Level.WARNING, "Unmanaged Item handler: " + etcItem.getHandlerName() + " for Item Id: " + _itemId + "!");
+					LOG.warn("Unmanaged Item handler: {} for Item Id: {}!", etcItem.getHandlerName(), _itemId);
 				}
 				else if (Config.DEBUG)
 				{
-					_log.log(Level.WARNING, "No Item handler registered for Item Id: " + _itemId + "!");
+					LOG.warn("No Item handler registered for Item Id: {}!", _itemId);
 				}
 				return;
 			}

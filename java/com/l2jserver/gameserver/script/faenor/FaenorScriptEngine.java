@@ -22,11 +22,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.script.ScriptContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
 
 import com.l2jserver.Config;
@@ -41,7 +41,8 @@ import com.l2jserver.util.file.filter.XMLFilter;
  */
 public class FaenorScriptEngine extends ScriptEngine
 {
-	private static final Logger _log = Logger.getLogger(FaenorScriptEngine.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(FaenorScriptEngine.class);
+	
 	public static final String PACKAGE_DIRECTORY = "data/faenor/";
 	
 	protected FaenorScriptEngine()
@@ -58,7 +59,7 @@ public class FaenorScriptEngine extends ScriptEngine
 				}
 				catch (IOException e)
 				{
-					_log.log(Level.WARNING, e.getMessage(), e);
+					LOG.warn("", e);
 				}
 			}
 		}
@@ -76,23 +77,23 @@ public class FaenorScriptEngine extends ScriptEngine
 		}
 		catch (ParserNotCreatedException e)
 		{
-			_log.log(Level.WARNING, "ERROR: No parser registered for Script: " + parserClass + ": " + e.getMessage(), e);
+			LOG.warn("ERROR: No parser registered for Script: {}", parserClass, e);
 		}
 		
 		if (parser == null)
 		{
-			_log.warning("Unknown Script Type: " + script.getName());
+			LOG.warn("Unknown Script Type: {}", script.getName());
 			return;
 		}
 		
 		try
 		{
 			parser.parseScript(node, context);
-			_log.info(getClass().getSimpleName() + ": Loaded  " + script.getName() + " successfully.");
+			LOG.info("{}: Loaded  {} successfully.", getClass().getSimpleName(), script.getName());
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Script Parsing Failed: " + e.getMessage(), e);
+			LOG.warn("Script Parsing Failed!", e);
 		}
 	}
 	

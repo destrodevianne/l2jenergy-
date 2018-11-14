@@ -33,7 +33,7 @@ import com.l2jserver.gameserver.model.L2TeleportLocation;
 
 public class TeleportLocationTable
 {
-	private static Logger LOG = LoggerFactory.getLogger(TeleportLocationTable.class);
+	private static final Logger LOG = LoggerFactory.getLogger(TeleportLocationTable.class);
 	
 	private final Map<Integer, L2TeleportLocation> _teleports = new HashMap<>();
 	

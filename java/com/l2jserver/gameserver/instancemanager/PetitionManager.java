@@ -22,7 +22,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
@@ -42,7 +44,7 @@ import com.l2jserver.util.StringUtil;
  */
 public final class PetitionManager
 {
-	protected static final Logger _log = Logger.getLogger(PetitionManager.class.getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(PetitionManager.class);
 	
 	private final Map<Integer, Petition> _pendingPetitions;
 	private final Map<Integer, Petition> _completedPetitions;
@@ -58,7 +60,7 @@ public final class PetitionManager
 		final int numPetitions = getPendingPetitionCount();
 		
 		getCompletedPetitions().clear();
-		_log.info(getClass().getSimpleName() + ": Completed petition data cleared. " + numPetitions + " petition(s) removed.");
+		LOG.info("{}: Completed petition data cleared. {} petition(s) removed.", getClass().getSimpleName(), numPetitions);
 	}
 	
 	public void clearPendingPetitions()
@@ -66,7 +68,7 @@ public final class PetitionManager
 		final int numPetitions = getPendingPetitionCount();
 		
 		getPendingPetitions().clear();
-		_log.info(getClass().getSimpleName() + ": Pending petition queue cleared. " + numPetitions + " petition(s) removed.");
+		LOG.info("{}: Pending petition queue cleared. {} petition(s) removed.", getClass().getSimpleName(), numPetitions);
 	}
 	
 	public boolean acceptPetition(L2PcInstance respondingAdmin, int petitionId)
@@ -366,7 +368,11 @@ public final class PetitionManager
 	
 	public void sendPendingPetitionList(L2PcInstance activeChar)
 	{
-		final StringBuilder htmlContent = StringUtil.startAppend(600 + (getPendingPetitionCount() * 300), "<html><body><center><table width=270><tr>" + "<td width=45><button value=\"Main\" action=\"bypass -h admin_admin\" width=45 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>" + "<td width=180><center>Petition Menu</center></td>" + "<td width=45><button value=\"Back\" action=\"bypass -h admin_admin7\" width=45 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table><br>" + "<table width=\"270\">" + "<tr><td><table width=\"270\"><tr><td><button value=\"Reset\" action=\"bypass -h admin_reset_petitions\" width=\"80\" height=\"21\" back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>" + "<td align=right><button value=\"Refresh\" action=\"bypass -h admin_view_petitions\" width=\"80\" height=\"21\" back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table><br></td></tr>");
+		final StringBuilder htmlContent = StringUtil.startAppend(600 + (getPendingPetitionCount() * 300), "<html><body><center><table width=270><tr>"
+			+ "<td width=45><button value=\"Main\" action=\"bypass -h admin_admin\" width=45 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>" + "<td width=180><center>Petition Menu</center></td>"
+			+ "<td width=45><button value=\"Back\" action=\"bypass -h admin_admin7\" width=45 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table><br>" + "<table width=\"270\">"
+			+ "<tr><td><table width=\"270\"><tr><td><button value=\"Reset\" action=\"bypass -h admin_reset_petitions\" width=\"80\" height=\"21\" back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>"
+			+ "<td align=right><button value=\"Refresh\" action=\"bypass -h admin_view_petitions\" width=\"80\" height=\"21\" back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table><br></td></tr>");
 		
 		final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
@@ -393,7 +399,8 @@ public final class PetitionManager
 			StringUtil.append(htmlContent, "<tr><td width=\"130\">");
 			if (currPetition.getState() != PetitionState.IN_PROCESS)
 			{
-				StringUtil.append(htmlContent, "<table width=\"130\" cellpadding=\"2\"><tr>" + "<td><button value=\"View\" action=\"bypass -h admin_view_petition ", String.valueOf(currPetition.getId()), "\" width=\"50\" height=\"21\" back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>" + "<td><button value=\"Reject\" action=\"bypass -h admin_reject_petition ", String.valueOf(currPetition.getId()), "\" width=\"50\" height=\"21\" back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table>");
+				StringUtil.append(htmlContent, "<table width=\"130\" cellpadding=\"2\"><tr>" + "<td><button value=\"View\" action=\"bypass -h admin_view_petition ", String.valueOf(currPetition.getId()), "\" width=\"50\" height=\"21\" back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td>"
+					+ "<td><button value=\"Reject\" action=\"bypass -h admin_reject_petition ", String.valueOf(currPetition.getId()), "\" width=\"50\" height=\"21\" back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table>");
 			}
 			else
 			{

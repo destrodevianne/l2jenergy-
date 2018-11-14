@@ -20,15 +20,12 @@ package com.l2jserver.gameserver;
 
 import java.awt.Toolkit;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.LogManager;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -157,8 +154,7 @@ import com.l2jserver.util.Util;
 public final class GameServer
 {
 	private static final Logger LOG = LoggerFactory.getLogger(GameServer.class);
-	private static final String LOG_FOLDER = "log"; // Name of folder for log file
-	private static final String LOG_NAME = "./log.cfg"; // Name of log file
+	
 	private static final String DATAPACK = "-dp";
 	private static final String GEODATA = "-gd";
 	
@@ -184,7 +180,7 @@ public final class GameServer
 		ThreadPoolManager.getInstance();
 		EventDispatcher.getInstance();
 		
-		new File("log/game").mkdirs();
+		new File("logs/game").mkdirs();
 		
 		// load script engines
 		printSection("Engines");
@@ -249,10 +245,7 @@ public final class GameServer
 		RaidBossPointsManager.getInstance();
 		PetDataTable.getInstance();
 		CharSummonTable.getInstance().init();
-		if (Config.BBS_TELEPORTS_ENABLE)
-		{
-			TeleportBBSData.getInstance();
-		}
+		
 		// Multi-Language System
 		printSection("Messages");
 		MessagesData.getInstance();
@@ -286,8 +279,8 @@ public final class GameServer
 		ItemAuctionManager.getInstance();
 		
 		printSection("Olympiad");
-		Olympiad.getInstance();
-		Hero.getInstance();
+		Olympiad.getInstance();// TODO: log
+		Hero.getInstance();// TODO: log
 		
 		printSection("Seven Signs");
 		SevenSigns.getInstance();
@@ -297,11 +290,15 @@ public final class GameServer
 		HtmCache.getInstance();
 		CrestTable.getInstance();
 		TeleportLocationTable.getInstance();
+		if (Config.BBS_TELEPORTS_ENABLE)
+		{
+			TeleportBBSData.getInstance();
+		}
 		UIData.getInstance();
 		PartyMatchWaitingList.getInstance();
 		PartyMatchRoomList.getInstance();
 		PetitionManager.getInstance();
-		AugmentationData.getInstance();
+		AugmentationData.getInstance(); // TODO: log
 		CursedWeaponsManager.getInstance();
 		TransformData.getInstance();
 		BotReportTable.getInstance();
@@ -381,7 +378,6 @@ public final class GameServer
 		{
 			MiniGameScoreManager.getInstance();
 		}
-		
 		TaskManager.getInstance();
 		
 		AntiFeedManager.getInstance().registerEvent(AntiFeedManager.GAME_ID);
@@ -485,15 +481,10 @@ public final class GameServer
 			Config.GEODATA_PATH = Paths.get(gd);
 		}
 		
+		final String LOG_FOLDER = "./logs"; // Name of folder for log file
 		// Create log folder
-		File logFolder = new File(Config.DATAPACK_ROOT, LOG_FOLDER);
+		File logFolder = new File(LOG_FOLDER);
 		logFolder.mkdir();
-		
-		// Create input stream for log file -- or store file data into memory
-		try (InputStream is = new FileInputStream(new File(LOG_NAME)))
-		{
-			LogManager.getLogManager().readConfiguration(is);
-		}
 		
 		printSection("Database");
 		DAOFactory.getInstance();

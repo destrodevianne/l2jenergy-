@@ -18,9 +18,8 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.SevenSignsFestival;
@@ -31,6 +30,7 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.taskmanager.AttackStanceTaskManager;
+import com.l2jserver.gameserver.util.LoggingUtils;
 
 /**
  * This class ...
@@ -39,7 +39,8 @@ import com.l2jserver.gameserver.taskmanager.AttackStanceTaskManager;
 public final class Logout extends L2GameClientPacket
 {
 	private static final String _C__00_LOGOUT = "[C] 00 Logout";
-	protected static final Logger _logAccounting = Logger.getLogger("accounting");
+	
+	protected static final Logger LOG_ACCOUNTING = LoggerFactory.getLogger("accounting");
 	
 	@Override
 	protected void readImpl()
@@ -60,7 +61,7 @@ public final class Logout extends L2GameClientPacket
 		{
 			if (Config.DEBUG)
 			{
-				_log.fine("Player " + player.getName() + " tried to logout while enchanting.");
+				LOG.debug("Player {} tried to logout while enchanting.", player.getName());
 			}
 			player.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
@@ -68,7 +69,7 @@ public final class Logout extends L2GameClientPacket
 		
 		if (player.isLocked())
 		{
-			_log.warning("Player " + player.getName() + " tried to logout during class change.");
+			LOG.warn("Player {} tried to logout during class change.", player.getName());
 			player.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
@@ -83,7 +84,7 @@ public final class Logout extends L2GameClientPacket
 			
 			if (Config.DEBUG)
 			{
-				_log.fine("Player " + player.getName() + " tried to logout while fighting.");
+				LOG.debug("Player {} tried to logout while fighting.", player.getName());
 			}
 			
 			player.sendPacket(SystemMessageId.CANT_LOGOUT_WHILE_FIGHTING);
@@ -119,12 +120,13 @@ public final class Logout extends L2GameClientPacket
 		// Remove player from Boss Zone
 		player.removeFromBossZone();
 		
-		LogRecord record = new LogRecord(Level.INFO, "Disconnected");
-		record.setParameters(new Object[]
+		if (LOG_ACCOUNTING.isInfoEnabled())
 		{
-			getClient()
-		});
-		_logAccounting.log(record);
+			LoggingUtils.logAccounting(LOG_ACCOUNTING, "Disconnected", new Object[]
+			{
+				getClient()
+			});
+		}
 		
 		player.logout();
 	}

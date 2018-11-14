@@ -57,7 +57,7 @@ public class RequestExRqItemLink extends L2GameClientPacket
 				{
 					if (Config.DEBUG)
 					{
-						_log.info(getClient() + " requested item link for item which wasnt published! ID:" + _objectId);
+						LOG.debug("{} requested item link for item which wasnt published! ID: {}", getClient(), _objectId);
 					}
 				}
 			}

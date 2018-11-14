@@ -18,9 +18,8 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
@@ -42,6 +41,7 @@ import com.l2jserver.gameserver.network.serverpackets.CharSelected;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.network.serverpackets.SSQInfo;
 import com.l2jserver.gameserver.network.serverpackets.ServerClose;
+import com.l2jserver.gameserver.util.LoggingUtils;
 
 /**
  * This class ...
@@ -50,7 +50,7 @@ import com.l2jserver.gameserver.network.serverpackets.ServerClose;
 public class CharacterSelect extends L2GameClientPacket
 {
 	private static final String _C__12_CHARACTERSELECT = "[C] 12 CharacterSelect";
-	protected static final Logger _logAccounting = Logger.getLogger("accounting");
+	protected static final Logger LOG_ACCOUNTING = LoggerFactory.getLogger("accounting");
 	
 	// cd
 	private int _charSlot;
@@ -132,7 +132,7 @@ public class CharacterSelect extends L2GameClientPacket
 					// The L2PcInstance must be created here, so that it can be attached to the L2GameClient
 					if (Config.DEBUG)
 					{
-						_log.fine("selected slot:" + _charSlot);
+						LOG.debug("selected slot: {}", _charSlot);
 					}
 					
 					// load up character from disk
@@ -167,12 +167,13 @@ public class CharacterSelect extends L2GameClientPacket
 				client.getActiveCharLock().unlock();
 			}
 			
-			LogRecord record = new LogRecord(Level.INFO, "Logged in");
-			record.setParameters(new Object[]
+			if (LOG_ACCOUNTING.isInfoEnabled())
 			{
-				client
-			});
-			_logAccounting.log(record);
+				LoggingUtils.logAccounting(LOG_ACCOUNTING, "Logged in", new Object[]
+				{
+					client
+				});
+			}
 		}
 	}
 	

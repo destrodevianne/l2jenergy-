@@ -23,8 +23,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
@@ -48,7 +49,7 @@ import com.l2jserver.gameserver.util.Util;
 
 public class PcInventory extends Inventory
 {
-	private static final Logger _log = Logger.getLogger(PcInventory.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(PcInventory.class);
 	
 	private final L2PcInstance _owner;
 	private L2ItemInstance _adena;
@@ -756,7 +757,7 @@ public class PcInventory extends Inventory
 				if (_questSlots < 0)
 				{
 					_questSlots = 0;
-					_log.warning(this + ": QuestInventory size < 0!");
+					LOG.warn("{}: QuestInventory size < 0!", this);
 				}
 			}
 		}
@@ -807,7 +808,7 @@ public class PcInventory extends Inventory
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Could not restore inventory: " + e.getMessage(), e);
+			LOG.warn("Could not restore inventory!", e);
 		}
 		return paperdoll;
 	}

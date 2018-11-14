@@ -63,7 +63,7 @@ public final class RequestQuestAbort extends L2GameClientPacket
 			{
 				if (Config.DEBUG)
 				{
-					_log.info("Player '" + activeChar.getName() + "' try to abort quest " + qe.getName() + " but he didn't have it started.");
+					LOG.info("Player '{}' try to abort quest {} but he didn't have it started.", activeChar.getName(), qe.getName());
 				}
 			}
 		}
@@ -71,7 +71,7 @@ public final class RequestQuestAbort extends L2GameClientPacket
 		{
 			if (Config.DEBUG)
 			{
-				_log.warning("Quest (id='" + _questId + "') not found.");
+				LOG.warn("Quest (id='{}') not found.", _questId);
 			}
 		}
 	}

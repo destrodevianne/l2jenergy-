@@ -24,8 +24,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Base64;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.loginserver.GameServerTable;
@@ -38,7 +39,8 @@ import com.l2jserver.util.network.BaseRecievePacket;
  */
 public class ChangePassword extends BaseRecievePacket
 {
-	protected static Logger _log = Logger.getLogger(ChangePassword.class.getName());
+	protected final static Logger LOG = LoggerFactory.getLogger(ChangePassword.class);
+	
 	private static GameServerThread gst = null;
 	
 	public ChangePassword(byte[] decrypt)
@@ -109,7 +111,7 @@ public class ChangePassword extends BaseRecievePacket
 						passUpdated = ps.executeUpdate();
 					}
 					
-					_log.log(Level.INFO, "The password for account " + accountName + " has been changed from " + curpassEnc + " to " + Base64.getEncoder().encodeToString(password));
+					LOG.info("The password for account {} has been changed from {} to ", accountName, curpassEnc, Base64.getEncoder().encodeToString(password));
 					if (passUpdated > 0)
 					{
 						gst.ChangePasswordResponse((byte) 1, characterName, "You have successfully changed your password!");
@@ -126,7 +128,7 @@ public class ChangePassword extends BaseRecievePacket
 			}
 			catch (Exception e)
 			{
-				_log.warning("Error while changing password for account " + accountName + " requested by player " + characterName + "! " + e);
+				LOG.warn("Error while changing password for account {} requested by player {}! ", accountName, characterName, e);
 			}
 		}
 	}

@@ -18,7 +18,8 @@
  */
 package com.l2jserver.loginserver.network;
 
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.loginserver.GameServerThread;
@@ -42,7 +43,7 @@ import com.l2jserver.util.network.BaseRecievePacket;
  */
 public class L2JGameServerPacketHandler
 {
-	protected static Logger _log = Logger.getLogger(L2JGameServerPacketHandler.class.getName());
+	protected final static Logger LOG = LoggerFactory.getLogger(L2JGameServerPacketHandler.class);
 	
 	public static enum GameServerState
 	{
@@ -65,7 +66,7 @@ public class L2JGameServerPacketHandler
 						msg = new BlowFishKey(data, server);
 						break;
 					default:
-						_log.warning("Unknown Opcode (" + Integer.toHexString(opcode).toUpperCase() + ") in state " + state.name() + " from GameServer, closing connection.");
+						LOG.warn("Unknown Opcode ({}) in state {} from GameServer, closing connection.", Integer.toHexString(opcode).toUpperCase(), state.name());
 						server.forceClose(LoginServerFail.NOT_AUTHED);
 						break;
 				}
@@ -77,7 +78,7 @@ public class L2JGameServerPacketHandler
 						msg = new GameServerAuth(data, server);
 						break;
 					default:
-						_log.warning("Unknown Opcode (" + Integer.toHexString(opcode).toUpperCase() + ") in state " + state.name() + " from GameServer, closing connection.");
+						LOG.warn("Unknown Opcode ({}) in state {} from GameServer, closing connection.", Integer.toHexString(opcode).toUpperCase(), state.name());
 						server.forceClose(LoginServerFail.NOT_AUTHED);
 						break;
 				}
@@ -119,7 +120,7 @@ public class L2JGameServerPacketHandler
 						new ChangePassword(data);
 						break;
 					default:
-						_log.warning("Unknown Opcode (" + Integer.toHexString(opcode).toUpperCase() + ") in state " + state.name() + " from GameServer, closing connection.");
+						LOG.warn("Unknown Opcode ({}) in state {} from GameServer, closing connection.", Integer.toHexString(opcode).toUpperCase(), state.name());
 						server.forceClose(LoginServerFail.NOT_AUTHED);
 						break;
 				}

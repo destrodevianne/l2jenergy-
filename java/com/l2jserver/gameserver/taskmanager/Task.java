@@ -19,7 +19,9 @@
 package com.l2jserver.gameserver.taskmanager;
 
 import java.util.concurrent.ScheduledFuture;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.taskmanager.TaskManager.ExecutedTask;
 
@@ -28,7 +30,7 @@ import com.l2jserver.gameserver.taskmanager.TaskManager.ExecutedTask;
  */
 public abstract class Task
 {
-	protected final Logger _log = Logger.getLogger(getClass().getName());
+	protected final Logger LOG = LoggerFactory.getLogger(getClass().getName());
 	
 	public void initializate()
 	{

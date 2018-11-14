@@ -21,7 +21,6 @@ package com.l2jserver.gameserver.network.clientpackets;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.enums.MacroType;
 import com.l2jserver.gameserver.model.Macro;
 import com.l2jserver.gameserver.model.MacroCmd;
@@ -49,11 +48,6 @@ public final class RequestMakeMacro extends L2GameClientPacket
 		if (_count > MAX_MACRO_LENGTH)
 		{
 			_count = MAX_MACRO_LENGTH;
-		}
-		
-		if (Config.DEBUG)
-		{
-			_log.info("Make macro id:" + _id + "\tname:" + _name + "\tdesc:" + _desc + "\tacronym:" + _acronym + "\ticon:" + _icon + "\tcount:" + _count);
 		}
 		
 		final List<MacroCmd> commands = new ArrayList<>(_count);

@@ -18,7 +18,8 @@
  */
 package com.l2jserver.gameserver.handler;
 
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -28,7 +29,7 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
  */
 public interface IBypassHandler
 {
-	public static Logger _log = Logger.getLogger(IBypassHandler.class.getName());
+	public static Logger LOG = LoggerFactory.getLogger(IBypassHandler.class);
 	
 	/**
 	 * This is the worker method that is called when someone uses an bypass command.

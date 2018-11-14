@@ -23,8 +23,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
@@ -51,7 +52,7 @@ import com.l2jserver.util.StringUtil;
  */
 public abstract class Inventory extends ItemContainer
 {
-	protected static final Logger _log = Logger.getLogger(Inventory.class.getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(Inventory.class);
 	
 	public interface PaperdollListener
 	{
@@ -325,7 +326,7 @@ public abstract class Inventory extends ItemContainer
 					}
 					else
 					{
-						_log.warning("Inventory.ItemSkillsListener.Weapon: Incorrect skill: " + skillInfo + ".");
+						LOG.warn("Inventory.ItemSkillsListener.Weapon: Incorrect skill: {}.", skillInfo);
 					}
 				}
 			}
@@ -460,7 +461,7 @@ public abstract class Inventory extends ItemContainer
 					}
 					else
 					{
-						_log.warning("Inventory.ItemSkillsListener.Weapon: Incorrect skill: " + skillInfo + ".");
+						LOG.warn("Inventory.ItemSkillsListener.Weapon: Incorrect skill: {}.", skillInfo);
 					}
 				}
 			}
@@ -547,7 +548,7 @@ public abstract class Inventory extends ItemContainer
 							}
 							else
 							{
-								_log.warning("Inventory.ArmorSetListener: Incorrect skill: " + holder + ".");
+								LOG.warn("Inventory.ArmorSetListener: Incorrect skill: {}.", holder);
 							}
 						}
 					}
@@ -563,7 +564,7 @@ public abstract class Inventory extends ItemContainer
 							}
 							else
 							{
-								_log.warning("Inventory.ArmorSetListener: Incorrect skill: " + holder + ".");
+								LOG.warn("Inventory.ArmorSetListener: Incorrect skill: {}.", holder);
 							}
 						}
 					}
@@ -579,7 +580,7 @@ public abstract class Inventory extends ItemContainer
 							}
 							else
 							{
-								_log.warning("Inventory.ArmorSetListener: Incorrect skill: " + holder + ".");
+								LOG.warn("Inventory.ArmorSetListener: Incorrect skill: {}.", holder);
 							}
 						}
 					}
@@ -596,7 +597,7 @@ public abstract class Inventory extends ItemContainer
 					}
 					else
 					{
-						_log.warning("Inventory.ArmorSetListener: Incorrect skill: " + holder + ".");
+						LOG.warn("Inventory.ArmorSetListener: Incorrect skill: {}.", holder);
 					}
 				}
 			}
@@ -681,7 +682,7 @@ public abstract class Inventory extends ItemContainer
 						}
 						else
 						{
-							_log.warning("Inventory.ArmorSetListener: Incorrect skill: " + holder + ".");
+							LOG.warn("Inventory.ArmorSetListener: Incorrect skill: {}.", holder);
 						}
 					}
 				}
@@ -697,7 +698,7 @@ public abstract class Inventory extends ItemContainer
 						}
 						else
 						{
-							_log.warning("Inventory.ArmorSetListener: Incorrect skill: " + holder + ".");
+							LOG.warn("Inventory.ArmorSetListener: Incorrect skill: {}.", holder);
 						}
 					}
 				}
@@ -713,7 +714,7 @@ public abstract class Inventory extends ItemContainer
 						}
 						else
 						{
-							_log.warning("Inventory.ArmorSetListener: Incorrect skill: " + holder + ".");
+							LOG.warn("Inventory.ArmorSetListener: Incorrect skill: {}.", holder);
 						}
 					}
 				}
@@ -1250,11 +1251,6 @@ public abstract class Inventory extends ItemContainer
 	 */
 	public L2ItemInstance unEquipItemInBodySlot(int slot)
 	{
-		if (Config.DEBUG)
-		{
-			_log.info(Inventory.class.getSimpleName() + ": Unequip body slot:" + slot);
-		}
-		
 		int pdollSlot = -1;
 		
 		switch (slot)
@@ -1327,8 +1323,8 @@ public abstract class Inventory extends ItemContainer
 				pdollSlot = PAPERDOLL_BELT;
 				break;
 			default:
-				_log.info("Unhandled slot type: " + slot);
-				_log.info(StringUtil.getTraceString(Thread.currentThread().getStackTrace()));
+				LOG.info("Unhandled slot type: {}", slot);
+				LOG.info(StringUtil.getTraceString(Thread.currentThread().getStackTrace()));
 		}
 		if (pdollSlot >= 0)
 		{
@@ -1561,7 +1557,7 @@ public abstract class Inventory extends ItemContainer
 				setPaperdollItem(PAPERDOLL_CHEST, item);
 				break;
 			default:
-				_log.warning("Unknown body slot " + targetSlot + " for Item ID:" + item.getId());
+				LOG.warn("Unknown body slot {} for Item ID: {}", targetSlot, item.getId());
 		}
 	}
 	
@@ -1690,7 +1686,7 @@ public abstract class Inventory extends ItemContainer
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Could not restore inventory: " + e.getMessage(), e);
+			LOG.warn("Could not restore inventory!", e);
 		}
 	}
 	

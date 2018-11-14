@@ -38,9 +38,8 @@ public final class SummonAgathion extends AbstractEffect
 		
 		if (params.isEmpty())
 		{
-			_log.warning(getClass().getSimpleName() + ": must have parameters.");
+			LOG.warn("{}: must have parameters.", getClass().getSimpleName());
 		}
-		
 		_npcId = params.getInt("npcId", 0);
 	}
 	

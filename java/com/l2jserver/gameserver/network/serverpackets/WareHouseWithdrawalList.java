@@ -43,7 +43,7 @@ public final class WareHouseWithdrawalList extends AbstractItemPacket
 	{
 		if (player.getActiveWarehouse() == null)
 		{
-			_log.warning("error while sending withdraw request to: " + player.getName());
+			LOG.warn("Error while sending withdraw request to: {}", player.getName());
 			return;
 		}
 		

@@ -130,7 +130,7 @@ public class EnterWorld extends L2GameClientPacket
 		final L2PcInstance activeChar = getActiveChar();
 		if (activeChar == null)
 		{
-			_log.warning("EnterWorld failed! activeChar returned 'null'.");
+			LOG.warn("EnterWorld failed! activeChar returned 'null'.");
 			getClient().closeNow();
 			return;
 		}
@@ -163,7 +163,7 @@ public class EnterWorld extends L2GameClientPacket
 		{
 			if (L2World.getInstance().findObject(activeChar.getObjectId()) != null)
 			{
-				_log.warning("User already exists in Object ID map! User " + activeChar.getName() + " is a character clone.");
+				LOG.warn("User already exists in Object ID map! User {} is a character clone.", activeChar.getName());
 			}
 		}
 		

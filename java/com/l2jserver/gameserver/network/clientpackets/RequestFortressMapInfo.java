@@ -44,7 +44,7 @@ public class RequestFortressMapInfo extends L2GameClientPacket
 		
 		if (fort == null)
 		{
-			_log.warning("Fort is not found with id (" + _fortressId + ") in all forts with size of (" + FortManager.getInstance().getForts().size() + ") called by player (" + getActiveChar() + ")");
+			LOG.warn("Fort is not found with id ({}) in all forts with size of ({}) called by player ({})", _fortressId, FortManager.getInstance().getForts().size(), getActiveChar());
 			
 			if (getActiveChar() == null)
 			{

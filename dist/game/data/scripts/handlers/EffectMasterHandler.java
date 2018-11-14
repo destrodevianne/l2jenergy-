@@ -18,8 +18,8 @@
  */
 package handlers;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.handler.EffectHandler;
 import com.l2jserver.gameserver.model.effects.AbstractEffect;
@@ -191,7 +191,7 @@ import handlers.effecthandlers.ticks.TickMp;
  */
 public final class EffectMasterHandler
 {
-	private static final Logger _log = Logger.getLogger(EffectMasterHandler.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(EffectMasterHandler.class);
 	
 	private static final Class<?>[] EFFECTS =
 	{
@@ -372,11 +372,11 @@ public final class EffectMasterHandler
 		// And lets try get size
 		try
 		{
-			_log.log(Level.INFO, EffectMasterHandler.class.getSimpleName() + ": Loaded " + EffectHandler.getInstance().size() + " effect handlers.");
+			LOG.info("{}: Loaded {} effect handlers.", EffectMasterHandler.class.getSimpleName(), EffectHandler.getInstance().size());
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Failed invoking size method for handler: " + EffectMasterHandler.class.getSimpleName(), e);
+			LOG.warn("Failed invoking size method for handler: {}", EffectMasterHandler.class.getSimpleName(), e);
 		}
 	}
 }

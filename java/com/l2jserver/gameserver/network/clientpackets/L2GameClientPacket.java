@@ -19,8 +19,9 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import java.nio.BufferUnderflowException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -37,7 +38,7 @@ import com.l2jserver.mmocore.ReceivablePacket;
  */
 public abstract class L2GameClientPacket extends ReceivablePacket<L2GameClient>
 {
-	protected static final Logger _log = Logger.getLogger(L2GameClientPacket.class.getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(L2GameClientPacket.class);
 	
 	@Override
 	public boolean read()
@@ -49,7 +50,7 @@ public abstract class L2GameClientPacket extends ReceivablePacket<L2GameClient>
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.SEVERE, "Client: " + getClient().toString() + " - Failed reading: " + getType() + " ; " + e.getMessage(), e);
+			LOG.error("Client: {} - Failed reading: {}", getClient().toString(), getType(), e);
 			
 			if (e instanceof BufferUnderflowException)
 			{
@@ -79,14 +80,14 @@ public abstract class L2GameClientPacket extends ReceivablePacket<L2GameClient>
 					actor.onActionRequest();
 					if (Config.DEBUG)
 					{
-						_log.info("Spawn protection for player " + actor.getName() + " removed by packet: " + getType());
+						LOG.debug("Spawn protection for player {} removed by packet: {}", actor.getName(), getType());
 					}
 				}
 			}
 		}
 		catch (Throwable t)
 		{
-			_log.log(Level.SEVERE, "Client: " + getClient().toString() + " - Failed running: " + getType() + " ; " + t.getMessage(), t);
+			LOG.error("Client: {} - Failed running: {}", getClient().toString(), getType(), t);
 			// in case of EnterWorld error kick player from game
 			if (this instanceof EnterWorld)
 			{

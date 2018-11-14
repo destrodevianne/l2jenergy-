@@ -20,8 +20,9 @@ package com.l2jserver.gameserver.model.events;
 
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.model.events.impl.IBaseEvent;
@@ -33,7 +34,7 @@ import com.l2jserver.gameserver.model.events.returns.AbstractEventReturn;
  */
 public final class EventDispatcher
 {
-	private static final Logger _log = Logger.getLogger(EventDispatcher.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(EventDispatcher.class);
 	
 	protected EventDispatcher()
 	{
@@ -86,7 +87,7 @@ public final class EventDispatcher
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, getClass().getSimpleName() + ": Couldn't notify event " + event.getClass().getSimpleName(), e);
+			LOG.warn("{}: Couldn't notify event {}", getClass().getSimpleName(), event.getClass().getSimpleName(), e);
 		}
 		return null;
 	}
@@ -190,7 +191,7 @@ public final class EventDispatcher
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, getClass().getSimpleName() + ": Couldn't notify event " + event.getClass().getSimpleName(), e);
+			LOG.warn("{}: Couldn't notify event {}", getClass().getSimpleName(), event.getClass().getSimpleName(), e);
 		}
 		return null;
 	}
@@ -255,7 +256,7 @@ public final class EventDispatcher
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, getClass().getSimpleName() + ": Exception during notification of event: " + event.getClass().getSimpleName() + " listener: " + listener.getClass().getSimpleName(), e);
+				LOG.warn("{}: Exception during notification of event: {} listener: {}", getClass().getSimpleName(), event.getClass().getSimpleName(), listener.getClass().getSimpleName(), e);
 			}
 		}
 		

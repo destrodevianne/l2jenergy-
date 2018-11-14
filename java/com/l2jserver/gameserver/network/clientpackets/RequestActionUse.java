@@ -97,11 +97,6 @@ public final class RequestActionUse extends L2GameClientPacket
 			return;
 		}
 		
-		if (Config.DEBUG)
-		{
-			_log.info(getType() + ": " + activeChar + " requested action use ID: " + _actionId + " Ctrl pressed:" + _ctrlPressed + " Shift pressed:" + _shiftPressed);
-		}
-		
 		// Don't do anything if player is dead or confused
 		if ((activeChar.isFakeDeath() && (_actionId != 0)) || activeChar.isDead() || activeChar.isOutOfControl())
 		{
@@ -130,7 +125,7 @@ public final class RequestActionUse extends L2GameClientPacket
 			if (!(Arrays.binarySearch(allowedActions, _actionId) >= 0))
 			{
 				sendPacket(ActionFailed.STATIC_PACKET);
-				_log.warning("Player " + activeChar + " used action which he does not have! Id = " + _actionId + " transform: " + activeChar.getTransformation());
+				LOG.warn("Player {} used action which he does not have! Id = {} transform: {}", activeChar, _actionId, activeChar.getTransformation());
 				return;
 			}
 		}
@@ -765,7 +760,7 @@ public final class RequestActionUse extends L2GameClientPacket
 				tryBroadcastSocial(15);
 				break;
 			default:
-				_log.warning(activeChar.getName() + ": unhandled action type " + _actionId);
+				LOG.warn("{}: unhandled action type {}", activeChar.getName(), _actionId);
 				break;
 		}
 	}
@@ -886,14 +881,14 @@ public final class RequestActionUse extends L2GameClientPacket
 		final SkillHolder skillHolder = summon.getTemplate().getParameters().getSkillHolder(skillName);
 		if (skillHolder == null)
 		{
-			_log.warning(summon + " requested missing skill " + skillName + "!");
+			LOG.warn("{} requested missing skill {}!", summon, skillName);
 			return;
 		}
 		
 		final Skill skill = skillHolder.getSkill();
 		if (skill == null)
 		{
-			_log.warning(summon + " requested missing skill " + skillHolder + "!");
+			LOG.warn("{} requested missing skill {}!", summon, skillHolder);
 			return;
 		}
 		

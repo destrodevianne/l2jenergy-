@@ -18,7 +18,6 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.RecipeController;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -34,10 +33,6 @@ public final class RequestRecipeBookOpen extends L2GameClientPacket
 	protected void readImpl()
 	{
 		_isDwarvenCraft = (readD() == 0);
-		if (Config.DEBUG)
-		{
-			_log.info("RequestRecipeBookOpen : " + (_isDwarvenCraft ? "dwarvenCraft" : "commonCraft"));
-		}
 	}
 	
 	@Override

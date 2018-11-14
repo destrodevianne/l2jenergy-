@@ -65,7 +65,7 @@ public final class RequestHennaEquip extends L2GameClientPacket
 		final L2Henna henna = HennaData.getInstance().getHenna(_symbolId);
 		if (henna == null)
 		{
-			_log.warning(getClass().getName() + ": Invalid Henna Id: " + _symbolId + " from player " + activeChar);
+			LOG.warn("{}: Invalid Henna Id: {} from player {}", getClass().getName(), _symbolId, activeChar);
 			sendActionFailed();
 			return;
 		}

@@ -56,7 +56,7 @@ public final class CannotMoveAnymore extends L2GameClientPacket
 		
 		if (Config.DEBUG)
 		{
-			_log.fine("client: x:" + _x + " y:" + _y + " z:" + _z + " server x:" + player.getX() + " y:" + player.getY() + " z:" + player.getZ());
+			LOG.debug("client: x:{} y:{} z:{} server x:{} y:{} z:{}", _x, _y, _z, player.getX(), player.getY(), player.getZ());
 		}
 		if (player.getAI() != null)
 		{

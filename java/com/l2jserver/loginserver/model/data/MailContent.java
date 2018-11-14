@@ -16,18 +16,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.log.filter;
+package com.l2jserver.loginserver.model.data;
 
-import java.util.logging.Filter;
-import java.util.logging.LogRecord;
-
-public class ErrorFilter implements Filter
+public class MailContent
 {
+	private final String _subject;
+	private final String _text;
 	
-	@Override
-	public boolean isLoggable(LogRecord record)
+	/**
+	 * @param subject
+	 * @param text
+	 */
+	public MailContent(String subject, String text)
 	{
-		return record.getThrown() != null;
+		_subject = subject;
+		_text = text;
 	}
 	
+	public String getSubject()
+	{
+		return _subject;
+	}
+	
+	public String getText()
+	{
+		return _text;
+	}
 }

@@ -16,16 +16,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.log.filter;
+package com.l2jserver.gameserver.util.logging;
 
-import java.util.logging.Filter;
-import java.util.logging.LogRecord;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.filter.Filter;
+import ch.qos.logback.core.spi.FilterReply;
 
-public class PDamageFilter implements Filter
+/**
+ * @author Tatanka
+ */
+public class ItemFilter extends Filter<ILoggingEvent>
 {
 	@Override
-	public boolean isLoggable(LogRecord record)
+	public FilterReply decide(ILoggingEvent event)
 	{
-		return record.getLoggerName().equalsIgnoreCase("pdam");
+		if ("item".equals(event.getLoggerName()))
+		{
+			return FilterReply.ACCEPT;
+		}
+		
+		return FilterReply.DENY;
 	}
 }

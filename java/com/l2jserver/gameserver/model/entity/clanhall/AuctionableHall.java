@@ -20,8 +20,9 @@ package com.l2jserver.gameserver.model.entity.clanhall;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
@@ -135,7 +136,7 @@ public final class AuctionableHall extends ClanHall
 	/** Fee Task */
 	protected class FeeTask implements Runnable
 	{
-		private final Logger _log = Logger.getLogger(FeeTask.class.getName());
+		private final Logger LOG = LoggerFactory.getLogger(FeeTask.class);
 		
 		@Override
 		public void run()
@@ -210,7 +211,7 @@ public final class AuctionableHall extends ClanHall
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.SEVERE, "", e);
+				LOG.error("", e);
 			}
 		}
 	}
@@ -229,7 +230,7 @@ public final class AuctionableHall extends ClanHall
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception: updateOwnerInDB(L2Clan clan): " + e.getMessage(), e);
+			LOG.warn("Exception: updateOwnerInDB(L2Clan clan)", e);
 		}
 	}
 }

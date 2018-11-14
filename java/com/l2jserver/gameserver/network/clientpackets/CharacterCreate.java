@@ -96,7 +96,7 @@ public final class CharacterCreate extends L2GameClientPacket
 		{
 			if (Config.DEBUG)
 			{
-				_log.fine("Character Creation Failure: Character name " + _name + " is invalid.");
+				LOG.debug("Character Creation Failure: Character name {} is invalid.", _name);
 			}
 			
 			sendPacket(new CharCreateFail(CharCreateFail.REASON_16_ENG_CHARS));
@@ -123,7 +123,7 @@ public final class CharacterCreate extends L2GameClientPacket
 		
 		if ((_face > 2) || (_face < 0))
 		{
-			_log.warning("Character Creation Failure: Character face " + _face + " is invalid. Possible client hack. " + getClient());
+			LOG.warn("Character Creation Failure: Character face {} is invalid. Possible client hack. {}", _face, getClient());
 			
 			sendPacket(new CharCreateFail(CharCreateFail.REASON_CREATION_FAILED));
 			return;
@@ -131,7 +131,7 @@ public final class CharacterCreate extends L2GameClientPacket
 		
 		if ((_hairStyle < 0) || ((_sex == 0) && (_hairStyle > 4)) || ((_sex != 0) && (_hairStyle > 6)))
 		{
-			_log.warning("Character Creation Failure: Character hair style " + _hairStyle + " is invalid. Possible client hack. " + getClient());
+			LOG.warn("Character Creation Failure: Character hair style {} is invalid. Possible client hack. {}", _hairStyle, getClient());
 			
 			sendPacket(new CharCreateFail(CharCreateFail.REASON_CREATION_FAILED));
 			return;
@@ -139,7 +139,7 @@ public final class CharacterCreate extends L2GameClientPacket
 		
 		if ((_hairColor > 3) || (_hairColor < 0))
 		{
-			_log.warning("Character Creation Failure: Character hair color " + _hairColor + " is invalid. Possible client hack. " + getClient());
+			LOG.warn("Character Creation Failure: Character hair color {} is invalid. Possible client hack. {}", _hairColor, getClient());
 			
 			sendPacket(new CharCreateFail(CharCreateFail.REASON_CREATION_FAILED));
 			return;
@@ -156,7 +156,7 @@ public final class CharacterCreate extends L2GameClientPacket
 			{
 				if (Config.DEBUG)
 				{
-					_log.fine("Max number of characters reached. Creation failed.");
+					LOG.debug("Max number of characters reached. Creation failed.");
 				}
 				
 				sendPacket(new CharCreateFail(CharCreateFail.REASON_TOO_MANY_CHARACTERS));
@@ -166,7 +166,7 @@ public final class CharacterCreate extends L2GameClientPacket
 			{
 				if (Config.DEBUG)
 				{
-					_log.fine("Character Creation Failure: Message generated: You cannot create another character. Please delete the existing character and try again.");
+					LOG.debug("Character Creation Failure: Message generated: You cannot create another character. Please delete the existing character and try again.");
 				}
 				
 				sendPacket(new CharCreateFail(CharCreateFail.REASON_NAME_ALREADY_EXISTS));
@@ -175,7 +175,7 @@ public final class CharacterCreate extends L2GameClientPacket
 			
 			if (ClassId.getClassId(_classId).level() > 0)
 			{
-				_log.warning("Character Creation Failure: " + _name + " classId: " + _classId);
+				LOG.warn("Character Creation Failure: {} classId: {}", _name, _classId);
 				
 				sendPacket(new CharCreateFail(CharCreateFail.REASON_CREATION_FAILED));
 				return;
@@ -205,7 +205,7 @@ public final class CharacterCreate extends L2GameClientPacket
 	{
 		if (Config.DEBUG)
 		{
-			_log.fine("Character init start");
+			LOG.debug("Character init start");
 		}
 		
 		L2World.getInstance().storeObject(newChar);
@@ -241,7 +241,7 @@ public final class CharacterCreate extends L2GameClientPacket
 				final L2ItemInstance item = newChar.getInventory().addItem("Init", ie.getId(), ie.getCount(), newChar, null);
 				if (item == null)
 				{
-					_log.warning("Could not create item during char creation: itemId " + ie.getId() + ", amount " + ie.getCount() + ".");
+					LOG.warn("Could not create item during char creation: itemId {}, amount {}.", ie.getId(), ie.getCount());
 					continue;
 				}
 				
@@ -256,7 +256,7 @@ public final class CharacterCreate extends L2GameClientPacket
 		{
 			if (Config.DEBUG)
 			{
-				_log.fine("Adding starter skill:" + skill.getSkillId() + " / " + skill.getSkillLevel());
+				LOG.debug("Adding starter skill:{} / {}", skill.getSkillId(), skill.getSkillLevel());
 			}
 			
 			newChar.addSkill(SkillData.getInstance().getSkill(skill.getSkillId(), skill.getSkillLevel()), true);
@@ -275,7 +275,7 @@ public final class CharacterCreate extends L2GameClientPacket
 		
 		if (Config.DEBUG)
 		{
-			_log.fine("Character init end");
+			LOG.debug("Character init end");
 		}
 	}
 	

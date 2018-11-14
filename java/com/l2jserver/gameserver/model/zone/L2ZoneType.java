@@ -23,7 +23,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.instancemanager.InstanceManager;
@@ -43,7 +45,7 @@ import com.l2jserver.gameserver.network.serverpackets.L2GameServerPacket;
  */
 public abstract class L2ZoneType extends ListenersContainer
 {
-	protected static final Logger _log = Logger.getLogger(L2ZoneType.class.getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(L2ZoneType.class);
 	
 	private final int _id;
 	protected L2ZoneForm _zone;
@@ -195,7 +197,7 @@ public abstract class L2ZoneType extends ListenersContainer
 		}
 		else
 		{
-			_log.info(getClass().getSimpleName() + ": Unknown parameter - " + name + " in zone: " + getId());
+			LOG.info("{}: Unknown parameter - {} in zone: {}", getClass().getSimpleName(), name, getId());
 		}
 	}
 	

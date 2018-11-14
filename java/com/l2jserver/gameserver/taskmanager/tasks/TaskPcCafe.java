@@ -52,7 +52,7 @@ public class TaskPcCafe extends Task
 		}
 		catch (Exception e)
 		{
-			_log.warning("Could not reset pc cafe daily bonus: " + e); // error
+			LOG.error("Could not reset pc cafe daily bonus!", e);
 		}
 		
 		// Update data for online players.
@@ -64,7 +64,7 @@ public class TaskPcCafe extends Task
 			player.getVariables().storeMe();
 		});
 		
-		_log.info("Daily pc cafe daily bonus has been resetted.");
+		LOG.info("Daily pc cafe daily bonus has been resetted.");
 	}
 	
 	@Override

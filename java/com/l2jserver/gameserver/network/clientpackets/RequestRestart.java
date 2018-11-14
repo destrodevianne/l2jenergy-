@@ -18,9 +18,8 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.SevenSignsFestival;
@@ -35,6 +34,7 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.CharSelectionInfo;
 import com.l2jserver.gameserver.network.serverpackets.RestartResponse;
 import com.l2jserver.gameserver.taskmanager.AttackStanceTaskManager;
+import com.l2jserver.gameserver.util.LoggingUtils;
 
 /**
  * This class ...
@@ -43,7 +43,7 @@ import com.l2jserver.gameserver.taskmanager.AttackStanceTaskManager;
 public final class RequestRestart extends L2GameClientPacket
 {
 	private static final String _C__57_REQUESTRESTART = "[C] 57 RequestRestart";
-	protected static final Logger _logAccounting = Logger.getLogger("accounting");
+	protected static final Logger LOG_ACCOUNTING = LoggerFactory.getLogger("accounting");
 	
 	@Override
 	protected void readImpl()
@@ -69,7 +69,7 @@ public final class RequestRestart extends L2GameClientPacket
 		
 		if (player.isLocked())
 		{
-			_log.warning("Player " + player.getName() + " tried to restart during class change.");
+			LOG.warn("Player {} tried to restart during class change.", player.getName());
 			sendPacket(RestartResponse.valueOf(false));
 			return;
 		}
@@ -83,11 +83,6 @@ public final class RequestRestart extends L2GameClientPacket
 		
 		if (AttackStanceTaskManager.getInstance().hasAttackStanceTask(player) && !(player.isGM() && Config.GM_RESTART_FIGHTING))
 		{
-			if (Config.DEBUG)
-			{
-				_log.fine("Player " + player.getName() + " tried to logout while fighting.");
-			}
-			
 			player.sendPacket(SystemMessageId.CANT_RESTART_WHILE_FIGHTING);
 			sendPacket(RestartResponse.valueOf(false));
 			return;
@@ -124,12 +119,13 @@ public final class RequestRestart extends L2GameClientPacket
 		
 		final L2GameClient client = getClient();
 		
-		LogRecord record = new LogRecord(Level.INFO, "Logged out");
-		record.setParameters(new Object[]
+		if (LOG_ACCOUNTING.isInfoEnabled())
 		{
-			client
-		});
-		_logAccounting.log(record);
+			LoggingUtils.logAccounting(LOG_ACCOUNTING, "Logged out", new Object[]
+			{
+				client
+			});
+		}
 		
 		// detach the client from the char so that the connection isnt closed in the deleteMe
 		player.setClient(null);

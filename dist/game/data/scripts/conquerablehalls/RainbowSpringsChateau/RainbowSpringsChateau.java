@@ -294,7 +294,7 @@ public final class RainbowSpringsChateau extends ClanHallSiegeEngine
 			}
 			else
 			{
-				_log.warn("CHSiegeManager: No Date setted for RainBow Springs Chateau Clan hall siege!. SIEGE CANCELED!");
+				LOG.warn("CHSiegeManager: No Date setted for RainBow Springs Chateau Clan hall siege!. SIEGE CANCELED!");
 			}
 		}
 	}
@@ -685,7 +685,7 @@ public final class RainbowSpringsChateau extends ClanHallSiegeEngine
 	{
 		if ((arena < 0) || (arena > 3))
 		{
-			_log.warn("RainbowSptringChateau siege: Wrong arena ID passed {}!", arena);
+			LOG.warn("RainbowSptringChateau siege: Wrong arena ID passed {}!", arena);
 			return;
 		}
 		for (L2PcInstance pc : leader.getParty().getMembers())
@@ -719,7 +719,7 @@ public final class RainbowSpringsChateau extends ClanHallSiegeEngine
 				}
 				catch (Exception e)
 				{
-					_log.warn("Unable to spawn guard for clan index {}!", i, e);
+					LOG.warn("Unable to spawn guard for clan index {}!", i, e);
 				}
 			}
 			SpawnTable.getInstance().addNewSpawn(_gourds[i], false);
@@ -840,7 +840,7 @@ public final class RainbowSpringsChateau extends ClanHallSiegeEngine
 		}
 		catch (Exception e)
 		{
-			_log.warn("{}: Unable to remove attacker clan ID {} from database!", RainbowSpringsChateau.class.getSigners(), clanId, e);
+			LOG.warn("{}: Unable to remove attacker clan ID {} from database!", RainbowSpringsChateau.class.getSigners(), clanId, e);
 		}
 	}
 	
@@ -855,7 +855,7 @@ public final class RainbowSpringsChateau extends ClanHallSiegeEngine
 		}
 		catch (Exception e)
 		{
-			_log.warn("{}: Unable add attakers for clan ID {} and count {}!", RainbowSpringsChateau.class.getSigners(), clanId, count, e);
+			LOG.warn("{}: Unable add attakers for clan ID {} and count {}!", RainbowSpringsChateau.class.getSigners(), clanId, count, e);
 		}
 	}
 	
@@ -873,7 +873,7 @@ public final class RainbowSpringsChateau extends ClanHallSiegeEngine
 		}
 		catch (Exception e)
 		{
-			_log.warn("{}: Unable load attakers!", RainbowSpringsChateau.class.getSigners(), e);
+			LOG.warn("{}: Unable load attakers!", RainbowSpringsChateau.class.getSigners(), e);
 		}
 	}
 	

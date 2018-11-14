@@ -21,17 +21,11 @@ package com.l2jserver.loginserver.network.gameserverpackets;
 import com.l2jserver.loginserver.mail.MailSystem;
 import com.l2jserver.util.network.BaseRecievePacket;
 
-/**
- * @author mrTJO
- */
 public class RequestSendMail extends BaseRecievePacket
 {
 	String _accountName, _mailId;
 	String[] _args;
 	
-	/**
-	 * @param decrypt
-	 */
 	public RequestSendMail(byte[] decrypt)
 	{
 		super(decrypt);
@@ -43,7 +37,6 @@ public class RequestSendMail extends BaseRecievePacket
 		{
 			_args[i] = readS();
 		}
-		
 		MailSystem.getInstance().sendMail(_accountName, _mailId, _args);
 	}
 }

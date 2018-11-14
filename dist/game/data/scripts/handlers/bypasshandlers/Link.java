@@ -36,13 +36,13 @@ public class Link implements IBypassHandler
 		String htmlPath = command.substring(4).trim();
 		if (htmlPath.isEmpty())
 		{
-			_log.warning("Player " + activeChar.getName() + " sent empty link html!");
+			LOG.warn("Player {} sent empty link html!", activeChar.getName());
 			return false;
 		}
 		
 		if (htmlPath.contains(".."))
 		{
-			_log.warning("Player " + activeChar.getName() + " sent invalid link html: " + htmlPath);
+			LOG.warn("Player {} sent invalid link html: {}", activeChar.getName(), htmlPath);
 			return false;
 		}
 		

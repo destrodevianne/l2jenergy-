@@ -18,13 +18,13 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.network.serverpackets.KeyPacket;
 import com.l2jserver.gameserver.network.serverpackets.L2GameServerPacket;
+import com.l2jserver.gameserver.util.LoggingUtils;
 
 /**
  * This class ...
@@ -33,7 +33,7 @@ import com.l2jserver.gameserver.network.serverpackets.L2GameServerPacket;
 public final class ProtocolVersion extends L2GameClientPacket
 {
 	private static final String _C__0E_PROTOCOLVERSION = "[C] 0E ProtocolVersion";
-	private static final Logger _logAccounting = Logger.getLogger("accounting");
+	private static final Logger LOG_ACCOUNTING = LoggerFactory.getLogger("accounting");
 	
 	private int _version;
 	
@@ -49,33 +49,25 @@ public final class ProtocolVersion extends L2GameClientPacket
 		// this packet is never encrypted
 		if (_version == -2)
 		{
-			if (Config.DEBUG)
-			{
-				_log.info("Ping received");
-			}
 			// this is just a ping attempt from the new C2 client
 			getClient().close((L2GameServerPacket) null);
 		}
 		else if (!Config.PROTOCOL_LIST.contains(_version))
 		{
-			LogRecord record = new LogRecord(Level.WARNING, "Wrong protocol");
-			record.setParameters(new Object[]
+			if (LOG_ACCOUNTING.isWarnEnabled())
 			{
-				_version,
-				getClient()
-			});
-			_logAccounting.log(record);
+				LoggingUtils.logAccounting(LOG_ACCOUNTING, "Wrong protocol", new Object[]
+				{
+					_version,
+					getClient()
+				});
+			}
 			KeyPacket pk = new KeyPacket(getClient().enableCrypt(), 0);
 			getClient().setProtocolOk(false);
 			getClient().close(pk);
 		}
 		else
 		{
-			if (Config.DEBUG)
-			{
-				_log.fine("Client Protocol Revision is ok: " + _version);
-			}
-			
 			KeyPacket pk = new KeyPacket(getClient().enableCrypt(), 1);
 			getClient().sendPacket(pk);
 			getClient().setProtocolOk(true);

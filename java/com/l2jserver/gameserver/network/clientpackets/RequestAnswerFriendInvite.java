@@ -20,7 +20,6 @@ package com.l2jserver.gameserver.network.clientpackets;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.util.logging.Level;
 
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -94,7 +93,7 @@ public final class RequestAnswerFriendInvite extends L2GameClientPacket
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "Could not add friend objectid: " + e.getMessage(), e);
+				LOG.warn("Could not add friend objectid!", e);
 			}
 		}
 		else

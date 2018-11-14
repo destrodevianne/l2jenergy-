@@ -147,7 +147,7 @@ public final class RequestPrivateStoreBuy extends L2GameClientPacket
 			sendPacket(ActionFailed.STATIC_PACKET);
 			if (result > 1)
 			{
-				_log.warning("PrivateStore buy has failed due to invalid list or request. Player: " + player.getName() + ", Private store of: " + storePlayer.getName());
+				LOG.warn("PrivateStore buy has failed due to invalid list or request. Player: {}, Private store of: {}", player.getName(), storePlayer.getName());
 			}
 			return;
 		}

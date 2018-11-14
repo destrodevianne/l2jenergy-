@@ -20,8 +20,6 @@ package com.l2jserver.loginserver.network.clientpackets;
 
 import java.net.InetAddress;
 import java.security.GeneralSecurityException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.crypto.Cipher;
 
@@ -40,16 +38,12 @@ import com.l2jserver.loginserver.network.serverpackets.ServerList;
 
 /**
  * <pre>
- * Format: x
- * 0 (a leading null)
- * x: the rsa encrypted block with the login an password.
+ * Format: x 0 (a leading null) x: the rsa encrypted block with the login an password.
  * 
  * <pre>
  */
 public class RequestAuthLogin extends L2LoginClientPacket
 {
-	private static Logger _log = Logger.getLogger(RequestAuthLogin.class.getName());
-	
 	private final byte[] _raw = new byte[128];
 	
 	private String _user;
@@ -101,7 +95,7 @@ public class RequestAuthLogin extends L2LoginClientPacket
 		}
 		catch (GeneralSecurityException e)
 		{
-			_log.log(Level.INFO, "", e);
+			LOG.info("", e);
 			return;
 		}
 		
@@ -116,7 +110,7 @@ public class RequestAuthLogin extends L2LoginClientPacket
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "", e);
+			LOG.warn("", e);
 			return;
 		}
 		

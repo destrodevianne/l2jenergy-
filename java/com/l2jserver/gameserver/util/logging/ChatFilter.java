@@ -16,18 +16,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.log.handler;
+package com.l2jserver.gameserver.util.logging;
 
-import java.io.IOException;
-import java.util.logging.FileHandler;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.filter.Filter;
+import ch.qos.logback.core.spi.FilterReply;
 
 /**
- * @author Advi
+ * @author Tatanka
  */
-public class ItemLogHandler extends FileHandler
+public class ChatFilter extends Filter<ILoggingEvent>
 {
-	public ItemLogHandler() throws IOException, SecurityException
+	@Override
+	public FilterReply decide(ILoggingEvent event)
 	{
-		super();
+		if ("chat".equals(event.getLoggerName()))
+		{
+			return FilterReply.ACCEPT;
+		}
+		
+		return FilterReply.DENY;
 	}
 }

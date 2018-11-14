@@ -60,7 +60,7 @@ public final class SummonTrap extends AbstractEffect
 		
 		if (_npcId <= 0)
 		{
-			_log.warning(SummonTrap.class.getSimpleName() + ": Invalid NPC ID:" + _npcId + " in skill ID: " + info.getSkill().getId());
+			LOG.warn("{}: Invalid NPC ID:{} in skill ID: {}", SummonTrap.class.getSimpleName(), _npcId, info.getSkill().getId());
 			return;
 		}
 		
@@ -79,7 +79,7 @@ public final class SummonTrap extends AbstractEffect
 		final L2NpcTemplate npcTemplate = NpcData.getInstance().getTemplate(_npcId);
 		if (npcTemplate == null)
 		{
-			_log.warning(SummonTrap.class.getSimpleName() + ": Spawn of the non-existing Trap ID: " + _npcId + " in skill ID:" + info.getSkill().getId());
+			LOG.warn("{}: Spawn of the non-existing Trap ID: {} in skill ID: {}", SummonTrap.class.getSimpleName(), _npcId, info.getSkill().getId());
 			return;
 		}
 		

@@ -22,12 +22,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
@@ -44,12 +44,7 @@ import com.l2jserver.gameserver.model.entity.Castle;
 public class MerchantPriceConfigTable implements InstanceListManager
 {
 	// Zoey76: TODO: Implement using IXmlReader.
-	private static Logger LOGGER = Logger.getLogger(MerchantPriceConfigTable.class.getName());
-	
-	public static MerchantPriceConfigTable getInstance()
-	{
-		return SingletonHolder._instance;
-	}
+	private static Logger LOG = LoggerFactory.getLogger(MerchantPriceConfigTable.class);
 	
 	private static final String MPCS_FILE = "MerchantPriceConfig.xml";
 	
@@ -165,11 +160,11 @@ public class MerchantPriceConfigTable implements InstanceListManager
 		try
 		{
 			loadXML();
-			LOGGER.info(getClass().getSimpleName() + ": Loaded " + _mpcs.size() + " merchant price configs.");
+			LOG.info("{}: Loaded {} merchant price configs.", getClass().getSimpleName(), _mpcs.size());
 		}
 		catch (Exception e)
 		{
-			LOGGER.log(Level.SEVERE, getClass().getSimpleName() + ": Failed loading MerchantPriceConfigTable. Reason: " + e.getMessage(), e);
+			LOG.error("{}: Failed loading MerchantPriceConfigTable.", getClass().getSimpleName(), e);
 		}
 	}
 	
@@ -283,6 +278,11 @@ public class MerchantPriceConfigTable implements InstanceListManager
 				_castle = CastleManager.getInstance().getCastleById(_castleId);
 			}
 		}
+	}
+	
+	public static MerchantPriceConfigTable getInstance()
+	{
+		return SingletonHolder._instance;
 	}
 	
 	private static class SingletonHolder

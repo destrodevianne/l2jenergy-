@@ -20,19 +20,6 @@ package com.l2jserver.loginserver.network.serverpackets;
 
 import com.l2jserver.loginserver.SessionKey;
 
-/**
- * <pre>
- * Format: dddddddd
- * f: the session key
- * d: ?
- * d: ?
- * d: ?
- * d: ?
- * d: ?
- * d: ?
- * b: 16 bytes - unknown
- * </pre>
- */
 public final class LoginOk extends L2LoginServerPacket
 {
 	private final int _loginOk1, _loginOk2;

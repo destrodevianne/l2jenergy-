@@ -24,8 +24,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
@@ -40,7 +41,7 @@ import com.l2jserver.gameserver.network.serverpackets.PledgeShowInfoUpdate;
 
 public abstract class ClanHall
 {
-	protected static final Logger _log = Logger.getLogger(ClanHall.class.getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(ClanHall.class);
 	
 	private final int _clanHallId;
 	private ArrayList<L2DoorInstance> _doors;
@@ -180,7 +181,7 @@ public abstract class ClanHall
 				}
 				catch (Exception e)
 				{
-					_log.log(Level.SEVERE, "", e);
+					LOG.error("", e);
 				}
 			}
 		}
@@ -200,7 +201,7 @@ public abstract class ClanHall
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.SEVERE, "Exception: ClanHall.updateFunctions(int type, int lvl, int lease, long rate, long time, boolean addNew): " + e.getMessage(), e);
+				LOG.error("Exception: ClanHall.updateFunctions(int type, int lvl, int lease, long rate, long time, boolean addNew)", e);
 			}
 		}
 	}
@@ -438,7 +439,7 @@ public abstract class ClanHall
 		}
 		else
 		{
-			_log.log(Level.WARNING, getClass().getSimpleName() + ": Zone is null for clan hall: " + getId() + " " + getName());
+			LOG.warn("{}: Zone is null for clan hall: {} {}", getClass().getSimpleName(), getId(), getName());
 		}
 	}
 	
@@ -459,7 +460,7 @@ public abstract class ClanHall
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.SEVERE, "Exception: ClanHall.loadFunctions(): " + e.getMessage(), e);
+			LOG.error("Exception: ClanHall.loadFunctions()", e);
 		}
 	}
 	
@@ -479,7 +480,7 @@ public abstract class ClanHall
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.SEVERE, "Exception: ClanHall.removeFunctions(int functionType): " + e.getMessage(), e);
+			LOG.error("Exception: ClanHall.removeFunctions(int functionType)", e);
 		}
 	}
 	

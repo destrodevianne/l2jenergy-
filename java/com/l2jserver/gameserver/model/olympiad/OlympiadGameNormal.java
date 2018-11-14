@@ -23,8 +23,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
@@ -40,6 +38,7 @@ import com.l2jserver.gameserver.network.serverpackets.ExOlympiadMatchResult;
 import com.l2jserver.gameserver.network.serverpackets.ExOlympiadUserInfo;
 import com.l2jserver.gameserver.network.serverpackets.L2GameServerPacket;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
+import com.l2jserver.gameserver.util.LoggingUtils;
 import com.l2jserver.util.Rnd;
 
 /**
@@ -145,7 +144,7 @@ public abstract class OlympiadGameNormal extends AbstractOlympiadGame
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "", e);
+			LOG.warn("", e);
 			return false;
 		}
 		return result;
@@ -361,8 +360,7 @@ public abstract class OlympiadGameNormal extends AbstractOlympiadGame
 						
 						if (Config.ALT_OLY_LOG_FIGHTS)
 						{
-							LogRecord record = new LogRecord(Level.INFO, _playerOne.getName() + " default");
-							record.setParameters(new Object[]
+							LoggingUtils.logOlympiad(LOG_OLYMPIAD, _playerOne.getName() + " default", new Object[]
 							{
 								_playerOne.getName(),
 								_playerTwo.getName(),
@@ -373,12 +371,11 @@ public abstract class OlympiadGameNormal extends AbstractOlympiadGame
 								points,
 								getType().toString()
 							});
-							_logResults.log(record);
 						}
 					}
 					catch (Exception e)
 					{
-						_log.log(Level.WARNING, "Exception on validateWinner(): " + e.getMessage(), e);
+						LOG.warn("Exception on validateWinner()", e);
 					}
 				}
 				if (_playerTwo.isDefaulted())
@@ -400,8 +397,7 @@ public abstract class OlympiadGameNormal extends AbstractOlympiadGame
 						
 						if (Config.ALT_OLY_LOG_FIGHTS)
 						{
-							LogRecord record = new LogRecord(Level.INFO, _playerTwo.getName() + " default");
-							record.setParameters(new Object[]
+							LoggingUtils.logOlympiad(LOG_OLYMPIAD, _playerTwo.getName() + " default", new Object[]
 							{
 								_playerOne.getName(),
 								_playerTwo.getName(),
@@ -412,12 +408,11 @@ public abstract class OlympiadGameNormal extends AbstractOlympiadGame
 								points,
 								getType().toString()
 							});
-							_logResults.log(record);
 						}
 					}
 					catch (Exception e)
 					{
-						_log.log(Level.WARNING, "Exception on validateWinner(): " + e.getMessage(), e);
+						LOG.warn("Exception on validateWinner()", e);
 					}
 				}
 				if (winside == 1)
@@ -433,7 +428,7 @@ public abstract class OlympiadGameNormal extends AbstractOlympiadGame
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "Exception on validateWinner(): " + e.getMessage(), e);
+				LOG.warn("Exception on validateWinner()", e);
 				return;
 			}
 		}
@@ -463,8 +458,7 @@ public abstract class OlympiadGameNormal extends AbstractOlympiadGame
 					
 					if (Config.ALT_OLY_LOG_FIGHTS)
 					{
-						LogRecord record = new LogRecord(Level.INFO, _playerTwo.getName() + " crash");
-						record.setParameters(new Object[]
+						LoggingUtils.logOlympiad(LOG_OLYMPIAD, _playerTwo.getName() + " crash", new Object[]
 						{
 							_playerOne.getName(),
 							_playerTwo.getName(),
@@ -475,7 +469,6 @@ public abstract class OlympiadGameNormal extends AbstractOlympiadGame
 							pointDiff,
 							getType().toString()
 						});
-						_logResults.log(record);
 					}
 					
 					// Notify to scripts
@@ -501,8 +494,7 @@ public abstract class OlympiadGameNormal extends AbstractOlympiadGame
 					
 					if (Config.ALT_OLY_LOG_FIGHTS)
 					{
-						LogRecord record = new LogRecord(Level.INFO, _playerOne.getName() + " crash");
-						record.setParameters(new Object[]
+						LoggingUtils.logOlympiad(LOG_OLYMPIAD, _playerOne.getName() + " crash", new Object[]
 						{
 							_playerOne.getName(),
 							_playerTwo.getName(),
@@ -513,7 +505,6 @@ public abstract class OlympiadGameNormal extends AbstractOlympiadGame
 							pointDiff,
 							getType().toString()
 						});
-						_logResults.log(record);
 					}
 					// Notify to scripts
 					EventDispatcher.getInstance().notifyEventAsync(new OnOlympiadMatchResult(_playerTwo, _playerOne, getType()), Olympiad.getInstance());
@@ -534,8 +525,7 @@ public abstract class OlympiadGameNormal extends AbstractOlympiadGame
 					
 					if (Config.ALT_OLY_LOG_FIGHTS)
 					{
-						LogRecord record = new LogRecord(Level.INFO, "both crash");
-						record.setParameters(new Object[]
+						LoggingUtils.logOlympiad(LOG_OLYMPIAD, "both crash", new Object[]
 						{
 							_playerOne.getName(),
 							_playerTwo.getName(),
@@ -546,7 +536,6 @@ public abstract class OlympiadGameNormal extends AbstractOlympiadGame
 							pointDiff,
 							getType().toString()
 						});
-						_logResults.log(record);
 					}
 				}
 				
@@ -574,7 +563,7 @@ public abstract class OlympiadGameNormal extends AbstractOlympiadGame
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "Exception on validateWinner(): " + e.getMessage(), e);
+				LOG.warn("Exception on validateWinner() ", e);
 				return;
 			}
 		}
@@ -706,8 +695,7 @@ public abstract class OlympiadGameNormal extends AbstractOlympiadGame
 			
 			if (Config.ALT_OLY_LOG_FIGHTS)
 			{
-				LogRecord record = new LogRecord(Level.INFO, winner);
-				record.setParameters(new Object[]
+				LoggingUtils.logOlympiad(LOG_OLYMPIAD, winner, new Object[]
 				{
 					_playerOne.getName(),
 					_playerTwo.getName(),
@@ -718,12 +706,11 @@ public abstract class OlympiadGameNormal extends AbstractOlympiadGame
 					pointDiff,
 					getType().toString()
 				});
-				_logResults.log(record);
 			}
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception on validateWinner(): " + e.getMessage(), e);
+			LOG.warn("Exception on validateWinner()", e);
 		}
 	}
 	
@@ -808,10 +795,7 @@ public abstract class OlympiadGameNormal extends AbstractOlympiadGame
 		}
 		catch (SQLException e)
 		{
-			if (_log.isLoggable(Level.SEVERE))
-			{
-				_log.log(Level.SEVERE, "SQL exception while saving olympiad fight.", e);
-			}
+			LOG.error("SQL exception while saving olympiad fight.", e);
 		}
 	}
 }

@@ -49,11 +49,11 @@ public class TaskSevenSignsUpdate extends Task
 			{
 				SevenSignsFestival.getInstance().saveFestivalData(false);
 			}
-			_log.info("SevenSigns: Data updated successfully.");
+			LOG.info("SevenSigns: Data updated successfully.");
 		}
 		catch (Exception e)
 		{
-			_log.warning(getClass().getSimpleName() + ": SevenSigns: Failed to save Seven Signs configuration: " + e.getMessage());
+			LOG.warn("{}: SevenSigns: Failed to save Seven Signs configuration!", getClass().getSimpleName(), e);
 		}
 	}
 	

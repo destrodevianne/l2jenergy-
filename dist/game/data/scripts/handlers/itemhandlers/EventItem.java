@@ -54,7 +54,7 @@ public class EventItem implements IItemHandler
 				used = useBlockCheckerItem(activeChar, item);
 				break;
 			default:
-				_log.warning("EventItemHandler: Item with id: " + itemId + " is not handled");
+				LOG.warn("EventItemHandler: Item with id: {} is not handled", itemId);
 		}
 		return used;
 	}
@@ -97,7 +97,7 @@ public class EventItem implements IItemHandler
 			}
 			return true;
 		}
-		_log.warning("Char: " + castor.getName() + "[" + castor.getObjectId() + "] has unknown block checker arena");
+		LOG.warn("Char: {}[{}] has unknown block checker arena", castor.getName(), castor.getObjectId());
 		return false;
 	}
 }

@@ -1,10 +1,8 @@
 @echo off
 COLOR 0b
 title L2jEnergy Server Console
-
 :start
-
-java -Xms1024m -Xmx1792m -cp ./../libs/*;l2jserver.jar com.l2jserver.gameserver.GameServer
+java -Dfile.encoding=UTF-8 -Xmx1792m -Dlogback.configurationFile=./config/logback.xml -cp ./../libs/*;l2jserver.jar com.l2jserver.gameserver.GameServer
 
 REM NOTE: If you have a powerful machine, you could modify/add some extra parameters for performance, like:
 REM -Xms1536m

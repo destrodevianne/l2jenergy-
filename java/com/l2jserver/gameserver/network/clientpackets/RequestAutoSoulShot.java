@@ -18,7 +18,6 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -57,11 +56,6 @@ public final class RequestAutoSoulShot extends L2GameClientPacket
 		
 		if ((activeChar.getPrivateStoreType() == PrivateStoreType.NONE) && (activeChar.getActiveRequester() == null) && !activeChar.isDead())
 		{
-			if (Config.DEBUG)
-			{
-				_log.fine("AutoSoulShot:" + _itemId);
-			}
-			
 			final L2ItemInstance item = activeChar.getInventory().getItemByItemId(_itemId);
 			if (item == null)
 			{

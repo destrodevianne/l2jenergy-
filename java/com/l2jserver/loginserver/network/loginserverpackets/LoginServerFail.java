@@ -25,10 +25,6 @@ import com.l2jserver.util.network.BaseSendablePacket;
  */
 public class LoginServerFail extends BaseSendablePacket
 {
-	
-	/**
-	 * @param reason
-	 */
 	public LoginServerFail(int reason)
 	{
 		writeC(0x01);
@@ -48,5 +44,4 @@ public class LoginServerFail extends BaseSendablePacket
 	public static final int REASON_NO_FREE_ID = 5;
 	public static final int NOT_AUTHED = 6;
 	public static final int REASON_ALREADY_LOGGED8IN = 7;
-	
 }

@@ -22,8 +22,9 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.handler.ActionHandler;
@@ -296,7 +297,7 @@ import handlers.voicedcommandhandlers.Wedding;
  */
 public class MasterHandler
 {
-	private static final Logger _log = Logger.getLogger(MasterHandler.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(MasterHandler.class);
 	
 	private static final IHandler<?, ?>[] LOAD_INSTANCES =
 	{
@@ -611,7 +612,7 @@ public class MasterHandler
 	
 	public static void main(String[] args)
 	{
-		_log.log(Level.INFO, "Loading Handlers...");
+		LOG.info("Loading Handlers...");
 		
 		Map<IHandler<?, ?>, Method> registerHandlerMethods = new HashMap<>();
 		for (IHandler<?, ?> loadInstance : LOAD_INSTANCES)
@@ -628,7 +629,7 @@ public class MasterHandler
 		
 		registerHandlerMethods.entrySet().stream().filter(e -> e.getValue() == null).forEach(e ->
 		{
-			_log.log(Level.WARNING, "Failed loading handlers of: " + e.getKey().getClass().getSimpleName() + " seems registerHandler function does not exist.");
+			LOG.warn("Failed loading handlers of: {} seems registerHandler function does not exist.", e.getKey().getClass().getSimpleName());
 		});
 		
 		for (Class<?> classes[] : HANDLERS)
@@ -653,7 +654,7 @@ public class MasterHandler
 				}
 				catch (Exception e)
 				{
-					_log.log(Level.WARNING, "Failed loading handler: " + c.getSimpleName(), e);
+					LOG.warn("Failed loading handler: {}", c.getSimpleName(), e);
 					continue;
 				}
 			}
@@ -661,9 +662,8 @@ public class MasterHandler
 		
 		for (IHandler<?, ?> loadInstance : LOAD_INSTANCES)
 		{
-			_log.log(Level.INFO, loadInstance.getClass().getSimpleName() + ": Loaded " + loadInstance.size() + " Handlers");
+			LOG.info("{}: Loaded {} Handlers", loadInstance.getClass().getSimpleName(), loadInstance.size());
 		}
-		
-		_log.log(Level.INFO, "Handlers Loaded...");
+		LOG.info("Handlers Loaded...");
 	}
 }

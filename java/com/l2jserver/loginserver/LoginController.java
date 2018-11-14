@@ -36,10 +36,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.crypto.Cipher;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
@@ -53,7 +54,7 @@ import com.l2jserver.util.crypt.ScrambledKeyPair;
 
 public class LoginController
 {
-	protected static final Logger _log = Logger.getLogger(LoginController.class.getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
 	
 	private static LoginController _instance;
 	
@@ -82,7 +83,7 @@ public class LoginController
 	
 	private LoginController() throws GeneralSecurityException
 	{
-		_log.info("Loading LoginController...");
+		LOG.info("Loading LoginController...");
 		
 		_keyPairs = new ScrambledKeyPair[10];
 		
@@ -97,7 +98,7 @@ public class LoginController
 		{
 			_keyPairs[i] = new ScrambledKeyPair(keygen.generateKeyPair());
 		}
-		_log.info("Cached 10 KeyPairs for RSA communication");
+		LOG.info("Cached 10 KeyPairs for RSA communication");
 		
 		testCipher((RSAPrivateKey) _keyPairs[0]._pair.getPrivate());
 		
@@ -133,7 +134,7 @@ public class LoginController
 				_blowfishKeys[i][j] = (byte) (Rnd.nextInt(255) + 1);
 			}
 		}
-		_log.info("Stored " + _blowfishKeys.length + " keys for Blowfish communication");
+		LOG.info("Stored {} keys for Blowfish communication", _blowfishKeys.length);
 	}
 	
 	/**
@@ -198,7 +199,7 @@ public class LoginController
 			addBanForAddress(addr, Config.LOGIN_BLOCK_AFTER_BAN * 1000);
 			// we need to clear the failed login attempts here, so after the ip ban is over the client has another 5 attempts
 			clearFailedLoginAttemps(addr);
-			_log.warning("Added banned address " + addr.getHostAddress() + "! Too many login attemps.");
+			LOG.warn("Added banned address {}! Too many login attemps.", addr.getHostAddress());
 		}
 	}
 	
@@ -227,11 +228,7 @@ public class LoginController
 				{
 					if (rset.next())
 					{
-						if (Config.DEBUG)
-						{
-							_log.fine("Account '" + login + "' exists.");
-						}
-						
+						LOG.debug("Account '{}' exists.", login);
 						AccountInfo info = new AccountInfo(rset.getString("login"), rset.getString("password"), rset.getInt("accessLevel"), rset.getInt("lastServer"));
 						if (!info.checkPassHash(hashBase64))
 						{
@@ -265,16 +262,16 @@ public class LoginController
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "Exception while auto creating account for '" + login + "'!", e);
+				LOG.warn("Exception while auto creating account for '{}'!", login, e);
 				return null;
 			}
 			
-			_log.info("Auto created account '" + login + "'.");
+			LOG.info("Auto created account '{}'.", login);
 			return retriveAccountInfo(addr, login, password, false);
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception while retriving account info for '" + login + "'!", e);
+			LOG.warn("Exception while retriving account info for '{}'!", login, e);
 			return null;
 		}
 	}
@@ -348,7 +345,7 @@ public class LoginController
 			if ((bi > 0) && (bi < System.currentTimeMillis()))
 			{
 				_bannedIps.remove(address);
-				_log.info("Removed expired ip address ban " + address.getHostAddress() + ".");
+				LOG.info("Removed expired ip address ban {}.", address.getHostAddress());
 				return false;
 			}
 			return true;
@@ -462,7 +459,7 @@ public class LoginController
 				}
 				catch (Exception e)
 				{
-					_log.log(Level.WARNING, "Could not set lastServer: " + e.getMessage(), e);
+					LOG.warn("Could not set lastServer!", e);
 				}
 			}
 			return loginOk;
@@ -481,7 +478,7 @@ public class LoginController
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Could not set accessLevel: " + e.getMessage(), e);
+			LOG.warn("Could not set accessLevel!", e);
 		}
 	}
 	
@@ -500,7 +497,7 @@ public class LoginController
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Could not set last tracert: " + e.getMessage(), e);
+			LOG.warn("Could not set last tracert!", e);
 		}
 	}
 	
@@ -580,13 +577,13 @@ public class LoginController
 			{
 				if (!ipWhiteList.isEmpty() && !ipWhiteList.contains(address))
 				{
-					_log.warning("Account checkin attemp from address(" + address.getHostAddress() + ") not present on whitelist for account '" + info.getLogin() + "'.");
+					LOG.warn("Account checkin attemp from address({}) not present on whitelist for account '{}'.", address.getHostAddress(), info.getLogin());
 					return false;
 				}
 				
 				if (!ipBlackList.isEmpty() && ipBlackList.contains(address))
 				{
-					_log.warning("Account checkin attemp from address(" + address.getHostAddress() + ") on blacklist for account '" + info.getLogin() + "'.");
+					LOG.warn("Account checkin attemp from address({}) on blacklist for account '{}'.", address.getHostAddress(), info.getLogin());
 					return false;
 				}
 			}
@@ -606,7 +603,7 @@ public class LoginController
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Could not finish login process!", e);
+			LOG.warn("Could not finish login process!", e);
 			return false;
 		}
 	}

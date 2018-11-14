@@ -20,7 +20,9 @@ package com.l2jserver.gameserver.model.stats;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.SevenSigns;
@@ -90,7 +92,7 @@ import com.l2jserver.util.Rnd;
  */
 public final class Formulas
 {
-	private static final Logger _log = Logger.getLogger(Formulas.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(Formulas.class);
 	
 	/** Regeneration Task period. */
 	private static final int HP_REGENERATE_PERIOD = 3000; // 3 secs
@@ -528,7 +530,7 @@ public final class Formulas
 		
 		if (Config.DEBUG)
 		{
-			_log.info("Distance: " + distToCenter + ", RegenMulti: " + ((distToCenter * 2.5) / 50));
+			LOG.debug("Distance: {}, RegenMulti: {}", distToCenter, ((distToCenter * 2.5) / 50));
 		}
 		
 		return 1.0 - (distToCenter * 0.0005); // Maximum Decreased Regen of ~ -65%;

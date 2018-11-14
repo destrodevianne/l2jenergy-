@@ -20,7 +20,6 @@ package handlers.bypasshandlers;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.logging.Level;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.SevenSigns;
@@ -345,7 +344,7 @@ public class Festival implements IBypassHandler
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception in " + getClass().getSimpleName(), e);
+			LOG.warn("Exception in {}", getClass().getSimpleName(), e);
 		}
 		return false;
 	}

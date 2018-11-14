@@ -24,32 +24,65 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import com.l2jserver.Config;
+import com.l2jserver.loginserver.model.data.MailContent;
+import com.l2jserver.util.data.xml.IXmlReader;
 
 /**
  * @author mrTJO
  */
-public class MailSystem
+public class MailSystem implements IXmlReader
 {
-	private static final Logger _log = Logger.getLogger(MailSystem.class.getName());
 	private final Map<String, MailContent> _mailData = new HashMap<>();
-	
-	public static MailSystem getInstance()
-	{
-		return SingletonHolder._instance;
-	}
 	
 	public MailSystem()
 	{
-		loadMails();
+		load();
+	}
+	
+	@Override
+	public void load()
+	{
+		_mailData.clear();
+		parseDatapackFile("data/mail/MailList.xml");
+		LOG.info("{}: eMail System Loaded.", getClass().getSimpleName());
+	}
+	
+	@Override
+	public void parseDocument(Document doc)
+	{
+		for (Node d = doc.getFirstChild(); d != null; d = d.getNextSibling())
+		{
+			if (d.getNodeName().equals("mail"))
+			{
+				String mailId = d.getAttributes().getNamedItem("id").getNodeValue();
+				String subject = d.getAttributes().getNamedItem("subject").getNodeValue();
+				String maFile = d.getAttributes().getNamedItem("file").getNodeValue();
+				
+				try (FileInputStream fis = new FileInputStream(new File(Config.DATAPACK_ROOT, "data/mail/" + maFile));
+					BufferedInputStream bis = new BufferedInputStream(fis))
+				{
+					int bytes = bis.available();
+					byte[] raw = new byte[bytes];
+					
+					bis.read(raw);
+					String html = new String(raw, "UTF-8");
+					html = html.replaceAll(Config.EOL, "\n");
+					html = html.replace("%servermail%", Config.EMAIL_SERVERINFO_ADDRESS);
+					html = html.replace("%servername%", Config.EMAIL_SERVERINFO_NAME);
+					
+					_mailData.put(mailId, new MailContent(subject, html));
+				}
+				catch (IOException e)
+				{
+					LOG.warn("IOException while reading {}", maFile);
+				}
+			}
+		}
 	}
 	
 	public void sendMail(String account, String messageId, String... args)
@@ -58,93 +91,14 @@ public class MailSystem
 		mail.run();
 	}
 	
-	private void loadMails()
-	{
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		factory.setValidating(false);
-		factory.setIgnoringComments(true);
-		File file = new File(Config.DATAPACK_ROOT, "data/mail/MailList.xml");
-		Document doc = null;
-		if (file.exists())
-		{
-			try
-			{
-				doc = factory.newDocumentBuilder().parse(file);
-			}
-			catch (Exception e)
-			{
-				_log.log(Level.WARNING, "Could not parse MailList.xml file: " + e.getMessage(), e);
-				return;
-			}
-			
-			Node n = doc.getFirstChild();
-			File mailFile;
-			for (Node d = n.getFirstChild(); d != null; d = d.getNextSibling())
-			{
-				if (d.getNodeName().equals("mail"))
-				{
-					String mailId = d.getAttributes().getNamedItem("id").getNodeValue();
-					String subject = d.getAttributes().getNamedItem("subject").getNodeValue();
-					String maFile = d.getAttributes().getNamedItem("file").getNodeValue();
-					
-					mailFile = new File(Config.DATAPACK_ROOT, "data/mail/" + maFile);
-					try (FileInputStream fis = new FileInputStream(mailFile);
-						BufferedInputStream bis = new BufferedInputStream(fis))
-					{
-						int bytes = bis.available();
-						byte[] raw = new byte[bytes];
-						
-						bis.read(raw);
-						String html = new String(raw, "UTF-8");
-						html = html.replaceAll(Config.EOL, "\n");
-						html = html.replace("%servermail%", Config.EMAIL_SERVERINFO_ADDRESS);
-						html = html.replace("%servername%", Config.EMAIL_SERVERINFO_NAME);
-						
-						_mailData.put(mailId, new MailContent(subject, html));
-					}
-					catch (IOException e)
-					{
-						_log.warning("IOException while reading " + maFile);
-					}
-				}
-			}
-			_log.info("eMail System Loaded");
-		}
-		else
-		{
-			_log.warning("Cannot load eMail System - Missing file MailList.xml");
-		}
-	}
-	
-	public class MailContent
-	{
-		private final String _subject;
-		private final String _text;
-		
-		/**
-		 * @param subject
-		 * @param text
-		 */
-		public MailContent(String subject, String text)
-		{
-			_subject = subject;
-			_text = text;
-		}
-		
-		public String getSubject()
-		{
-			return _subject;
-		}
-		
-		public String getText()
-		{
-			return _text;
-		}
-	}
-	
 	public MailContent getMailContent(String mailId)
 	{
 		return _mailData.get(mailId);
+	}
+	
+	public static MailSystem getInstance()
+	{
+		return SingletonHolder._instance;
 	}
 	
 	private static class SingletonHolder

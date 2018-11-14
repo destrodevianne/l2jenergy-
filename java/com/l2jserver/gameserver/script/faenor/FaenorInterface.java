@@ -19,7 +19,9 @@
 package com.l2jserver.gameserver.script.faenor;
 
 import java.util.List;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.data.sql.impl.AnnouncementsTable;
 import com.l2jserver.gameserver.datatables.EventDroplist;
@@ -32,12 +34,7 @@ import com.l2jserver.gameserver.script.EngineInterface;
  */
 public class FaenorInterface implements EngineInterface
 {
-	protected static final Logger _log = Logger.getLogger(FaenorInterface.class.getName());
-	
-	public static FaenorInterface getInstance()
-	{
-		return SingletonHolder._instance;
-	}
+	protected static final Logger LOG = LoggerFactory.getLogger(FaenorInterface.class);
 	
 	public List<?> getAllPlayers()
 	{
@@ -54,6 +51,11 @@ public class FaenorInterface implements EngineInterface
 	public void onPlayerLogin(String message, DateRange validDateRange)
 	{
 		AnnouncementsTable.getInstance().addAnnouncement(new EventAnnouncement(validDateRange, message));
+	}
+	
+	public static FaenorInterface getInstance()
+	{
+		return SingletonHolder._instance;
 	}
 	
 	private static class SingletonHolder

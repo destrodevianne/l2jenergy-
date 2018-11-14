@@ -30,8 +30,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.cache.HtmCache;
@@ -56,7 +57,8 @@ import com.l2jserver.gameserver.network.serverpackets.UserInfo;
  */
 public class L2Event
 {
-	protected static final Logger _log = Logger.getLogger(L2Event.class.getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(L2Event.class);
+	
 	public static EventState eventState = EventState.OFF;
 	public static String _eventName = "";
 	public static String _eventCreator = "";
@@ -156,7 +158,7 @@ public class L2Event
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "Exception on showEventHtml(): " + e.getMessage(), e);
+				LOG.warn("Exception on showEventHtml()", e);
 			}
 		}
 	}
@@ -192,7 +194,7 @@ public class L2Event
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception on spawn(): " + e.getMessage(), e);
+			LOG.warn("Exception on spawn()", e);
 		}
 		
 	}
@@ -316,7 +318,7 @@ public class L2Event
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Error at unregisterAndResetPlayer in the event:" + e.getMessage(), e);
+			LOG.warn("Error at unregisterAndResetPlayer in the event", e);
 		}
 	}
 	
@@ -406,7 +408,7 @@ public class L2Event
 		}
 		catch (Exception e)
 		{
-			_log.warning("L2Event: " + e.getMessage());
+			LOG.warn("", e);
 			return "Cannot start event participation, an error has occured.";
 		}
 		
@@ -477,7 +479,7 @@ public class L2Event
 		}
 		catch (Exception e)
 		{
-			_log.warning("L2Event: " + e.getMessage());
+			LOG.warn("", e);
 			return "Cannot start event, an error has occured.";
 		}
 		

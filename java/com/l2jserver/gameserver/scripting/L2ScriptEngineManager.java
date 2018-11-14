@@ -29,8 +29,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.script.Compilable;
 import javax.script.CompiledScript;
@@ -41,6 +39,9 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import javax.script.SimpleScriptContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.l2jserver.Config;
 
 /**
@@ -49,7 +50,7 @@ import com.l2jserver.Config;
  */
 public final class L2ScriptEngineManager
 {
-	private static final Logger _log = Logger.getLogger(L2ScriptEngineManager.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(L2ScriptEngineManager.class);
 	
 	public static final File SCRIPT_FOLDER = new File(Config.DATAPACK_ROOT.getAbsolutePath(), "data/scripts");
 	
@@ -115,7 +116,7 @@ public final class L2ScriptEngineManager
 				
 				if (reg)
 				{
-					_log.info("Script Engine: " + factory.getEngineName() + " " + factory.getEngineVersion() + " - Language: " + factory.getLanguageName() + " - Language Version: " + factory.getLanguageVersion());
+					LOG.info("Script Engine: {} {} - Language: {} - Language Version: {}", factory.getEngineName(), factory.getEngineVersion(), factory.getLanguageName(), factory.getLanguageVersion());
 				}
 				
 				for (String ext : factory.getExtensions())
@@ -128,7 +129,7 @@ public final class L2ScriptEngineManager
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "Failed initializing factory: " + e.getMessage(), e);
+				LOG.warn("Failed initializing factory!", e);
 			}
 		}
 	}
@@ -152,11 +153,11 @@ public final class L2ScriptEngineManager
 				try
 				{
 					executeScript(new File(SCRIPT_FOLDER, "handlers/MasterHandler.java"));
-					_log.info("Handlers loaded, all other scripts skipped");
+					LOG.info("Handlers loaded, all other scripts skipped");
 				}
 				catch (ScriptException se)
 				{
-					_log.log(Level.WARNING, "", se);
+					LOG.warn("", se);
 				}
 			}
 			return;
@@ -214,7 +215,7 @@ public final class L2ScriptEngineManager
 						}
 						else
 						{
-							_log.warning("Failed loading: (" + file.getCanonicalPath() + ") @ " + list.getName() + ":" + lnr.getLineNumber() + " - Reason: doesnt exists or is not a file.");
+							LOG.warn("Failed loading: ({}) @ {}:{} - Reason: doesnt exists or is not a file.", file.getCanonicalPath(), list.getName(), lnr.getLineNumber());
 						}
 					}
 				}
@@ -252,7 +253,7 @@ public final class L2ScriptEngineManager
 				{
 					if (VERBOSE_LOADING)
 					{
-						_log.info("Entering folder: " + file.getName());
+						LOG.info("Entering folder: {}", file.getName());
 					}
 					executeAllScriptsInDirectory(file, recurseDown, maxDepth, currentDepth + 1);
 				}
@@ -322,7 +323,7 @@ public final class L2ScriptEngineManager
 	{
 		if (VERBOSE_LOADING)
 		{
-			_log.info("Loading Script: " + file.getAbsolutePath());
+			LOG.info("Loading Script: {}", file.getAbsolutePath());
 		}
 		
 		if (PURGE_ERROR_LOG)
@@ -388,7 +389,7 @@ public final class L2ScriptEngineManager
 		}
 		catch (IOException e)
 		{
-			_log.log(Level.WARNING, "Error executing script!", e);
+			LOG.warn("Error executing script!", e);
 		}
 	}
 	
@@ -462,16 +463,16 @@ public final class L2ScriptEngineManager
 				String errorHeader = "Error on: " + file.getCanonicalPath() + Config.EOL + "Line: " + e.getLineNumber() + " - Column: " + e.getColumnNumber() + Config.EOL + Config.EOL;
 				fos.write(errorHeader.getBytes());
 				fos.write(e.getMessage().getBytes());
-				_log.warning("Failed executing script: " + script.getAbsolutePath() + ". See " + file.getName() + " for details.");
+				LOG.warn("Failed executing script: {}. See {} for details.", script.getAbsolutePath(), file.getName());
 			}
 			catch (IOException ioe)
 			{
-				_log.log(Level.WARNING, "Failed executing script: " + script.getAbsolutePath() + Config.EOL + e.getMessage() + "Additionally failed when trying to write an error report on script directory. Reason: " + ioe.getMessage(), ioe);
+				LOG.warn("Failed executing script: {} {} Additionally failed when trying to write an error report on script directory. Reason: {}", script.getAbsolutePath(), Config.EOL, ioe.getMessage(), ioe);
 			}
 		}
 		else
 		{
-			_log.log(Level.WARNING, "Failed executing script: " + script.getAbsolutePath() + Config.EOL + e.getMessage() + "Additionally failed when trying to write an error report on script directory.", e);
+			LOG.warn("Failed executing script: {} {} Additionally failed when trying to write an error report on script directory.", script.getAbsolutePath(), Config.EOL, e);
 		}
 	}
 	

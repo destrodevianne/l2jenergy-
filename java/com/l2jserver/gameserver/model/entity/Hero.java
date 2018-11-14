@@ -32,7 +32,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
@@ -65,7 +67,7 @@ import com.l2jserver.util.StringUtil;
  */
 public class Hero
 {
-	private static final Logger _log = Logger.getLogger(Hero.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(Hero.class);
 	
 	private static final String GET_HEROES = "SELECT heroes.charId, characters.char_name, heroes.class_id, heroes.count, heroes.played, heroes.claimed FROM heroes, characters WHERE characters.charId = heroes.charId AND heroes.played = 1";
 	private static final String GET_ALL_HEROES = "SELECT heroes.charId, characters.char_name, heroes.class_id, heroes.count, heroes.played, heroes.claimed FROM heroes, characters WHERE characters.charId = heroes.charId";
@@ -154,11 +156,10 @@ public class Hero
 		}
 		catch (SQLException e)
 		{
-			_log.warning("Hero System: Couldnt load Heroes: " + e.getMessage());
+			LOG.warn("Hero System: Couldnt load Heroes!", e);
 		}
-		
-		_log.info("Hero System: Loaded " + HEROES.size() + " Heroes.");
-		_log.info("Hero System: Loaded " + COMPLETE_HEROS.size() + " all time Heroes.");
+		LOG.info("Hero System: Loaded {} Heroes.", HEROES.size());
+		LOG.info("Hero System: Loaded {} all time Heroes.", COMPLETE_HEROS.size());
 	}
 	
 	private void processHeros(PreparedStatement ps, int charId, StatsSet hero) throws SQLException
@@ -223,7 +224,7 @@ public class Hero
 		}
 		catch (SQLException e)
 		{
-			_log.warning("Hero System: Couldnt load Hero Message for CharId: " + charId + ": " + e.getMessage());
+			LOG.warn("Hero System: Couldnt load Hero Message for CharId: {}", charId, e);
 		}
 	}
 	
@@ -274,11 +275,11 @@ public class Hero
 			}
 			HERO_DIARY.put(charId, diary);
 			
-			_log.info("Hero System: Loaded " + diaryentries + " diary entries for Hero: " + CharNameTable.getInstance().getNameById(charId));
+			LOG.info("Hero System: Loaded {} diary entries for Hero: {}", diaryentries, CharNameTable.getInstance().getNameById(charId));
 		}
 		catch (SQLException e)
 		{
-			_log.warning("Hero System: Couldnt load Hero Diary for CharId: " + charId + ": " + e.getMessage());
+			LOG.warn("Hero System: Couldnt load Hero Diary for CharId: {}", charId, e);
 		}
 	}
 	
@@ -407,11 +408,11 @@ public class Hero
 			HERO_COUNTS.put(charId, heroCountData);
 			HERO_FIGHTS.put(charId, fights);
 			
-			_log.info("Hero System: Loaded " + numberoffights + " fights for Hero: " + CharNameTable.getInstance().getNameById(charId));
+			LOG.info("Hero System: Loaded {} fights for Hero: ", numberoffights, CharNameTable.getInstance().getNameById(charId));
 		}
 		catch (SQLException e)
 		{
-			_log.warning("Hero System: Couldnt load Hero fights history for CharId: " + charId + ": " + e);
+			LOG.warn("Hero System: Couldnt load Hero fights history for CharId: {}", charId, e);
 		}
 	}
 	
@@ -567,7 +568,8 @@ public class Hero
 						{
 							StringUtil.append(fList, "<table width=270>");
 						}
-						StringUtil.append(fList, "<tr><td width=220><font color=\"LEVEL\">" + fight.getString("start") + "</font>&nbsp;&nbsp;" + fight.getString("result") + "</td><td width=50 align=right>" + (fight.getInt("classed") > 0 ? "<font color=\"FFFF99\">cls</font>" : "<font color=\"999999\">non-cls<font>") + "</td></tr>");
+						StringUtil.append(fList, "<tr><td width=220><font color=\"LEVEL\">" + fight.getString("start") + "</font>&nbsp;&nbsp;" + fight.getString("result") + "</td><td width=50 align=right>"
+							+ (fight.getInt("classed") > 0 ? "<font color=\"FFFF99\">cls</font>" : "<font color=\"999999\">non-cls<font>") + "</td></tr>");
 						StringUtil.append(fList, "<tr><td width=220>vs " + fight.getString("oponent") + " (" + fight.getString("oponentclass") + ")</td><td width=50 align=right>(" + fight.getString("time") + ")</td></tr>");
 						StringUtil.append(fList, "<tr><td colspan=2>&nbsp;</td></tr></table>");
 						StringUtil.append(fList, "</td></tr>");
@@ -779,7 +781,7 @@ public class Hero
 		}
 		catch (SQLException e)
 		{
-			_log.warning("Hero System: Couldnt update Heroes: " + e.getMessage());
+			LOG.warn("Hero System: Couldnt update Heroes", e);
 		}
 	}
 	
@@ -837,7 +839,7 @@ public class Hero
 		}
 		catch (SQLException e)
 		{
-			_log.severe("SQL exception while saving DiaryData: " + e.getMessage());
+			LOG.error("SQL exception while saving DiaryData", e);
 		}
 	}
 	
@@ -871,7 +873,7 @@ public class Hero
 		}
 		catch (SQLException e)
 		{
-			_log.severe("SQL exception while saving HeroMessage:" + e.getMessage());
+			LOG.warn("SQL exception while saving HeroMessage", e);
 		}
 	}
 	
@@ -884,7 +886,7 @@ public class Hero
 		}
 		catch (SQLException e)
 		{
-			_log.warning("Heroes: " + e.getMessage());
+			LOG.warn("", e);
 		}
 	}
 	

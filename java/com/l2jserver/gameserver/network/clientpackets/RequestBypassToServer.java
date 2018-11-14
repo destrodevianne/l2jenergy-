@@ -19,7 +19,6 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import java.util.StringTokenizer;
-import java.util.logging.Level;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.ai.CtrlIntention;
@@ -89,7 +88,7 @@ public final class RequestBypassToServer extends L2GameClientPacket
 		
 		if (_command.isEmpty())
 		{
-			_log.warning("Player " + activeChar.getName() + " sent empty bypass!");
+			LOG.warn("Player {} sent empty bypass!", activeChar.getName());
 			activeChar.logout();
 			return;
 		}
@@ -110,7 +109,7 @@ public final class RequestBypassToServer extends L2GameClientPacket
 			bypassOriginId = activeChar.validateHtmlAction(_command);
 			if (bypassOriginId == -1)
 			{
-				_log.warning("Player " + activeChar.getName() + " sent non cached bypass: '" + _command + "'");
+				LOG.warn("Player {} sent non cached bypass: '{}'", activeChar.getName(), _command);
 				return;
 			}
 			
@@ -140,14 +139,14 @@ public final class RequestBypassToServer extends L2GameClientPacket
 					{
 						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "gm_command_not_exist").replace("%s%", command.substring(6) + ""));
 					}
-					_log.warning(activeChar + " requested not registered admin command '" + command + "'");
+					LOG.warn("{} requested not registered admin command '{}'", activeChar, command);
 					return;
 				}
 				
 				if (!AdminData.getInstance().hasAccess(command, activeChar.getAccessLevel()))
 				{
 					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "gm_command_not_access"));
-					_log.warning("Character " + activeChar.getName() + " tried to use admin command " + command + ", without proper access level!");
+					LOG.warn("Character {} tried to use admin command {}, without proper access level!", activeChar.getName(), command);
 					return;
 				}
 				
@@ -225,7 +224,7 @@ public final class RequestBypassToServer extends L2GameClientPacket
 				}
 				catch (NumberFormatException nfe)
 				{
-					_log.log(Level.WARNING, "NFE for command [" + _command + "]", nfe);
+					LOG.warn("NFE for command [{}]", _command, nfe);
 				}
 			}
 			else if (_command.startsWith("_match"))
@@ -297,13 +296,13 @@ public final class RequestBypassToServer extends L2GameClientPacket
 				}
 				else
 				{
-					_log.warning(getClient() + " sent not handled RequestBypassToServer: [" + _command + "]");
+					LOG.warn("{} sent not handled RequestBypassToServer: [{}]", getClient(), _command);
 				}
 			}
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception processing bypass from player " + activeChar.getName() + ": " + _command, e);
+			LOG.warn("Exception processing bypass from player {}: {}", activeChar.getName(), _command, e);
 			
 			if (activeChar.isGM())
 			{

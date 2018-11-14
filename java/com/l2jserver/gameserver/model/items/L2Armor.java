@@ -24,7 +24,6 @@ import com.l2jserver.gameserver.model.items.type.ArmorType;
 import com.l2jserver.gameserver.model.items.type.ItemType1;
 import com.l2jserver.gameserver.model.items.type.ItemType2;
 import com.l2jserver.gameserver.model.skills.Skill;
-import com.l2jserver.util.StringUtil;
 
 /**
  * This class is dedicated to the management of armors.
@@ -79,7 +78,7 @@ public final class L2Armor extends L2Item
 				catch (Exception nfe)
 				{
 					// Incorrect syntax, don't add new skill
-					_log.info(StringUtil.concat("> Couldnt parse ", skill, " in armor enchant skills! item ", toString()));
+					LOG.info("> Couldnt parse {} in armor enchant skills! item {}", skill, toString());
 				}
 				if ((id > 0) && (level > 0))
 				{

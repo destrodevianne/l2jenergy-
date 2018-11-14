@@ -19,7 +19,6 @@
 package handlers.bypasshandlers;
 
 import java.util.List;
-import java.util.logging.Level;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
@@ -121,7 +120,7 @@ public class SkillList implements IBypassHandler
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "Exception in " + getClass().getSimpleName(), e);
+				LOG.warn("Exception in {}", getClass().getSimpleName(), e);
 			}
 		}
 		else

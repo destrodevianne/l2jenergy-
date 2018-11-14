@@ -74,7 +74,7 @@ public final class RequestHennaRemove extends L2GameClientPacket
 		// TODO: Test.
 		if (!found)
 		{
-			_log.warning(getClass().getSimpleName() + ": Player " + activeChar + " requested Henna Draw remove without any henna.");
+			LOG.warn("{}: Player {} requested Henna Draw remove without any henna.", getClass().getSimpleName(), activeChar);
 			sendActionFailed();
 		}
 	}

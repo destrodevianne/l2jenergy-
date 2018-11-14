@@ -52,7 +52,7 @@ public class ExShowCastleInfo extends L2GameServerPacket
 				}
 				else
 				{
-					_log.warning("Castle owner with no name! Castle: " + castle.getName() + " has an OwnerId = " + castle.getOwnerId() + " who does not have a  name!");
+					LOG.warn("Castle owner with no name! Castle: {} has an OwnerId = {} who does not have a  name!", castle.getName(), castle.getOwnerId());
 					writeS("");
 				}
 			}

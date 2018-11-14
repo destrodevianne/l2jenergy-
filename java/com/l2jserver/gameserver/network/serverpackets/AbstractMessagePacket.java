@@ -20,7 +20,6 @@ package com.l2jserver.gameserver.network.serverpackets;
 
 import java.io.PrintStream;
 import java.util.Arrays;
-import java.util.logging.Level;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
@@ -145,7 +144,7 @@ public abstract class AbstractMessagePacket<T extends AbstractMessagePacket<?>> 
 		{
 			_params = Arrays.copyOf(_params, _paramIndex + 1);
 			_smId.setParamCount(_paramIndex + 1);
-			_log.log(Level.INFO, "Wrong parameter count '" + (_paramIndex + 1) + "' for SystemMessageId: " + _smId);
+			LOG.info("Wrong parameter count '{}' for SystemMessageId: {}", (_paramIndex + 1), _smId);
 		}
 		
 		_params[_paramIndex++] = param;

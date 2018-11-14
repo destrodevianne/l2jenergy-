@@ -43,10 +43,10 @@ public class ExGetOnAirShip extends L2GameClientPacket
 	@Override
 	protected void runImpl()
 	{
-		_log.info("[T1:ExGetOnAirShip] x: " + _x);
-		_log.info("[T1:ExGetOnAirShip] y: " + _y);
-		_log.info("[T1:ExGetOnAirShip] z: " + _z);
-		_log.info("[T1:ExGetOnAirShip] ship ID: " + _shipId);
+		LOG.info("[T1:ExGetOnAirShip] x: {}", _x);
+		LOG.info("[T1:ExGetOnAirShip] y: {}", _y);
+		LOG.info("[T1:ExGetOnAirShip] z: {}", _z);
+		LOG.info("[T1:ExGetOnAirShip] ship ID: {}", _shipId);
 	}
 	
 	@Override

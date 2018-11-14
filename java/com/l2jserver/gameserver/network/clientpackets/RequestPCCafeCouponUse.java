@@ -36,7 +36,7 @@ public final class RequestPCCafeCouponUse extends L2GameClientPacket
 	@Override
 	protected void runImpl()
 	{
-		_log.info("C5: RequestPCCafeCouponUse: S: " + _str);
+		LOG.info("C5: RequestPCCafeCouponUse: S: {}", _str);
 	}
 	
 	@Override

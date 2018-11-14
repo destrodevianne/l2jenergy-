@@ -55,7 +55,7 @@ public class TaskBirthday extends Task
 		// TODO(Zoey76): Fix first run.
 		final int birthdayGiftCount = giveBirthdayGifts(task.getLastActivation());
 		
-		_log.info("BirthdayManager: " + birthdayGiftCount + " gifts sent.");
+		LOG.info("BirthdayManager: {} gifts sent.", birthdayGiftCount);
 	}
 	
 	private int giveBirthdayGifts(long lastActivation)
@@ -82,7 +82,7 @@ public class TaskBirthday extends Task
 		}
 		catch (SQLException e)
 		{
-			_log.warning("Error checking birthdays: " + e.getMessage());
+			LOG.warn("Error checking birthdays!", e);
 		}
 		return birthdayGiftCount;
 	}

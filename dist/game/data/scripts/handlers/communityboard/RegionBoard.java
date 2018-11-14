@@ -90,10 +90,9 @@ public class RegionBoard implements IWriteBoardHandler
 			final String id = command.replace("_bbsloc;", "");
 			if (!Util.isDigit(id))
 			{
-				LOG.warning(RegionBoard.class.getSimpleName() + ": Player " + activeChar + " sent and invalid region bypass " + command + "!");
+				LOG.warn("{}: Player {} sent and invalid region bypass {}!", RegionBoard.class.getSimpleName(), activeChar, command);
 				return false;
 			}
-			
 			// TODO: Implement.
 		}
 		return true;

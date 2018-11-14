@@ -23,7 +23,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.handler.EffectHandler;
@@ -45,7 +47,7 @@ import com.l2jserver.gameserver.model.stats.functions.FuncTemplate;
  */
 public abstract class AbstractEffect
 {
-	protected static final Logger _log = Logger.getLogger(AbstractEffect.class.getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(AbstractEffect.class);
 	
 	// Conditions
 	/** Attach condition. */
@@ -86,7 +88,7 @@ public abstract class AbstractEffect
 		final Class<? extends AbstractEffect> handler = EffectHandler.getInstance().getHandler(name);
 		if (handler == null)
 		{
-			_log.warning(AbstractEffect.class.getSimpleName() + ": Requested unexistent effect handler: " + name + " in skill[" + set.getInt("id") + "]");
+			LOG.warn("{}: Requested unexistent effect handler: {} in skill[{}]", AbstractEffect.class.getSimpleName(), name, set.getInt("id"));
 			return null;
 		}
 		
@@ -97,7 +99,7 @@ public abstract class AbstractEffect
 		}
 		catch (NoSuchMethodException | SecurityException e)
 		{
-			_log.warning(AbstractEffect.class.getSimpleName() + ": Requested unexistent constructor for effect handler: " + name + " in skill[" + set.getInt("id") + "] : " + e.getMessage());
+			LOG.warn("{}: Requested unexistent constructor for effect handler: {} in skill[{}] : ", AbstractEffect.class.getSimpleName(), name, set.getInt("id"), e);
 			return null;
 		}
 		
@@ -107,7 +109,7 @@ public abstract class AbstractEffect
 		}
 		catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
 		{
-			_log.warning(AbstractEffect.class.getSimpleName() + ": Unable to initialize effect handler: " + name + " in skill[" + set.getInt("id") + "] : " + e.getMessage());
+			LOG.warn("{}: Unable to initialize effect handler: {} in skill[{}] : ", AbstractEffect.class.getSimpleName(), name, set.getInt("id"), e);
 		}
 		return null;
 	}

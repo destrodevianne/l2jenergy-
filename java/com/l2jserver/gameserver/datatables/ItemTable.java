@@ -26,9 +26,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ScheduledFuture;
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
@@ -50,14 +50,15 @@ import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.items.L2Weapon;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.util.GMAudit;
+import com.l2jserver.gameserver.util.LoggingUtils;
 
 /**
  * This class serves as a container for all item templates in the game.
  */
 public class ItemTable
 {
-	private static Logger LOGGER = Logger.getLogger(ItemTable.class.getName());
-	private static Logger LOGGER_ITEMS = Logger.getLogger("item");
+	private static final Logger LOG = LoggerFactory.getLogger(ItemTable.class);
+	private static final Logger LOG_ITEMS = LoggerFactory.getLogger("item");
 	
 	public static final Map<String, Integer> SLOTS = new HashMap<>();
 	
@@ -106,14 +107,6 @@ public class ItemTable
 		SLOTS.put("waist", L2Item.SLOT_BELT);
 	}
 	
-	/**
-	 * @return a reference to this ItemTable object
-	 */
-	public static ItemTable getInstance()
-	{
-		return SingletonHolder._instance;
-	}
-	
 	protected ItemTable()
 	{
 		load();
@@ -145,10 +138,10 @@ public class ItemTable
 			}
 		}
 		buildFastLookupTable(highest);
-		LOGGER.log(Level.INFO, getClass().getSimpleName() + ": Loaded: " + _etcItems.size() + " Etc Items");
-		LOGGER.log(Level.INFO, getClass().getSimpleName() + ": Loaded: " + _armors.size() + " Armor Items");
-		LOGGER.log(Level.INFO, getClass().getSimpleName() + ": Loaded: " + _weapons.size() + " Weapon Items");
-		LOGGER.log(Level.INFO, getClass().getSimpleName() + ": Loaded: " + (_etcItems.size() + _armors.size() + _weapons.size()) + " Items in total.");
+		LOG.info("{}: Loaded: {} Etc Items", getClass().getSimpleName(), _etcItems.size());
+		LOG.info("{}: Loaded: {} Armor Items", getClass().getSimpleName(), _armors.size());
+		LOG.info("{}: Loaded: {} Weapon Items", getClass().getSimpleName(), _weapons.size());
+		LOG.info("{}: Loaded: {} Items in total.", getClass().getSimpleName(), (_etcItems.size() + _armors.size() + _weapons.size()));
 	}
 	
 	/**
@@ -158,7 +151,7 @@ public class ItemTable
 	private void buildFastLookupTable(int size)
 	{
 		// Create a FastLookUp Table called _allTemplates of size : value of the highest item ID
-		LOGGER.info(getClass().getSimpleName() + ": Highest item id used:" + size);
+		LOG.info("{}: Highest item id used: {}", getClass().getSimpleName(), size);
 		_allTemplates = new L2Item[size + 1];
 		
 		// Insert armor item in Fast Look Up Table
@@ -234,11 +227,6 @@ public class ItemTable
 			}
 		}
 		
-		if (Config.DEBUG)
-		{
-			LOGGER.fine(getClass().getSimpleName() + ": Item created  oid:" + item.getObjectId() + " itemid:" + itemId);
-		}
-		
 		// Add the L2ItemInstance object to _allObjects of L2world
 		L2World.getInstance().storeObject(item);
 		
@@ -252,15 +240,7 @@ public class ItemTable
 		{
 			if (!Config.LOG_ITEMS_SMALL_LOG || (Config.LOG_ITEMS_SMALL_LOG && (item.isEquipable() || (item.getId() == ADENA_ID))))
 			{
-				LogRecord record = new LogRecord(Level.INFO, "CREATE:" + process);
-				record.setLoggerName("item");
-				record.setParameters(new Object[]
-				{
-					item,
-					actor,
-					reference
-				});
-				LOGGER_ITEMS.log(record);
+				LoggingUtils.logItem(LOG_ITEMS, "CREATE: ", process, item, actor.getName(), reference);
 			}
 		}
 		
@@ -312,7 +292,6 @@ public class ItemTable
 	{
 		synchronized (item)
 		{
-			long old = item.getCount();
 			item.setCount(0);
 			item.setOwnerId(0);
 			item.setItemLocation(ItemLocation.VOID);
@@ -325,16 +304,7 @@ public class ItemTable
 			{
 				if (!Config.LOG_ITEMS_SMALL_LOG || (Config.LOG_ITEMS_SMALL_LOG && (item.isEquipable() || (item.getId() == ADENA_ID))))
 				{
-					LogRecord record = new LogRecord(Level.INFO, "DELETE:" + process);
-					record.setLoggerName("item");
-					record.setParameters(new Object[]
-					{
-						item,
-						"PrevCount(" + old + ")",
-						actor,
-						reference
-					});
-					LOGGER_ITEMS.log(record);
+					LoggingUtils.logItem(LOG_ITEMS, "DELETE: ", process, item, actor.getName(), reference);
 				}
 			}
 			
@@ -371,7 +341,7 @@ public class ItemTable
 				}
 				catch (Exception e)
 				{
-					LOGGER.log(Level.WARNING, "could not delete pet objectid:", e);
+					LOG.warn("Could not delete pet objectid!", e);
 				}
 			}
 		}
@@ -413,6 +383,11 @@ public class ItemTable
 	public int getArraySize()
 	{
 		return _allTemplates.length;
+	}
+	
+	public static ItemTable getInstance()
+	{
+		return SingletonHolder._instance;
 	}
 	
 	private static class SingletonHolder

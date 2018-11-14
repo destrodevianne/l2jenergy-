@@ -16,28 +16,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.util;
+package com.l2jserver.gameserver.util.logging;
 
-import java.util.logging.LogManager;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.filter.Filter;
+import ch.qos.logback.core.spi.FilterReply;
 
 /**
- * Specialized {@link LogManager} class.<br>
- * Prevents log devices to close before shutdown sequence so the shutdown sequence can make logging.
+ * @author Мо3олЬ
  */
-public class L2LogManager extends LogManager
+public class PDamageFilter extends Filter<ILoggingEvent>
 {
-	public L2LogManager()
-	{
-	}
-	
 	@Override
-	public void reset()
+	public FilterReply decide(ILoggingEvent event)
 	{
-		// do nothing
-	}
-	
-	public void doReset()
-	{
-		super.reset();
+		if ("pdam".equals(event.getLoggerName()))
+		{
+			return FilterReply.ACCEPT;
+		}
+		return FilterReply.DENY;
 	}
 }

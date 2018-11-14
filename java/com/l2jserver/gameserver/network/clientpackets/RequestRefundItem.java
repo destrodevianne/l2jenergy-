@@ -208,7 +208,7 @@ public final class RequestRefundItem extends L2GameClientPacket
 			L2ItemInstance item = player.getRefund().transferItem("Refund", objectIds[i], Long.MAX_VALUE, player.getInventory(), player, player.getLastFolkNPC());
 			if (item == null)
 			{
-				_log.warning("Error refunding object for char " + player.getName() + " (newitem == null)");
+				LOG.warn("Error refunding object for char {} (newitem == null)", player.getName());
 				continue;
 			}
 		}

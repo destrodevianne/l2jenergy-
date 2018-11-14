@@ -18,8 +18,6 @@
  */
 package handlers.itemhandlers;
 
-import java.util.logging.Level;
-
 import com.l2jserver.gameserver.enums.ShotType;
 import com.l2jserver.gameserver.handler.IItemHandler;
 import com.l2jserver.gameserver.model.actor.L2Playable;
@@ -66,7 +64,7 @@ public class BeastSpiritShot implements IItemHandler
 		
 		if (skills == null)
 		{
-			_log.log(Level.WARNING, getClass().getSimpleName() + ": is missing skills!");
+			LOG.warn("{}: is missing skills!", getClass().getSimpleName());
 			return false;
 		}
 		

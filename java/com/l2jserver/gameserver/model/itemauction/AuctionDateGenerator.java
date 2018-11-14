@@ -70,7 +70,6 @@ public final class AuctionDateGenerator
 			_calendar.set(Calendar.DAY_OF_WEEK, _day_of_week);
 			return calcDestTime(_calendar.getTimeInMillis(), date, MILLIS_IN_WEEK);
 		}
-		
 		return calcDestTime(_calendar.getTimeInMillis(), date, TimeUnit.MILLISECONDS.convert(_interval, TimeUnit.DAYS));
 	}
 	

@@ -18,8 +18,8 @@
  */
 package gracia;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import gracia.AI.EnergySeeds;
 import gracia.AI.Lindvior;
@@ -48,7 +48,7 @@ import gracia.vehicles.SoIController.SoIController;
  */
 public final class GraciaLoader
 {
-	private static final Logger _log = Logger.getLogger(GraciaLoader.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(GraciaLoader.class);
 	
 	private static final Class<?>[] SCRIPTS =
 	{
@@ -81,7 +81,7 @@ public final class GraciaLoader
 	
 	public static void main(String[] args)
 	{
-		_log.info(GraciaLoader.class.getSimpleName() + ": Loading Gracia related scripts.");
+		LOG.info("{}: Loading Gracia related scripts.", GraciaLoader.class.getSimpleName());
 		for (Class<?> script : SCRIPTS)
 		{
 			try
@@ -90,7 +90,7 @@ public final class GraciaLoader
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.SEVERE, GraciaLoader.class.getSimpleName() + ": Failed loading " + script.getSimpleName() + ":", e);
+				LOG.warn("{}: Failed loading {}", GraciaLoader.class.getSimpleName(), script.getSimpleName(), e);
 			}
 		}
 	}

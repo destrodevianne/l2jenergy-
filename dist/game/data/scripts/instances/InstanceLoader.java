@@ -18,8 +18,8 @@
  */
 package instances;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import instances.CastleDungeon.CastleDungeon;
 import instances.CavernOfThePirateCaptain.CavernOfThePirateCaptain;
@@ -58,7 +58,7 @@ import instances.SecretAreaInTheKeucereusFortress1.SecretAreaInTheKeucereusFortr
  */
 public final class InstanceLoader
 {
-	private static final Logger _log = Logger.getLogger(InstanceLoader.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(InstanceLoader.class);
 	
 	private static final Class<?>[] SCRIPTS =
 	{
@@ -96,7 +96,7 @@ public final class InstanceLoader
 	
 	public static void main(String[] args)
 	{
-		_log.info(InstanceLoader.class.getSimpleName() + ": Loading Instances scripts.");
+		LOG.info("{}: Loading Instances scripts.", InstanceLoader.class.getSimpleName());
 		for (Class<?> script : SCRIPTS)
 		{
 			try
@@ -105,7 +105,7 @@ public final class InstanceLoader
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.SEVERE, InstanceLoader.class.getSimpleName() + ": Failed loading " + script.getSimpleName() + ":", e);
+				LOG.warn("{}: Failed loading {}", InstanceLoader.class.getSimpleName(), script.getSimpleName(), e);
 			}
 		}
 	}

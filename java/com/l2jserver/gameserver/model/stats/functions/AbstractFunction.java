@@ -18,7 +18,8 @@
  */
 package com.l2jserver.gameserver.model.stats.functions;
 
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.conditions.Condition;
@@ -36,7 +37,7 @@ import com.l2jserver.gameserver.model.stats.Stats;
 public abstract class AbstractFunction
 {
 	/** Logger. */
-	protected static final Logger LOG = Logger.getLogger(AbstractFunction.class.getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(AbstractFunction.class);
 	/** Statistics, that is affected by this function (See L2Character.CALCULATOR_XXX constants) */
 	private final Stats _stat;
 	/**

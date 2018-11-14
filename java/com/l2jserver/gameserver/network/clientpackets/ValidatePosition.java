@@ -64,8 +64,8 @@ public class ValidatePosition extends L2GameClientPacket
 		
 		if (Config.DEVELOPER)
 		{
-			_log.fine("client pos: " + _x + " " + _y + " " + _z + " head " + _heading);
-			_log.fine("server pos: " + realX + " " + realY + " " + realZ + " head " + activeChar.getHeading());
+			LOG.debug("client pos: {} {} {} head {}", _x, _y, _z, _heading);
+			LOG.debug("server pos: {} {}  {} head {}", realX, realY, realZ, activeChar.getHeading());
 		}
 		
 		if ((_x == 0) && (_y == 0))
@@ -191,9 +191,8 @@ public class ValidatePosition extends L2GameClientPacket
 				{
 					if (Config.DEVELOPER)
 					{
-						_log.info(activeChar.getName() + ": Synchronizing position Server --> Client");
+						LOG.debug("{}: Synchronizing position Server --> Client", activeChar.getName());
 					}
-					
 					activeChar.sendPacket(new ValidateLocation(activeChar));
 				}
 			}

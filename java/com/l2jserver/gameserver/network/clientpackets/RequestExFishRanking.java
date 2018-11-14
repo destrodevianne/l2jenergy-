@@ -35,7 +35,7 @@ public final class RequestExFishRanking extends L2GameClientPacket
 	@Override
 	protected void runImpl()
 	{
-		_log.info("C5: RequestExFishRanking");
+		LOG.info("C5: RequestExFishRanking");
 	}
 	
 	@Override

@@ -18,8 +18,6 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import java.util.logging.Level;
-
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -124,7 +122,7 @@ public class RequestPackageSend extends L2GameClientPacket
 			final L2ItemInstance item = player.checkItemManipulation(i.getId(), i.getCount(), "freight");
 			if (item == null)
 			{
-				_log.log(Level.WARNING, "Error depositing a warehouse object for char " + player.getName() + " (validity check)");
+				LOG.warn("Error depositing a warehouse object for char {} (validity check)", player.getName());
 				warehouse.deleteMe();
 				return;
 			}
@@ -173,7 +171,7 @@ public class RequestPackageSend extends L2GameClientPacket
 			final L2ItemInstance oldItem = player.checkItemManipulation(i.getId(), i.getCount(), "deposit");
 			if (oldItem == null)
 			{
-				_log.log(Level.WARNING, "Error depositing a warehouse object for char " + player.getName() + " (olditem == null)");
+				LOG.warn("Error depositing a warehouse object for char {} (olditem == null)", player.getName());
 				warehouse.deleteMe();
 				return;
 			}
@@ -181,7 +179,7 @@ public class RequestPackageSend extends L2GameClientPacket
 			final L2ItemInstance newItem = player.getInventory().transferItem("Trade", i.getId(), i.getCount(), warehouse, player, null);
 			if (newItem == null)
 			{
-				_log.log(Level.WARNING, "Error depositing a warehouse object for char " + player.getName() + " (newitem == null)");
+				LOG.warn("Error depositing a warehouse object for char {} (newitem == null)", player.getName());
 				continue;
 			}
 			

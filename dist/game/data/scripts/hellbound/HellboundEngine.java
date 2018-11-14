@@ -66,9 +66,9 @@ public final class HellboundEngine extends AbstractNpcAI
 		
 		startQuestTimer(UPDATE_EVENT, 1000, null, null);
 		
-		LOG.info("{}: Level: {}", HellboundEngine.class.getName(), getLevel());
-		LOG.info("{}: Trust: {}", HellboundEngine.class.getName(), getTrust());
-		LOG.info("{}: Status: {}", HellboundEngine.class.getName(), (isLocked() ? "locked." : "unlocked."));
+		LOG.info("{}: Level: {}", getClass().getSimpleName(), getLevel());
+		LOG.info("{}: Trust: {}", getClass().getSimpleName(), getTrust());
+		LOG.info("{}: Status: {}", getClass().getSimpleName(), (isLocked() ? "locked." : "unlocked."));
 	}
 	
 	@Override

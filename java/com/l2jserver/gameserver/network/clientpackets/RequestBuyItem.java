@@ -179,7 +179,7 @@ public final class RequestBuyItem extends L2GameClientPacket
 			
 			if (price < 0)
 			{
-				_log.warning("ERROR, no price found .. wrong buylist ??");
+				LOG.warn("ERROR, no price found .. wrong buylist ??");
 				sendPacket(ActionFailed.STATIC_PACKET);
 				return;
 			}

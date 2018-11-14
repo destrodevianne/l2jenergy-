@@ -59,7 +59,8 @@ import com.l2jserver.gameserver.util.Broadcast;
  */
 public abstract class ClanHallSiegeEngine extends Quest implements Siegable
 {
-	protected static final Logger _log = LoggerFactory.getLogger(ClanHallSiegeEngine.class);
+	protected static final Logger LOG = LoggerFactory.getLogger(ClanHallSiegeEngine.class);
+	
 	private static final String SQL_LOAD_ATTACKERS = "SELECT attacker_id FROM clanhall_siege_attackers WHERE clanhall_id = ?";
 	private static final String SQL_SAVE_ATTACKERS = "INSERT INTO clanhall_siege_attackers VALUES (?,?)";
 	private static final String SQL_LOAD_GUARDS = "SELECT * FROM clanhall_siege_guards WHERE clanHallId = ?";
@@ -86,7 +87,7 @@ public abstract class ClanHallSiegeEngine extends Quest implements Siegable
 		_hall.setSiege(this);
 		
 		_siegeTask = ThreadPoolManager.getInstance().scheduleGeneral(new PrepareOwner(), _hall.getNextSiegeTime() - System.currentTimeMillis() - 3600000);
-		_log.info("{} siege scheduled for {}.", _hall.getName(), getSiegeDate().getTime());
+		LOG.info("{} siege scheduled for {}.", _hall.getName(), getSiegeDate().getTime());
 		loadAttackers();
 	}
 	
@@ -108,7 +109,7 @@ public abstract class ClanHallSiegeEngine extends Quest implements Siegable
 		}
 		catch (Exception e)
 		{
-			_log.warn("{}: Could not load siege attackers!", getName(), e);
+			LOG.warn("{}: Could not load siege attackers!", getName(), e);
 		}
 	}
 	
@@ -133,11 +134,11 @@ public abstract class ClanHallSiegeEngine extends Quest implements Siegable
 					}
 				}
 			}
-			_log.info("{}: Successfully saved attackers to database.", getName());
+			LOG.info("{}: Successfully saved attackers to database.", getName());
 		}
 		catch (Exception e)
 		{
-			_log.warn("{}: Couldnt save attacker list!", getName(), e);
+			LOG.warn("{}: Couldnt save attacker list!", getName(), e);
 		}
 	}
 	
@@ -167,7 +168,7 @@ public abstract class ClanHallSiegeEngine extends Quest implements Siegable
 			}
 			catch (Exception e)
 			{
-				_log.warn("{}: Couldn't load siege guards!", getName(), e);
+				LOG.warn("{}: Couldn't load siege guards!", getName(), e);
 			}
 		}
 	}
@@ -403,7 +404,7 @@ public abstract class ClanHallSiegeEngine extends Quest implements Siegable
 		onSiegeEnds();
 		
 		_siegeTask = ThreadPoolManager.getInstance().scheduleGeneral(new PrepareOwner(), _hall.getNextSiegeTime() - System.currentTimeMillis() - 3600000);
-		_log.info("Siege of {} scheduled for {}.", _hall.getName(), _hall.getSiegeDate().getTime());
+		LOG.info("Siege of {} scheduled for {}.", _hall.getName(), _hall.getSiegeDate().getTime());
 		
 		_hall.updateSiegeStatus(SiegeStatus.REGISTERING);
 		unSpawnSiegeGuards();
@@ -414,7 +415,7 @@ public abstract class ClanHallSiegeEngine extends Quest implements Siegable
 	{
 		cancelSiegeTask();
 		_siegeTask = ThreadPoolManager.getInstance().scheduleGeneral(new PrepareOwner(), _hall.getNextSiegeTime() - 3600000);
-		_log.info("{} siege scheduled for {}.", _hall.getName(), _hall.getSiegeDate().getTime());
+		LOG.info("{} siege scheduled for {}.", _hall.getName(), _hall.getSiegeDate().getTime());
 	}
 	
 	public void cancelSiegeTask()

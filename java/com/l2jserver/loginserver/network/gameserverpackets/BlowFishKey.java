@@ -19,12 +19,12 @@
 package com.l2jserver.loginserver.network.gameserverpackets;
 
 import java.security.GeneralSecurityException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.crypto.Cipher;
 
-import com.l2jserver.Config;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.l2jserver.loginserver.GameServerThread;
 import com.l2jserver.loginserver.network.L2JGameServerPacketHandler.GameServerState;
 import com.l2jserver.util.crypt.NewCrypt;
@@ -35,7 +35,7 @@ import com.l2jserver.util.network.BaseRecievePacket;
  */
 public class BlowFishKey extends BaseRecievePacket
 {
-	protected static final Logger _log = Logger.getLogger(BlowFishKey.class.getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(BlowFishKey.class);
 	
 	/**
 	 * @param decrypt
@@ -66,15 +66,11 @@ public class BlowFishKey extends BaseRecievePacket
 			System.arraycopy(tempDecryptKey, i, key, 0, len - i);
 			
 			server.SetBlowFish(new NewCrypt(key));
-			if (Config.DEBUG)
-			{
-				_log.info("New BlowFish key received, Blowfih Engine initialized:");
-			}
 			server.setLoginConnectionState(GameServerState.BF_CONNECTED);
 		}
 		catch (GeneralSecurityException e)
 		{
-			_log.log(Level.SEVERE, "Error While decrypting blowfish key (RSA): " + e.getMessage(), e);
+			LOG.error("Error While decrypting blowfish key (RSA)!", e);
 		}
 	}
 }

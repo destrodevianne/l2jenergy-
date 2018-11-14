@@ -150,10 +150,6 @@ public final class TradeRequest extends L2GameClientPacket
 		
 		if (player.isProcessingTransaction())
 		{
-			if (Config.DEBUG)
-			{
-				_log.fine("Already trading with someone else.");
-			}
 			player.sendPacket(SystemMessageId.ALREADY_TRADING);
 			return;
 		}
@@ -161,10 +157,6 @@ public final class TradeRequest extends L2GameClientPacket
 		SystemMessage sm;
 		if (partner.isProcessingRequest() || partner.isProcessingTransaction())
 		{
-			if (Config.DEBUG)
-			{
-				_log.info("Transaction already in progress.");
-			}
 			sm = SystemMessage.getSystemMessage(SystemMessageId.C1_IS_BUSY_TRY_LATER);
 			sm.addString(partner.getName());
 			player.sendPacket(sm);

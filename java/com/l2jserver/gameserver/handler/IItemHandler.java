@@ -18,7 +18,8 @@
  */
 package com.l2jserver.gameserver.handler;
 
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.model.actor.L2Playable;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
@@ -28,7 +29,7 @@ import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
  */
 public interface IItemHandler
 {
-	public static final Logger _log = Logger.getLogger(IItemHandler.class.getName());
+	public static final Logger LOG = LoggerFactory.getLogger(IItemHandler.class);
 	
 	/**
 	 * Launch task associated to the item.

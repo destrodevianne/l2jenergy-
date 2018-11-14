@@ -34,9 +34,9 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledFuture;
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
@@ -50,14 +50,15 @@ import com.l2jserver.gameserver.model.events.ListenersContainer;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.util.Broadcast;
+import com.l2jserver.gameserver.util.LoggingUtils;
 
 /**
  * @author godson
  */
 public class Olympiad extends ListenersContainer
 {
-	protected static final Logger _log = Logger.getLogger(Olympiad.class.getName());
-	protected static final Logger _logResults = Logger.getLogger("olympiad");
+	protected static final Logger LOG = LoggerFactory.getLogger(Olympiad.class);
+	protected static final Logger LOG_OLYMPIAD = LoggerFactory.getLogger("olympiad");
 	
 	private static final Map<Integer, StatsSet> NOBLES = new ConcurrentHashMap<>();
 	private static final List<StatsSet> HEROS_TO_BE = new ArrayList<>();
@@ -65,16 +66,26 @@ public class Olympiad extends ListenersContainer
 	
 	public static final String OLYMPIAD_HTML_PATH = "data/html/olympiad/";
 	private static final String OLYMPIAD_LOAD_DATA = "SELECT current_cycle, period, olympiad_end, validation_end, " + "next_weekly_change FROM olympiad_data WHERE id = 0";
-	private static final String OLYMPIAD_SAVE_DATA = "INSERT INTO olympiad_data (id, current_cycle, " + "period, olympiad_end, validation_end, next_weekly_change) VALUES (0,?,?,?,?,?) " + "ON DUPLICATE KEY UPDATE current_cycle=?, period=?, olympiad_end=?, " + "validation_end=?, next_weekly_change=?";
-	private static final String OLYMPIAD_LOAD_NOBLES = "SELECT olympiad_nobles.charId, olympiad_nobles.class_id, " + "characters.char_name, olympiad_nobles.olympiad_points, olympiad_nobles.competitions_done, " + "olympiad_nobles.competitions_won, olympiad_nobles.competitions_lost, olympiad_nobles.competitions_drawn, " + "olympiad_nobles.competitions_done_week, olympiad_nobles.competitions_done_week_classed, olympiad_nobles.competitions_done_week_non_classed, olympiad_nobles.competitions_done_week_team " + "FROM olympiad_nobles, characters WHERE characters.charId = olympiad_nobles.charId";
-	private static final String OLYMPIAD_SAVE_NOBLES = "INSERT INTO olympiad_nobles " + "(`charId`,`class_id`,`olympiad_points`,`competitions_done`,`competitions_won`,`competitions_lost`," + "`competitions_drawn`, `competitions_done_week`, `competitions_done_week_classed`, `competitions_done_week_non_classed`, `competitions_done_week_team`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String OLYMPIAD_UPDATE_NOBLES = "UPDATE olympiad_nobles SET " + "olympiad_points = ?, competitions_done = ?, competitions_won = ?, competitions_lost = ?, competitions_drawn = ?, competitions_done_week = ?, competitions_done_week_classed = ?, competitions_done_week_non_classed = ?, competitions_done_week_team = ? WHERE charId = ?";
-	private static final String OLYMPIAD_GET_HEROS = "SELECT olympiad_nobles.charId, characters.char_name " + "FROM olympiad_nobles, characters WHERE characters.charId = olympiad_nobles.charId " + "AND olympiad_nobles.class_id = ? AND olympiad_nobles.competitions_done >= " + Config.ALT_OLY_MIN_MATCHES + " AND olympiad_nobles.competitions_won > 0 " + "ORDER BY olympiad_nobles.olympiad_points DESC, olympiad_nobles.competitions_done DESC, olympiad_nobles.competitions_won DESC";
+	private static final String OLYMPIAD_SAVE_DATA = "INSERT INTO olympiad_data (id, current_cycle, " + "period, olympiad_end, validation_end, next_weekly_change) VALUES (0,?,?,?,?,?) " + "ON DUPLICATE KEY UPDATE current_cycle=?, period=?, olympiad_end=?, "
+		+ "validation_end=?, next_weekly_change=?";
+	private static final String OLYMPIAD_LOAD_NOBLES = "SELECT olympiad_nobles.charId, olympiad_nobles.class_id, " + "characters.char_name, olympiad_nobles.olympiad_points, olympiad_nobles.competitions_done, "
+		+ "olympiad_nobles.competitions_won, olympiad_nobles.competitions_lost, olympiad_nobles.competitions_drawn, "
+		+ "olympiad_nobles.competitions_done_week, olympiad_nobles.competitions_done_week_classed, olympiad_nobles.competitions_done_week_non_classed, olympiad_nobles.competitions_done_week_team " + "FROM olympiad_nobles, characters WHERE characters.charId = olympiad_nobles.charId";
+	private static final String OLYMPIAD_SAVE_NOBLES = "INSERT INTO olympiad_nobles " + "(`charId`,`class_id`,`olympiad_points`,`competitions_done`,`competitions_won`,`competitions_lost`,"
+		+ "`competitions_drawn`, `competitions_done_week`, `competitions_done_week_classed`, `competitions_done_week_non_classed`, `competitions_done_week_team`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String OLYMPIAD_UPDATE_NOBLES = "UPDATE olympiad_nobles SET "
+		+ "olympiad_points = ?, competitions_done = ?, competitions_won = ?, competitions_lost = ?, competitions_drawn = ?, competitions_done_week = ?, competitions_done_week_classed = ?, competitions_done_week_non_classed = ?, competitions_done_week_team = ? WHERE charId = ?";
+	private static final String OLYMPIAD_GET_HEROS = "SELECT olympiad_nobles.charId, characters.char_name " + "FROM olympiad_nobles, characters WHERE characters.charId = olympiad_nobles.charId " + "AND olympiad_nobles.class_id = ? AND olympiad_nobles.competitions_done >= "
+		+ Config.ALT_OLY_MIN_MATCHES + " AND olympiad_nobles.competitions_won > 0 " + "ORDER BY olympiad_nobles.olympiad_points DESC, olympiad_nobles.competitions_done DESC, olympiad_nobles.competitions_won DESC";
 	private static final String GET_ALL_CLASSIFIED_NOBLESS = "SELECT charId from olympiad_nobles_eom " + "WHERE competitions_done >= " + Config.ALT_OLY_MIN_MATCHES + " ORDER BY olympiad_points DESC, competitions_done DESC, competitions_won DESC";
-	private static final String GET_EACH_CLASS_LEADER = "SELECT characters.char_name from olympiad_nobles_eom, characters " + "WHERE characters.charId = olympiad_nobles_eom.charId AND olympiad_nobles_eom.class_id = ? " + "AND olympiad_nobles_eom.competitions_done >= " + Config.ALT_OLY_MIN_MATCHES + " " + "ORDER BY olympiad_nobles_eom.olympiad_points DESC, olympiad_nobles_eom.competitions_done DESC, olympiad_nobles_eom.competitions_won DESC LIMIT 10";
-	private static final String GET_EACH_CLASS_LEADER_CURRENT = "SELECT characters.char_name from olympiad_nobles, characters " + "WHERE characters.charId = olympiad_nobles.charId AND olympiad_nobles.class_id = ? " + "AND olympiad_nobles.competitions_done >= " + Config.ALT_OLY_MIN_MATCHES + " " + "ORDER BY olympiad_nobles.olympiad_points DESC, olympiad_nobles.competitions_done DESC, olympiad_nobles.competitions_won DESC LIMIT 10";
-	private static final String GET_EACH_CLASS_LEADER_SOULHOUND = "SELECT characters.char_name from olympiad_nobles_eom, characters " + "WHERE characters.charId = olympiad_nobles_eom.charId AND (olympiad_nobles_eom.class_id = ? OR olympiad_nobles_eom.class_id = 133) " + "AND olympiad_nobles_eom.competitions_done >= " + Config.ALT_OLY_MIN_MATCHES + " " + "ORDER BY olympiad_nobles_eom.olympiad_points DESC, olympiad_nobles_eom.competitions_done DESC, olympiad_nobles_eom.competitions_won DESC LIMIT 10";
-	private static final String GET_EACH_CLASS_LEADER_CURRENT_SOULHOUND = "SELECT characters.char_name from olympiad_nobles, characters " + "WHERE characters.charId = olympiad_nobles.charId AND (olympiad_nobles.class_id = ? OR olympiad_nobles.class_id = 133) " + "AND olympiad_nobles.competitions_done >= " + Config.ALT_OLY_MIN_MATCHES + " " + "ORDER BY olympiad_nobles.olympiad_points DESC, olympiad_nobles.competitions_done DESC, olympiad_nobles.competitions_won DESC LIMIT 10";
+	private static final String GET_EACH_CLASS_LEADER = "SELECT characters.char_name from olympiad_nobles_eom, characters " + "WHERE characters.charId = olympiad_nobles_eom.charId AND olympiad_nobles_eom.class_id = ? " + "AND olympiad_nobles_eom.competitions_done >= " + Config.ALT_OLY_MIN_MATCHES
+		+ " " + "ORDER BY olympiad_nobles_eom.olympiad_points DESC, olympiad_nobles_eom.competitions_done DESC, olympiad_nobles_eom.competitions_won DESC LIMIT 10";
+	private static final String GET_EACH_CLASS_LEADER_CURRENT = "SELECT characters.char_name from olympiad_nobles, characters " + "WHERE characters.charId = olympiad_nobles.charId AND olympiad_nobles.class_id = ? " + "AND olympiad_nobles.competitions_done >= " + Config.ALT_OLY_MIN_MATCHES + " "
+		+ "ORDER BY olympiad_nobles.olympiad_points DESC, olympiad_nobles.competitions_done DESC, olympiad_nobles.competitions_won DESC LIMIT 10";
+	private static final String GET_EACH_CLASS_LEADER_SOULHOUND = "SELECT characters.char_name from olympiad_nobles_eom, characters " + "WHERE characters.charId = olympiad_nobles_eom.charId AND (olympiad_nobles_eom.class_id = ? OR olympiad_nobles_eom.class_id = 133) "
+		+ "AND olympiad_nobles_eom.competitions_done >= " + Config.ALT_OLY_MIN_MATCHES + " " + "ORDER BY olympiad_nobles_eom.olympiad_points DESC, olympiad_nobles_eom.competitions_done DESC, olympiad_nobles_eom.competitions_won DESC LIMIT 10";
+	private static final String GET_EACH_CLASS_LEADER_CURRENT_SOULHOUND = "SELECT characters.char_name from olympiad_nobles, characters " + "WHERE characters.charId = olympiad_nobles.charId AND (olympiad_nobles.class_id = ? OR olympiad_nobles.class_id = 133) "
+		+ "AND olympiad_nobles.competitions_done >= " + Config.ALT_OLY_MIN_MATCHES + " " + "ORDER BY olympiad_nobles.olympiad_points DESC, olympiad_nobles.competitions_done DESC, olympiad_nobles.competitions_won DESC LIMIT 10";
 	
 	private static final String OLYMPIAD_DELETE_ALL = "TRUNCATE olympiad_nobles";
 	private static final String OLYMPIAD_MONTH_CLEAR = "TRUNCATE olympiad_nobles_eom";
@@ -194,12 +205,12 @@ public class Olympiad extends ListenersContainer
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Olympiad System: Error loading olympiad data from database: ", e);
+			LOG.warn("Olympiad System: Error loading olympiad data from database!", e);
 		}
 		
 		if (!loaded)
 		{
-			_log.log(Level.INFO, "Olympiad System: failed to load data from database, trying to load from file.");
+			LOG.info("Olympiad System: failed to load data from database, trying to load from file.");
 			
 			Properties OlympiadProperties = new Properties();
 			try (InputStream is = new FileInputStream(Config.OLYMPIAD_CONFIG_FILE))
@@ -209,7 +220,7 @@ public class Olympiad extends ListenersContainer
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.SEVERE, "Olympiad System: Error loading olympiad properties: ", e);
+				LOG.error("Olympiad System: Error loading olympiad properties!", e);
 				return;
 			}
 			
@@ -247,7 +258,7 @@ public class Olympiad extends ListenersContainer
 				}
 				break;
 			default:
-				_log.warning("Olympiad System: Omg something went wrong in loading!! Period = " + _period);
+				LOG.warn("Olympiad System: Omg something went wrong in loading!! Period = {}", _period);
 				return;
 		}
 		
@@ -277,19 +288,19 @@ public class Olympiad extends ListenersContainer
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Olympiad System: Error loading noblesse data from database: ", e);
+			LOG.warn("Olympiad System: Error loading noblesse data from database!", e);
 		}
 		
 		synchronized (this)
 		{
-			_log.info("Olympiad System: Loading Olympiad System....");
+			LOG.info("Olympiad System: Loading Olympiad System....");
 			if (_period == 0)
 			{
-				_log.info("Olympiad System: Currently in Olympiad Period");
+				LOG.info("Olympiad System: Currently in Olympiad Period");
 			}
 			else
 			{
-				_log.info("Olympiad System: Currently in Validation Period");
+				LOG.info("Olympiad System: Currently in Validation Period");
 			}
 			
 			long milliToEnd;
@@ -302,18 +313,16 @@ public class Olympiad extends ListenersContainer
 				milliToEnd = getMillisToValidationEnd();
 			}
 			
-			_log.info("Olympiad System: " + (milliToEnd / 60000) + " minutes until period ends");
+			LOG.info("Olympiad System: {} minutes until period ends", (milliToEnd / 60000));
 			
 			if (_period == 0)
 			{
 				milliToEnd = getMillisToWeekChange();
 				
-				_log.info("Olympiad System: Next weekly change is in " + (milliToEnd / 60000) + " minutes");
+				LOG.info("Olympiad System: Next weekly change is in {}  minutes", (milliToEnd / 60000));
 			}
 		}
-		
-		_log.info("Olympiad System: Loaded " + NOBLES.size() + " Nobles");
-		
+		LOG.info("Olympiad System: Loaded {} Nobles", NOBLES.size());
 	}
 	
 	public void loadNoblesRank()
@@ -332,7 +341,7 @@ public class Olympiad extends ListenersContainer
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Olympiad System: Error loading noblesse data from database for Ranking: ", e);
+			LOG.warn("Olympiad System: Error loading noblesse data from database for Ranking!", e);
 		}
 		
 		int rank1 = (int) Math.round(tmpPlace.size() * 0.01);
@@ -473,9 +482,8 @@ public class Olympiad extends ListenersContainer
 			int numHours = (int) Math.floor(countDown % 24);
 			int numDays = (int) Math.floor((countDown - numHours) / 24);
 			
-			_log.info("Olympiad System: Competition Period Starts in " + numDays + " days, " + numHours + " hours and " + numMins + " mins.");
-			
-			_log.info("Olympiad System: Event starts/started : " + _compStart.getTime());
+			LOG.info("Olympiad System: Competition Period Starts in {} days, {} hours and {} mins.", numDays, numHours, numMins);
+			LOG.info("Olympiad System: Event starts/started: {}", _compStart.getTime());
 		}
 		
 		_scheduledCompStart = ThreadPoolManager.getInstance().scheduleGeneral(() ->
@@ -488,8 +496,8 @@ public class Olympiad extends ListenersContainer
 			_inCompPeriod = true;
 			
 			Broadcast.toAllOnlinePlayers(SystemMessage.getSystemMessage(SystemMessageId.THE_OLYMPIAD_GAME_HAS_STARTED));
-			_log.info("Olympiad System: Olympiad Game Started");
-			_logResults.info("Result,Player1,Player2,Player1 HP,Player2 HP,Player1 Damage,Player2 Damage,Points,Classed");
+			LOG.info("Olympiad System: Olympiad Game Started");
+			LOG_OLYMPIAD.info("Result,Player1,Player2,Player1 HP,Player2 HP,Player1 Damage,Player2 Damage,Points,Classed");
 			
 			_gameManager = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(OlympiadGameManager.getInstance(), 30000, 30000);
 			if (Config.ALT_OLY_ANNOUNCE_GAMES)
@@ -511,7 +519,7 @@ public class Olympiad extends ListenersContainer
 				}
 				_inCompPeriod = false;
 				Broadcast.toAllOnlinePlayers(SystemMessage.getSystemMessage(SystemMessageId.THE_OLYMPIAD_GAME_HAS_ENDED));
-				_log.info("Olympiad System: Olympiad Game Ended");
+				LOG.info("Olympiad System: Olympiad Game Ended");
 				
 				while (OlympiadGameManager.getInstance().isBattleStarted()) // cleared in game manager
 				{
@@ -540,8 +548,8 @@ public class Olympiad extends ListenersContainer
 				saveOlympiadStatus();
 				
 				init();
-			} , getMillisToCompEnd());
-		} , getMillisToCompBegin());
+			}, getMillisToCompEnd());
+		}, getMillisToCompBegin());
 	}
 	
 	private long getMillisToOlympiadEnd()
@@ -624,7 +632,7 @@ public class Olympiad extends ListenersContainer
 		_compStart.add(Calendar.HOUR_OF_DAY, 24);
 		_compEnd = _compStart.getTimeInMillis() + COMP_PERIOD;
 		
-		_log.info("Olympiad System: New Schedule @ " + _compStart.getTime());
+		LOG.info("Olympiad System: New Schedule @ {}", _compStart.getTime());
 		
 		return (_compStart.getTimeInMillis() - Calendar.getInstance().getTimeInMillis());
 	}
@@ -650,13 +658,13 @@ public class Olympiad extends ListenersContainer
 		_scheduledWeeklyTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(() ->
 		{
 			addWeeklyPoints();
-			_log.info("Olympiad System: Added weekly points to nobles");
+			LOG.info("Olympiad System: Added weekly points to nobles");
 			resetWeeklyMatches();
-			_log.info("Olympiad System: Reset weekly matches to nobles");
+			LOG.info("Olympiad System: Reset weekly matches to nobles");
 			
 			Calendar nextChange = Calendar.getInstance();
 			_nextWeeklyChange = nextChange.getTimeInMillis() + WEEKLY_PERIOD;
-		} , getMillisToWeekChange(), WEEKLY_PERIOD);
+		}, getMillisToWeekChange(), WEEKLY_PERIOD);
 	}
 	
 	protected synchronized void addWeeklyPoints()
@@ -780,7 +788,7 @@ public class Olympiad extends ListenersContainer
 		}
 		catch (SQLException e)
 		{
-			_log.log(Level.SEVERE, "Olympiad System: Failed to save noblesse data to database: ", e);
+			LOG.error("Olympiad System: Failed to save noblesse data to database!", e);
 		}
 	}
 	
@@ -808,7 +816,7 @@ public class Olympiad extends ListenersContainer
 		}
 		catch (SQLException e)
 		{
-			_log.log(Level.SEVERE, "Olympiad System: Failed to save olympiad data to database: ", e);
+			LOG.error("Olympiad System: Failed to save olympiad data to database!", e);
 		}
 		//@formatter:off
 		/*
@@ -841,7 +849,7 @@ public class Olympiad extends ListenersContainer
 		}
 		catch (SQLException e)
 		{
-			_log.log(Level.SEVERE, "Olympiad System: Failed to update monthly noblese data: ", e);
+			LOG.error("Olympiad System: Failed to update monthly noblese data!", e);
 		}
 	}
 	
@@ -852,8 +860,7 @@ public class Olympiad extends ListenersContainer
 			return;
 		}
 		
-		LogRecord record;
-		_logResults.info("Noble,charid,classid,compDone,points");
+		LOG_OLYMPIAD.info("Noble,charid,classid,compDone,points");
 		for (Entry<Integer, StatsSet> entry : NOBLES.entrySet())
 		{
 			StatsSet nobleInfo = entry.getValue();
@@ -868,15 +875,16 @@ public class Olympiad extends ListenersContainer
 			int points = nobleInfo.getInt(POINTS);
 			int compDone = nobleInfo.getInt(COMP_DONE);
 			
-			record = new LogRecord(Level.INFO, charName);
-			record.setParameters(new Object[]
+			if (LOG_OLYMPIAD.isInfoEnabled())
 			{
-				charId,
-				classId,
-				compDone,
-				points
-			});
-			_logResults.log(record);
+				LoggingUtils.logOlympiad(LOG_OLYMPIAD, charName, new Object[]
+				{
+					charId,
+					classId,
+					compDone,
+					points
+				});
+			}
 		}
 		
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
@@ -905,13 +913,14 @@ public class Olympiad extends ListenersContainer
 						}
 						else
 						{
-							record = new LogRecord(Level.INFO, "Hero " + hero.getString(CHAR_NAME));
-							record.setParameters(new Object[]
+							if (LOG_OLYMPIAD.isInfoEnabled())
 							{
-								hero.getInt(CHAR_ID),
-								hero.getInt(CLASS_ID)
-							});
-							_logResults.log(record);
+								LoggingUtils.logOlympiad(LOG_OLYMPIAD, "Hero " + hero.getString(CHAR_NAME), new Object[]
+								{
+									hero.getInt(CHAR_ID),
+									hero.getInt(CLASS_ID)
+								});
+							}
 							HEROS_TO_BE.add(hero);
 						}
 					}
@@ -932,13 +941,14 @@ public class Olympiad extends ListenersContainer
 					hero.set(CHAR_ID, winner.getInt(CHAR_ID));
 					hero.set(CHAR_NAME, winner.getString(CHAR_NAME));
 					
-					record = new LogRecord(Level.INFO, "Hero " + hero.getString(CHAR_NAME));
-					record.setParameters(new Object[]
+					if (LOG_OLYMPIAD.isInfoEnabled())
 					{
-						hero.getInt(CHAR_ID),
-						hero.getInt(CLASS_ID)
-					});
-					_logResults.log(record);
+						LoggingUtils.logOlympiad(LOG_OLYMPIAD, "Hero " + hero.getString(CHAR_NAME), new Object[]
+						{
+							hero.getInt(CHAR_ID),
+							hero.getInt(CLASS_ID)
+						});
+					}
 					HEROS_TO_BE.add(hero);
 					break;
 				}
@@ -990,13 +1000,14 @@ public class Olympiad extends ListenersContainer
 					hero.set(CHAR_ID, winner.getInt(CHAR_ID));
 					hero.set(CHAR_NAME, winner.getString(CHAR_NAME));
 					
-					record = new LogRecord(Level.INFO, "Hero " + hero.getString(CHAR_NAME));
-					record.setParameters(new Object[]
+					if (LOG_OLYMPIAD.isInfoEnabled())
 					{
-						hero.getInt(CHAR_ID),
-						hero.getInt(CLASS_ID)
-					});
-					_logResults.log(record);
+						LoggingUtils.logOlympiad(LOG_OLYMPIAD, "Hero " + hero.getString(CHAR_NAME), new Object[]
+						{
+							hero.getInt(CHAR_ID),
+							hero.getInt(CLASS_ID)
+						});
+					}
 					HEROS_TO_BE.add(hero);
 					break;
 				}
@@ -1004,7 +1015,7 @@ public class Olympiad extends ListenersContainer
 		}
 		catch (SQLException e)
 		{
-			_log.warning("Olympiad System: Couldnt load heros from DB");
+			LOG.warn("Olympiad System: Couldnt load heros from DB");
 		}
 	}
 	
@@ -1026,7 +1037,7 @@ public class Olympiad extends ListenersContainer
 		}
 		catch (SQLException e)
 		{
-			_log.warning("Olympiad System: Couldn't load olympiad leaders from DB!");
+			LOG.warn("Olympiad System: Couldn't load olympiad leaders from DB!");
 		}
 		return names;
 	}
@@ -1104,7 +1115,7 @@ public class Olympiad extends ListenersContainer
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Could not load last olympiad points:", e);
+			LOG.warn("Could not load last olympiad points!", e);
 		}
 		return result;
 	}
@@ -1241,7 +1252,7 @@ public class Olympiad extends ListenersContainer
 		}
 		catch (SQLException e)
 		{
-			_log.warning("Olympiad System: Couldn't delete nobles from DB!");
+			LOG.warn("Olympiad System: Couldn't delete nobles from DB!");
 		}
 		NOBLES.clear();
 	}

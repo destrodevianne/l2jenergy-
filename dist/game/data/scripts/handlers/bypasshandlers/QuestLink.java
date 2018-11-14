@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
 
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.handler.IBypassHandler;
@@ -152,13 +151,13 @@ public class QuestLink implements IBypassHandler
 				if (questId == TO_LEAD_AND_BE_LED)
 				{
 					sb.append("<a action=\"bypass -h Quest Q00118_ToLeadAndBeLed sponsor\"><font color=\"").append(color) //
-					.append("\">[<fstring>").append(questId).append(state).append("</fstring> (Sponsor)]</font></a><br>");
+						.append("\">[<fstring>").append(questId).append(state).append("</fstring> (Sponsor)]</font></a><br>");
 				}
 				
 				if (questId == THE_LEADER_AND_THE_FOLLOWER)
 				{
 					sb.append("<a action=\"bypass -h Quest Q00123_TheLeaderAndTheFollower sponsor\"><font color=\"").append(color) //
-					.append("\">[<fstring>").append(questId).append(state).append("</fstring> (Sponsor)]</font></a><br>");
+						.append("\">[<fstring>").append(questId).append(state).append("</fstring> (Sponsor)]</font></a><br>");
 				}
 			}
 		}
@@ -242,7 +241,7 @@ public class QuestLink implements IBypassHandler
 		final L2NpcTemplate template = NpcData.getInstance().getTemplate(npcId);
 		if (template == null)
 		{
-			_log.log(Level.WARNING, QuestLink.class.getSimpleName() + ": " + player.getName() + " requested quests for talk on non existing npc " + npcId);
+			LOG.warn("{}: {} requested quests for talk on non existing npc {}", QuestLink.class.getSimpleName(), player.getName(), npcId);
 			return states;
 		}
 		
@@ -282,7 +281,7 @@ public class QuestLink implements IBypassHandler
 			final Quest quest = state.getQuest();
 			if (quest == null)
 			{
-				_log.log(Level.WARNING, player + " Requested incorrect quest state for non existing quest: " + state.getQuestName());
+				LOG.warn("{} Requested incorrect quest state for non existing quest: {}", player, state.getQuestName());
 				continue;
 			}
 			if ((quest.getId() > 0) && (quest.getId() < 20000))

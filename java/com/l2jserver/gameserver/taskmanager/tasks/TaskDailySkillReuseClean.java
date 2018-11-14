@@ -59,9 +59,9 @@ public class TaskDailySkillReuseClean extends Task
 		}
 		catch (Exception e)
 		{
-			_log.severe(getClass().getSimpleName() + ": Could not reset daily skill reuse: " + e);
+			LOG.error("{}: Could not reset daily skill reuse!", getClass().getSimpleName(), e);
 		}
-		_log.info("Daily skill reuse cleaned.");
+		LOG.info("Daily skill reuse cleaned.");
 	}
 	
 	@Override

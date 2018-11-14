@@ -22,9 +22,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 
@@ -33,7 +35,7 @@ import com.l2jserver.Config;
  */
 public class ScriptPackage
 {
-	private static final Logger _log = Logger.getLogger(ScriptPackage.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(ScriptPackage.class);
 	
 	private final List<ScriptDocument> _scriptFiles = new ArrayList<>();
 	private final List<String> _otherFiles = new ArrayList<>();
@@ -77,7 +79,7 @@ public class ScriptPackage
 				}
 				catch (IOException io)
 				{
-					_log.warning(getClass().getSimpleName() + ": " + io.getMessage());
+					LOG.warn("{}", getClass().getSimpleName(), io);
 				}
 			}
 			else if (!entry.isDirectory())

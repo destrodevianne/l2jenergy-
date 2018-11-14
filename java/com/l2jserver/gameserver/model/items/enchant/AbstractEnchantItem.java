@@ -18,7 +18,8 @@
  */
 package com.l2jserver.gameserver.model.items.enchant;
 
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.model.StatsSet;
@@ -35,7 +36,7 @@ import com.l2jserver.gameserver.util.Util;
  */
 public abstract class AbstractEnchantItem
 {
-	protected static final Logger _log = Logger.getLogger(AbstractEnchantItem.class.getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(AbstractEnchantItem.class);
 	
 	private static final ItemType[] ENCHANT_TYPES = new ItemType[]
 	{

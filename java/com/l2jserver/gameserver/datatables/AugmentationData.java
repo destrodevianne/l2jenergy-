@@ -23,11 +23,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -49,7 +49,7 @@ import com.l2jserver.util.Rnd;
 public class AugmentationData
 {
 	// TODO(Zoey76): Implement using IXmlReader.
-	private static final Logger LOGGER = Logger.getLogger(AugmentationData.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(AugmentationData.class);
 	
 	// stats
 	private static final int STAT_BLOCKSIZE = 3640;
@@ -106,13 +106,13 @@ public class AugmentationData
 		{
 			for (int i = 0; i < 10; i++)
 			{
-				LOGGER.info(getClass().getSimpleName() + ": Loaded: " + _blueSkills.get(i).size() + " blue, " + _purpleSkills.get(i).size() + " purple and " + _redSkills.get(i).size() + " red skills for lifeStoneLevel " + i);
+				LOG.info("{}: Loaded: {} blue, {} purple and {} red skills for lifeStoneLevel {}", getClass().getSimpleName(), _blueSkills.get(i).size(), _purpleSkills.get(i).size(), _redSkills.get(i).size(), i);
 			}
 		}
 		else
 		{
-			LOGGER.log(Level.INFO, getClass().getSimpleName() + ": Loaded: " + _augmentationChances.size() + " augmentations.");
-			LOGGER.log(Level.INFO, getClass().getSimpleName() + ": Loaded: " + _augmentationChancesAcc.size() + " accessory augmentations.");
+			LOG.info("{}: Loaded: {} augmentations.", getClass().getSimpleName(), _augmentationChances.size());
+			LOG.info("{}: Loaded: {} accessory augmentations.", getClass().getSimpleName(), _augmentationChancesAcc.size());
 		}
 	}
 	
@@ -239,7 +239,7 @@ public class AugmentationData
 				File file = new File(Config.DATAPACK_ROOT + "/data/stats/augmentation/augmentation_skillmap.xml");
 				if (!file.exists())
 				{
-					LOGGER.log(Level.WARNING, getClass().getSimpleName() + ": ERROR The augmentation skillmap file is missing.");
+					LOG.warn("{}: ERROR The augmentation skillmap file is missing.", getClass().getSimpleName());
 					return;
 				}
 				
@@ -308,12 +308,12 @@ public class AugmentationData
 				}
 				if (badAugmantData != 0)
 				{
-					LOGGER.info(getClass().getSimpleName() + ": " + badAugmantData + " bad skill(s) were skipped.");
+					LOG.info("{}: {} bad skill(s) were skipped.", getClass().getSimpleName(), badAugmantData);
 				}
 			}
 			catch (Exception e)
 			{
-				LOGGER.log(Level.WARNING, getClass().getSimpleName() + ": ERROR parsing augmentation_skillmap.xml.", e);
+				LOG.warn("{}: ERROR parsing augmentation_skillmap.xml.", getClass().getSimpleName(), e);
 				return;
 			}
 		}
@@ -407,7 +407,7 @@ public class AugmentationData
 			}
 			else
 			{
-				LOGGER.log(Level.WARNING, getClass().getSimpleName() + ": ERROR The retailchances.xml data file is missing.");
+				LOG.warn("{}: ERROR The retailchances.xml data file is missing.", getClass().getSimpleName());
 				return;
 			}
 		}
@@ -500,7 +500,7 @@ public class AugmentationData
 			}
 			else
 			{
-				LOGGER.log(Level.WARNING, getClass().getSimpleName() + ": ERROR The retailchances_accessory.xml data file is missing.");
+				LOG.warn("{}: ERROR The retailchances_accessory.xml data file is missing.", getClass().getSimpleName());
 				return;
 			}
 		}
@@ -864,11 +864,6 @@ public class AugmentationData
 			}
 		}
 		stat12 = Rnd.get(offset, (offset + STAT_SUBBLOCKSIZE) - 1);
-		
-		if (Config.DEBUG)
-		{
-			LOGGER.info(getClass().getSimpleName() + ": Augmentation success: stat12=" + stat12 + "; stat34=" + stat34 + "; resultColor=" + resultColor + "; level=" + lifeStoneLevel + "; grade=" + lifeStoneGrade);
-		}
 		return new L2Augmentation(((stat34 << 16) + stat12));
 	}
 	
@@ -988,11 +983,6 @@ public class AugmentationData
 		
 		// stat12 has stats only
 		stat12 = base + skillsLength + (ACC_STAT_SUBBLOCKSIZE * resultColor) + stat12;
-		
-		if (Config.DEBUG)
-		{
-			LOGGER.info(getClass().getSimpleName() + ": Accessory augmentation success: stat12=" + stat12 + "; stat34=" + stat34 + "; level=" + lifeStoneLevel);
-		}
 		return new L2Augmentation(((stat34 << 16) + stat12));
 	}
 	

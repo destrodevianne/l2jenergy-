@@ -63,7 +63,7 @@ public final class MaxMp extends AbstractEffect
 		
 		if (params.isEmpty())
 		{
-			_log.warning(getClass().getSimpleName() + ": must have parameters.");
+			LOG.warn("{}: must have parameters.", getClass().getSimpleName());
 		}
 	}
 	

@@ -74,7 +74,7 @@ public final class ThrowUp extends AbstractEffect
 		double distance = Math.hypot(dx, dy);
 		if (distance > 2000)
 		{
-			_log.info("EffectThrow was going to use invalid coordinates for characters, getEffected: " + curX + "," + curY + " and getEffector: " + activeChar.getX() + "," + activeChar.getY());
+			LOG.info("EffectThrow was going to use invalid coordinates for characters, getEffected: {},{} and getEffector: {}, {}", curX, curY, activeChar.getX(), activeChar.getY());
 			return;
 		}
 		int offset = Math.min((int) distance + _flyRadius, 1400);

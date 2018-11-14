@@ -21,15 +21,14 @@ package com.l2jserver.loginserver;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.GeneralSecurityException;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.Server;
@@ -47,7 +46,7 @@ import com.l2jserver.status.Status;
  */
 public final class L2LoginServer
 {
-	private final Logger _log = Logger.getLogger(L2LoginServer.class.getName());
+	private final Logger LOG = LoggerFactory.getLogger(L2LoginServer.class);
 	
 	public static final int PROTOCOL_REV = 0x0106;
 	private static L2LoginServer _instance;
@@ -70,29 +69,13 @@ public final class L2LoginServer
 	{
 		_instance = this;
 		Server.serverMode = Server.MODE_LOGINSERVER;
-		// Local Constants
-		final String LOG_FOLDER = "log"; // Name of folder for log file
-		final String LOG_NAME = "./log.cfg"; // Name of log file
 		
-		/*** Main ***/
+		final String LOG_FOLDER = "./logs"; // Name of folder for log file
 		// Create log folder
-		File logFolder = new File(Config.DATAPACK_ROOT, LOG_FOLDER);
+		File logFolder = new File(LOG_FOLDER);
 		logFolder.mkdir();
-		
-		// Create input stream for log file -- or store file data into memory
-		
-		try (InputStream is = new FileInputStream(new File(LOG_NAME)))
-		{
-			LogManager.getLogManager().readConfiguration(is);
-		}
-		catch (IOException e)
-		{
-			_log.warning(getClass().getSimpleName() + ": " + e.getMessage());
-		}
-		
 		// Load Config
 		Config.load();
-		
 		// Prepare Database
 		ConnectionFactory.getInstance();
 		
@@ -102,7 +85,7 @@ public final class L2LoginServer
 		}
 		catch (GeneralSecurityException e)
 		{
-			_log.log(Level.SEVERE, "FATAL: Failed initializing LoginController. Reason: " + e.getMessage(), e);
+			LOG.error("FATAL: Failed initializing LoginController. Reason!", e);
 			System.exit(1);
 		}
 		
@@ -124,7 +107,7 @@ public final class L2LoginServer
 			}
 			catch (UnknownHostException e)
 			{
-				_log.log(Level.WARNING, "WARNING: The LoginServer bind address is invalid, using all avaliable IPs. Reason: " + e.getMessage(), e);
+				LOG.error("WARNING: The LoginServer bind address is invalid, using all avaliable IPs. Reason!", e);
 			}
 		}
 		
@@ -142,7 +125,7 @@ public final class L2LoginServer
 		}
 		catch (IOException e)
 		{
-			_log.log(Level.SEVERE, "FATAL: Failed to open Selector. Reason: " + e.getMessage(), e);
+			LOG.error("FATAL: Failed to open Selector. Reason!", e);
 			System.exit(1);
 		}
 		
@@ -150,11 +133,11 @@ public final class L2LoginServer
 		{
 			_gameServerListener = new GameServerListener();
 			_gameServerListener.start();
-			_log.info("Listening for GameServers on " + Config.GAME_SERVER_LOGIN_HOST + ":" + Config.GAME_SERVER_LOGIN_PORT);
+			LOG.info("Listening for GameServers on {}: {}", Config.GAME_SERVER_LOGIN_HOST, Config.GAME_SERVER_LOGIN_PORT);
 		}
 		catch (IOException e)
 		{
-			_log.log(Level.SEVERE, "FATAL: Failed to start the Game Server Listener. Reason: " + e.getMessage(), e);
+			LOG.error("FATAL: Failed to start the Game Server Listener. Reason!", e);
 			System.exit(1);
 		}
 		
@@ -167,23 +150,23 @@ public final class L2LoginServer
 			}
 			catch (IOException e)
 			{
-				_log.log(Level.WARNING, "Failed to start the Telnet Server. Reason: " + e.getMessage(), e);
+				LOG.error("Failed to start the Telnet Server. Reason!", e);
 			}
 		}
 		else
 		{
-			_log.info("Telnet server is currently disabled.");
+			LOG.info("Telnet server is currently disabled.");
 		}
 		
 		try
 		{
 			_selectorThread.openServerSocket(bindAddress, Config.PORT_LOGIN);
 			_selectorThread.start();
-			_log.log(Level.INFO, getClass().getSimpleName() + ": is now listening on: " + Config.LOGIN_BIND_ADDRESS + ":" + Config.PORT_LOGIN);
+			LOG.info("{}: is now listening on: {}: {}", getClass().getSimpleName(), Config.LOGIN_BIND_ADDRESS, Config.PORT_LOGIN);
 		}
 		catch (IOException e)
 		{
-			_log.log(Level.SEVERE, "FATAL: Failed to open server socket. Reason: " + e.getMessage(), e);
+			LOG.error("FATAL: Failed to open server socket. Reason!", e);
 			System.exit(1);
 		}
 		
@@ -228,7 +211,7 @@ public final class L2LoginServer
 							}
 							catch (NumberFormatException nfe)
 							{
-								_log.warning("Skipped: Incorrect ban duration (" + parts[1] + ") on (" + bannedFile.getName() + "). Line: " + lnr.getLineNumber());
+								LOG.warn("Skipped: Incorrect ban duration ({}) on ({}). Line: ",parts[1], bannedFile.getName(), lnr.getLineNumber());
 								return;
 							}
 						}
@@ -239,25 +222,25 @@ public final class L2LoginServer
 						}
 						catch (UnknownHostException e)
 						{
-							_log.warning("Skipped: Invalid address (" + address + ") on (" + bannedFile.getName() + "). Line: " + lnr.getLineNumber());
+							LOG.warn("Skipped: Invalid address ({}) on ({}). Line: {}",address, bannedFile.getName(), lnr.getLineNumber());
 						}
 					});
 				//@formatter:on
 			}
 			catch (IOException e)
 			{
-				_log.log(Level.WARNING, "Error while reading the bans file (" + bannedFile.getName() + "). Details: " + e.getMessage(), e);
+				LOG.warn("Error while reading the bans file ({}).", bannedFile.getName(), e);
 			}
-			_log.info("Loaded " + LoginController.getInstance().getBannedIps().size() + " IP Bans.");
+			LOG.info("Loaded {} IP Bans.", LoginController.getInstance().getBannedIps().size());
 		}
 		else
 		{
-			_log.warning("IP Bans file (" + bannedFile.getName() + ") is missing or is a directory, skipped.");
+			LOG.warn("IP Bans file ({}) is missing or is a directory, skipped.", bannedFile.getName());
 		}
 		
 		if (Config.LOGIN_SERVER_SCHEDULE_RESTART)
 		{
-			_log.info("Scheduled LS restart after " + Config.LOGIN_SERVER_SCHEDULE_RESTART_TIME + " hours");
+			LOG.info("Scheduled LS restart after {} hours", Config.LOGIN_SERVER_SCHEDULE_RESTART_TIME);
 			_restartLoginServer = new LoginServerRestart();
 			_restartLoginServer.setDaemon(true);
 			_restartLoginServer.start();

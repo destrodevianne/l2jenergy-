@@ -22,7 +22,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.datatables.ItemTable;
@@ -50,7 +52,6 @@ import com.l2jserver.gameserver.model.stats.functions.AbstractFunction;
 import com.l2jserver.gameserver.model.stats.functions.FuncTemplate;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
-import com.l2jserver.util.StringUtil;
 
 /**
  * This class contains all informations concerning the item (weapon, armor, etc).<BR>
@@ -63,7 +64,7 @@ import com.l2jserver.util.StringUtil;
  */
 public abstract class L2Item extends ListenersContainer implements IIdentifiable
 {
-	protected static final Logger _log = Logger.getLogger(L2Item.class.getName());
+	protected static final Logger LOG = LoggerFactory.getLogger(L2Item.class);
 	
 	public static final int SLOT_NONE = 0x0000;
 	public static final int SLOT_UNDERWEAR = 0x0001;
@@ -209,13 +210,13 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 					
 					if (id == 0)
 					{
-						_log.info(StringUtil.concat("Ignoring item_skill(", element, ") for item ", toString(), ". Skill id is 0!"));
+						LOG.info("Ignoring item_skill({}) for item {}. Skill id is 0.", element, toString());
 						continue;
 					}
 					
 					if (level == 0)
 					{
-						_log.info(StringUtil.concat("Ignoring item_skill(", element, ") for item ", toString(), ". Skill level is 0!"));
+						LOG.info("Ignoring item_skill({}) for item {}. Skill level is 0!", element, toString());
 						continue;
 					}
 					
@@ -224,7 +225,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 				}
 				catch (Exception e)
 				{
-					_log.warning(StringUtil.concat("Failed to parse item_skill(", element, ") for item ", toString(), "! Format: SkillId0-SkillLevel0[;SkillIdN-SkillLevelN]"));
+					LOG.warn("Failed to parse item_skill({}) for item {}! Format: SkillId0-SkillLevel0[;SkillIdN-SkillLevelN]", element, toString());
 				}
 			}
 			
@@ -253,7 +254,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 				catch (Exception nfe)
 				{
 					// Incorrect syntax, don't add new skill
-					_log.info(StringUtil.concat("Couldnt parse ", skills, " in weapon unequip skills! item ", toString()));
+					LOG.info("Couldnt parse {} in weapon unequip skills! item {}", skills, toString());
 				}
 				if ((id > 0) && (level > 0))
 				{

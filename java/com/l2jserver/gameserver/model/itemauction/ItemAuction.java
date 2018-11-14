@@ -24,8 +24,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
@@ -44,7 +45,8 @@ import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
  */
 public final class ItemAuction
 {
-	static final Logger _log = Logger.getLogger(ItemAuctionManager.class.getName());
+	static final Logger LOG = LoggerFactory.getLogger(ItemAuctionManager.class);
+	
 	private static final long ENDING_TIME_EXTEND_5 = TimeUnit.MILLISECONDS.convert(5, TimeUnit.MINUTES);
 	private static final long ENDING_TIME_EXTEND_3 = TimeUnit.MILLISECONDS.convert(3, TimeUnit.MINUTES);
 	
@@ -208,7 +210,7 @@ public final class ItemAuction
 		}
 		catch (final SQLException e)
 		{
-			_log.log(Level.WARNING, "", e);
+			LOG.warn("", e);
 		}
 	}
 	
@@ -242,7 +244,7 @@ public final class ItemAuction
 		}
 		catch (SQLException e)
 		{
-			_log.log(Level.WARNING, "", e);
+			LOG.warn("", e);
 		}
 	}
 	
@@ -434,7 +436,7 @@ public final class ItemAuction
 		{
 			case CREATED:
 				return false;
-				
+			
 			case FINISHED:
 				if (_startingTime < (System.currentTimeMillis() - TimeUnit.MILLISECONDS.convert(Config.ALT_ITEM_AUCTION_EXPIRED_AFTER, TimeUnit.DAYS)))
 				{

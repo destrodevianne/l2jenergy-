@@ -78,6 +78,8 @@ public class SevenSignsFestival implements SpawnListener
 	
 	private static final String GET_CLAN_NAME = "SELECT clan_name FROM clan_data WHERE clan_id = (SELECT clanid FROM characters WHERE char_name = ?)";
 	
+	private L2PcInstance _player;
+	
 	/**
 	 * These length settings are important! :)<br>
 	 * All times are relative to the ELAPSED time (in ms) since a festival begins.<br>
@@ -1916,7 +1918,7 @@ public class SevenSignsFestival implements SpawnListener
 					}
 					else
 					{
-						festivalInst.sendMessageToParticipants(MessagesData.getInstance().getMessage(null, "ss_festival_ended_time").replace("%s%", end + ""));
+						festivalInst.sendMessageToParticipants(MessagesData.getInstance().getMessage(getPlayer(), "ss_festival_ended_time").replace("%s%", end + ""));
 					}
 				}
 				
@@ -2431,6 +2433,11 @@ public class SevenSignsFestival implements SpawnListener
 				_npcId = -1;
 			}
 		}
+	}
+	
+	public L2PcInstance getPlayer()
+	{
+		return _player;
 	}
 	
 	private static class SingletonHolder

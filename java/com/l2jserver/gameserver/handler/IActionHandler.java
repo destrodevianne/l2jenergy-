@@ -18,7 +18,8 @@
  */
 package com.l2jserver.gameserver.handler;
 
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.model.L2Object;
@@ -26,7 +27,7 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
 public interface IActionHandler
 {
-	public static Logger _log = Logger.getLogger(IActionHandler.class.getName());
+	public static Logger LOG = LoggerFactory.getLogger(IActionHandler.class);
 	
 	public boolean action(L2PcInstance activeChar, L2Object target, boolean interact);
 	

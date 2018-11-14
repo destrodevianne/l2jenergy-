@@ -18,8 +18,6 @@
  */
 package handlers.effecthandlers.instant;
 
-import java.util.logging.Level;
-
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.data.xml.impl.PetDataTable;
 import com.l2jserver.gameserver.model.L2PetData;
@@ -71,14 +69,14 @@ public final class SummonPet extends AbstractEffect
 		final PetItemHolder holder = player.removeScript(PetItemHolder.class);
 		if (holder == null)
 		{
-			_log.log(Level.WARNING, "Summoning pet without attaching PetItemHandler!", new Throwable());
+			LOG.warn("Summoning pet without attaching PetItemHandler!", new Throwable());
 			return;
 		}
 		
 		final L2ItemInstance item = holder.getItem();
 		if (player.getInventory().getItemByObjectId(item.getObjectId()) != item)
 		{
-			_log.log(Level.WARNING, "Player: " + player + " is trying to summon pet from item that he doesn't owns.");
+			LOG.warn("Player: {} is trying to summon pet from item that he doesn't owns.", player);
 			return;
 		}
 		

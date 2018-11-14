@@ -21,7 +21,6 @@ package com.l2jserver.gameserver.network.clientpackets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.logging.Level;
 
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -76,7 +75,7 @@ public class RequestPetitionFeedback extends L2GameClientPacket
 		}
 		catch (SQLException e)
 		{
-			_log.log(Level.SEVERE, "Error while saving petition feedback");
+			LOG.error("Error while saving petition feedback!", e);
 		}
 	}
 	

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss} [%-5level] %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	 <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/java.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/java_%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+       <encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5level] [%thread] %logger - %msg%n</pattern>
+		</encoder>
+    </appender>
+	
+	<appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+		<file>logs/error.log</file>
+		
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+		  <!-- rollover daily -->
+		  <fileNamePattern>logs/error_%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter"> 
+			<level>WARN</level>
+			<level>ERROR</level> 
+		</filter>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5level] [%thread] %logger - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="LOGIN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="com.l2jserver.loginserver.util.logging.LoginFilter"/>
+        <file>logs/login.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/auth_%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+       <encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5level] [%thread] %logger - %msg%n</pattern>
+		</encoder>
+    </appender>
+	
+	 <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+		<appender-ref ref="FILE_ERROR"/>
+        <appender-ref ref="LOGIN"/>
+    </root>
+</configuration>

@@ -61,9 +61,9 @@ public class TaskRecom extends Task
 		}
 		catch (Exception e)
 		{
-			_log.severe(getClass().getSimpleName() + ": Could not reset Recommendations System: " + e);
+			LOG.error("{}: Could not reset Recommendations System!", getClass().getSimpleName(), e);
 		}
-		_log.info("Recommendations System reseted");
+		LOG.info("Recommendations System reseted");
 	}
 	
 	@Override

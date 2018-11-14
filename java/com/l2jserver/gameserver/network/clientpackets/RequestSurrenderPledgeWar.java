@@ -60,7 +60,7 @@ public final class RequestSurrenderPledgeWar extends L2GameClientPacket
 			return;
 		}
 		
-		_log.info("RequestSurrenderPledgeWar by " + getClient().getActiveChar().getClan().getName() + " with " + _pledgeName);
+		LOG.info("RequestSurrenderPledgeWar by {} with {}", getClient().getActiveChar().getClan().getName(), _pledgeName);
 		
 		if (!_clan.isAtWarWith(clan.getId()))
 		{

@@ -20,7 +20,6 @@ package com.l2jserver.gameserver.network.clientpackets;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
@@ -76,7 +75,7 @@ public final class RequestPreviewItem extends L2GameClientPacket
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.SEVERE, "", e);
+				LOG.error("", e);
 			}
 		}
 	}
@@ -154,7 +153,7 @@ public final class RequestPreviewItem extends L2GameClientPacket
 		final L2MerchantInstance merchant = (target instanceof L2MerchantInstance) ? (L2MerchantInstance) target : null;
 		if (merchant == null)
 		{
-			_log.warning(getClass().getName() + " Null merchant!");
+			LOG.warn("{} Null merchant!", getClass().getName());
 			return;
 		}
 		

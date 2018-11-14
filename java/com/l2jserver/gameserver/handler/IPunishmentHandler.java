@@ -18,7 +18,8 @@
  */
 package com.l2jserver.gameserver.handler;
 
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.model.punishment.PunishmentTask;
 import com.l2jserver.gameserver.model.punishment.PunishmentType;
@@ -28,7 +29,7 @@ import com.l2jserver.gameserver.model.punishment.PunishmentType;
  */
 public interface IPunishmentHandler
 {
-	static final Logger _log = Logger.getLogger(IPunishmentHandler.class.getName());
+	static final Logger LOG = LoggerFactory.getLogger(IPunishmentHandler.class);
 	
 	public void onStart(PunishmentTask task);
 	

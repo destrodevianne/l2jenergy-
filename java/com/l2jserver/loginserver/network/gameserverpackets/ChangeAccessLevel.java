@@ -18,7 +18,8 @@
  */
 package com.l2jserver.loginserver.network.gameserverpackets;
 
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.loginserver.GameServerThread;
 import com.l2jserver.loginserver.LoginController;
@@ -29,12 +30,8 @@ import com.l2jserver.util.network.BaseRecievePacket;
  */
 public class ChangeAccessLevel extends BaseRecievePacket
 {
-	protected static Logger _log = Logger.getLogger(ChangeAccessLevel.class.getName());
+	protected final static Logger LOG = LoggerFactory.getLogger(ChangeAccessLevel.class);
 	
-	/**
-	 * @param decrypt
-	 * @param server
-	 */
 	public ChangeAccessLevel(byte[] decrypt, GameServerThread server)
 	{
 		super(decrypt);
@@ -42,6 +39,6 @@ public class ChangeAccessLevel extends BaseRecievePacket
 		String account = readS();
 		
 		LoginController.getInstance().setAccountAccessLevel(account, level);
-		_log.info("Changed " + account + " access level to " + level);
+		LOG.info("Changed {} access level to {}", account, level);
 	}
 }

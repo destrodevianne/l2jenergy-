@@ -65,7 +65,7 @@ public class ItemSkillsTemplate implements IItemHandler
 		final SkillHolder[] skills = item.getEtcItem().getSkills();
 		if (skills == null)
 		{
-			_log.info("Item " + item + " does not have registered any skill for handler.");
+			LOG.info("Item {} does not have registered any skill for handler.", item);
 			return false;
 		}
 		

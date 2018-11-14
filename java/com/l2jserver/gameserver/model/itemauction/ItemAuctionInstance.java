@@ -57,6 +57,7 @@ import com.l2jserver.util.Rnd;
 public final class ItemAuctionInstance
 {
 	private static final Logger LOG = LoggerFactory.getLogger(ItemAuctionInstance.class);
+	
 	private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("HH:mm:ss dd.MM.yy");
 	
 	private static final long START_TIME_SPACE = TimeUnit.MILLISECONDS.convert(1, TimeUnit.MINUTES);

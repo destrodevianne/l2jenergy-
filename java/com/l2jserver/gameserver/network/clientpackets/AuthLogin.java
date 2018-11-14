@@ -64,8 +64,8 @@ public final class AuthLogin extends L2GameClientPacket
 		SessionKey key = new SessionKey(_loginKey1, _loginKey2, _playKey1, _playKey2);
 		if (Config.DEBUG)
 		{
-			_log.info("user:" + _loginName);
-			_log.info("key:" + key);
+			LOG.debug("user: {}", _loginName);
+			LOG.debug("key: {}", key);
 		}
 		
 		// avoid potential exploits

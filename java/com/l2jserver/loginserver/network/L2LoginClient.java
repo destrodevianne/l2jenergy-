@@ -24,9 +24,10 @@ import java.nio.ByteBuffer;
 import java.security.interfaces.RSAPrivateKey;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
-import com.l2jserver.Config;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.l2jserver.loginserver.LoginController;
 import com.l2jserver.loginserver.SessionKey;
 import com.l2jserver.loginserver.network.serverpackets.L2LoginServerPacket;
@@ -47,7 +48,7 @@ import com.l2jserver.util.crypt.ScrambledKeyPair;
  */
 public final class L2LoginClient extends MMOClient<MMOConnection<L2LoginClient>>
 {
-	private static final Logger _log = Logger.getLogger(L2LoginClient.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(L2LoginClient.class);
 	
 	public static enum LoginClientState
 	{
@@ -98,7 +99,7 @@ public final class L2LoginClient extends MMOClient<MMOConnection<L2LoginClient>>
 			isChecksumValid = _loginCrypt.decrypt(buf.array(), buf.position(), size);
 			if (!isChecksumValid)
 			{
-				_log.warning("Wrong checksum from client: " + toString());
+				LOG.warn("Wrong checksum from client: {}", toString());
 				super.getConnection().close((SendablePacket<L2LoginClient>) null);
 				return false;
 			}
@@ -106,7 +107,7 @@ public final class L2LoginClient extends MMOClient<MMOConnection<L2LoginClient>>
 		}
 		catch (IOException e)
 		{
-			_log.warning(getClass().getSimpleName() + ": " + e.getMessage());
+			LOG.warn("{}: ", getClass().getSimpleName(), e);
 			super.getConnection().close((SendablePacket<L2LoginClient>) null);
 			return false;
 		}
@@ -122,7 +123,7 @@ public final class L2LoginClient extends MMOClient<MMOConnection<L2LoginClient>>
 		}
 		catch (IOException e)
 		{
-			_log.warning(getClass().getSimpleName() + ": " + e.getMessage());
+			LOG.warn("{}: ", getClass().getSimpleName(), e);
 			return false;
 		}
 		buf.position(offset + size);
@@ -265,11 +266,7 @@ public final class L2LoginClient extends MMOClient<MMOConnection<L2LoginClient>>
 	@Override
 	public void onDisconnection()
 	{
-		if (Config.DEBUG)
-		{
-			_log.info("DISCONNECTED: " + toString());
-		}
-		
+		LOG.debug("DISCONNECTED: {}", toString());
 		if (!hasJoinedGS() || ((getConnectionStartTime() + LoginController.LOGIN_TIMEOUT) < System.currentTimeMillis()))
 		{
 			LoginController.getInstance().removeAuthedLoginClient(getAccount());

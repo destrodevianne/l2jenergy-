@@ -18,9 +18,8 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
@@ -36,6 +35,7 @@ import com.l2jserver.gameserver.model.events.returns.ChatFilterReturn;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
+import com.l2jserver.gameserver.util.LoggingUtils;
 import com.l2jserver.gameserver.util.Util;
 
 /**
@@ -45,7 +45,7 @@ import com.l2jserver.gameserver.util.Util;
 public final class Say2 extends L2GameClientPacket
 {
 	private static final String _C__49_SAY2 = "[C] 49 Say2";
-	private static Logger _logChat = Logger.getLogger("chat");
+	private static Logger LOG_CHAT = LoggerFactory.getLogger("chat");
 	
 	public static final int ALL = 0;
 	public static final int SHOUT = 1; // !
@@ -152,11 +152,6 @@ public final class Say2 extends L2GameClientPacket
 	@Override
 	protected void runImpl()
 	{
-		if (Config.DEBUG)
-		{
-			_log.info("Say2: Msg Type = '" + _type + "' Text = '" + _text + "'.");
-		}
-		
 		L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 		{
@@ -165,7 +160,7 @@ public final class Say2 extends L2GameClientPacket
 		
 		if ((_type < 0) || (_type >= CHAT_NAMES.length))
 		{
-			_log.warning("Say2: Invalid type: " + _type + " Player : " + activeChar.getName() + " text: " + String.valueOf(_text));
+			LOG.warn("Say2: Invalid type: {} Player : {} text: {}", _type, activeChar.getName(), String.valueOf(_text));
 			activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 			activeChar.logout();
 			return;
@@ -173,7 +168,7 @@ public final class Say2 extends L2GameClientPacket
 		
 		if (_text.isEmpty())
 		{
-			_log.warning(activeChar.getName() + ": sending empty text. Possible packet hack!");
+			LOG.warn("{}: sending empty text. Possible packet hack!", activeChar.getName());
 			activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 			activeChar.logout();
 			return;
@@ -235,27 +230,7 @@ public final class Say2 extends L2GameClientPacket
 		
 		if (Config.LOG_CHAT)
 		{
-			LogRecord record = new LogRecord(Level.INFO, _text);
-			record.setLoggerName("chat");
-			
-			if (_type == TELL)
-			{
-				record.setParameters(new Object[]
-				{
-					CHAT_NAMES[_type],
-					"[" + activeChar.getName() + " to " + _target + "]"
-				});
-			}
-			else
-			{
-				record.setParameters(new Object[]
-				{
-					CHAT_NAMES[_type],
-					"[" + activeChar.getName() + "]"
-				});
-			}
-			
-			_logChat.log(record);
+			LoggingUtils.logChat(LOG_CHAT, _type == TELL ? activeChar.getName() : null, _target, _text, CHAT_NAMES[_type]);
 		}
 		
 		if (_text.indexOf(8) >= 0)
@@ -285,7 +260,7 @@ public final class Say2 extends L2GameClientPacket
 		}
 		else
 		{
-			_log.info("No handler registered for ChatType: " + _type + " Player: " + getClient());
+			LOG.info("No handler registered for ChatType: {} Player: {}", _type, getClient());
 		}
 	}
 	
@@ -333,20 +308,20 @@ public final class Say2 extends L2GameClientPacket
 			{
 				if (owner.getInventory().getItemByObjectId(id) == null)
 				{
-					_log.info(getClient() + " trying publish item which doesnt own! ID:" + id);
+					LOG.info("{} trying publish item which doesnt own! ID: {}", getClient(), id);
 					return false;
 				}
 				((L2ItemInstance) item).publish();
 			}
 			else
 			{
-				_log.info(getClient() + " trying publish object which is not item! Object:" + item);
+				LOG.info("{} trying publish object which is not item! Object: {}", getClient(), item);
 				return false;
 			}
 			pos1 = _text.indexOf(8, pos) + 1;
 			if (pos1 == 0) // missing ending tag
 			{
-				_log.info(getClient() + " sent invalid publish item msg! ID:" + id);
+				LOG.info("{} sent invalid publish item msg! ID: {}", getClient(), id);
 				return false;
 			}
 		}

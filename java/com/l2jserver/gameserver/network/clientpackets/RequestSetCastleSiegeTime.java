@@ -20,7 +20,6 @@ package com.l2jserver.gameserver.network.clientpackets;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Level;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
@@ -54,17 +53,17 @@ public class RequestSetCastleSiegeTime extends L2GameClientPacket
 		final Castle castle = CastleManager.getInstance().getCastleById(_castleId);
 		if ((activeChar == null) || (castle == null))
 		{
-			_log.log(Level.WARNING, getType() + ": activeChar: " + activeChar + " castle: " + castle + " castleId: " + _castleId);
+			LOG.warn("{}: activeChar: {} castle: {} castleId: {}", getType(), activeChar, castle, _castleId);
 			return;
 		}
 		if ((castle.getOwnerId() > 0) && (castle.getOwnerId() != activeChar.getClanId()))
 		{
-			_log.log(Level.WARNING, getType() + ": activeChar: " + activeChar + " castle: " + castle + " castleId: " + _castleId + " is trying to change siege date of not his own castle!");
+			LOG.warn("{}: activeChar: {} castle: {} castleId: {} is trying to change siege date of not his own castle!", getType(), activeChar, castle, _castleId);
 			return;
 		}
 		else if (!activeChar.isClanLeader())
 		{
-			_log.log(Level.WARNING, getType() + ": activeChar: " + activeChar + " castle: " + castle + " castleId: " + _castleId + " is trying to change siege date but is not clan leader!");
+			LOG.warn("{}: activeChar: {} castle: {} castleId: {} is trying to change siege date but is not clan leader!", getType(), activeChar, castle, _castleId);
 			return;
 		}
 		else if (!castle.getIsTimeRegistrationOver())
@@ -81,12 +80,12 @@ public class RequestSetCastleSiegeTime extends L2GameClientPacket
 			}
 			else
 			{
-				_log.log(Level.WARNING, getType() + ": activeChar: " + activeChar + " castle: " + castle + " castleId: " + _castleId + " is trying to an invalid time (" + new Date(_time) + " !");
+				LOG.warn("{}: activeChar: {} castle: {} castleId: {} is trying to an invalid time ({}) !", getType(), activeChar, castle, _castleId, new Date(_time));
 			}
 		}
 		else
 		{
-			_log.log(Level.WARNING, getType() + ": activeChar: " + activeChar + " castle: " + castle + " castleId: " + _castleId + " is trying to change siege date but currently not possible!");
+			LOG.warn("{}: activeChar:{} castle: {} castleId: {} is trying to change siege date but currently not possible!", getType(), activeChar, castle, _castleId);
 		}
 	}
 	

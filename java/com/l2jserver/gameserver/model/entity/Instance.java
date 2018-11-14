@@ -29,11 +29,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ScheduledFuture;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -70,7 +70,7 @@ import com.l2jserver.gameserver.util.Broadcast;
  */
 public final class Instance
 {
-	private static final Logger _log = Logger.getLogger(Instance.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(Instance.class);
 	
 	private final int _id;
 	private String _name;
@@ -268,7 +268,7 @@ public final class Instance
 	{
 		if (_doors.containsKey(doorId))
 		{
-			_log.warning("Door ID " + doorId + " already exists in instance " + getId());
+			LOG.warn("Door ID {} already exists in instance {}", doorId, getId());
 			return;
 		}
 		
@@ -437,7 +437,7 @@ public final class Instance
 		}
 		else
 		{
-			_log.warning(getName() + " instance: cannot spawn NPC's, wrong group name: " + groupName);
+			LOG.warn("{} instance: cannot spawn NPC's, wrong group name: {}", getName(), groupName);
 		}
 		
 		return ret;
@@ -465,11 +465,11 @@ public final class Instance
 		}
 		catch (IOException e)
 		{
-			_log.log(Level.WARNING, "Instance: can not find " + xml.getAbsolutePath() + " ! " + e.getMessage(), e);
+			LOG.warn("Instance: can not find {} !", xml.getAbsolutePath(), e);
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Instance: error while loading " + xml.getAbsolutePath() + " ! " + e.getMessage(), e);
+			LOG.warn("Instance: error while loading {}!", xml.getAbsolutePath(), e);
 		}
 	}
 	
@@ -701,7 +701,7 @@ public final class Instance
 							}
 							catch (Exception e)
 							{
-								_log.log(Level.WARNING, "Error parsing instance xml: " + e.getMessage(), e);
+								LOG.warn("Error parsing instance xml!", e);
 							}
 						}
 					}
@@ -915,7 +915,7 @@ public final class Instance
 						player.teleToLocation(TeleportWhereType.TOWN);
 					}
 				}
-			} , _ejectTime));
+			}, _ejectTime));
 		}
 	}
 	

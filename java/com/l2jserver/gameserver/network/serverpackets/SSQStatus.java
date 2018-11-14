@@ -131,20 +131,20 @@ public class SSQStatus extends L2GameServerPacket
 				
 				if (Config.DEBUG)
 				{
-					_log.info("Dusk Stone Score: " + duskStoneScore + " - Dawn Stone Score: " + dawnStoneScore);
-					_log.info("Dusk Festival Score: " + duskFestivalScore + " - Dawn Festival Score: " + dawnFestivalScore);
-					_log.info("Dusk Score: " + duskTotalScore + " - Dawn Score: " + dawnTotalScore);
-					_log.info("Overall Score: " + totalOverallScore);
-					_log.info("");
+					LOG.debug("Dusk Stone Score: {} - Dawn Stone Score: {}", duskStoneScore, dawnStoneScore);
+					LOG.debug("Dusk Festival Score: {} - Dawn Festival Score: {}", duskFestivalScore, dawnFestivalScore);
+					LOG.debug("Dusk Score: {} - Dawn Score: {}", duskTotalScore, dawnTotalScore);
+					LOG.debug("Overall Score: {}", totalOverallScore);
+					LOG.debug("");
 					if (totalStoneScore == 0)
 					{
-						_log.info("Dusk Prop: 0 - Dawn Prop: 0");
+						LOG.debug("Dusk Prop: 0 - Dawn Prop: 0");
 					}
 					else
 					{
-						_log.info("Dusk Prop: " + ((duskStoneScore / totalStoneScore) * 500) + " - Dawn Prop: " + ((dawnStoneScore / totalStoneScore) * 500));
+						LOG.debug("Dusk Prop: {} - Dawn Prop: {}", ((duskStoneScore / totalStoneScore) * 500), ((dawnStoneScore / totalStoneScore) * 500));
 					}
-					_log.info("Dusk %: " + duskPercent + " - Dawn %: " + dawnPercent);
+					LOG.debug("Dusk %: {} - Dawn %: {}", duskPercent, dawnPercent);
 				}
 				
 				/* DUSK */
@@ -229,7 +229,7 @@ public class SSQStatus extends L2GameServerPacket
 					
 					if (Config.DEBUG)
 					{
-						_log.info(SevenSigns.getSealName(i, true) + " = Dawn Prop: " + dawnProportion + "(" + ((dawnProportion / totalDawnMembers) * 100) + "%)" + ", Dusk Prop: " + duskProportion + "(" + ((duskProportion / totalDuskMembers) * 100) + "%)");
+						LOG.debug("{} = Dawn Prop: {}({}%)" + ", Dusk Prop: {}({}%)", SevenSigns.getSealName(i, true), dawnProportion, ((dawnProportion / totalDawnMembers) * 100), duskProportion, ((duskProportion / totalDuskMembers) * 100));
 					}
 					
 					writeC(i);

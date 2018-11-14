@@ -22,7 +22,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.datatables.SkillData;
@@ -37,7 +39,7 @@ import com.l2jserver.util.file.filter.XMLFilter;
  */
 public class DocumentEngine
 {
-	private static final Logger _log = Logger.getLogger(DocumentEngine.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(DocumentEngine.class);
 	
 	private final List<File> _itemFiles = new ArrayList<>();
 	private final List<File> _skillFiles = new ArrayList<>();
@@ -66,7 +68,7 @@ public class DocumentEngine
 		File dir = new File(Config.DATAPACK_ROOT, dirname);
 		if (!dir.exists())
 		{
-			_log.warning("Dir " + dir.getAbsolutePath() + " not exists");
+			LOG.warn("Dir {} not exists", dir.getAbsolutePath());
 			return;
 		}
 		
@@ -84,7 +86,7 @@ public class DocumentEngine
 	{
 		if (file == null)
 		{
-			_log.warning("Skill file not found.");
+			LOG.warn("Skill file not found.");
 			return null;
 		}
 		DocumentSkill doc = new DocumentSkill(file);
@@ -108,7 +110,7 @@ public class DocumentEngine
 				count++;
 			}
 		}
-		_log.info(getClass().getSimpleName() + ": Loaded " + count + " Skill templates from XML files.");
+		LOG.info("{}: Loaded {} Skill templates from XML files.", getClass().getSimpleName(), count);
 	}
 	
 	/**

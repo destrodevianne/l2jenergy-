@@ -18,8 +18,6 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
-import java.util.logging.Level;
-
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.enums.HtmlActionScope;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -77,7 +75,7 @@ public abstract class AbstractHtmlPacket extends L2GameServerPacket
 	{
 		if (html.length() > 17200)
 		{
-			_log.log(Level.WARNING, "Html is too long! this will crash the client!", new Throwable());
+			LOG.warn("Html is too long! this will crash the client!", new Throwable());
 			_html = html.substring(0, 17200);
 		}
 		
@@ -95,7 +93,7 @@ public abstract class AbstractHtmlPacket extends L2GameServerPacket
 		if (content == null)
 		{
 			setHtml("<html><body>My Text is missing:<br>" + path + "</body></html>");
-			_log.warning("missing html page " + path);
+			LOG.warn("missing html page {}", path);
 			return false;
 		}
 		

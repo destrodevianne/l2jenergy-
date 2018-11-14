@@ -19,11 +19,11 @@
 package com.l2jserver.gameserver.script.faenor;
 
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.script.ScriptContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
 
 import com.l2jserver.gameserver.ThreadPoolManager;
@@ -38,7 +38,8 @@ import com.l2jserver.gameserver.script.ScriptEngine;
  */
 public class FaenorEventParser extends FaenorParser
 {
-	static Logger _log = Logger.getLogger(FaenorEventParser.class.getName());
+	static Logger LOG = LoggerFactory.getLogger(FaenorEventParser.class);
+	
 	private DateRange _eventDates = null;
 	
 	@Override
@@ -50,13 +51,13 @@ public class FaenorEventParser extends FaenorParser
 		Date currentDate = new Date();
 		if (_eventDates.getEndDate().before(currentDate))
 		{
-			_log.info("Event ID: (" + ID + ") has passed... Ignored.");
+			LOG.info("Event ID: ({}) has passed... Ignored.", ID);
 			return;
 		}
 		
 		if (_eventDates.getStartDate().after(currentDate))
 		{
-			_log.info("Event ID: (" + ID + ") is not active yet... Ignored.");
+			LOG.info("Event ID: ({}) is not active yet... Ignored.", ID);
 			ThreadPoolManager.getInstance().scheduleGeneral(() -> parseEventDropAndMessage(eventNode), _eventDates.getStartDate().getTime() - currentDate.getTime());
 			return;
 		}
@@ -93,7 +94,7 @@ public class FaenorEventParser extends FaenorParser
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Error in event parser: " + e.getMessage(), e);
+			LOG.warn("Error in event parser!", e);
 		}
 	}
 	
@@ -120,7 +121,7 @@ public class FaenorEventParser extends FaenorParser
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "ERROR(parseEventDrop):" + e.getMessage(), e);
+			LOG.warn("ERROR(parseEventDrop)!", e);
 		}
 	}
 	

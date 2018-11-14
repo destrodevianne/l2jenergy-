@@ -104,7 +104,7 @@ public final class RequestBlock extends L2GameClientPacket
 				BlockList.setBlockAll(activeChar, false);
 				break;
 			default:
-				_log.info("Unknown 0xA9 block type: " + _type);
+				LOG.info("Unknown 0xA9 block type: {}", _type);
 		}
 	}
 	

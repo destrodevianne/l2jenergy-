@@ -18,8 +18,6 @@
  */
 package com.l2jserver.loginserver.network.gameserverpackets;
 
-import java.util.logging.Logger;
-
 import com.l2jserver.loginserver.GameServerTable;
 import com.l2jserver.loginserver.GameServerTable.GameServerInfo;
 import com.l2jserver.loginserver.GameServerThread;
@@ -30,8 +28,6 @@ import com.l2jserver.util.network.BaseRecievePacket;
  */
 public class ServerStatus extends BaseRecievePacket
 {
-	protected static Logger _log = Logger.getLogger(ServerStatus.class.getName());
-	
 	public static final String[] STATUS_STRING =
 	{
 		"Auto",

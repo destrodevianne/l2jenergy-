@@ -20,7 +20,6 @@ package com.l2jserver.gameserver.model.olympiad;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.idfactory.IdFactory;
@@ -316,7 +315,7 @@ public class OlympiadGameTeams extends AbstractOlympiadGame
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "", e);
+			LOG.warn("", e);
 			return false;
 		}
 		return result;
@@ -623,7 +622,7 @@ public class OlympiadGameTeams extends AbstractOlympiadGame
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "Exception on validateWinner(): " + e.getMessage(), e);
+				LOG.warn("Exception on validateWinner()", e);
 			}
 			return;
 		}
@@ -823,7 +822,7 @@ public class OlympiadGameTeams extends AbstractOlympiadGame
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "Exception on validateWinner(): " + e.getMessage(), e);
+				LOG.warn("Exception on validateWinner()", e);
 			}
 			
 			if (winside == 1)
@@ -985,7 +984,7 @@ public class OlympiadGameTeams extends AbstractOlympiadGame
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception on validateWinner(): " + e.getMessage(), e);
+			LOG.warn("Exception on validateWinner()", e);
 		}
 	}
 	
@@ -1088,7 +1087,7 @@ public class OlympiadGameTeams extends AbstractOlympiadGame
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception on checkDefaulted(): " + e.getMessage(), e);
+			LOG.warn("Exception on checkDefaulted()", e);
 			return true;
 		}
 	}

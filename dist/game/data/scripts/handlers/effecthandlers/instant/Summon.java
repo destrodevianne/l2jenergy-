@@ -89,7 +89,7 @@ public final class Summon extends AbstractEffect
 		if (summon.getLevel() >= Config.MAX_PET_LEVEL)
 		{
 			summon.getStat().setExp(ExperienceData.getInstance().getExpForLevel(Config.MAX_PET_LEVEL - 1));
-			_log.warning(Summon.class.getSimpleName() + ": (" + summon.getName() + ") NpcID: " + summon.getId() + " has a level above " + Config.MAX_PET_LEVEL + ". Please rectify.");
+			LOG.warn("{}: ({}) NpcID: {} has a level above {}. Please rectify.", Summon.class.getSimpleName(), summon.getName(), summon.getId(), Config.MAX_PET_LEVEL);
 		}
 		else
 		{

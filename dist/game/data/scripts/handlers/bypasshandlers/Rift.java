@@ -18,8 +18,6 @@
  */
 package handlers.bypasshandlers;
 
-import java.util.logging.Level;
-
 import com.l2jserver.gameserver.handler.IBypassHandler;
 import com.l2jserver.gameserver.instancemanager.DimensionalRiftManager;
 import com.l2jserver.gameserver.model.actor.L2Character;
@@ -53,7 +51,7 @@ public class Rift implements IBypassHandler
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "Exception in " + getClass().getSimpleName(), e);
+				LOG.warn("Exception in {}", getClass().getSimpleName(), e);
 			}
 		}
 		else

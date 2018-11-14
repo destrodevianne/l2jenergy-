@@ -18,9 +18,6 @@
  */
 package com.l2jserver.loginserver.network.serverpackets;
 
-/**
- * Fromat: d d: the failure reason
- */
 public final class LoginFail extends L2LoginServerPacket
 {
 	public static enum LoginFailReason

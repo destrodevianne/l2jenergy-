@@ -18,7 +18,8 @@
  */
 package hellbound;
 
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.handler.AdminCommandHandler;
@@ -69,7 +70,7 @@ import quests.Q00133_ThatsBloodyHot.Q00133_ThatsBloodyHot;
  */
 public final class HellboundLoader
 {
-	private static final Logger _log = Logger.getLogger(HellboundLoader.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(HellboundLoader.class);
 	
 	private static final Class<?>[] SCRIPTS =
 	{
@@ -119,7 +120,7 @@ public final class HellboundLoader
 	
 	public static void main(String[] args)
 	{
-		_log.info(HellboundLoader.class.getSimpleName() + ": Loading Hellbound related scripts:");
+		LOG.info("{}: Loading Hellbound related scripts:", HellboundLoader.class.getSimpleName());
 		// Data
 		HellboundPointData.getInstance();
 		HellboundSpawns.getInstance();
@@ -141,7 +142,7 @@ public final class HellboundLoader
 			}
 			catch (Exception e)
 			{
-				_log.severe(HellboundLoader.class.getSimpleName() + ": Failed loading " + script.getSimpleName() + ":" + e.getMessage());
+				LOG.warn("{}: Failed loading {}", HellboundLoader.class.getSimpleName(), script.getSimpleName(), e);
 			}
 		}
 	}

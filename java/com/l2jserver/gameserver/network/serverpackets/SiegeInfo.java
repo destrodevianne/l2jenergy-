@@ -89,7 +89,7 @@ public class SiegeInfo extends L2GameServerPacket
 				}
 				else
 				{
-					_log.warning("Null owner for castle: " + _castle.getName());
+					LOG.warn("Null owner for castle: {}", _castle.getName());
 				}
 			}
 			else
@@ -142,7 +142,7 @@ public class SiegeInfo extends L2GameServerPacket
 				}
 				else
 				{
-					_log.warning("Null owner for siegable hall: " + _hall.getName());
+					LOG.warn("Null owner for siegable hall: {}", _hall.getName());
 				}
 			}
 			else
