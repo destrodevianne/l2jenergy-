@@ -34,6 +34,7 @@ import com.l2jserver.gameserver.handler.IParseBoardHandler;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.zone.ZoneId;
+import com.l2jserver.gameserver.network.serverpackets.ShowBoard;
 import com.l2jserver.gameserver.util.DifferentMethods;
 import com.l2jserver.gameserver.util.Util;
 import com.l2jserver.gameserver.util.bbs.TeleportPoint;
@@ -105,15 +106,13 @@ public class TeleportBoard implements IParseBoardHandler
 		}
 		else if (command.startsWith("_bbsteleport:id"))
 		{
-			final String customPath = Config.CUSTOM_CB_ENABLED ? "Custom/" : "";
 			final int id = Integer.parseInt(command.split(":")[2]);
 			final Optional<TeleportPoint> point = TeleportBBSData.getInstance().getTeleportId(id);
 			if (point.isPresent())
 			{
 				goToTeleportID(activeChar, point.get());
 			}
-			
-			html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/" + customPath + "teleport/index.html");
+			activeChar.sendPacket(new ShowBoard());
 		}
 		CommunityBoardHandler.separateAndSend(html, activeChar);
 		return true;
