@@ -19,6 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.LoginServerThread;
 import com.l2jserver.gameserver.SevenSigns;
 import com.l2jserver.gameserver.cache.HtmCache;
@@ -26,6 +27,7 @@ import com.l2jserver.gameserver.data.sql.impl.AnnouncementsTable;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
+import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.enums.PcCafeType;
 import com.l2jserver.gameserver.instancemanager.CHSiegeManager;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
@@ -57,6 +59,7 @@ import com.l2jserver.gameserver.model.entity.clanhall.SiegableHall;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.skills.CommonSkill;
+import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
@@ -567,6 +570,25 @@ public class EnterWorld extends L2GameClientPacket
 		{
 			activeChar.sendPacket(ExNotifyPremiumItem.STATIC_PACKET);
 		}
+		
+		if (activeChar.getRace().ordinal() == 2)
+		{
+			final Skill skill = SkillData.getInstance().getSkill(294, 1); // Shadow Sense level 1
+			if ((skill != null) && (activeChar.getSkillLevel(294) == 1))
+			{
+				if (GameTimeController.getInstance().isNight())
+				{
+					activeChar.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.IT_IS_NOW_MIDNIGHT_AND_THE_EFFECT_OF_S1_CAN_BE_FELT).addSkillName(skill));
+					activeChar.updateAndBroadcastStatus(2);
+				}
+				else
+				{
+					activeChar.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.IT_IS_DOWN_AND_THE_EFFECT_OF_S1_WILL_NOW_DISAPPEAR).addSkillName(skill));
+					activeChar.updateAndBroadcastStatus(2);
+				}
+			}
+		}
+		
 		activeChar.setCurrentCp(activeChar._currCp);
 		activeChar.setCurrentHp(activeChar._currHp);
 		activeChar.setCurrentMp(activeChar._currMp);
