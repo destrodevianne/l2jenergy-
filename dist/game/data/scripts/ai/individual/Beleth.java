@@ -18,10 +18,14 @@
  */
 package ai.individual;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
@@ -54,7 +58,7 @@ import ai.npc.AbstractNpcAI;
 
 /**
  * Beleth's AI.
- * @author Treat, Sahar
+ * @author Treat, Sahar, Sacrifice
  */
 public final class Beleth extends AbstractNpcAI
 {
@@ -83,6 +87,8 @@ public final class Beleth extends AbstractNpcAI
 	private static final int DOOR3 = 20240003;
 	// Items
 	private static final ItemHolder RING = new ItemHolder(10314, 1);
+	// Query
+	private static final String UPDATE_RESPAWN = "UPDATE grandboss_data set respawn_time = ? where boss_id = ?";
 	// Variables
 	private L2Npc _camera1;
 	private L2Npc _camera2;
@@ -97,6 +103,7 @@ public final class Beleth extends AbstractNpcAI
 	private int _killedCount;
 	private long _lastAttack;
 	private final List<L2Npc> _minions = new CopyOnWriteArrayList<>();
+	private final GrandBossManager _grandBossManager = GrandBossManager.getInstance();
 	
 	private Beleth()
 	{
@@ -106,8 +113,8 @@ public final class Beleth extends AbstractNpcAI
 		addStartNpc(STONE_COFFIN);
 		addTalkId(STONE_COFFIN);
 		addFirstTalkId(ELF);
-		StatsSet info = GrandBossManager.getInstance().getStatsSet(REAL_BELETH);
-		int status = GrandBossManager.getInstance().getBossStatus(REAL_BELETH);
+		final StatsSet info = _grandBossManager.getStatsSet(REAL_BELETH);
+		final int status = _grandBossManager.getBossStatus(REAL_BELETH);
 		if (status == DEAD)
 		{
 			final long time = (info.getLong("respawn_time") - System.currentTimeMillis());
@@ -117,12 +124,12 @@ public final class Beleth extends AbstractNpcAI
 			}
 			else
 			{
-				GrandBossManager.getInstance().setBossStatus(REAL_BELETH, ALIVE);
+				_grandBossManager.setBossStatus(REAL_BELETH, ALIVE);
 			}
 		}
 		else if (status != ALIVE)
 		{
-			GrandBossManager.getInstance().setBossStatus(REAL_BELETH, ALIVE);
+			_grandBossManager.setBossStatus(REAL_BELETH, ALIVE);
 		}
 		DoorData.getInstance().getDoor(DOOR1).openMe();
 	}
@@ -134,7 +141,7 @@ public final class Beleth extends AbstractNpcAI
 		{
 			case "BELETH_UNLOCK":
 			{
-				GrandBossManager.getInstance().setBossStatus(REAL_BELETH, ALIVE);
+				_grandBossManager.setBossStatus(REAL_BELETH, ALIVE);
 				DoorData.getInstance().getDoor(DOOR1).openMe();
 				break;
 			}
@@ -247,9 +254,9 @@ public final class Beleth extends AbstractNpcAI
 				
 				for (int i = 0; i < 6; i++)
 				{
-					int x = (int) ((150 * Math.cos(i * 1.046666667)) + 16323);
-					int y = (int) ((150 * Math.sin(i * 1.046666667)) + 213059);
-					L2Npc minion = addSpawn(FAKE_BELETH, new Location(x, y, -9357, 49152));
+					final int x = (int) ((150 * Math.cos(i * 1.046666667)) + 16323);
+					final int y = (int) ((150 * Math.sin(i * 1.046666667)) + 213059);
+					final L2Npc minion = addSpawn(FAKE_BELETH, new Location(x, y, -9357, 49152));
 					minion.setShowSummonAnimation(true);
 					minion.decayMe();
 					
@@ -391,8 +398,8 @@ public final class Beleth extends AbstractNpcAI
 				{
 					a++;
 					
-					int x = (int) ((650 * Math.cos(i * 0.39)) + 16323);
-					int y = (int) ((650 * Math.sin(i * 0.39)) + 213170);
+					final int x = (int) ((650 * Math.cos(i * 0.39)) + 16323);
+					final int y = (int) ((650 * Math.sin(i * 0.39)) + 213170);
 					
 					npc = addSpawn(FAKE_BELETH, new Location(x, y, -9357, 49152));
 					_minions.add(npc);
@@ -404,8 +411,8 @@ public final class Beleth extends AbstractNpcAI
 					}
 				}
 				
-				int[] xm = new int[16];
-				int[] ym = new int[16];
+				final int[] xm = new int[16];
+				final int[] ym = new int[16];
 				for (int i = 0; i < 4; i++)
 				{
 					xm[i] = (int) ((1700 * Math.cos((i * 1.57) + 0.78)) + 16323);
@@ -547,7 +554,7 @@ public final class Beleth extends AbstractNpcAI
 			{
 				if ((_lastAttack + 900000) < System.currentTimeMillis())
 				{
-					GrandBossManager.getInstance().setBossStatus(REAL_BELETH, ALIVE);
+					_grandBossManager.setBossStatus(REAL_BELETH, ALIVE);
 					for (L2Character charInside : ZONE.getCharactersInside())
 					{
 						if (charInside != null)
@@ -575,39 +582,6 @@ public final class Beleth extends AbstractNpcAI
 	}
 	
 	@Override
-	public String onEnterZone(L2Character character, L2ZoneType zone)
-	{
-		if (character.isPlayer() && (GrandBossManager.getInstance().getBossStatus(REAL_BELETH) == INIT))
-		{
-			if (_priest != null)
-			{
-				_priest.deleteMe();
-			}
-			if (_stone != null)
-			{
-				_stone.deleteMe();
-			}
-			
-			GrandBossManager.getInstance().setBossStatus(REAL_BELETH, FIGHT);
-			startQuestTimer("SPAWN1", 300000, null, null);
-		}
-		
-		return super.onEnterZone(character, zone);
-	}
-	
-	@Override
-	public String onSkillSee(L2Npc npc, L2PcInstance player, Skill skill, L2Object[] targets, boolean isSummon)
-	{
-		if (!npc.isDead() && (npc.getId() == REAL_BELETH) && !npc.isCastingNow() && skill.hasEffectType(L2EffectType.HP) && (getRandom(100) < 80))
-		{
-			npc.setTarget(player);
-			npc.doCast(HORN_OF_RISING);
-		}
-		
-		return null;
-	}
-	
-	@Override
 	public String onAggroRangeEnter(L2Npc npc, L2PcInstance player, boolean isSummon)
 	{
 		if (!npc.isDead() && !npc.isCastingNow())
@@ -623,92 +597,7 @@ public final class Beleth extends AbstractNpcAI
 			npc.setTarget(player);
 			npc.doCast(FIREBALL);
 		}
-		
 		return null;
-	}
-	
-	@Override
-	public String onSpellFinished(L2Npc npc, L2PcInstance player, Skill skill)
-	{
-		if (!npc.isDead() && !npc.isCastingNow())
-		{
-			if (!player.isDead())
-			{
-				final double distance2 = npc.calculateDistance(player, false, false);
-				if ((distance2 > 890) && !npc.isMovementDisabled())
-				{
-					npc.setTarget(player);
-					npc.getAI().setIntention(CtrlIntention.AI_INTENTION_FOLLOW, player);
-					double speed = npc.isRunning() ? npc.getRunSpeed() : npc.getWalkSpeed();
-					int time = (int) (((distance2 - 890) / speed) * 1000);
-					startQuestTimer("CAST", time, npc, null);
-				}
-				else if (distance2 < 890)
-				{
-					npc.setTarget(player);
-					npc.doCast(FIREBALL);
-				}
-				return null;
-			}
-			if (getRandom(100) < 40)
-			{
-				if (!npc.getKnownList().getKnownPlayersInRadius(200).isEmpty())
-				{
-					npc.doCast(LIGHTENING);
-					return null;
-				}
-			}
-			for (L2PcInstance plr : npc.getKnownList().getKnownPlayersInRadius(950))
-			{
-				npc.setTarget(plr);
-				npc.doCast(FIREBALL);
-				return null;
-			}
-			((L2Attackable) npc).clearAggroList();
-		}
-		return null;
-	}
-	
-	@Override
-	public String onSpawn(L2Npc npc)
-	{
-		npc.setRunning();
-		if (!npc.getKnownList().getKnownPlayersInRadius(300).isEmpty() && (getRandom(100) < 60))
-		{
-			npc.doCast(BLEED);
-		}
-		if (npc.getId() == REAL_BELETH)
-		{
-			npc.getSpawn().setRespawnDelay(0);
-		}
-		
-		return null;
-	}
-	
-	@Override
-	public String onTalk(L2Npc npc, L2PcInstance player)
-	{
-		String html;
-		if ((_killer != null) && (player.getObjectId() == _killer.getObjectId()))
-		{
-			_killer = null;
-			
-			giveItems(player, RING);
-			
-			html = "32470a.htm";
-		}
-		else
-		{
-			html = "32470b.htm";
-		}
-		
-		return HtmCache.getInstance().getHtm(player.getHtmlPrefix(), "data/html/default/" + html);
-	}
-	
-	@Override
-	public String onFirstTalk(L2Npc npc, L2PcInstance player)
-	{
-		return onTalk(npc, player);
 	}
 	
 	@Override
@@ -745,7 +634,31 @@ public final class Beleth extends AbstractNpcAI
 			}
 			((L2Attackable) npc).clearAggroList();
 		}
-		
+		return null;
+	}
+	
+	@Override
+	public String onEnterZone(L2Character character, L2ZoneType zone)
+	{
+		if (character.isPlayer() && (_grandBossManager.getBossStatus(REAL_BELETH) == INIT))
+		{
+			if (_priest != null)
+			{
+				_priest.deleteMe();
+			}
+			if (_stone != null)
+			{
+				_stone.deleteMe();
+			}
+			_grandBossManager.setBossStatus(REAL_BELETH, FIGHT);
+			startQuestTimer("SPAWN1", 300000, null, null);
+		}
+		return super.onEnterZone(character, zone);
+	}
+	
+	@Override
+	public String onFirstTalk(L2Npc npc, L2PcInstance player)
+	{
 		return null;
 	}
 	
@@ -757,11 +670,10 @@ public final class Beleth extends AbstractNpcAI
 			cancelQuestTimer("CHECK_ATTACK", null, null);
 			
 			setBelethKiller(killer);
-			GrandBossManager.getInstance().setBossStatus(REAL_BELETH, DEAD);
-			final long respawnTime = (Config.BELETH_SPAWN_INTERVAL + getRandom(-Config.BELETH_SPAWN_RANDOM, Config.BELETH_SPAWN_RANDOM)) * 3600000;
-			StatsSet info = GrandBossManager.getInstance().getStatsSet(REAL_BELETH);
-			info.set("respawn_time", System.currentTimeMillis() + respawnTime);
-			GrandBossManager.getInstance().setStatsSet(REAL_BELETH, info);
+			_grandBossManager.setBossStatus(REAL_BELETH, DEAD);
+			long respawnTime = Config.BELETH_SPAWN_INTERVAL + getRandom(-Config.BELETH_SPAWN_RANDOM, Config.BELETH_SPAWN_RANDOM);
+			respawnTime *= 3600000;
+			setBelethRespawnTime(REAL_BELETH, respawnTime);
 			startQuestTimer("BELETH_UNLOCK", respawnTime, null, null);
 			
 			deleteAll();
@@ -792,7 +704,7 @@ public final class Beleth extends AbstractNpcAI
 			deleteAll();
 			
 			_killedCount++;
-			if (_killedCount >= 5)
+			if (_killedCount >= 1)
 			{
 				startQuestTimer("SPAWN_REAL", 60000, null, null);
 			}
@@ -801,8 +713,105 @@ public final class Beleth extends AbstractNpcAI
 				startQuestTimer("SPAWN25", 60000, null, null);
 			}
 		}
-		
 		return null;
+	}
+	
+	@Override
+	public String onSkillSee(L2Npc npc, L2PcInstance player, Skill skill, L2Object[] targets, boolean isSummon)
+	{
+		if (!npc.isDead() && (npc.getId() == REAL_BELETH) && !npc.isCastingNow() && skill.hasEffectType(L2EffectType.HP) && (getRandom(100) < 80))
+		{
+			npc.setTarget(player);
+			npc.doCast(HORN_OF_RISING);
+		}
+		return null;
+	}
+	
+	@Override
+	public String onSpawn(L2Npc npc)
+	{
+		npc.setRunning();
+		if (!npc.getKnownList().getKnownPlayersInRadius(300).isEmpty() && (getRandom(100) < 60))
+		{
+			npc.doCast(BLEED);
+		}
+		if (npc.getId() == REAL_BELETH)
+		{
+			npc.getSpawn().setRespawnDelay(0);
+		}
+		return null;
+	}
+	
+	@Override
+	public String onSpellFinished(L2Npc npc, L2PcInstance player, Skill skill)
+	{
+		if (!npc.isDead() && !npc.isCastingNow())
+		{
+			if (!player.isDead())
+			{
+				final double distance2 = npc.calculateDistance(player, false, false);
+				if ((distance2 > 890) && !npc.isMovementDisabled())
+				{
+					npc.setTarget(player);
+					npc.getAI().setIntention(CtrlIntention.AI_INTENTION_FOLLOW, player);
+					final double speed = npc.isRunning() ? npc.getRunSpeed() : npc.getWalkSpeed();
+					final int time = (int) (((distance2 - 890) / speed) * 1000);
+					startQuestTimer("CAST", time, npc, null);
+				}
+				else if (distance2 < 890)
+				{
+					npc.setTarget(player);
+					npc.doCast(FIREBALL);
+				}
+				return null;
+			}
+			if (getRandom(100) < 40)
+			{
+				if (!npc.getKnownList().getKnownPlayersInRadius(200).isEmpty())
+				{
+					npc.doCast(LIGHTENING);
+					return null;
+				}
+			}
+			for (L2PcInstance plr : npc.getKnownList().getKnownPlayersInRadius(950))
+			{
+				npc.setTarget(plr);
+				npc.doCast(FIREBALL);
+				return null;
+			}
+			((L2Attackable) npc).clearAggroList();
+		}
+		return null;
+	}
+	
+	@Override
+	public String onTalk(L2Npc npc, L2PcInstance player)
+	{
+		final String html;
+		if ((_killer != null) && (player.getObjectId() == _killer.getObjectId()))
+		{
+			_killer = null;
+			giveItems(player, RING);
+			html = "32470a.htm";
+			npc.deleteMe();
+		}
+		else
+		{
+			html = "32470b.htm";
+		}
+		return HtmCache.getInstance().getHtm(player.getHtmlPrefix(), "data/html/default/" + html);
+	}
+	
+	private void deleteAll()
+	{
+		_minions.stream().filter(n -> !n.isDead()).forEach(n ->
+		{
+			n.abortCast();
+			n.setTarget(null);
+			n.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
+			n.deleteMe();
+		});
+		_allowedObjId = 0;
 	}
 	
 	private void setBelethKiller(L2PcInstance killer)
@@ -824,16 +833,20 @@ public final class Beleth extends AbstractNpcAI
 		}
 	}
 	
-	private void deleteAll()
+	private void setBelethRespawnTime(int bossId, long respawnTime)
 	{
-		_minions.stream().filter(n -> !n.isDead()).forEach(n ->
+		try (Connection con = ConnectionFactory.getInstance().getConnection();
+			PreparedStatement ps = con.prepareStatement(UPDATE_RESPAWN))
 		{
-			n.abortCast();
-			n.setTarget(null);
-			n.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
-			n.deleteMe();
-		});
-		_allowedObjId = 0;
+			ps.setLong(1, System.currentTimeMillis() + respawnTime);
+			ps.setInt(2, bossId);
+			ps.executeUpdate();
+			ps.close();
+		}
+		catch (SQLException sqle)
+		{
+			LOG.warn("{}: Couldn't update respawn time to database {} {}", getClass().getSimpleName(), sqle.getMessage(), sqle);
+		}
 	}
 	
 	public static void main(String[] args)
