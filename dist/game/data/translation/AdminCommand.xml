@@ -213,6 +213,60 @@
 	    <set lang="en" val="Your character has been banned. Bye." />
 		<set lang="ru" val="Ваш персонаж заблокирован. До свидания." />
 	</message>
+	<!-- AdminClan -->
+	<message id="admin_task_have_been_forcely_executed">
+	    <set lang="en" val="Task have been forcely executed" />
+		<set lang="ru" val="Задание выполнено." />
+	</message>
+	<message id="admin_no">
+        <set lang="en" val="No" />
+		<set lang="ru" val="Нет" />
+    </message>
+    <message id="admin_not_in_ally">
+        <set lang="en" val="Not in ally" />
+		<set lang="ru" val="Союза нет" />
+    </message>
+     <message id="admin_forse">
+        <set lang="en" val="Forse" />
+		<set lang="ru" val="Forse" />
+    </message>
+	<!-- AdminCreateItem -->
+	<message id="admin_usage_create_item">
+	    <set lang="en" val="Usage: //create_item [itemId] [amount]" />
+		<set lang="ru" val="Применение: //create_item [itemId] [amount]" />
+	</message>
+	<message id="admin_usage_create_coin">
+	    <set lang="en" val="Usage: //create_coin [name] [amount]" />
+		<set lang="ru" val="Применение: //create_coin [name] [amount]" />
+	</message>
+	<message id="admin_usage_give_item_target">
+	    <set lang="en" val="Usage: //give_item_target [itemId] [amount]" />
+		<set lang="ru" val="Применение: //give_item_target [itemId] [amount]" />
+	</message>
+	<message id="admin_specify_valid_number">
+	    <set lang="en" val="Specify a valid number." />
+		<set lang="ru" val="Укажите действительное число." />
+	</message>
+	<message id="admin_item_doesnt_exist">
+	    <set lang="en" val="This item doesn't exist." />
+		<set lang="ru" val="Предмет не существует." />
+	</message>
+	<message id="admin_item_does_not_stack">
+	    <set lang="en" val="This item does not stack - Creation aborted." />
+		<set lang="ru" val="Предмет не складывается - создание прервано." />
+	</message>
+	<message id="player_admin_spawned_in_your_inventory">
+	    <set lang="en" val="Admin spawned %s% %i% in your inventory." />
+		<set lang="ru" val="Админ создал %s% %i% в вашем инвентаре." />
+	</message>
+	<message id="admin_players_rewarded_with">
+	    <set lang="en" val="%s% players rewarded with %i%." />
+		<set lang="ru" val="%s% игроки награждаются %i%." />
+	</message>
+	<message id="admin_you_have_spawned_inventory">
+	    <set lang="en" val="You have spawned %s% %c% (%i%) in %n% inventory." />
+		<set lang="ru" val="Вы создали %s% %c% (%i%) игроку %n% в инвентарь." />
+	</message>
 	<!-- AdminShutdown -->
 	<message id="admin_usage_server_shutdown">
 	    <set lang="en" val="Usage: //server_shutdown [seconds]" />
@@ -238,7 +292,6 @@
 	    <set lang="en" val="Day" />
 		<set lang="ru" val="День" />
 	</message>
-	
 	<!-- AdminReload -->
 	<message id="admin_usage_reload">
 	    <set lang="en" val="Usage: //reload [config|access|npc|quest [quest_id|quest_name]|walker|htm[l] [file|directory]|multisell|buylist|teleport|skill|item|door|effect|handler|enchant|creationpoint|itemmall|messages]" />

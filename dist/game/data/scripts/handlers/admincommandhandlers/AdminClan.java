@@ -22,6 +22,7 @@ import java.util.StringTokenizer;
 
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.ClanHallManager;
@@ -70,17 +71,17 @@ public class AdminClan implements IAdminCommandHandler
 					return false;
 				}
 				
-				final NpcHtmlMessage html = new NpcHtmlMessage(0, 1);
+				final NpcHtmlMessage html = new NpcHtmlMessage();
 				html.setHtml(HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/admin/claninfo.htm"));
 				html.replace("%clan_name%", clan.getName());
 				html.replace("%clan_leader%", clan.getLeaderName());
 				html.replace("%clan_level%", String.valueOf(clan.getLevel()));
-				html.replace("%clan_has_castle%", clan.getCastleId() > 0 ? CastleManager.getInstance().getCastleById(clan.getCastleId()).getName() : "No");
-				html.replace("%clan_has_clanhall%", clan.getHideoutId() > 0 ? ClanHallManager.getInstance().getClanHallById(clan.getHideoutId()).getName() : "No");
-				html.replace("%clan_has_fortress%", clan.getFortId() > 0 ? FortManager.getInstance().getFortById(clan.getFortId()).getName() : "No");
+				html.replace("%clan_has_castle%", clan.getCastleId() > 0 ? CastleManager.getInstance().getCastleById(clan.getCastleId()).getName() : MessagesData.getInstance().getMessage(activeChar, "admin_no"));
+				html.replace("%clan_has_clanhall%", clan.getHideoutId() > 0 ? ClanHallManager.getInstance().getClanHallById(clan.getHideoutId()).getName() : MessagesData.getInstance().getMessage(activeChar, "admin_no"));
+				html.replace("%clan_has_fortress%", clan.getFortId() > 0 ? FortManager.getInstance().getFortById(clan.getFortId()).getName() : MessagesData.getInstance().getMessage(activeChar, "admin_no"));
 				html.replace("%clan_points%", String.valueOf(clan.getReputationScore()));
 				html.replace("%clan_players_count%", String.valueOf(clan.getMembersCount()));
-				html.replace("%clan_ally%", clan.getAllyId() > 0 ? clan.getAllyName() : "Not in ally");
+				html.replace("%clan_ally%", clan.getAllyId() > 0 ? clan.getAllyName() : MessagesData.getInstance().getMessage(activeChar, "admin_not_in_ally"));
 				html.replace("%current_player_objectId%", String.valueOf(player.getObjectId()));
 				html.replace("%current_player_name%", player.getName());
 				activeChar.sendPacket(html);
@@ -117,7 +118,7 @@ public class AdminClan implements IAdminCommandHandler
 			}
 			case "admin_clan_show_pending":
 			{
-				final NpcHtmlMessage html = new NpcHtmlMessage(0, 1);
+				final NpcHtmlMessage html = new NpcHtmlMessage();
 				html.setHtml(HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/admin/clanchanges.htm"));
 				StringBuilder sb = new StringBuilder();
 				for (L2Clan clan : ClanTable.getInstance().getClans())
@@ -127,7 +128,7 @@ public class AdminClan implements IAdminCommandHandler
 						sb.append("<tr>");
 						sb.append("<td>" + clan.getName() + "</td>");
 						sb.append("<td>" + clan.getNewLeaderName() + "</td>");
-						sb.append("<td><a action=\"bypass -h admin_clan_force_pending " + clan.getId() + "\">Force</a></td>");
+						sb.append("<td><a action=\"bypass -h admin_clan_force_pending " + clan.getId() + "\"> " + MessagesData.getInstance().getMessage(activeChar, "admin_forse") + "</a></td>");
 						sb.append("</tr>");
 					}
 				}
@@ -157,9 +158,8 @@ public class AdminClan implements IAdminCommandHandler
 					{
 						break;
 					}
-					
 					clan.setNewLeader(member);
-					activeChar.sendAdminMessage("Task have been forcely executed.");
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_task_have_been_forcely_executed"));
 					break;
 				}
 			}
