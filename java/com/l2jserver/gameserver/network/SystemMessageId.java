@@ -4401,7 +4401,7 @@ public final class SystemMessageId
 	 * ID: 764<br>
 	 * Message: You have been playing for an extended period of time. Please consider taking a break.
 	 */
-	public static final SystemMessageId PLAYING_FOR_LONG_TIME = new SystemMessageId(764);
+	public static final SystemMessageId YOU_HAVE_BEEN_PLAYING_FOR_AN_EXTENDED_PERIOD_OF_TIME_S1_PLEASE_CONSIDER_TAKING_A_BREAK = new SystemMessageId(764);
 	
 	/**
 	 * ID: 769<br>

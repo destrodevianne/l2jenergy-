@@ -18,8 +18,11 @@
  */
 package com.l2jserver.gameserver.model.actor.tasks.player;
 
+import java.util.concurrent.TimeUnit;
+
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
+import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
 /**
  * Task dedicated to warn user to take a break.
@@ -41,7 +44,8 @@ public class WarnUserTakeBreakTask implements Runnable
 		{
 			if (_player.isOnline())
 			{
-				_player.sendPacket(SystemMessageId.PLAYING_FOR_LONG_TIME);
+				final long hours = TimeUnit.MILLISECONDS.toHours(_player.getUptime());
+				_player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_HAVE_BEEN_PLAYING_FOR_AN_EXTENDED_PERIOD_OF_TIME_S1_PLEASE_CONSIDER_TAKING_A_BREAK).addLong(hours));
 			}
 			else
 			{

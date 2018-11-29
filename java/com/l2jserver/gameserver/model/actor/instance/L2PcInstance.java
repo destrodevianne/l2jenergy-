@@ -327,6 +327,7 @@ import com.l2jserver.gameserver.network.serverpackets.ValidateLocation;
 import com.l2jserver.gameserver.taskmanager.AttackStanceTaskManager;
 import com.l2jserver.gameserver.util.Broadcast;
 import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.LoggingUtils;
 import com.l2jserver.gameserver.util.Util;
 import com.l2jserver.util.EnumIntBitmask;
 import com.l2jserver.util.Rnd;
@@ -9450,7 +9451,7 @@ public final class L2PcInstance extends L2Playable
 	{
 		if (_taskWarnUserTakeBreak == null)
 		{
-			_taskWarnUserTakeBreak = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new WarnUserTakeBreakTask(this), 7200000, 7200000);
+			_taskWarnUserTakeBreak = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new WarnUserTakeBreakTask(this), 3600000, 3600000, TimeUnit.MILLISECONDS);
 		}
 	}
 	
@@ -9598,6 +9599,7 @@ public final class L2PcInstance extends L2Playable
 			{
 				getAccountVariables().set(AccountVariables.PC_CAFE_POINTS_TODAY, true);
 				increasePcCafePoints(getVariables().getInt(ENABLE_DAILY_BONUS_POINTS_KEY, Config.ALT_PCBANG_DIALY_BONUS_POINTS));
+				LoggingUtils.add(this.getName() + " [ " + this.getObjectId() + " ] - give pcbang daily bonus, reward count: " + Config.ALT_PCBANG_DIALY_BONUS_POINTS + " ", "pcbang_logs");
 			}
 		}
 		
