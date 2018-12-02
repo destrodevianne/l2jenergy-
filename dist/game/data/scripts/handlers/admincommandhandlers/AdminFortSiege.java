@@ -21,10 +21,10 @@ package handlers.admincommandhandlers;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.instancemanager.FortManager;
 import com.l2jserver.gameserver.model.L2Clan;
-import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.Fort;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -33,12 +33,11 @@ import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.util.StringUtil;
 
 /**
- * This class handles all siege commands: Todo: change the class name, and neaten it up
+ * This class handles all siege commands.
+ * @author U3Games (rework)
  */
 public class AdminFortSiege implements IAdminCommandHandler
 {
-	// private static Logger _log = Logger.getLogger(AdminFortSiege.class.getName());
-	
 	private static final String[] ADMIN_COMMANDS =
 	{
 		"admin_fortsiege",
@@ -61,12 +60,14 @@ public class AdminFortSiege implements IAdminCommandHandler
 		// Get fort
 		Fort fort = null;
 		int fortId = 0;
+		
 		if (st.hasMoreTokens())
 		{
 			fortId = Integer.parseInt(st.nextToken());
 			fort = FortManager.getInstance().getFortById(fortId);
 		}
-		// Get fort
+		
+		// Check fort
 		if (((fort == null) || (fortId == 0)))
 		{
 			// No fort specified
@@ -74,79 +75,90 @@ public class AdminFortSiege implements IAdminCommandHandler
 		}
 		else
 		{
-			L2Object target = activeChar.getTarget();
 			L2PcInstance player = null;
-			if (target instanceof L2PcInstance)
+			if ((activeChar.getTarget() != null) && activeChar.getTarget().isPlayer())
 			{
-				player = (L2PcInstance) target;
+				player = activeChar.getTarget().getActingPlayer();
 			}
 			
-			if (command.equalsIgnoreCase("admin_add_fortattacker"))
+			switch (command)
 			{
-				if (player == null)
+				case "admin_add_fortattacker":
 				{
-					activeChar.sendPacket(SystemMessageId.TARGET_IS_INCORRECT);
-				}
-				else
-				{
-					if (fort.getSiege().addAttacker(player, false) == 4)
+					if (player == null)
 					{
-						final SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.REGISTERED_TO_S1_FORTRESS_BATTLE);
-						sm.addCastleId(fort.getResidenceId());
-						player.sendPacket(sm);
+						activeChar.sendPacket(SystemMessageId.TARGET_IS_INCORRECT);
 					}
 					else
 					{
-						player.sendAdminMessage("During registering error occurred!");
+						if (fort.getSiege().addAttacker(player, false) == 4)
+						{
+							final SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.REGISTERED_TO_S1_FORTRESS_BATTLE);
+							sm.addCastleId(fort.getResidenceId());
+							player.sendPacket(sm);
+						}
+						else
+						{
+							player.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_during_registering_error_occurred"));
+						}
 					}
+					break;
 				}
-			}
-			else if (command.equalsIgnoreCase("admin_clear_fortsiege_list"))
-			{
-				fort.getSiege().clearSiegeClan();
-			}
-			else if (command.equalsIgnoreCase("admin_endfortsiege"))
-			{
-				fort.getSiege().endSiege();
-			}
-			else if (command.equalsIgnoreCase("admin_list_fortsiege_clans"))
-			{
-				activeChar.sendAdminMessage("Not implemented yet.");
-			}
-			else if (command.equalsIgnoreCase("admin_setfort"))
-			{
-				if ((player == null) || (player.getClan() == null))
+				case "admin_clear_fortsiege_list":
 				{
-					activeChar.sendPacket(SystemMessageId.TARGET_IS_INCORRECT);
+					fort.getSiege().clearSiegeClan();
+					break;
 				}
-				else
+				case "admin_endfortsiege":
 				{
-					fort.endOfSiege(player.getClan());
+					fort.getSiege().endSiege();
+					break;
 				}
-			}
-			else if (command.equalsIgnoreCase("admin_removefort"))
-			{
-				L2Clan clan = fort.getOwnerClan();
-				if (clan != null)
+				case "admin_list_fortsiege_clans":
 				{
-					fort.removeOwner(true);
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_not_implemented_yet"));
+					break;
 				}
-				else
+				case "admin_setfort":
 				{
-					activeChar.sendAdminMessage("Unable to remove fort");
+					if ((player == null) || (player.getClan() == null))
+					{
+						activeChar.sendPacket(SystemMessageId.TARGET_IS_INCORRECT);
+					}
+					else
+					{
+						fort.endOfSiege(player.getClan());
+					}
+					break;
 				}
-			}
-			else if (command.equalsIgnoreCase("admin_spawn_fortdoors"))
-			{
-				fort.resetDoors();
-			}
-			else if (command.equalsIgnoreCase("admin_startfortsiege"))
-			{
-				fort.getSiege().startSiege();
+				case "admin_removefort":
+				{
+					final L2Clan clan = fort.getOwnerClan();
+					if (clan != null)
+					{
+						fort.removeOwner(true);
+					}
+					else
+					{
+						activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_unable_to_remove_fort"));
+					}
+					break;
+				}
+				case "admin_spawn_fortdoors":
+				{
+					fort.resetDoors();
+					break;
+				}
+				case "admin_startfortsiege":
+				{
+					fort.getSiege().startSiege();
+					break;
+				}
 			}
 			
 			showFortSiegePage(activeChar, fort);
 		}
+		
 		return true;
 	}
 	
@@ -192,5 +204,4 @@ public class AdminFortSiege implements IAdminCommandHandler
 	{
 		return ADMIN_COMMANDS;
 	}
-	
 }

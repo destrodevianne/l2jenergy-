@@ -267,6 +267,19 @@
 	    <set lang="en" val="You have spawned %s% %c% (%i%) in %n% inventory." />
 		<set lang="ru" val="Вы создали %s% %c% (%i%) игроку %n% в инвентарь." />
 	</message>
+	<!-- AdminFortSiege -->
+	<message id="admin_during_registering_error_occurred">
+	    <set lang="en" val="During registering error occurred!" />
+		<set lang="ru" val="При регистрации произошла ошибка!" />
+	</message>
+	<message id="admin_not_implemented_yet">
+	    <set lang="en" val="Not implemented yet." />
+		<set lang="ru" val="Не реализовано." />
+	</message>
+	<message id="admin_unable_to_remove_fort">
+	    <set lang="en" val="Unable to remove fort" />
+		<set lang="ru" val="Не удалось удалить форт" />
+	</message>
 	<!-- AdminShutdown -->
 	<message id="admin_usage_server_shutdown">
 	    <set lang="en" val="Usage: //server_shutdown [seconds]" />
