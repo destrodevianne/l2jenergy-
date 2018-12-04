@@ -67,16 +67,16 @@ public final class SpawnTable implements IXmlReader
 		{
 			fillSpawnTable(false);
 			final int spawnCount = _spawnTable.size();
-			LOG.info("{}: Loaded " + spawnCount + " npc spawns.", getClass().getSimpleName());
+			LOG.info("{}: Loaded {} npc spawns.", getClass().getSimpleName(), spawnCount);
 			if (Config.CUSTOM_SPAWNLIST_TABLE)
 			{
 				fillSpawnTable(true);
-				LOG.info("{}: Loaded " + (_spawnTable.size() - spawnCount) + " custom npc spawns.", getClass().getSimpleName());
+				LOG.info("{}: Loaded {} custom npc spawns.", getClass().getSimpleName(), (_spawnTable.size() - spawnCount));
 			}
 			
 			// Load XML list
 			parseDatapackDirectory("data/spawnlist", false);
-			LOG.info("{}: Loaded " + _xmlSpawnCount + " npc spawns from XML.", getClass().getSimpleName());
+			LOG.info("{}: Loaded {} npc spawns from XML.", getClass().getSimpleName(), _xmlSpawnCount);
 		}
 	}
 	
