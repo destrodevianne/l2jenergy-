@@ -620,7 +620,12 @@
 		<set name="operateType" val="A1" />
 		<set name="reuseDelay" val="604800000" />
 		<set name="rideState" val="NONE;STRIDER;WYVERN;WOLF" />
-		<set name="targetType" val="NONE" />
+		<set name="targetType" val="SELF" />
+		<effects>
+			<effect name="PcCafe">
+				<param amount="10000" />
+			</effect>
+		</effects>
 	</skill>
 	<skill id="9041" levels="1" name="Sixth Anniversary Cake">
 		<set name="abnormalLvl" val="8" />

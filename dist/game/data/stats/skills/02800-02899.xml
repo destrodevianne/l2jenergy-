@@ -980,7 +980,12 @@
 		<set name="operateType" val="A1" />
 		<set name="reuseDelay" val="10000" />
 		<set name="rideState" val="NONE;STRIDER;WYVERN;WOLF" />
-		<set name="targetType" val="NONE" />
+		<set name="targetType" val="SELF" />
+		<effects>
+			<effect name="PcCafe">
+				<param amount="7000" />
+			</effect>
+		</effects>
 	</skill>
 	<skill id="2842" levels="1" name="Duel Supplies">
 		<!-- Confirmed CT2.5 -->
