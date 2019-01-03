@@ -24,12 +24,9 @@ import org.slf4j.LoggerFactory;
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.network.serverpackets.KeyPacket;
 import com.l2jserver.gameserver.network.serverpackets.L2GameServerPacket;
+import com.l2jserver.gameserver.network.serverpackets.SendStatus;
 import com.l2jserver.gameserver.util.LoggingUtils;
 
-/**
- * This class ...
- * @version $Revision: 1.5.2.8.2.8 $ $Date: 2005/04/02 10:43:04 $
- */
 public final class ProtocolVersion extends L2GameClientPacket
 {
 	private static final String _C__0E_PROTOCOLVERSION = "[C] 0E ProtocolVersion";
@@ -52,16 +49,24 @@ public final class ProtocolVersion extends L2GameClientPacket
 			// this is just a ping attempt from the new C2 client
 			getClient().close((L2GameServerPacket) null);
 		}
+		else if (_version == -3)
+		{
+			LoggingUtils.logAccounting(LOG_ACCOUNTING, "Status request from IP:", new Object[]
+			{
+				_version,
+				getClient().getConnectionAddress()
+			});
+			getClient().close(new SendStatus());
+			return;
+		}
 		else if (!Config.PROTOCOL_LIST.contains(_version))
 		{
-			if (LOG_ACCOUNTING.isWarnEnabled())
+			LoggingUtils.logAccounting(LOG_ACCOUNTING, "Wrong protocol", new Object[]
 			{
-				LoggingUtils.logAccounting(LOG_ACCOUNTING, "Wrong protocol", new Object[]
-				{
-					_version,
-					getClient()
-				});
-			}
+				_version,
+				getClient()
+			});
+			
 			KeyPacket pk = new KeyPacket(getClient().enableCrypt(), 0);
 			getClient().setProtocolOk(false);
 			getClient().close(pk);

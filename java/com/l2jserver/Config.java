@@ -46,6 +46,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
@@ -783,6 +784,20 @@ public final class Config
 	public static int L2JMOD_DUALBOX_CHECK_MAX_L2EVENT_PARTICIPANTS_PER_IP;
 	public static Map<Integer, Integer> L2JMOD_DUALBOX_CHECK_WHITELIST;
 	public static boolean L2JMOD_ALLOW_CHANGE_PASSWORD;
+	
+	// RWHO system (off emulation)
+	public static boolean SENDSTATUS_TRADE_JUST_OFFLINE;
+	public static double SENDSTATUS_TRADE_MOD;
+	public static boolean SHOW_OFFLINE_MODE_IN_ONLINE;
+	public static boolean RWHO_LOG;
+	public static int RWHO_FORCE_INC;
+	public static int RWHO_KEEP_STAT;
+	public static int RWHO_MAX_ONLINE;
+	public static boolean RWHO_SEND_TRASH;
+	public static int RWHO_ONLINE_INCREMENT;
+	public static float RWHO_PRIV_STORE_FACTOR;
+	public static int RWHO_ARRAY[] = new int[13];
+	
 	// --------------------------------------------------
 	// NPC Settings
 	// --------------------------------------------------
@@ -2539,6 +2554,40 @@ public final class Config
 				}
 			}
 			L2JMOD_ALLOW_CHANGE_PASSWORD = L2JModSettings.getBoolean("AllowChangePassword", false);
+			
+			SENDSTATUS_TRADE_JUST_OFFLINE = L2JModSettings.getBoolean("SendStatusTradeJustOffline", false);
+			SENDSTATUS_TRADE_MOD = L2JModSettings.getDouble("SendStatusTradeMod", 1);
+			SHOW_OFFLINE_MODE_IN_ONLINE = L2JModSettings.getBoolean("ShowOfflineTradeInOnline", false);
+			Random ppc = new Random();
+			int z = ppc.nextInt(6);
+			if (z == 0)
+			{
+				z += 2;
+			}
+			for (int x = 0; x < 8; x++)
+			{
+				if (x == 4)
+				{
+					RWHO_ARRAY[x] = 44;
+				}
+				else
+				{
+					RWHO_ARRAY[x] = 51 + ppc.nextInt(z);
+				}
+			}
+			RWHO_ARRAY[11] = 37265 + ppc.nextInt((z * 2) + 3);
+			RWHO_ARRAY[8] = 51 + ppc.nextInt(z);
+			z = 36224 + ppc.nextInt(z * 2);
+			RWHO_ARRAY[9] = z;
+			RWHO_ARRAY[10] = z;
+			RWHO_ARRAY[12] = 1;
+			RWHO_LOG = L2JModSettings.getBoolean("RemoteWhoLog", false);
+			RWHO_SEND_TRASH = L2JModSettings.getBoolean("RemoteWhoSendTrash", false);
+			RWHO_MAX_ONLINE = L2JModSettings.getInt("RemoteWhoMaxOnline", 0);
+			RWHO_KEEP_STAT = L2JModSettings.getInt("RemoteOnlineKeepStat", 5);
+			RWHO_ONLINE_INCREMENT = L2JModSettings.getInt("RemoteOnlineIncrement", 0);
+			RWHO_PRIV_STORE_FACTOR = L2JModSettings.getFloat("RemotePrivStoreFactor", 0);
+			RWHO_FORCE_INC = L2JModSettings.getInt("RemoteWhoForceInc", 0);
 			
 			// Load PvP L2Properties file (if exists)
 			final PropertiesParser PVPSettings = new PropertiesParser(PVP_CONFIG_FILE);
