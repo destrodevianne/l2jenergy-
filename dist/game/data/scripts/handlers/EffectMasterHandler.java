@@ -98,6 +98,7 @@ import handlers.effecthandlers.instant.MagicalSoulAttack;
 import handlers.effecthandlers.instant.ManaHealByLevel;
 import handlers.effecthandlers.instant.Mp;
 import handlers.effecthandlers.instant.MpPerMax;
+import handlers.effecthandlers.instant.NevitHourglass;
 import handlers.effecthandlers.instant.OpenCommonRecipeBook;
 import handlers.effecthandlers.instant.OpenDwarfRecipeBook;
 import handlers.effecthandlers.instant.OutpostCreate;
@@ -282,6 +283,7 @@ public final class EffectMasterHandler
 		Mp.class,
 		MpPerMax.class,
 		Mute.class,
+		NevitHourglass.class,
 		NoblesseBless.class,
 		OpenChest.class,
 		Unsummon.class,
