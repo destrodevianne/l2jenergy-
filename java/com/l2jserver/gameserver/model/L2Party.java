@@ -800,6 +800,7 @@ public class L2Party extends AbstractPlayerGroup
 					if (!member.isInsideZone(ZoneId.PEACE) && ((member.getLevel() - target.getLevel()) <= 9))
 					{
 						member.getNevitSystem().startAdventTask();
+						member.setRecomTimerActive(true);
 						member.updateVitalityPoints(vitalityPoints, true, false);
 					}
 					

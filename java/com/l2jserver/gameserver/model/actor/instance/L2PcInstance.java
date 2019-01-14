@@ -163,7 +163,6 @@ import com.l2jserver.gameserver.model.actor.tasks.player.PCCafePointsTask;
 import com.l2jserver.gameserver.model.actor.tasks.player.PetFeedTask;
 import com.l2jserver.gameserver.model.actor.tasks.player.PvPFlagTask;
 import com.l2jserver.gameserver.model.actor.tasks.player.RecoBonusTask;
-import com.l2jserver.gameserver.model.actor.tasks.player.RecoBonusTaskEnd;
 import com.l2jserver.gameserver.model.actor.tasks.player.RecoGiveTask;
 import com.l2jserver.gameserver.model.actor.tasks.player.RentPetTask;
 import com.l2jserver.gameserver.model.actor.tasks.player.ResetChargesTask;
@@ -648,6 +647,7 @@ public final class L2PcInstance extends L2Playable
 	private ScheduledFuture<?> _pcCafePointsTask;
 	private L2Fish _fish;
 	
+	// Recomendation System
 	private int _recomHave; // how much I was recommended by others
 	private int _recomLeft; // how many recommendations I can give to others
 	private ScheduledFuture<?> _recoBonusTask; // Recommendation Bonus task
@@ -731,7 +731,6 @@ public final class L2PcInstance extends L2Playable
 		player.setNewbie(1);
 		// Give 20 recommendations
 		player.setRecomLeft(20);
-		
 		// Give one hour bonus for new chars
 		player.setRecomBonusTime(3600);
 		
@@ -1828,10 +1827,7 @@ public final class L2PcInstance extends L2Playable
 	 */
 	protected void decRecomLeft()
 	{
-		if (_recomLeft > 0)
-		{
-			_recomLeft--;
-		}
+		_recomLeft--;
 	}
 	
 	public void giveRecom(L2PcInstance target)
@@ -2349,7 +2345,6 @@ public final class L2PcInstance extends L2Playable
 		
 		boolean levelIncreased = getSubStat().addLevel(value);
 		onLevelChange(levelIncreased);
-		
 		return levelIncreased;
 	}
 	
@@ -2420,6 +2415,8 @@ public final class L2PcInstance extends L2Playable
 		sendPacket(new UserInfo(this));
 		sendPacket(new ExBrExtraUserInfo(this));
 		sendPacket(new ExVoteSystemInfo(this));
+		// Nevit Points For Level
+		getNevitSystem().addPoints(2000);
 	}
 	
 	public int getActiveEnchantAttrItemId()
@@ -9620,6 +9617,13 @@ public final class L2PcInstance extends L2Playable
 				sendMessage(MessagesData.getInstance().getMessage(this, "your_premium_will_expire_tomorrow"));
 			}
 		}
+		
+		// Load player's recommendations and bonus time
+		DAOFactory.getInstance().getRecommendationBonusDAO().load(this);
+		
+		// Starting recommendations give task
+		startRecoGiveTask();
+		
 		EventDispatcher.getInstance().notifyEventAsync(new OnPlayerLogin(this), this);
 	}
 	
@@ -12875,44 +12879,8 @@ public final class L2PcInstance extends L2Playable
 	 */
 	public void storeRecommendations()
 	{
-		long recoTaskEnd = 0;
-		if (_recoBonusTask != null)
-		{
-			recoTaskEnd = Math.max(0, _recoBonusTask.getDelay(TimeUnit.MILLISECONDS));
-		}
-		
-		DAOFactory.getInstance().getRecommendationBonusDAO().insert(this, recoTaskEnd);
-	}
-	
-	public void checkRecoBonusTask()
-	{
-		final long taskTime = DAOFactory.getInstance().getRecommendationBonusDAO().load(this);
-		if (taskTime > 0)
-		{
-			// Add 20 recos on first login
-			if (taskTime == 3600000)
-			{
-				setRecomLeft(getRecomLeft() + 20);
-			}
-			
-			// If player have some timeleft, start bonus task
-			_recoBonusTask = ThreadPoolManager.getInstance().scheduleGeneral(new RecoBonusTaskEnd(this), taskTime);
-		}
-		
-		// Create task to give new recommendations
-		_recoGiveTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new RecoGiveTask(this), 7200000, 3600000);
-		
-		// Store new data
-		storeRecommendations();
-	}
-	
-	public void stopRecoBonusTask()
-	{
-		if (_recoBonusTask != null)
-		{
-			_recoBonusTask.cancel(false);
-			_recoBonusTask = null;
-		}
+		int recTimeToSave = _recoBonusTask != null ? (int) Math.max(0, _recoBonusTask.getDelay(TimeUnit.SECONDS)) : getRecomBonusTime();
+		DAOFactory.getInstance().getRecommendationBonusDAO().insert(this, recTimeToSave);
 	}
 	
 	public void stopRecoGiveTask()
@@ -12924,11 +12892,6 @@ public final class L2PcInstance extends L2Playable
 		}
 	}
 	
-	public boolean isRecoTwoHoursGiven()
-	{
-		return _recoTwoHoursGiven;
-	}
-	
 	public void setRecoTwoHoursGiven(boolean val)
 	{
 		_recoTwoHoursGiven = val;
@@ -12936,18 +12899,7 @@ public final class L2PcInstance extends L2Playable
 	
 	public int getRecomBonusTime()
 	{
-		if (_recoBonusTask != null)
-		{
-			return (int) Math.max(0, _recoBonusTask.getDelay(TimeUnit.SECONDS));
-		}
-		
-		return 0;
-	}
-	
-	public int getRecomBonusType()
-	{
-		// Maintain = 1
-		return 0;
+		return _recoBonusTime;
 	}
 	
 	// High Five: Nevit's Bonus System
@@ -13021,7 +12973,7 @@ public final class L2PcInstance extends L2Playable
 		sendPacket(new ExVoteSystemInfo(this));
 	}
 	
-	public void stopRecoBonusTask1()
+	public void stopRecoBonusTask()
 	{
 		if (_recoBonusTask != null)
 		{
@@ -13031,7 +12983,7 @@ public final class L2PcInstance extends L2Playable
 		}
 	}
 	
-	public boolean isRecoTwoHoursGiven1()
+	public boolean isRecoTwoHoursGiven()
 	{
 		return _recoTwoHoursGiven;
 	}

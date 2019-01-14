@@ -498,6 +498,7 @@ public class L2Attackable extends L2Npc
 									if (!attacker.isInsideZone(ZoneId.PEACE) && ((attacker.getLevel() - getLevel()) <= 9))
 									{
 										attacker.getNevitSystem().startAdventTask();
+										attacker.setRecomTimerActive(true);
 										attacker.updateVitalityPoints(getVitalityPoints(damage), true, false);
 									}
 									

@@ -107,8 +107,8 @@ public class NevitSystem implements IUniqueId
 	
 	public void addPoints(int val)
 	{
-		// setAdventPoints(getEffectTime() > 0 ? 0 : getAdventPoints() + val);
-		setAdventPoints(getAdventPoints() + val);
+		setAdventPoints(getEffectTime() > 0 ? 0 : getAdventPoints() + val);
+		// setAdventPoints(getAdventPoints() + val);
 		
 		if (getAdventPoints() > MAX_POINTS)
 		{

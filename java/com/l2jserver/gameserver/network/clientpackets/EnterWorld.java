@@ -349,8 +349,6 @@ public class EnterWorld extends L2GameClientPacket
 			}
 		}
 		
-		activeChar.checkRecoBonusTask();
-		
 		if (Config.ALT_PCBANG_POINTS_ENABLED)
 		{
 			activeChar.startPcBangPointsTask();

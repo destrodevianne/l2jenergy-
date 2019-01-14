@@ -26,7 +26,6 @@ import com.l2jserver.gameserver.model.L2PetLevelData;
 import com.l2jserver.gameserver.model.PcCondOverride;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.actor.transform.TransformTemplate;
-import com.l2jserver.gameserver.model.entity.RecoBonus;
 import com.l2jserver.gameserver.model.stats.MoveType;
 import com.l2jserver.gameserver.model.stats.Stats;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -457,7 +456,7 @@ public class PcStat extends PlayableStat
 		vitality = getVitalityMultiplier();
 		
 		// Bonus from Nevit's Blessing
-		nevits = RecoBonus.getRecoMultiplier(getActiveChar());
+		nevits = getActiveChar().getRecomBonusMul();
 		
 		// Bonus exp from skills
 		bonusExp = 1 + (calcStat(Stats.BONUS_EXP, 0, null, null) / 100);
@@ -498,7 +497,7 @@ public class PcStat extends PlayableStat
 		vitality = getVitalityMultiplier();
 		
 		// Bonus from Nevit's Blessing
-		nevits = RecoBonus.getRecoMultiplier(getActiveChar());
+		nevits = getActiveChar().getRecomBonusMul();
 		
 		// Bonus sp from skills
 		bonusSp = 1 + (calcStat(Stats.BONUS_SP, 0, null, null) / 100);
