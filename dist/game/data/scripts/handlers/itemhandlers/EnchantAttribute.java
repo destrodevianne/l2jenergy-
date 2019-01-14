@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -45,6 +45,12 @@ public class EnchantAttribute implements IItemHandler
 		if (activeChar.isEnchanting())
 		{
 			activeChar.sendPacket(SystemMessageId.ENCHANTMENT_ALREADY_IN_PROGRESS);
+			return false;
+		}
+		
+		// missing check allowing spam attribute stones
+		if (activeChar.getActiveEnchantAttrItemId() != L2PcInstance.ID_NONE)
+		{
 			return false;
 		}
 		
