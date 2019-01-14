@@ -4696,6 +4696,14 @@ public final class L2PcInstance extends L2Playable
 	@Override
 	public void doCast(Skill skill)
 	{
+		if (getCurrentSkill() != null)
+		{
+			if (!checkUseMagicConditions(skill, getCurrentSkill().isCtrlPressed(), getCurrentSkill().isShiftPressed()))
+			{
+				setIsCastingNow(false);
+				return;
+			}
+		}
 		super.doCast(skill);
 		setRecentFakeDeath(false);
 	}
@@ -7556,11 +7564,6 @@ public final class L2PcInstance extends L2Playable
 			// just ignore the passive skill request. why does the client send it anyway ??
 			// Send a Server->Client packet ActionFailed to the L2PcInstance
 			sendPacket(ActionFailed.STATIC_PACKET);
-			return false;
-		}
-		
-		if (!checkUseMagicConditions(skill, forceUse, dontMove))
-		{
 			return false;
 		}
 		
