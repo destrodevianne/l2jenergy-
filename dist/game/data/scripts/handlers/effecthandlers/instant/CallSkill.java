@@ -48,6 +48,10 @@ public final class CallSkill extends AbstractEffect
 	@Override
 	public void onStart(BuffInfo info)
 	{
+		if (_skill.getSkill().isDebuff())
+		{
+			info.getEffected().removeSkill(_skill.getSkillId());
+		}
 		info.getEffector().makeTriggerCast(_skill.getSkill(), info.getEffected(), true);
 	}
 }
