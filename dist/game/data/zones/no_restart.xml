@@ -132,7 +132,7 @@
 		<node X="-113293" Y="-182247" />
 		<node X="-116217" Y="-182247" />
 	</zone>
-	<zone name="balakas_no_restart" type="NoRestartZone" shape="NPoly" minZ="-2572" maxZ="5428"> <!-- 26_14 -->
+	<zone name="valakas_no_restart" type="NoRestartZone" shape="NPoly" minZ="-2572" maxZ="5428"> <!-- 26_14 -->
 		<stat name="restartTime" val="1800" />
 		<node X="196866" Y="-130845" />
 		<node X="229289" Y="-130860" />
