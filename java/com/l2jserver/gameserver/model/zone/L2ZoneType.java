@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -27,6 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.l2jserver.gameserver.enums.GameTime;
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.instancemanager.InstanceManager;
 import com.l2jserver.gameserver.model.L2Object;
@@ -65,6 +66,7 @@ public abstract class L2ZoneType extends ListenersContainer
 	private boolean _allowStore;
 	private boolean _enabled;
 	private AbstractZoneSettings _settings;
+	private GameTime _gameTime = GameTime.NONE;
 	
 	protected L2ZoneType(int id)
 	{
@@ -194,6 +196,10 @@ public abstract class L2ZoneType extends ListenersContainer
 		else if (name.equals("default_enabled"))
 		{
 			_enabled = Boolean.parseBoolean(value);
+		}
+		else if (name.equals("time"))
+		{
+			_gameTime = Enum.valueOf(GameTime.class, value);
 		}
 		else
 		{
@@ -596,5 +602,10 @@ public abstract class L2ZoneType extends ListenersContainer
 	public boolean isEnabled()
 	{
 		return _enabled;
+	}
+	
+	public GameTime getGameTime()
+	{
+		return _gameTime;
 	}
 }

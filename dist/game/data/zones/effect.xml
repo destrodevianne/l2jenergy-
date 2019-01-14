@@ -2036,6 +2036,7 @@
 	</zone>
 	<!-- Hellbound Heat of Desert -->
 	<zone name="area_dehydration" type="EffectZone" shape="NPoly" minZ="-5156" maxZ="1844"> <!-- [19_25] -->
+		<stat name="time" val="DAY"/>
 		<stat name="skillIdLvl" val="5399-1;" /> <!-- s_area_hot_ground1 -->
 		<stat name="chance" val="100" />
 		<!-- stat name="unitTick" val="10" / -->
@@ -2049,6 +2050,7 @@
 		<node X="-19214" Y="251154" />
 	</zone>
 	<zone name="area_dehydration_var" type="EffectZone" shape="NPoly" minZ="-5980" maxZ="1020"> <!-- [20_25] -->
+		<stat name="time" val="DAY"/>
 		<stat name="skillIdLvl" val="5399-1;" /> <!-- s_area_hot_ground1 -->
 		<stat name="chance" val="100" />
 		<!-- stat name="unitTick" val="10" / -->

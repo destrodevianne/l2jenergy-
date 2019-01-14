@@ -53,6 +53,7 @@
 												<xs:enumeration value="targetClass" />
 												<xs:enumeration value="taxById" />
 												<xs:enumeration value="territoryId" />
+												<xs:enumeration value="time" />
 												<xs:enumeration value="townId" />
 											</xs:restriction>
 										</xs:simpleType>
