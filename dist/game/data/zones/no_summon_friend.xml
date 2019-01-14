@@ -57,6 +57,12 @@
 		<node X="188132" Y="119249" />
 		<node X="173386" Y="119391" />
 	</zone>
+	<zone name="boss_area_baium" type="NoSummonFriendZone" shape="NPoly" minZ="10061" maxZ="11061">
+		<node X="111074" Y="16177" />
+		<node X="114562" Y="12623" />
+		<node X="118194" Y="15790" />
+		<node X="114825" Y="19589" />
+	</zone>
 	<zone name="20_26_basetower_inner_01" type="NoSummonFriendZone" shape="NPoly" minZ="-10736" maxZ="-5736">
 		<node X="12080" Y="274633" />
 		<node X="20523" Y="274633" />
