@@ -23,6 +23,7 @@ import com.l2jserver.gameserver.handler.IItemHandler;
 import com.l2jserver.gameserver.model.actor.L2Playable;
 import com.l2jserver.gameserver.model.entity.TvTEvent;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
+import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -103,7 +104,7 @@ public class ItemSkillsTemplate implements IItemHandler
 					return false;
 				}
 				
-				if (!item.isPotion() && !item.isElixir() && !item.isScroll() && playable.isCastingNow())
+				if (!canRunSimultaneously(item.getItem(), true) && playable.isCastingNow())
 				{
 					return false;
 				}
@@ -116,7 +117,9 @@ public class ItemSkillsTemplate implements IItemHandler
 					playable.sendPacket(sm);
 				}
 				
-				if (itemSkill.isSimultaneousCast() || ((item.getItem().hasImmediateEffect() || item.getItem().hasExImmediateEffect()) && itemSkill.isStatic()))
+				// this will fix exploits with item that contains skills
+				if (itemSkill.isSimultaneousCast() || canRunSimultaneously(item.getItem(), false))
+				
 				{
 					playable.doSimultaneousCast(itemSkill);
 				}
@@ -168,6 +171,16 @@ public class ItemSkillsTemplate implements IItemHandler
 			}
 		}
 		return false;
+	}
+	
+	// this will fix exploits with item that contains skills
+	private boolean canRunSimultaneously(L2Item item, boolean checkScrollType)
+	{
+		if (checkScrollType && (item.isScroll() || item.isPotion()))
+		{
+			return true;
+		}
+		return item.hasImmediateEffect() || item.hasExImmediateEffect() || item.isElixir();
 	}
 	
 	/**
