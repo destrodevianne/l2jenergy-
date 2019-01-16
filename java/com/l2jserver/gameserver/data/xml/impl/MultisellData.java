@@ -75,6 +75,10 @@ public final class MultisellData implements IXmlReader
 			parseDatapackDirectory("data/multisell/custom", false);
 		}
 		
+		if (Config.CUSTOM_CB_ENABLED)
+		{
+			parseDatapackDirectory("data/multisell/community", false);
+		}
 		verify();
 		LOG.info("{}: Loaded {} multisell lists.", getClass().getSimpleName(), _entries.size());
 	}
@@ -243,7 +247,7 @@ public final class MultisellData implements IXmlReader
 			return;
 		}
 		
-		if (((npc != null) && !template.isNpcAllowed(npc.getId())) || ((npc == null) && template.isNpcOnly()))
+		if (!template.isNpcAllowed(-1) && (((npc != null) && !template.isNpcAllowed(npc.getId())) || ((npc == null) && template.isNpcOnly())))
 		{
 			LOG.warn("{}: Player {} attempted to open multisell {} from npc {} which is not allowed!", getClass().getSimpleName(), player, listId, npc);
 			return;

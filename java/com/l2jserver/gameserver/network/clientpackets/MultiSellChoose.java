@@ -18,8 +18,6 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import static com.l2jserver.gameserver.model.actor.L2Npc.INTERACTION_DISTANCE;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -120,19 +118,11 @@ public class MultiSellChoose extends L2GameClientPacket
 		}
 		
 		final L2Npc npc = player.getLastFolkNPC();
-		if (((npc != null) && !list.isNpcAllowed(npc.getId())) || ((npc == null) && list.isNpcOnly()))
+		
+		if (!list.isNpcAllowed(-1) && !isAllowedToUse(player, npc, list))
 		{
 			player.setMultiSell(null);
 			return;
-		}
-		
-		if (!player.isGM() && (npc != null) && !player.isBBSMultisell())
-		{
-			if (!player.isInsideRadius(npc, INTERACTION_DISTANCE, true, false) || (player.getInstanceId() != npc.getInstanceId()))
-			{
-				player.setMultiSell(null);
-				return;
-			}
 		}
 		
 		for (Entry entry : list.getEntries())
@@ -467,6 +457,26 @@ public class MultiSellChoose extends L2GameClientPacket
 				break;
 			}
 		}
+	}
+	
+	private boolean isAllowedToUse(L2PcInstance player, L2Npc npc, PreparedListContainer list)
+	{
+		if (npc != null)
+		{
+			if (!list.isNpcAllowed(npc.getId()))
+			{
+				return false;
+			}
+			else if (list.isNpcOnly() && ((npc.getInstanceId() != player.getInstanceId()) || !player.isInsideRadius(npc, L2Npc.INTERACTION_DISTANCE, true, false)))
+			{
+				return false;
+			}
+		}
+		else if (list.isNpcOnly())
+		{
+			return false;
+		}
+		return true;
 	}
 	
 	@Override

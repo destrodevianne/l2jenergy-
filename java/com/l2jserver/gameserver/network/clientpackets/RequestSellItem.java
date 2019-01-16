@@ -47,6 +47,7 @@ public final class RequestSellItem extends L2GameClientPacket
 	private static final String _C__37_REQUESTSELLITEM = "[C] 37 RequestSellItem";
 	
 	private static final int BATCH_LENGTH = 16;
+	private static final int CUSTOM_CB_SELL_LIST = 423;
 	
 	private int _listId;
 	private List<UniqueItemHolder> _items = null;
@@ -112,7 +113,7 @@ public final class RequestSellItem extends L2GameClientPacket
 		
 		L2Object target = player.getTarget();
 		L2Character merchant = null;
-		if (!player.isGM() && !player.isBBSMultisell())
+		if (!player.isGM() && (_listId != CUSTOM_CB_SELL_LIST))
 		{
 			if ((target == null) || (!player.isInsideRadius(target, INTERACTION_DISTANCE, true, false)) || (player.getInstanceId() != target.getInstanceId()))
 			{
