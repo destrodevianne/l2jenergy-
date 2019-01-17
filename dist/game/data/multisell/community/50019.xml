@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xsd/multisell.xsd">
+    <npcs>
+		<npc>-1</npc> <!-- CB -->
+	</npcs>
+	<!-- Shirt -->
+	<item>
+		<ingredient count="15577000" id="57"/> <!-- Adena -->
+		<production count="1" id="10512"/> <!-- Striped Mithril Shirt [HP] -->
+	</item>
+	<item>
+		<ingredient count="15577000" id="57"/> <!-- Adena -->
+		<production count="1" id="10513"/> <!-- Striped Mithril Shirt [MP] -->
+	</item>
+	<item>
+		<ingredient count="15577000" id="57"/> <!-- Adena -->
+		<production count="1" id="10514"/> <!-- Striped Mithril Shirt [CP] -->
+	</item>
+</list>

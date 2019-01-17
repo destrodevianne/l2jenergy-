@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xsd/multisell.xsd">
+    <npcs>
+		<npc>-1</npc> <!-- CB -->
+	</npcs>
+	<!-- Soul Crystal -->
+	<item>
+		<ingredient count="6000000000" id="57"/> <!-- Adena -->
+		<ingredient count="100" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="5908"/> <!-- Red Soul Crystal: Stage 13 -->
+	</item>
+	<item>
+		<ingredient count="6000000000" id="57"/> <!-- Adena -->
+		<ingredient count="100" id="13068"/> <!--  Fantasy Isle Coin -->
+		<production count="1" id="5911"/>  <!-- Green Soul Crystal: Stage 13 -->
+	</item>
+	<item>
+		<ingredient count="6000000000" id="57"/> <!-- Adena -->
+		<ingredient count="100" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="5914"/> <!-- Blue Soul Crystal: Stage 13 -->
+	</item>
+	<item>
+		<ingredient count="6000000000" id="57"/> <!-- Adena -->
+		<ingredient count="100" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="9570"/> <!-- Red Soul Crystal - Stage 14 -->
+	</item>
+	<item>
+		<ingredient count="6000000000" id="57"/> <!-- Adena -->
+		<ingredient count="100" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="9571"/> <!-- Blue Soul Crystal - Stage 14 -->
+	</item>
+	<item>
+		<ingredient count="6000000000"  id="57"/> <!-- Adena -->
+		<ingredient count="100" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="9572"/> <!-- Green Soul Crystal - Stage 14 -->
+	</item> 
+	<item>
+		<ingredient count="6000000000" id="57"/> <!-- Adena -->
+		<ingredient count="100" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="10480"/> <!-- Red Soul Crystal - Stage 15 -->
+	</item>
+	<item>
+		<ingredient count="6000000000" id="57"/> <!-- Adena -->
+		<ingredient count="100" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="10481"/> <!-- Blue Soul Crystal - Stage 15 -->
+	</item>
+	<item>
+		<ingredient count="6000000000" id="57"/> <!-- Adena -->
+		<ingredient count="100" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="10482"/> <!-- Green Soul Crystal - Stage 15 -->
+	</item> 
+	<item>
+		<ingredient count="6000000000" id="57"/> <!-- Adena -->
+		<ingredient count="100" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="13071"/> <!-- Red Soul Crystal - Stage 16 -->
+	</item>
+	<item>
+		<ingredient count="6000000000" id="57"/> <!-- Adena -->
+		<ingredient count="100" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="13072"/> <!-- Blue Soul Crystal - Stage 16 -->
+	</item>
+	<item>
+		<ingredient count="6000000000" id="57"/> <!-- Adena -->
+		<ingredient count="100" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="13073"/> <!-- Green Soul Crystal - Stage 16 -->
+	</item> 
+	<item>
+		<ingredient count="6000000000" id="57"/> <!-- Adena -->
+		<ingredient count="100" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="15541"/> <!-- Red Soul Crystal - Stage 17 -->
+	</item>
+	<item>
+		<ingredient count="6000000000" id="57"/> <!-- Adena -->
+		<ingredient count="100" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="15542"/> <!-- Blue Soul Crystal - Stage 17 -->
+	</item>
+	<item>
+		<ingredient count="6000000000" id="57"/> <!-- Adena -->
+		<ingredient count="100" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="15543"/> <!-- Green Soul Crystal - Stage 17 -->
+	</item> 
+	<item>
+		<ingredient count="6000000000" id="57"/> <!-- Adena -->
+		<ingredient count="100" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="15826"/> <!-- Red Soul Crystal - Stage 18 -->
+	</item>
+	<item>
+		<ingredient count="6000000000" id="57"/> <!-- Adena -->
+		<ingredient count="100" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="15827"/> <!-- Blue Soul Crystal - Stage 18 -->
+	</item>
+	<item>
+		<ingredient count="6000000000" id="57"/> <!-- Adena -->
+		<ingredient count="100" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="15828"/> <!-- Green Soul Crystal - Stage 18 -->
+	</item>
+</list>

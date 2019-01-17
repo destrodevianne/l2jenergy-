@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xsd/multisell.xsd">
+    <npcs>
+		<npc>-1</npc> <!-- CB -->
+	</npcs>
+	<!-- Life Stone -->
+	<item>
+		<ingredient count="15577000" id="57"/> <!-- Adena -->
+		<production count="1" id="16166"/> <!-- High-Grade Life Stone - Level 86 -->
+	</item> 
+	<item>
+		<ingredient count="15577000" id="57"/> <!-- Adena -->
+		<production count="1" id="16167"/> <!-- Top-Grade Life Stone - Level 86 -->
+	</item> 
+	<item>
+		<ingredient count="15577000" id="57"/> <!-- Adena -->
+		<production count="1" id="14008"/> <!-- Accessory Type Life Stone - Level 84 -->
+	</item> 
+	<item>
+		<ingredient count="15577000" id="57"/> <!-- Adena -->
+		<production count="1" id="12851"/> <!-- Accessory Life Stone - Level 82 -->
+	</item> 
+	<item>
+		<ingredient count="15577000" id="57"/> <!-- Adena -->
+		<production count="1" id="12850"/> <!-- Accessory Life Stone - Level 80 -->
+	</item> 
+	<item>
+		<ingredient count="15577000" id="57"/> <!-- Adena -->
+		<production count="1" id="12849"/> <!-- Accessory Life Stone - Level 76 -->
+	</item> 
+</list>

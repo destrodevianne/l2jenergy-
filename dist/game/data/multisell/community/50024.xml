@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xsd/multisell.xsd">
+    <npcs>
+		<npc>-1</npc> <!-- CB -->
+	</npcs>
+    <!-- S Grade: Earring, Ring, Necklace -->
+	<item>
+		<ingredient count="2180000" id="57"/> <!-- Adena -->
+		<production count="1" id="889"/> <!-- Tateossian Ring -->
+	</item> 
+	<item>
+		<ingredient count="3270000" id="57"/> <!-- Adena -->
+		<production count="1" id="858"/> <!-- Tateossian Earring -->
+	</item> 
+	<item>
+		<ingredient count="4361000" id="57"/> <!-- Adena -->
+		<production count="1" id="920"/> <!-- Tateossian Necklace -->
+	</item> 
+	<item>
+		<ingredient count="5956000" id="57"/> <!-- Adena -->
+		<production count="1" id="9455"/> <!-- Dynasty Earrings -->
+	</item> 
+	<item>
+		<ingredient count="7942000" id="57"/> <!-- Adena -->
+		<production count="1" id="9456"/> <!-- Dynasty Necklace -->
+	</item> 
+	<item>
+		<ingredient count="3971000" id="57"/> <!-- Adena -->
+		<production count="1" id="9457"/> <!-- Dynasty Ring -->
+	</item> 
+	<item>
+		<ingredient count="15577000" id="57"/> <!-- Adena -->
+		<production count="1" id="15723"/> <!-- Moirai Ring -->
+	</item> 
+	<item>
+		<ingredient count="15577000" id="57"/> <!-- Adena -->
+		<production count="1" id="15724"/> <!-- Moirai Earring -->
+	</item> 
+	<item>
+		<ingredient count="15577000" id="57"/> <!-- Adena -->
+		<production count="1" id="15725"/> <!-- Moirai Necklace -->
+	</item> 
+	<item>
+		<ingredient count="15577000" id="57"/> <!-- Adena -->
+		<production count="1" id="14165"/> <!-- Vesper Ring -->
+	</item> 
+	<item>
+		<ingredient count="15577000" id="57"/> <!-- Adena -->
+		<production count="1" id="14164"/> <!-- Vesper Necklace -->
+	</item> 
+	<item>
+		<ingredient count="15577000" id="57"/> <!-- Adena -->
+		<production count="1" id="14163"/> <!-- Vesper Earring -->
+	</item> 
+	<item>
+		<ingredient count="15577000" id="57"/> <!-- Adena -->
+		<production count="1" id="15720"/> <!-- Vorpal Ring -->
+	</item> 
+	<item>
+		<ingredient count="15577000" id="57"/> <!-- Adena -->
+		<production count="1" id="15721"/> <!-- Vorpal Earring -->
+	</item> 
+	<item>
+		<ingredient count="18177000" id="57"/> <!-- Adena -->
+		<production count="1" id="15722"/> <!-- Vorpal Necklace -->
+	</item> 
+	<item>
+		<ingredient count="15577000" id="57"/> <!-- Adena -->
+		<production count="1" id="15717"/> <!-- Elegia Ring -->
+	</item> 
+	<item>
+		<ingredient count="16346000" id="57"/> <!-- Adena -->
+		<production count="1" id="15718"/> <!-- Elegia Earring -->
+	</item> 
+	<item>
+		<ingredient count="21795000" id="57"/> <!-- Adena -->
+		<production count="1" id="15719"/> <!-- Elegia Necklace -->
+	</item> 
+</list>
