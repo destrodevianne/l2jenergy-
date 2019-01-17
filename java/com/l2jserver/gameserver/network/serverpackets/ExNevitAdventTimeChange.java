@@ -18,8 +18,6 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
-import com.l2jserver.gameserver.model.entity.NevitSystem;
-
 /**
  * @author mochitto, IrLex
  */
@@ -30,10 +28,8 @@ public class ExNevitAdventTimeChange extends L2GameServerPacket
 	
 	public ExNevitAdventTimeChange(int time, boolean paused)
 	{
-		// we must set time here
-		_time = (time >= NevitSystem.ADVENT_TIME) ? 16000 : time;
+		_time = (time > 14400) ? 14400 : time;
 		_paused = paused;
-		
 	}
 	
 	@Override
@@ -41,9 +37,7 @@ public class ExNevitAdventTimeChange extends L2GameServerPacket
 	{
 		writeC(0xFE);
 		writeH(0xE1);
-		// state 0 - pause 1 - started
-		writeC(_paused ? 0x00 : 0x01);
-		// left time in ms max is 16000 its 4m and state is automatically changed to quit
-		writeD(_time);
+		writeC(_paused ? 0x00 : 0x01); // state 0 - pause 1 - started
+		writeD(_time); // left time in ms max is 16000 its 4m and state is automatically changed to quit
 	}
 }
