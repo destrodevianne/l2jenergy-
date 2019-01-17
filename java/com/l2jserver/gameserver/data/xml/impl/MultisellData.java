@@ -54,7 +54,7 @@ public final class MultisellData implements IXmlReader
 	
 	public static final int PAGE_SIZE = 40;
 	// Special IDs.
-	public static final int PC_BANG_POINTS = -100;
+	public static final int PC_CAFE_POINTS = -100;
 	public static final int CLAN_REPUTATION = -200;
 	public static final int FAME = -300;
 	// Misc
@@ -288,13 +288,15 @@ public final class MultisellData implements IXmlReader
 	{
 		switch (id)
 		{
-			case PC_BANG_POINTS:
-				if (player.getPcCafePoints() < amount)
+			case PC_CAFE_POINTS:
+			{
+				if (player.getPcCafePoints() >= amount)
 				{
-					player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.SHORT_OF_ACCUMULATED_POINTS));
-					break;
+					return true;
 				}
-				return true;
+				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_SHORT_OF_PC_POINTS));
+				break;
+			}
 			case CLAN_REPUTATION:
 				if (player.getClan() == null)
 				{
@@ -327,7 +329,7 @@ public final class MultisellData implements IXmlReader
 	{
 		switch (id)
 		{
-			case PC_BANG_POINTS:
+			case PC_CAFE_POINTS:
 				final int cost = player.getPcCafePoints() - (int) (amount);
 				player.setPcCafePoints(cost);
 				SystemMessage smsgpc = SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT);
@@ -397,7 +399,7 @@ public final class MultisellData implements IXmlReader
 	{
 		switch (ing.getItemId())
 		{
-			case PC_BANG_POINTS:
+			case PC_CAFE_POINTS:
 			case CLAN_REPUTATION:
 			case FAME:
 				return true;

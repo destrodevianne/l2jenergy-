@@ -9988,9 +9988,9 @@ public final class SystemMessageId
 	
 	/**
 	 * ID: 1710<br>
-	 * Message: You don't have enough PC Points.
+	 * Message: You are short of PC points.
 	 */
-	public static final SystemMessageId SHORT_OF_ACCUMULATED_POINTS = new SystemMessageId(1710);
+	public static final SystemMessageId YOU_ARE_SHORT_OF_PC_POINTS = new SystemMessageId(1710);
 	
 	/**
 	 * ID: 1711<br>
