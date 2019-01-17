@@ -23,8 +23,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -32,8 +32,9 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
@@ -59,6 +60,8 @@ import com.l2jserver.gameserver.model.interfaces.IIdentifiable;
 import com.l2jserver.gameserver.model.interfaces.INamable;
 import com.l2jserver.gameserver.model.itemcontainer.ClanWarehouse;
 import com.l2jserver.gameserver.model.itemcontainer.ItemContainer;
+import com.l2jserver.gameserver.model.pledge.RankPrivs;
+import com.l2jserver.gameserver.model.pledge.SubPledge;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -83,7 +86,7 @@ import com.l2jserver.util.EnumIntBitmask;
 
 public class L2Clan implements IIdentifiable, INamable
 {
-	private static final Logger _log = Logger.getLogger(L2Clan.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(L2Clan.class);
 	
 	// SQL queries
 	private static final String INSERT_CLAN_DATA = "INSERT INTO clan_data (clan_id,clan_name,clan_level,hasCastle,blood_alliance_count,blood_oath_count,ally_id,ally_name,leader_id,crest_id,crest_large_id,ally_crest_id,new_leader_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -150,7 +153,6 @@ public class L2Clan implements IIdentifiable, INamable
 	private final Map<Integer, Skill> _subPledgeSkills = new ConcurrentHashMap<>();
 	
 	private int _reputationScore = 0;
-	private int _rank = 0;
 	
 	private String _notice;
 	private boolean _noticeEnabled = false;
@@ -159,6 +161,11 @@ public class L2Clan implements IIdentifiable, INamable
 	
 	private final AtomicInteger _siegeKills = new AtomicInteger();
 	private final AtomicInteger _siegeDeaths = new AtomicInteger();
+	
+	public static final int RANK_FIRST = 1;
+	public static final int RANK_LAST = 10;
+	private static final int REPUTATION_PLACES = 100;
+	private static final ClanReputationComparator REPUTATION_COMPARATOR = new ClanReputationComparator();
 	
 	/**
 	 * Called if a clan is referenced only by id. In this case all other data needs to be fetched from db
@@ -261,7 +268,7 @@ public class L2Clan implements IIdentifiable, INamable
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "Couldn't update clan privs for old clan leader", e);
+				LOG.warn("Couldn't update clan privs for old clan leader", e);
 			}
 		}
 		
@@ -301,14 +308,14 @@ public class L2Clan implements IIdentifiable, INamable
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "Couldn't update clan privs for new clan leader", e);
+				LOG.warn("Couldn't update clan privs for new clan leader", e);
 			}
 		}
 		
 		broadcastClanStatus();
 		broadcastToOnlineMembers(SystemMessage.getSystemMessage(SystemMessageId.CLAN_LEADER_PRIVILEGES_HAVE_BEEN_TRANSFERRED_TO_C1).addString(member.getName()));
 		
-		_log.log(Level.INFO, "Leader of Clan: " + getName() + " changed to: " + member.getName() + " ex leader: " + exMember.getName());
+		LOG.info("Leader of Clan: {} changed to: {} ex leader: {}", getName(), member.getName(), exMember.getName());
 	}
 	
 	/**
@@ -318,7 +325,7 @@ public class L2Clan implements IIdentifiable, INamable
 	{
 		if (_leader == null)
 		{
-			_log.warning(L2Clan.class.getName() + ": Clan " + getName() + " without clan leader!");
+			LOG.warn("{}: Clan {} without clan leader!", L2Clan.class.getName(), getName());
 			return "";
 		}
 		return _leader.getName();
@@ -421,7 +428,7 @@ public class L2Clan implements IIdentifiable, INamable
 		final L2ClanMember exMember = _members.remove(objectId);
 		if (exMember == null)
 		{
-			_log.warning("Member Object ID: " + objectId + " not found in clan while trying to remove");
+			LOG.warn("Member Object ID: {} not found in clan while trying to remove", objectId);
 			return;
 		}
 		final int leadssubpledge = getLeaderSubPledge(objectId);
@@ -855,7 +862,7 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception on updateBloodAllianceCountInDB(): " + e.getMessage(), e);
+			LOG.warn("Exception on updateBloodAllianceCountInDB()", e);
 		}
 	}
 	
@@ -899,7 +906,7 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception on updateBloodAllianceCountInDB(): " + e.getMessage(), e);
+			LOG.warn("Exception on updateBloodAllianceCountInDB()", e);
 		}
 	}
 	
@@ -917,7 +924,7 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Exception on updateClanScoreInDb(): " + e.getMessage(), e);
+			LOG.warn("Exception on updateClanScoreInDb()", e);
 		}
 	}
 	
@@ -951,14 +958,10 @@ public class L2Clan implements IIdentifiable, INamable
 			ps.setInt(9, getNewLeaderId());
 			ps.setInt(10, getId());
 			ps.execute();
-			if (Config.DEBUG)
-			{
-				_log.fine("New clan leader saved in db: " + getId());
-			}
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.SEVERE, "Error saving clan: " + e.getMessage(), e);
+			LOG.error("Error saving clan!", e);
 		}
 	}
 	
@@ -996,14 +999,10 @@ public class L2Clan implements IIdentifiable, INamable
 			ps.setInt(12, getAllyCrestId());
 			ps.setInt(13, getNewLeaderId());
 			ps.execute();
-			if (Config.DEBUG)
-			{
-				_log.fine("New clan saved in db: " + getId());
-			}
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.SEVERE, "Error saving new clan: " + e.getMessage(), e);
+			LOG.error("Error saving new clan!", e);
 		}
 	}
 	
@@ -1035,7 +1034,7 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.SEVERE, "Error removing clan member: " + e.getMessage(), e);
+			LOG.error("Error removing clan member!", e);
 		}
 	}
 	
@@ -1103,11 +1102,6 @@ public class L2Clan implements IIdentifiable, INamable
 				}
 			}
 			
-			if (Config.DEBUG && (getName() != null))
-			{
-				_log.info("Restored clan data for \"" + getName() + "\" from database.");
-			}
-			
 			restoreSubPledges();
 			restoreRankPrivs();
 			restoreSkills();
@@ -1115,7 +1109,7 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.SEVERE, "Error restoring clan data: " + e.getMessage(), e);
+			LOG.error("Error restoring clan data!", e);
 		}
 	}
 	
@@ -1136,7 +1130,7 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.SEVERE, "Error restoring clan notice: " + e.getMessage(), e);
+			LOG.error("Error restoring clan notice!", e);
 		}
 	}
 	
@@ -1178,9 +1172,8 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Error could not store clan notice: " + e.getMessage(), e);
+			LOG.warn("Error could not store clan notice!", e);
 		}
-		
 		_notice = notice;
 		_noticeEnabled = enabled;
 	}
@@ -1245,7 +1238,7 @@ public class L2Clan implements IIdentifiable, INamable
 						}
 						else
 						{
-							_log.info("Missing subpledge " + subType + " for clan " + this + ", skill skipped.");
+							LOG.info("Missing subpledge {} for clan {}, skill skipped.", subType, getId());
 						}
 					}
 				}
@@ -1253,7 +1246,7 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.SEVERE, "Error restoring clan skills: " + e.getMessage(), e);
+			LOG.error("Error restoring clan skills!", e);
 		}
 	}
 	
@@ -1330,7 +1323,7 @@ public class L2Clan implements IIdentifiable, INamable
 				}
 				else
 				{
-					_log.log(Level.WARNING, "Subpledge " + subType + " does not exist for clan " + this);
+					LOG.warn("Subpledge {} does not exist for clan {}", subType, getId());
 					return oldSkill;
 				}
 			}
@@ -1362,7 +1355,7 @@ public class L2Clan implements IIdentifiable, INamable
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "Error could not store clan skills: " + e.getMessage(), e);
+				LOG.warn("Error could not store clan skills!", e);
 			}
 			
 			SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.CLAN_SKILL_S1_ADDED);
@@ -1417,7 +1410,7 @@ public class L2Clan implements IIdentifiable, INamable
 				}
 				catch (NullPointerException e)
 				{
-					_log.log(Level.WARNING, e.getMessage(), e);
+					LOG.warn("", e);
 				}
 			}
 		}
@@ -1681,102 +1674,6 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 	}
 	
-	public static class SubPledge
-	{
-		private final int _id;
-		private String _subPledgeName;
-		private int _leaderId;
-		private final Map<Integer, Skill> _subPledgeSkills = new HashMap<>();
-		
-		public SubPledge(int id, String name, int leaderId)
-		{
-			_id = id;
-			_subPledgeName = name;
-			_leaderId = leaderId;
-		}
-		
-		public int getId()
-		{
-			return _id;
-		}
-		
-		public String getName()
-		{
-			return _subPledgeName;
-		}
-		
-		public void setName(String name)
-		{
-			_subPledgeName = name;
-		}
-		
-		public int getLeaderId()
-		{
-			return _leaderId;
-		}
-		
-		public void setLeaderId(int leaderId)
-		{
-			_leaderId = leaderId;
-		}
-		
-		public Skill addNewSkill(Skill skill)
-		{
-			return _subPledgeSkills.put(skill.getId(), skill);
-		}
-		
-		public Collection<Skill> getSkills()
-		{
-			return _subPledgeSkills.values();
-		}
-		
-		public Skill getSkill(int id)
-		{
-			return _subPledgeSkills.get(id);
-		}
-	}
-	
-	public static class RankPrivs
-	{
-		private final int _rankId;
-		private final int _party;// TODO find out what this stuff means and implement it
-		private final EnumIntBitmask<ClanPrivilege> _rankPrivs;
-		
-		public RankPrivs(int rank, int party, int privs)
-		{
-			_rankId = rank;
-			_party = party;
-			_rankPrivs = new EnumIntBitmask<>(ClanPrivilege.class, privs);
-		}
-		
-		public RankPrivs(int rank, int party, EnumIntBitmask<ClanPrivilege> rankPrivs)
-		{
-			_rankId = rank;
-			_party = party;
-			_rankPrivs = rankPrivs;
-		}
-		
-		public int getRank()
-		{
-			return _rankId;
-		}
-		
-		public int getParty()
-		{
-			return _party;
-		}
-		
-		public EnumIntBitmask<ClanPrivilege> getPrivs()
-		{
-			return _rankPrivs;
-		}
-		
-		public void setPrivs(int privs)
-		{
-			_rankPrivs.setBitmask(privs);
-		}
-	}
-	
 	private void restoreSubPledges()
 	{
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
@@ -1799,7 +1696,7 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Could not restore clan sub-units: " + e.getMessage(), e);
+			LOG.warn("Could not restore clan sub-units!", e);
 		}
 	}
 	
@@ -1814,7 +1711,6 @@ public class L2Clan implements IIdentifiable, INamable
 		{
 			return null;
 		}
-		
 		return _subPledges.get(pledgeType);
 	}
 	
@@ -1905,15 +1801,10 @@ public class L2Clan implements IIdentifiable, INamable
 					// TODO: clan lvl9 or more can reinforce knights cheaper if first knight unit already created, use Config.KNIGHT_REINFORCE_COST
 				}
 			}
-			
-			if (Config.DEBUG)
-			{
-				_log.fine("New sub_clan saved in db: " + getId() + "; " + pledgeType);
-			}
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.SEVERE, "Error saving sub clan data: " + e.getMessage(), e);
+			LOG.error("Error saving sub clan data!", e);
 		}
 		
 		broadcastToOnlineMembers(new PledgeShowInfoUpdate(_leader.getClan()));
@@ -1961,14 +1852,10 @@ public class L2Clan implements IIdentifiable, INamable
 			ps.setInt(3, getId());
 			ps.setInt(4, pledgeType);
 			ps.execute();
-			if (Config.DEBUG)
-			{
-				_log.fine("Subpledge updated in db: " + getId());
-			}
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.SEVERE, "Error updating subpledge: " + e.getMessage(), e);
+			LOG.error("Error updating subpledge!", e);
 		}
 	}
 	
@@ -1993,20 +1880,19 @@ public class L2Clan implements IIdentifiable, INamable
 					{
 						continue;
 					}
-					
 					_privs.get(rank).setPrivs(privileges);
 				}
 			}
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.SEVERE, "Error restoring clan privs by rank: " + e.getMessage(), e);
+			LOG.error("Error restoring clan privs by rank", e);
 		}
 	}
 	
 	public void initializePrivs()
 	{
-		for (int i = 1; i < 10; i++)
+		for (int i = RANK_FIRST; i <= RANK_LAST; i++)
 		{
 			_privs.put(i, new RankPrivs(i, 0, new EnumIntBitmask<>(ClanPrivilege.class, false)));
 		}
@@ -2014,8 +1900,17 @@ public class L2Clan implements IIdentifiable, INamable
 	
 	public EnumIntBitmask<ClanPrivilege> getRankPrivs(int rank)
 	{
+		if ((rank < RANK_FIRST) || (rank > RANK_LAST))
+		{
+			LOG.warn("Requested invalid rank value: {}", rank);
+			Thread.dumpStack();
+			return null;
+		}
+		
 		if (_privs.get(rank) != null)
 		{
+			LOG.warn("Request of rank before init: {}", rank);
+			Thread.dumpStack();
 			return _privs.get(rank).getPrivs();
 		}
 		return new EnumIntBitmask<>(ClanPrivilege.class, false);
@@ -2023,6 +1918,13 @@ public class L2Clan implements IIdentifiable, INamable
 	
 	public void setRankPrivs(int rank, int privs)
 	{
+		if ((rank < RANK_FIRST) || (rank > RANK_LAST))
+		{
+			LOG.warn("Requested set of invalid rank value: {}", rank);
+			Thread.dumpStack();
+			return;
+		}
+		
 		if (_privs.get(rank) != null)
 		{
 			_privs.get(rank).setPrivs(privs);
@@ -2040,7 +1942,7 @@ public class L2Clan implements IIdentifiable, INamable
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "Could not store clan privs for rank: " + e.getMessage(), e);
+				LOG.warn("Could not store clan privs for rank!", e);
 			}
 			
 			for (L2ClanMember cm : getMembers())
@@ -2076,7 +1978,7 @@ public class L2Clan implements IIdentifiable, INamable
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "Could not create new rank and store clan privs for rank: " + e.getMessage(), e);
+				LOG.warn("Could not create new rank and store clan privs for rank!", e);
 			}
 		}
 	}
@@ -2090,7 +1992,6 @@ public class L2Clan implements IIdentifiable, INamable
 		{
 			return new RankPrivs[0];
 		}
-		
 		return _privs.values().toArray(new RankPrivs[_privs.values().size()]);
 	}
 	
@@ -2167,14 +2068,26 @@ public class L2Clan implements IIdentifiable, INamable
 		return _reputationScore;
 	}
 	
-	public void setRank(int rank)
-	{
-		_rank = rank;
-	}
-	
 	public int getRank()
 	{
-		return _rank;
+		final L2Clan[] clans = ClanTable.getInstance().getClans2(); // TODO: переписать для final Collection<L2Clan> clans = ClanTable.getInstance().getClans();
+		Arrays.parallelSort(clans, REPUTATION_COMPARATOR);
+		
+		final int place = 1;
+		for (int i = 0; i < clans.length; i++) // getValue(),
+		{
+			if (i == REPUTATION_PLACES)
+			{
+				return 0;
+			}
+			
+			final L2Clan clan = clans[i];
+			if (clan == this)
+			{
+				return place + i;
+			}
+		}
+		return 0;
 	}
 	
 	public int getAuctionBiddedAt()
@@ -2197,7 +2110,7 @@ public class L2Clan implements IIdentifiable, INamable
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "Could not store auction for clan: " + e.getMessage(), e);
+				LOG.warn("Could not store auction for clan!", e);
 			}
 		}
 	}
@@ -2406,11 +2319,6 @@ public class L2Clan implements IIdentifiable, INamable
 		if (null == player)
 		{
 			return;
-		}
-		
-		if (Config.DEBUG)
-		{
-			_log.fine(player.getObjectId() + "(" + player.getName() + ") requested ally creation from ");
 		}
 		
 		if (!player.isClanLeader())
@@ -2745,7 +2653,7 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "could not increase clan level:" + e.getMessage(), e);
+			LOG.warn("Could not increase clan level!", e);
 		}
 		
 		setLevel(level);
@@ -2791,7 +2699,7 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 		catch (SQLException e)
 		{
-			_log.log(Level.WARNING, "Could not update crest for clan " + getName() + " [" + getId() + "] : " + e.getMessage(), e);
+			LOG.warn("Could not update crest for clan {} [{}]!", getName(), getId(), e);
 		}
 		
 		for (L2PcInstance member : getOnlineMembers(0))
@@ -2828,7 +2736,7 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 		catch (SQLException e)
 		{
-			_log.log(Level.WARNING, "Could not update ally crest for ally/clan id " + allyId + " : " + e.getMessage(), e);
+			LOG.warn("Could not update ally crest for ally/clan id {}!", allyId, e);
 		}
 		
 		if (onlyThisClan)
@@ -2874,7 +2782,7 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 		catch (SQLException e)
 		{
-			_log.log(Level.WARNING, "Could not update large crest for clan " + getName() + " [" + getId() + "] : " + e.getMessage(), e);
+			LOG.warn("Could not update large crest for clan {} [{}]!", getName(), getId(), e);
 		}
 		
 		for (L2PcInstance member : getOnlineMembers(0))
@@ -3026,5 +2934,23 @@ public class L2Clan implements IIdentifiable, INamable
 	public void clearSiegeDeaths()
 	{
 		_siegeDeaths.set(0);
+	}
+	
+	private static class ClanReputationComparator implements Comparator<L2Clan>
+	{
+		public ClanReputationComparator()
+		{
+			
+		}
+		
+		@Override
+		public int compare(final L2Clan o1, final L2Clan o2)
+		{
+			if ((o1 == null) || (o2 == null))
+			{
+				return 0;
+			}
+			return o2.getReputationScore() - o1.getReputationScore();
+		}
 	}
 }

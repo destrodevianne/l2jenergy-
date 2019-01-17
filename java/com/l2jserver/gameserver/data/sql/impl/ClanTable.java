@@ -120,6 +120,11 @@ public class ClanTable
 		return _clans.values();
 	}
 	
+	public L2Clan[] getClans2() // TODO: убрать
+	{
+		return _clans.values().toArray(new L2Clan[_clans.size()]);
+	}
+	
 	/**
 	 * Gets the clan count.
 	 * @return the clan count

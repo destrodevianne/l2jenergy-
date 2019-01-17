@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.network.serverpackets;
 
 import com.l2jserver.gameserver.model.L2Clan;
-import com.l2jserver.gameserver.model.L2Clan.SubPledge;
+import com.l2jserver.gameserver.model.pledge.SubPledge;
 
 /**
  * @author -Wooden-
@@ -44,7 +44,6 @@ public class PledgeReceiveSubPledgeCreated extends L2GameServerPacket
 	{
 		writeC(0xfe);
 		writeH(0x40);
-		
 		writeD(0x01);
 		writeD(_subPledge.getId());
 		writeS(_subPledge.getName());

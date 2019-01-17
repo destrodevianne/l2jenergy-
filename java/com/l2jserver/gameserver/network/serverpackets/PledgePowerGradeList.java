@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
-import com.l2jserver.gameserver.model.L2Clan.RankPrivs;
+import com.l2jserver.gameserver.model.pledge.RankPrivs;
 
 public class PledgePowerGradeList extends L2GameServerPacket
 {
