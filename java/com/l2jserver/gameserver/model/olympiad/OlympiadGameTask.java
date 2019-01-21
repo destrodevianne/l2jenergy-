@@ -381,6 +381,12 @@ public final class OlympiadGameTask implements Runnable
 				_zone.spawnBuffers();
 			}
 			
+			// 3vs3 team matches shouldn't have olympiad buffers
+			if (!_game.needBuffers())
+			{
+				_zone.deleteBuffers();
+			}
+			
 			if (!_game.portPlayersToArena(_zone.getSpawns()))
 			{
 				return false;
