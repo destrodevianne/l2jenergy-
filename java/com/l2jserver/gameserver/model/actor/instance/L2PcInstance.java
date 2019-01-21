@@ -5818,6 +5818,11 @@ public final class L2PcInstance extends L2Playable
 			}
 		}
 		
+		if (getNevitSystem().isAdventBlessingActive())
+		{
+			lostExp = 0;
+		}
+		
 		if (isFestivalParticipant() || atWar)
 		{
 			lostExp /= 4.0;
