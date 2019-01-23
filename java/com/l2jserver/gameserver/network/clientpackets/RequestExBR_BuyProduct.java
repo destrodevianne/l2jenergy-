@@ -18,32 +18,15 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-
-import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.xml.impl.ProductItemData;
-import com.l2jserver.gameserver.datatables.ItemTable;
-import com.l2jserver.gameserver.enums.IllegalActionPunishmentType;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.items.L2Item;
-import com.l2jserver.gameserver.model.primeshop.L2ProductItem;
-import com.l2jserver.gameserver.model.primeshop.L2ProductItemComponent;
-import com.l2jserver.gameserver.network.serverpackets.ExBR_BuyProduct;
-import com.l2jserver.gameserver.network.serverpackets.ExBR_GamePoint;
-import com.l2jserver.gameserver.network.serverpackets.StatusUpdate;
-import com.l2jserver.gameserver.util.Util;
 
 /**
  * @author Мо3олЬ
  */
 public class RequestExBR_BuyProduct extends L2GameClientPacket
 {
-	private static final String _C__D0_8B_REQUESTBRBUYPRODUCT = "[C] D0 8C RequestBrBuyProduct";
-	
-	private final ConcurrentHashMap<Integer, List<L2ProductItem>> _recentList = new ConcurrentHashMap<>();
+	private static final String _C__D0_8C_REQUESTBRBUYPRODUCT = "[C] D0 8C RequestBrBuyProduct";
 	
 	private int _productId;
 	private int _count;
@@ -63,102 +46,12 @@ public class RequestExBR_BuyProduct extends L2GameClientPacket
 		{
 			return;
 		}
-		
-		if ((_count > 1) || (_count < 99))
-		{
-			activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_WRONG_USER_STATE));
-			Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " tried to buy invalid itemcount [" + _count + "] from Prime", IllegalActionPunishmentType.JAIL);
-			return;
-		}
-		
-		L2ProductItem product = ProductItemData.getInstance().getItem(_productId);
-		if (product == null)
-		{
-			activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_WRONG_PRODUCT));
-			Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " tried to buy invalid brId from Prime", IllegalActionPunishmentType.JAIL);
-			return;
-		}
-		else if ((Calendar.getInstance().get(Calendar.DAY_OF_WEEK) & product.getDayWeek()) == 0)
-		{
-			activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_NOT_DAY_OF_WEEK));
-			return;
-		}
-		else if (!ProductItemData.getInstance().calcStartEndTime(product.getProductId()))
-		{
-			activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_SALE_PERIOD_ENDED));
-			return;
-		}
-		
-		final long totalPoints = product.getPrice() * _count;
-		
-		if (totalPoints < 0)
-		{
-			activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_WRONG_PRODUCT));
-			return;
-		}
-		
-		if (totalPoints > activeChar.getPrimePoints())
-		{
-			activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_NOT_ENOUGH_POINTS));
-			return;
-		}
-		
-		int totalWeight = 0;
-		for (final L2ProductItemComponent com : product.getComponents())
-		{
-			totalWeight += com.getWeight();
-		}
-		totalWeight *= _count; // увеличиваем вес согласно количеству
-		int totalCount = 0;
-		
-		for (final L2ProductItemComponent com : product.getComponents())
-		{
-			final L2Item item = ItemTable.getInstance().getTemplate(com.getId());
-			if (item == null)
-			{
-				activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_WRONG_PRODUCT_ITEM));
-				return; // what
-			}
-			
-			totalCount += item.isStackable() ? 1 : com.getCount() * _count;
-		}
-		
-		if (!activeChar.getInventory().validateCapacity(totalCount) || !activeChar.getInventory().validateWeight(totalWeight))
-		{
-			activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_INVENTORY_FULL));
-			return;
-		}
-		for (L2ProductItemComponent comp : product.getComponents())
-		{
-			activeChar.addItem("Buy Product" + _productId, comp.getId(), comp.getCount() * _count, activeChar, true);
-		}
-		
-		activeChar.setPrimePoints(activeChar.getPrimePoints() - totalPoints);
-		
-		if (_recentList.get(activeChar.getObjectId()) == null)
-		{
-			List<L2ProductItem> charList = new ArrayList<>();
-			charList.add(product);
-			_recentList.put(activeChar.getObjectId(), charList);
-		}
-		else
-		{
-			_recentList.get(activeChar.getObjectId()).add(product);
-		}
-		
-		final StatusUpdate su = new StatusUpdate(activeChar.getObjectId());
-		su.addAttribute(StatusUpdate.CUR_LOAD, activeChar.getCurrentLoad());
-		activeChar.sendPacket(su);
-		
-		activeChar.sendPacket(new ExBR_GamePoint(activeChar));
-		activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_OK));
-		activeChar.broadcastUserInfo();
-		DAOFactory.getInstance().getItemMallDAO().requestBuyItem(activeChar, _productId, (byte) _count);
+		ProductItemData.getInstance().buyItem(activeChar, _productId, _count);
 	}
 	
 	@Override
 	public String getType()
 	{
-		return _C__D0_8B_REQUESTBRBUYPRODUCT;
+		return _C__D0_8C_REQUESTBRBUYPRODUCT;
 	}
 }

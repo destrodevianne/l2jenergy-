@@ -25,11 +25,11 @@ import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.xml.impl.ProductItemData;
 import com.l2jserver.gameserver.model.primeshop.L2ProductItem;
 
-public class ExBR_RecentProductListPacket extends L2GameServerPacket
+public class ExBR_RecentProductList extends L2GameServerPacket
 {
 	private List<L2ProductItem> _itemsList = new ArrayList<>();
 	
-	public ExBR_RecentProductListPacket(int charId)
+	public ExBR_RecentProductList(int charId)
 	{
 		_itemsList = ProductItemData.getInstance().getRecentListByOID(charId);
 		DAOFactory.getInstance().getItemMallDAO().recentListByItem(charId);
@@ -52,9 +52,9 @@ public class ExBR_RecentProductListPacket extends L2GameServerPacket
 			writeD(template.getProductId());
 			writeH(template.getCategory());
 			writeD(template.getPrice());
-			writeD(template.getTabId());// show tab 2-th group 1 - event 2 - best 3 - event & best
-			writeD((int) (template.getStartSaleDate() / 1000));
-			writeD((int) (template.getEndSaleDate() / 1000));
+			writeD(template.getEventFlag().ordinal());// show tab 2-th group 1 - event 2 - best 3 - event & best
+			writeD((int) template.getStartSaleDate()); // start sale
+			writeD((int) template.getEndSaleDate()); // end sale
 			writeC(template.getDayWeek()); // day week
 			writeC(template.getStartSaleHour());
 			writeC(template.getStartSaleMin());

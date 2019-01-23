@@ -21,6 +21,7 @@ package com.l2jserver.gameserver.data.xml.impl;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -30,9 +31,19 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
+import com.l2jserver.gameserver.datatables.ItemTable;
+import com.l2jserver.gameserver.enums.IllegalActionPunishmentType;
+import com.l2jserver.gameserver.enums.ItemMallFlag;
+import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.primeshop.L2ProductItem;
 import com.l2jserver.gameserver.model.primeshop.L2ProductItemComponent;
+import com.l2jserver.gameserver.network.serverpackets.ExBR_BuyProduct;
+import com.l2jserver.gameserver.network.serverpackets.ExBR_GamePoint;
+import com.l2jserver.gameserver.network.serverpackets.StatusUpdate;
 import com.l2jserver.gameserver.util.TimeUtils;
+import com.l2jserver.gameserver.util.Util;
 import com.l2jserver.util.data.xml.IXmlReader;
 
 /**
@@ -68,48 +79,43 @@ public class ProductItemData implements IXmlReader
 					if ("product".equalsIgnoreCase(d.getNodeName()))
 					{
 						Node onSaleNode = d.getAttributes().getNamedItem("on_sale");
-						Boolean onSale = (onSaleNode != null) && Boolean.parseBoolean(onSaleNode.getNodeValue());
+						final boolean onSale = (onSaleNode != null) && Boolean.parseBoolean(onSaleNode.getNodeValue());
 						if (!onSale)
 						{
 							continue;
 						}
 						
+						final int productId = Integer.parseInt(d.getAttributes().getNamedItem("id").getNodeValue());
+						
+						Node categoryNode = d.getAttributes().getNamedItem("category");
+						final int category = categoryNode != null ? Integer.parseInt(categoryNode.getNodeValue()) : 5;
+						
+						Node priceNode = d.getAttributes().getNamedItem("price");
+						final int price = priceNode != null ? Integer.parseInt(priceNode.getNodeValue()) : 0;
+						
+						Node dayWeekNode = d.getAttributes().getNamedItem("day_of_week");
+						final int dayWeek = dayWeekNode != null ? Integer.parseInt(dayWeekNode.getNodeValue()) : Byte.MAX_VALUE;
+						
+						Node isEventNode = d.getAttributes().getNamedItem("is_event");
+						final boolean isEvent = isEventNode != null ? Boolean.parseBoolean(isEventNode.getNodeValue()) : L2ProductItem.DEFAULT_IS_EVENT;
+						
+						Node startTimeNode = d.getAttributes().getNamedItem("start_sale_date");
+						final ZonedDateTime startTimeSale = startTimeNode != null ? getMillisecondsFromString(startTimeNode.getNodeValue()) : L2ProductItem.DEFAULT_START_SALE_DATE;
+						
 						Node endTimeNode = d.getAttributes().getNamedItem("end_sale_date");
-						ZonedDateTime endTimeSale = endTimeNode != null ? getMillisecondsFromString(endTimeNode.getNodeValue()) : L2ProductItem.DEFAULT_END_SALE_DATE;
+						final ZonedDateTime endTimeSale = endTimeNode != null ? getMillisecondsFromString(endTimeNode.getNodeValue()) : L2ProductItem.DEFAULT_END_SALE_DATE;
 						if (endTimeSale.isBefore(ZonedDateTime.now()))
 						{
 							continue;
 						}
 						
-						int productId = Integer.parseInt(d.getAttributes().getNamedItem("id").getNodeValue());
-						
-						Node categoryNode = d.getAttributes().getNamedItem("category");
-						int category = categoryNode != null ? Integer.parseInt(categoryNode.getNodeValue()) : 5;
-						
-						Node priceNode = d.getAttributes().getNamedItem("price");
-						int price = priceNode != null ? Integer.parseInt(priceNode.getNodeValue()) : 0;
-						
-						Node isEventNode = d.getAttributes().getNamedItem("is_event");
-						Boolean isEvent = (isEventNode != null) && Boolean.parseBoolean(isEventNode.getNodeValue());
-						
-						Node isBestNode = d.getAttributes().getNamedItem("is_best");
-						Boolean isBest = (isBestNode != null) && Boolean.parseBoolean(isBestNode.getNodeValue());
-						
-						Node isNewNode = d.getAttributes().getNamedItem("is_new");
-						Boolean isNew = (isNewNode != null) && Boolean.parseBoolean(isNewNode.getNodeValue());
-						int tabId = getProductTabId(isEvent, isBest, isNew);
-						
 						Node isMaxStockNode = d.getAttributes().getNamedItem("max_stock");
 						int isMaxStock = isMaxStockNode != null ? Integer.parseInt(isMaxStockNode.getNodeValue()) : L2ProductItem.DEFAULT_MAX_STOCK;
 						
-						Node startTimeNode = d.getAttributes().getNamedItem("start_sale_date");
-						ZonedDateTime startTimeSale = startTimeNode != null ? getMillisecondsFromString(startTimeNode.getNodeValue()) : L2ProductItem.DEFAULT_START_SALE_DATE;
-						
-						Node dayWeekNode = d.getAttributes().getNamedItem("day_of_week");
-						int dayWeek = dayWeekNode != null ? Integer.parseInt(dayWeekNode.getNodeValue()) : Byte.MAX_VALUE;
+						final ItemMallFlag event = isEvent ? ItemMallFlag.EVENT : ItemMallFlag.NONE;
 						
 						ArrayList<L2ProductItemComponent> components = new ArrayList<>();
-						final L2ProductItem product = new L2ProductItem(productId, category, price, dayWeek, startTimeSale, endTimeSale, isMaxStock, tabId);
+						final L2ProductItem product = new L2ProductItem(productId, category, price, dayWeek, startTimeSale, endTimeSale, isMaxStock, event);
 						
 						for (Node t1 = d.getFirstChild(); t1 != null; t1 = t1.getNextSibling())
 						{
@@ -129,27 +135,114 @@ public class ProductItemData implements IXmlReader
 		}
 	}
 	
-	/**
-	 * @param isEvent boolean
-	 * @param isBest boolean
-	 * @param isNew boolean
-	 * @return int
-	 */
-	private static int getProductTabId(boolean isEvent, boolean isBest, boolean isNew)
+	public void buyItem(L2PcInstance activeChar, int productId, int count)
 	{
-		if (isEvent && isBest)
+		if (activeChar.isOutOfControl())
 		{
-			return 3;
+			activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_WRONG_USER_STATE));
+			return;
 		}
-		if (isEvent)
+		
+		if ((count < 0) || (count > 99))
 		{
-			return 1;
+			activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_WRONG_USER_STATE));
+			Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " tried to buy invalid itemcount [" + count + "] from Prime", IllegalActionPunishmentType.JAIL);
+			return;
 		}
-		if (isBest)
+		
+		if (_itemsList.containsKey(Integer.valueOf(productId)))
 		{
-			return 2;
+			L2ProductItem product = ProductItemData.getInstance().getItem(productId);
+			
+			if (product == null)
+			{
+				activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_WRONG_PRODUCT));
+				Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " tried to buy invalid brId from Prime", IllegalActionPunishmentType.JAIL);
+				return;
+			}
+			else if ((Calendar.getInstance().get(Calendar.DAY_OF_WEEK) & product.getDayWeek()) == 0)
+			{
+				activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_NOT_DAY_OF_WEEK));
+				return;
+			}
+			else if (!ProductItemData.getInstance().calcStartEndTime(product.getProductId()))
+			{
+				activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_SALE_PERIOD_ENDED));
+				return;
+			}
+			
+			final long totalPoints = product.getPrice() * count;
+			
+			if (totalPoints < 0)
+			{
+				activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_WRONG_PRODUCT));
+				return;
+			}
+			
+			if (totalPoints > activeChar.getPrimePoints())
+			{
+				activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_NOT_ENOUGH_POINTS));
+				return;
+			}
+			
+			int totalWeight = 0;
+			for (final L2ProductItemComponent com : product.getComponents())
+			{
+				totalWeight += com.getWeight();
+			}
+			totalWeight *= count; // увеличиваем вес согласно количеству
+			int totalCount = 0;
+			
+			for (final L2ProductItemComponent com : product.getComponents())
+			{
+				final L2Item item = ItemTable.getInstance().getTemplate(com.getId());
+				if (item == null)
+				{
+					activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_WRONG_PRODUCT_ITEM));
+					return; // what
+				}
+				
+				totalCount += item.isStackable() ? 1 : com.getCount() * count;
+			}
+			
+			if (!activeChar.getInventory().validateCapacity(totalCount) || !activeChar.getInventory().validateWeight(totalWeight))
+			{
+				activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_INVENTORY_FULL));
+				return;
+			}
+			
+			for (L2ProductItemComponent comp : product.getComponents())
+			{
+				activeChar.addItem("Buy Product" + productId, comp.getId(), comp.getCount() * count, activeChar, true);
+			}
+			
+			activeChar.setPrimePoints(activeChar.getPrimePoints() - totalPoints);
+			
+			if (_recentList.get(activeChar.getObjectId()) == null)
+			{
+				List<L2ProductItem> charList = new ArrayList<>();
+				charList.add(product);
+				_recentList.put(activeChar.getObjectId(), charList);
+			}
+			else
+			{
+				_recentList.get(activeChar.getObjectId()).add(product);
+			}
+			
+			final StatusUpdate su = new StatusUpdate(activeChar.getObjectId());
+			su.addAttribute(StatusUpdate.CUR_LOAD, activeChar.getCurrentLoad());
+			activeChar.sendPacket(su);
+			
+			activeChar.sendPacket(new ExBR_GamePoint(activeChar));
+			activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_OK));
+			activeChar.broadcastUserInfo();
+			DAOFactory.getInstance().getItemMallDAO().requestBuyItem(activeChar, productId, (byte) count);
 		}
-		return 4;
+		else
+		{
+			activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_WRONG_PRODUCT));
+			Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " tried to buy invalid brId from Prime", IllegalActionPunishmentType.JAIL);
+		}
 	}
 	
 	private static ZonedDateTime getMillisecondsFromString(final String datetime)
@@ -157,12 +250,12 @@ public class ProductItemData implements IXmlReader
 		try
 		{
 			return TimeUtils.DATE_TIME_FORMATTER.withZone(ZoneId.systemDefault()).parse(datetime, ZonedDateTime::from);
+			
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
-		
 		return null;
 	}
 	

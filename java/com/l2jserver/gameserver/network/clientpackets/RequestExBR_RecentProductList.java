@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.network.serverpackets.ExBR_RecentProductListPacket;
+import com.l2jserver.gameserver.network.serverpackets.ExBR_RecentProductList;
 
 public class RequestExBR_RecentProductList extends L2GameClientPacket
 {
@@ -38,7 +38,7 @@ public class RequestExBR_RecentProductList extends L2GameClientPacket
 		{
 			return;
 		}
-		activeChar.sendPacket(new ExBR_RecentProductListPacket(activeChar.getObjectId()));
+		activeChar.sendPacket(new ExBR_RecentProductList(activeChar.getObjectId()));
 	}
 	
 	@Override
