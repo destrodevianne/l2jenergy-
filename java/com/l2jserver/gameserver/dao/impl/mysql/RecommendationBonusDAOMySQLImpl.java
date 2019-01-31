@@ -31,7 +31,7 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
 /**
  * Recommendation Bonus DAO MySQL implementation.
- * @author Zoey76
+ * @author Zoey76, Мо3олЬ
  */
 public class RecommendationBonusDAOMySQLImpl implements RecommendationBonusDAO
 {
