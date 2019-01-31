@@ -18,7 +18,7 @@
  */
 package handlers.admincommandhandlers;
 
-import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.concurrent.TimeUnit;
 
 import com.l2jserver.gameserver.cache.HtmCache;
@@ -27,6 +27,7 @@ import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.instancemanager.PremiumManager;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
+import com.l2jserver.gameserver.util.TimeUtils;
 
 public class AdminPremium implements IAdminCommandHandler
 {
@@ -113,14 +114,14 @@ public class AdminPremium implements IAdminCommandHandler
 	{
 		// TODO: Add check if account exists XD
 		PremiumManager.getInstance().addPremiumTime(accountName, months * 30, TimeUnit.DAYS);
-		activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_account_will_have_premium_status_ntil").replace("%s%", accountName + "").replace("%i%", new SimpleDateFormat("dd.MM.yyyy HH:mm").format(PremiumManager.getInstance().getPremiumExpiration(accountName)) + ""));
+		activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_account_will_have_premium_status_ntil").replace("%s%", accountName + "").replace("%i%", TimeUtils.dateTimeFormat(Instant.ofEpochMilli(PremiumManager.getInstance().getPremiumExpiration(accountName))) + ""));
 	}
 	
 	private void viewPremiumInfo(L2PcInstance activeChar, String accountName)
 	{
 		if (PremiumManager.getInstance().getPremiumExpiration(accountName) > 0)
 		{
-			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_account_has_premium_status_until").replace("%s%", accountName + "").replace("%i%", new SimpleDateFormat("dd.MM.yyyy HH:mm").format(PremiumManager.getInstance().getPremiumExpiration(accountName)) + ""));
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_account_has_premium_status_until").replace("%s%", accountName + "").replace("%i%", TimeUtils.dateTimeFormat(Instant.ofEpochMilli(PremiumManager.getInstance().getPremiumExpiration(accountName))) + ""));
 		}
 		else
 		{

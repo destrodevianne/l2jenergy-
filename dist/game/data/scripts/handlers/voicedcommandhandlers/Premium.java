@@ -18,13 +18,14 @@
  */
 package handlers.voicedcommandhandlers;
 
-import java.text.SimpleDateFormat;
+import java.time.Instant;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.handler.IVoicedCommandHandler;
 import com.l2jserver.gameserver.instancemanager.PremiumManager;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
+import com.l2jserver.gameserver.util.TimeUtils;
 
 public class Premium implements IVoicedCommandHandler
 {
@@ -38,33 +39,10 @@ public class Premium implements IVoicedCommandHandler
 	{
 		if (command.startsWith("premium") && Config.PREMIUM_SYSTEM_ENABLED)
 		{
-			final SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-			final long endDate = PremiumManager.getInstance().getPremiumExpiration(activeChar.getAccountName());
+			final Instant instant = Instant.ofEpochMilli(PremiumManager.getInstance().getPremiumExpiration(activeChar.getAccountName()));
 			final NpcHtmlMessage msg = new NpcHtmlMessage(5);
 			final StringBuilder html = new StringBuilder();
-			if (endDate == 0)
-			{
-				html.append("<html><body><title>Account Details</title><center>");
-				html.append("<table>");
-				html.append("<tr><td><center>Account Status: <font color=\"LEVEL\">Normal<br></font></td></tr>");
-				html.append("<tr><td>Rate XP: <font color=\"LEVEL\"> x" + Config.RATE_XP + "<br1></font></td></tr>");
-				html.append("<tr><td>Rate SP: <font color=\"LEVEL\"> x" + Config.RATE_SP + "<br1></font></td></tr>");
-				html.append("<tr><td>Drop Chance: <font color=\"LEVEL\"> x" + Config.RATE_DEATH_DROP_CHANCE_MULTIPLIER + "<br1></font></td></tr><br>");
-				html.append("<tr><td>Drop Amount: <font color=\"LEVEL\"> x" + Config.RATE_DEATH_DROP_AMOUNT_MULTIPLIER + "<br1></font></td></tr><br>");
-				// html.append("<tr><td>Spoil Chance: <font color=\"LEVEL\"> x" + Config.RATE_SPOIL_DROP_CHANCE_MULTIPLIER + "<br1></font></td></tr><br>");
-				// html.append("<tr><td>Spoil Amount: <font color=\"LEVEL\"> x" + Config.RATE_SPOIL_DROP_AMOUNT_MULTIPLIER + "<br><br></font></td></tr><br>");
-				html.append("<tr><td><center>Premium Info & Rules<br></td></tr>");
-				html.append("<tr><td>Rate XP: <font color=\"LEVEL\"> x" + (Config.RATE_XP * Config.PREMIUM_RATE_XP) + "<br1></font></td></tr>");
-				html.append("<tr><td>Rate SP: <font color=\"LEVEL\"> x" + (Config.RATE_SP * Config.PREMIUM_RATE_SP) + "<br1></font></td></tr>");
-				html.append("<tr><td>Drop Chance: <font color=\"LEVEL\"> x" + (Config.RATE_DEATH_DROP_CHANCE_MULTIPLIER * Config.PREMIUM_RATE_DROP_CHANCE) + "<br1></font></td></tr>");
-				html.append("<tr><td>Drop Amount: <font color=\"LEVEL\"> x" + (Config.RATE_DEATH_DROP_AMOUNT_MULTIPLIER * Config.PREMIUM_RATE_DROP_AMOUNT) + "<br1></font></td></tr>");
-				// html.append("<tr><td>Spoil Chance: <font color=\"LEVEL\"> x" + (Config.RATE_SPOIL_DROP_CHANCE_MULTIPLIER * Config.PREMIUM_RATE_SPOIL_CHANCE) + "<br1></font></td></tr>");
-				// html.append("<tr><td>Spoil Amount: <font color=\"LEVEL\"> x" + (Config.RATE_SPOIL_DROP_AMOUNT_MULTIPLIER * Config.PREMIUM_RATE_SPOIL_AMOUNT) + "<br1></font></td></tr>");
-				html.append("<tr><td> <font color=\"70FFCA\">1. Premium benefits CAN NOT BE TRANSFERED.<br1></font></td></tr>");
-				html.append("<tr><td> <font color=\"70FFCA\">2. Premium does not effect party members.<br1></font></td></tr>");
-				html.append("<tr><td> <font color=\"70FFCA\">3. Premium benefits effect ALL characters in same account.</font></td></tr>");
-			}
-			else
+			if (activeChar.isPremium())
 			{
 				html.append("<html><body><title>Premium Account Details</title><center>");
 				html.append("<table>");
@@ -73,15 +51,38 @@ public class Premium implements IVoicedCommandHandler
 				html.append("<tr><td>Rate SP: <font color=\"LEVEL\">x" + (Config.RATE_SP * Config.PREMIUM_RATE_SP) + "  <br1></font></td></tr>");
 				html.append("<tr><td>Drop Chance: <font color=\"LEVEL\">x" + (Config.RATE_DEATH_DROP_CHANCE_MULTIPLIER * Config.PREMIUM_RATE_DROP_CHANCE) + " <br1></font></td></tr>");
 				html.append("<tr><td>Drop Amount: <font color=\"LEVEL\">x" + (Config.RATE_DEATH_DROP_AMOUNT_MULTIPLIER * Config.PREMIUM_RATE_DROP_AMOUNT) + " <br1></font></td></tr>");
-				// html.append("<tr><td>Spoil Chance: <font color=\"LEVEL\">x" + (Config.RATE_SPOIL_DROP_CHANCE_MULTIPLIER * Config.PREMIUM_RATE_SPOIL_CHANCE) + " <br1></font></td></tr>");
-				// html.append("<tr><td>Spoil Amount: <font color=\"LEVEL\">x" + (Config.RATE_SPOIL_DROP_AMOUNT_MULTIPLIER * Config.PREMIUM_RATE_SPOIL_AMOUNT) + " <br1></font></td></tr>");
-				html.append("<tr><td>Expires: <font color=\"00A5FF\">" + format.format(endDate) + "</font></td></tr>");
-				html.append("<tr><td>Current Date: <font color=\"70FFCA\">" + format.format(System.currentTimeMillis()) + "<br><br></font></td></tr>");
+				html.append("<tr><td>Drop Manor: <font color=\"LEVEL\"> x" + (Config.RATE_DROP_MANOR * Config.PREMIUM_RATE_DROP_MANOR) + "<br1></font></td></tr>");
+				html.append("<tr><td>Spoil Chance: <font color=\"LEVEL\">x" + (Config.RATE_CORPSE_DROP_CHANCE_MULTIPLIER * Config.PREMIUM_RATE_SPOIL_CHANCE) + " <br1></font></td></tr>");
+				html.append("<tr><td>Spoil Amount: <font color=\"LEVEL\">x" + (Config.RATE_CORPSE_DROP_AMOUNT_MULTIPLIER * Config.PREMIUM_RATE_SPOIL_AMMOUNT) + " <br1></font></td></tr>");
+				html.append("<tr><td>End date premium account: <font color=\"00A5FF\">" + TimeUtils.dateTimeFormat(instant) + "</font></td></tr>");
 				html.append("<tr><td><center>Premium Info & Rules<br></center></td></tr>");
 				html.append("<tr><td><font color=\"70FFCA\">1. Premium accounts CAN NOT BE TRANSFERED.<br1></font></td></tr>");
 				html.append("<tr><td><font color=\"70FFCA\">2. Premium does not effect party members.<br1></font></td></tr>");
 				html.append("<tr><td><font color=\"70FFCA\">3. Premium account effects ALL characters in same account.<br><br><br></font></td></tr>");
-				html.append("<tr><td><center>Thank you for supporting our server.</td></tr>");
+			}
+			else
+			{
+				html.append("<html><body><title>Account Details</title><center>");
+				html.append("<table>");
+				html.append("<tr><td><center>Account Status: <font color=\"LEVEL\">Normal<br></font></td></tr>");
+				html.append("<tr><td>Rate XP: <font color=\"LEVEL\"> x" + Config.RATE_XP + "<br1></font></td></tr>");
+				html.append("<tr><td>Rate SP: <font color=\"LEVEL\"> x" + Config.RATE_SP + "<br1></font></td></tr>");
+				html.append("<tr><td>Drop Chance: <font color=\"LEVEL\"> x" + Config.RATE_DEATH_DROP_CHANCE_MULTIPLIER + "<br1></font></td></tr><br>");
+				html.append("<tr><td>Drop Amount: <font color=\"LEVEL\"> x" + Config.RATE_DEATH_DROP_AMOUNT_MULTIPLIER + "<br1></font></td></tr><br>");
+				html.append("<tr><td>Spoil Chance: <font color=\"LEVEL\"> x" + Config.RATE_CORPSE_DROP_CHANCE_MULTIPLIER + "<br1></font></td></tr><br>");
+				html.append("<tr><td>Spoil Amount: <font color=\"LEVEL\"> x" + Config.RATE_CORPSE_DROP_AMOUNT_MULTIPLIER + "<br><br></font></td></tr><br>");
+				html.append("<tr><td>Drop Manor: <font color=\"LEVEL\"> x" + Config.RATE_DROP_MANOR + "<br1></font></td></tr>");
+				html.append("<tr><td><center>Premium Info & Rules<br></td></tr>");
+				html.append("<tr><td>Rate XP: <font color=\"LEVEL\"> x" + (Config.RATE_XP * Config.PREMIUM_RATE_XP) + "<br1></font></td></tr>");
+				html.append("<tr><td>Rate SP: <font color=\"LEVEL\"> x" + (Config.RATE_SP * Config.PREMIUM_RATE_SP) + "<br1></font></td></tr>");
+				html.append("<tr><td>Drop Chance: <font color=\"LEVEL\"> x" + (Config.RATE_DEATH_DROP_CHANCE_MULTIPLIER * Config.PREMIUM_RATE_DROP_CHANCE) + "<br1></font></td></tr>");
+				html.append("<tr><td>Drop Amount: <font color=\"LEVEL\"> x" + (Config.RATE_DEATH_DROP_AMOUNT_MULTIPLIER * Config.PREMIUM_RATE_DROP_AMOUNT) + "<br1></font></td></tr>");
+				html.append("<tr><td>Spoil Chance: <font color=\"LEVEL\"> x" + (Config.RATE_CORPSE_DROP_CHANCE_MULTIPLIER * Config.PREMIUM_RATE_SPOIL_CHANCE) + "<br1></font></td></tr>");
+				html.append("<tr><td>Spoil Amount: <font color=\"LEVEL\"> x" + (Config.RATE_CORPSE_DROP_AMOUNT_MULTIPLIER * Config.PREMIUM_RATE_SPOIL_AMMOUNT) + "<br1></font></td></tr>");
+				html.append("<tr><td>Drop Manor: <font color=\"LEVEL\"> x" + (Config.RATE_DROP_MANOR * Config.PREMIUM_RATE_DROP_MANOR) + "<br1></font></td></tr>");
+				html.append("<tr><td> <font color=\"70FFCA\">1. Premium benefits CAN NOT BE TRANSFERED.<br1></font></td></tr>");
+				html.append("<tr><td> <font color=\"70FFCA\">2. Premium does not effect party members.<br1></font></td></tr>");
+				html.append("<tr><td> <font color=\"70FFCA\">3. Premium benefits effect ALL characters in same account.</font></td></tr>");
 			}
 			html.append("</table>");
 			html.append("</center></body></html>");
