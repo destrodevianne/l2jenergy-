@@ -148,6 +148,7 @@
 				<xs:attribute type="xs:string" name="class_id_restriction" use="optional" />
 				<xs:attribute type="xs:short" name="siegeZone" use="optional" />
 				<xs:attribute type="xs:byte" name="siegeSide" use="optional" />
+				<xs:attribute type="xs:string" name="checkpcbangpoint" use="optional" />
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
@@ -652,6 +653,7 @@
 					<xs:enumeration value="TriggerSkillBySkill" />
 					<xs:enumeration value="UnsummonAgathion" />
 					<xs:enumeration value="VitalityPointUp" />
+					<xs:enumeration value="PcBangPointUp" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>

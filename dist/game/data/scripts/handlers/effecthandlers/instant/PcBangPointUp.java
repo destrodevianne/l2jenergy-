@@ -31,11 +31,11 @@ import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 /**
  * @author Мо3олЬ
  */
-public class PcCafe extends AbstractEffect
+public class PcBangPointUp extends AbstractEffect
 {
 	private final int _amount;
 	
-	public PcCafe(Condition attachCond, Condition applyCond, StatsSet set, StatsSet params)
+	public PcBangPointUp(Condition attachCond, Condition applyCond, StatsSet set, StatsSet params)
 	{
 		super(attachCond, applyCond, set, params);
 		_amount = params.getInt("amount", 0);

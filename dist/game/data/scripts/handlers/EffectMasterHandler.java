@@ -103,7 +103,7 @@ import handlers.effecthandlers.instant.OpenCommonRecipeBook;
 import handlers.effecthandlers.instant.OpenDwarfRecipeBook;
 import handlers.effecthandlers.instant.OutpostCreate;
 import handlers.effecthandlers.instant.OutpostDestroy;
-import handlers.effecthandlers.instant.PcCafe;
+import handlers.effecthandlers.instant.PcBangPointUp;
 import handlers.effecthandlers.instant.PhysicalAttack;
 import handlers.effecthandlers.instant.PhysicalAttackHpLink;
 import handlers.effecthandlers.instant.PhysicalSoulAttack;
@@ -294,7 +294,7 @@ public final class EffectMasterHandler
 		OutpostDestroy.class,
 		Paralyze.class,
 		Passive.class,
-		PcCafe.class,
+		PcBangPointUp.class,
 		PhysicalAttack.class,
 		PhysicalAttackHpLink.class,
 		PhysicalAttackMute.class,

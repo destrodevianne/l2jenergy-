@@ -621,8 +621,11 @@
 		<set name="reuseDelay" val="604800000" />
 		<set name="rideState" val="NONE;STRIDER;WYVERN;WOLF" />
 		<set name="targetType" val="SELF" />
+		<cond>
+			<player checkpcbangpoint="true" />
+		</cond>
 		<effects>
-			<effect name="PcCafe">
+			<effect name="PcBangPointUp">
 				<param amount="10000" />
 			</effect>
 		</effects>

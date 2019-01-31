@@ -13684,6 +13684,12 @@ public final class SystemMessageId
 	public static final SystemMessageId YOU_CANNOT_REPORT_CHAR_AT_THIS_TIME_4 = new SystemMessageId(2383);
 	
 	/**
+	 * ID: 2389<br>
+	 * Message: The maximum accumulation allowed of PC cafe points has been exceeded. You can no longer acquire PC cafe points.
+	 */
+	public static final SystemMessageId THE_MAXMIMUM_ACCUMULATION_ALLOWED_OF_PC_CAFE_POINTS_HAS_BEEN_EXCEEDED = new SystemMessageId(2389);
+	
+	/**
 	 * ID: 2390<br>
 	 * Message: Your number of My Teleports slots has reached its maximum limit.
 	 */
