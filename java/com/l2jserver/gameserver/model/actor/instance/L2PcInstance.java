@@ -833,6 +833,12 @@ public final class L2PcInstance extends L2Playable
 				final long masks = player.getVariables().getLong(COND_OVERRIDE_KEY, PcCondOverride.getAllExceptionsMask());
 				player.setOverrideCond(masks);
 			}
+			
+			// Starting recommendations give task, init Task give = 10 reco 2hs & 1 every 1hs.
+			player.startRecoGiveTask();
+			
+			// Load player's recommendations and bonus time
+			DAOFactory.getInstance().getRecommendationBonusDAO().load(player);
 			return player;
 		}
 		catch (Exception e)
@@ -9627,12 +9633,6 @@ public final class L2PcInstance extends L2Playable
 				sendMessage(MessagesData.getInstance().getMessage(this, "your_premium_will_expire_tomorrow"));
 			}
 		}
-		
-		// Load player's recommendations and bonus time
-		DAOFactory.getInstance().getRecommendationBonusDAO().load(this);
-		
-		// Starting recommendations give task
-		startRecoGiveTask();
 		
 		EventDispatcher.getInstance().notifyEventAsync(new OnPlayerLogin(this), this);
 	}
