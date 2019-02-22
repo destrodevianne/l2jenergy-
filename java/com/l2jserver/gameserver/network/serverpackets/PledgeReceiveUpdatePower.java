@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -18,34 +18,20 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
-import com.l2jserver.gameserver.model.ClanPrivilege;
-import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.util.EnumIntBitmask;
-
-public class ManagePledgePower extends L2GameServerPacket
+public class PledgeReceiveUpdatePower extends L2GameServerPacket
 {
-	private final int _action;
-	private final int _clanId;
 	private final int _privs;
 	
-	public ManagePledgePower(final L2PcInstance player, final int action, final int rank)
+	public PledgeReceiveUpdatePower(final int privs)
 	{
-		_clanId = player.getClanId();
-		_action = action;
-		final EnumIntBitmask<ClanPrivilege> temp = player.getClan().getRankPrivs(rank);
-		_privs = temp == null ? 0 : temp.getBitmask();
-		player.sendPacket(new PledgeReceiveUpdatePower(_privs));
+		_privs = privs;
 	}
 	
 	@Override
 	protected final void writeImpl()
 	{
-		if (_action == 1)
-		{
-			writeC(0x2a);
-			writeD(_clanId);
-			writeD(_action);
-			writeD(_privs);
-		}
+		writeC(0xfe);
+		writeH(0x42);
+		writeD(_privs);
 	}
 }

@@ -21,6 +21,7 @@ package handlers.admincommandhandlers;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
+import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2Clan;
@@ -128,7 +129,7 @@ public class AdminPledge implements IAdminCommandHandler
 				int level = Integer.parseInt(parameter);
 				if ((level >= 0) && (level < 12))
 				{
-					player.getClan().changeLevel(level);
+					DAOFactory.getInstance().getClanDAO().changeLevel(player.getClan(), level);
 					activeChar.sendAdminMessage("You set level " + level + " for clan " + player.getClan().getName());
 				}
 				else

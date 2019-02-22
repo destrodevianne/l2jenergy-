@@ -19,7 +19,9 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.gameserver.model.ClanPrivilege;
+import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.ManagePledgePower;
 
 public final class RequestPledgePower extends L2GameClientPacket
@@ -56,7 +58,13 @@ public final class RequestPledgePower extends L2GameClientPacket
 		
 		if (_action == 2)
 		{
-			if (player.isClanLeader())
+			if ((_rank < L2Clan.RANK_FIRST) || (_rank > L2Clan.RANK_LAST))
+			{
+				return;
+			}
+			
+			if ((player.getClan() != null) && player.isClanLeader()) // TODO: if (activeChar.getClan() != null && (activeChar.getClanPrivileges() & Clan.CP_CL_MANAGE_RANKS) == Clan.CP_CL_MANAGE_RANKS)
+			// if (player.isClanLeader())
 			{
 				if (_rank == 9)
 				{
@@ -66,15 +74,20 @@ public final class RequestPledgePower extends L2GameClientPacket
 					// bulletin board administration
 					// Clan war, right to dismiss, set functions
 					// Auction, manage taxes, attack/defend registration, mercenary management
-					// => Leaves only CP_CL_VIEW_WAREHOUSE, CP_CH_OPEN_DOOR, CP_CS_OPEN_DOOR?
-					_privs &= ClanPrivilege.CL_VIEW_WAREHOUSE.getBitmask() | ClanPrivilege.CH_OPEN_DOOR.getBitmask() | ClanPrivilege.CS_OPEN_DOOR.getBitmask();
+					// => Leaves only CP_CL_VIEW_WAREHOUSE, CP_CH_OPEN_DOOR, CP_CS_OPEN_DOOR? // CS_USE_FUNCTIONS взято из jts, CH_USE_FUNCTIONS - нету (взято из jts)
+					_privs &= ClanPrivilege.CL_VIEW_WAREHOUSE.getBitmask() | ClanPrivilege.CH_OPEN_DOOR.getBitmask() | ClanPrivilege.CS_OPEN_DOOR.getBitmask() | ClanPrivilege.CS_USE_FUNCTIONS.getBitmask();
 				}
 				player.getClan().setRankPrivs(_rank, _privs);
+				player.getClan().updatePrivsForRank(_rank); // TODO: test
 			}
+		}
+		else if (player.getClan() != null)
+		{
+			player.sendPacket(new ManagePledgePower(player, _action, _rank));
 		}
 		else
 		{
-			player.sendPacket(new ManagePledgePower(getClient().getActiveChar().getClan(), _action, _rank));
+			player.sendPacket(ActionFailed.STATIC_PACKET);
 		}
 	}
 	

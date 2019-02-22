@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -18,6 +18,7 @@
  */
 package com.l2jserver.gameserver.dao.factory;
 
+import com.l2jserver.gameserver.dao.ClanDAO;
 import com.l2jserver.gameserver.dao.FriendDAO;
 import com.l2jserver.gameserver.dao.HennaDAO;
 import com.l2jserver.gameserver.dao.ItemDAO;
@@ -40,10 +41,12 @@ import com.l2jserver.gameserver.dao.TeleportBookmarkDAO;
 
 /**
  * DAO Factory interface.
- * @author Zoey76
+ * @author Zoey76, Мо3олЬ
  */
 public interface IDAOFactory
 {
+	ClanDAO getClanDAO();
+	
 	FriendDAO getFriendDAO();
 	
 	HennaDAO getHennaDAO();

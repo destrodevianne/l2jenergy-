@@ -18,6 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
+import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.sql.impl.CrestTable;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
@@ -89,7 +90,7 @@ public final class RequestSetAllyCrest extends L2GameClientPacket
 		{
 			if (leaderClan.getAllyCrestId() != 0)
 			{
-				leaderClan.changeAllyCrest(0, false);
+				DAOFactory.getInstance().getClanDAO().changeAllyCrest(leaderClan, 0, false);
 			}
 		}
 		else
@@ -97,7 +98,7 @@ public final class RequestSetAllyCrest extends L2GameClientPacket
 			final L2Crest crest = CrestTable.getInstance().createCrest(_data, CrestType.ALLY);
 			if (crest != null)
 			{
-				leaderClan.changeAllyCrest(crest.getId(), false);
+				DAOFactory.getInstance().getClanDAO().changeAllyCrest(leaderClan, crest.getId(), false);
 				activeChar.sendPacket(SystemMessageId.CLAN_CREST_WAS_SUCCESSFULLY_REGISTRED);
 			}
 		}

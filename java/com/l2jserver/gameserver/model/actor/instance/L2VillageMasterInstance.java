@@ -25,6 +25,7 @@ import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.xml.impl.ClassListData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
@@ -916,7 +917,7 @@ public class L2VillageMasterInstance extends L2NpcInstance
 		}
 		
 		clan.setDissolvingExpiryTime(System.currentTimeMillis() + (Config.ALT_CLAN_DISSOLVE_DAYS * 86400000L)); // 24*60*60*1000 = 86400000
-		clan.updateClanInDB();
+		DAOFactory.getInstance().getClanDAO().updateClan(clan);
 		
 		// The clan leader should take the XP penalty of a full death.
 		player.calculateDeathExpPenalty(null, false);
@@ -933,7 +934,7 @@ public class L2VillageMasterInstance extends L2NpcInstance
 		
 		final L2Clan clan = player.getClan();
 		clan.setDissolvingExpiryTime(0);
-		clan.updateClanInDB();
+		DAOFactory.getInstance().getClanDAO().updateClan(clan);
 	}
 	
 	private static final void createSubPledge(L2PcInstance player, String clanName, String leaderName, int pledgeType, int minClanLvl)
@@ -1075,7 +1076,7 @@ public class L2VillageMasterInstance extends L2NpcInstance
 		}
 		
 		subPledge.setName(pledgeName);
-		clan.updateSubPledgeInDB(subPledge.getId());
+		DAOFactory.getInstance().getClanDAO().updateSubPledge(clan, subPledge.getId());
 		clan.broadcastClanStatus();
 		player.sendMessage(MessagesData.getInstance().getMessage(player, "pledge_name_change"));
 	}
@@ -1121,7 +1122,7 @@ public class L2VillageMasterInstance extends L2NpcInstance
 		}
 		
 		subPledge.setLeaderId(clan.getClanMember(leaderName).getObjectId());
-		clan.updateSubPledgeInDB(subPledge.getId());
+		DAOFactory.getInstance().getClanDAO().updateSubPledge(clan, subPledge.getId());
 		
 		final L2ClanMember leaderSubPledge = clan.getClanMember(leaderName);
 		final L2PcInstance leaderPlayer = leaderSubPledge.getPlayerInstance();

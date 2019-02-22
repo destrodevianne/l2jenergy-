@@ -18,6 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
+import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.CrestTable;
 import com.l2jserver.gameserver.model.ClanPrivilege;
 import com.l2jserver.gameserver.model.L2Clan;
@@ -87,7 +88,7 @@ public final class RequestExSetPledgeCrestLarge extends L2GameClientPacket
 		{
 			if (clan.getCrestLargeId() != 0)
 			{
-				clan.changeLargeCrest(0);
+				DAOFactory.getInstance().getClanDAO().changeLargeCrest(clan, 0);
 				activeChar.sendPacket(SystemMessageId.CLAN_CREST_HAS_BEEN_DELETED);
 			}
 		}
@@ -102,7 +103,7 @@ public final class RequestExSetPledgeCrestLarge extends L2GameClientPacket
 			final L2Crest crest = CrestTable.getInstance().createCrest(_data, CrestType.PLEDGE_LARGE);
 			if (crest != null)
 			{
-				clan.changeLargeCrest(crest.getId());
+				DAOFactory.getInstance().getClanDAO().changeLargeCrest(clan, crest.getId());
 				activeChar.sendPacket(SystemMessageId.CLAN_EMBLEM_WAS_SUCCESSFULLY_REGISTERED);
 			}
 		}

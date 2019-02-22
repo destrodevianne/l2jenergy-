@@ -18,6 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
+import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -72,8 +73,8 @@ public final class RequestAnswerJoinAlly extends L2GameClientPacket
 				activeChar.getClan().setAllyId(clan.getAllyId());
 				activeChar.getClan().setAllyName(clan.getAllyName());
 				activeChar.getClan().setAllyPenaltyExpiryTime(0, 0);
-				activeChar.getClan().changeAllyCrest(clan.getAllyCrestId(), true);
-				activeChar.getClan().updateClanInDB();
+				DAOFactory.getInstance().getClanDAO().changeAllyCrest(clan, clan.getAllyCrestId(), true);
+				DAOFactory.getInstance().getClanDAO().updateClan(activeChar.getClan());
 			}
 		}
 		

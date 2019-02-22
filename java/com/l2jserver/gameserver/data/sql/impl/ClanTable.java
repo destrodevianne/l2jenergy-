@@ -35,6 +35,7 @@ import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.communitybbs.Manager.ForumsBBSManager;
+import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.idfactory.IdFactory;
 import com.l2jserver.gameserver.instancemanager.AuctionManager;
 import com.l2jserver.gameserver.instancemanager.CHSiegeManager;
@@ -205,7 +206,7 @@ public class ClanTable
 		L2ClanMember leader = new L2ClanMember(clan, player);
 		clan.setLeader(leader);
 		leader.setPlayerInstance(player);
-		clan.store();
+		DAOFactory.getInstance().getClanDAO().storeClan(clan);
 		player.setClan(clan);
 		player.setPledgeClass(L2ClanMember.calculatePledgeClass(player));
 		player.setClanPrivileges(new EnumIntBitmask<>(ClanPrivilege.class, true));
@@ -523,8 +524,8 @@ public class ClanTable
 				{
 					clan.setAllyId(0);
 					clan.setAllyName(null);
-					clan.changeAllyCrest(0, true);
-					clan.updateClanInDB();
+					DAOFactory.getInstance().getClanDAO().changeAllyCrest(clan, 0, true);
+					DAOFactory.getInstance().getClanDAO().updateClan(clan);
 					LOG.info("{}: Removed alliance from clan: {}", getClass().getSimpleName(), clan);
 				}
 			}
@@ -551,7 +552,7 @@ public class ClanTable
 	{
 		for (L2Clan clan : _clans.values())
 		{
-			clan.updateClanScoreInDB();
+			DAOFactory.getInstance().getClanDAO().updateClanScore(clan);
 		}
 	}
 	

@@ -18,6 +18,7 @@
  */
 package com.l2jserver.gameserver.dao.factory.impl;
 
+import com.l2jserver.gameserver.dao.ClanDAO;
 import com.l2jserver.gameserver.dao.FriendDAO;
 import com.l2jserver.gameserver.dao.HennaDAO;
 import com.l2jserver.gameserver.dao.ItemDAO;
@@ -38,6 +39,7 @@ import com.l2jserver.gameserver.dao.SkillDAO;
 import com.l2jserver.gameserver.dao.SubclassDAO;
 import com.l2jserver.gameserver.dao.TeleportBookmarkDAO;
 import com.l2jserver.gameserver.dao.factory.IDAOFactory;
+import com.l2jserver.gameserver.dao.impl.mysql.ClanDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.FriendDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.HennaDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.ItemDAOMySQLImpl;
@@ -66,6 +68,7 @@ enum MySQLDAOFactory implements IDAOFactory
 {
 	INSTANCE;
 	
+	private final ClanDAO clanDAO = new ClanDAOMySQLImpl();
 	private final FriendDAO friendDAO = new FriendDAOMySQLImpl();
 	private final HennaDAO hennaDAO = new HennaDAOMySQLImpl();
 	private final ItemDAO itemDAO = new ItemDAOMySQLImpl();
@@ -85,6 +88,12 @@ enum MySQLDAOFactory implements IDAOFactory
 	private final SkillDAO skillDAO = new SkillDAOMySQLImpl();
 	private final SubclassDAO subclassDAO = new SubclassDAOMySQLImpl();
 	private final TeleportBookmarkDAO teleportBookmarkDAO = new TeleportBookmarkDAOMySQLImpl();
+	
+	@Override
+	public ClanDAO getClanDAO()
+	{
+		return clanDAO;
+	}
 	
 	@Override
 	public FriendDAO getFriendDAO()
