@@ -30,7 +30,7 @@ import com.l2jserver.gameserver.model.itemcontainer.Inventory;
 public interface IAmountMultiplierStrategy
 {
 	public static final IAmountMultiplierStrategy DROP = DEFAULT_STRATEGY(Config.RATE_DEATH_DROP_AMOUNT_MULTIPLIER);
-	public static final IAmountMultiplierStrategy SPOIL = DEFAULT_STRATEGY(Config.RATE_CORPSE_DROP_AMOUNT_MULTIPLIER);
+	public static final IAmountMultiplierStrategy SPOIL = DEFAULT_STRATEGY(Config.RATE_CORPSE_DROP_AMOUNT_MULTIPLIER); // TODO:fix add * Config.PREMIUM_RATE_SPOIL_AMMOUNT
 	public static final IAmountMultiplierStrategy STATIC = (item, victim) -> 1;
 	
 	public static IAmountMultiplierStrategy DEFAULT_STRATEGY(final double defaultMultiplier)

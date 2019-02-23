@@ -1501,15 +1501,7 @@ public class L2Attackable extends L2Npc
 			{
 				count += diff;
 			}
-			
-			if (seeder.isPremium())
-			{
-				_harvestItem.set(new ItemHolder(_seed.getCropId(), count * Config.RATE_DROP_MANOR * Config.PREMIUM_RATE_DROP_MANOR));
-			}
-			else
-			{
-				_harvestItem.set(new ItemHolder(_seed.getCropId(), count * Config.RATE_DROP_MANOR));
-			}
+			_harvestItem.set(new ItemHolder(_seed.getCropId(), seeder.isPremium() ? count * Config.RATE_DROP_MANOR * Config.PREMIUM_RATE_DROP_MANOR : count * Config.RATE_DROP_MANOR));
 		}
 	}
 	

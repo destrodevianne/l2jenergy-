@@ -30,7 +30,7 @@ import com.l2jserver.gameserver.model.itemcontainer.Inventory;
 public interface IChanceMultiplierStrategy
 {
 	public static final IChanceMultiplierStrategy DROP = DEFAULT_STRATEGY(Config.RATE_DEATH_DROP_CHANCE_MULTIPLIER);
-	public static final IChanceMultiplierStrategy SPOIL = DEFAULT_STRATEGY(Config.RATE_CORPSE_DROP_CHANCE_MULTIPLIER);
+	public static final IChanceMultiplierStrategy SPOIL = DEFAULT_STRATEGY(Config.RATE_CORPSE_DROP_CHANCE_MULTIPLIER);// TODO:fix add * Config.PREMIUM_RATE_SPOIL_CHANCE
 	public static final IChanceMultiplierStrategy STATIC = (item, victim) -> 1;
 	
 	public static final IChanceMultiplierStrategy QUEST = (item, victim) ->
