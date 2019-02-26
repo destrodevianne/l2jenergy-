@@ -124,6 +124,7 @@ $MYL < sql/game/character_tpbookmark.sql &> /dev/null
 $MYL < sql/game/character_ui_actions.sql &> /dev/null
 $MYL < sql/game/character_ui_categories.sql &> /dev/null
 $MYL < sql/game/character_variables.sql &> /dev/null
+$MYL < sql/game/character_votes.sql &> /dev/null
 $MYL < sql/game/characters.sql &> /dev/null
 $MYL < sql/game/clan_data.sql &> /dev/null
 $MYL < sql/game/clan_notices.sql &> /dev/null

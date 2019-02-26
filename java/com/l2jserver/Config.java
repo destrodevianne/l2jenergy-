@@ -115,6 +115,7 @@ public final class Config
 	public static final String COMMUNITY_BOARD_CONFIG_FILE = "config/services/CommunityBoard.properties";
 	public static final String PC_CAFE_CONFIG_FILE = "config/services/PCCafe.properties";
 	public static final String PREMIUM_CONFIG_FILE = "config/services/Premium.properties";
+	public static final String TOP_CONFIG_FILE = "config/services/Tops.properties";
 	
 	// --------------------------------------------------
 	// L2J Variable Definitions
@@ -1163,6 +1164,20 @@ public final class Config
 	public static float PREMIUM_RATE_SPOIL_AMMOUNT;
 	public static Map<Integer, Float> PREMIUM_RATE_DROP_CHANCE_MULTIPLIER;
 	public static Map<Integer, Float> PREMIUM_RATE_DROP_AMOUNT_MULTIPLIER;
+	
+	public static boolean L2_TOP_MANAGER_ENABLED;
+	public static String L2_TOP_WEB_ADDRESS;
+	public static String L2_TOP_SMS_ADDRESS;
+	public static int L2_TOP_REWARD_ID;
+	public static int L2_TOP_REWARD_COUNT;
+	public static String L2_TOP_SERVER_PREFIX;
+	public static boolean MMO_TOP_MANAGER_ENABLED;
+	public static String MMO_TOP_WEB_ADDRESS;
+	public static int MMO_TOP_REWARD_ID;
+	public static int MMO_TOP_REWARD_COUNT;
+	public static int TOP_MANAGER_INTERVAL;
+	public static String TOP_SERVER_ADDRESS;
+	public static int TOP_SAVE_DAYS;
 	
 	/**
 	 * This class initializes all global variables for configuration.<br>
@@ -2894,6 +2909,23 @@ public final class Config
 					}
 				}
 			}
+			
+			final PropertiesParser topSettings = new PropertiesParser(TOP_CONFIG_FILE);
+			L2_TOP_MANAGER_ENABLED = topSettings.getBoolean("L2TopManagerEnabled", false);
+			
+			L2_TOP_WEB_ADDRESS = topSettings.getString("L2TopWebAddress", "");
+			L2_TOP_SMS_ADDRESS = topSettings.getString("L2TopSmsAddress", "");
+			L2_TOP_SERVER_PREFIX = topSettings.getString("L2TopServerPrefix", "");
+			L2_TOP_REWARD_ID = topSettings.getInt("L2TopRewardId", 57);
+			L2_TOP_REWARD_COUNT = topSettings.getInt("L2TopRewardCount", 1000);
+			MMO_TOP_MANAGER_ENABLED = topSettings.getBoolean("MMOTopEnable", false);
+			MMO_TOP_WEB_ADDRESS = topSettings.getString("MMOTopUrl", "");
+			MMO_TOP_REWARD_ID = topSettings.getInt("MMOTopRewardId", 57);
+			MMO_TOP_REWARD_COUNT = topSettings.getInt("MMOTopRewardCount", 1000);
+			
+			TOP_MANAGER_INTERVAL = topSettings.getInt("TopManagerInterval", 300000);
+			TOP_SERVER_ADDRESS = topSettings.getString("TopServerAddress", "L2jenergy");
+			TOP_SAVE_DAYS = topSettings.getInt("TopSaveDays", 30);
 		}
 		else if (Server.serverMode == Server.MODE_LOGINSERVER)
 		{

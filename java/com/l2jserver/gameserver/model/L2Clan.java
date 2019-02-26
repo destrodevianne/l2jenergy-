@@ -1120,7 +1120,7 @@ public class L2Clan implements IIdentifiable, INamable
 			}
 		}
 		
-		if (_reputationScore < 0)
+		if (getReputationScore() < 0)
 		{
 			skillsStatus(player, true);
 		}
@@ -1644,7 +1644,7 @@ public class L2Clan implements IIdentifiable, INamable
 	
 	public void setReputationScore(int value, boolean save)
 	{
-		if ((_reputationScore >= 0) && (value < 0))
+		if ((getReputationScore() >= 0) && (value < 0))
 		{
 			broadcastToOnlineMembers(SystemMessage.getSystemMessage(SystemMessageId.REPUTATION_POINTS_0_OR_LOWER_CLAN_SKILLS_DEACTIVATED));
 			for (L2ClanMember member : _members.values())
@@ -1655,7 +1655,7 @@ public class L2Clan implements IIdentifiable, INamable
 				}
 			}
 		}
-		else if ((_reputationScore < 0) && (value >= 0))
+		else if ((getReputationScore() < 0) && (value >= 0))
 		{
 			broadcastToOnlineMembers(SystemMessage.getSystemMessage(SystemMessageId.CLAN_SKILLS_WILL_BE_ACTIVATED_SINCE_REPUTATION_IS_0_OR_HIGHER));
 			for (L2ClanMember member : _members.values())
@@ -1667,15 +1667,15 @@ public class L2Clan implements IIdentifiable, INamable
 			}
 		}
 		
-		_reputationScore = value;
-		if (_reputationScore > 100000000)
+		setReputationScore(value);
+		if (getReputationScore() > 100000000)
 		{
-			_reputationScore = 100000000;
+			setReputationScore(100000000);
 		}
 		
-		if (_reputationScore < -100000000)
+		if (getReputationScore() < -100000000)
 		{
-			_reputationScore = -100000000;
+			setReputationScore(-100000000);
 		}
 		
 		broadcastToOnlineMembers(new PledgeShowInfoUpdate(this));
@@ -1688,6 +1688,11 @@ public class L2Clan implements IIdentifiable, INamable
 	public int getReputationScore()
 	{
 		return _reputationScore;
+	}
+	
+	public void setReputationScore(int reputationScore)
+	{
+		_reputationScore = reputationScore;
 	}
 	
 	public int getRank()

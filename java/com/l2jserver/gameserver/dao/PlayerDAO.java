@@ -28,29 +28,15 @@ public interface PlayerDAO
 {
 	void storeCharBase(L2PcInstance player);
 	
-	/**
-	 * Create a new player in the characters table of the database.
-	 * @param player the player
-	 * @return {@code true} if the player was inserted into the database
-	 */
 	boolean insert(L2PcInstance player);
 	
-	/**
-	 * Updates the database with online status and last access of the player (called when login and logout).
-	 * @param player the player
-	 */
 	void updateOnlineStatus(L2PcInstance player);
 	
-	/**
-	 * Restores a player from the database.
-	 * @param objectId the player's object ID
-	 * @return the player
-	 */
 	L2PcInstance load(int objectId);
 	
-	/**
-	 * Retrieve the name and ID of the other characters assigned to this account.
-	 * @param player the player
-	 */
 	void loadCharacters(L2PcInstance player);
+	
+	void checkAndSave(long date, String nick, int mult);
+	
+	void clean();
 }

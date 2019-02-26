@@ -21,11 +21,14 @@ package com.l2jserver.gameserver.dao.impl.mysql;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Calendar;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.dao.PlayerDAO;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
@@ -51,6 +54,10 @@ public class PlayerDAOMySQLImpl implements PlayerDAO
 	private static final String UPDATE = "UPDATE characters SET level=?,maxHp=?,curHp=?,maxCp=?,curCp=?,maxMp=?,curMp=?,face=?,hairStyle=?,hairColor=?,sex=?,heading=?,x=?,y=?,z=?,exp=?,expBeforeDeath=?,sp=?,karma=?,fame=?,pvpkills=?,pkkills=?,clanid=?,race=?,classid=?,deletetime=?,title=?,title_color=?,accesslevel=?,online=?,isin7sdungeon=?,clan_privs=?,wantspeace=?,base_class=?,onlinetime=?,newbie=?,nobless=?,power_grade=?,subpledge=?,lvl_joined_academy=?,apprentice=?,sponsor=?,clan_join_expiry_time=?,clan_create_expiry_time=?,char_name=?,death_penalty_level=?,bookmarkslot=?,vitality_points=?,language=? WHERE charId=?";
 	private static final String UPDATE_ONLINE = "UPDATE characters SET online=?, lastAccess=? WHERE charId=?";
 	private static final String SELECT_CHARACTERS = "SELECT charId, char_name FROM characters WHERE account_name=? AND charId<>?";
+	private static final String SELECT_CHARACTERS_CHAR_ID = "SELECT charId FROM characters WHERE char_name=?";
+	private static final String SELECT_CHARACTER_TOP_DATA = "SELECT * FROM character_votes WHERE id=? AND date=? AND multipler=?";
+	private static final String INSERT_TOP_DATA = "INSERT INTO character_votes (date, id, nick, multipler) values (?,?,?,?)";
+	private static final String DELETE_TOP_DATA = "DELETE FROM character_votes WHERE date<?";
 	
 	@Override
 	public L2PcInstance load(int objectId)
@@ -374,6 +381,64 @@ public class PlayerDAOMySQLImpl implements PlayerDAO
 		catch (Exception e)
 		{
 			LOG.error("Failed updating character online status. {}", e);
+		}
+	}
+	
+	@Override
+	public void checkAndSave(long date, String nick, int mult)
+	{
+		try (Connection con = ConnectionFactory.getInstance().getConnection();
+			PreparedStatement ps = con.prepareStatement(SELECT_CHARACTERS_CHAR_ID))
+		{
+			int charId = 0;
+			ps.setString(1, nick);
+			try (ResultSet rs = ps.executeQuery())
+			{
+				if (rs.next())
+				{
+					charId = rs.getInt("charId");
+				}
+				if (charId > 0)
+				{
+					PreparedStatement ps1 = con.prepareStatement(SELECT_CHARACTER_TOP_DATA);
+					ps1.setInt(1, charId);
+					ps1.setLong(2, date);
+					ps1.setInt(3, mult);
+					try (ResultSet rs1 = ps1.executeQuery())
+					{
+						if (!rs1.next())
+						{
+							PreparedStatement ps2 = con.prepareStatement(INSERT_TOP_DATA);
+							ps2.setLong(1, date);
+							ps2.setInt(2, charId);
+							ps2.setString(3, nick);
+							ps2.setInt(4, mult);
+							ps2.execute();
+						}
+					}
+				}
+			}
+		}
+		catch (SQLException e)
+		{
+			LOG.error("", e);
+		}
+	}
+	
+	@Override
+	public void clean()
+	{
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DAY_OF_YEAR, -Config.TOP_SAVE_DAYS);
+		try (Connection con = ConnectionFactory.getInstance().getConnection();
+			PreparedStatement ps = con.prepareStatement(DELETE_TOP_DATA))
+		{
+			ps.setLong(1, calendar.getTimeInMillis() / 1000);
+			ps.execute();
+		}
+		catch (Exception e)
+		{
+			LOG.warn("", e);
 		}
 	}
 }

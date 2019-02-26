@@ -128,6 +128,8 @@ import com.l2jserver.gameserver.instancemanager.TerritoryWarManager;
 import com.l2jserver.gameserver.instancemanager.WalkingManager;
 import com.l2jserver.gameserver.instancemanager.ZoneManager;
 import com.l2jserver.gameserver.instancemanager.games.MiniGameScoreManager;
+import com.l2jserver.gameserver.instancemanager.vote.L2TopManager;
+import com.l2jserver.gameserver.instancemanager.vote.MMOTopManager;
 import com.l2jserver.gameserver.model.AutoSpawnHandler;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.PartyMatchRoomList;
@@ -302,6 +304,10 @@ public final class GameServer
 		CursedWeaponsManager.getInstance();
 		TransformData.getInstance();
 		BotReportTable.getInstance();
+		
+		printSection("Bonus Tops");
+		L2TopManager.getInstance();
+		MMOTopManager.getInstance();
 		
 		printSection("Scripts");
 		QuestManager.getInstance();
