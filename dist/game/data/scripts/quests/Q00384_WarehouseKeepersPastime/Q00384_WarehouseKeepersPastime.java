@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright © 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -143,7 +143,6 @@ public final class Q00384_WarehouseKeepersPastime extends Quest
 				return event;
 			}
 			
-			final int ask = Integer.parseInt(event);
 			switch (npc.getId())
 			{
 				case CLIFF:
@@ -157,6 +156,8 @@ public final class Q00384_WarehouseKeepersPastime extends Quest
 						qs.playSound(Sound.ITEMSOUND_QUEST_MIDDLE);
 						return "30182-05.htm";
 					}
+					
+					final int ask = Integer.parseInt(event);
 					switch (ask)
 					{
 						case 3:
@@ -239,6 +240,7 @@ public final class Q00384_WarehouseKeepersPastime extends Quest
 					break;
 				}
 				case WAREHOUSE_CHIEF_BAXT:
+					final int ask = Integer.parseInt(event);
 					switch (ask)
 					{
 						case 3:
