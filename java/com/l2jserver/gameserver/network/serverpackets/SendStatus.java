@@ -24,24 +24,21 @@ import com.l2jserver.Config;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
-/**
- * @author Мо3олЬ
- */
 public class SendStatus extends L2GameServerPacket
 {
 	private static final long MIN_UPDATE_PERIOD = 30000;
-	private static int online_players = 0;
-	private static int max_online_players = 0;
-	private static int online_priv_store = 0;
-	private static long last_update = 0;
+	private static int ONLINE_PLAYERS = 0;
+	private static int MAX_ONLINE_PLAYERS = 0;
+	private static int ONLINE_PRIVS_STORE = 0;
+	private static long LAST_UPDATE = 0;
 	
 	public SendStatus()
 	{
-		if ((System.currentTimeMillis() - last_update) < MIN_UPDATE_PERIOD)
+		if ((System.currentTimeMillis() - LAST_UPDATE) < MIN_UPDATE_PERIOD)
 		{
 			return;
 		}
-		last_update = System.currentTimeMillis();
+		LAST_UPDATE = System.currentTimeMillis();
 		int i = 0;
 		int j = 0;
 		for (L2PcInstance player : L2World.getInstance().getPlayers())
@@ -52,9 +49,9 @@ public class SendStatus extends L2GameServerPacket
 				j++;
 			}
 		}
-		online_players = i;
-		online_priv_store = (int) Math.floor(j * Config.SENDSTATUS_TRADE_MOD);
-		max_online_players = Math.max(max_online_players, online_players);
+		ONLINE_PLAYERS = i;
+		ONLINE_PRIVS_STORE = (int) Math.floor(j * Config.SENDSTATUS_TRADE_MOD);
+		MAX_ONLINE_PLAYERS = Math.max(MAX_ONLINE_PLAYERS, ONLINE_PLAYERS);
 	}
 	
 	@Override
@@ -64,10 +61,10 @@ public class SendStatus extends L2GameServerPacket
 		
 		writeC(0x00); // Packet ID
 		writeD(0x01); // World ID
-		writeD(max_online_players); // Max Online
-		writeD(online_players); // Current Online
-		writeD(online_players); // Current Online
-		writeD(online_priv_store); // Priv.Store Chars
+		writeD(MAX_ONLINE_PLAYERS); // Max Online
+		writeD(ONLINE_PLAYERS); // Current Online
+		writeD(ONLINE_PLAYERS); // Current Online
+		writeD(ONLINE_PRIVS_STORE); // Priv.Store Chars
 		if (Config.RWHO_SEND_TRASH)
 		{
 			writeH(0x30);

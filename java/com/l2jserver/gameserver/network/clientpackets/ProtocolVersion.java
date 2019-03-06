@@ -29,7 +29,6 @@ import com.l2jserver.gameserver.util.LoggingUtils;
 
 public final class ProtocolVersion extends L2GameClientPacket
 {
-	private static final String _C__0E_PROTOCOLVERSION = "[C] 0E ProtocolVersion";
 	private static final Logger LOG_ACCOUNTING = LoggerFactory.getLogger("accounting");
 	
 	private int _version;
@@ -82,6 +81,6 @@ public final class ProtocolVersion extends L2GameClientPacket
 	@Override
 	public String getType()
 	{
-		return _C__0E_PROTOCOLVERSION;
+		return "[C] 0E ProtocolVersion";
 	}
 }
