@@ -76,12 +76,10 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 	 */
 	public static enum GameClientState
 	{
-		/** Client has just connected . */
-		CONNECTED,
-		/** Client has authed but doesn't has character attached to it yet. */
-		AUTHED,
-		/** Client has selected a char and is in game. */
-		IN_GAME
+		CONNECTED, // Client has just connected.
+		AUTHED, // Client has authed but doesn't has character attached to it yet.
+		ENTERING, // client is currently loading his Player instance, but didn't end
+		IN_GAME // Client has selected a char and is in game.
 	}
 	
 	private GameClientState _state;
@@ -769,6 +767,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 					return "[IP: " + (address == null ? "disconnected" : address.getHostAddress()) + "]";
 				case AUTHED:
 					return "[Account: " + getAccountName() + " - IP: " + (address == null ? "disconnected" : address.getHostAddress()) + "]";
+				case ENTERING:
 				case IN_GAME:
 					return "[Character: " + (getActiveChar() == null ? "disconnected" : getActiveChar().getName() + "[" + getActiveChar().getObjectId() + "]") + " - Account: " + getAccountName() + " - IP: " + (address == null ? "disconnected" : address.getHostAddress()) + "]";
 				default:

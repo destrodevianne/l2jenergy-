@@ -78,6 +78,7 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient>, 
 						break;
 				}
 				break;
+			
 			case AUTHED:
 				switch (opcode)
 				{
@@ -137,6 +138,53 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient>, 
 						break;
 				}
 				break;
+			
+			case ENTERING:
+				switch (opcode)
+				{
+					case 0x11:
+					{
+						msg = new EnterWorld();
+						break;
+					}
+					case 0xd0:
+					{
+						int id2 = -1;
+						if (buf.remaining() >= 2)
+						{
+							id2 = buf.getShort() & 0xffff;
+						}
+						else
+						{
+							if (Config.PACKET_HANDLER_DEBUG)
+							{
+								LOG.warn("Client: {} sent a 0xd0 without the second opcode.", client.toString());
+							}
+							break;
+						}
+						
+						switch (id2)
+						{
+							case 0x01:
+							{
+								msg = new RequestManorList();
+								break;
+							}
+							default:
+							{
+								printDebugDoubleOpcode(opcode, id2, buf, state, client);
+								break;
+							}
+						}
+					}
+					default:
+					{
+						printDebug(opcode, buf, state, client);
+						break;
+					}
+				}
+				break;
+			
 			case IN_GAME:
 				switch (opcode)
 				{
@@ -175,9 +223,6 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient>, 
 						break;
 					case 0x10:
 						// Say
-						break;
-					case 0x11:
-						msg = new EnterWorld();
 						break;
 					case 0x12:
 						// CharacterSelect, in case of player spam clicks on loginscreen

@@ -169,6 +169,7 @@ public class LoggingUtils
 					
 					switch (client.getState())
 					{
+						case ENTERING:
 						case IN_GAME:
 							if (client.getActiveChar() != null)
 							{

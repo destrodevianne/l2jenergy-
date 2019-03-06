@@ -61,6 +61,7 @@ import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.skills.CommonSkill;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.model.zone.ZoneId;
+import com.l2jserver.gameserver.network.L2GameClient.GameClientState;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.Die;
@@ -167,6 +168,8 @@ public class EnterWorld extends L2GameClientPacket
 				LOG.warn("User already exists in Object ID map! User {} is a character clone.", activeChar.getName());
 			}
 		}
+		
+		getClient().setState(GameClientState.IN_GAME);
 		
 		// Apply special GM properties to the GM when entering
 		if (activeChar.isGM())
