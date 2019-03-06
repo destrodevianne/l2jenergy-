@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -66,6 +66,7 @@ public final class HomeBoard implements IParseBoardHandler
 			html = html.replaceAll("%region_count%", Integer.toString(getRegionCount(activeChar)));
 			html = html.replaceAll("%clan_count%", Integer.toString(ClanTable.getInstance().getClanCount()));
 			
+			html = html.replace("<?cb_player_name?>", activeChar.getName());
 			html = html.replace("<?cb_time?>", String.valueOf(DifferentMethods.time()));
 			html = html.replace("<?cb_online_players?>", String.valueOf(DifferentMethods.getPlayersCount("ALL_REAL")));
 			html = html.replace("<?cb_offtrade_players?>", String.valueOf(DifferentMethods.getPlayersCount("OFF_TRADE")));

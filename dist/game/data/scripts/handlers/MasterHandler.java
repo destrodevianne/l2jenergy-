@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -177,6 +177,7 @@ import handlers.chathandlers.ChatShout;
 import handlers.chathandlers.ChatTell;
 import handlers.chathandlers.ChatTrade;
 import handlers.communityboard.ClanBoard;
+import handlers.communityboard.EventBoard;
 import handlers.communityboard.FavoriteBoard;
 import handlers.communityboard.FriendsBoard;
 import handlers.communityboard.HomeBoard;
@@ -470,6 +471,7 @@ public class MasterHandler
 		{
 			// Community Board
 			ClanBoard.class,
+			EventBoard.class,
 			FavoriteBoard.class,
 			FriendsBoard.class,
 			HomeBoard.class,

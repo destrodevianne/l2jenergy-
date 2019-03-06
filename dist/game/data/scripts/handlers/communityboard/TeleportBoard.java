@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -34,6 +34,8 @@ import com.l2jserver.gameserver.handler.IParseBoardHandler;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.zone.ZoneId;
+import com.l2jserver.gameserver.network.SystemMessageId;
+import com.l2jserver.gameserver.network.serverpackets.ConfirmDlg;
 import com.l2jserver.gameserver.network.serverpackets.ShowBoard;
 import com.l2jserver.gameserver.util.DifferentMethods;
 import com.l2jserver.gameserver.util.Util;
@@ -131,6 +133,7 @@ public class TeleportBoard implements IParseBoardHandler
 		final int premiumPriceId = teleportPoint.getPremiumPriceId();
 		final int premiumCount = teleportPoint.getPremiumPriceCount();
 		final Location location = teleportPoint.getLocation();
+		final boolean isConfirm = false; // TODO: Не включать
 		
 		if ((level < minLevel) || (level > maxLevel))
 		{
@@ -156,11 +159,24 @@ public class TeleportBoard implements IParseBoardHandler
 		final int price = player.isPremium() ? premiumCount : count;
 		final boolean freeLevel = player.getLevel() <= Config.BBS_TELEPORT_FREE_LEVEL;
 		
-		if (DifferentMethods.getPay(player, item, freeLevel ? 0 : price))
+		if (isConfirm)
+		{
+			teleportByAsk(player, teleportPoint, item, price);
+		}
+		else if (DifferentMethods.getPay(player, item, freeLevel ? 0 : price))
 		{
 			player.teleToLocation(location);
 			player.sendMessage(MessagesData.getInstance().getMessage(player, "communityboard_teleport_point_success_location").replace("%s%", name + ""));
 		}
+	}
+	
+	private void teleportByAsk(L2PcInstance player, TeleportPoint tp, int priceId, int priceCount) // TODO: Доработать
+	{
+		String itemName = DifferentMethods.getItemName(priceId);
+		ConfirmDlg ask = new ConfirmDlg(SystemMessageId.S1.getId());
+		ask.addString("Желаете ли вы телепортироваться за " + priceCount + " " + itemName + "?");
+		ask.addTime(30000);
+		player.sendPacket(ask);
 	}
 	
 	// TODO: Доработать
