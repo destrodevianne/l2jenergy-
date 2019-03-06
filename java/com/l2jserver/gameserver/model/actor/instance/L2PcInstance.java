@@ -2063,8 +2063,15 @@ public final class L2PcInstance extends L2Playable
 		}
 	}
 	
-	public void useEquippableItem(L2ItemInstance item, boolean abortAttack)
+	public void useEquippableItem(int objectId, boolean abortAttack)
 	{
+		// Equip or unEquip
+		final L2ItemInstance item = getInventory().getItemByObjectId(objectId);
+		if (item == null)
+		{
+			return;
+		}
+		
 		// Equip or unEquip
 		L2ItemInstance[] items = null;
 		final boolean isEquiped = item.isEquipped();
