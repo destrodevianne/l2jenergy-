@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -325,14 +325,11 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 		}
 		else if (isNpc())
 		{
-			// Copy the Standard Calculators of the L2NPCInstance in _calculators
 			_calculators = NPC_STD_CALCULATOR;
 		}
 		else
 		{
-			// If L2Character is a L2PcInstance or a L2Summon, create the basic calculator set
 			_calculators = new Calculator[Stats.NUM_STATS];
-			Formulas.addFuncsToNewCharacter(this);
 		}
 		
 		setIsInvul(true);
