@@ -39,7 +39,6 @@ import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.Message;
 import com.l2jserver.gameserver.model.itemcontainer.Mail;
-import com.l2jserver.gameserver.util.LoggingUtils;
 
 /**
  * @author Mobius, Мо3олЬ
@@ -169,7 +168,7 @@ public class MMOTopManager
 						Mail attachments = msg.createAttachments();
 						attachments.addItem("MMOTop", Config.MMO_TOP_REWARD_ID, Config.MMO_TOP_REWARD_COUNT * mult, null, null);
 						MailManager.getInstance().sendMessage(msg);
-						LoggingUtils.add(winner.getName() + " | " + winner.getObjectId() + " | MMOTop reward item ID | " + Config.MMO_TOP_REWARD_ID + " | MMOTop reward count | " + (Config.MMO_TOP_REWARD_COUNT * mult) + " |", "MMOTop");
+						LOG.info("MMOTOP: " + winner.getName() + "[charId:" + winner.getObjectId() + "]  item: [id:" + Config.MMO_TOP_REWARD_ID + "count:" + (Config.MMO_TOP_REWARD_COUNT * mult) + ']');
 					}
 				}
 			}

@@ -45,7 +45,6 @@ import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.Message;
 import com.l2jserver.gameserver.model.itemcontainer.Mail;
-import com.l2jserver.gameserver.util.LoggingUtils;
 
 /**
  * @author Mobius, Мо3олЬ
@@ -164,7 +163,9 @@ public class L2TopManager
 							st.nextToken();
 							nick = st.nextToken();
 						}
+						
 						int mult = 1;
+						
 						if (sms)
 						{
 							mult = Integer.parseInt(new StringBuffer(st.nextToken()).delete(0, 1).toString());
@@ -218,7 +219,7 @@ public class L2TopManager
 						Mail attachments = msg.createAttachments();
 						attachments.addItem("L2Top", Config.L2_TOP_REWARD_ID, Config.L2_TOP_REWARD_COUNT * mult, null, null);
 						MailManager.getInstance().sendMessage(msg);
-						LoggingUtils.add(winner.getName() + " | " + winner.getObjectId() + " | L2Top reward item ID | " + Config.L2_TOP_REWARD_ID + " | L2Top reward count | " + (Config.L2_TOP_REWARD_COUNT * mult) + " |", "l2top");
+						LOG.info("L2TOP: " + winner.getName() + "[charId:" + winner.getObjectId() + "]  item: [id:" + Config.L2_TOP_REWARD_ID + "count:" + (Config.L2_TOP_REWARD_COUNT * mult) + ']');
 					}
 				}
 			}
