@@ -73,7 +73,7 @@ public final class RequestAnswerJoinAlly extends L2GameClientPacket
 				activeChar.getClan().setAllyId(clan.getAllyId());
 				activeChar.getClan().setAllyName(clan.getAllyName());
 				activeChar.getClan().setAllyPenaltyExpiryTime(0, 0);
-				DAOFactory.getInstance().getClanDAO().changeAllyCrest(clan, clan.getAllyCrestId(), true);
+				activeChar.getClan().changeAllyCrest(clan.getAllyCrestId(), true);
 				DAOFactory.getInstance().getClanDAO().updateClan(activeChar.getClan());
 			}
 		}

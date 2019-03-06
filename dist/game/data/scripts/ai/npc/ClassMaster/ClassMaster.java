@@ -28,7 +28,6 @@ import static com.l2jserver.gameserver.network.SystemMessageId.INVENTORY_LESS_TH
 import static com.l2jserver.gameserver.network.SystemMessageId.NOT_ENOUGH_ITEMS;
 import static com.l2jserver.gameserver.network.serverpackets.TutorialCloseHtml.STATIC_PACKET;
 
-import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.xml.impl.ClassListData;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.model.Location;
@@ -206,7 +205,7 @@ public final class ClassMaster extends AbstractNpcAI
 			{
 				return "noclanlevel.htm";
 			}
-			DAOFactory.getInstance().getClanDAO().changeLevel(player.getClan(), 5);
+			player.getClan().changeLevel(5);
 		}
 		else
 		{

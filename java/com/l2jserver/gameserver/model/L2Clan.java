@@ -21,6 +21,7 @@ package com.l2jserver.gameserver.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -42,6 +43,7 @@ import com.l2jserver.gameserver.communitybbs.Manager.ForumsBBSManager;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
+import com.l2jserver.gameserver.data.sql.impl.CrestTable;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
@@ -88,8 +90,10 @@ public class L2Clan implements IIdentifiable, INamable
 	private static final Logger LOG = LoggerFactory.getLogger(L2Clan.class);
 	
 	private static final String SELECT_CLAN_SUBPLEDGES = "SELECT `sub_pledge_id`, `name`, `leader_id` FROM `clan_subpledges` WHERE `clan_id` = ?";
-	private static final String SELECT_CLAN_RANK_PRIVS = "SELECT `rank`, `party`, `privs` FROM `clan_privs` WHERE `clan_id` = ?";
 	private static final String SELECT_CLAN_SKILLS = "SELECT `skill_id`, `skill_level`, `sub_pledge_id` FROM `clan_skills` WHERE `clan_id` = ?";
+	
+	private static final String UPDATE_CLAN_ALLY_CREST_CLAN = "UPDATE `clan_data` SET `ally_crest_id` = ? WHERE `clan_id` = ?";
+	private static final String UPDATE_CLAN_ALLY_CREST_ALLY = "UPDATE `clan_data` SET `ally_crest_id` = ? WHERE `ally_id` = ?";
 	
 	// Ally Penalty Types
 	public static final int PENALTY_TYPE_CLAN_LEAVED = 1; // Clan leaved ally
@@ -153,7 +157,7 @@ public class L2Clan implements IIdentifiable, INamable
 	
 	public static final RankPrivs[] EMPTY_RANK_PRIVSES_ARRAY = new RankPrivs[0];
 	public static final int RANK_FIRST = 1;
-	public static final int RANK_LAST = 9;
+	public static final int RANK_LAST = 10;
 	private static final int REPUTATION_PLACES = 100;
 	private static final ClanReputationComparator REPUTATION_COMPARATOR = new ClanReputationComparator();
 	
@@ -248,7 +252,7 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 		else
 		{
-			DAOFactory.getInstance().getClanDAO().updateClanPrivsOld(this);
+			DAOFactory.getInstance().getClanDAO().updateClanPrivsOld(getLeaderId());
 		}
 		
 		setLeader(member);
@@ -280,7 +284,7 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 		else
 		{
-			DAOFactory.getInstance().getClanDAO().updateClanPrivsNew(this);
+			DAOFactory.getInstance().getClanDAO().updateClanPrivsNew(getLeaderId());
 		}
 		
 		broadcastClanStatus();
@@ -836,7 +840,7 @@ public class L2Clan implements IIdentifiable, INamable
 	public void increaseBloodAllianceCount()
 	{
 		_bloodAllianceCount += SiegeManager.getInstance().getBloodAllianceReward();
-		DAOFactory.getInstance().getClanDAO().updateBloodAllianceCount(this);
+		DAOFactory.getInstance().getClanDAO().updateBloodAllianceCount(getBloodAllianceCount(), getId());
 	}
 	
 	/**
@@ -845,7 +849,7 @@ public class L2Clan implements IIdentifiable, INamable
 	public void resetBloodAllianceCount()
 	{
 		_bloodAllianceCount = 0;
-		DAOFactory.getInstance().getClanDAO().updateBloodAllianceCount(this);
+		DAOFactory.getInstance().getClanDAO().updateBloodAllianceCount(getBloodAllianceCount(), getId());
 	}
 	
 	/**
@@ -867,7 +871,7 @@ public class L2Clan implements IIdentifiable, INamable
 	public void increaseBloodOathCount()
 	{
 		_bloodOathCount += Config.FS_BLOOD_OATH_COUNT;
-		DAOFactory.getInstance().getClanDAO().updateBloodOathCount(this);
+		DAOFactory.getInstance().getClanDAO().updateBloodOathCount(getBloodOathCount(), getId());
 	}
 	
 	/**
@@ -876,7 +880,12 @@ public class L2Clan implements IIdentifiable, INamable
 	public void resetBloodOathCount()
 	{
 		_bloodOathCount = 0;
-		DAOFactory.getInstance().getClanDAO().updateBloodOathCount(this);
+		DAOFactory.getInstance().getClanDAO().updateBloodOathCount(getBloodOathCount(), getId());
+	}
+	
+	public void updateClanScoreInDB()
+	{
+		DAOFactory.getInstance().getClanDAO().updateClanScore(getReputationScore(), getId());
 	}
 	
 	private void storeNotice(String notice, boolean enabled)
@@ -891,7 +900,7 @@ public class L2Clan implements IIdentifiable, INamable
 			notice = notice.substring(0, MAX_NOTICE_LENGTH - 1);
 		}
 		
-		DAOFactory.getInstance().getClanDAO().setNotice(this, notice, enabled);
+		DAOFactory.getInstance().getClanDAO().setNotice(getId(), getNotice(), isNoticeEnabled());
 		_notice = notice;
 		_noticeEnabled = enabled;
 	}
@@ -1504,6 +1513,11 @@ public class L2Clan implements IIdentifiable, INamable
 		return pledgeType;
 	}
 	
+	public void restoreRankPrivs()
+	{
+		DAOFactory.getInstance().getClanDAO().getPrivileges(getId()).forEach((rank, privileges) -> _privs.get(rank).setPrivs(privileges));
+	}
+	
 	public void initializePrivs()
 	{
 		for (int i = RANK_FIRST; i <= RANK_LAST; i++)
@@ -1523,39 +1537,20 @@ public class L2Clan implements IIdentifiable, INamable
 	
 	public void setRankPrivs(int rank, int privs)
 	{
-		if (_privs.get(rank) != null)
+		final RankPrivs rankPrivileges = _privs.get(rank);
+		if (rankPrivileges != null)
 		{
-			_privs.get(rank).setPrivs(privs);
+			rankPrivileges.setPrivs(privs);
 			
-			try (Connection con = ConnectionFactory.getInstance().getConnection();
-				PreparedStatement ps = con.prepareStatement("INSERT INTO clan_privs (clan_id,rank,party,privs) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE privs = ?"))
-			{
-				// Retrieve all skills of this L2PcInstance from the database
-				ps.setInt(1, getId());
-				ps.setInt(2, rank);
-				ps.setInt(3, 0);
-				ps.setInt(4, privs);
-				ps.setInt(5, privs);
-				ps.execute();
-			}
-			catch (Exception e)
-			{
-				LOG.warn("Could not store clan privs for rank!", e);
-			}
+			DAOFactory.getInstance().getClanDAO().storePrivileges(getId(), rank, privs);
 			
 			for (L2ClanMember cm : getMembers())
 			{
-				if (cm.isOnline())
+				if (cm.isOnline() && (cm.getPlayerInstance() != null) && (cm.getPowerGrade() == rank))
 				{
-					if (cm.getPowerGrade() == rank)
-					{
-						if (cm.getPlayerInstance() != null)
-						{
-							cm.getPlayerInstance().getClanPrivileges().setBitmask(privs);
-							cm.getPlayerInstance().sendPacket(new UserInfo(cm.getPlayerInstance()));
-							cm.getPlayerInstance().sendPacket(new ExBrExtraUserInfo(cm.getPlayerInstance()));
-						}
-					}
+					cm.getPlayerInstance().getClanPrivileges().setBitmask(privs);
+					cm.getPlayerInstance().sendPacket(new UserInfo(cm.getPlayerInstance()));
+					cm.getPlayerInstance().sendPacket(new ExBrExtraUserInfo(cm.getPlayerInstance()));
 				}
 			}
 			broadcastClanStatus();
@@ -1564,20 +1559,7 @@ public class L2Clan implements IIdentifiable, INamable
 		{
 			_privs.put(rank, new RankPrivs(rank, 0, privs));
 			
-			try (Connection con = ConnectionFactory.getInstance().getConnection();
-				PreparedStatement ps = con.prepareStatement("INSERT INTO clan_privs (clan_id,rank,party,privs) VALUES (?,?,?,?)"))
-			{
-				// Retrieve all skills of this L2PcInstance from the database
-				ps.setInt(1, getId());
-				ps.setInt(2, rank);
-				ps.setInt(3, 0);
-				ps.setInt(4, privs);
-				ps.execute();
-			}
-			catch (Exception e)
-			{
-				LOG.warn("Could not create new rank and store clan privs for rank!", e);
-			}
+			DAOFactory.getInstance().getClanDAO().storePrivileges(getId(), rank, privs);
 		}
 	}
 	
@@ -1585,20 +1567,14 @@ public class L2Clan implements IIdentifiable, INamable
 	{
 		for (L2ClanMember member : getMembers())
 		{
-			if (member.isOnline())
+			if (member.isOnline() && (member.getPlayerInstance() != null) && (member.getPowerGrade() == rank))
 			{
-				if (member.getPowerGrade() == rank)
+				if (member.getPlayerInstance().isClanLeader())
 				{
-					if (member.getPlayerInstance() != null)
-					{
-						if (member.getPlayerInstance().isClanLeader())
-						{
-							continue;
-						}
-						member.getPlayerInstance().sendPacket(new UserInfo(member.getPlayerInstance()));
-						member.getPlayerInstance().sendPacket(new ExBrExtraUserInfo(member.getPlayerInstance()));
-					}
+					continue;
 				}
+				member.getPlayerInstance().sendPacket(new UserInfo(member.getPlayerInstance()));
+				member.getPlayerInstance().sendPacket(new ExBrExtraUserInfo(member.getPlayerInstance()));
 			}
 		}
 	}
@@ -1681,7 +1657,7 @@ public class L2Clan implements IIdentifiable, INamable
 		broadcastToOnlineMembers(new PledgeShowInfoUpdate(this));
 		if (save)
 		{
-			DAOFactory.getInstance().getClanDAO().updateClanScore(this);
+			updateClanScoreInDB();
 		}
 	}
 	
@@ -1820,6 +1796,88 @@ public class L2Clan implements IIdentifiable, INamable
 			return false;
 		}
 		return true;
+	}
+	
+	public void changeLargeCrest(int crestId)
+	{
+		if (getCrestLargeId() != 0)
+		{
+			CrestTable.getInstance().removeCrest(getCrestLargeId());
+		}
+		
+		setCrestLargeId(crestId);
+		
+		DAOFactory.getInstance().getClanDAO().changeLargeCrest(crestId, getId());
+		
+		for (L2PcInstance member : getOnlineMembers(0))
+		{
+			member.broadcastUserInfo();
+		}
+	}
+	
+	public void changeAllyCrest(int crestId, boolean onlyThisClan)
+	{
+		String sqlStatement = UPDATE_CLAN_ALLY_CREST_CLAN;
+		int allyId = getId();
+		if (!onlyThisClan)
+		{
+			if (getAllyCrestId() != 0)
+			{
+				CrestTable.getInstance().removeCrest(getAllyCrestId());
+			}
+			sqlStatement = UPDATE_CLAN_ALLY_CREST_ALLY;
+			allyId = getAllyId();
+		}
+		
+		try (Connection con = ConnectionFactory.getInstance().getConnection();
+			PreparedStatement ps = con.prepareStatement(sqlStatement))
+		{
+			ps.setInt(1, crestId);
+			ps.setInt(2, allyId);
+			ps.executeUpdate();
+			ps.close();
+		}
+		catch (SQLException e)
+		{
+			LOG.warn("Could not update ally crest for ally/clan id {}!", allyId, e);
+		}
+		
+		if (onlyThisClan)
+		{
+			setAllyCrestId(crestId);
+			for (L2PcInstance member : getOnlineMembers(0))
+			{
+				member.broadcastUserInfo();
+			}
+		}
+		else
+		{
+			for (L2Clan clan : ClanTable.getInstance().getClanAllies(getAllyId()))
+			{
+				clan.setAllyCrestId(crestId);
+				for (L2PcInstance member : clan.getOnlineMembers(0))
+				{
+					member.broadcastUserInfo();
+				}
+			}
+		}
+	}
+	
+	public void changeClanCrest(int crestId)
+	{
+		if (getCrestId() != 0)
+		{
+			CrestTable.getInstance().removeCrest(getCrestId());
+		}
+		
+		setCrestId(crestId);
+		
+		DAOFactory.getInstance().getClanDAO().changeClanCrest(crestId, getId());
+		
+		for (L2PcInstance member : getOnlineMembers(0))
+		{
+			member.broadcastUserInfo();
+		}
 	}
 	
 	/**
@@ -2061,7 +2119,7 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 		setAllyId(0);
 		setAllyName(null);
-		DAOFactory.getInstance().getClanDAO().changeAllyCrest(this, 0, false);
+		changeAllyCrest(0, false);
 		setAllyPenaltyExpiryTime(currentTime + (Config.ALT_CREATE_ALLY_DAYS_WHEN_DISSOLVED * 86400000L), L2Clan.PENALTY_TYPE_DISSOLVE_ALLY); // 24*60*60*1000 = 86400000
 		DAOFactory.getInstance().getClanDAO().updateClan(this);
 	}
@@ -2297,10 +2355,35 @@ public class L2Clan implements IIdentifiable, INamable
 		su.addAttribute(StatusUpdate.SP, player.getSp());
 		player.sendPacket(su);
 		player.sendPacket(new ItemList(player, false));
-		DAOFactory.getInstance().getClanDAO().changeLevel(this, getLevel() + 1);
+		changeLevel(getLevel() + 1);
 		// Notify to scripts
 		EventDispatcher.getInstance().notifyEventAsync(new OnPlayerClanLvlUp(player, this));
 		return true;
+	}
+	
+	public void changeLevel(int level)
+	{
+		DAOFactory.getInstance().getClanDAO().changeLevel(level, getId());
+		
+		setLevel(level);
+		
+		if (getLeader().isOnline())
+		{
+			L2PcInstance leader = getLeader().getPlayerInstance();
+			if (level > 4)
+			{
+				SiegeManager.getInstance().addSiegeSkills(leader);
+				leader.sendPacket(SystemMessageId.CLAN_CAN_ACCUMULATE_CLAN_REPUTATION_POINTS);
+			}
+			else if (level < 5)
+			{
+				SiegeManager.getInstance().removeSiegeSkills(leader);
+			}
+		}
+		
+		// notify all the members about it
+		broadcastToOnlineMembers(SystemMessage.getSystemMessage(SystemMessageId.CLAN_LEVEL_INCREASED));
+		broadcastToOnlineMembers(new PledgeShowInfoUpdate(this));
 	}
 	
 	public void restoreSubPledges()
@@ -2328,44 +2411,6 @@ public class L2Clan implements IIdentifiable, INamable
 		catch (Exception e)
 		{
 			LOG.warn("Couldn't restore clan sub-units!", e);
-		}
-	}
-	
-	public void restoreRankPrivs()
-	{
-		try (Connection con = ConnectionFactory.getInstance().getConnection();
-			PreparedStatement ps = con.prepareStatement(SELECT_CLAN_RANK_PRIVS))
-		{
-			// Retrieve all skills of this L2PcInstance from the database
-			ps.setInt(1, getId());
-			
-			if (Config.DEBUG)
-			{
-				LOG.warn("ClanPrivs restore for ClanId: {}", getId());
-			}
-			
-			try (ResultSet rs = ps.executeQuery())
-			{
-				// Go though the recordset of this SQL query
-				while (rs.next())
-				{
-					final int rank = rs.getInt("rank");
-					final int party = rs.getInt("party"); // TODO
-					final int privileges = rs.getInt("privs");
-					// Create a SubPledge object for each record
-					if (rank == -1)
-					{
-						continue;
-					}
-					_privs.put(rank, new RankPrivs(rank, party, privileges)).setPrivs(privileges); // TODO
-				}
-				rs.close();
-			}
-			ps.close();
-		}
-		catch (Exception e)
-		{
-			LOG.error("Couldn't restoring clan privs by rank", e);
 		}
 	}
 	

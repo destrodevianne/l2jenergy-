@@ -18,40 +18,45 @@
  */
 package com.l2jserver.gameserver.dao;
 
+import java.util.Map;
+
 import com.l2jserver.gameserver.model.L2Clan;
 
 /**
- * @author Мо3олЬ
+ * Clan DAO interface.
+ * @author Мо3олЬ, Zoey76
  */
 public interface ClanDAO
 {
-	void storeClan(L2Clan clan);
+	void storeClan(L2Clan clan); // Переделать
 	
-	void updateClan(L2Clan clan);
+	void updateClan(L2Clan clan); // Переделать
 	
-	void restoreClan(L2Clan clan);
+	void restoreClan(L2Clan clan); // Переделать
 	
-	void changeAllyCrest(L2Clan clan, int crestId, boolean onlyThisClan);
+	void updateSubPledge(L2Clan clan, int pledgeType); // Переделать
 	
-	void changeLevel(L2Clan clan, int level);
+	void changeLevel(int level, int clan);
 	
-	void changeClanCrest(L2Clan clan, int crestId);
+	void changeClanCrest(int crestId, int clan);
 	
-	void changeLargeCrest(L2Clan clan, int crestId);
+	void changeLargeCrest(int crestId, int clan);
 	
 	void removeMember(int playerId, long clanJoinExpiryTime, long clanCreateExpiryTime);
 	
-	void updateSubPledge(L2Clan clan, int pledgeType);
+	void setNotice(int clan, String notice, boolean enabled);
 	
-	void setNotice(L2Clan clan, String notice, boolean enabled);
+	void updateClanScore(int reputationScore, int clan);
 	
-	void updateClanScore(L2Clan clan);
+	void updateBloodOathCount(int bloodOath, int clan);
 	
-	void updateBloodOathCount(L2Clan clan);
+	void updateBloodAllianceCount(int bloodAlliance, int clan);
 	
-	void updateBloodAllianceCount(L2Clan clan);
+	void updateClanPrivsOld(int leader);
 	
-	void updateClanPrivsOld(L2Clan clan);
+	void updateClanPrivsNew(int leader);
 	
-	void updateClanPrivsNew(L2Clan clan);
+	Map<Integer, Integer> getPrivileges(int clanId);
+	
+	void storePrivileges(int clanId, int rank, int privileges);
 }

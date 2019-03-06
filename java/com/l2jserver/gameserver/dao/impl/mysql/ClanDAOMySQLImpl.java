@@ -22,6 +22,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,32 +31,26 @@ import org.slf4j.LoggerFactory;
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
 import com.l2jserver.gameserver.dao.ClanDAO;
-import com.l2jserver.gameserver.data.sql.impl.ClanTable;
-import com.l2jserver.gameserver.data.sql.impl.CrestTable;
-import com.l2jserver.gameserver.instancemanager.SiegeManager;
 import com.l2jserver.gameserver.model.ClanPrivilege;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2ClanMember;
-import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.network.SystemMessageId;
-import com.l2jserver.gameserver.network.serverpackets.PledgeShowInfoUpdate;
-import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.util.EnumIntBitmask;
 
 /**
- * @author Мо3олЬ
+ * MySQL DAO Factory implementation.
+ * @author Мо3олЬ, Zoey76
  */
 public class ClanDAOMySQLImpl implements ClanDAO
 {
 	private static final Logger LOG = LoggerFactory.getLogger(ClanDAOMySQLImpl.class);
 	
 	private static final String INSERT_CLAN_DATA = "INSERT INTO `clan_data` (`clan_id`, `clan_name`, `clan_level`, `hasCastle`, `blood_alliance_count`, `blood_oath_count`, `ally_id`, `ally_name`, `leader_id`, `crest_id`, `crest_large_id`, `ally_crest_id`, `new_leader_id`) values (?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_CLAN_PRIVILEGES = "INSERT INTO `clan_privs` (`clan_id`, `rank`, `party`, `privs`) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE `privs`=?";
 	private static final String UPDATE_CLAN_DATA = "UPDATE `clan_data` SET `leader_id` = ?, `ally_id` = ?, `ally_name` = ?, `reputation_score` = ?, `ally_penalty_expiry_time` = ?,`ally_penalty_type` = ?, `char_penalty_expiry_time` = ?, `dissolving_expiry_time` = ?, `new_leader_id` = ? WHERE `clan_id` = ?";
 	private static final String SELECT_CLAN_DATA = "SELECT * FROM `clan_data` where `clan_id` = ?";
 	private static final String SELECT_CLAN_NOTICE = "SELECT `enabled`, `notice` FROM `clan_notices` WHERE `clan_id` = ?";
+	private static final String SELECT_CLAN_PRIVILEGES = "SELECT `privs`, `rank`, `party` FROM `clan_privs` WHERE clan_id=?";
 	private static final String UPDATE_CLAN_LEVEL = "UPDATE `clan_data` SET `clan_level` = ? WHERE `clan_id` = ?";
-	private static final String UPDATE_CLAN_ALLY_CREST_CLAN = "UPDATE `clan_data` SET `ally_crest_id` = ? WHERE `clan_id` = ?";
-	private static final String UPDATE_CLAN_ALLY_CREST_ALLY = "UPDATE `clan_data` SET `ally_crest_id` = ? WHERE `ally_id` = ?";
 	private static final String UPDATE_CLAN_CREST = "UPDATE `clan_data` SET `crest_id` = ? WHERE `clan_id` = ?";
 	private static final String UPDATE_CLAN_CREST_LARGE = "UPDATE `clan_data` SET `crest_large_id` = ? WHERE `clan_id` = ?";
 	private static final String UPDATE_CLAN_SUBPLEDGES = "UPDATE `clan_subpledges` SET `leader_id` = ?, `name` = ? WHERE `clan_id` = ? AND `sub_pledge_id` = ?";
@@ -220,13 +216,13 @@ public class ClanDAOMySQLImpl implements ClanDAO
 	}
 	
 	@Override
-	public void changeLevel(L2Clan clan, int level)
+	public void changeLevel(int level, int clan)
 	{
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
 			PreparedStatement ps = con.prepareStatement(UPDATE_CLAN_LEVEL))
 		{
 			ps.setInt(1, level);
-			ps.setInt(2, clan.getId());
+			ps.setInt(2, clan);
 			ps.execute();
 			ps.close();
 		}
@@ -234,132 +230,38 @@ public class ClanDAOMySQLImpl implements ClanDAO
 		{
 			LOG.warn("Could not increase clan level!", e);
 		}
-		
-		clan.setLevel(level);
-		
-		if (clan.getLeader().isOnline())
-		{
-			L2PcInstance leader = clan.getLeader().getPlayerInstance();
-			if (level > 4)
-			{
-				SiegeManager.getInstance().addSiegeSkills(leader);
-				leader.sendPacket(SystemMessageId.CLAN_CAN_ACCUMULATE_CLAN_REPUTATION_POINTS);
-			}
-			else if (level < 5)
-			{
-				SiegeManager.getInstance().removeSiegeSkills(leader);
-			}
-		}
-		
-		// notify all the members about it
-		clan.broadcastToOnlineMembers(SystemMessage.getSystemMessage(SystemMessageId.CLAN_LEVEL_INCREASED));
-		clan.broadcastToOnlineMembers(new PledgeShowInfoUpdate(clan));
 	}
 	
 	@Override
-	public void changeAllyCrest(L2Clan clan, int crestId, boolean onlyThisClan)
+	public void changeClanCrest(int crestId, int clan)
 	{
-		String sqlStatement = UPDATE_CLAN_ALLY_CREST_CLAN;
-		int allyId = clan.getId();
-		if (!onlyThisClan)
-		{
-			if (clan.getAllyCrestId() != 0)
-			{
-				CrestTable.getInstance().removeCrest(clan.getAllyCrestId());
-			}
-			sqlStatement = UPDATE_CLAN_ALLY_CREST_ALLY;
-			allyId = clan.getAllyId();
-		}
-		
-		try (Connection con = ConnectionFactory.getInstance().getConnection();
-			PreparedStatement ps = con.prepareStatement(sqlStatement))
-		{
-			ps.setInt(1, crestId);
-			ps.setInt(2, allyId);
-			ps.executeUpdate();
-			ps.close();
-		}
-		catch (SQLException e)
-		{
-			LOG.warn("Could not update ally crest for ally/clan id {}!", allyId, e);
-		}
-		
-		if (onlyThisClan)
-		{
-			clan.setAllyCrestId(crestId);
-			for (L2PcInstance member : clan.getOnlineMembers(0))
-			{
-				member.broadcastUserInfo();
-			}
-		}
-		else
-		{
-			for (L2Clan clans : ClanTable.getInstance().getClanAllies(clan.getAllyId()))
-			{
-				clans.setAllyCrestId(crestId);
-				for (L2PcInstance member : clans.getOnlineMembers(0))
-				{
-					member.broadcastUserInfo();
-				}
-			}
-		}
-	}
-	
-	@Override
-	public void changeClanCrest(L2Clan clan, int crestId)
-	{
-		if (clan.getCrestId() != 0)
-		{
-			CrestTable.getInstance().removeCrest(clan.getCrestId());
-		}
-		
-		clan.setCrestId(crestId);
-		
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
 			PreparedStatement ps = con.prepareStatement(UPDATE_CLAN_CREST))
 		{
 			ps.setInt(1, crestId);
-			ps.setInt(2, clan.getId());
+			ps.setInt(2, clan);
 			ps.executeUpdate();
 			ps.close();
 		}
 		catch (SQLException e)
 		{
-			LOG.warn("Could not update crest for clan {} [{}]!", clan.getName(), clan.getId(), e);
-		}
-		
-		for (L2PcInstance member : clan.getOnlineMembers(0))
-		{
-			member.broadcastUserInfo();
+			LOG.warn("Could not update crest for clan {}!", clan, e);
 		}
 	}
 	
 	@Override
-	public void changeLargeCrest(L2Clan clan, int crestId)
+	public void changeLargeCrest(int crestId, int clan)
 	{
-		if (clan.getCrestLargeId() != 0)
-		{
-			CrestTable.getInstance().removeCrest(clan.getCrestLargeId());
-		}
-		
-		clan.setCrestLargeId(crestId);
-		
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
 			PreparedStatement ps = con.prepareStatement(UPDATE_CLAN_CREST_LARGE))
 		{
 			ps.setInt(1, crestId);
-			ps.setInt(2, clan.getId());
+			ps.setInt(2, clan);
 			ps.executeUpdate();
-			ps.close();
 		}
 		catch (SQLException e)
 		{
-			LOG.warn("Could not update large crest for clan {} [{}]!", clan.getName(), clan.getId(), e);
-		}
-		
-		for (L2PcInstance member : clan.getOnlineMembers(0))
-		{
-			member.broadcastUserInfo();
+			LOG.warn("Could not update large crest for clan {}!", clan, e);
 		}
 	}
 	
@@ -413,13 +315,13 @@ public class ClanDAOMySQLImpl implements ClanDAO
 	}
 	
 	@Override
-	public void updateClanScore(L2Clan clan)
+	public void updateClanScore(int reputationScore, int clan)
 	{
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
 			PreparedStatement ps = con.prepareStatement(UPDATE_CLAN_SCORE))
 		{
-			ps.setInt(1, clan.getReputationScore());
-			ps.setInt(2, clan.getId());
+			ps.setInt(1, reputationScore);
+			ps.setInt(2, clan);
 			ps.execute();
 			ps.close();
 		}
@@ -430,13 +332,13 @@ public class ClanDAOMySQLImpl implements ClanDAO
 	}
 	
 	@Override
-	public void updateBloodOathCount(L2Clan clan)
+	public void updateBloodOathCount(int bloodOath, int clan)
 	{
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
 			PreparedStatement ps = con.prepareStatement(UPDATE_BLOOD_OATH))
 		{
-			ps.setInt(1, clan.getBloodOathCount());
-			ps.setInt(2, clan.getId());
+			ps.setInt(1, bloodOath);
+			ps.setInt(2, clan);
 			ps.execute();
 			ps.close();
 		}
@@ -447,13 +349,13 @@ public class ClanDAOMySQLImpl implements ClanDAO
 	}
 	
 	@Override
-	public void updateBloodAllianceCount(L2Clan clan)
+	public void updateBloodAllianceCount(int bloodAlliance, int clan)
 	{
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
 			PreparedStatement ps = con.prepareStatement(UPDATE_BLOOD_ALLIANCE))
 		{
-			ps.setInt(1, clan.getBloodAllianceCount());
-			ps.setInt(2, clan.getId());
+			ps.setInt(1, bloodAlliance);
+			ps.setInt(2, clan);
 			ps.execute();
 			ps.close();
 		}
@@ -464,13 +366,13 @@ public class ClanDAOMySQLImpl implements ClanDAO
 	}
 	
 	@Override
-	public void updateClanPrivsOld(L2Clan clan)
+	public void updateClanPrivsOld(int leader)
 	{
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
 			PreparedStatement ps = con.prepareStatement(UPDATE_CLAN_PRIVS))
 		{
 			ps.setInt(1, 0);
-			ps.setInt(2, clan.getLeaderId());
+			ps.setInt(2, leader);
 			ps.execute();
 			ps.close();
 		}
@@ -481,13 +383,13 @@ public class ClanDAOMySQLImpl implements ClanDAO
 	}
 	
 	@Override
-	public void updateClanPrivsNew(L2Clan clan)
+	public void updateClanPrivsNew(int leader)
 	{
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
 			PreparedStatement ps = con.prepareStatement(UPDATE_CLAN_PRIVS))
 		{
 			ps.setInt(1, EnumIntBitmask.getAllBitmask(ClanPrivilege.class));
-			ps.setInt(2, clan.getLeaderId());
+			ps.setInt(2, leader);
 			ps.execute();
 			ps.close();
 		}
@@ -498,12 +400,12 @@ public class ClanDAOMySQLImpl implements ClanDAO
 	}
 	
 	@Override
-	public void setNotice(L2Clan clan, String notice, boolean enabled)
+	public void setNotice(int clan, String notice, boolean enabled)
 	{
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
 			PreparedStatement ps = con.prepareStatement("INSERT INTO `clan_notices` (`clan_id`, `notice`, `enabled`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `notice` = ?, `enabled` = ?"))
 		{
-			ps.setInt(1, clan.getId());
+			ps.setInt(1, clan);
 			ps.setString(2, notice);
 			
 			if (enabled)
@@ -531,6 +433,53 @@ public class ClanDAOMySQLImpl implements ClanDAO
 		catch (Exception e)
 		{
 			LOG.warn("Error could not store clan notice!", e);
+		}
+	}
+	
+	@Override
+	public Map<Integer, Integer> getPrivileges(int clanId)
+	{
+		final Map<Integer, Integer> result = new HashMap<>();
+		try (Connection con = ConnectionFactory.getInstance().getConnection();
+			PreparedStatement ps = con.prepareStatement(SELECT_CLAN_PRIVILEGES))
+		{
+			ps.setInt(1, clanId);
+			try (ResultSet rs = ps.executeQuery())
+			{
+				while (rs.next())
+				{
+					final int rank = rs.getInt("rank");
+					if (rank == -1)
+					{
+						continue;
+					}
+					result.put(rank, rs.getInt("privs"));
+				}
+			}
+		}
+		catch (Exception ex)
+		{
+			LOG.error("Unable to restore clan privileges for clan Id {}!", clanId, ex);
+		}
+		return result;
+	}
+	
+	@Override
+	public void storePrivileges(int clanId, int rank, int privileges)
+	{
+		try (Connection con = ConnectionFactory.getInstance().getConnection();
+			PreparedStatement ps = con.prepareStatement(INSERT_CLAN_PRIVILEGES))
+		{
+			ps.setInt(1, clanId);
+			ps.setInt(2, rank);
+			ps.setInt(3, 0);
+			ps.setInt(4, privileges);
+			ps.setInt(5, privileges);
+			ps.execute();
+		}
+		catch (Exception ex)
+		{
+			LOG.error("Unable to store clan privileges for clan Id {}!", clanId, ex);
 		}
 	}
 }

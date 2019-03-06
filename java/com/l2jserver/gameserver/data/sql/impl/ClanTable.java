@@ -524,7 +524,7 @@ public class ClanTable
 				{
 					clan.setAllyId(0);
 					clan.setAllyName(null);
-					DAOFactory.getInstance().getClanDAO().changeAllyCrest(clan, 0, true);
+					clan.changeAllyCrest(0, true);
 					DAOFactory.getInstance().getClanDAO().updateClan(clan);
 					LOG.info("{}: Removed alliance from clan: {}", getClass().getSimpleName(), clan);
 				}
@@ -552,7 +552,7 @@ public class ClanTable
 	{
 		for (L2Clan clan : _clans.values())
 		{
-			DAOFactory.getInstance().getClanDAO().updateClanScore(clan);
+			clan.updateClanScoreInDB();
 		}
 	}
 	

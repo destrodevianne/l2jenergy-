@@ -36,7 +36,6 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
-import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2Crest;
 import com.l2jserver.gameserver.model.L2Crest.CrestType;
@@ -131,7 +130,7 @@ public final class CrestTable
 				{
 					LOG.info("Removing non-existent crest for clan {} [{}], crestId: {}", clan.getName(), clan.getId(), clan.getCrestId());
 					clan.setCrestId(0);
-					DAOFactory.getInstance().getClanDAO().changeClanCrest(clan, 0);
+					clan.changeClanCrest(0);
 				}
 			}
 			
@@ -141,7 +140,7 @@ public final class CrestTable
 				{
 					LOG.info("Removing non-existent large crest for clan {} [{}], crestLargeId: {}", clan.getName(), clan.getId(), clan.getCrestLargeId());
 					clan.setCrestLargeId(0);
-					DAOFactory.getInstance().getClanDAO().changeLargeCrest(clan, 0);
+					clan.changeLargeCrest(0);
 				}
 			}
 			
@@ -151,7 +150,7 @@ public final class CrestTable
 				{
 					LOG.info("Removing non-existent ally crest for clan {} [{}], allyCrestId: {}", clan.getName(), clan.getId(), clan.getAllyCrestId());
 					clan.setAllyCrestId(0);
-					DAOFactory.getInstance().getClanDAO().changeAllyCrest(clan, 0, true);
+					clan.changeAllyCrest(0, true);
 				}
 			}
 		}
@@ -191,7 +190,7 @@ public final class CrestTable
 									if (clan.getCrestLargeId() == crestId)
 									{
 										clan.setCrestLargeId(0);
-										DAOFactory.getInstance().getClanDAO().changeLargeCrest(clan, crest.getId());
+										clan.changeLargeCrest(crest.getId());
 									}
 								}
 							}
@@ -210,7 +209,7 @@ public final class CrestTable
 									if (clan.getCrestId() == crestId)
 									{
 										clan.setCrestId(0);
-										DAOFactory.getInstance().getClanDAO().changeClanCrest(clan, crest.getId());
+										clan.changeClanCrest(crest.getId());
 									}
 								}
 							}
@@ -229,7 +228,7 @@ public final class CrestTable
 									if (clan.getAllyCrestId() == crestId)
 									{
 										clan.setAllyCrestId(0);
-										DAOFactory.getInstance().getClanDAO().changeAllyCrest(clan, crest.getId(), false);
+										clan.changeAllyCrest(crest.getId(), false);
 									}
 								}
 							}
