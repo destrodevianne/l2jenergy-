@@ -13513,7 +13513,7 @@ public final class SystemMessageId
 	 * ID: 2335<br>
 	 * Message: There are no more Dimensional Items to be found.
 	 */
-	public static final SystemMessageId THERE_ARE_NO_MORE_VITAMIN_ITEMS_TO_BE_FOUND = new SystemMessageId(2335);
+	public static final SystemMessageId THERE_ARE_NO_MORE_DIMENSIONAL_ITEMS_TO_BE_FOUND = new SystemMessageId(2335);
 	
 	/**
 	 * ID: 2336<br>

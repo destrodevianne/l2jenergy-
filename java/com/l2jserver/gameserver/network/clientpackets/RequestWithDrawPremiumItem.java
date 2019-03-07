@@ -31,8 +31,6 @@ import com.l2jserver.gameserver.util.Util;
  */
 public final class RequestWithDrawPremiumItem extends L2GameClientPacket
 {
-	private static final String _C__D0_52_REQUESTWITHDRAWPREMIUMITEM = "[C] D0:52 RequestWithDrawPremiumItem";
-	
 	private int _itemNum;
 	private int _charId;
 	private long _itemCount;
@@ -106,7 +104,7 @@ public final class RequestWithDrawPremiumItem extends L2GameClientPacket
 		
 		if (activeChar.getPremiumItemList().isEmpty())
 		{
-			activeChar.sendPacket(SystemMessageId.THERE_ARE_NO_MORE_VITAMIN_ITEMS_TO_BE_FOUND);
+			activeChar.sendPacket(SystemMessageId.THERE_ARE_NO_MORE_DIMENSIONAL_ITEMS_TO_BE_FOUND);
 		}
 		else
 		{
@@ -117,6 +115,6 @@ public final class RequestWithDrawPremiumItem extends L2GameClientPacket
 	@Override
 	public String getType()
 	{
-		return _C__D0_52_REQUESTWITHDRAWPREMIUMITEM;
+		return "[C] D0:52 RequestWithDrawPremiumItem";
 	}
 }

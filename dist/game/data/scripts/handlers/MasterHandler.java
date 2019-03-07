@@ -152,7 +152,6 @@ import handlers.bypasshandlers.PlayerHelp;
 import handlers.bypasshandlers.PrivateWarehouse;
 import handlers.bypasshandlers.QuestLink;
 import handlers.bypasshandlers.QuestList;
-import handlers.bypasshandlers.ReceivePremium;
 import handlers.bypasshandlers.ReleaseAttribute;
 import handlers.bypasshandlers.RentPet;
 import handlers.bypasshandlers.Rift;
@@ -440,7 +439,6 @@ public class MasterHandler
 			PlayerHelp.class,
 			PrivateWarehouse.class,
 			QuestList.class,
-			ReceivePremium.class,
 			ReleaseAttribute.class,
 			RentPet.class,
 			Rift.class,
