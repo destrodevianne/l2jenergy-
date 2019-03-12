@@ -44,6 +44,7 @@ import com.l2jserver.gameserver.taskmanager.tasks.TaskBirthday;
 import com.l2jserver.gameserver.taskmanager.tasks.TaskClanLeaderApply;
 import com.l2jserver.gameserver.taskmanager.tasks.TaskCleanUp;
 import com.l2jserver.gameserver.taskmanager.tasks.TaskDailySkillReuseClean;
+import com.l2jserver.gameserver.taskmanager.tasks.TaskFriendRecommendation;
 import com.l2jserver.gameserver.taskmanager.tasks.TaskGlobalVariablesSave;
 import com.l2jserver.gameserver.taskmanager.tasks.TaskNevit;
 import com.l2jserver.gameserver.taskmanager.tasks.TaskOlympiadSave;
@@ -191,6 +192,7 @@ public final class TaskManager
 		registerTask(new TaskClanLeaderApply());
 		registerTask(new TaskCleanUp());
 		registerTask(new TaskDailySkillReuseClean());
+		registerTask(new TaskFriendRecommendation());
 		registerTask(new TaskGlobalVariablesSave());
 		registerTask(new TaskNevit());
 		registerTask(new TaskOlympiadSave());

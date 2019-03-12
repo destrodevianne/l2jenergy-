@@ -46,6 +46,7 @@ public class PlayerVariables extends AbstractVariables
 	private final int _objectId;
 	public static final String PC_CAFE_POINTS = "PC_POINTS";
 	public static final String USED_PC_LOTTERY_TICKET = "USED_PC_LOTTERY_TICKET";
+	public static final String USED_PC_FRIEND_RECOMMENDATION_PROOF = "USED_PC_FRIEND_RECOMMENDATION_PROOF";
 	
 	public PlayerVariables(int objectId)
 	{

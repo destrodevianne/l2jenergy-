@@ -25,6 +25,7 @@ import com.l2jserver.gameserver.handler.ItemHandler;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
+import com.l2jserver.gameserver.model.variables.PlayerVariables;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.ExGetPremiumItemList;
 
@@ -43,8 +44,8 @@ public class DimensionalMerchant extends AbstractNpcAI
 	private static final int MINION_COUPON_EV = 13383; // Minion Coupon (5-hour) (Event)
 	private static final int SUP_MINION_COUPON = 14065; // Superior Minion Coupon - 5-hour
 	private static final int SUP_MINION_COUPON_EV = 14074; // Superior Minion Coupon (Event) - 5-hour
-	
-	// private static final int FRIEND_RECOMMENDATION_PROOF = 15279; //TODO: Friend Recommendation Proof
+	private static final int FRIEND_RECOMMENDATION_PROOF = 15279; // Friend Recommendation Proof
+	private static final int DIMENSIONAL_MERCHANT_CIFT = 15278; // Dimensional Merchant's Gift
 	
 	// Misc
 	private static final HashMap<String, Integer> MINION_EXCHANGE = new HashMap<>();
@@ -76,6 +77,8 @@ public class DimensionalMerchant extends AbstractNpcAI
 		
 		switch (event)
 		{
+			case "32478.html":
+			case "32478-01.html":
 			case "32478-02.html":
 			case "32478-03.html":
 			case "32478-04.html":
@@ -90,12 +93,11 @@ public class DimensionalMerchant extends AbstractNpcAI
 			case "32478-13.html":
 			case "32478-14.html":
 			case "32478-15.html":
-			case "32478-16.html":
 			{
 				htmltext = event;
 				break;
 			}
-			case "getDimensonalItem":
+			case "receivePremium":
 			{
 				if (player.getPremiumItemList().isEmpty())
 				{
@@ -123,8 +125,37 @@ public class DimensionalMerchant extends AbstractNpcAI
 				htmltext = giveMinion(player, event, SUP_MINION_COUPON, SUP_MINION_COUPON_EV);
 				break;
 			}
+			case "friend_recommendation":
+			{
+				if (!player.getVariables().getBoolean(PlayerVariables.USED_PC_FRIEND_RECOMMENDATION_PROOF, false))
+				{
+					player.getVariables().set(PlayerVariables.USED_PC_FRIEND_RECOMMENDATION_PROOF, true);
+					htmltext = tradeItem(player, FRIEND_RECOMMENDATION_PROOF);
+				}
+				else
+				{
+					htmltext = "32478-14.html";
+				}
+				break;
+			}
 		}
 		return htmltext;
+	}
+	
+	private String tradeItem(L2PcInstance player, int itemId)
+	{
+		if ((player.getInventory().getItemByItemId(itemId) == null))
+		{
+			player.sendPacket(SystemMessageId.NOT_ENOUGH_ITEMS);
+			return "32478-13.html";
+		}
+		
+		if (takeItems(player, itemId, 1))
+		{
+			giveItems(player, DIMENSIONAL_MERCHANT_CIFT, 1);
+			return "32478-07.html";
+		}
+		return "32478-13.html";
 	}
 	
 	private String giveMinion(L2PcInstance player, String event, int couponId, int eventCouponId)
@@ -140,9 +171,9 @@ public class DimensionalMerchant extends AbstractNpcAI
 			{
 				handler.useItem(player, summonItem, true);
 			}
-			return "32478-08.html";
+			return "32478-07.html";
 		}
-		return "32478-07.html";
+		return "32478-06.html";
 	}
 	
 	public static void main(String[] args)
