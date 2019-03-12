@@ -65,7 +65,7 @@ public final class Elementals
 		525, // Level 12
 		600, // Level 13
 		Integer.MAX_VALUE
-	// TODO: Higher stones
+		// TODO: Higher stones
 	};
 	
 	public static final int[] ARMOR_VALUES =
@@ -84,7 +84,7 @@ public final class Elementals
 		210, // Level 12
 		240, // Level 13
 		Integer.MAX_VALUE
-	// TODO: Higher stones
+		// TODO: Higher stones
 	};
 	
 	public static enum ElementalItemType
@@ -233,13 +233,13 @@ public final class Elementals
 		return (byte) (((element % 2) == 0) ? (element + 1) : (element - 1));
 	}
 	
-	public static class ElementalStatBoni
+	public static class ElementalStatBonus
 	{
 		private byte _elementalType;
 		private int _elementalValue;
 		private boolean _active;
 		
-		public ElementalStatBoni(byte type, int value)
+		public ElementalStatBonus(byte type, int value)
 		{
 			_elementalType = type;
 			_elementalValue = value;
@@ -304,7 +304,7 @@ public final class Elementals
 	}
 	
 	// non static:
-	private ElementalStatBoni _boni = null;
+	private ElementalStatBonus _bonus = null;
 	private byte _element = NONE;
 	private int _value = 0;
 	
@@ -316,7 +316,7 @@ public final class Elementals
 	public void setElement(byte type)
 	{
 		_element = type;
-		_boni.setElement(type);
+		_bonus.setElement(type);
 	}
 	
 	public int getValue()
@@ -327,7 +327,7 @@ public final class Elementals
 	public void setValue(int val)
 	{
 		_value = val;
-		_boni.setValue(val);
+		_bonus.setValue(val);
 	}
 	
 	@Override
@@ -340,22 +340,22 @@ public final class Elementals
 	{
 		_element = type;
 		_value = value;
-		_boni = new ElementalStatBoni(_element, _value);
+		_bonus = new ElementalStatBonus(_element, _value);
 	}
 	
 	public void applyBonus(L2PcInstance player, boolean isArmor)
 	{
-		_boni.applyBonus(player, isArmor);
+		_bonus.applyBonus(player, isArmor);
 	}
 	
 	public void removeBonus(L2PcInstance player)
 	{
-		_boni.removeBonus(player);
+		_bonus.removeBonus(player);
 	}
 	
 	public void updateBonus(L2PcInstance player, boolean isArmor)
 	{
-		_boni.removeBonus(player);
-		_boni.applyBonus(player, isArmor);
+		_bonus.removeBonus(player);
+		_bonus.applyBonus(player, isArmor);
 	}
 }
