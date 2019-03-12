@@ -478,6 +478,15 @@ import quests.Q00699_GuardianOfTheSkies.Q00699_GuardianOfTheSkies;
 import quests.Q00700_CursedLife.Q00700_CursedLife;
 import quests.Q00701_ProofOfExistence.Q00701_ProofOfExistence;
 import quests.Q00702_ATrapForRevenge.Q00702_ATrapForRevenge;
+import quests.Q00708_PathToBecomingALordGludio.Q00708_PathToBecomingALordGludio;
+import quests.Q00709_PathToBecomingALordDion.Q00709_PathToBecomingALordDion;
+import quests.Q00710_PathToBecomingALordGiran.Q00710_PathToBecomingALordGiran;
+import quests.Q00711_PathToBecomingALordInnadril.Q00711_PathToBecomingALordInnadril;
+import quests.Q00712_PathToBecomingALordOren.Q00712_PathToBecomingALordOren;
+import quests.Q00713_PathToBecomingALordAden.Q00713_PathToBecomingALordAden;
+import quests.Q00714_PathToBecomingALordSchuttgart.Q00714_PathToBecomingALordSchuttgart;
+import quests.Q00715_PathToBecomingALordGoddard.Q00715_PathToBecomingALordGoddard;
+import quests.Q00716_PathToBecomingALordRune.Q00716_PathToBecomingALordRune;
 import quests.Q00901_HowLavasaurusesAreMade.Q00901_HowLavasaurusesAreMade;
 import quests.Q00902_ReclaimOurEra.Q00902_ReclaimOurEra;
 import quests.Q00903_TheCallOfAntharas.Q00903_TheCallOfAntharas;
@@ -987,6 +996,15 @@ public class QuestMasterHandler
 		Q00700_CursedLife.class,
 		Q00701_ProofOfExistence.class,
 		Q00702_ATrapForRevenge.class,
+		Q00708_PathToBecomingALordGludio.class,
+		Q00709_PathToBecomingALordDion.class,
+		Q00710_PathToBecomingALordGiran.class,
+		Q00711_PathToBecomingALordInnadril.class,
+		Q00712_PathToBecomingALordOren.class,
+		Q00713_PathToBecomingALordAden.class,
+		Q00714_PathToBecomingALordSchuttgart.class,
+		Q00715_PathToBecomingALordGoddard.class,
+		Q00716_PathToBecomingALordRune.class,
 		Q00728_TerritoryWar.class,
 		Q00901_HowLavasaurusesAreMade.class,
 		Q00902_ReclaimOurEra.class,
