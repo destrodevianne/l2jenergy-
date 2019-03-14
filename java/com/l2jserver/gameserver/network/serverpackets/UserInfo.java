@@ -24,6 +24,7 @@ import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.instancemanager.CursedWeaponsManager;
 import com.l2jserver.gameserver.instancemanager.TerritoryWarManager;
 import com.l2jserver.gameserver.model.Elementals;
+import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.actor.templates.L2NpcTemplate;
 import com.l2jserver.gameserver.model.skills.AbnormalVisualEffect;
@@ -227,9 +228,20 @@ public final class UserInfo extends L2GameServerPacket
 		writeC(_activeChar.isHero() || (_activeChar.isGM() && Config.GM_HERO_AURA) ? 1 : 0); // 0x01: Hero Aura
 		
 		writeC(_activeChar.isFishing() ? 1 : 0); // Fishing Mode
-		writeD(_activeChar.getFishx()); // fishing x
-		writeD(_activeChar.getFishy()); // fishing y
-		writeD(_activeChar.getFishz()); // fishing z
+		Location loc = _activeChar.getFishingLoc();
+		if (loc != null)
+		{
+			writeD(loc.getX());
+			writeD(loc.getY());
+			writeD(loc.getZ());
+		}
+		else
+		{
+			writeD(0);
+			writeD(0);
+			writeD(0);
+		}
+		
 		writeD(_activeChar.getAppearance().getNameColor());
 		
 		// new c5

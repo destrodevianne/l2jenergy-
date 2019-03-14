@@ -22,6 +22,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.gameserver.model.L2World;
+import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jserver.gameserver.network.serverpackets.ExBrExtraUserInfo;
+import com.l2jserver.gameserver.network.serverpackets.ExVoteSystemInfo;
+import com.l2jserver.gameserver.network.serverpackets.UserInfo;
 import com.l2jserver.gameserver.taskmanager.Task;
 import com.l2jserver.gameserver.taskmanager.TaskManager;
 import com.l2jserver.gameserver.taskmanager.TaskManager.ExecutedTask;
@@ -43,26 +48,35 @@ public class TaskRecom extends Task
 	@Override
 	public void onTimeElapsed(ExecutedTask task)
 	{
+		final String UPDATE_CHARACTERS_RECO = "UPDATE character_reco_bonus cr, characters c SET cr.time_left = 3600, cr.rec_left = 20, rec_have = IF(rec_have > 20, rec_have - 20, 0) WHERE c.online = 0 AND c.charId = cr.charId";
+		
 		try (Connection con = ConnectionFactory.getInstance().getConnection())
 		{
-			try (PreparedStatement ps = con.prepareStatement("UPDATE character_reco_bonus SET rec_left=?, time_left=?, rec_have=0 WHERE rec_have <=  20"))
-			{
-				ps.setInt(1, 0); // Rec left = 0
-				ps.setInt(2, 3600); // Timer = 1 hour
-				ps.execute();
-			}
-			
-			try (PreparedStatement ps = con.prepareStatement("UPDATE character_reco_bonus SET rec_left=?, time_left=?, rec_have=GREATEST(rec_have-20,0) WHERE rec_have > 20"))
-			{
-				ps.setInt(1, 0); // Rec left = 0
-				ps.setInt(2, 3600); // Timer = 1 hour
-				ps.execute();
-			}
+			PreparedStatement statement = con.prepareStatement(UPDATE_CHARACTERS_RECO);
+			statement.execute();
 		}
 		catch (Exception e)
 		{
 			LOG.error("{}: Could not reset Recommendations System!", getClass().getSimpleName(), e);
 		}
+		
+		for (L2PcInstance player : L2World.getInstance().getPlayers())
+		{
+			if ((player != null))
+			{
+				player.stopRecoBonusTask();
+				player.setRecomBonusTime(3600);
+				player.setRecomLeft(20);
+				player.setRecomHave(player.getRecomHave() - 20);
+				if (!player.isInOfflineMode())
+				{
+					player.sendPacket(new UserInfo(player));
+					player.sendPacket(new ExBrExtraUserInfo(player));
+					player.sendPacket(new ExVoteSystemInfo(player));
+				}
+			}
+		}
+		
 		LOG.info("Recommendations System reseted");
 	}
 	

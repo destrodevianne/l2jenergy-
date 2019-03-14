@@ -38,6 +38,7 @@ import com.l2jserver.gameserver.instancemanager.ItemAuctionManager;
 import com.l2jserver.gameserver.instancemanager.ItemsOnGroundManager;
 import com.l2jserver.gameserver.instancemanager.QuestManager;
 import com.l2jserver.gameserver.instancemanager.RaidBossSpawnManager;
+import com.l2jserver.gameserver.instancemanager.games.FishingChampionshipManager;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.Hero;
@@ -551,6 +552,13 @@ public class Shutdown extends Thread
 		// Save all global variables data
 		GlobalVariablesManager.getInstance().storeMe();
 		LOG.info("Global Variables Manager: Variables saved({}ms).", tc.getEstimatedTimeAndRestartCounter());
+		
+		// Save Fishing tournament data
+		if (Config.ALT_FISH_CHAMPIONSHIP_ENABLED)
+		{
+			FishingChampionshipManager.getInstance().shutdown();
+			LOG.info("Fishing Championship data has been saved({}ms).", tc.getEstimatedTimeAndRestartCounter());
+		}
 		
 		// Save items on ground before closing
 		if (Config.SAVE_DROPPED_ITEM)

@@ -139,6 +139,7 @@ $MYL < sql/game/clanhall_siege_guards.sql &> /dev/null
 $MYL < sql/game/crests.sql &> /dev/null
 $MYL < sql/game/cursed_weapons.sql &> /dev/null
 $MYL < sql/game/dimensional_rift.sql &> /dev/null
+$MYL < sql/game/fishing_championship.sql &> /dev/null
 $MYL < sql/game/fort.sql &> /dev/null
 $MYL < sql/game/fort_doorupgrade.sql &> /dev/null
 $MYL < sql/game/fort_functions.sql &> /dev/null

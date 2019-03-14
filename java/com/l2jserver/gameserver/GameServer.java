@@ -127,6 +127,7 @@ import com.l2jserver.gameserver.instancemanager.SiegeManager;
 import com.l2jserver.gameserver.instancemanager.TerritoryWarManager;
 import com.l2jserver.gameserver.instancemanager.WalkingManager;
 import com.l2jserver.gameserver.instancemanager.ZoneManager;
+import com.l2jserver.gameserver.instancemanager.games.FishingChampionshipManager;
 import com.l2jserver.gameserver.instancemanager.games.MiniGameScoreManager;
 import com.l2jserver.gameserver.instancemanager.vote.L2TopManager;
 import com.l2jserver.gameserver.instancemanager.vote.MMOTopManager;
@@ -365,7 +366,7 @@ public final class GameServer
 		}
 		
 		MonsterRace.getInstance();
-		
+		FishingChampionshipManager.getInstance();
 		SevenSigns.getInstance().spawnSevenSignsNPC();
 		SevenSignsFestival.getInstance();
 		AutoSpawnHandler.getInstance();

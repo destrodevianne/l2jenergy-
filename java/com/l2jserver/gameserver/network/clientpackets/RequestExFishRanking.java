@@ -18,14 +18,16 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
+import com.l2jserver.Config;
+import com.l2jserver.gameserver.instancemanager.games.FishingChampionshipManager;
+import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+
 /**
  * Format: (ch) just a trigger
  * @author -Wooden-
  */
 public final class RequestExFishRanking extends L2GameClientPacket
 {
-	private static final String _C__D0_18_REQUESTEXFISHRANKING = "[C] D0:18 RequestExFishRanking";
-	
 	@Override
 	protected void readImpl()
 	{
@@ -35,12 +37,21 @@ public final class RequestExFishRanking extends L2GameClientPacket
 	@Override
 	protected void runImpl()
 	{
-		LOG.info("C5: RequestExFishRanking");
+		final L2PcInstance activeChar = getClient().getActiveChar();
+		if (activeChar == null)
+		{
+			return;
+		}
+		
+		if (Config.ALT_FISH_CHAMPIONSHIP_ENABLED)
+		{
+			FishingChampionshipManager.getInstance().showMidResult(activeChar);
+		}
 	}
 	
 	@Override
 	public String getType()
 	{
-		return _C__D0_18_REQUESTEXFISHRANKING;
+		return "[C] D0:18 RequestExFishRanking";
 	}
 }

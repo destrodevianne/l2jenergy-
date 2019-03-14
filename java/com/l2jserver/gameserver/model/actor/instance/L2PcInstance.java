@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -549,7 +549,7 @@ public final class L2PcInstance extends L2Playable
 	private L2ItemInstance _boltItem;
 	// Used for protection after teleport
 	private long _protectEndTime = 0;
-	private L2ItemInstance _lure = null;
+	
 	private long _teleportProtectEndTime = 0;
 	// protects a char from aggro mobs when getting up from fake death
 	private long _recentFakeDeathEndTime = 0;
@@ -568,11 +568,13 @@ public final class L2PcInstance extends L2Playable
 	/** Event parameters */
 	private PlayerEventHolder eventStatus = null;
 	private byte _handysBlockCheckerEventArena = -1;
-	private L2Fishing _fishCombat;
+	
 	private boolean _fishing = false;
-	private int _fishx = 0;
-	private int _fishy = 0;
-	private int _fishz = 0;
+	private Location _fishingLoc;
+	private L2ItemInstance _lure = null;
+	private L2Fishing _fishCombat;
+	private L2Fish _fish;
+	
 	private ScheduledFuture<?> _taskRentPet;
 	private ScheduledFuture<?> _taskWater;
 	/**
@@ -645,7 +647,6 @@ public final class L2PcInstance extends L2Playable
 	private ClassId _learningClass = getClassId();
 	private ScheduledFuture<?> _taskWarnUserTakeBreak;
 	private ScheduledFuture<?> _pcCafePointsTask;
-	private L2Fish _fish;
 	
 	// Recomendation System
 	private int _recomHave; // how much I was recommended by others
@@ -10665,14 +10666,12 @@ public final class L2PcInstance extends L2Playable
 	// In my opinion it makes more sense for it to be there since all other skill related checks were also there.
 	// Last but not least, moving the zone check there, fixed a bug where baits would always be consumed no matter if fishing actualy took place.
 	// startFishing() now takes up 3 arguments, wich are acurately described as being the hook landing coordinates.
-	public void startFishing(int _x, int _y, int _z)
+	public void startFishing(Location loc)
 	{
 		stopMove(null);
 		setIsImmobilized(true);
 		_fishing = true;
-		_fishx = _x;
-		_fishy = _y;
-		_fishz = _z;
+		_fishingLoc = loc;
 		// broadcastUserInfo();
 		// Starts fishing
 		int lvl = getRandomFishLvl();
@@ -10694,7 +10693,7 @@ public final class L2PcInstance extends L2Playable
 			_fish.setFishGroup(-1);
 		}
 		// sendMessage("Hook x,y: " + _x + "," + _y + " - Water Z, Player Z:" + _z + ", " + getZ()); //debug line, uncoment to show coordinates used in fishing.
-		broadcastPacket(new ExFishingStart(this, _fish.getFishGroup(), _x, _y, _z, _lure.isNightLure()));
+		broadcastPacket(new ExFishingStart(this, _fish.getFishGroup(), loc, _lure.isNightLure()));
 		sendPacket(Music.SF_P_01.getPacket());
 		startLookingForFishTask();
 	}
@@ -11056,22 +11055,21 @@ public final class L2PcInstance extends L2Playable
 	
 	public void startFishCombat(boolean isNoob, boolean isUpperGrade)
 	{
-		_fishCombat = new L2Fishing(this, _fish, isNoob, isUpperGrade);
+		_fishCombat = new L2Fishing(this, _fish, isNoob, isUpperGrade, _lure.getId());
 	}
 	
 	public void endFishing(boolean win)
 	{
 		_fishing = false;
-		_fishx = 0;
-		_fishy = 0;
-		_fishz = 0;
 		// broadcastUserInfo();
 		if (_fishCombat == null)
 		{
 			sendPacket(SystemMessageId.BAIT_LOST_FISH_GOT_AWAY);
 		}
 		_fishCombat = null;
+		
 		_lure = null;
+		_fishingLoc = null;
 		// Ends fishing
 		broadcastPacket(new ExFishingEnd(win, this));
 		sendPacket(SystemMessageId.REEL_LINE_AND_STOP_FISHING);
@@ -11084,19 +11082,9 @@ public final class L2PcInstance extends L2Playable
 		return _fishCombat;
 	}
 	
-	public int getFishx()
+	public Location getFishingLoc()
 	{
-		return _fishx;
-	}
-	
-	public int getFishy()
-	{
-		return _fishy;
-	}
-	
-	public int getFishz()
-	{
-		return _fishz;
+		return _fishingLoc;
 	}
 	
 	public L2ItemInstance getLure()

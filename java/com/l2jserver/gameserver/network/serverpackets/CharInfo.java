@@ -21,6 +21,7 @@ package com.l2jserver.gameserver.network.serverpackets;
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.instancemanager.CursedWeaponsManager;
+import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.PcCondOverride;
 import com.l2jserver.gameserver.model.actor.L2Decoy;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -300,9 +301,19 @@ public class CharInfo extends L2GameServerPacket
 			writeC(_activeChar.isHero() || (_activeChar.isGM() && Config.GM_HERO_AURA) ? 1 : 0); // Hero Aura
 			
 			writeC(_activeChar.isFishing() ? 1 : 0); // 0x01: Fishing Mode (Cant be undone by setting back to 0)
-			writeD(_activeChar.getFishx());
-			writeD(_activeChar.getFishy());
-			writeD(_activeChar.getFishz());
+			Location loc = _activeChar.getFishingLoc();
+			if (loc != null)
+			{
+				writeD(loc.getX());
+				writeD(loc.getY());
+				writeD(loc.getZ());
+			}
+			else
+			{
+				writeD(0);
+				writeD(0);
+				writeD(0);
+			}
 			
 			writeD(_activeChar.getAppearance().getNameColor());
 			

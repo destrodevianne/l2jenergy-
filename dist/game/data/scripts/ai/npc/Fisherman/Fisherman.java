@@ -23,6 +23,7 @@ import java.util.List;
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.datatables.SkillData;
+import com.l2jserver.gameserver.instancemanager.games.FishingChampionshipManager;
 import com.l2jserver.gameserver.model.L2SkillLearn;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2MerchantInstance;
@@ -42,32 +43,16 @@ import ai.npc.AbstractNpcAI;
 public class Fisherman extends AbstractNpcAI
 {
 	// NPC
+	// @formatter:off
 	private static final int[] FISHERMAN =
 	{
-		31562,
-		31563,
-		31564,
-		31565,
-		31566,
-		31567,
-		31568,
-		31569,
-		31570,
-		31571,
-		31572,
-		31573,
-		31574,
-		31575,
-		31576,
-		31577,
-		31578,
-		31579,
-		31696,
-		31697,
-		31989,
-		32007,
-		32348
+		31562, 31563, 31564, 31565, 31566,
+		31567, 31568, 31569, 31570, 31571,
+		31572, 31573, 31574, 31575, 31576,
+		31577, 31578, 31579, 31696, 31697,
+		31989, 32007, 32348
 	};
+	// @formatter:on
 	
 	public Fisherman()
 	{
@@ -88,9 +73,35 @@ public class Fisherman extends AbstractNpcAI
 				showFishSkillList(player);
 				break;
 			}
-			case "fishing_championship.htm":
+			case "FishingChampionship":
 			{
-				htmltext = event;
+				if (Config.ALT_FISH_CHAMPIONSHIP_ENABLED)
+				{
+					FishingChampionshipManager.getInstance().showChampScreen(player, npc);
+				}
+				else
+				{
+					htmltext = "no_fish_event001.htm";
+				}
+				break;
+			}
+			case "FishingReward":
+			{
+				if (Config.ALT_FISH_CHAMPIONSHIP_ENABLED)
+				{
+					if (FishingChampionshipManager.getInstance().isWinner(player.getName()))
+					{
+						FishingChampionshipManager.getInstance().getReward(player);
+					}
+					else
+					{
+						htmltext = "no_fish_event_reward001.htm";
+					}
+				}
+				else
+				{
+					htmltext = "no_fish_event001.htm";
+				}
 				break;
 			}
 			case "BuySellRefund":
