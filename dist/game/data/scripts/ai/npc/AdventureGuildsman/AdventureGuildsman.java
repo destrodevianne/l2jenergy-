@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -268,14 +268,20 @@ public class AdventureGuildsman extends AbstractNpcAI
 		
 		switch (event)
 		{
+			
+			case "quest_list":
+			{
+				player.sendPacket(ExShowQuestInfo.STATIC_PACKET);
+				break;
+			}
 			case "pccafe_list":
 			{
 				htmltext = "pccafe_list001.htm";
 				break;
 			}
-			case "quest_list":
+			case "life_crystal":
 			{
-				player.sendPacket(ExShowQuestInfo.STATIC_PACKET);
+				htmltext = npc.getId() + "-1.htm";
 				break;
 			}
 			case "buff_list":
@@ -288,17 +294,6 @@ public class AdventureGuildsman extends AbstractNpcAI
 				htmltext = "pccafe_item001.htm";
 				break;
 			}
-			case "life_crystal_aden.htm":
-			case "life_crystal_dion.htm":
-			case "life_crystal_giran.htm":
-			case "life_crystal_gludin.htm":
-			case "life_crystal_gludio.htm":
-			case "life_crystal_godard.htm":
-			case "life_crystal_heiness.htm":
-			case "life_crystal_hunter.htm":
-			case "life_crystal_oren.htm":
-			case "life_crystal_rune.htm":
-			case "life_crystal_schuttgart.htm":
 			case "life_crystal_help.htm":
 			case "adventure_manager_help.htm":
 			case "raid_boss_position.htm":
@@ -356,7 +351,7 @@ public class AdventureGuildsman extends AbstractNpcAI
 		}
 		if (event.startsWith("tele"))
 		{
-			htmltext = npc.getId() + "-tele.htm";
+			htmltext = npc.getId() + "-2.htm";
 		}
 		else if (POINTSSKILL.containsKey(event))
 		{
@@ -586,10 +581,6 @@ public class AdventureGuildsman extends AbstractNpcAI
 	@Override
 	public String onFirstTalk(L2Npc npc, L2PcInstance player)
 	{
-		if ((player.getPcCafePoints() > 0) && Config.ALT_PCBANG_POINTS_ENABLED)
-		{
-			return npc.getId() + "-pcbangpoint.htm";
-		}
 		return npc.getId() + ".htm";
 	}
 	
