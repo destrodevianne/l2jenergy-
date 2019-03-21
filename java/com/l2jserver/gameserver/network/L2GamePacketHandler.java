@@ -650,7 +650,7 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient>, 
 						msg = new MultiSellChoose();
 						break;
 					case 0xb1:
-						// NetPing
+						// msg = new NetPing();
 						break;
 					case 0xb2:
 						// RequestRemainTime
@@ -1049,7 +1049,7 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient>, 
 								// RequestStopShowCrataeCubeRank
 								break;
 							case 0x56:
-								// NotifyStartMiniGame
+								msg = new NotifyStartMiniGame();
 								break;
 							case 0x57:
 								msg = new RequestJoinDominionWar();
