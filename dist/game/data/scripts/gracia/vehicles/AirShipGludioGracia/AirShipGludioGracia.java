@@ -47,61 +47,61 @@ public final class AirShipGludioGracia extends AirShipController
 	private static final int GLUDIO_DOCK_ID = 10; // Warf of Gludio Airship's
 	private static final int GRACIA_DOCK_ID = 11; // Keucereus Alliance Base
 	
-	protected static final Location OUST_GLUDIO = new Location(-149379, 255246, -80);
-	protected static final Location OUST_GRACIA = new Location(-186563, 243590, 2608);
+	protected static final Location OUST_GLUDIO = new Location(-149392, 255232, -80);
+	protected static final Location OUST_GRACIA = new Location(-186576, 243584, 2608);
 	
 	protected static final VehiclePathPoint[] GLUDIO_TO_WARPGATE =
 	{
-		new VehiclePathPoint(-151202, 252556, 231),
-		new VehiclePathPoint(-160403, 256144, 222),
-		new VehiclePathPoint(-167874, 256731, -509, 0, 41035) // teleport: x, y, z, speed=0, heading
+		new VehiclePathPoint(-151216, 252544, 231),
+		new VehiclePathPoint(-160416, 256144, 222),
+		new VehiclePathPoint(-167888, 256720, -509, 0, 41035) // teleport: x, y, z, speed=0, heading
 	};
 	
 	protected static final VehiclePathPoint[] GRACIA_TO_WARPGATE =
 	{
-		new VehiclePathPoint(-187801, 244997, 2672),
-		new VehiclePathPoint(-188520, 245932, 2465),
-		new VehiclePathPoint(-189932, 245243, 1682),
-		new VehiclePathPoint(-191192, 242969, 1523),
-		new VehiclePathPoint(-190408, 239088, 1706),
-		new VehiclePathPoint(-187475, 237113, 2768),
-		new VehiclePathPoint(-184673, 238433, 2802),
-		new VehiclePathPoint(-184524, 241119, 2816),
-		new VehiclePathPoint(-182129, 243385, 2733),
-		new VehiclePathPoint(-179440, 243651, 1337),
-		new VehiclePathPoint(-174538, 246185, 39),
-		new VehiclePathPoint(-172595, 247737, 398),
-		new VehiclePathPoint(-171822, 250061, 425),
-		new VehiclePathPoint(-169763, 254815, 282),
-		new VehiclePathPoint(-168067, 256626, 343),
-		new VehiclePathPoint(-157261, 255664, 221, 0, 64781) // teleport: x, y, z, speed=0, heading
+		new VehiclePathPoint(-187808, 244992, 2672),
+		new VehiclePathPoint(-188528, 245920, 2465),
+		new VehiclePathPoint(-189936, 245232, 1682),
+		new VehiclePathPoint(-191200, 242960, 1523),
+		new VehiclePathPoint(-190416, 239088, 1706),
+		new VehiclePathPoint(-187488, 237104, 2768),
+		new VehiclePathPoint(-184688, 238432, 2802),
+		new VehiclePathPoint(-184528, 241104, 2816),
+		new VehiclePathPoint(-182144, 243376, 2733),
+		new VehiclePathPoint(-179440, 243648, 1337),
+		new VehiclePathPoint(-174544, 246176, 39),
+		new VehiclePathPoint(-172608, 247728, 398),
+		new VehiclePathPoint(-171824, 250048, 425),
+		new VehiclePathPoint(-169776, 254800, 282),
+		new VehiclePathPoint(-168080, 256624, 343),
+		new VehiclePathPoint(-157264, 255664, 221, 0, 64781) // teleport: x, y, z, speed=0, heading
 	};
 	
 	protected static final VehiclePathPoint[] WARPGATE_TO_GLUDIO =
 	{
-		new VehiclePathPoint(-153414, 255385, 221),
-		new VehiclePathPoint(-149548, 258172, 221),
-		new VehiclePathPoint(-146884, 257097, 221),
-		new VehiclePathPoint(-146672, 254239, 221),
-		new VehiclePathPoint(-147855, 252712, 206),
-		new VehiclePathPoint(-149378, 252552, 198)
+		new VehiclePathPoint(-153424, 255376, 221),
+		new VehiclePathPoint(-149552, 258160, 221),
+		new VehiclePathPoint(-146896, 257088, 221),
+		new VehiclePathPoint(-146672, 254224, 221),
+		new VehiclePathPoint(-147856, 252704, 206),
+		new VehiclePathPoint(-149392, 252544, 198)
 	};
 	
 	protected static final VehiclePathPoint[] WARPGATE_TO_GRACIA =
 	{
-		new VehiclePathPoint(-169763, 254815, 282),
-		new VehiclePathPoint(-171822, 250061, 425),
-		new VehiclePathPoint(-172595, 247737, 398),
-		new VehiclePathPoint(-174538, 246185, 39),
-		new VehiclePathPoint(-179440, 243651, 1337),
-		new VehiclePathPoint(-182601, 243957, 2739),
-		new VehiclePathPoint(-184952, 245122, 2694),
-		new VehiclePathPoint(-186936, 244563, 2617)
+		new VehiclePathPoint(-169776, 254800, 282),
+		new VehiclePathPoint(-171824, 250048, 425),
+		new VehiclePathPoint(-172608, 247728, 398),
+		new VehiclePathPoint(-174544, 246176, 39),
+		new VehiclePathPoint(-179440, 243648, 1337),
+		new VehiclePathPoint(-182608, 243952, 2739),
+		new VehiclePathPoint(-184960, 245120, 2694),
+		new VehiclePathPoint(-186944, 244560, 2617)
 	};
 	
-	protected volatile int _cycle;
+	protected int _cycle;
 	
-	protected volatile L2AirShipInstance _ship;
+	protected L2AirShipInstance _ship;
 	
 	private boolean _foundAtcGludio;
 	private boolean _foundAtcGracia;
@@ -116,7 +116,7 @@ public final class AirShipGludioGracia extends AirShipController
 		addFirstTalkId(CONTROLLERS);
 		addTalkId(CONTROLLERS);
 		_cycle = 0;
-		_ship = AirShipManager.getInstance().getNewAirShip(-149378, 252552, 198, 33837);
+		_ship = AirShipManager.getInstance().getNewAirShip(-149392, 252544, 198, 33837);
 		_foundAtcGludio = false;
 		_foundAtcGracia = false;
 		_atcGludio = null;
@@ -125,6 +125,51 @@ public final class AirShipGludioGracia extends AirShipController
 		_ship.setInDock(GLUDIO_DOCK_ID);
 		_ship.registerEngine(new RunAirShip());
 		_ship.runEngine(60000);
+	}
+	
+	private L2Npc findController()
+	{
+		// Check objects around the ship
+		for (L2Object obj : L2World.getInstance().getVisibleObjects(_ship, 600))
+		{
+			if (obj.isNpc())
+			{
+				for (int id : CONTROLLERS)
+				{
+					if (obj.getId() == id)
+					{
+						return (L2Npc) obj;
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
+	protected void broadcastInGludio(NpcStringId npcString)
+	{
+		if (!_foundAtcGludio)
+		{
+			_foundAtcGludio = true;
+			_atcGludio = findController();
+		}
+		if (_atcGludio != null)
+		{
+			_atcGludio.broadcastPacket(new NpcSay(_atcGludio.getObjectId(), Say2.NPC_SHOUT, _atcGludio.getId(), npcString));
+		}
+	}
+	
+	protected void broadcastInGracia(NpcStringId npcStringId)
+	{
+		if (!_foundAtcGracia)
+		{
+			_foundAtcGracia = true;
+			_atcGracia = findController();
+		}
+		if (_atcGracia != null)
+		{
+			_atcGracia.broadcastPacket(new NpcSay(_atcGracia.getObjectId(), Say2.NPC_SHOUT, _atcGracia.getId(), npcStringId));
+		}
 	}
 	
 	@Override
@@ -209,51 +254,6 @@ public final class AirShipGludioGracia extends AirShipController
 		return super.unload(removeFromList);
 	}
 	
-	private L2Npc findController()
-	{
-		// Check objects around the ship
-		for (L2Object obj : L2World.getInstance().getVisibleObjects(_ship, 600))
-		{
-			if (obj.isNpc())
-			{
-				for (int id : CONTROLLERS)
-				{
-					if (obj.getId() == id)
-					{
-						return (L2Npc) obj;
-					}
-				}
-			}
-		}
-		return null;
-	}
-	
-	protected void broadcastInGludio(NpcStringId npcString)
-	{
-		if (!_foundAtcGludio)
-		{
-			_foundAtcGludio = true;
-			_atcGludio = findController();
-		}
-		if (_atcGludio != null)
-		{
-			_atcGludio.broadcastPacket(new NpcSay(_atcGludio.getObjectId(), Say2.NPC_SHOUT, _atcGludio.getId(), npcString));
-		}
-	}
-	
-	protected void broadcastInGracia(NpcStringId npcStringId)
-	{
-		if (!_foundAtcGracia)
-		{
-			_foundAtcGracia = true;
-			_atcGracia = findController();
-		}
-		if (_atcGracia != null)
-		{
-			_atcGracia.broadcastPacket(new NpcSay(_atcGracia.getObjectId(), Say2.NPC_SHOUT, _atcGracia.getId(), npcStringId));
-		}
-	}
-	
 	private final class RunAirShip implements Runnable
 	{
 		protected RunAirShip()
@@ -263,72 +263,65 @@ public final class AirShipGludioGracia extends AirShipController
 		@Override
 		public void run()
 		{
-			try
+			switch (_cycle)
 			{
-				switch (_cycle)
+				case 0:
 				{
-					case 0:
-					{
-						broadcastInGludio(NpcStringId.THE_REGULARLY_SCHEDULED_AIRSHIP_THAT_FLIES_TO_THE_GRACIA_CONTINENT_HAS_DEPARTED);
-						_ship.setInDock(0);
-						_ship.executePath(GLUDIO_TO_WARPGATE);
-						break;
-					}
-					case 1:
-					{
-						_ship.setOustLoc(OUST_GRACIA);
-						_ship.runEngine(5000);
-						break;
-					}
-					case 2:
-					{
-						_ship.executePath(WARPGATE_TO_GRACIA);
-						break;
-					}
-					case 3:
-					{
-						broadcastInGracia(NpcStringId.THE_REGULARLY_SCHEDULED_AIRSHIP_HAS_ARRIVED_IT_WILL_DEPART_FOR_THE_ADEN_CONTINENT_IN_1_MINUTE);
-						_ship.setInDock(GRACIA_DOCK_ID);
-						_ship.oustPlayers();
-						_ship.runEngine(60000);
-						break;
-					}
-					case 4:
-					{
-						broadcastInGracia(NpcStringId.THE_REGULARLY_SCHEDULED_AIRSHIP_THAT_FLIES_TO_THE_ADEN_CONTINENT_HAS_DEPARTED);
-						_ship.setInDock(0);
-						_ship.executePath(GRACIA_TO_WARPGATE);
-						break;
-					}
-					case 5:
-					{
-						_ship.setOustLoc(OUST_GLUDIO);
-						_ship.runEngine(5000);
-						break;
-					}
-					case 6:
-					{
-						_ship.executePath(WARPGATE_TO_GLUDIO);
-						break;
-					}
-					case 7:
-					{
-						broadcastInGludio(NpcStringId.THE_REGULARLY_SCHEDULED_AIRSHIP_HAS_ARRIVED_IT_WILL_DEPART_FOR_THE_GRACIA_CONTINENT_IN_1_MINUTE);
-						_ship.setInDock(GLUDIO_DOCK_ID);
-						_ship.oustPlayers();
-						_ship.runEngine(60000);
-						break;
-					}
+					broadcastInGludio(NpcStringId.THE_REGULARLY_SCHEDULED_AIRSHIP_THAT_FLIES_TO_THE_GRACIA_CONTINENT_HAS_DEPARTED);
+					_ship.setInDock(0);
+					_ship.executePath(GLUDIO_TO_WARPGATE);
+					break;
 				}
-				_cycle++;
-				if (_cycle > 7)
+				case 1:
 				{
-					_cycle = 0;
+					_ship.setOustLoc(OUST_GRACIA);
+					_ship.runEngine(5000);
+					break;
+				}
+				case 2:
+				{
+					_ship.executePath(WARPGATE_TO_GRACIA);
+					break;
+				}
+				case 3:
+				{
+					broadcastInGracia(NpcStringId.THE_REGULARLY_SCHEDULED_AIRSHIP_HAS_ARRIVED_IT_WILL_DEPART_FOR_THE_ADEN_CONTINENT_IN_1_MINUTE);
+					_ship.setInDock(GRACIA_DOCK_ID);
+					_ship.oustPlayers();
+					_ship.runEngine(60000);
+					break;
+				}
+				case 4:
+				{
+					broadcastInGracia(NpcStringId.THE_REGULARLY_SCHEDULED_AIRSHIP_THAT_FLIES_TO_THE_ADEN_CONTINENT_HAS_DEPARTED);
+					_ship.setInDock(0);
+					_ship.executePath(GRACIA_TO_WARPGATE);
+					break;
+				}
+				case 5:
+				{
+					_ship.setOustLoc(OUST_GLUDIO);
+					_ship.runEngine(5000);
+					break;
+				}
+				case 6:
+				{
+					_ship.executePath(WARPGATE_TO_GLUDIO);
+					break;
+				}
+				case 7:
+				{
+					broadcastInGludio(NpcStringId.THE_REGULARLY_SCHEDULED_AIRSHIP_HAS_ARRIVED_IT_WILL_DEPART_FOR_THE_GRACIA_CONTINENT_IN_1_MINUTE);
+					_ship.setInDock(GLUDIO_DOCK_ID);
+					_ship.oustPlayers();
+					_ship.runEngine(60000);
+					break;
 				}
 			}
-			catch (Exception e)
+			_cycle++;
+			if (_cycle > 7)
 			{
-				e.printStackTrace();
+				_cycle = 0;
 			}
 		}
 	}
