@@ -19,20 +19,26 @@
 package com.l2jserver.gameserver.util;
 
 import java.io.File;
+import java.lang.reflect.Constructor;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.StringJoiner;
 import java.util.logging.Logger;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.converter.Converter;
 import com.l2jserver.commons.util.filter.ExtFilter;
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ThreadPoolManager;
@@ -1025,5 +1031,54 @@ public final class Util
 		test.setTime(date);
 		
 		return isSameDay(now.getTime(), test.getTime());
+	}
+	
+	// TODO[Hack]: в парсер конфигов
+	public static <K, V> Map<K, V> parseConfigMapThrowable(String str, Class<K> keyClass, Class<V> valueClass)
+	{
+		Map<K, V> map = new HashMap<>();
+		String[] strs = str.trim().split(";");
+		for (String obj : strs)
+		{
+			String[] values = obj.split(",");
+			map.put(Converter.convert(keyClass, values[0]), Converter.convert(valueClass, values[1]));
+		}
+		return map;
+	}
+	
+	public static <K, V> Map<K, V> parseConfigMap(String str, Class<K> keyClass, Class<V> valueClass)
+	{
+		try
+		{
+			return parseConfigMapThrowable(str, keyClass, valueClass);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return new HashMap<>();
+		}
+	}
+	
+	public static <T> List<T> parseTemplateConfig(String str, Constructor<T> templateConstructor) throws Exception
+	{
+		List<T> list = new ArrayList<>();
+		String[] strs = str.trim().split(";");
+		for (String obj : strs)
+		{
+			String[] values = obj.split(",");
+			List<Object> args = new ArrayList<>();
+			for (int i = 0; i < values.length; i++)
+			{
+				args.add(Converter.convert(templateConstructor.getParameterTypes()[i], values[i]));
+			}
+			list.add(templateConstructor.newInstance(args.toArray()));
+		}
+		return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T> List<T> parseTemplateConfig(String str, Class<T> templateClass) throws Exception
+	{
+		return parseTemplateConfig(str, (Constructor<T>) templateClass.getConstructors()[0]);
 	}
 }
