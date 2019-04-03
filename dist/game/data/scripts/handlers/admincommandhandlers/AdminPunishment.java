@@ -26,8 +26,8 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.cache.HtmCache;
+import com.l2jserver.gameserver.configuration.parser.IPConfigDataParser;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.instancemanager.PunishmentManager;
@@ -262,7 +262,7 @@ public class AdminPunishment implements IAdminCommandHandler
 						{
 							throw new UnknownHostException("You cannot ban any local address!");
 						}
-						else if (Config.GAME_SERVER_HOSTS.contains(addr.getHostAddress()))
+						else if (IPConfigDataParser.getInstance().getHosts().contains(addr.getHostAddress()))
 						{
 							throw new UnknownHostException("You cannot ban your gameserver's address!");
 						}

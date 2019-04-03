@@ -1,0 +1,36 @@
+{
+	 # =====================================================================
+    # Manor
+    # =====================================================================
+    # Default: true
+    "AllowManor" : "true",
+
+    # Manor refresh time in military hours.
+    # Default: 20 (8pm)
+    "AltManorRefreshTime" : "20",
+
+    # Manor refresh time (minutes).
+    # Default: 00 (start of the hour)
+    "AltManorRefreshMin" : "00",
+
+    # Manor period approve time in military hours.
+    # Default: 4 (4am)
+    "AltManorApproveTime" : "4",
+
+    # Manor period approve time (minutes).
+    # Default: 30
+    "AltManorApproveMin" : "30",
+
+    # Manor maintenance time (minutes).
+    # Default: 6
+    "AltManorMaintenanceMin" : "6",
+
+    # Manor Save Type.
+    # true = Save data into the database after every action
+    # Default: false
+    "AltManorSaveAllActions" : "false",
+
+    # Manor Save Period (used only if AltManorSaveAllActions = false)
+    # Default: 2 (hour)
+    "AltManorSavePeriodRate" : "2"
+}

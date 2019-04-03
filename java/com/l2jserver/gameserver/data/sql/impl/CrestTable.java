@@ -34,12 +34,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.commons.util.filter.BMPFilter;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2Crest;
 import com.l2jserver.gameserver.model.L2Crest.CrestType;
-import com.l2jserver.util.file.filter.BMPFilter;
 
 /**
  * Loads and saves crests from database.
@@ -163,7 +163,7 @@ public final class CrestTable
 	 */
 	private void moveOldCrestsToDb(Set<Integer> crestsInUse)
 	{
-		final File crestDir = new File(Config.DATAPACK_ROOT, "data/crests/");
+		final File crestDir = new File(ServerConfig.DATAPACK_ROOT, "data/crests/");
 		if (crestDir.exists())
 		{
 			final File[] files = crestDir.listFiles(new BMPFilter());

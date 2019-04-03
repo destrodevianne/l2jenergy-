@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.PremiumConfig;
 import com.l2jserver.gameserver.handler.ActionHandler;
 import com.l2jserver.gameserver.handler.ActionShiftHandler;
 import com.l2jserver.gameserver.handler.AdminCommandHandler;
@@ -551,7 +552,7 @@ public class MasterHandler
 			(Config.L2JMOD_MULTILANG_ENABLE && Config.L2JMOD_MULTILANG_VOICED_ALLOW ? Lang.class : null),
 			(Config.L2JMOD_DEBUG_VOICE_COMMAND ? Debug.class : null),
 			(Config.L2JMOD_ALLOW_CHANGE_PASSWORD ? ChangePassword.class : null),
-			(Config.PREMIUM_ALLOW_VOICED ? Premium.class : null),
+			(PremiumConfig.PREMIUM_ALLOW_VOICED ? Premium.class : null),
 		},
 		{
 			// Target Handlers

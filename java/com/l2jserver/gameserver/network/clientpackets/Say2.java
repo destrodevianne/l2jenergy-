@@ -22,6 +22,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.parser.chatFilter.ChatFilterConfigParser;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.ChatHandler;
 import com.l2jserver.gameserver.handler.IChatHandler;
@@ -185,7 +187,7 @@ public final class Say2 extends L2GameClientPacket
 		
 		if (Config.L2WALKER_PROTECTION && (_type == TELL) && checkBot(_text))
 		{
-			Util.handleIllegalPlayerAction(activeChar, "Client Emulator Detect: Player " + activeChar.getName() + " using l2walker.", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(activeChar, "Client Emulator Detect: Player " + activeChar.getName() + " using l2walker.", GeneralConfig.DEFAULT_PUNISH);
 			return;
 		}
 		
@@ -203,7 +205,7 @@ public final class Say2 extends L2GameClientPacket
 			}
 			else
 			{
-				for (int chatId : Config.BAN_CHAT_CHANNELS)
+				for (int chatId : GeneralConfig.BAN_CHAT_CHANNELS)
 				{
 					if (_type == chatId)
 					{
@@ -214,7 +216,7 @@ public final class Say2 extends L2GameClientPacket
 			return;
 		}
 		
-		if (activeChar.isJailed() && Config.JAIL_DISABLE_CHAT)
+		if (activeChar.isJailed() && GeneralConfig.JAIL_DISABLE_CHAT)
 		{
 			if ((_type == TELL) || (_type == SHOUT) || (_type == TRADE) || (_type == HERO_VOICE))
 			{
@@ -228,7 +230,7 @@ public final class Say2 extends L2GameClientPacket
 			_type = PETITION_GM;
 		}
 		
-		if (Config.LOG_CHAT)
+		if (GeneralConfig.LOG_CHAT)
 		{
 			LoggingUtils.logChat(LOG_CHAT, _type == TELL ? activeChar.getName() : null, _target, _text, CHAT_NAMES[_type]);
 		}
@@ -248,7 +250,7 @@ public final class Say2 extends L2GameClientPacket
 		}
 		
 		// Say Filter implementation
-		if (Config.USE_SAY_FILTER)
+		if (GeneralConfig.USE_SAY_FILTER)
 		{
 			checkText();
 		}
@@ -279,9 +281,9 @@ public final class Say2 extends L2GameClientPacket
 	private void checkText()
 	{
 		String filteredText = _text;
-		for (String pattern : Config.FILTER_LIST)
+		for (String pattern : ChatFilterConfigParser.getInstance().FILTER_LIST)
 		{
-			filteredText = filteredText.replaceAll("(?i)" + pattern, Config.CHAT_FILTER_CHARS);
+			filteredText = filteredText.replaceAll("(?i)" + pattern, GeneralConfig.CHAT_FILTER_CHARS);
 		}
 		_text = filteredText;
 	}

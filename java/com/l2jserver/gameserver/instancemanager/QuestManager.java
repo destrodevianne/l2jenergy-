@@ -26,11 +26,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
+import com.l2jserver.commons.util.Util;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.scripting.L2ScriptEngineManager;
 import com.l2jserver.gameserver.scripting.ScriptManager;
-import com.l2jserver.util.Util;
 
 /**
  * Quests and scripts manager.
@@ -104,7 +105,7 @@ public final class QuestManager extends ScriptManager<Quest>
 		
 		try
 		{
-			L2ScriptEngineManager.getInstance().executeScriptList(new File(Config.DATAPACK_ROOT, "data/scripts.cfg"));
+			L2ScriptEngineManager.getInstance().executeScriptList(new File(ServerConfig.DATAPACK_ROOT, "data/scripts.cfg"));
 		}
 		catch (IOException e)
 		{
@@ -200,7 +201,7 @@ public final class QuestManager extends ScriptManager<Quest>
 			
 		}
 		
-		if (Config.ALT_DEV_SHOW_QUESTS_LOAD_IN_LOGS)
+		if (GeneralConfig.ALT_DEV_SHOW_QUESTS_LOAD_IN_LOGS)
 		{
 			final String questName = quest.getName().contains("_") ? quest.getName().substring(quest.getName().indexOf('_') + 1) : quest.getName();
 			LOG.info("Loaded quest {}.", Util.splitWords(questName));
@@ -268,7 +269,7 @@ public final class QuestManager extends ScriptManager<Quest>
 			LOG.info("{}: Replaced script {} with a new version!", getClass().getSimpleName(), old.getName());
 		}
 		
-		if (Config.ALT_DEV_SHOW_SCRIPTS_LOAD_IN_LOGS)
+		if (GeneralConfig.ALT_DEV_SHOW_SCRIPTS_LOAD_IN_LOGS)
 		{
 			LOG.info("Loaded script {}.", Util.splitWords(script.getClass().getSimpleName()));
 		}

@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.data.xml.impl.PetDataTable;
 import com.l2jserver.gameserver.datatables.SkillData;

@@ -22,9 +22,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.cache.HtmCache;
+import com.l2jserver.gameserver.configuration.config.community.CBasicConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.handler.CommunityBoardHandler;
 import com.l2jserver.gameserver.handler.IParseBoardHandler;
@@ -58,7 +58,7 @@ public final class HomeBoard implements IParseBoardHandler
 	{
 		if (command.equals("_bbshome") || command.equals("_bbstop"))
 		{
-			final String customPath = Config.CUSTOM_CB_ENABLED ? "Custom/" : "";
+			final String customPath = CBasicConfig.CUSTOM_CB_ENABLED ? "Custom/" : "";
 			CommunityBoardHandler.getInstance().addBypass(activeChar, "Home", command);
 			
 			String html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/" + customPath + "bbs_top.html");
@@ -74,7 +74,7 @@ public final class HomeBoard implements IParseBoardHandler
 		}
 		else if (command.startsWith("_bbsopen"))
 		{
-			final String customPath = Config.CUSTOM_CB_ENABLED ? "Custom/" : "";
+			final String customPath = CBasicConfig.CUSTOM_CB_ENABLED ? "Custom/" : "";
 			final String[] b = command.split(":");
 			final String folder = b[1];
 			final String page = b[2];
@@ -87,7 +87,7 @@ public final class HomeBoard implements IParseBoardHandler
 		}
 		else if (command.startsWith("_bbstop;"))
 		{
-			final String customPath = Config.CUSTOM_CB_ENABLED ? "Custom/" : "";
+			final String customPath = CBasicConfig.CUSTOM_CB_ENABLED ? "Custom/" : "";
 			final String path = command.replace("_bbstop;", "");
 			if ((path.length() > 0) && path.endsWith(".html"))
 			{

@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -40,7 +40,7 @@ public final class RequestPostItemList extends L2GameClientPacket
 	@Override
 	public void runImpl()
 	{
-		if (!Config.ALLOW_MAIL || !Config.ALLOW_ATTACHMENTS)
+		if (!GeneralConfig.ALLOW_MAIL || !GeneralConfig.ALLOW_ATTACHMENTS)
 		{
 			return;
 		}

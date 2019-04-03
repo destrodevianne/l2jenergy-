@@ -37,9 +37,9 @@ import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -77,7 +77,7 @@ public final class BotReportTable
 	
 	BotReportTable()
 	{
-		if (Config.BOTREPORT_ENABLE)
+		if (GeneralConfig.BOTREPORT_ENABLE)
 		{
 			_ipRegistry = new HashMap<>();
 			_charRegistry = new ConcurrentHashMap<>();
@@ -118,7 +118,7 @@ public final class BotReportTable
 			long lastResetTime = 0;
 			try
 			{
-				String[] hour = Config.BOTREPORT_RESETPOINT_HOUR;
+				String[] hour = GeneralConfig.BOTREPORT_RESETPOINT_HOUR;
 				Calendar c = Calendar.getInstance();
 				c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour[0]));
 				c.set(Calendar.MINUTE, Integer.parseInt(hour[1]));
@@ -277,7 +277,7 @@ public final class BotReportTable
 					return false;
 				}
 				
-				if (!Config.BOTREPORT_ALLOW_REPORTS_FROM_SAME_CLAN_MEMBERS && rcd.reportedBySameClan(reporter.getClan()))
+				if (!GeneralConfig.BOTREPORT_ALLOW_REPORTS_FROM_SAME_CLAN_MEMBERS && rcd.reportedBySameClan(reporter.getClan()))
 				{
 					reporter.sendPacket(SystemMessageId.CANNOT_REPORT_TARGET_ALREDY_REPORTED_BY_CLAN_ALLY_MEMBER_OR_SAME_IP);
 					return false;
@@ -293,7 +293,7 @@ public final class BotReportTable
 				}
 				
 				long reuse = (System.currentTimeMillis() - rcdRep.getLastReporTime());
-				if (reuse < Config.BOTREPORT_REPORT_DELAY)
+				if (reuse < GeneralConfig.BOTREPORT_REPORT_DELAY)
 				{
 					SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.YOU_CAN_REPORT_IN_S1_MINS_YOU_HAVE_S2_POINTS_LEFT);
 					sm.addInt((int) (reuse / 60000));
@@ -414,7 +414,7 @@ public final class BotReportTable
 	{
 		try
 		{
-			String[] hour = Config.BOTREPORT_RESETPOINT_HOUR;
+			String[] hour = GeneralConfig.BOTREPORT_RESETPOINT_HOUR;
 			Calendar c = Calendar.getInstance();
 			c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour[0]));
 			c.set(Calendar.MINUTE, Integer.parseInt(hour[1]));
@@ -466,7 +466,7 @@ public final class BotReportTable
 	{
 		if (map.containsKey(objectId))
 		{
-			return (System.currentTimeMillis() - map.get(objectId)) > Config.BOTREPORT_REPORT_DELAY;
+			return (System.currentTimeMillis() - map.get(objectId)) > GeneralConfig.BOTREPORT_REPORT_DELAY;
 		}
 		return true;
 	}

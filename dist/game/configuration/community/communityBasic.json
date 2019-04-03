@@ -1,0 +1,13 @@
+{
+    # =================================================================
+	#                      Settings Community Board
+	# =================================================================
+	# Enable the Community Board.
+	"AllowCommunityBoard" : "true",
+
+	# Default Community Board page.
+    "BBSDefault" : "_bbshome",
+
+    # Enable Custom Community Board.
+    "CustomCommunityBoard" : "true"
+}

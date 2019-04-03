@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -21,8 +21,9 @@ package com.l2jserver.loginserver.network;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
+import com.l2jserver.commons.network.BaseRecievePacket;
 import com.l2jserver.loginserver.GameServerThread;
+import com.l2jserver.loginserver.configuration.config.EmailConfig;
 import com.l2jserver.loginserver.network.gameserverpackets.BlowFishKey;
 import com.l2jserver.loginserver.network.gameserverpackets.ChangeAccessLevel;
 import com.l2jserver.loginserver.network.gameserverpackets.ChangePassword;
@@ -36,7 +37,6 @@ import com.l2jserver.loginserver.network.gameserverpackets.RequestSendMail;
 import com.l2jserver.loginserver.network.gameserverpackets.RequestTempBan;
 import com.l2jserver.loginserver.network.gameserverpackets.ServerStatus;
 import com.l2jserver.loginserver.network.loginserverpackets.LoginServerFail;
-import com.l2jserver.util.network.BaseRecievePacket;
 
 /**
  * @author mrTJO
@@ -108,7 +108,7 @@ public class L2JGameServerPacketHandler
 						msg = new ReplyCharacters(data, server);
 						break;
 					case 0x09:
-						if (Config.EMAIL_SYS_ENABLED)
+						if (EmailConfig.EMAIL_SYS_ENABLED)
 						{
 							msg = new RequestSendMail(data);
 						}

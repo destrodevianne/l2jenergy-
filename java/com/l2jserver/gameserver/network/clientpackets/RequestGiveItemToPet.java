@@ -19,6 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -85,7 +86,7 @@ public final class RequestGiveItemToPet extends L2GameClientPacket
 		if (_amount > item.getCount())
 		{
 			Util.handleIllegalPlayerAction(player, getClass().getSimpleName() + ": Character " + player.getName() + " of account " + player.getAccountName() + " tried to get item with oid " + _objectId + " from pet but has invalid count " + _amount + " item count: "
-				+ item.getCount(), Config.DEFAULT_PUNISH);
+				+ item.getCount(), GeneralConfig.DEFAULT_PUNISH);
 			return;
 		}
 		

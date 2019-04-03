@@ -21,7 +21,7 @@ package ai.npc.AdventureGuildsman;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.PcCafeConfig;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.enums.PcCafeType;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -557,7 +557,7 @@ public class AdventureGuildsman extends AbstractNpcAI
 	
 	private String tradeItem(L2PcInstance player, int itemId, int points)
 	{
-		if (player.getPcCafePoints() >= Config.MAX_PC_BANG_POINTS)
+		if (player.getPcCafePoints() >= PcCafeConfig.MAX_PC_BANG_POINTS)
 		{
 			return "pccafe_help_lottery_fail2.htm";
 		}

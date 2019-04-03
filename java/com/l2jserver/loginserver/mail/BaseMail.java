@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -36,8 +36,8 @@ import javax.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.loginserver.configuration.config.EmailConfig;
 import com.l2jserver.loginserver.model.data.MailContent;
 
 /**
@@ -55,7 +55,7 @@ public class BaseMail implements Runnable
 		
 		public SmtpAuthenticator()
 		{
-			_auth = new PasswordAuthentication(Config.EMAIL_SYS_USERNAME, Config.EMAIL_SYS_PASSWORD);
+			_auth = new PasswordAuthentication(EmailConfig.EMAIL_SYS_USERNAME, EmailConfig.EMAIL_SYS_PASSWORD);
 		}
 		
 		@Override
@@ -83,13 +83,13 @@ public class BaseMail implements Runnable
 		String message = compileHtml(account, content.getText(), args);
 		
 		final Properties mailProp = new Properties();
-		mailProp.put("mail.smtp.host", Config.EMAIL_SYS_HOST);
-		mailProp.put("mail.smtp.auth", Config.EMAIL_SYS_SMTP_AUTH);
-		mailProp.put("mail.smtp.port", Config.EMAIL_SYS_PORT);
-		mailProp.put("mail.smtp.socketFactory.port", Config.EMAIL_SYS_PORT);
-		mailProp.put("mail.smtp.socketFactory.class", Config.EMAIL_SYS_FACTORY);
-		mailProp.put("mail.smtp.socketFactory.fallback", Config.EMAIL_SYS_FACTORY_CALLBACK);
-		final SmtpAuthenticator authenticator = (Config.EMAIL_SYS_SMTP_AUTH ? new SmtpAuthenticator() : null);
+		mailProp.put("mail.smtp.host", EmailConfig.EMAIL_SYS_HOST);
+		mailProp.put("mail.smtp.auth", EmailConfig.EMAIL_SYS_SMTP_AUTH);
+		mailProp.put("mail.smtp.port", EmailConfig.EMAIL_SYS_PORT);
+		mailProp.put("mail.smtp.socketFactory.port", EmailConfig.EMAIL_SYS_PORT);
+		mailProp.put("mail.smtp.socketFactory.class", EmailConfig.EMAIL_SYS_FACTORY);
+		mailProp.put("mail.smtp.socketFactory.fallback", EmailConfig.EMAIL_SYS_FACTORY_CALLBACK);
+		final SmtpAuthenticator authenticator = (EmailConfig.EMAIL_SYS_SMTP_AUTH ? new SmtpAuthenticator() : null);
 		
 		Session mailSession = Session.getDefaultInstance(mailProp, authenticator);
 		
@@ -99,7 +99,7 @@ public class BaseMail implements Runnable
 			_messageMime.setSubject(content.getSubject());
 			try
 			{
-				_messageMime.setFrom(new InternetAddress(Config.EMAIL_SYS_ADDRESS, Config.EMAIL_SERVERINFO_NAME));
+				_messageMime.setFrom(new InternetAddress(EmailConfig.EMAIL_SYS_ADDRESS, EmailConfig.EMAIL_SERVERINFO_NAME));
 			}
 			catch (UnsupportedEncodingException e)
 			{
@@ -130,14 +130,14 @@ public class BaseMail implements Runnable
 	private String getUserMail(String username)
 	{
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
-			PreparedStatement statement = con.prepareStatement(Config.EMAIL_SYS_SELECTQUERY))
+			PreparedStatement statement = con.prepareStatement(EmailConfig.EMAIL_SYS_SELECTQUERY))
 		{
 			statement.setString(1, username);
 			try (ResultSet rset = statement.executeQuery())
 			{
 				if (rset.next())
 				{
-					String mail = rset.getString(Config.EMAIL_SYS_DBFIELD);
+					String mail = rset.getString(EmailConfig.EMAIL_SYS_DBFIELD);
 					return mail;
 				}
 			}

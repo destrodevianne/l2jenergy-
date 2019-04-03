@@ -19,15 +19,16 @@
 package handlers.admincommandhandlers;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.MemoryWatchDog;
 import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.Shutdown;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.util.DifferentMethods;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.MemoryWatchDog;
 
 public class AdminShutdown implements IAdminCommandHandler
 {
@@ -99,7 +100,7 @@ public class AdminShutdown implements IAdminCommandHandler
 		html.replace("%gameTime%", GameTimeController.getInstance().getGameHour() + ":" + GameTimeController.getInstance().getGameMinute());
 		html.replace("%dayNight%", GameTimeController.getInstance().isNight() ? MessagesData.getInstance().getMessage(activeChar, "admin_game_night") : MessagesData.getInstance().getMessage(activeChar, "admin_game_day"));
 		html.replace("%timeserv%", String.valueOf(DifferentMethods.getServerUpTime()));
-		html.replace("%maxonline%", String.valueOf(DifferentMethods.getPlayersCount("ALL") + "/" + Config.MAXIMUM_ONLINE_USERS));
+		html.replace("%maxonline%", String.valueOf(DifferentMethods.getPlayersCount("ALL") + "/" + ServerConfig.MAXIMUM_ONLINE_USERS));
 		html.replace("%geo%", Config.PATHFINDING > 0 ? MessagesData.getInstance().getMessage(activeChar, "admin_geo_loading") : MessagesData.getInstance().getMessage(activeChar, "admin_geo_disabled"));
 		activeChar.sendPacket(html);
 		return true;

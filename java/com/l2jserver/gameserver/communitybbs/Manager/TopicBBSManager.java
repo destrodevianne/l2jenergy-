@@ -27,13 +27,13 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.communitybbs.BB.Forum;
 import com.l2jserver.gameserver.communitybbs.BB.Post;
 import com.l2jserver.gameserver.communitybbs.BB.Topic;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.handler.CommunityBoardHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.util.StringUtil;
 
 public class TopicBBSManager extends BaseBBSManager
 {

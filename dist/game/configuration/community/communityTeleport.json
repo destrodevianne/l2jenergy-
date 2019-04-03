@@ -1,0 +1,28 @@
+{
+	#======================================================
+    #               Community Board Teleport
+    #======================================================
+	# Enable Community Board Teleports.
+	"CommunityEnableTeleports" : "true",
+
+	# Inclusion of a free teleport to a player level.
+	"CommunityTeleportsFreeByLevel" : "40",
+ 
+	# Id of the item to pay for saving the teleport point.
+	"CommunityTeleportsSaveItemId" : "57",
+
+	# Amount of saving the teleport point.
+	"CommunityTeleportsSavePrice" : "5000",
+
+	# The item (id) charged by teleportation.
+	"CommunityTeleportsPremiumSaveItemId" : "57",
+
+	# The amount of the item (the teleport price) charged at teleportation.
+	"CommunityTeleportPremiumSavePrice" : "2500",
+
+	# The maximum number of points of a personal teleport.
+	"CommunityTeleportsMaxPointsCount" : "12",
+
+	# Only Premium Players can save a teleport point.
+	"CommunityTeleportsPointForPremium" : "false"
+}

@@ -36,7 +36,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.FortUpdater;
 import com.l2jserver.gameserver.FortUpdater.UpdaterType;
 import com.l2jserver.gameserver.ThreadPoolManager;

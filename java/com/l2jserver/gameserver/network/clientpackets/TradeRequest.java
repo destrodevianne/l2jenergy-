@@ -19,6 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.BotReportTable;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
@@ -136,7 +137,7 @@ public final class TradeRequest extends L2GameClientPacket
 			return;
 		}
 		
-		if (Config.JAIL_DISABLE_TRANSACTION && (player.isJailed() || partner.isJailed()))
+		if (GeneralConfig.JAIL_DISABLE_TRANSACTION && (player.isJailed() || partner.isJailed()))
 		{
 			player.sendMessage(MessagesData.getInstance().getMessage(player, "no_trade_in_jail"));
 			return;

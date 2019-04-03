@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -18,7 +18,7 @@
  */
 package com.l2jserver.loginserver;
 
-import com.l2jserver.Config;
+import com.l2jserver.loginserver.configuration.config.LoginConfig;
 
 public class SessionKey
 {
@@ -59,7 +59,7 @@ public class SessionKey
 		}
 		final SessionKey key = (SessionKey) o;
 		// when server doesn't show license it doesn't send the LoginOk packet, client doesn't have this part of the key then.
-		if (Config.SHOW_LICENCE)
+		if (LoginConfig.SHOW_LICENCE)
 		{
 			return ((playOkID1 == key.playOkID1) && (loginOkID1 == key.loginOkID1) && (playOkID2 == key.playOkID2) && (loginOkID2 == key.loginOkID2));
 		}

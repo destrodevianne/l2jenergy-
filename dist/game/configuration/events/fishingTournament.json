@@ -1,0 +1,17 @@
+{
+	# =====================================================================
+    # Fishing Tournament
+    # =====================================================================
+    # Enable or disable the Fishing Tournament system
+    "AltFishChampionshipEnabled" : "true",
+
+    # Item Id used as reward
+    "AltFishChampionshipRewardItemId" : "57",
+
+    # Item count used as reward (for the 5 first winners)
+    "AltFishChampionshipReward1" : "800000",
+    "AltFishChampionshipReward2" : "500000",
+    "AltFishChampionshipReward3" : "300000",
+    "AltFishChampionshipReward4" : "200000",
+    "AltFishChampionshipReward5" : "100000"
+}

@@ -33,15 +33,15 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.instancemanager.DayNightSpawnManager;
 import com.l2jserver.gameserver.instancemanager.ZoneManager;
 import com.l2jserver.gameserver.model.L2Spawn;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.actor.templates.L2NpcTemplate;
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * Spawn data retriever.
@@ -63,12 +63,12 @@ public final class SpawnTable implements IXmlReader
 	@Override
 	public void load()
 	{
-		if (!Config.ALT_DEV_NO_SPAWNS)
+		if (!GeneralConfig.ALT_DEV_NO_SPAWNS)
 		{
 			fillSpawnTable(false);
 			final int spawnCount = _spawnTable.size();
 			LOG.info("{}: Loaded {} npc spawns.", getClass().getSimpleName(), spawnCount);
-			if (Config.CUSTOM_SPAWNLIST_TABLE)
+			if (GeneralConfig.CUSTOM_SPAWNLIST_TABLE)
 			{
 				fillSpawnTable(true);
 				LOG.info("{}: Loaded {} custom npc spawns.", getClass().getSimpleName(), (_spawnTable.size() - spawnCount));
@@ -404,7 +404,7 @@ public final class SpawnTable implements IXmlReader
 		
 		if (storeInDb)
 		{
-			final String spawnTable = spawn.isCustom() && Config.CUSTOM_SPAWNLIST_TABLE ? "custom_spawnlist" : "spawnlist";
+			final String spawnTable = spawn.isCustom() && GeneralConfig.CUSTOM_SPAWNLIST_TABLE ? "custom_spawnlist" : "spawnlist";
 			try (Connection con = ConnectionFactory.getInstance().getConnection();
 				PreparedStatement insert = con.prepareStatement("INSERT INTO " + spawnTable + "(count,npc_templateid,locx,locy,locz,heading,respawn_delay,respawn_random,loc_id) values(?,?,?,?,?,?,?,?,?)"))
 			{

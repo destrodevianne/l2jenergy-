@@ -18,6 +18,7 @@
  */
 package handlers.itemhandlers;
 
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.enums.ShotType;
 import com.l2jserver.gameserver.handler.IItemHandler;
 import com.l2jserver.gameserver.model.actor.L2Playable;
@@ -30,7 +31,6 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.MagicSkillUse;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.util.Broadcast;
-import com.l2jserver.util.Rnd;
 
 public class SoulShots implements IItemHandler
 {

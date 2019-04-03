@@ -25,8 +25,9 @@ import java.util.concurrent.Future;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.instancemanager.DuelManager;
 import com.l2jserver.gameserver.model.L2Object;
@@ -45,7 +46,6 @@ import com.l2jserver.gameserver.model.stats.Formulas;
 import com.l2jserver.gameserver.model.stats.Stats;
 import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.network.SystemMessageId;
-import com.l2jserver.util.Rnd;
 
 public final class L2CubicInstance implements IIdentifiable
 {
@@ -516,7 +516,7 @@ public final class L2CubicInstance implements IIdentifiable
 			byte shld = Formulas.calcShldUse(_owner, target, skill);
 			double damage = Formulas.calcMagicDam(this, target, skill, mcrit, shld);
 			
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				LOG.debug("L2SkillMdam: useCubicSkill() -> damage = " + damage);
 			}
@@ -546,7 +546,7 @@ public final class L2CubicInstance implements IIdentifiable
 	
 	public void useCubicDrain(Skill skill, L2Object[] targets)
 	{
-		if (Config.DEBUG)
+		if (GeneralConfig.DEBUG)
 		{
 			LOG.debug("L2SkillDrain: useCubicSkill()");
 		}
@@ -562,7 +562,7 @@ public final class L2CubicInstance implements IIdentifiable
 			byte shld = Formulas.calcShldUse(_owner, target, skill);
 			
 			double damage = Formulas.calcMagicDam(this, target, skill, mcrit, shld);
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				LOG.debug("L2SkillDrain: useCubicSkill() -> damage = " + damage);
 			}
@@ -592,7 +592,7 @@ public final class L2CubicInstance implements IIdentifiable
 	
 	public void useCubicDisabler(Skill skill, L2Object[] targets)
 	{
-		if (Config.DEBUG)
+		if (GeneralConfig.DEBUG)
 		{
 			LOG.debug("Disablers: useCubicSkill() skill : {}", skill);
 		}
@@ -613,14 +613,14 @@ public final class L2CubicInstance implements IIdentifiable
 					// Apply effects
 					skill.applyEffects(_owner, target, false, false, true, 0);
 					
-					if (Config.DEBUG)
+					if (GeneralConfig.DEBUG)
 					{
 						LOG.debug("Disablers: useCubicSkill() -> success");
 					}
 				}
 				else
 				{
-					if (Config.DEBUG)
+					if (GeneralConfig.DEBUG)
 					{
 						LOG.debug("Disablers: useCubicSkill() -> failed");
 					}

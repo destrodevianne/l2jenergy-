@@ -22,7 +22,7 @@ import java.util.Collection;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.handler.IChatHandler;
 import com.l2jserver.gameserver.handler.IVoicedCommandHandler;
 import com.l2jserver.gameserver.handler.VoicedCommandHandler;
@@ -67,7 +67,7 @@ public class ChatAll implements IChatHandler
 			else
 			{
 				command = text.substring(1);
-				if (Config.DEBUG)
+				if (GeneralConfig.DEBUG)
 				{
 					_log.info("Command: " + command);
 				}
@@ -80,7 +80,7 @@ public class ChatAll implements IChatHandler
 			}
 			else
 			{
-				if (Config.DEBUG)
+				if (GeneralConfig.DEBUG)
 				{
 					_log.warning("No handler registered for bypass '" + command + "'");
 				}
@@ -89,7 +89,7 @@ public class ChatAll implements IChatHandler
 		}
 		if (!vcd_used)
 		{
-			if (activeChar.isChatBanned() && Util.contains(Config.BAN_CHAT_CHANNELS, type))
+			if (activeChar.isChatBanned() && Util.contains(GeneralConfig.BAN_CHAT_CHANNELS, type))
 			{
 				activeChar.sendPacket(SystemMessageId.CHATTING_IS_CURRENTLY_PROHIBITED);
 				return;

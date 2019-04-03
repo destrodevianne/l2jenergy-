@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.enums.PetitionState;
 import com.l2jserver.gameserver.model.Petition;
@@ -36,7 +37,6 @@ import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
-import com.l2jserver.util.StringUtil;
 
 /**
  * Petition Manager

@@ -18,8 +18,8 @@
  */
 package com.l2jserver.gameserver.model.pledge;
 
+import com.l2jserver.commons.util.EnumIntBitmask;
 import com.l2jserver.gameserver.model.ClanPrivilege;
-import com.l2jserver.util.EnumIntBitmask;
 
 /**
  * @author Мо3олЬ

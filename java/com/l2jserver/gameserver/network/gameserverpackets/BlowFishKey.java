@@ -25,7 +25,7 @@ import javax.crypto.Cipher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.util.network.BaseSendablePacket;
+import com.l2jserver.commons.network.BaseSendablePacket;
 
 /**
  * @author -Wooden-

@@ -25,6 +25,7 @@ import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.ai.CtrlEvent;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.ai.NextAction;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.handler.IItemHandler;
@@ -322,7 +323,7 @@ public final class UseItem extends L2GameClientPacket
 				{
 					LOG.warn("Unmanaged Item handler: {} for Item Id: {}!", etcItem.getHandlerName(), _itemId);
 				}
-				else if (Config.DEBUG)
+				else if (GeneralConfig.DEBUG)
 				{
 					LOG.warn("No Item handler registered for Item Id: {}!", _itemId);
 				}

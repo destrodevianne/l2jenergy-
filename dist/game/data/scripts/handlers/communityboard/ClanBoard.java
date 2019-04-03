@@ -18,6 +18,7 @@
  */
 package handlers.communityboard;
 
+import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.handler.CommunityBoardHandler;
 import com.l2jserver.gameserver.handler.IWriteBoardHandler;
@@ -25,7 +26,6 @@ import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.StringUtil;
 
 /**
  * Clan board.

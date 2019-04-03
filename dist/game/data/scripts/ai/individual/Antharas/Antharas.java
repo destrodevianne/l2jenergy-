@@ -22,8 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.configuration.config.GrandBossConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.MountType;
 import com.l2jserver.gameserver.enums.audio.Music;
@@ -163,7 +163,7 @@ public final class Antharas extends AbstractNpcAI
 				_antharas = (L2GrandBossInstance) addSpawn(ANTHARAS, 185708, 114298, -8221, 0, false, 0);
 				_antharas.setCurrentHpMp(curr_hp, curr_mp);
 				addBoss(_antharas);
-				startQuestTimer("SPAWN_ANTHARAS", Config.ANTHARAS_WAIT_TIME * 60000, null, null);
+				startQuestTimer("SPAWN_ANTHARAS", GrandBossConfig.ANTHARAS_WAIT_TIME * 60000, null, null);
 				break;
 			}
 			case IN_FIGHT:
@@ -244,7 +244,7 @@ public final class Antharas extends AbstractNpcAI
 						if (getStatus() != WAITING)
 						{
 							setStatus(WAITING);
-							startQuestTimer("SPAWN_ANTHARAS", Config.ANTHARAS_WAIT_TIME * 60000, null, null);
+							startQuestTimer("SPAWN_ANTHARAS", GrandBossConfig.ANTHARAS_WAIT_TIME * 60000, null, null);
 						}
 					}
 				}
@@ -260,7 +260,7 @@ public final class Antharas extends AbstractNpcAI
 						if (getStatus() != WAITING)
 						{
 							setStatus(WAITING);
-							startQuestTimer("SPAWN_ANTHARAS", Config.ANTHARAS_WAIT_TIME * 60000, null, null);
+							startQuestTimer("SPAWN_ANTHARAS", GrandBossConfig.ANTHARAS_WAIT_TIME * 60000, null, null);
 						}
 					}
 				}
@@ -684,7 +684,7 @@ public final class Antharas extends AbstractNpcAI
 				zone.broadcastPacket(new SpecialCamera(npc, 1200, 20, -10, 0, 10000, 13000, 0, 0, 0, 0, 0));
 				zone.broadcastPacket(Music.BS01_D_10000.getPacket());
 				addSpawn(CUBE, 177615, 114941, -7709, 0, false, 900000);
-				long respawnTime = (Config.ANTHARAS_SPAWN_INTERVAL + getRandom(-Config.ANTHARAS_SPAWN_RANDOM, Config.ANTHARAS_SPAWN_RANDOM)) * 3600000;
+				long respawnTime = (GrandBossConfig.ANTHARAS_SPAWN_INTERVAL + getRandom(-GrandBossConfig.ANTHARAS_SPAWN_RANDOM, GrandBossConfig.ANTHARAS_SPAWN_RANDOM)) * 3600000;
 				setRespawn(respawnTime);
 				startQuestTimer("CLEAR_STATUS", respawnTime, null, null);
 				cancelQuestTimer("SET_REGEN", npc, null);

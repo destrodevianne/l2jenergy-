@@ -21,8 +21,8 @@ package com.l2jserver.gameserver.instancemanager.tasks;
 import java.util.Calendar;
 import java.util.concurrent.ScheduledFuture;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.instancemanager.FourSepulchersManager;
 
 /**
@@ -51,7 +51,7 @@ public final class FourSepulchersChangeWarmUpTimeTask implements Runnable
 		}
 		else
 		{
-			interval = Config.FS_TIME_WARMUP * 60000L;
+			interval = GeneralConfig.FS_TIME_WARMUP * 60000L;
 		}
 		
 		manager.setChangeAttackTimeTask(ThreadPoolManager.getInstance().scheduleGeneral(new FourSepulchersChangeAttackTimeTask(), interval));

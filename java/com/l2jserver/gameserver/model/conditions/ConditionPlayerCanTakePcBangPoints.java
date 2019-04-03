@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model.conditions;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.PcCafeConfig;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.items.L2Item;
@@ -49,7 +49,7 @@ public class ConditionPlayerCanTakePcBangPoints extends Condition
 		{
 			canTakePoints = false;
 		}
-		else if (player.getPcCafePoints() >= Config.MAX_PC_BANG_POINTS)
+		else if (player.getPcCafePoints() >= PcCafeConfig.MAX_PC_BANG_POINTS)
 		{
 			player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.THE_MAXMIMUM_ACCUMULATION_ALLOWED_OF_PC_CAFE_POINTS_HAS_BEEN_EXCEEDED));
 			canTakePoints = false;

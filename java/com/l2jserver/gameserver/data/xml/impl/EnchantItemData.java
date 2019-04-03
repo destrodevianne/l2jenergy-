@@ -29,7 +29,7 @@ import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.items.enchant.EnchantScroll;
 import com.l2jserver.gameserver.model.items.enchant.EnchantSupportItem;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * Loads item enchant data.

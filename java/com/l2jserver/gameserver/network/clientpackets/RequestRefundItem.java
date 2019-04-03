@@ -21,6 +21,7 @@ package com.l2jserver.gameserver.network.clientpackets;
 import static com.l2jserver.gameserver.model.actor.L2Npc.INTERACTION_DISTANCE;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.BuyListData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.L2Object;
@@ -119,7 +120,7 @@ public final class RequestRefundItem extends L2GameClientPacket
 		final L2BuyList buyList = BuyListData.getInstance().getBuyList(_listId);
 		if (buyList == null)
 		{
-			Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " sent a false BuyList list_id " + _listId, Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " sent a false BuyList list_id " + _listId, GeneralConfig.DEFAULT_PUNISH);
 			return;
 		}
 		
@@ -141,7 +142,7 @@ public final class RequestRefundItem extends L2GameClientPacket
 			int idx = _items[i];
 			if ((idx < 0) || (idx >= refund.length))
 			{
-				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " sent invalid refund index", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " sent invalid refund index", GeneralConfig.DEFAULT_PUNISH);
 				return;
 			}
 			
@@ -150,7 +151,7 @@ public final class RequestRefundItem extends L2GameClientPacket
 			{
 				if (idx == _items[j])
 				{
-					Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " sent duplicate refund index", Config.DEFAULT_PUNISH);
+					Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " sent duplicate refund index", GeneralConfig.DEFAULT_PUNISH);
 					return;
 				}
 			}
@@ -164,7 +165,7 @@ public final class RequestRefundItem extends L2GameClientPacket
 			{
 				if (objectIds[i] == objectIds[j])
 				{
-					Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " has duplicate items in refund list", Config.DEFAULT_PUNISH);
+					Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " has duplicate items in refund list", GeneralConfig.DEFAULT_PUNISH);
 					return;
 				}
 			}

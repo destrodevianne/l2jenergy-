@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.instancemanager.TerritoryWarManager;
@@ -158,7 +158,7 @@ public class TerritoryWard
 		_player.sendPacket(sm);
 		
 		// Refresh inventory
-		if (!Config.FORCE_INVENTORY_UPDATE)
+		if (!GeneralConfig.FORCE_INVENTORY_UPDATE)
 		{
 			InventoryUpdate iu = new InventoryUpdate();
 			iu.addItem(_item);

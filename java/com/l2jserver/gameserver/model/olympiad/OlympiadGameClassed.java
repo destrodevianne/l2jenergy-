@@ -20,8 +20,8 @@ package com.l2jserver.gameserver.model.olympiad;
 
 import java.util.List;
 
-import com.l2jserver.Config;
-import com.l2jserver.util.Rnd;
+import com.l2jserver.commons.util.Rnd;
+import com.l2jserver.gameserver.configuration.config.OlympiadConfig;
 
 /**
  * @author DS
@@ -42,13 +42,13 @@ public class OlympiadGameClassed extends OlympiadGameNormal
 	@Override
 	protected final int getDivider()
 	{
-		return Config.ALT_OLY_DIVIDER_CLASSED;
+		return OlympiadConfig.ALT_OLY_DIVIDER_CLASSED;
 	}
 	
 	@Override
 	protected final int[][] getReward()
 	{
-		return Config.ALT_OLY_CLASSED_REWARD;
+		return OlympiadConfig.ALT_OLY_CLASSED_REWARD;
 	}
 	
 	@Override

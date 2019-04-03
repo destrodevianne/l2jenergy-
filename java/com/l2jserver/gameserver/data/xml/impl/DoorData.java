@@ -36,7 +36,7 @@ import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.actor.instance.L2DoorInstance;
 import com.l2jserver.gameserver.model.actor.templates.L2DoorTemplate;
 import com.l2jserver.gameserver.pathfinding.AbstractNodeLoc;
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * Loads doors.

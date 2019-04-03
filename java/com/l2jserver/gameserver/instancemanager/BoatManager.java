@@ -21,7 +21,7 @@ package com.l2jserver.gameserver.instancemanager;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.VehiclePathPoint;
@@ -54,7 +54,7 @@ public class BoatManager
 	
 	public L2BoatInstance getNewBoat(int boatId, int x, int y, int z, int heading)
 	{
-		if (!Config.ALLOW_BOAT)
+		if (!GeneralConfig.ALLOW_BOAT)
 		{
 			return null;
 		}
@@ -180,7 +180,7 @@ public class BoatManager
 	{
 		for (L2PcInstance player : L2World.getInstance().getPlayers())
 		{
-			if (Math.hypot(player.getX() - point1.getX(), player.getY() - point1.getY()) < Config.BOAT_BROADCAST_RADIUS)
+			if (Math.hypot(player.getX() - point1.getX(), player.getY() - point1.getY()) < GeneralConfig.BOAT_BROADCAST_RADIUS)
 			{
 				for (L2GameServerPacket p : packets)
 				{
@@ -189,7 +189,7 @@ public class BoatManager
 			}
 			else
 			{
-				if (Math.hypot(player.getX() - point2.getX(), player.getY() - point2.getY()) < Config.BOAT_BROADCAST_RADIUS)
+				if (Math.hypot(player.getX() - point2.getX(), player.getY() - point2.getY()) < GeneralConfig.BOAT_BROADCAST_RADIUS)
 				{
 					for (L2GameServerPacket p : packets)
 					{

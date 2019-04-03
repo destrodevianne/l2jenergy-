@@ -36,7 +36,7 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.network.serverpackets.ShortCutRegister;
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * This class holds the Initial Shortcuts information.<br>

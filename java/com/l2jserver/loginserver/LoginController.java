@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -42,21 +42,19 @@ import javax.crypto.Cipher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.loginserver.GameServerTable.GameServerInfo;
+import com.l2jserver.loginserver.configuration.config.LoginConfig;
 import com.l2jserver.loginserver.model.data.AccountInfo;
 import com.l2jserver.loginserver.network.L2LoginClient;
 import com.l2jserver.loginserver.network.gameserverpackets.ServerStatus;
 import com.l2jserver.loginserver.network.serverpackets.LoginFail.LoginFailReason;
-import com.l2jserver.util.Rnd;
-import com.l2jserver.util.crypt.ScrambledKeyPair;
+import com.l2jserver.loginserver.security.ScrambledKeyPair;
 
 public class LoginController
 {
 	protected static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
-	
-	private static LoginController _instance;
 	
 	/** Time before kicking the client if he didn't logged yet */
 	public static final int LOGIN_TIMEOUT = 60 * 1000;
@@ -81,26 +79,30 @@ public class LoginController
 	private static final String ACCOUNT_IPS_UPDATE = "UPDATE accounts SET pcIp = ?, hop1 = ?, hop2 = ?, hop3 = ?, hop4 = ? WHERE login = ?";
 	private static final String ACCOUNT_IPAUTH_SELECT = "SELECT * FROM accounts_ipauth WHERE login = ?";
 	
-	private LoginController() throws GeneralSecurityException
+	protected LoginController()
 	{
 		LOG.info("Loading LoginController...");
 		
 		_keyPairs = new ScrambledKeyPair[10];
 		
-		KeyPairGenerator keygen = null;
-		
-		keygen = KeyPairGenerator.getInstance("RSA");
-		RSAKeyGenParameterSpec spec = new RSAKeyGenParameterSpec(1024, RSAKeyGenParameterSpec.F4);
-		keygen.initialize(spec);
-		
-		// generate the initial set of keys
-		for (int i = 0; i < 10; i++)
+		try
 		{
-			_keyPairs[i] = new ScrambledKeyPair(keygen.generateKeyPair());
+			final KeyPairGenerator keygen = KeyPairGenerator.getInstance("RSA");
+			final RSAKeyGenParameterSpec spec = new RSAKeyGenParameterSpec(1024, RSAKeyGenParameterSpec.F4);
+			keygen.initialize(spec);
+			for (int i = 0; i < 10; i++)
+			{
+				_keyPairs[i] = new ScrambledKeyPair(keygen.generateKeyPair());
+			}
+			
+			testCipher((RSAPrivateKey) _keyPairs[0].getPair().getPrivate());
+			
+			LOG.info("Cached 10 KeyPairs for RSA communication.");
 		}
-		LOG.info("Cached 10 KeyPairs for RSA communication");
-		
-		testCipher((RSAPrivateKey) _keyPairs[0]._pair.getPrivate());
+		catch (Exception ex)
+		{
+			LOG.error("There has been an error loading the key pairs!", ex);
+		}
 		
 		// Store keys for blowfish communication
 		generateBlowFishKeys();
@@ -116,7 +118,7 @@ public class LoginController
 	 * @param key Any private RSA Key just for testing purposes.
 	 * @throws GeneralSecurityException if a underlying exception was thrown by the Cipher
 	 */
-	private void testCipher(RSAPrivateKey key) throws GeneralSecurityException
+	private void testCipher(RSAPrivateKey key) throws Exception
 	{
 		// avoid worst-case execution, KenM
 		Cipher rsaCipher = Cipher.getInstance("RSA/ECB/nopadding");
@@ -175,40 +177,21 @@ public class LoginController
 	
 	private void recordFailedLoginAttemp(InetAddress addr)
 	{
-		// We need to synchronize this!
-		// When multiple connections from the same address fail to login at the
-		// same time, unexpected behavior can happen.
-		Integer failedLoginAttemps;
-		synchronized (_failedLoginAttemps)
-		{
-			failedLoginAttemps = _failedLoginAttemps.get(addr);
-			if (failedLoginAttemps == null)
-			{
-				failedLoginAttemps = 1;
-			}
-			else
-			{
-				++failedLoginAttemps;
-			}
-			
-			_failedLoginAttemps.put(addr, failedLoginAttemps);
-		}
+		final Integer failedLoginAttemps = _failedLoginAttemps.getOrDefault(addr, 0) + 1;
+		_failedLoginAttemps.put(addr, failedLoginAttemps);
 		
-		if (failedLoginAttemps >= Config.LOGIN_TRY_BEFORE_BAN)
+		if (failedLoginAttemps >= LoginConfig.LOGIN_TRY_BEFORE_BAN)
 		{
-			addBanForAddress(addr, Config.LOGIN_BLOCK_AFTER_BAN * 1000);
+			addBanForAddress(addr, LoginConfig.LOGIN_BLOCK_AFTER_BAN * 1000);
 			// we need to clear the failed login attempts here, so after the ip ban is over the client has another 5 attempts
 			clearFailedLoginAttemps(addr);
-			LOG.warn("Added banned address {}! Too many login attemps.", addr.getHostAddress());
+			LOG.warn("Added banned address {}, too many login attemps!", addr.getHostAddress());
 		}
 	}
 	
 	private void clearFailedLoginAttemps(InetAddress addr)
 	{
-		synchronized (_failedLoginAttemps)
-		{
-			_failedLoginAttemps.remove(addr);
-		}
+		_failedLoginAttemps.remove(addr);
 	}
 	
 	private AccountInfo retriveAccountInfo(InetAddress addr, String login, String password, boolean autoCreateIfEnabled)
@@ -243,7 +226,7 @@ public class LoginController
 				}
 			}
 			
-			if (!autoCreateIfEnabled || !Config.AUTO_CREATE_ACCOUNTS)
+			if (!autoCreateIfEnabled || !LoginConfig.AUTO_CREATE_ACCOUNTS)
 			{
 				// account does not exist and auto create account is not desired
 				recordFailedLoginAttemp(addr);
@@ -377,9 +360,9 @@ public class LoginController
 	{
 		try
 		{
-			return this.removeBanForAddress(InetAddress.getByName(address));
+			return removeBanForAddress(InetAddress.getByName(address));
 		}
-		catch (UnknownHostException e)
+		catch (Exception e)
 		{
 			return false;
 		}
@@ -627,26 +610,6 @@ public class LoginController
 		return true;
 	}
 	
-	public static void load() throws GeneralSecurityException
-	{
-		synchronized (LoginController.class)
-		{
-			if (_instance == null)
-			{
-				_instance = new LoginController();
-			}
-			else
-			{
-				throw new IllegalStateException("LoginController can only be loaded a single time.");
-			}
-		}
-	}
-	
-	public static LoginController getInstance()
-	{
-		return _instance;
-	}
-	
 	class PurgeThread extends Thread
 	{
 		public PurgeThread()
@@ -681,6 +644,16 @@ public class LoginController
 				}
 			}
 		}
+	}
+	
+	public static LoginController getInstance()
+	{
+		return SingletonHolder.INSTANCE;
+	}
+	
+	private static class SingletonHolder
+	{
+		protected static final LoginController INSTANCE = new LoginController();
 	}
 	
 	public static enum AuthLoginResult

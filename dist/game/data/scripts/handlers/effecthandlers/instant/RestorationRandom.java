@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.model.L2ExtractableProductItem;
 import com.l2jserver.gameserver.model.L2ExtractableSkill;
 import com.l2jserver.gameserver.model.StatsSet;
@@ -31,7 +32,6 @@ import com.l2jserver.gameserver.model.effects.AbstractEffect;
 import com.l2jserver.gameserver.model.holders.ItemHolder;
 import com.l2jserver.gameserver.model.skills.BuffInfo;
 import com.l2jserver.gameserver.network.SystemMessageId;
-import com.l2jserver.util.Rnd;
 
 /**
  * Restoration Random effect implementation.<br>

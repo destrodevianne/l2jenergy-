@@ -21,7 +21,7 @@ package com.l2jserver.gameserver.network.clientpackets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.network.serverpackets.KeyPacket;
 import com.l2jserver.gameserver.network.serverpackets.L2GameServerPacket;
 import com.l2jserver.gameserver.network.serverpackets.SendStatus;
@@ -58,7 +58,7 @@ public final class ProtocolVersion extends L2GameClientPacket
 			getClient().close(new SendStatus());
 			return;
 		}
-		else if (!Config.PROTOCOL_LIST.contains(_version))
+		else if ((_version < ServerConfig.MIN_PROTOCOL_REVISION) || (_version > ServerConfig.MAX_PROTOCOL_REVISION))
 		{
 			LoggingUtils.logAccounting(LOG_ACCOUNTING, "Wrong protocol", new Object[]
 			{

@@ -18,7 +18,7 @@
  */
 package ai.fantasy_isle;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.instancemanager.HandysBlockCheckerManager;
 import com.l2jserver.gameserver.model.ArenaParticipantsHolder;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -79,7 +79,7 @@ public class HandysBlockCheckerEvent extends Quest
 			
 			int countBlue = holder.getBlueTeamSize();
 			int countRed = holder.getRedTeamSize();
-			int minMembers = Config.MIN_BLOCK_CHECKER_TEAM_MEMBERS;
+			int minMembers = GeneralConfig.MIN_BLOCK_CHECKER_TEAM_MEMBERS;
 			
 			if ((countBlue >= minMembers) && (countRed >= minMembers))
 			{
@@ -98,7 +98,7 @@ public class HandysBlockCheckerEvent extends Quest
 	
 	public static void main(String[] args)
 	{
-		if (Config.ENABLE_BLOCK_CHECKER_EVENT)
+		if (GeneralConfig.ENABLE_BLOCK_CHECKER_EVENT)
 		{
 			new HandysBlockCheckerEvent();
 			LOG.info("Handy's Block Checker Event is enabled");

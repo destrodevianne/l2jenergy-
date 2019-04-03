@@ -18,9 +18,9 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.SevenSigns;
 import com.l2jserver.gameserver.SevenSignsFestival;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.network.SystemMessageId;
 
@@ -129,7 +129,7 @@ public class SSQStatus extends L2GameServerPacket
 					duskPercent = Math.round(((float) duskTotalScore / (float) totalOverallScore) * 100);
 				}
 				
-				if (Config.DEBUG)
+				if (GeneralConfig.DEBUG)
 				{
 					LOG.debug("Dusk Stone Score: {} - Dawn Stone Score: {}", duskStoneScore, dawnStoneScore);
 					LOG.debug("Dusk Festival Score: {} - Dawn Festival Score: {}", duskFestivalScore, dawnFestivalScore);
@@ -227,7 +227,7 @@ public class SSQStatus extends L2GameServerPacket
 					int dawnProportion = SevenSigns.getInstance().getSealProportion(i, SevenSigns.CABAL_DAWN);
 					int duskProportion = SevenSigns.getInstance().getSealProportion(i, SevenSigns.CABAL_DUSK);
 					
-					if (Config.DEBUG)
+					if (GeneralConfig.DEBUG)
 					{
 						LOG.debug("{} = Dawn Prop: {}({}%)" + ", Dusk Prop: {}({}%)", SevenSigns.getSealName(i, true), dawnProportion, ((dawnProportion / totalDawnMembers) * 100), duskProportion, ((duskProportion / totalDuskMembers) * 100));
 					}

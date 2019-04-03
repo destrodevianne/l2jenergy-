@@ -21,8 +21,8 @@ package com.l2jserver.gameserver.network.clientpackets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.instancemanager.CursedWeaponsManager;
@@ -67,7 +67,7 @@ public final class RequestDestroyItem extends L2GameClientPacket
 		{
 			if (_count < 0)
 			{
-				Util.handleIllegalPlayerAction(activeChar, "[RequestDestroyItem] Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to destroy item with oid " + _objectId + " but has count < 0!", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(activeChar, "[RequestDestroyItem] Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to destroy item with oid " + _objectId + " but has count < 0!", GeneralConfig.DEFAULT_PUNISH);
 			}
 			return;
 		}
@@ -131,7 +131,7 @@ public final class RequestDestroyItem extends L2GameClientPacket
 		
 		if (!itemToRemove.isStackable() && (count > 1))
 		{
-			Util.handleIllegalPlayerAction(activeChar, "[RequestDestroyItem] Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to destroy a non-stackable item with oid " + _objectId + " but has count > 1!", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(activeChar, "[RequestDestroyItem] Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to destroy a non-stackable item with oid " + _objectId + " but has count > 1!", GeneralConfig.DEFAULT_PUNISH);
 			return;
 		}
 		
@@ -202,7 +202,7 @@ public final class RequestDestroyItem extends L2GameClientPacket
 			return;
 		}
 		
-		if (!Config.FORCE_INVENTORY_UPDATE)
+		if (!GeneralConfig.FORCE_INVENTORY_UPDATE)
 		{
 			InventoryUpdate iu = new InventoryUpdate();
 			if (removedItem.getCount() == 0)

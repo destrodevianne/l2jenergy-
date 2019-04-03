@@ -34,7 +34,7 @@ import com.l2jserver.gameserver.model.holders.AdditionalItemHolder;
 import com.l2jserver.gameserver.model.holders.AdditionalSkillHolder;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.network.serverpackets.ExBasicActionList;
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * Transformation data.

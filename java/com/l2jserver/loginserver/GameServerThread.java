@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -32,6 +32,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.l2jserver.commons.dao.ServerNameDAO;
+import com.l2jserver.commons.network.BaseSendablePacket;
+import com.l2jserver.commons.security.crypt.NewCrypt;
 import com.l2jserver.loginserver.GameServerTable.GameServerInfo;
 import com.l2jserver.loginserver.network.L2JGameServerPacketHandler;
 import com.l2jserver.loginserver.network.L2JGameServerPacketHandler.GameServerState;
@@ -40,8 +43,6 @@ import com.l2jserver.loginserver.network.loginserverpackets.InitLS;
 import com.l2jserver.loginserver.network.loginserverpackets.KickPlayer;
 import com.l2jserver.loginserver.network.loginserverpackets.LoginServerFail;
 import com.l2jserver.loginserver.network.loginserverpackets.RequestCharacters;
-import com.l2jserver.util.crypt.NewCrypt;
-import com.l2jserver.util.network.BaseSendablePacket;
 
 /**
  * @author -Wooden-
@@ -132,7 +133,7 @@ public class GameServerThread extends Thread
 		}
 		catch (IOException e)
 		{
-			String serverName = (getServerId() != -1 ? "[" + getServerId() + "] " + GameServerTable.getInstance().getServerNameById(getServerId()) : "(" + _connectionIPAddress + ")");
+			String serverName = (getServerId() != -1 ? "[" + getServerId() + "] " + ServerNameDAO.getServer(getServerId()) : "(" + _connectionIPAddress + ")");
 			String msg = "GameServer " + serverName + ": Connection lost: " + e.getMessage();
 			LOG.info(msg);
 			broadcastToTelnet(msg);
@@ -142,7 +143,7 @@ public class GameServerThread extends Thread
 			if (isAuthed())
 			{
 				_gsi.setDown();
-				LOG.info("Server {}] {} is now set as disconnected", getServerId(), GameServerTable.getInstance().getServerNameById(getServerId()));
+				LOG.info("Server {}] {} is now set as disconnected", getServerId(), ServerNameDAO.getServer(getServerId()));
 			}
 			L2LoginServer.getInstance().getGameServerListener().removeGameServer(this);
 			L2LoginServer.getInstance().getGameServerListener().removeFloodProtection(_connectionIp);
@@ -278,7 +279,7 @@ public class GameServerThread extends Thread
 	 */
 	public void setGameHosts(String[] hosts)
 	{
-		LOG.info("Updated Gameserver [{}] {} IP's: ", getServerId(), GameServerTable.getInstance().getServerNameById(getServerId()));
+		LOG.info("Updated game server {}[{}] IP's.", ServerNameDAO.getServer(getServerId()), getServerId());
 		
 		_gsi.clearServerAddresses();
 		for (int i = 0; i < hosts.length; i += 2)

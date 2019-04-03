@@ -25,13 +25,13 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.communitybbs.BB.Forum;
 import com.l2jserver.gameserver.communitybbs.BB.Post;
 import com.l2jserver.gameserver.communitybbs.BB.Post.CPost;
 import com.l2jserver.gameserver.communitybbs.BB.Topic;
 import com.l2jserver.gameserver.handler.CommunityBoardHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.util.StringUtil;
 
 public class PostBBSManager extends BaseBBSManager
 {

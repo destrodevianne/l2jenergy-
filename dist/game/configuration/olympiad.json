@@ -1,0 +1,151 @@
+{
+    # =====================================================================
+    # Olympiad Settings
+    # =====================================================================
+    # The defaults are set to be retail-like.
+    # If you modify any of these settings your server will deviate from being retail-like.
+    # Warning: 
+    # Please take extreme caution when changing anything.
+    # Also please understand what you are changing before you do so on a live server.
+    # Olympiad Start Time in Military hours Default 6pm (18)
+    "AltOlyStartTime" : "18",
+
+    # Olympiad Start Time for Min's, Default 00 so at the start of the hour.
+    "AltOlyMin" : "00",
+
+    # Maximum number of buffs.
+    "AltOlyMaxBuffs" : "5",
+
+    # Olympiad Competition Period, Default 6 hours.
+    # (If set different, should be increment by 10mins)
+    "AltOlyCPeriod" : "21600000",
+
+    # Olympiad Battle Period, Default 5 minutes.
+    "AltOlyBattle" : "300000",
+
+    # Olympiad Weekly Period, Default 1 week
+    # Used for adding points to nobles
+    "AltOlyWPeriod" : "604800000",
+
+    # Olympiad Validation Period, Default 24 Hours.
+    "AltOlyVPeriod" : "86400000",
+
+    # Points for reaching Noblesse for the first time
+    "AltOlyStartPoints" : "10",
+
+    # Points every week
+    "AltOlyWeeklyPoints" : "10",
+
+    # Required number of participants for the class based games
+    "AltOlyClassedParticipants" : "11",
+
+    # Required number of participants for the non-class based games
+    "AltOlyNonClassedParticipants" : "11",
+
+    # Required number of participants for the 3x3 teams games
+    "AltOlyTeamsParticipants" : "6",
+
+    # Number used for displaying amount of registered participants, messages "Fewer than ..." or "More than ...".
+    # 0 for displaying digits instead of text phrase (old style).
+    "AltOlyRegistrationDisplayNumber" : "100",
+
+    # Reward for the class based games
+    # Format: itemId1,itemNum1;itemId2,itemNum2...
+    "AltOlyClassedReward" : "13722,50",
+
+    # Reward for the non-class based games
+    # Format: itemId1,itemNum1;itemId2,itemNum2...
+    "AltOlyNonClassedReward" : "13722,40",
+
+    # Reward for the 3x3 teams games
+    # Format: itemId1,itemNum1;itemId2,itemNum2...
+    "AltOlyTeamReward" : "13722,85",
+
+    # ItemId used for exchanging to the points.
+    "AltOlyCompRewItem" : "13722",
+
+    # The minimal matches you need to participate to receive point rewards
+    "AltOlyMinMatchesForPoints" : "15",
+
+    # Rate to exchange points to reward item.
+    "AltOlyGPPerPoint" : "1000",
+
+    # Noblesse points awarded to Heroes.
+    "AltOlyHeroPoints" : "200",
+
+    # Noblesse points awarded to Rank 1 members.
+    "AltOlyRank1Points" : "100",
+
+    # Noblesse points awarded to Rank 2 members.
+    "AltOlyRank2Points" : "75",
+
+    # Noblesse points awarded to Rank 3 members.
+    "AltOlyRank3Points" : "55",
+
+    # Noblesse points awarded to Rank 4 members. 
+    "AltOlyRank4Points" : "40",
+
+    # Noblesse points awarded to Rank 5 members. 
+    "AltOlyRank5Points" : "30",
+
+    # Maximum points that player can gain/lose on a match.
+    "AltOlyMaxPoints" : "10",
+
+    # Hero tables show last month's winners or current status.
+    "AltOlyShowMonthlyWinners" : "true",
+
+    # Olympiad Managers announce each start of fight.
+    "AltOlyAnnounceGames" : "true",
+
+    # Restrict specified items in Olympiad. ItemID's need to be separated with a comma (ex. 1,200,350)
+    # Equipped items will be moved to inventory during port.
+    "AltOlyRestrictedItems" : "6611,6612,6613,6614,6615,6616,6617,6618,6619,6620,6621,9388,9389,9390,17049,17050,17051,17052,17053,17054,17055,17056,17057,17058,17059,17060,17061,20759,20775,20776,20777,20778,14774",
+
+    # Enchant limit for items during Olympiad battles. Disabled = -1.
+    "AltOlyEnchantLimit" : "-1",
+
+    # Log all Olympiad fights and outcome to olympiad.csv file.
+    "AltOlyLogFights" : "false",
+
+    # Time to wait before teleported to arena.
+    "AltOlyWaitTime" : "120",
+
+    # Divider for points in classed games
+    "AltOlyDividerClassed" : "5",
+	
+	# Divider for points non-classed games
+    "AltOlyDividerNonClassed" : "5",
+
+    # Maximum number of matches a Noblesse character can join per week
+    "AltOlyMaxWeeklyMatches" : "70",
+
+    # Maximum number of Class-Irrelevant Individual matches a character can join per week
+    "AltOlyMaxWeeklyMatchesNonClassed" : "60",
+
+    # Maximum number of Class Individual matches a character can join per week
+    "AltOlyMaxWeeklyMatchesClassed" : "30",
+
+    # Maximum number of Class-Irrelevant Team matches a character can join per week
+    "AltOlyMaxWeeklyMatchesTeam" : "10",
+
+    # =====================================================================
+    # Custom Olympiad period settings
+    # =====================================================================
+    # Example for Olympiad every 2 weeks:
+    #    AltOlyUseCustomPeriodSettings = True
+    #    AltOlyPeriod = WEEK
+    #    AltOlyPeriodMultiplier = 2
+    # Enable/disable custom period settings.
+    "AltOlyUseCustomPeriodSettings" : "false",
+ 
+    # Change the type of delay between two Olympiads.
+    # Available values: MONTH, WEEK, DAY
+    # Default: MONTH
+    "AltOlyPeriod" : "MONTH",
+ 
+    # Change the Olympiad frequency.
+    # The value is a multiplier of period type, i.e. if type is MONTH and multiplier is 2, then Olympiad will occur every 2 months.
+    # Default: 1
+    # Note! If type = DAY, multiplier must be >= 7!
+    "AltOlyPeriodMultiplier" : "1"
+}

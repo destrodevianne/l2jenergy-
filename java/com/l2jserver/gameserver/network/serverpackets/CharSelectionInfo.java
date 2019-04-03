@@ -27,7 +27,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.data.json.ExperienceData;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.model.CharSelectInfoPackage;
@@ -77,7 +78,7 @@ public class CharSelectionInfo extends L2GameServerPacket
 		writeD(size);
 		
 		// Can prevent players from creating new characters (if 0); (if 1, the client will ask if chars may be created (0x13) Response: (0x0D) )
-		writeD(Config.MAX_CHARACTERS_NUMBER_PER_ACCOUNT);
+		writeD(ServerConfig.MAX_CHARACTERS_NUMBER_PER_ACCOUNT);
 		writeC(0x00);
 		
 		long lastAccess = 0L;

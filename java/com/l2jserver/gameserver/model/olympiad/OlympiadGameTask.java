@@ -21,8 +21,8 @@ package com.l2jserver.gameserver.model.olympiad;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.OlympiadConfig;
 import com.l2jserver.gameserver.model.zone.type.L2OlympiadStadiumZone;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
@@ -34,7 +34,7 @@ public final class OlympiadGameTask implements Runnable
 {
 	protected static final Logger LOG = LoggerFactory.getLogger(OlympiadGameTask.class);
 	
-	protected static final long BATTLE_PERIOD = Config.ALT_OLY_BATTLE; // 6 mins
+	protected static final long BATTLE_PERIOD = OlympiadConfig.ALT_OLY_BATTLE; // 6 mins
 	
 	private static final int[] TELEPORT_TO_ARENA_TIMES =
 	{
@@ -178,7 +178,7 @@ public final class OlympiadGameTask implements Runnable
 				case BEGIN:
 				{
 					_state = GameState.TELEPORT_TO_ARENA;
-					_countDown = Config.ALT_OLY_WAIT_TIME;
+					_countDown = OlympiadConfig.ALT_OLY_WAIT_TIME;
 					break;
 				}
 				// Teleport to arena countdown
@@ -268,7 +268,7 @@ public final class OlympiadGameTask implements Runnable
 				case BATTLE_IN_PROGRESS:
 				{
 					_countDown += 1000;
-					if (checkBattle() || (_countDown > Config.ALT_OLY_BATTLE))
+					if (checkBattle() || (_countDown > OlympiadConfig.ALT_OLY_BATTLE))
 					{
 						_state = GameState.GAME_STOPPED;
 					}

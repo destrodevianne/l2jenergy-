@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.instancemanager.MailManager;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.Message;
@@ -47,7 +47,7 @@ public final class RequestReceivedPost extends L2GameClientPacket
 	public void runImpl()
 	{
 		final L2PcInstance activeChar = getClient().getActiveChar();
-		if ((activeChar == null) || !Config.ALLOW_MAIL)
+		if ((activeChar == null) || !GeneralConfig.ALLOW_MAIL)
 		{
 			return;
 		}
@@ -66,7 +66,7 @@ public final class RequestReceivedPost extends L2GameClientPacket
 		
 		if (msg.getReceiverId() != activeChar.getObjectId())
 		{
-			Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " tried to receive not own post!", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " tried to receive not own post!", GeneralConfig.DEFAULT_PUNISH);
 			return;
 		}
 		

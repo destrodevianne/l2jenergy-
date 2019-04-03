@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -28,7 +28,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
+import com.l2jserver.loginserver.configuration.config.LoginConfig;
 
 /**
  * @author -Wooden-
@@ -61,14 +61,14 @@ public abstract class FloodProtectedListener extends Thread
 			try
 			{
 				connection = _serverSocket.accept();
-				if (Config.FLOOD_PROTECTION)
+				if (LoginConfig.FLOOD_PROTECTION)
 				{
 					ForeignConnection fConnection = _floodProtection.get(connection.getInetAddress().getHostAddress());
 					if (fConnection != null)
 					{
 						fConnection.connectionNumber += 1;
-						if (((fConnection.connectionNumber > Config.FAST_CONNECTION_LIMIT) && ((System.currentTimeMillis() - fConnection.lastConnection) < Config.NORMAL_CONNECTION_TIME)) || ((System.currentTimeMillis() - fConnection.lastConnection) < Config.FAST_CONNECTION_TIME)
-							|| (fConnection.connectionNumber > Config.MAX_CONNECTION_PER_IP))
+						if (((fConnection.connectionNumber > LoginConfig.FAST_CONNECTION_LIMIT) && ((System.currentTimeMillis() - fConnection.lastConnection) < LoginConfig.NORMAL_CONNECTION_TIME)) || ((System.currentTimeMillis() - fConnection.lastConnection) < LoginConfig.FAST_CONNECTION_TIME)
+							|| (fConnection.connectionNumber > LoginConfig.MAX_CONNECTION_PER_IP))
 						{
 							fConnection.lastConnection = System.currentTimeMillis();
 							connection.close();
@@ -135,7 +135,7 @@ public abstract class FloodProtectedListener extends Thread
 	
 	public void removeFloodProtection(String ip)
 	{
-		if (!Config.FLOOD_PROTECTION)
+		if (!LoginConfig.FLOOD_PROTECTION)
 		{
 			return;
 		}

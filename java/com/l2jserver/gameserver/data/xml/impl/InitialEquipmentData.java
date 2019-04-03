@@ -31,7 +31,7 @@ import com.l2jserver.Config;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.items.PcItemTemplate;
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * This class holds the Initial Equipment information.<br>

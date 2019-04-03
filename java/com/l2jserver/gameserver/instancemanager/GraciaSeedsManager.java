@@ -23,8 +23,8 @@ import java.util.Calendar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.GraciaSeedsConfig;
 import com.l2jserver.gameserver.instancemanager.tasks.UpdateSoDStateTask;
 import com.l2jserver.gameserver.model.quest.Quest;
 
@@ -98,14 +98,14 @@ public final class GraciaSeedsManager
 			case 2:
 				// Conquest Complete state, if too much time is passed than change to defense state
 				long timePast = System.currentTimeMillis() - _SoDLastStateChangeDate.getTimeInMillis();
-				if (timePast >= Config.SOD_STAGE_2_LENGTH)
+				if (timePast >= GraciaSeedsConfig.SOD_STAGE_2_LENGTH)
 				{
 					// change to Attack state because Defend statet is not implemented
 					setSoDState(1, true);
 				}
 				else
 				{
-					ThreadPoolManager.getInstance().scheduleEffect(new UpdateSoDStateTask(), Config.SOD_STAGE_2_LENGTH - timePast);
+					ThreadPoolManager.getInstance().scheduleEffect(new UpdateSoDStateTask(), GraciaSeedsConfig.SOD_STAGE_2_LENGTH - timePast);
 				}
 				break;
 			case 3:
@@ -135,7 +135,7 @@ public final class GraciaSeedsManager
 		if (_SoDState == 1)
 		{
 			_SoDTiatKilled++;
-			if (_SoDTiatKilled >= Config.SOD_TIAT_KILL_COUNT)
+			if (_SoDTiatKilled >= GraciaSeedsConfig.SOD_TIAT_KILL_COUNT)
 			{
 				setSoDState(2, false);
 			}
@@ -183,7 +183,7 @@ public final class GraciaSeedsManager
 			case 1:
 				return -1;
 			case 2:
-				return ((_SoDLastStateChangeDate.getTimeInMillis() + Config.SOD_STAGE_2_LENGTH) - System.currentTimeMillis());
+				return ((_SoDLastStateChangeDate.getTimeInMillis() + GraciaSeedsConfig.SOD_STAGE_2_LENGTH) - System.currentTimeMillis());
 			case 3:
 				// not implemented yet
 				return -1;

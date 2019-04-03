@@ -42,7 +42,7 @@ import com.l2jserver.gameserver.model.entity.Instance;
 import com.l2jserver.gameserver.model.entity.clanhall.SiegableHall;
 import com.l2jserver.gameserver.model.zone.type.L2ClanHallZone;
 import com.l2jserver.gameserver.model.zone.type.L2RespawnZone;
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * Map Region Manager.

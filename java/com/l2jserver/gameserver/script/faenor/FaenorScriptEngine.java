@@ -29,12 +29,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
 
-import com.l2jserver.Config;
+import com.l2jserver.commons.util.filter.XMLFilter;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.script.Parser;
 import com.l2jserver.gameserver.script.ParserNotCreatedException;
 import com.l2jserver.gameserver.script.ScriptDocument;
 import com.l2jserver.gameserver.script.ScriptEngine;
-import com.l2jserver.util.file.filter.XMLFilter;
 
 /**
  * @author Luis Arias
@@ -47,7 +47,7 @@ public class FaenorScriptEngine extends ScriptEngine
 	
 	protected FaenorScriptEngine()
 	{
-		final File packDirectory = new File(Config.DATAPACK_ROOT, PACKAGE_DIRECTORY);
+		final File packDirectory = new File(ServerConfig.DATAPACK_ROOT, PACKAGE_DIRECTORY);
 		final File[] files = packDirectory.listFiles(new XMLFilter());
 		if (files != null)
 		{

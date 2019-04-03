@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 
 /**
  * @author Zealar
@@ -56,7 +56,7 @@ public final class ExperienceData
 	public void load()
 	{
 		_expTable.clear();
-		try (JsonReader reader = new JsonReader(new FileReader(new File(Config.DATAPACK_ROOT, "data/stats/expData.json"))))
+		try (JsonReader reader = new JsonReader(new FileReader(new File(ServerConfig.DATAPACK_ROOT, "data/stats/expData.json"))))
 		{
 			_expTable.putAll(GSON.fromJson(reader, TYPE_MAP_INTEGER_LONG));
 		}

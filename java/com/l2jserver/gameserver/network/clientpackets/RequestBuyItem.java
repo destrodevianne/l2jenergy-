@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.BuyListData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.L2Object;
@@ -125,7 +126,7 @@ public final class RequestBuyItem extends L2GameClientPacket
 		final L2BuyList buyList = BuyListData.getInstance().getBuyList(_listId);
 		if (buyList == null)
 		{
-			Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " sent a false BuyList list_id " + _listId, Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " sent a false BuyList list_id " + _listId, GeneralConfig.DEFAULT_PUNISH);
 			return;
 		}
 		
@@ -160,13 +161,13 @@ public final class RequestBuyItem extends L2GameClientPacket
 			final Product product = buyList.getProductByItemId(i.getId());
 			if (product == null)
 			{
-				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " sent a false BuyList list_id " + _listId + " and item_id " + i.getId(), Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " sent a false BuyList list_id " + _listId + " and item_id " + i.getId(), GeneralConfig.DEFAULT_PUNISH);
 				return;
 			}
 			
 			if (!product.getItem().isStackable() && (i.getCount() > 1))
 			{
-				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to purchase invalid quantity of items at the same time.", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to purchase invalid quantity of items at the same time.", GeneralConfig.DEFAULT_PUNISH);
 				sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_HAVE_EXCEEDED_QUANTITY_THAT_CAN_BE_INPUTTED));
 				return;
 			}
@@ -184,10 +185,10 @@ public final class RequestBuyItem extends L2GameClientPacket
 				return;
 			}
 			
-			if ((price == 0) && !player.isGM() && Config.ONLY_GM_ITEMS_FREE)
+			if ((price == 0) && !player.isGM() && GeneralConfig.ONLY_GM_ITEMS_FREE)
 			{
 				player.sendMessage(MessagesData.getInstance().getMessage(player, "cheat_detected"));
-				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried buy item for 0 adena.", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried buy item for 0 adena.", GeneralConfig.DEFAULT_PUNISH);
 				return;
 			}
 			
@@ -203,7 +204,7 @@ public final class RequestBuyItem extends L2GameClientPacket
 			
 			if ((MAX_ADENA / i.getCount()) < price)
 			{
-				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to purchase over " + MAX_ADENA + " adena worth of goods.", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to purchase over " + MAX_ADENA + " adena worth of goods.", GeneralConfig.DEFAULT_PUNISH);
 				return;
 			}
 			// first calculate price per item with tax, then multiply by count
@@ -211,7 +212,7 @@ public final class RequestBuyItem extends L2GameClientPacket
 			subTotal += i.getCount() * price;
 			if (subTotal > MAX_ADENA)
 			{
-				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to purchase over " + MAX_ADENA + " adena worth of goods.", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to purchase over " + MAX_ADENA + " adena worth of goods.", GeneralConfig.DEFAULT_PUNISH);
 				return;
 			}
 			
@@ -250,7 +251,7 @@ public final class RequestBuyItem extends L2GameClientPacket
 			Product product = buyList.getProductByItemId(i.getId());
 			if (product == null)
 			{
-				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " sent a false BuyList list_id " + _listId + " and item_id " + i.getId(), Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " sent a false BuyList list_id " + _listId + " and item_id " + i.getId(), GeneralConfig.DEFAULT_PUNISH);
 				continue;
 			}
 			

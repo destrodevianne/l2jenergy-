@@ -21,7 +21,7 @@ package com.l2jserver.gameserver.dao.factory.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.dao.factory.IDAOFactory;
 
 /**
@@ -48,7 +48,7 @@ public class DAOFactory
 		
 		static
 		{
-			switch (Config.DATABASE_ENGINE)
+			switch (ServerConfig.DATABASE_ENGINE)
 			{
 				case "MSSQL":
 				case "OracleDB":
@@ -56,7 +56,7 @@ public class DAOFactory
 				case "H2":
 				case "HSQLDB":
 				{
-					throw new UnsupportedOperationException(Config.DATABASE_ENGINE + " is not supported!");
+					throw new UnsupportedOperationException(ServerConfig.DATABASE_ENGINE + " is not supported!");
 				}
 				default:
 				case "MariaDB":

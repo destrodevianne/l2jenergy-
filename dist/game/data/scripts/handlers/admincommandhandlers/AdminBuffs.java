@@ -23,7 +23,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import com.l2jserver.Config;
+import com.l2jserver.commons.util.StringUtil;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
@@ -39,7 +40,6 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.network.serverpackets.SkillCoolTime;
 import com.l2jserver.gameserver.util.GMAudit;
-import com.l2jserver.util.StringUtil;
 
 public class AdminBuffs implements IAdminCommandHandler
 {
@@ -197,7 +197,7 @@ public class AdminBuffs implements IAdminCommandHandler
 		}
 		else if (command.startsWith("admin_switch_gm_buffs"))
 		{
-			if (Config.GM_GIVE_SPECIAL_SKILLS != Config.GM_GIVE_SPECIAL_AURA_SKILLS)
+			if (GeneralConfig.GM_GIVE_SPECIAL_SKILLS != GeneralConfig.GM_GIVE_SPECIAL_AURA_SKILLS)
 			{
 				final boolean toAuraSkills = activeChar.getKnownSkill(7041) != null;
 				switchSkills(activeChar, toAuraSkills);
@@ -327,7 +327,7 @@ public class AdminBuffs implements IAdminCommandHandler
 		// Send the packet
 		activeChar.sendPacket(new NpcHtmlMessage(html.toString()));
 		
-		if (Config.GMAUDIT)
+		if (GeneralConfig.GMAUDIT)
 		{
 			GMAudit.auditGMAction(activeChar.getName() + " [" + activeChar.getObjectId() + "]", "getbuffs", target.getName() + " (" + Integer.toString(target.getObjectId()) + ")", "");
 		}
@@ -353,7 +353,7 @@ public class AdminBuffs implements IAdminCommandHandler
 			}
 			
 			showBuffs(activeChar, target, 1, false);
-			if (Config.GMAUDIT)
+			if (GeneralConfig.GMAUDIT)
 			{
 				GMAudit.auditGMAction(activeChar.getName() + " [" + activeChar.getObjectId() + "]", "stopbuff", target.getName() + " (" + objId + ")", Integer.toString(skillId));
 			}
@@ -376,7 +376,7 @@ public class AdminBuffs implements IAdminCommandHandler
 			target.stopAllEffects();
 			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_removed_all_effects").replace("%c%", target.getName() + "").replace("%i%", objId + ""));
 			showBuffs(activeChar, target, 1, false);
-			if (Config.GMAUDIT)
+			if (GeneralConfig.GMAUDIT)
 			{
 				GMAudit.auditGMAction(activeChar.getName() + " [" + activeChar.getObjectId() + "]", "stopallbuffs", target.getName() + " (" + objId + ")", "");
 			}

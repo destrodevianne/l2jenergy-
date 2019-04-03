@@ -31,8 +31,8 @@ import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.items.enchant.EnchantItemGroup;
 import com.l2jserver.gameserver.model.items.enchant.EnchantRateItem;
 import com.l2jserver.gameserver.model.items.enchant.EnchantScrollGroup;
+import com.l2jserver.gameserver.util.IXmlReader;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.data.xml.IXmlReader;
 
 /**
  * Enchant Item Group data.

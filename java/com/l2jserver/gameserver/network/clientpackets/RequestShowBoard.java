@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.community.CBasicConfig;
 import com.l2jserver.gameserver.handler.CommunityBoardHandler;
 
 /**
@@ -27,8 +27,6 @@ import com.l2jserver.gameserver.handler.CommunityBoardHandler;
  */
 public final class RequestShowBoard extends L2GameClientPacket
 {
-	private static final String _C__5E_REQUESTSHOWBOARD = "[C] 5E RequestShowBoard";
-	
 	@SuppressWarnings("unused")
 	private int _unknown;
 	
@@ -41,13 +39,13 @@ public final class RequestShowBoard extends L2GameClientPacket
 	@Override
 	protected void runImpl()
 	{
-		CommunityBoardHandler.getInstance().handleParseCommand(Config.BBS_DEFAULT, getActiveChar());
+		CommunityBoardHandler.getInstance().handleParseCommand(CBasicConfig.BBS_DEFAULT, getActiveChar());
 	}
 	
 	@Override
 	public final String getType()
 	{
-		return _C__5E_REQUESTSHOWBOARD;
+		return "[C] 5E RequestShowBoard";
 	}
 	
 	@Override

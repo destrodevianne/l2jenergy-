@@ -25,8 +25,9 @@ import java.util.TimerTask;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Future;
 
-import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.instancemanager.DimensionalRiftManager;
 import com.l2jserver.gameserver.instancemanager.QuestManager;
 import com.l2jserver.gameserver.model.L2Party;
@@ -36,7 +37,6 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.serverpackets.Earthquake;
-import com.l2jserver.util.Rnd;
 
 /**
  * Thanks to L2Fortress and balancer.ru - kombat
@@ -216,7 +216,7 @@ public class DimensionalRift
 			}
 		};
 		
-		spawnTimer.schedule(spawnTimerTask, Config.RIFT_SPAWN_DELAY);
+		spawnTimer.schedule(spawnTimerTask, GeneralConfig.RIFT_SPAWN_DELAY);
 	}
 	
 	public void partyMemberInvited()
@@ -236,7 +236,7 @@ public class DimensionalRift
 			_revivedInWaitingRoom.remove(player);
 		}
 		
-		if ((_party.getMemberCount() < Config.RIFT_MIN_PARTY_SIZE) || (_party.getMemberCount() == 1))
+		if ((_party.getMemberCount() < GeneralConfig.RIFT_MIN_PARTY_SIZE) || (_party.getMemberCount() == 1))
 		{
 			for (L2PcInstance p : _party.getMembers())
 			{
@@ -405,11 +405,11 @@ public class DimensionalRift
 	
 	private long calcTimeToNextJump()
 	{
-		int time = Rnd.get(Config.RIFT_AUTO_JUMPS_TIME_MIN, Config.RIFT_AUTO_JUMPS_TIME_MAX) * 1000;
+		int time = Rnd.get(GeneralConfig.RIFT_AUTO_JUMPS_TIME_MIN, GeneralConfig.RIFT_AUTO_JUMPS_TIME_MAX) * 1000;
 		
 		if (isBossRoom)
 		{
-			return (long) (time * Config.RIFT_BOSS_ROOM_TIME_MUTIPLY);
+			return (long) (time * GeneralConfig.RIFT_BOSS_ROOM_TIME_MUTIPLY);
 		}
 		return time;
 	}
@@ -442,7 +442,7 @@ public class DimensionalRift
 			_deadPlayers.add(player);
 		}
 		
-		if ((_party.getMemberCount() - _revivedInWaitingRoom.size()) < Config.RIFT_MIN_PARTY_SIZE)
+		if ((_party.getMemberCount() - _revivedInWaitingRoom.size()) < GeneralConfig.RIFT_MIN_PARTY_SIZE)
 		{
 			// int pcm = _party.getMemberCount();
 			// int rev = revivedInWaitingRoom.size();
@@ -481,9 +481,9 @@ public class DimensionalRift
 	
 	public byte getMaxJumps()
 	{
-		if ((Config.RIFT_MAX_JUMPS <= 8) && (Config.RIFT_MAX_JUMPS >= 1))
+		if ((GeneralConfig.RIFT_MAX_JUMPS <= 8) && (GeneralConfig.RIFT_MAX_JUMPS >= 1))
 		{
-			return (byte) Config.RIFT_MAX_JUMPS;
+			return (byte) GeneralConfig.RIFT_MAX_JUMPS;
 		}
 		return 4;
 	}

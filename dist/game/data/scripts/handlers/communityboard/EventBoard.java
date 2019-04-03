@@ -20,6 +20,7 @@ package handlers.communityboard;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.cache.HtmCache;
+import com.l2jserver.gameserver.configuration.config.community.CBasicConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.CommunityBoardHandler;
 import com.l2jserver.gameserver.handler.IParseBoardHandler;
@@ -45,12 +46,12 @@ public class EventBoard implements IParseBoardHandler
 		String html = null;
 		if (command.equals("_bbsevents"))
 		{
-			final String customPath = Config.CUSTOM_CB_ENABLED ? "Custom/" : "";
+			final String customPath = CBasicConfig.CUSTOM_CB_ENABLED ? "Custom/" : "";
 			html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/" + customPath + "events/index.html");
 		}
 		else if (command.startsWith("_bbsevents:page"))
 		{
-			final String customPath = Config.CUSTOM_CB_ENABLED ? "Custom/" : "";
+			final String customPath = CBasicConfig.CUSTOM_CB_ENABLED ? "Custom/" : "";
 			final String[] path = command.split(":");
 			if (path.length > 3)
 			{
@@ -63,7 +64,7 @@ public class EventBoard implements IParseBoardHandler
 		}
 		else if (command.startsWith("_bbsevents:tvt"))
 		{
-			final String customPath = Config.CUSTOM_CB_ENABLED ? "Custom/" : "";
+			final String customPath = CBasicConfig.CUSTOM_CB_ENABLED ? "Custom/" : "";
 			
 			if (!Config.TVT_EVENT_ENABLED)
 			{

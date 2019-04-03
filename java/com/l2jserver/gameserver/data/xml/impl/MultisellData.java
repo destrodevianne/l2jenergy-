@@ -30,6 +30,9 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.filter.NumericNameFilter;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.community.CBasicConfig;
 import com.l2jserver.gameserver.enums.PcCafeType;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -44,9 +47,8 @@ import com.l2jserver.gameserver.network.serverpackets.ExPCCafePointInfo;
 import com.l2jserver.gameserver.network.serverpackets.MultiSellList;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.network.serverpackets.UserInfo;
+import com.l2jserver.gameserver.util.IXmlReader;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.data.xml.IXmlReader;
-import com.l2jserver.util.file.filter.NumericNameFilter;
 
 public final class MultisellData implements IXmlReader
 {
@@ -70,12 +72,12 @@ public final class MultisellData implements IXmlReader
 	{
 		_entries.clear();
 		parseDatapackDirectory("data/multisell", false);
-		if (Config.CUSTOM_MULTISELL_LOAD)
+		if (GeneralConfig.CUSTOM_MULTISELL_LOAD)
 		{
 			parseDatapackDirectory("data/multisell/custom", false);
 		}
 		
-		if (Config.CUSTOM_CB_ENABLED)
+		if (CBasicConfig.CUSTOM_CB_ENABLED)
 		{
 			parseDatapackDirectory("data/multisell/community", false);
 		}

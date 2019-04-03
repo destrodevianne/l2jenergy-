@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.RecipeData;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.model.L2ManufactureItem;
@@ -111,13 +112,13 @@ public final class RequestRecipeShopListSet extends L2GameClientPacket
 			final L2RecipeList list = RecipeData.getInstance().getRecipeList(i.getRecipeId());
 			if (!dwarfRecipes.contains(list) && !commonRecipes.contains(list))
 			{
-				Util.handleIllegalPlayerAction(player, "Warning!! Player " + player.getName() + " of account " + player.getAccountName() + " tried to set recipe which he dont have.", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! Player " + player.getName() + " of account " + player.getAccountName() + " tried to set recipe which he dont have.", GeneralConfig.DEFAULT_PUNISH);
 				return;
 			}
 			
 			if (i.getCost() > MAX_ADENA)
 			{
-				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to set price more than " + MAX_ADENA + " adena in Private Manufacture.", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to set price more than " + MAX_ADENA + " adena in Private Manufacture.", GeneralConfig.DEFAULT_PUNISH);
 				return;
 			}
 			

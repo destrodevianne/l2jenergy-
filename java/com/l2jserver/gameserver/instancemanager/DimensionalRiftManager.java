@@ -35,8 +35,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.commons.util.Rnd;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.SpawnTable;
 import com.l2jserver.gameserver.model.DimensionalRiftRoom;
@@ -47,7 +49,6 @@ import com.l2jserver.gameserver.model.entity.DimensionalRift;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.Rnd;
 
 /**
  * Dimensional Rift manager.
@@ -132,7 +133,7 @@ public final class DimensionalRiftManager
 			factory.setValidating(false);
 			factory.setIgnoringComments(true);
 			
-			File file = new File(Config.DATAPACK_ROOT, "data/dimensionalRift.xml");
+			File file = new File(ServerConfig.DATAPACK_ROOT, "data/dimensionalRift.xml");
 			if (!file.exists())
 			{
 				LOG.warn("{}: Couldn't find data/{}", getClass().getSimpleName(), file.getName());
@@ -277,12 +278,12 @@ public final class DimensionalRiftManager
 			return;
 		}
 		
-		if (player.getParty().getMemberCount() < Config.RIFT_MIN_PARTY_SIZE)
+		if (player.getParty().getMemberCount() < GeneralConfig.RIFT_MIN_PARTY_SIZE)
 		{
 			final NpcHtmlMessage html = new NpcHtmlMessage(npc.getObjectId());
 			html.setFile(player.getHtmlPrefix(), "data/html/seven_signs/rift/SmallParty.htm");
 			html.replace("%npc_name%", npc.getName());
-			html.replace("%count%", Integer.toString(Config.RIFT_MIN_PARTY_SIZE));
+			html.replace("%count%", Integer.toString(GeneralConfig.RIFT_MIN_PARTY_SIZE));
 			player.sendPacket(html);
 			return;
 		}
@@ -404,17 +405,17 @@ public final class DimensionalRiftManager
 		switch (type)
 		{
 			case 1:
-				return Config.RIFT_ENTER_COST_RECRUIT;
+				return GeneralConfig.RIFT_ENTER_COST_RECRUIT;
 			case 2:
-				return Config.RIFT_ENTER_COST_SOLDIER;
+				return GeneralConfig.RIFT_ENTER_COST_SOLDIER;
 			case 3:
-				return Config.RIFT_ENTER_COST_OFFICER;
+				return GeneralConfig.RIFT_ENTER_COST_OFFICER;
 			case 4:
-				return Config.RIFT_ENTER_COST_CAPTAIN;
+				return GeneralConfig.RIFT_ENTER_COST_CAPTAIN;
 			case 5:
-				return Config.RIFT_ENTER_COST_COMMANDER;
+				return GeneralConfig.RIFT_ENTER_COST_COMMANDER;
 			case 6:
-				return Config.RIFT_ENTER_COST_HERO;
+				return GeneralConfig.RIFT_ENTER_COST_HERO;
 			default:
 				throw new IndexOutOfBoundsException();
 		}
@@ -434,7 +435,7 @@ public final class DimensionalRiftManager
 		if (!player.isGM())
 		{
 			LOG.warn("Player {}({}) was cheating in dimension rift area!", player.getName(), player.getObjectId());
-			Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " tried to cheat in dimensional rift.", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " tried to cheat in dimensional rift.", GeneralConfig.DEFAULT_PUNISH);
 		}
 	}
 	

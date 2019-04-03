@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.events.FishingConfig;
 import com.l2jserver.gameserver.instancemanager.games.FishingChampionshipManager;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
@@ -43,7 +43,7 @@ public final class RequestExFishRanking extends L2GameClientPacket
 			return;
 		}
 		
-		if (Config.ALT_FISH_CHAMPIONSHIP_ENABLED)
+		if (FishingConfig.ALT_FISH_CHAMPIONSHIP_ENABLED)
 		{
 			FishingChampionshipManager.getInstance().showMidResult(activeChar);
 		}

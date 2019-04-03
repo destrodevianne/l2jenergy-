@@ -21,9 +21,9 @@ package ai.individual;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.configuration.config.GrandBossConfig;
 import com.l2jserver.gameserver.enums.MountType;
 import com.l2jserver.gameserver.enums.audio.Music;
 import com.l2jserver.gameserver.instancemanager.GrandBossManager;
@@ -182,7 +182,7 @@ public final class Valakas extends AbstractNpcAI
 				// Start timer to lock entry after 30 minutes
 				if (status == WAITING)
 				{
-					startQuestTimer("beginning", (Config.VALAKAS_WAIT_TIME * 60000), valakas, null);
+					startQuestTimer("beginning", (GrandBossConfig.VALAKAS_WAIT_TIME * 60000), valakas, null);
 				}
 			}
 		}
@@ -442,7 +442,7 @@ public final class Valakas extends AbstractNpcAI
 		
 		GrandBossManager.getInstance().setBossStatus(VALAKAS, DEAD);
 		// Calculate Min and Max respawn times randomly.
-		long respawnTime = Config.VALAKAS_SPAWN_INTERVAL + getRandom(-Config.VALAKAS_SPAWN_RANDOM, Config.VALAKAS_SPAWN_RANDOM);
+		long respawnTime = GrandBossConfig.VALAKAS_SPAWN_INTERVAL + getRandom(-GrandBossConfig.VALAKAS_SPAWN_RANDOM, GrandBossConfig.VALAKAS_SPAWN_RANDOM);
 		respawnTime *= 3600000;
 		
 		startQuestTimer("valakas_unlock", respawnTime, null, null);

@@ -36,7 +36,7 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.L2GameServerPacket;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * Loads administrator access levels and commands.
@@ -59,9 +59,9 @@ public final class AdminData implements IXmlReader
 	{
 		_accessLevels.clear();
 		_adminCommandAccessRights.clear();
-		parseDatapackFile("config/accessLevels.xml");
+		parseDatapackFile("configuration/accessLevels.xml");
 		LOG.info("{}: Loaded: {} Access Levels.", getClass().getSimpleName(), _accessLevels.size());
-		parseDatapackFile("config/adminCommands.xml");
+		parseDatapackFile("configuration/adminCommands.xml");
 		LOG.info("{}: Loaded: {} Access Commands.", getClass().getSimpleName(), _adminCommandAccessRights.size());
 	}
 	

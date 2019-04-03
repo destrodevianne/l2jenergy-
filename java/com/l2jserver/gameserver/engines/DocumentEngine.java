@@ -26,13 +26,14 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
+import com.l2jserver.commons.util.filter.XMLFilter;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.engines.items.DocumentItem;
 import com.l2jserver.gameserver.engines.skills.DocumentSkill;
 import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.skills.Skill;
-import com.l2jserver.util.file.filter.XMLFilter;
 
 /**
  * @author mkizub
@@ -52,12 +53,12 @@ public class DocumentEngine
 	protected DocumentEngine()
 	{
 		hashFiles("data/stats/items", _itemFiles);
-		if (Config.CUSTOM_ITEMS_LOAD)
+		if (GeneralConfig.CUSTOM_ITEMS_LOAD)
 		{
 			hashFiles("data/stats/items/custom", _itemFiles);
 		}
 		hashFiles("data/stats/skills", _skillFiles);
-		if (Config.CUSTOM_SKILLS_LOAD)
+		if (GeneralConfig.CUSTOM_SKILLS_LOAD)
 		{
 			hashFiles("data/stats/skills/custom", _skillFiles);
 		}
@@ -65,7 +66,7 @@ public class DocumentEngine
 	
 	private void hashFiles(String dirname, List<File> hash)
 	{
-		File dir = new File(Config.DATAPACK_ROOT, dirname);
+		File dir = new File(ServerConfig.DATAPACK_ROOT, dirname);
 		if (!dir.exists())
 		{
 			LOG.warn("Dir {} not exists", dir.getAbsolutePath());

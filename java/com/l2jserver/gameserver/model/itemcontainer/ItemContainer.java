@@ -29,8 +29,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.GameTimeController;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.enums.ItemLocation;
 import com.l2jserver.gameserver.model.L2World;
@@ -361,7 +362,7 @@ public abstract class ItemContainer
 				item.updateDatabase();
 				
 				// If stackable, end loop as entire count is included in 1 instance of item
-				if (template.isStackable() || !Config.MULTIPLE_ITEM_DROP)
+				if (template.isStackable() || !GeneralConfig.MULTIPLE_ITEM_DROP)
 				{
 					break;
 				}

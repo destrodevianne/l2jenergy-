@@ -20,6 +20,7 @@ package quests.Q00025_HidingBehindTheTruth;
 
 import java.util.HashMap;
 
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.Location;
@@ -32,7 +33,6 @@ import com.l2jserver.gameserver.model.quest.State;
 import com.l2jserver.gameserver.network.NpcStringId;
 import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
-import com.l2jserver.util.Rnd;
 
 import quests.Q00024_InhabitantsOfTheForestOfTheDead.Q00024_InhabitantsOfTheForestOfTheDead;
 

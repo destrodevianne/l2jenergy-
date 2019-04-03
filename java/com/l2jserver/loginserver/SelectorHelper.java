@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -27,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.l2jserver.commons.util.IPv4Filter;
 import com.l2jserver.loginserver.network.L2LoginClient;
 import com.l2jserver.loginserver.network.serverpackets.Init;
 import com.l2jserver.mmocore.IAcceptFilter;
@@ -34,7 +35,6 @@ import com.l2jserver.mmocore.IClientFactory;
 import com.l2jserver.mmocore.IMMOExecutor;
 import com.l2jserver.mmocore.MMOConnection;
 import com.l2jserver.mmocore.ReceivablePacket;
-import com.l2jserver.util.IPv4Filter;
 
 public class SelectorHelper implements IMMOExecutor<L2LoginClient>, IClientFactory<L2LoginClient>, IAcceptFilter
 {

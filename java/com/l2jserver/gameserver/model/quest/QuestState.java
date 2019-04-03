@@ -28,7 +28,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.enums.QuestType;
 import com.l2jserver.gameserver.enums.audio.IAudio;
 import com.l2jserver.gameserver.enums.audio.Sound;

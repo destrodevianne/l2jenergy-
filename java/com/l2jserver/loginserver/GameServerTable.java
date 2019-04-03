@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -32,23 +32,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.dao.ServerNameDAO;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.loginserver.network.gameserverpackets.ServerStatus;
-import com.l2jserver.util.IPSubnet;
-import com.l2jserver.util.Rnd;
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.loginserver.util.IPSubnet;
 
 /**
  * The Class GameServerTable loads the game server names and initialize the game server tables.
  * @author KenM, Zoey76
  */
-public final class GameServerTable implements IXmlReader
+public final class GameServerTable
 {
-	// Server Names
-	private static final Map<Integer, String> SERVER_NAMES = new HashMap<>();
+	private static final Logger LOG = LoggerFactory.getLogger(GameServerTable.class);
+	
 	// Game Server Table
 	private static final Map<Integer, GameServerInfo> GAME_SERVER_TABLE = new HashMap<>();
 	// RSA Config
@@ -60,31 +60,11 @@ public final class GameServerTable implements IXmlReader
 	 */
 	public GameServerTable()
 	{
-		load();
-		
 		loadRegisteredGameServers();
 		LOG.info("{}: Loaded {} registered Game Servers.", getClass().getSimpleName(), GAME_SERVER_TABLE.size());
 		
 		initRSAKeys();
 		LOG.info("{}: Cached {} RSA keys for Game Server communication.", getClass().getSimpleName(), _keyPairs.length);
-	}
-	
-	@Override
-	public void load()
-	{
-		SERVER_NAMES.clear();
-		parseDatapackFile("data/servername.xml");
-		LOG.info("{}: Loaded {} server names.", getClass().getSimpleName(), SERVER_NAMES.size());
-	}
-	
-	@Override
-	public void parseDocument(Document doc)
-	{
-		final NodeList servers = doc.getElementsByTagName("server");
-		for (int s = 0; s < servers.getLength(); s++)
-		{
-			SERVER_NAMES.put(parseInteger(servers.item(s).getAttributes(), "id"), parseString(servers.item(s).getAttributes(), "name"));
-		}
 	}
 	
 	/**
@@ -169,7 +149,7 @@ public final class GameServerTable implements IXmlReader
 		// avoid two servers registering with the same "free" id
 		synchronized (GAME_SERVER_TABLE)
 		{
-			for (Integer serverId : SERVER_NAMES.keySet())
+			for (Integer serverId : ServerNameDAO.getServers().keySet())
 			{
 				if (!GAME_SERVER_TABLE.containsKey(serverId))
 				{
@@ -232,25 +212,6 @@ public final class GameServerTable implements IXmlReader
 		{
 			LOG.error("{}: Error while saving gameserver!", getClass().getSimpleName(), e);
 		}
-	}
-	
-	/**
-	 * Gets the server name by id.
-	 * @param id the id
-	 * @return the server name by id
-	 */
-	public String getServerNameById(int id)
-	{
-		return SERVER_NAMES.get(id);
-	}
-	
-	/**
-	 * Gets the server names.
-	 * @return the game server names map.
-	 */
-	public Map<Integer, String> getServerNames()
-	{
-		return SERVER_NAMES;
 	}
 	
 	/**
@@ -361,8 +322,7 @@ public final class GameServerTable implements IXmlReader
 		
 		public String getName()
 		{
-			// this value can't be stored in a private variable because the ID can be changed by setId()
-			return GameServerTable.getInstance().getServerNameById(_id);
+			return ServerNameDAO.getServer(_id);
 		}
 		
 		/**
@@ -669,11 +629,11 @@ public final class GameServerTable implements IXmlReader
 	
 	public static GameServerTable getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final GameServerTable _instance = new GameServerTable();
+		protected static final GameServerTable INSTANCE = new GameServerTable();
 	}
 }

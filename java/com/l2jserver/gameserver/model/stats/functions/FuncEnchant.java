@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model.stats.functions;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.OlympiadConfig;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.conditions.Condition;
 import com.l2jserver.gameserver.model.items.L2Item;
@@ -59,16 +59,16 @@ public class FuncEnchant extends AbstractFunction
 		
 		if (effector.isPlayer())
 		{
-			if (effector.getActingPlayer().isInOlympiadMode() && (Config.ALT_OLY_ENCHANT_LIMIT >= 0) && ((enchant + overenchant) > Config.ALT_OLY_ENCHANT_LIMIT))
+			if (effector.getActingPlayer().isInOlympiadMode() && (OlympiadConfig.ALT_OLY_ENCHANT_LIMIT >= 0) && ((enchant + overenchant) > OlympiadConfig.ALT_OLY_ENCHANT_LIMIT))
 			{
-				if (Config.ALT_OLY_ENCHANT_LIMIT > 3)
+				if (OlympiadConfig.ALT_OLY_ENCHANT_LIMIT > 3)
 				{
-					overenchant = Config.ALT_OLY_ENCHANT_LIMIT - 3;
+					overenchant = OlympiadConfig.ALT_OLY_ENCHANT_LIMIT - 3;
 				}
 				else
 				{
 					overenchant = 0;
-					enchant = Config.ALT_OLY_ENCHANT_LIMIT;
+					enchant = OlympiadConfig.ALT_OLY_ENCHANT_LIMIT;
 				}
 			}
 		}

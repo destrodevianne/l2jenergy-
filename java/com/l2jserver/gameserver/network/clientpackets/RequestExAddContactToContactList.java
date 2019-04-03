@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.serverpackets.ExConfirmAddingContact;
 
@@ -40,7 +40,7 @@ public class RequestExAddContactToContactList extends L2GameClientPacket
 	@Override
 	protected void runImpl()
 	{
-		if (!Config.ALLOW_MAIL)
+		if (!GeneralConfig.ALLOW_MAIL)
 		{
 			return;
 		}

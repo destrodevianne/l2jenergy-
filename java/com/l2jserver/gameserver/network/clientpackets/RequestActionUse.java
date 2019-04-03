@@ -20,11 +20,12 @@ package com.l2jserver.gameserver.network.clientpackets;
 
 import java.util.Arrays;
 
-import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ai.CtrlEvent;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.ai.L2SummonAI;
 import com.l2jserver.gameserver.ai.NextAction;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.sql.impl.SummonSkillsTable;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.PetDataTable;
@@ -56,7 +57,6 @@ import com.l2jserver.gameserver.network.serverpackets.RecipeShopManageList;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.taskmanager.AttackStanceTaskManager;
-import com.l2jserver.util.Rnd;
 
 /**
  * This class manages the action use request packet.
@@ -359,7 +359,7 @@ public final class RequestActionUse extends L2GameClientPacket
 				activeChar.tryOpenPrivateSellStore(true);
 				break;
 			case 65: // Bot Report Button
-				if (Config.BOTREPORT_ENABLE)
+				if (GeneralConfig.BOTREPORT_ENABLE)
 				{
 					BotReportTable.getInstance().reportBot(activeChar);
 				}

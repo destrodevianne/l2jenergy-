@@ -26,7 +26,7 @@ import org.w3c.dom.Node;
 
 import com.l2jserver.gameserver.model.TranslationMessage;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * @author Мо3олЬ

@@ -21,8 +21,8 @@ package ai.individual;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.configuration.config.GrandBossConfig;
 import com.l2jserver.gameserver.enums.audio.Music;
 import com.l2jserver.gameserver.instancemanager.GrandBossManager;
 import com.l2jserver.gameserver.model.L2Object;
@@ -335,7 +335,7 @@ public final class Orfen extends AbstractNpcAI
 			npc.broadcastPacket(Music.BS02_D_7000.getPacket());
 			GrandBossManager.getInstance().setBossStatus(ORFEN, DEAD);
 			// Calculate Min and Max respawn times randomly.
-			long respawnTime = Config.ORFEN_SPAWN_INTERVAL + getRandom(-Config.ORFEN_SPAWN_RANDOM, Config.ORFEN_SPAWN_RANDOM);
+			long respawnTime = GrandBossConfig.ORFEN_SPAWN_INTERVAL + getRandom(-GrandBossConfig.ORFEN_SPAWN_RANDOM, GrandBossConfig.ORFEN_SPAWN_RANDOM);
 			respawnTime *= 3600000;
 			startQuestTimer("orfen_unlock", respawnTime, null, null);
 			// also save the respawn time so that the info is maintained past reboots

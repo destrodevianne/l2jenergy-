@@ -29,7 +29,7 @@ import java.util.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.LoginServerThread;
 import com.l2jserver.gameserver.data.xml.impl.SecondaryAuthData;
 import com.l2jserver.gameserver.network.L2GameClient;

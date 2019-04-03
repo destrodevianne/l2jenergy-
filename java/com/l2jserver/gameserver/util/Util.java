@@ -33,8 +33,11 @@ import java.util.StringJoiner;
 import java.util.logging.Logger;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.filter.ExtFilter;
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.enums.HtmlActionScope;
 import com.l2jserver.gameserver.enums.IllegalActionPunishmentType;
 import com.l2jserver.gameserver.model.L2Object;
@@ -45,7 +48,6 @@ import com.l2jserver.gameserver.model.interfaces.ILocational;
 import com.l2jserver.gameserver.network.serverpackets.AbstractHtmlPacket;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.network.serverpackets.ShowBoard;
-import com.l2jserver.util.file.filter.ExtFilter;
 
 /**
  * General Utility functions related to game server.
@@ -460,7 +462,7 @@ public final class Util
 	
 	public static File[] getDatapackFiles(String dirname, String extention)
 	{
-		File dir = new File(Config.DATAPACK_ROOT, "data/" + dirname);
+		File dir = new File(ServerConfig.DATAPACK_ROOT, "data/" + dirname);
 		if (!dir.exists())
 		{
 			return null;
@@ -506,7 +508,7 @@ public final class Util
 				bypass = bypass.substring(0, firstParameterStart + 1);
 			}
 			
-			if (Config.HTML_ACTION_CACHE_DEBUG)
+			if (GeneralConfig.HTML_ACTION_CACHE_DEBUG)
 			{
 				LOGGER.info("Cached html bypass(" + scope.toString() + "): '" + bypass + "'");
 			}
@@ -543,7 +545,7 @@ public final class Util
 				continue;
 			}
 			
-			if (Config.HTML_ACTION_CACHE_DEBUG)
+			if (GeneralConfig.HTML_ACTION_CACHE_DEBUG)
 			{
 				LOGGER.info("Cached html link(" + scope.toString() + "): '" + htmlLink + "'");
 			}
@@ -569,7 +571,7 @@ public final class Util
 			throw new IllegalArgumentException();
 		}
 		
-		if (Config.HTML_ACTION_CACHE_DEBUG)
+		if (GeneralConfig.HTML_ACTION_CACHE_DEBUG)
 		{
 			LOGGER.info("Set html action npc(" + scope.toString() + "): " + npcObjId);
 		}

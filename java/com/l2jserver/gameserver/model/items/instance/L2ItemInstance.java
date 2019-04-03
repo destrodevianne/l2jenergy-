@@ -33,10 +33,11 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.OlympiadConfig;
 import com.l2jserver.gameserver.data.xml.impl.EnchantItemOptionsData;
 import com.l2jserver.gameserver.data.xml.impl.OptionData;
 import com.l2jserver.gameserver.datatables.ItemTable;
@@ -303,9 +304,9 @@ public final class L2ItemInstance extends L2Object
 	{
 		setOwnerId(owner_id);
 		
-		if (Config.LOG_ITEMS)
+		if (GeneralConfig.LOG_ITEMS)
 		{
-			if (!Config.LOG_ITEMS_SMALL_LOG || (Config.LOG_ITEMS_SMALL_LOG && (getItem().isEquipable() || (getItem().getId() == ADENA_ID))))
+			if (!GeneralConfig.LOG_ITEMS_SMALL_LOG || (GeneralConfig.LOG_ITEMS_SMALL_LOG && (getItem().isEquipable() || (getItem().getId() == ADENA_ID))))
 			{
 				LoggingUtils.logItem(LOG_ITEMS, "CHANGE: ", process, this, creator.getName(), reference);
 			}
@@ -325,7 +326,7 @@ public final class L2ItemInstance extends L2Object
 					referenceName = (String) reference;
 				}
 				String targetName = (creator.getTarget() != null ? creator.getTarget().getName() : "no-target");
-				if (Config.GMAUDIT)
+				if (GeneralConfig.GMAUDIT)
 				{
 					GMAudit.auditGMAction(creator.getName() + " [" + creator.getObjectId() + "]", process + "(id: " + getId() + " name: " + getName() + ")", targetName, "L2Object referencing this action is: " + referenceName);
 				}
@@ -462,9 +463,9 @@ public final class L2ItemInstance extends L2Object
 		
 		_storedInDb = false;
 		
-		if (Config.LOG_ITEMS && (process != null))
+		if (GeneralConfig.LOG_ITEMS && (process != null))
 		{
-			if (!Config.LOG_ITEMS_SMALL_LOG || (Config.LOG_ITEMS_SMALL_LOG && (_item.isEquipable() || (_item.getId() == ADENA_ID))))
+			if (!GeneralConfig.LOG_ITEMS_SMALL_LOG || (GeneralConfig.LOG_ITEMS_SMALL_LOG && (_item.isEquipable() || (_item.getId() == ADENA_ID))))
 			{
 				LoggingUtils.logItem(LOG_ITEMS, "CHANGE: ", process, this, creator.getName(), reference);
 			}
@@ -484,7 +485,7 @@ public final class L2ItemInstance extends L2Object
 					referenceName = (String) reference;
 				}
 				String targetName = (creator.getTarget() != null ? creator.getTarget().getName() : "no-target");
-				if (Config.GMAUDIT)
+				if (GeneralConfig.GMAUDIT)
 				{
 					GMAudit.auditGMAction(creator.getName() + " [" + creator.getObjectId() + "]", process + "(id: " + getId() + " objId: " + getObjectId() + " name: " + getName() + " count: " + count + ")", targetName, "L2Object referencing this action is: " + referenceName);
 				}
@@ -1427,7 +1428,7 @@ public final class L2ItemInstance extends L2Object
 				{
 					removeFromDb();
 				}
-				else if (!Config.LAZY_ITEMS_UPDATE || force)
+				else if (!GeneralConfig.LAZY_ITEMS_UPDATE || force)
 				{
 					updateInDb();
 				}
@@ -1582,7 +1583,7 @@ public final class L2ItemInstance extends L2Object
 			// synchronized, to avoid deadlocks
 			// Add the L2ItemInstance dropped in the world as a visible object
 			L2World.getInstance().addVisibleObject(_itm, _itm.getWorldRegion());
-			if (Config.SAVE_DROPPED_ITEM)
+			if (GeneralConfig.SAVE_DROPPED_ITEM)
 			{
 				ItemsOnGroundManager.getInstance().save(_itm);
 			}
@@ -1968,7 +1969,7 @@ public final class L2ItemInstance extends L2Object
 	@Override
 	public boolean decayMe()
 	{
-		if (Config.SAVE_DROPPED_ITEM)
+		if (GeneralConfig.SAVE_DROPPED_ITEM)
 		{
 			ItemsOnGroundManager.getInstance().removeObject(this);
 		}
@@ -2014,9 +2015,9 @@ public final class L2ItemInstance extends L2Object
 			return enchant;
 		}
 		
-		if (player.isInOlympiadMode() && (Config.ALT_OLY_ENCHANT_LIMIT >= 0) && (enchant > Config.ALT_OLY_ENCHANT_LIMIT))
+		if (player.isInOlympiadMode() && (OlympiadConfig.ALT_OLY_ENCHANT_LIMIT >= 0) && (enchant > OlympiadConfig.ALT_OLY_ENCHANT_LIMIT))
 		{
-			enchant = Config.ALT_OLY_ENCHANT_LIMIT;
+			enchant = OlympiadConfig.ALT_OLY_ENCHANT_LIMIT;
 		}
 		
 		return enchant;

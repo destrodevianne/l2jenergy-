@@ -25,7 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.community.CBasicConfig;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.util.Util;
@@ -109,7 +109,7 @@ public final class CommunityBoardHandler implements IHandler<IParseBoardHandler,
 			return;
 		}
 		
-		if (!Config.ENABLE_COMMUNITY_BOARD)
+		if (!CBasicConfig.ENABLE_COMMUNITY_BOARD)
 		{
 			player.sendPacket(SystemMessageId.CB_OFFLINE);
 			return;
@@ -142,7 +142,7 @@ public final class CommunityBoardHandler implements IHandler<IParseBoardHandler,
 			return;
 		}
 		
-		if (!Config.ENABLE_COMMUNITY_BOARD)
+		if (!CBasicConfig.ENABLE_COMMUNITY_BOARD)
 		{
 			player.sendPacket(SystemMessageId.CB_OFFLINE);
 			return;

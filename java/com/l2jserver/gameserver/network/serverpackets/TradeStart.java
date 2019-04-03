@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.PcCondOverride;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
@@ -31,7 +31,7 @@ public final class TradeStart extends AbstractItemPacket
 	public TradeStart(L2PcInstance player)
 	{
 		_activeChar = player;
-		_itemList = _activeChar.getInventory().getAvailableItems(true, (_activeChar.canOverrideCond(PcCondOverride.ITEM_CONDITIONS) && Config.GM_TRADE_RESTRICTED_ITEMS), false);
+		_itemList = _activeChar.getInventory().getAvailableItems(true, (_activeChar.canOverrideCond(PcCondOverride.ITEM_CONDITIONS) && GeneralConfig.GM_TRADE_RESTRICTED_ITEMS), false);
 	}
 	
 	@Override

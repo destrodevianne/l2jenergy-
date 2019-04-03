@@ -21,12 +21,12 @@ package quests.Q00356_DigUpTheSeaOfSpores;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.Rnd;
 
 /**
  * Dig Up the Sea of Spores! (356)

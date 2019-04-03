@@ -19,6 +19,7 @@
 package com.l2jserver.gameserver.model.actor.instance;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.SevenSigns;
 import com.l2jserver.gameserver.SevenSignsFestival;
 import com.l2jserver.gameserver.enums.InstanceType;
@@ -26,7 +27,6 @@ import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.templates.L2NpcTemplate;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
-import com.l2jserver.util.StringUtil;
 
 /**
  * Festival of Darkness Guide (Seven Signs)

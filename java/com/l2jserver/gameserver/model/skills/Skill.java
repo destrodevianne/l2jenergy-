@@ -31,7 +31,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.GeoData;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.datatables.SkillData;
@@ -69,7 +71,6 @@ import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.Rnd;
 
 public class Skill implements IIdentifiable
 {
@@ -916,7 +917,7 @@ public class Skill implements IIdentifiable
 	
 	public boolean checkCondition(L2Character activeChar, L2Object object, boolean itemOrWeapon)
 	{
-		if (activeChar.canOverrideCond(PcCondOverride.SKILL_CONDITIONS) && !Config.GM_SKILL_RESTRICTION)
+		if (activeChar.canOverrideCond(PcCondOverride.SKILL_CONDITIONS) && !GeneralConfig.GM_SKILL_RESTRICTION)
 		{
 			return true;
 		}

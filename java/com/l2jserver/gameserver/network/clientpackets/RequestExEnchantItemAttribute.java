@@ -19,6 +19,8 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.model.Elementals;
@@ -31,7 +33,6 @@ import com.l2jserver.gameserver.network.serverpackets.InventoryUpdate;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.network.serverpackets.UserInfo;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.Rnd;
 
 public class RequestExEnchantItemAttribute extends L2GameClientPacket
 {
@@ -116,7 +117,7 @@ public class RequestExEnchantItemAttribute extends L2GameClientPacket
 			default:
 			{
 				player.setActiveEnchantAttrItemId(L2PcInstance.ID_NONE);
-				Util.handleIllegalPlayerAction(player, "Player " + player.getName() + " tried to use enchant Exploit!", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Player " + player.getName() + " tried to use enchant Exploit!", GeneralConfig.DEFAULT_PUNISH);
 				return;
 			}
 		}
@@ -150,7 +151,7 @@ public class RequestExEnchantItemAttribute extends L2GameClientPacket
 				if (elm.getElement() == opositeElement)
 				{
 					player.setActiveEnchantAttrItemId(L2PcInstance.ID_NONE);
-					Util.handleIllegalPlayerAction(player, "Player " + player.getName() + " tried to add oposite attribute to item!", Config.DEFAULT_PUNISH);
+					Util.handleIllegalPlayerAction(player, "Player " + player.getName() + " tried to add oposite attribute to item!", GeneralConfig.DEFAULT_PUNISH);
 					return;
 				}
 			}
@@ -173,7 +174,7 @@ public class RequestExEnchantItemAttribute extends L2GameClientPacket
 		if (!player.destroyItem("AttrEnchant", stone, 1, player, true))
 		{
 			player.sendPacket(SystemMessageId.NOT_ENOUGH_ITEMS);
-			Util.handleIllegalPlayerAction(player, "Player " + player.getName() + " tried to attribute enchant with a stone he doesn't have", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(player, "Player " + player.getName() + " tried to attribute enchant with a stone he doesn't have", GeneralConfig.DEFAULT_PUNISH);
 			player.setActiveEnchantAttrItemId(L2PcInstance.ID_NONE);
 			return;
 		}

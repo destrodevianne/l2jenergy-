@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -20,14 +20,15 @@ package com.l2jserver.loginserver.network.gameserverpackets;
 
 import java.util.Arrays;
 
-import com.l2jserver.Config;
+import com.l2jserver.commons.dao.ServerNameDAO;
+import com.l2jserver.commons.network.BaseRecievePacket;
 import com.l2jserver.loginserver.GameServerTable;
 import com.l2jserver.loginserver.GameServerTable.GameServerInfo;
 import com.l2jserver.loginserver.GameServerThread;
+import com.l2jserver.loginserver.configuration.config.LoginConfig;
 import com.l2jserver.loginserver.network.L2JGameServerPacketHandler.GameServerState;
 import com.l2jserver.loginserver.network.loginserverpackets.AuthResponse;
 import com.l2jserver.loginserver.network.loginserverpackets.LoginServerFail;
-import com.l2jserver.util.network.BaseRecievePacket;
 
 /**
  * <pre>
@@ -82,7 +83,7 @@ public class GameServerAuth extends BaseRecievePacket
 		{
 			AuthResponse ar = new AuthResponse(server.getGameServerInfo().getId());
 			server.sendPacket(ar);
-			server.broadcastToTelnet("GameServer [" + server.getServerId() + "] " + GameServerTable.getInstance().getServerNameById(server.getServerId()) + " is connected");
+			server.broadcastToTelnet("GameServer [" + server.getServerId() + "] " + ServerNameDAO.getServer(server.getServerId()) + " is connected");
 			server.setLoginConnectionState(GameServerState.AUTHED);
 		}
 	}
@@ -116,7 +117,7 @@ public class GameServerAuth extends BaseRecievePacket
 			{
 				// there is already a server registered with the desired id and different hex id
 				// try to register this one with an alternative id
-				if (Config.ACCEPT_NEW_GAMESERVER && _acceptAlternativeId)
+				if (LoginConfig.ACCEPT_NEW_GAMESERVER && _acceptAlternativeId)
 				{
 					gsi = new GameServerInfo(id, hexId, _server);
 					if (gameServerTable.registerWithFirstAvailableId(gsi))
@@ -141,7 +142,7 @@ public class GameServerAuth extends BaseRecievePacket
 		else
 		{
 			// can we register on this id?
-			if (Config.ACCEPT_NEW_GAMESERVER)
+			if (LoginConfig.ACCEPT_NEW_GAMESERVER)
 			{
 				gsi = new GameServerInfo(id, hexId, _server);
 				if (gameServerTable.register(id, gsi))

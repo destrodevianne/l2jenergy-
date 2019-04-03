@@ -31,10 +31,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.commons.util.EnumIntBitmask;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.communitybbs.Manager.ForumsBBSManager;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.community.CBasicConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.idfactory.IdFactory;
 import com.l2jserver.gameserver.instancemanager.AuctionManager;
@@ -63,7 +65,6 @@ import com.l2jserver.gameserver.network.serverpackets.PledgeShowMemberListAll;
 import com.l2jserver.gameserver.network.serverpackets.PledgeShowMemberListUpdate;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.network.serverpackets.UserInfo;
-import com.l2jserver.util.EnumIntBitmask;
 
 /**
  * This class loads the clan related data.
@@ -79,7 +80,7 @@ public class ClanTable
 	protected ClanTable()
 	{
 		// forums has to be loaded before clan data, because of last forum id used should have also memo included
-		if (Config.ENABLE_COMMUNITY_BOARD)
+		if (CBasicConfig.ENABLE_COMMUNITY_BOARD)
 		{
 			ForumsBBSManager.getInstance().initRoot();
 		}
@@ -162,7 +163,7 @@ public class ClanTable
 			return null;
 		}
 		
-		if (Config.DEBUG)
+		if (GeneralConfig.DEBUG)
 		{
 			LOG.debug("{}: {}({}) requested a clan creation.", getClass().getSimpleName(), player.getObjectId(), player.getName());
 		}

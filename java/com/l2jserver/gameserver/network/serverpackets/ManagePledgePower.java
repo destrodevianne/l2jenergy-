@@ -18,9 +18,9 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
+import com.l2jserver.commons.util.EnumIntBitmask;
 import com.l2jserver.gameserver.model.ClanPrivilege;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.util.EnumIntBitmask;
 
 public class ManagePledgePower extends L2GameServerPacket
 {

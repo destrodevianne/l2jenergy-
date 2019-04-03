@@ -21,7 +21,7 @@ package com.l2jserver.gameserver.taskmanager.tasks;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.variables.AccountVariables;
 import com.l2jserver.gameserver.model.variables.PlayerVariables;

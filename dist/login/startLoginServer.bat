@@ -2,7 +2,7 @@
 COLOR 0b
 title L2jEnergy Login Console
 :start
-java -Dfile.encoding=UTF-8 -Xmx256m -Dlogback.configurationFile=./config/logback.xml -cp ./../libs/*;l2jlogin.jar com.l2jserver.loginserver.L2LoginServer
+java -Dfile.encoding=UTF-8 -Xmx256m -Dlogback.configurationFile=./configuration/logback.xml -cp ./../libs/*;l2jlogin.jar com.l2jserver.loginserver.L2LoginServer
 if ERRORLEVEL 2 goto restart
 if ERRORLEVEL 1 goto error
 goto end

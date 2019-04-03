@@ -24,10 +24,10 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.cache.HtmCache;
+import com.l2jserver.gameserver.configuration.config.GrandBossConfig;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
 import com.l2jserver.gameserver.enums.audio.Music;
 import com.l2jserver.gameserver.instancemanager.GrandBossManager;
@@ -671,7 +671,7 @@ public final class Beleth extends AbstractNpcAI
 			
 			setBelethKiller(killer);
 			_grandBossManager.setBossStatus(REAL_BELETH, DEAD);
-			long respawnTime = Config.BELETH_SPAWN_INTERVAL + getRandom(-Config.BELETH_SPAWN_RANDOM, Config.BELETH_SPAWN_RANDOM);
+			long respawnTime = GrandBossConfig.BELETH_SPAWN_INTERVAL + getRandom(-GrandBossConfig.BELETH_SPAWN_RANDOM, GrandBossConfig.BELETH_SPAWN_RANDOM);
 			respawnTime *= 3600000;
 			setBelethRespawnTime(REAL_BELETH, respawnTime);
 			startQuestTimer("BELETH_UNLOCK", respawnTime, null, null);

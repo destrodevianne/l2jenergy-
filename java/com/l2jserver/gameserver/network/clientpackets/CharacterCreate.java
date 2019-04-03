@@ -24,6 +24,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.xml.impl.InitialEquipmentData;
 import com.l2jserver.gameserver.data.xml.impl.InitialShortcutData;
@@ -94,7 +96,7 @@ public final class CharacterCreate extends L2GameClientPacket
 	{
 		if ((_name.length() < 1) || (_name.length() > 16))
 		{
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				LOG.debug("Character Creation Failure: Character name {} is invalid.", _name);
 			}
@@ -152,9 +154,9 @@ public final class CharacterCreate extends L2GameClientPacket
 		 */
 		synchronized (CharNameTable.getInstance())
 		{
-			if ((CharNameTable.getInstance().getAccountCharacterCount(getClient().getAccountName()) >= Config.MAX_CHARACTERS_NUMBER_PER_ACCOUNT) && (Config.MAX_CHARACTERS_NUMBER_PER_ACCOUNT != 0))
+			if ((CharNameTable.getInstance().getAccountCharacterCount(getClient().getAccountName()) >= ServerConfig.MAX_CHARACTERS_NUMBER_PER_ACCOUNT) && (ServerConfig.MAX_CHARACTERS_NUMBER_PER_ACCOUNT != 0))
 			{
-				if (Config.DEBUG)
+				if (GeneralConfig.DEBUG)
 				{
 					LOG.debug("Max number of characters reached. Creation failed.");
 				}
@@ -164,7 +166,7 @@ public final class CharacterCreate extends L2GameClientPacket
 			}
 			else if (CharNameTable.getInstance().doesCharNameExist(_name))
 			{
-				if (Config.DEBUG)
+				if (GeneralConfig.DEBUG)
 				{
 					LOG.debug("Character Creation Failure: Message generated: You cannot create another character. Please delete the existing character and try again.");
 				}
@@ -198,12 +200,12 @@ public final class CharacterCreate extends L2GameClientPacket
 	
 	private boolean isValidName(String text)
 	{
-		return Config.PLAYER_NAME_TEMPLATE.matcher(text).matches();
+		return ServerConfig.PLAYER_NAME_TEMPLATE.matcher(text).matches();
 	}
 	
 	private void initNewChar(L2GameClient client, L2PcInstance newChar)
 	{
-		if (Config.DEBUG)
+		if (GeneralConfig.DEBUG)
 		{
 			LOG.debug("Character init start");
 		}
@@ -254,7 +256,7 @@ public final class CharacterCreate extends L2GameClientPacket
 		
 		for (L2SkillLearn skill : SkillTreesData.getInstance().getAvailableSkills(newChar, newChar.getClassId(), false, true))
 		{
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				LOG.debug("Adding starter skill:{} / {}", skill.getSkillId(), skill.getSkillLevel());
 			}
@@ -273,7 +275,7 @@ public final class CharacterCreate extends L2GameClientPacket
 		final CharSelectionInfo cl = new CharSelectionInfo(client.getAccountName(), client.getSessionId().playOkID1);
 		client.setCharSelection(cl.getCharInfo());
 		
-		if (Config.DEBUG)
+		if (GeneralConfig.DEBUG)
 		{
 			LOG.debug("Character init end");
 		}

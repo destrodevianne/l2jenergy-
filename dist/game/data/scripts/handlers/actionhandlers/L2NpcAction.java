@@ -19,6 +19,7 @@
 package handlers.actionhandlers;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.enums.InstanceType;
@@ -32,7 +33,6 @@ import com.l2jserver.gameserver.model.events.EventDispatcher;
 import com.l2jserver.gameserver.model.events.EventType;
 import com.l2jserver.gameserver.model.events.impl.character.npc.OnNpcFirstTalk;
 import com.l2jserver.gameserver.network.serverpackets.MoveToPawn;
-import com.l2jserver.util.Rnd;
 
 public class L2NpcAction implements IActionHandler
 {

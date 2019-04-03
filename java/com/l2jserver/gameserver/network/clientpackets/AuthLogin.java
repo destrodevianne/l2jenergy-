@@ -18,9 +18,9 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.LoginServerThread;
 import com.l2jserver.gameserver.LoginServerThread.SessionKey;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.network.L2GameClient;
 import com.l2jserver.gameserver.network.serverpackets.L2GameServerPacket;
 
@@ -62,7 +62,7 @@ public final class AuthLogin extends L2GameClientPacket
 			return;
 		}
 		SessionKey key = new SessionKey(_loginKey1, _loginKey2, _playKey1, _playKey2);
-		if (Config.DEBUG)
+		if (GeneralConfig.DEBUG)
 		{
 			LOG.debug("user: {}", _loginName);
 			LOG.debug("key: {}", key);

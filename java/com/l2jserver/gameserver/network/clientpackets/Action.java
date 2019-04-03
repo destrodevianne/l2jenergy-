@@ -19,6 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.enums.DuelState;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2World;
@@ -54,7 +55,7 @@ public final class Action extends L2GameClientPacket
 	@Override
 	protected void runImpl()
 	{
-		if (Config.DEBUG)
+		if (GeneralConfig.DEBUG)
 		{
 			LOG.debug("{}: {} Target object ID: {} orignX: {} orignY: {} orignZ: {}", getType(), (_actionId == 0 ? "Simple-click" : "Shift-click"), _objectId, _originX, _originY, _originZ);
 		}

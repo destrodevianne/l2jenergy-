@@ -23,6 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.handler.IBypassHandler;
 import com.l2jserver.gameserver.instancemanager.QuestManager;
@@ -38,7 +39,6 @@ import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
-import com.l2jserver.util.StringUtil;
 
 public class QuestLink implements IBypassHandler
 {

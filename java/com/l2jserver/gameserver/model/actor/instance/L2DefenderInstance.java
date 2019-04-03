@@ -21,12 +21,12 @@ package com.l2jserver.gameserver.model.actor.instance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.ai.L2CharacterAI;
 import com.l2jserver.gameserver.ai.L2FortSiegeGuardAI;
 import com.l2jserver.gameserver.ai.L2SiegeGuardAI;
 import com.l2jserver.gameserver.ai.L2SpecialSiegeGuardAI;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.FortManager;
@@ -135,7 +135,7 @@ public class L2DefenderInstance extends L2Attackable
 		}
 		if (!isInsideRadius(getSpawn(), 40, false, false))
 		{
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				LOG.debug("{} moving home", getObjectId());
 			}
@@ -178,7 +178,7 @@ public class L2DefenderInstance extends L2Attackable
 		// Check if the L2PcInstance already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				LOG.debug("new target selected: {}", getObjectId());
 			}

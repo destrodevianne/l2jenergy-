@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.events.FishingConfig;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Character;
 
@@ -51,6 +51,6 @@ public class ExFishingStart extends L2GameServerPacket
 		writeD(_loc.getY()); // y position
 		writeD(_loc.getZ()); // z position
 		writeC(_isNightLure ? 0x01 : 0x00); // night lure
-		writeC(Config.ALT_FISH_CHAMPIONSHIP_ENABLED ? 0x01 : 0x00); // show fish rank result button
+		writeC(FishingConfig.ALT_FISH_CHAMPIONSHIP_ENABLED ? 0x01 : 0x00); // show fish rank result button
 	}
 }

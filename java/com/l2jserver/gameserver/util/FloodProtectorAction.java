@@ -22,6 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.instancemanager.PunishmentManager;
 import com.l2jserver.gameserver.model.PcCondOverride;
@@ -29,7 +30,6 @@ import com.l2jserver.gameserver.model.punishment.PunishmentAffect;
 import com.l2jserver.gameserver.model.punishment.PunishmentTask;
 import com.l2jserver.gameserver.model.punishment.PunishmentType;
 import com.l2jserver.gameserver.network.L2GameClient;
-import com.l2jserver.util.StringUtil;
 
 /**
  * Flood protector implementation.

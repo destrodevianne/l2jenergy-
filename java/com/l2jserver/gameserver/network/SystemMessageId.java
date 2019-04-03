@@ -35,6 +35,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.model.clientstrings.Builder;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
@@ -15340,7 +15341,7 @@ public final class SystemMessageId
 		String text;
 		for (final String lang : languages)
 		{
-			file = new File(Config.DATAPACK_ROOT, "/data/lang/" + lang + "/sm/SystemMessageLocalisation.xml");
+			file = new File(ServerConfig.DATAPACK_ROOT, "/data/lang/" + lang + "/sm/SystemMessageLocalisation.xml");
 			if (!file.isFile())
 			{
 				continue;

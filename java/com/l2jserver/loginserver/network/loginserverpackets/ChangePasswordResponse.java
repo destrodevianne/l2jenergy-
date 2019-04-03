@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -18,7 +18,7 @@
  */
 package com.l2jserver.loginserver.network.loginserverpackets;
 
-import com.l2jserver.util.network.BaseSendablePacket;
+import com.l2jserver.commons.network.BaseSendablePacket;
 
 /**
  * @author Nik

@@ -35,7 +35,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
@@ -61,7 +62,6 @@ import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
 import com.l2jserver.gameserver.network.serverpackets.MagicSkillUse;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.Rnd;
 
 /**
  * Seven Signs Festival of Darkness Engine.<br>

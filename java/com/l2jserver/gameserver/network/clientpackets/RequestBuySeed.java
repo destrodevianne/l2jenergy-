@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.ManorConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
@@ -132,7 +134,7 @@ public class RequestBuySeed extends L2GameClientPacket
 			totalPrice += (sp.getPrice() * ih.getCount());
 			if (totalPrice > MAX_ADENA)
 			{
-				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to purchase over " + MAX_ADENA + " adena worth of goods.", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to purchase over " + MAX_ADENA + " adena worth of goods.", GeneralConfig.DEFAULT_PUNISH);
 				sendActionFailed();
 				return;
 			}
@@ -196,7 +198,7 @@ public class RequestBuySeed extends L2GameClientPacket
 			sm.addLong(totalPrice);
 			player.sendPacket(sm);
 			
-			if (Config.ALT_MANOR_SAVE_ALL_ACTIONS)
+			if (ManorConfig.ALT_MANOR_SAVE_ALL_ACTIONS)
 			{
 				manor.updateCurrentProduction(_manorId, _productInfo.values());
 			}

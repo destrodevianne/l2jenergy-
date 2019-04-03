@@ -24,12 +24,12 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.model.items.type.EtcItemType;
 import com.l2jserver.gameserver.model.items.type.ItemType;
 import com.l2jserver.gameserver.network.L2GameClient;
-import com.l2jserver.util.StringUtil;
 
 public class LoggingUtils
 {

@@ -22,6 +22,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import com.l2jserver.gameserver.configuration.config.TerritoryWarConfig;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.instancemanager.GlobalVariablesManager;
 import com.l2jserver.gameserver.instancemanager.TerritoryWarManager;
@@ -121,7 +122,7 @@ public class AdminTerritoryWar implements IAdminCommandHandler
 		}
 		else if (command.equalsIgnoreCase("admin_territory_war_end"))
 		{
-			TerritoryWarManager.getInstance().setTWStartTimeInMillis(System.currentTimeMillis() - TerritoryWarManager.WARLENGTH);
+			TerritoryWarManager.getInstance().setTWStartTimeInMillis(System.currentTimeMillis() - TerritoryWarConfig.WARLENGTH);
 		}
 		else if (command.equalsIgnoreCase("admin_territory_wards_list"))
 		{

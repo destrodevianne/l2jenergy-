@@ -26,7 +26,9 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.StringTokenizer;
 
-import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
+import com.l2jserver.commons.util.StringUtil;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.data.xml.impl.TransformData;
 import com.l2jserver.gameserver.enums.audio.Music;
@@ -41,8 +43,6 @@ import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.network.serverpackets.PlaySound;
 import com.l2jserver.gameserver.network.serverpackets.UserInfo;
 import com.l2jserver.gameserver.util.Broadcast;
-import com.l2jserver.util.Rnd;
-import com.l2jserver.util.StringUtil;
 
 /**
  * This class handles following admin commands: - admin = shows menu
@@ -123,7 +123,7 @@ public class AdminEventEngine implements IAdminCommandHandler
 				{
 					final NpcHtmlMessage adminReply = new NpcHtmlMessage();
 					
-					try (FileInputStream fis = new FileInputStream(Config.DATAPACK_ROOT + "/data/events/" + eventName);
+					try (FileInputStream fis = new FileInputStream(ServerConfig.DATAPACK_ROOT + "/data/events/" + eventName);
 						InputStreamReader isr = new InputStreamReader(fis);
 						BufferedReader br = new BufferedReader(isr))
 					{
@@ -148,7 +148,7 @@ public class AdminEventEngine implements IAdminCommandHandler
 			{
 				// There is an exception here for not using the ST. We use spaces (ST delim) for the event name.
 				String eventName = command.substring(16);
-				File file = new File(Config.DATAPACK_ROOT + "/data/events/" + eventName);
+				File file = new File(ServerConfig.DATAPACK_ROOT + "/data/events/" + eventName);
 				file.delete();
 				showMainPage(activeChar);
 			}
@@ -167,7 +167,7 @@ public class AdminEventEngine implements IAdminCommandHandler
 			{
 				try
 				{
-					try (FileOutputStream file = new FileOutputStream(new File(Config.DATAPACK_ROOT, "data/events/" + tempName));
+					try (FileOutputStream file = new FileOutputStream(new File(ServerConfig.DATAPACK_ROOT, "data/events/" + tempName));
 						PrintStream p = new PrintStream(file))
 					{
 						p.println(activeChar.getName());
@@ -442,7 +442,7 @@ public class AdminEventEngine implements IAdminCommandHandler
 	
 	private String showStoredEvents()
 	{
-		final File dir = new File(Config.DATAPACK_ROOT, "/data/events");
+		final File dir = new File(ServerConfig.DATAPACK_ROOT, "/data/events");
 		if (dir.isFile())
 		{
 			return "<font color=\"FF0000\">The directory '" + dir.getAbsolutePath() + "' is a file or is corrupted!</font><br>";

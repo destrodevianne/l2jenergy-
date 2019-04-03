@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.ClassListData;
 import com.l2jserver.gameserver.enums.IllegalActionPunishmentType;
 import com.l2jserver.gameserver.model.PcCondOverride;
@@ -97,12 +98,12 @@ public final class SubClassSkills extends Quest
 	@Override
 	public String onEnterWorld(L2PcInstance player)
 	{
-		if (!Config.SKILL_CHECK_ENABLE)
+		if (!GeneralConfig.SKILL_CHECK_ENABLE)
 		{
 			return null;
 		}
 		
-		if (player.canOverrideCond(PcCondOverride.SKILL_CONDITIONS) && !Config.SKILL_CHECK_GM)
+		if (player.canOverrideCond(PcCondOverride.SKILL_CONDITIONS) && !GeneralConfig.SKILL_CHECK_GM)
 		{
 			return null;
 		}
@@ -114,7 +115,7 @@ public final class SubClassSkills extends Quest
 			{
 				Util.handleIllegalPlayerAction(player, "Player " + player.getName() + " has cert skill on subclass :" + s.getName() + "(" + s.getId() + "/" + s.getLevel() + "), class:" + ClassListData.getInstance().getClass(player.getClassId()).getClassName(), IllegalActionPunishmentType.NONE);
 				
-				if (Config.SKILL_CHECK_REMOVE)
+				if (GeneralConfig.SKILL_CHECK_REMOVE)
 				{
 					player.removeSkill(s);
 				}
@@ -277,7 +278,7 @@ public final class SubClassSkills extends Quest
 						Util.handleIllegalPlayerAction(player, "Player " + player.getName() + " has invalid cert skill :" + skill.getName() + "(" + skill.getId() + "/" + skill.getLevel() + "), level too high", IllegalActionPunishmentType.NONE);
 					}
 					
-					if (Config.SKILL_CHECK_REMOVE)
+					if (GeneralConfig.SKILL_CHECK_REMOVE)
 					{
 						player.removeSkill(skill);
 					}

@@ -25,8 +25,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.CharSummonTable;
 import com.l2jserver.gameserver.data.sql.impl.SummonEffectsTable;
@@ -68,7 +70,6 @@ import com.l2jserver.gameserver.network.serverpackets.StatusUpdate;
 import com.l2jserver.gameserver.network.serverpackets.StopMove;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.taskmanager.DecayTaskManager;
-import com.l2jserver.util.Rnd;
 
 public class L2PetInstance extends L2Summon
 {
@@ -566,7 +567,7 @@ public class L2PetInstance extends L2Summon
 			// Remove from the ground!
 			target.pickupMe(this);
 			
-			if (Config.SAVE_DROPPED_ITEM)
+			if (GeneralConfig.SAVE_DROPPED_ITEM)
 			{
 				ItemsOnGroundManager.getInstance().removeObject(target);
 			}

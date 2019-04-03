@@ -24,9 +24,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.cache.HtmCache;
+import com.l2jserver.gameserver.configuration.config.community.CBasicConfig;
+import com.l2jserver.gameserver.configuration.config.community.CTeleportConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.TeleportBBSData;
 import com.l2jserver.gameserver.handler.CommunityBoardHandler;
@@ -51,7 +52,7 @@ public class TeleportBoard implements IParseBoardHandler
 	@Override
 	public boolean parseCommunityBoardCommand(String command, L2PcInstance activeChar)
 	{
-		if (!Config.BBS_TELEPORTS_ENABLE)
+		if (!CTeleportConfig.BBS_TELEPORTS_ENABLE)
 		{
 			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "community_board_services_disabled"));
 			parseCommunityBoardCommand("_bbshome", activeChar);
@@ -61,12 +62,12 @@ public class TeleportBoard implements IParseBoardHandler
 		String html = null;
 		if (command.equals("_bbsteleport"))
 		{
-			final String customPath = Config.CUSTOM_CB_ENABLED ? "Custom/" : "";
+			final String customPath = CBasicConfig.CUSTOM_CB_ENABLED ? "Custom/" : "";
 			html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/" + customPath + "teleport/index.html");
 		}
 		else if (command.startsWith("_bbsteleport:page"))
 		{
-			final String customPath = Config.CUSTOM_CB_ENABLED ? "Custom/" : "";
+			final String customPath = CBasicConfig.CUSTOM_CB_ENABLED ? "Custom/" : "";
 			final String[] path = command.split(":");
 			if (path.length > 3)
 			{
@@ -157,7 +158,7 @@ public class TeleportBoard implements IParseBoardHandler
 		
 		final int item = player.isPremium() ? premiumPriceId : priceId;
 		final int price = player.isPremium() ? premiumCount : count;
-		final boolean freeLevel = player.getLevel() <= Config.BBS_TELEPORT_FREE_LEVEL;
+		final boolean freeLevel = player.getLevel() <= CTeleportConfig.BBS_TELEPORT_FREE_LEVEL;
 		
 		if (isConfirm)
 		{
@@ -182,7 +183,7 @@ public class TeleportBoard implements IParseBoardHandler
 	// TODO: Доработать
 	private void showTeleportPoint(L2PcInstance activeChar)
 	{
-		if (Config.BBS_TELEPORTS_POINT_FOR_PREMIUM && !activeChar.isPremium())
+		if (CTeleportConfig.BBS_TELEPORTS_POINT_FOR_PREMIUM && !activeChar.isPremium())
 		{
 			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "communityboard_teleport_personal_point_only_premium"));
 			parseCommunityBoardCommand("_bbsteleport", activeChar);
@@ -219,12 +220,12 @@ public class TeleportBoard implements IParseBoardHandler
 			LOG.warn("", e);
 		}
 		
-		final String customPath = Config.CUSTOM_CB_ENABLED ? "Custom/" : "";
+		final String customPath = CBasicConfig.CUSTOM_CB_ENABLED ? "Custom/" : "";
 		String content = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/" + customPath + "teleport/save.html");
 		content = content.replace("{points}", points.equals("") ? "<center><font color=\"FF0000\">" + MessagesData.getInstance().getMessage(activeChar, "communityboard_teleport_dont_have_points") + "</font></center>" : points);
-		content = content.replace("{all_price}", Util.formatAdena(Config.BBS_TELEPORT_SAVE_PRICE) + " " + String.valueOf(DifferentMethods.getItemName(Config.BBS_TELEPORT_SAVE_ITEM_ID)));
-		content = content.replace("{premium_price}", Util.formatAdena(Config.BBS_TELEPORT_PREMIUM_SAVE_PRICE) + " " + String.valueOf(DifferentMethods.getItemName(Config.BBS_TELEPORT_PREMIUM_SAVE_ITEM_ID)));
-		content = content.replace("{point_count}", String.valueOf(Config.BBS_TELEPORT_MAX_COUNT));
+		content = content.replace("{all_price}", Util.formatAdena(CTeleportConfig.BBS_TELEPORT_SAVE_PRICE) + " " + String.valueOf(DifferentMethods.getItemName(CTeleportConfig.BBS_TELEPORT_SAVE_ITEM_ID)));
+		content = content.replace("{premium_price}", Util.formatAdena(CTeleportConfig.BBS_TELEPORT_PREMIUM_SAVE_PRICE) + " " + String.valueOf(DifferentMethods.getItemName(CTeleportConfig.BBS_TELEPORT_PREMIUM_SAVE_ITEM_ID)));
+		content = content.replace("{point_count}", String.valueOf(CTeleportConfig.BBS_TELEPORT_MAX_COUNT));
 		CommunityBoardHandler.separateAndSend(content, activeChar);
 		return;
 	}
@@ -248,7 +249,7 @@ public class TeleportBoard implements IParseBoardHandler
 	// TODO: Доработать
 	private void addTeleportPoint(L2PcInstance activeChar, final String point)
 	{
-		if (!DifferentMethods.getPay(activeChar, Config.BBS_TELEPORT_SAVE_ITEM_ID, Config.BBS_TELEPORT_SAVE_PRICE))
+		if (!DifferentMethods.getPay(activeChar, CTeleportConfig.BBS_TELEPORT_SAVE_ITEM_ID, CTeleportConfig.BBS_TELEPORT_SAVE_PRICE))
 		{
 			return;
 		}
@@ -258,7 +259,7 @@ public class TeleportBoard implements IParseBoardHandler
 			return;
 		}
 		
-		if (Config.BBS_TELEPORTS_POINT_FOR_PREMIUM && !activeChar.isPremium())
+		if (CTeleportConfig.BBS_TELEPORTS_POINT_FOR_PREMIUM && !activeChar.isPremium())
 		{
 			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "communityboard_teleport_personal_point_only_premium"));
 			return;
@@ -303,7 +304,7 @@ public class TeleportBoard implements IParseBoardHandler
 			{
 				if (rset.next())
 				{
-					if (rset.getInt(1) < Config.BBS_TELEPORT_MAX_COUNT)
+					if (rset.getInt(1) < CTeleportConfig.BBS_TELEPORT_MAX_COUNT)
 					{
 						stmt = con.prepareStatement("SELECT COUNT(*) FROM bbs_teleport WHERE charId=? AND name=?;");
 						stmt.setLong(1, activeChar.getObjectId());
@@ -325,7 +326,7 @@ public class TeleportBoard implements IParseBoardHandler
 				}
 				else
 				{
-					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "communityboard_teleport_personal_point").replace("%s%", Config.BBS_TELEPORT_MAX_COUNT + ""));
+					activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "communityboard_teleport_personal_point").replace("%s%", CTeleportConfig.BBS_TELEPORT_MAX_COUNT + ""));
 				}
 			}
 		}

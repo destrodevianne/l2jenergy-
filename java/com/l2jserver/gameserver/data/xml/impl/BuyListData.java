@@ -30,14 +30,14 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.commons.util.filter.NumericNameFilter;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.model.buylist.L2BuyList;
 import com.l2jserver.gameserver.model.buylist.Product;
 import com.l2jserver.gameserver.model.items.L2Item;
-import com.l2jserver.util.data.xml.IXmlReader;
-import com.l2jserver.util.file.filter.NumericNameFilter;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * Loads buy lists for NPCs.
@@ -58,7 +58,7 @@ public final class BuyListData implements IXmlReader
 	{
 		_buyLists.clear();
 		parseDatapackDirectory("data/buylists", false);
-		if (Config.CUSTOM_BUYLIST_LOAD)
+		if (GeneralConfig.CUSTOM_BUYLIST_LOAD)
 		{
 			parseDatapackDirectory("data/buylists/custom", false);
 		}

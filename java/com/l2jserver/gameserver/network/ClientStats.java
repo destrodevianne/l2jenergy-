@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 
 public class ClientStats
 {
@@ -55,7 +55,7 @@ public class ClientStats
 	
 	public ClientStats()
 	{
-		BUFFER_SIZE = Config.CLIENT_PACKET_QUEUE_MEASURE_INTERVAL;
+		BUFFER_SIZE = GeneralConfig.CLIENT_PACKET_QUEUE_MEASURE_INTERVAL;
 		_packetsInSecond = new int[BUFFER_SIZE];
 		_head = BUFFER_SIZE - 1;
 	}
@@ -110,7 +110,7 @@ public class ClientStats
 		}
 		
 		_unknownPacketsInMin++;
-		return _unknownPacketsInMin > Config.CLIENT_PACKET_QUEUE_MAX_UNKNOWN_PER_MIN;
+		return _unknownPacketsInMin > GeneralConfig.CLIENT_PACKET_QUEUE_MAX_UNKNOWN_PER_MIN;
 	}
 	
 	/**
@@ -124,7 +124,7 @@ public class ClientStats
 			maxBurstSize = count;
 		}
 		
-		if (count < Config.CLIENT_PACKET_QUEUE_MAX_BURST_SIZE)
+		if (count < GeneralConfig.CLIENT_PACKET_QUEUE_MAX_BURST_SIZE)
 		{
 			return false;
 		}
@@ -150,7 +150,7 @@ public class ClientStats
 		}
 		
 		_overflowsInMin++;
-		return _overflowsInMin > Config.CLIENT_PACKET_QUEUE_MAX_OVERFLOWS_PER_MIN;
+		return _overflowsInMin > GeneralConfig.CLIENT_PACKET_QUEUE_MAX_OVERFLOWS_PER_MIN;
 	}
 	
 	/**
@@ -169,7 +169,7 @@ public class ClientStats
 		}
 		
 		_underflowReadsInMin++;
-		return _underflowReadsInMin > Config.CLIENT_PACKET_QUEUE_MAX_UNDERFLOWS_PER_MIN;
+		return _underflowReadsInMin > GeneralConfig.CLIENT_PACKET_QUEUE_MAX_UNDERFLOWS_PER_MIN;
 	}
 	
 	/**
@@ -177,12 +177,12 @@ public class ClientStats
 	 */
 	protected final boolean countFloods()
 	{
-		return _floodsInMin > Config.CLIENT_PACKET_QUEUE_MAX_FLOODS_PER_MIN;
+		return _floodsInMin > GeneralConfig.CLIENT_PACKET_QUEUE_MAX_FLOODS_PER_MIN;
 	}
 	
 	private final boolean longFloodDetected()
 	{
-		return (_totalCount / BUFFER_SIZE) > Config.CLIENT_PACKET_QUEUE_MAX_AVERAGE_PACKETS_PER_SECOND;
+		return (_totalCount / BUFFER_SIZE) > GeneralConfig.CLIENT_PACKET_QUEUE_MAX_AVERAGE_PACKETS_PER_SECOND;
 	}
 	
 	/**
@@ -198,7 +198,7 @@ public class ClientStats
 			_packetCountStartTick = tick;
 			
 			// clear flag if no more flooding during last seconds
-			if (_floodDetected && !longFloodDetected() && (_packetsInSecond[_head] < (Config.CLIENT_PACKET_QUEUE_MAX_PACKETS_PER_SECOND / 2)))
+			if (_floodDetected && !longFloodDetected() && (_packetsInSecond[_head] < (GeneralConfig.CLIENT_PACKET_QUEUE_MAX_PACKETS_PER_SECOND / 2)))
 			{
 				_floodDetected = false;
 			}
@@ -218,7 +218,7 @@ public class ClientStats
 		final int count = ++_packetsInSecond[_head];
 		if (!_floodDetected)
 		{
-			if (count > Config.CLIENT_PACKET_QUEUE_MAX_PACKETS_PER_SECOND)
+			if (count > GeneralConfig.CLIENT_PACKET_QUEUE_MAX_PACKETS_PER_SECOND)
 			{
 				shortFloods++;
 			}

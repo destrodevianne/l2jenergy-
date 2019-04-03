@@ -47,7 +47,7 @@ import com.l2jserver.gameserver.model.zone.type.L2ArenaZone;
 import com.l2jserver.gameserver.model.zone.type.L2OlympiadStadiumZone;
 import com.l2jserver.gameserver.model.zone.type.L2RespawnZone;
 import com.l2jserver.gameserver.model.zone.type.NpcSpawnTerritory;
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * This class manages the zones

@@ -35,6 +35,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.model.clientstrings.Builder;
 import com.l2jserver.gameserver.network.serverpackets.ExShowScreenMessage;
 
@@ -25331,7 +25332,7 @@ public final class NpcStringId
 		String text;
 		for (final String lang : languages)
 		{
-			file = new File(Config.DATAPACK_ROOT, "/data/lang/" + lang + "/ns/NpcStringLocalisation.xml");
+			file = new File(ServerConfig.DATAPACK_ROOT, "/data/lang/" + lang + "/ns/NpcStringLocalisation.xml");
 			if (!file.isFile())
 			{
 				continue;

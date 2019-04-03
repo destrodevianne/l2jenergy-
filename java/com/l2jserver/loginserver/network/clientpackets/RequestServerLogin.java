@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -18,9 +18,9 @@
  */
 package com.l2jserver.loginserver.network.clientpackets;
 
-import com.l2jserver.Config;
 import com.l2jserver.loginserver.LoginController;
 import com.l2jserver.loginserver.SessionKey;
+import com.l2jserver.loginserver.configuration.config.LoginConfig;
 import com.l2jserver.loginserver.network.serverpackets.LoginFail.LoginFailReason;
 import com.l2jserver.loginserver.network.serverpackets.PlayFail.PlayFailReason;
 import com.l2jserver.loginserver.network.serverpackets.PlayOk;
@@ -82,7 +82,7 @@ public class RequestServerLogin extends L2LoginClientPacket
 		SessionKey sk = getClient().getSessionKey();
 		
 		// if we didnt showed the license we cant check these values
-		if (!Config.SHOW_LICENCE || sk.checkLoginPair(_skey1, _skey2))
+		if (!LoginConfig.SHOW_LICENCE || sk.checkLoginPair(_skey1, _skey2))
 		{
 			if (LoginController.getInstance().isLoginPossible(getClient(), _serverId))
 			{

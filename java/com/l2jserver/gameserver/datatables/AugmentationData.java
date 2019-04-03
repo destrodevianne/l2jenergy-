@@ -33,6 +33,8 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.data.xml.impl.OptionData;
 import com.l2jserver.gameserver.model.L2Augmentation;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
@@ -40,7 +42,6 @@ import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.model.options.Options;
 import com.l2jserver.gameserver.network.clientpackets.AbstractRefinePacket;
-import com.l2jserver.util.Rnd;
 
 /**
  * Loads augmentation bonuses and skills.
@@ -236,7 +237,7 @@ public class AugmentationData
 				factory.setValidating(false);
 				factory.setIgnoringComments(true);
 				
-				File file = new File(Config.DATAPACK_ROOT + "/data/stats/augmentation/augmentation_skillmap.xml");
+				File file = new File(ServerConfig.DATAPACK_ROOT + "/data/stats/augmentation/augmentation_skillmap.xml");
 				if (!file.exists())
 				{
 					LOG.warn("{}: ERROR The augmentation skillmap file is missing.", getClass().getSimpleName());
@@ -323,7 +324,7 @@ public class AugmentationData
 			factory.setValidating(false);
 			factory.setIgnoringComments(true);
 			
-			File aFile = new File(Config.DATAPACK_ROOT + "/data/stats/augmentation/retailchances.xml");
+			File aFile = new File(ServerConfig.DATAPACK_ROOT + "/data/stats/augmentation/retailchances.xml");
 			if (aFile.exists())
 			{
 				Document aDoc = null;
@@ -417,7 +418,7 @@ public class AugmentationData
 			factory3.setValidating(false);
 			factory3.setIgnoringComments(true);
 			
-			File aFile3 = new File(Config.DATAPACK_ROOT + "/data/stats/augmentation/retailchances_accessory.xml");
+			File aFile3 = new File(ServerConfig.DATAPACK_ROOT + "/data/stats/augmentation/retailchances_accessory.xml");
 			if (aFile3.exists())
 			{
 				Document aDoc = null;

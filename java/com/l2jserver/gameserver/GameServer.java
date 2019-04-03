@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -32,10 +32,20 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.Server;
-import com.l2jserver.UPnPService;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.UPnPService;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.commons.util.IPv4Filter;
+import com.l2jserver.commons.util.MemoryWatchDog;
+import com.l2jserver.commons.util.Util;
 import com.l2jserver.commons.versioning.Version;
 import com.l2jserver.gameserver.cache.HtmCache;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.MMOConfig;
+import com.l2jserver.gameserver.configuration.config.PremiumConfig;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
+import com.l2jserver.gameserver.configuration.config.TelnetConfig;
+import com.l2jserver.gameserver.configuration.config.community.CTeleportConfig;
+import com.l2jserver.gameserver.configuration.loader.ConfigLoader;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.json.ExperienceData;
 import com.l2jserver.gameserver.data.sql.impl.AnnouncementsTable;
@@ -146,13 +156,9 @@ import com.l2jserver.gameserver.script.faenor.FaenorScriptEngine;
 import com.l2jserver.gameserver.scripting.L2ScriptEngineManager;
 import com.l2jserver.gameserver.taskmanager.KnownListUpdateTaskManager;
 import com.l2jserver.gameserver.taskmanager.TaskManager;
+import com.l2jserver.gameserver.util.DeadLockDetector;
 import com.l2jserver.mmocore.SelectorConfig;
 import com.l2jserver.mmocore.SelectorThread;
-import com.l2jserver.status.Status;
-import com.l2jserver.util.DeadLockDetector;
-import com.l2jserver.util.IPv4Filter;
-import com.l2jserver.util.MemoryWatchDog;
-import com.l2jserver.util.Util;
 
 public final class GameServer
 {
@@ -221,7 +227,7 @@ public final class GameServer
 		EnchantItemHPBonusData.getInstance();
 		MerchantPriceConfigTable.getInstance().loadInstances();
 		BuyListData.getInstance();
-		if (Config.ENABLE_ITEM_MALL)
+		if (GeneralConfig.ENABLE_ITEM_MALL)
 		{
 			ProductItemData.getInstance();
 		}
@@ -293,7 +299,7 @@ public final class GameServer
 		HtmCache.getInstance();
 		CrestTable.getInstance();
 		TeleportLocationTable.getInstance();
-		if (Config.BBS_TELEPORTS_ENABLE)
+		if (CTeleportConfig.BBS_TELEPORTS_ENABLE)
 		{
 			TeleportBBSData.getInstance();
 		}
@@ -319,9 +325,9 @@ public final class GameServer
 		try
 		{
 			LOG.info("{}: Loading server scripts:", getClass().getSimpleName());
-			if (!Config.ALT_DEV_NO_HANDLERS || !Config.ALT_DEV_NO_QUESTS)
+			if (!GeneralConfig.ALT_DEV_NO_HANDLERS || !GeneralConfig.ALT_DEV_NO_QUESTS)
 			{
-				L2ScriptEngineManager.getInstance().executeScriptList(new File(Config.DATAPACK_ROOT, "data/scripts.cfg"));
+				L2ScriptEngineManager.getInstance().executeScriptList(new File(ServerConfig.DATAPACK_ROOT, "data/scripts.cfg"));
 			}
 		}
 		catch (IOException ioe)
@@ -348,19 +354,19 @@ public final class GameServer
 		CastleManorManager.getInstance();
 		MercTicketManager.getInstance();
 		
-		if (Config.PREMIUM_SYSTEM_ENABLED)
+		if (PremiumConfig.PREMIUM_SYSTEM_ENABLED)
 		{
 			PremiumManager.getInstance();
 		}
 		
 		QuestManager.getInstance().report();
 		
-		if (Config.SAVE_DROPPED_ITEM)
+		if (GeneralConfig.SAVE_DROPPED_ITEM)
 		{
 			ItemsOnGroundManager.getInstance();
 		}
 		
-		if ((Config.AUTODESTROY_ITEM_AFTER > 0) || (Config.HERB_AUTO_DESTROY_TIME > 0))
+		if ((GeneralConfig.AUTODESTROY_ITEM_AFTER > 0) || (GeneralConfig.HERB_AUTO_DESTROY_TIME > 0))
 		{
 			ItemsAutoDestroy.getInstance();
 		}
@@ -381,7 +387,7 @@ public final class GameServer
 			CoupleManager.getInstance();
 		}
 		
-		if (Config.EX_JAPAN_MINIGAME)
+		if (GeneralConfig.EX_JAPAN_MINIGAME)
 		{
 			MiniGameScoreManager.getInstance();
 		}
@@ -389,7 +395,7 @@ public final class GameServer
 		
 		AntiFeedManager.getInstance().registerEvent(AntiFeedManager.GAME_ID);
 		
-		if (Config.ALLOW_MAIL)
+		if (GeneralConfig.ALLOW_MAIL)
 		{
 			MailManager.getInstance();
 		}
@@ -407,7 +413,7 @@ public final class GameServer
 			OfflineTradersTable.getInstance().restoreOfflineTraders();
 		}
 		
-		if (Config.DEADLOCK_DETECTOR)
+		if (GeneralConfig.DEADLOCK_DETECTOR)
 		{
 			_deadDetectThread = new DeadLockDetector();
 			_deadDetectThread.setDaemon(true);
@@ -422,21 +428,21 @@ public final class GameServer
 		LoginServerThread.getInstance().start();
 		
 		final SelectorConfig sc = new SelectorConfig();
-		sc.MAX_READ_PER_PASS = Config.MMO_MAX_READ_PER_PASS;
-		sc.MAX_SEND_PER_PASS = Config.MMO_MAX_SEND_PER_PASS;
-		sc.SLEEP_TIME = Config.MMO_SELECTOR_SLEEP_TIME;
-		sc.HELPER_BUFFER_COUNT = Config.MMO_HELPER_BUFFER_COUNT;
-		sc.TCP_NODELAY = Config.MMO_TCP_NODELAY;
+		sc.MAX_READ_PER_PASS = MMOConfig.MMO_MAX_READ_PER_PASS;
+		sc.MAX_SEND_PER_PASS = MMOConfig.MMO_MAX_SEND_PER_PASS;
+		sc.SLEEP_TIME = MMOConfig.MMO_SELECTOR_SLEEP_TIME;
+		sc.HELPER_BUFFER_COUNT = MMOConfig.MMO_HELPER_BUFFER_COUNT;
+		sc.TCP_NODELAY = MMOConfig.MMO_TCP_NODELAY;
 		
 		_gamePacketHandler = new L2GamePacketHandler();
 		_selectorThread = new SelectorThread<>(sc, _gamePacketHandler, _gamePacketHandler, _gamePacketHandler, new IPv4Filter());
 		
 		InetAddress bindAddress = null;
-		if (!Config.GAMESERVER_HOSTNAME.equals("*"))
+		if (!ServerConfig.GAMESERVER_HOSTNAME.equals("*"))
 		{
 			try
 			{
-				bindAddress = InetAddress.getByName(Config.GAMESERVER_HOSTNAME);
+				bindAddress = InetAddress.getByName(ServerConfig.GAMESERVER_HOSTNAME);
 			}
 			catch (UnknownHostException e1)
 			{
@@ -446,9 +452,9 @@ public final class GameServer
 		
 		try
 		{
-			_selectorThread.openServerSocket(bindAddress, Config.PORT_GAME);
+			_selectorThread.openServerSocket(bindAddress, ServerConfig.PORT_GAME);
 			_selectorThread.start();
-			LOG.info("{}: is now listening on: {}:{}", getClass().getSimpleName(), Config.GAMESERVER_HOSTNAME, Config.PORT_GAME);
+			LOG.info("{}: is now listening on: {}:{}", getClass().getSimpleName(), ServerConfig.GAMESERVER_HOSTNAME, ServerConfig.PORT_GAME);
 		}
 		catch (IOException e)
 		{
@@ -456,7 +462,7 @@ public final class GameServer
 			System.exit(1);
 		}
 		
-		LOG.info("{}: Maximum numbers of connected players: {}", getClass().getSimpleName(), Config.MAXIMUM_ONLINE_USERS);
+		LOG.info("{}: Maximum numbers of connected players: {}", getClass().getSimpleName(), ServerConfig.MAXIMUM_ONLINE_USERS);
 		LOG.info("{}: Started, free memory {} of {}", getClass().getSimpleName(), MemoryWatchDog.getMemFreeMb(), MemoryWatchDog.getMemMaxMb());
 		LOG.info("{}: Used memory: {}", getClass().getSimpleName(), MemoryWatchDog.getMemUsedMb());
 		LOG.info("Revision: ................ {}", getVersion().getRevisionNumber());
@@ -465,8 +471,11 @@ public final class GameServer
 		LOG.info("Forum: ................... L2jEnergy.ru");
 		LOG.info("{}: Server loaded in {} seconds.", getClass().getSimpleName(), TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis() - serverLoadStart));
 		_upTime = System.currentTimeMillis();
-		printSection("UPnP");
-		UPnPService.getInstance();
+		if (ServerConfig.ENABLE_UPNP)
+		{
+			printSection("UPnP");
+			UPnPService.getInstance().load(ServerConfig.PORT_GAME, "L2J Game Server");
+		}
 	}
 	
 	public static void main(String[] args) throws Exception
@@ -474,12 +483,12 @@ public final class GameServer
 		Server.serverMode = Server.MODE_GAMESERVER;
 		
 		// Initialize configurations.
+		ConfigLoader.loading();
 		Config.load();
-		
 		final String dp = Util.parseArg(args, DATAPACK, true);
 		if (dp != null)
 		{
-			Config.DATAPACK_ROOT = new File(dp);
+			ServerConfig.DATAPACK_ROOT = new File(dp);
 		}
 		
 		final String gd = Util.parseArg(args, GEODATA, true);
@@ -495,13 +504,22 @@ public final class GameServer
 		
 		printSection("Database");
 		DAOFactory.getInstance();
-		ConnectionFactory.getInstance();
+		
+		ConnectionFactory.builder() //
+			.withDriver(ServerConfig.DATABASE_DRIVER) //
+			.withUrl(ServerConfig.DATABASE_URL) //
+			.withUser(ServerConfig.DATABASE_LOGIN) //
+			.withPassword(ServerConfig.DATABASE_PASSWORD) //
+			.withConnectionPool(ServerConfig.DATABASE_CONNECTION_POOL) //
+			.withMaxIdleTime(ServerConfig.DATABASE_MAX_IDLE_TIME) //
+			.withMaxPoolSize(ServerConfig.DATABASE_MAX_CONNECTIONS) //
+			.build();
 		
 		gameServer = new GameServer();
 		
-		if (Config.IS_TELNET_ENABLED)
+		if (TelnetConfig.IS_TELNET_ENABLED)
 		{
-			new Status(Server.serverMode).start();
+			// new Status().start();
 		}
 		else
 		{

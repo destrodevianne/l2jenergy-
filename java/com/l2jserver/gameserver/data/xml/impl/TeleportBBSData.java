@@ -27,8 +27,8 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import com.l2jserver.gameserver.model.Location;
+import com.l2jserver.gameserver.util.IXmlReader;
 import com.l2jserver.gameserver.util.bbs.TeleportPoint;
-import com.l2jserver.util.data.xml.IXmlReader;
 
 /**
  * @author Мо3олЬ

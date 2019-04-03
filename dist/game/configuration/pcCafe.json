@@ -1,0 +1,28 @@
+{
+    #======================================================
+	#         Player Commendation System (PC Bang)
+	#======================================================
+    # Enable Pc Bang Points (add Pc Bang points only premium account)
+    "AltPcBangPointsEnabled" : "true",
+
+    # Max points (limited) that player may have.
+    "AltPcBangPointsMax" : "200000",
+
+	# Interval for add Pc Bang points is set to 20 minutes by default
+    "AltPcBangPointsDelay" : "20",
+
+    # Minimum lvl player add Pc Bang points
+    "AltPcBangPointsMinLvl" : "1",
+
+	# Amount of Pc Bang points for a bonus
+    "AltPcBangPointsBonus" : "20",
+	
+	# Double Pc Bang points chance (%)
+    "AltPcBangPointsDoubleChance" : "10",
+
+	# Enable Pc Bang points of a daily entrance reward
+    "AltPcBangDailyBonusEnabled" : "true",
+
+	# Amount of Pc Bang points for daily entrance
+    "AltPcBangDailyBonusPoints" : "1000"
+}

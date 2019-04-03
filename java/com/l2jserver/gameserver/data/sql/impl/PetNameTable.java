@@ -26,8 +26,8 @@ import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 
 public class PetNameTable
 {
@@ -58,7 +58,7 @@ public class PetNameTable
 	
 	public boolean isValidPetName(String name)
 	{
-		return Config.PET_NAME_TEMPLATE.matcher(name).matches();
+		return ServerConfig.PET_NAME_TEMPLATE.matcher(name).matches();
 	}
 	
 	private static class SingletonHolder

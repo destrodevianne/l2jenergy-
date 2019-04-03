@@ -18,8 +18,8 @@
  */
 package handlers.communityboard;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.cache.HtmCache;
+import com.l2jserver.gameserver.configuration.config.community.CBasicConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.MultisellData;
 import com.l2jserver.gameserver.handler.CommunityBoardHandler;
@@ -39,7 +39,7 @@ public class ShopBoard implements IParseBoardHandler
 	{
 		activeChar.setSessionVar("add_fav", null);
 		
-		if (!Config.ENABLE_COMMUNITY_BOARD)
+		if (!CBasicConfig.ENABLE_COMMUNITY_BOARD)
 		{
 			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "community_board_services_disabled"));
 			parseCommunityBoardCommand("_bbshome", activeChar);
@@ -66,7 +66,7 @@ public class ShopBoard implements IParseBoardHandler
 				MultisellData.getInstance().separateAndSend(listId, activeChar, null, false);
 				return false;
 			}
-			final String customPath = Config.CUSTOM_CB_ENABLED ? "Custom/" : "";
+			final String customPath = CBasicConfig.CUSTOM_CB_ENABLED ? "Custom/" : "";
 			html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/" + customPath + "shop/" + link[1] + ".html");
 		}
 		else

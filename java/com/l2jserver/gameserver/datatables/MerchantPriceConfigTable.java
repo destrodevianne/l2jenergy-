@@ -32,8 +32,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.InstanceListManager;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.model.actor.instance.L2MerchantInstance;
 import com.l2jserver.gameserver.model.entity.Castle;
@@ -73,7 +73,7 @@ public class MerchantPriceConfigTable implements InstanceListManager
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		factory.setValidating(false);
 		factory.setIgnoringComments(true);
-		File file = new File(Config.DATAPACK_ROOT + "/data/" + MPCS_FILE);
+		File file = new File(ServerConfig.DATAPACK_ROOT + "/data/" + MPCS_FILE);
 		if (file.exists())
 		{
 			int defaultPriceConfigId;

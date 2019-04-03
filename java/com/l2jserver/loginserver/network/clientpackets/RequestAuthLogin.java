@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -23,10 +23,10 @@ import java.security.GeneralSecurityException;
 
 import javax.crypto.Cipher;
 
-import com.l2jserver.Config;
 import com.l2jserver.loginserver.GameServerTable.GameServerInfo;
 import com.l2jserver.loginserver.LoginController;
 import com.l2jserver.loginserver.LoginController.AuthLoginResult;
+import com.l2jserver.loginserver.configuration.config.LoginConfig;
 import com.l2jserver.loginserver.model.data.AccountInfo;
 import com.l2jserver.loginserver.network.L2LoginClient;
 import com.l2jserver.loginserver.network.L2LoginClient.LoginClientState;
@@ -133,7 +133,7 @@ public class RequestAuthLogin extends L2LoginClientPacket
 				client.setState(LoginClientState.AUTHED_LOGIN);
 				client.setSessionKey(lc.assignSessionKeyToClient(info.getLogin(), client));
 				lc.getCharactersOnAccount(info.getLogin());
-				if (Config.SHOW_LICENCE)
+				if (LoginConfig.SHOW_LICENCE)
 				{
 					client.sendPacket(new LoginOk(getClient().getSessionKey()));
 				}

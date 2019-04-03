@@ -28,9 +28,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
+import com.l2jserver.commons.util.filter.HTMLFilter;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.file.filter.HTMLFilter;
 
 /**
  * @author Layane
@@ -41,7 +42,7 @@ public class HtmCache
 	
 	private static final HTMLFilter HTML_FILTER = new HTMLFilter();
 	
-	private static final Map<String, String> _cache = Config.LAZY_CACHE ? new ConcurrentHashMap<>() : new HashMap<>();
+	private static final Map<String, String> _cache = GeneralConfig.LAZY_CACHE ? new ConcurrentHashMap<>() : new HashMap<>();
 	
 	private int _loadedFiles;
 	private long _bytesBuffLen;
@@ -53,12 +54,12 @@ public class HtmCache
 	
 	public void reload()
 	{
-		reload(Config.DATAPACK_ROOT);
+		reload(ServerConfig.DATAPACK_ROOT);
 	}
 	
 	public void reload(File f)
 	{
-		if (!Config.LAZY_CACHE)
+		if (!GeneralConfig.LAZY_CACHE)
 		{
 			LOG.info("Html cache start...");
 			parseDir(f);
@@ -115,7 +116,7 @@ public class HtmCache
 			return null;
 		}
 		
-		final String relpath = Util.getRelativePath(Config.DATAPACK_ROOT, file);
+		final String relpath = Util.getRelativePath(ServerConfig.DATAPACK_ROOT, file);
 		String content = null;
 		try (FileInputStream fis = new FileInputStream(file);
 			BufferedInputStream bis = new BufferedInputStream(fis))
@@ -187,9 +188,9 @@ public class HtmCache
 		}
 		
 		String content = _cache.get(path);
-		if (Config.LAZY_CACHE && (content == null))
+		if (GeneralConfig.LAZY_CACHE && (content == null))
 		{
-			content = loadFile(new File(Config.DATAPACK_ROOT, path));
+			content = loadFile(new File(ServerConfig.DATAPACK_ROOT, path));
 		}
 		return content;
 	}
@@ -205,7 +206,7 @@ public class HtmCache
 	 */
 	public boolean isLoadable(String path)
 	{
-		return HTML_FILTER.accept(new File(Config.DATAPACK_ROOT, path));
+		return HTML_FILTER.accept(new File(ServerConfig.DATAPACK_ROOT, path));
 	}
 	
 	public static HtmCache getInstance()

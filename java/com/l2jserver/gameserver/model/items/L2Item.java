@@ -27,6 +27,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.OlympiadConfig;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.model.Elementals;
 import com.l2jserver.gameserver.model.L2Object;
@@ -765,7 +767,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	
 	public boolean checkCondition(L2Character activeChar, L2Object object, boolean sendMessage)
 	{
-		if (activeChar.canOverrideCond(PcCondOverride.ITEM_CONDITIONS) && !Config.GM_ITEM_RESTRICTION)
+		if (activeChar.canOverrideCond(PcCondOverride.ITEM_CONDITIONS) && !GeneralConfig.GM_ITEM_RESTRICTION)
 		{
 			return true;
 		}
@@ -851,7 +853,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	
 	public boolean isOlyRestrictedItem()
 	{
-		return _is_oly_restricted || Config.LIST_OLY_RESTRICTED_ITEMS.contains(_itemId);
+		return _is_oly_restricted || OlympiadConfig.LIST_OLY_RESTRICTED_ITEMS.contains(_itemId);
 	}
 	
 	public boolean isForNpc()

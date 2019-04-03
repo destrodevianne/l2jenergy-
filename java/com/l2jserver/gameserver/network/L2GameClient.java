@@ -35,10 +35,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.LoginServerThread;
 import com.l2jserver.gameserver.LoginServerThread.SessionKey;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.xml.impl.SecondaryAuthData;
@@ -127,11 +128,11 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 		_crypt = new GameCrypt();
 		_stats = new ClientStats();
 		
-		_packetQueue = new ArrayBlockingQueue<>(Config.CLIENT_PACKET_QUEUE_SIZE);
+		_packetQueue = new ArrayBlockingQueue<>(GeneralConfig.CLIENT_PACKET_QUEUE_SIZE);
 		
-		if (Config.CHAR_STORE_INTERVAL > 0)
+		if (GeneralConfig.CHAR_STORE_INTERVAL > 0)
 		{
-			_autoSaveInDB = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new AutoSaveTask(), 300000L, (Config.CHAR_STORE_INTERVAL * 60000L));
+			_autoSaveInDB = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new AutoSaveTask(), 300000L, (GeneralConfig.CHAR_STORE_INTERVAL * 60000L));
 		}
 		else
 		{
@@ -380,7 +381,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 			{
 				getActiveChar().storeMe();
 				getActiveChar().storeRecommendations();
-				if (Config.UPDATE_ITEMS_ON_CHAR_STORE)
+				if (GeneralConfig.UPDATE_ITEMS_ON_CHAR_STORE)
 				{
 					getActiveChar().getInventory().updateDatabase();
 					getActiveChar().getWarehouse().updateDatabase();
@@ -985,7 +986,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 	{
 		if (_activeChar != null)
 		{
-			Util.handleIllegalPlayerAction(_activeChar, toString() + ": " + punishment, Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(_activeChar, toString() + ": " + punishment, GeneralConfig.DEFAULT_PUNISH);
 			return true;
 		}
 		
@@ -1029,7 +1030,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 		}
 		if (_state == GameClientState.CONNECTED) // in CONNECTED state kick client immediately
 		{
-			if (Config.PACKET_HANDLER_DEBUG)
+			if (GeneralConfig.PACKET_HANDLER_DEBUG)
 			{
 				LOG.debug("Client {} - Disconnected, too many buffer underflows in non-authed state.", toString());
 			}
@@ -1050,7 +1051,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 		}
 		if (_state == GameClientState.CONNECTED) // in CONNECTED state kick client immediately
 		{
-			if (Config.PACKET_HANDLER_DEBUG)
+			if (GeneralConfig.PACKET_HANDLER_DEBUG)
 			{
 				LOG.debug("Client {} - Disconnected, too many unknown packets in non-authed state.", toString());
 			}
@@ -1096,7 +1097,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 			{
 				if (getStats().processedPackets > 3)
 				{
-					if (Config.PACKET_HANDLER_DEBUG)
+					if (GeneralConfig.PACKET_HANDLER_DEBUG)
 					{
 						LOG.debug("Client {} - Disconnected, too many packets in non-authed state.", toString());
 					}

@@ -30,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.ai.CtrlEvent;
 import com.l2jserver.gameserver.ai.CtrlIntention;
@@ -37,6 +38,8 @@ import com.l2jserver.gameserver.ai.L2AttackableAI;
 import com.l2jserver.gameserver.ai.L2CharacterAI;
 import com.l2jserver.gameserver.ai.L2FortSiegeGuardAI;
 import com.l2jserver.gameserver.ai.L2SiegeGuardAI;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.PremiumConfig;
 import com.l2jserver.gameserver.datatables.EventDroplist;
 import com.l2jserver.gameserver.datatables.EventDroplist.DateDrop;
 import com.l2jserver.gameserver.datatables.ItemTable;
@@ -74,7 +77,6 @@ import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.taskmanager.DecayTaskManager;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.Rnd;
 
 public class L2Attackable extends L2Npc
 {
@@ -759,7 +761,7 @@ public class L2Attackable extends L2Npc
 		AggroInfo ai = _aggroList.get(target);
 		if (ai == null)
 		{
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				LOG.info("Target {} not present in aggro list of {}.", target, this);
 			}
@@ -1501,7 +1503,7 @@ public class L2Attackable extends L2Npc
 			{
 				count += diff;
 			}
-			_harvestItem.set(new ItemHolder(_seed.getCropId(), seeder.isPremium() ? count * Config.RATE_DROP_MANOR * Config.PREMIUM_RATE_DROP_MANOR : count * Config.RATE_DROP_MANOR));
+			_harvestItem.set(new ItemHolder(_seed.getCropId(), seeder.isPremium() ? count * Config.RATE_DROP_MANOR * PremiumConfig.PREMIUM_RATE_DROP_MANOR : count * Config.RATE_DROP_MANOR));
 		}
 	}
 	
@@ -1555,7 +1557,7 @@ public class L2Attackable extends L2Npc
 	@Override
 	public boolean hasRandomAnimation()
 	{
-		return ((Config.MAX_MONSTER_ANIMATION > 0) && isRandomAnimationEnabled() && !(this instanceof L2GrandBossInstance));
+		return ((GeneralConfig.MAX_MONSTER_ANIMATION > 0) && isRandomAnimationEnabled() && !(this instanceof L2GrandBossInstance));
 	}
 	
 	@Override

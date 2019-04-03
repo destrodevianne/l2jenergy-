@@ -32,13 +32,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.datatables.SpawnTable;
 import com.l2jserver.gameserver.model.L2Spawn;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.actor.instance.L2RaidBossInstance;
-import com.l2jserver.util.Rnd;
 
 /**
  * Raid Boss spawn manager.

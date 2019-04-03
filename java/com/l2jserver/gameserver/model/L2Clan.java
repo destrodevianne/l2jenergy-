@@ -37,9 +37,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.commons.util.EnumIntBitmask;
 import com.l2jserver.gameserver.communitybbs.BB.Forum;
 import com.l2jserver.gameserver.communitybbs.Manager.ForumsBBSManager;
+import com.l2jserver.gameserver.configuration.config.community.CBasicConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
@@ -83,7 +85,6 @@ import com.l2jserver.gameserver.network.serverpackets.StatusUpdate;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.network.serverpackets.UserInfo;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.EnumIntBitmask;
 
 public class L2Clan implements IIdentifiable, INamable
 {
@@ -702,7 +703,7 @@ public class L2Clan implements IIdentifiable, INamable
 	public void setLevel(int level)
 	{
 		_level = level;
-		if ((_level >= 2) && (_forum == null) && Config.ENABLE_COMMUNITY_BOARD)
+		if ((_level >= 2) && (_forum == null) && CBasicConfig.ENABLE_COMMUNITY_BOARD)
 		{
 			final Forum forum = ForumsBBSManager.getInstance().getForumByName("ClanRoot");
 			if (forum != null)

@@ -18,9 +18,9 @@
  */
 package com.l2jserver.gameserver.model.actor.tasks.player;
 
-import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
+import com.l2jserver.gameserver.configuration.config.PcCafeConfig;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.util.Rnd;
 
 /**
  * @author Мо3олЬ
@@ -42,14 +42,14 @@ public class PCCafePointsTask implements Runnable
 			return;
 		}
 		
-		if (_player.isInOfflineMode() || (_player.getLevel() < Config.ALT_PCBANG_POINTS_MIN_LVL))
+		if (_player.isInOfflineMode() || (_player.getLevel() < PcCafeConfig.ALT_PCBANG_POINTS_MIN_LVL))
 		{
 			return;
 		}
 		
 		if (_player.isPremium())
 		{
-			_player.increasePcCafePoints(Config.ALT_PCBANG_POINTS_BONUS, (Config.ALT_PCBANG_POINTS_BONUS_DOUBLE_CHANCE > 0) && (Rnd.get(100) < Config.ALT_PCBANG_POINTS_BONUS_DOUBLE_CHANCE));
+			_player.increasePcCafePoints(PcCafeConfig.ALT_PCBANG_POINTS_BONUS, (PcCafeConfig.ALT_PCBANG_POINTS_BONUS_DOUBLE_CHANCE > 0) && (Rnd.get(100) < PcCafeConfig.ALT_PCBANG_POINTS_BONUS_DOUBLE_CHANCE));
 		}
 	}
 }

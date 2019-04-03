@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -23,7 +23,7 @@ import java.net.Socket;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import com.l2jserver.Config;
+import com.l2jserver.loginserver.configuration.config.LoginConfig;
 
 /**
  * @author KenM
@@ -34,7 +34,7 @@ public class GameServerListener extends FloodProtectedListener
 	
 	public GameServerListener() throws IOException
 	{
-		super(Config.GAME_SERVER_LOGIN_HOST, Config.GAME_SERVER_LOGIN_PORT);
+		super(LoginConfig.GAME_SERVER_LOGIN_HOST, LoginConfig.GAME_SERVER_LOGIN_PORT);
 		setName(getClass().getSimpleName());
 	}
 	

@@ -18,6 +18,7 @@
  */
 package ai.npc.TerritoryManagers;
 
+import com.l2jserver.gameserver.configuration.config.TerritoryWarConfig;
 import com.l2jserver.gameserver.data.xml.impl.MultisellData;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
@@ -101,7 +102,7 @@ public final class TerritoryManagers extends AbstractNpcAI
 				// L2J Custom for minimum badges required.
 				final NpcHtmlMessage html = new NpcHtmlMessage(npc.getObjectId());
 				html.setFile(player.getHtmlPrefix(), "data/scripts/ai/npc/TerritoryManagers/36490-04.html");
-				html.replace("%badge%", String.valueOf(TerritoryWarManager.MINTWBADGEFORNOBLESS));
+				html.replace("%badge%", String.valueOf(TerritoryWarConfig.MINTWBADGEFORNOBLESS));
 				player.sendPacket(html);
 				break;
 			}
@@ -122,7 +123,7 @@ public final class TerritoryManagers extends AbstractNpcAI
 			}
 			case "MakeMeNoble":
 			{
-				if (player.getInventory().getInventoryItemCount(itemId, -1) < TerritoryWarManager.MINTWBADGEFORNOBLESS)
+				if (player.getInventory().getInventoryItemCount(itemId, -1) < TerritoryWarConfig.MINTWBADGEFORNOBLESS)
 				{
 					// If the player does not have enough Territory Badges, it cannot continue.
 					htmltext = "36490-02.html";
@@ -150,7 +151,7 @@ public final class TerritoryManagers extends AbstractNpcAI
 					processNoblesseQuest(player, 247, null);
 					
 					// Take the Territory Badges.
-					player.destroyItemByItemId(event, itemId, TerritoryWarManager.MINTWBADGEFORNOBLESS, npc, true);
+					player.destroyItemByItemId(event, itemId, TerritoryWarConfig.MINTWBADGEFORNOBLESS, npc, true);
 					// Give Noblesse Tiara to the player.
 					player.addItem(event, 7694, 1, npc, true);
 					// Set Noblesse status to the player.

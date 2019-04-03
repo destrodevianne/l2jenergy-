@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.configuration.config.OlympiadConfig;
 import com.l2jserver.gameserver.instancemanager.AntiFeedManager;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.FortManager;
@@ -184,7 +185,7 @@ public abstract class AbstractOlympiadGame
 			player.setIsInOlympiadMode(true);
 			player.setIsOlympiadStart(false);
 			player.setOlympiadSide(par.getSide());
-			player.setOlympiadBuffCount(Config.ALT_OLY_MAX_BUFFS);
+			player.setOlympiadBuffCount(OlympiadConfig.ALT_OLY_MAX_BUFFS);
 			loc.setInstanceId(OlympiadGameManager.getInstance().getOlympiadTask(id).getZone().getInstanceId());
 			player.teleToLocation(loc, false);
 			player.sendPacket(new ExOlympiadMode(2));

@@ -30,7 +30,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.commons.util.PropertiesParser;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2Object;
@@ -41,7 +42,6 @@ import com.l2jserver.gameserver.model.entity.Castle;
 import com.l2jserver.gameserver.model.entity.Siege;
 import com.l2jserver.gameserver.model.interfaces.ILocational;
 import com.l2jserver.gameserver.model.skills.Skill;
-import com.l2jserver.util.PropertiesParser;
 
 public final class SiegeManager
 {

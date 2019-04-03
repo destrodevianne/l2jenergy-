@@ -28,7 +28,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.data.xml.impl.ArmorSetsData;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.enums.ItemLocation;
@@ -44,7 +45,6 @@ import com.l2jserver.gameserver.model.items.type.EtcItemType;
 import com.l2jserver.gameserver.model.items.type.WeaponType;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.network.serverpackets.SkillCoolTime;
-import com.l2jserver.util.StringUtil;
 
 /**
  * This class manages inventory

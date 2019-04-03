@@ -23,6 +23,8 @@ import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.LoginServerThread;
 import com.l2jserver.gameserver.SevenSigns;
 import com.l2jserver.gameserver.cache.HtmCache;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.PcCafeConfig;
 import com.l2jserver.gameserver.data.sql.impl.AnnouncementsTable;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
@@ -148,7 +150,7 @@ public class EnterWorld extends L2GameClientPacket
 		getClient().setClientTracert(tracert);
 		
 		// Restore to instanced area if enabled
-		if (Config.RESTORE_PLAYER_INSTANCE)
+		if (GeneralConfig.RESTORE_PLAYER_INSTANCE)
 		{
 			activeChar.setInstanceId(InstanceManager.getInstance().getPlayerInstance(activeChar.getObjectId()));
 		}
@@ -161,7 +163,7 @@ public class EnterWorld extends L2GameClientPacket
 			}
 		}
 		
-		if (Config.DEBUG)
+		if (GeneralConfig.DEBUG)
 		{
 			if (L2World.getInstance().findObject(activeChar.getObjectId()) != null)
 			{
@@ -174,28 +176,28 @@ public class EnterWorld extends L2GameClientPacket
 		// Apply special GM properties to the GM when entering
 		if (activeChar.isGM())
 		{
-			if (Config.GM_STARTUP_INVULNERABLE && AdminData.getInstance().hasAccess("admin_invul", activeChar.getAccessLevel()))
+			if (GeneralConfig.GM_STARTUP_INVULNERABLE && AdminData.getInstance().hasAccess("admin_invul", activeChar.getAccessLevel()))
 			{
 				activeChar.setIsInvul(true);
 			}
 			
-			if (Config.GM_STARTUP_INVISIBLE && AdminData.getInstance().hasAccess("admin_invisible", activeChar.getAccessLevel()))
+			if (GeneralConfig.GM_STARTUP_INVISIBLE && AdminData.getInstance().hasAccess("admin_invisible", activeChar.getAccessLevel()))
 			{
 				activeChar.setInvisible(true);
 			}
 			
-			if (Config.GM_STARTUP_SILENCE && AdminData.getInstance().hasAccess("admin_silence", activeChar.getAccessLevel()))
+			if (GeneralConfig.GM_STARTUP_SILENCE && AdminData.getInstance().hasAccess("admin_silence", activeChar.getAccessLevel()))
 			{
 				activeChar.setSilenceMode(true);
 			}
 			
-			if (Config.GM_STARTUP_DIET_MODE && AdminData.getInstance().hasAccess("admin_diet", activeChar.getAccessLevel()))
+			if (GeneralConfig.GM_STARTUP_DIET_MODE && AdminData.getInstance().hasAccess("admin_diet", activeChar.getAccessLevel()))
 			{
 				activeChar.setDietMode(true);
 				activeChar.refreshOverloaded();
 			}
 			
-			if (Config.GM_STARTUP_AUTO_LIST && AdminData.getInstance().hasAccess("admin_gmliston", activeChar.getAccessLevel()))
+			if (GeneralConfig.GM_STARTUP_AUTO_LIST && AdminData.getInstance().hasAccess("admin_gmliston", activeChar.getAccessLevel()))
 			{
 				AdminData.getInstance().addGm(activeChar, false);
 			}
@@ -204,12 +206,12 @@ public class EnterWorld extends L2GameClientPacket
 				AdminData.getInstance().addGm(activeChar, true);
 			}
 			
-			if (Config.GM_GIVE_SPECIAL_SKILLS)
+			if (GeneralConfig.GM_GIVE_SPECIAL_SKILLS)
 			{
 				SkillTreesData.getInstance().addSkills(activeChar, false);
 			}
 			
-			if (Config.GM_GIVE_SPECIAL_AURA_SKILLS)
+			if (GeneralConfig.GM_GIVE_SPECIAL_AURA_SKILLS)
 			{
 				SkillTreesData.getInstance().addSkills(activeChar, true);
 			}
@@ -352,7 +354,7 @@ public class EnterWorld extends L2GameClientPacket
 			}
 		}
 		
-		if (Config.ALT_PCBANG_POINTS_ENABLED)
+		if (PcCafeConfig.ALT_PCBANG_POINTS_ENABLED)
 		{
 			activeChar.startPcBangPointsTask();
 		}
@@ -454,7 +456,7 @@ public class EnterWorld extends L2GameClientPacket
 			notice.disableValidation();
 			sendPacket(notice);
 		}
-		else if (Config.SERVER_NEWS)
+		else if (GeneralConfig.SERVER_NEWS)
 		{
 			String serverNews = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/servnews.htm");
 			if (serverNews != null)
@@ -535,7 +537,7 @@ public class EnterWorld extends L2GameClientPacket
 			activeChar.teleToLocation(TeleportWhereType.TOWN);
 		}
 		
-		if (Config.ALLOW_MAIL)
+		if (GeneralConfig.ALLOW_MAIL)
 		{
 			if (MailManager.getInstance().hasUnreadPost(activeChar))
 			{

@@ -18,6 +18,7 @@
  */
 package handlers.admincommandhandlers;
 
+import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.CastleManorManager;
@@ -25,7 +26,6 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.Castle;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.StringUtil;
 
 /**
  * @author malyelfik

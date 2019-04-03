@@ -19,6 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
@@ -75,13 +76,13 @@ public final class RequestDropItem extends L2GameClientPacket
 		
 		L2ItemInstance item = activeChar.getInventory().getItemByObjectId(_objectId);
 		
-		if ((item == null) || (_count == 0) || !activeChar.validateItemManipulation(_objectId, "drop") || (!Config.ALLOW_DISCARDITEM && !activeChar.canOverrideCond(PcCondOverride.DROP_ALL_ITEMS))
-			|| (!item.isDropable() && !(activeChar.canOverrideCond(PcCondOverride.DROP_ALL_ITEMS) && Config.GM_TRADE_RESTRICTED_ITEMS)) || ((item.getItemType() == EtcItemType.PET_COLLAR) && activeChar.havePetInvItems()) || activeChar.isInsideZone(ZoneId.NO_ITEM_DROP))
+		if ((item == null) || (_count == 0) || !activeChar.validateItemManipulation(_objectId, "drop") || (!GeneralConfig.ALLOW_DISCARDITEM && !activeChar.canOverrideCond(PcCondOverride.DROP_ALL_ITEMS))
+			|| (!item.isDropable() && !(activeChar.canOverrideCond(PcCondOverride.DROP_ALL_ITEMS) && GeneralConfig.GM_TRADE_RESTRICTED_ITEMS)) || ((item.getItemType() == EtcItemType.PET_COLLAR) && activeChar.havePetInvItems()) || activeChar.isInsideZone(ZoneId.NO_ITEM_DROP))
 		{
 			activeChar.sendPacket(SystemMessageId.CANNOT_DISCARD_THIS_ITEM);
 			return;
 		}
-		if (item.isQuestItem() && !(activeChar.canOverrideCond(PcCondOverride.DROP_ALL_ITEMS) && Config.GM_TRADE_RESTRICTED_ITEMS))
+		if (item.isQuestItem() && !(activeChar.canOverrideCond(PcCondOverride.DROP_ALL_ITEMS) && GeneralConfig.GM_TRADE_RESTRICTED_ITEMS))
 		{
 			return;
 		}
@@ -100,17 +101,17 @@ public final class RequestDropItem extends L2GameClientPacket
 		
 		if (_count < 0)
 		{
-			Util.handleIllegalPlayerAction(activeChar, "[RequestDropItem] Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to drop item with oid " + _objectId + " but has count < 0!", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(activeChar, "[RequestDropItem] Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to drop item with oid " + _objectId + " but has count < 0!", GeneralConfig.DEFAULT_PUNISH);
 			return;
 		}
 		
 		if (!item.isStackable() && (_count > 1))
 		{
-			Util.handleIllegalPlayerAction(activeChar, "[RequestDropItem] Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to drop non-stackable item with oid " + _objectId + " but has count > 1!", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(activeChar, "[RequestDropItem] Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to drop non-stackable item with oid " + _objectId + " but has count > 1!", GeneralConfig.DEFAULT_PUNISH);
 			return;
 		}
 		
-		if (Config.JAIL_DISABLE_TRANSACTION && activeChar.isJailed())
+		if (GeneralConfig.JAIL_DISABLE_TRANSACTION && activeChar.isJailed())
 		{
 			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "no_drop_in_jail"));
 			return;

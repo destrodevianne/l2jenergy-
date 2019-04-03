@@ -23,6 +23,8 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.EnchantSkillGroupsData;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.model.L2EnchantSkillGroup.EnchantSkillHolder;
@@ -38,7 +40,6 @@ import com.l2jserver.gameserver.network.serverpackets.ExEnchantSkillInfoDetail;
 import com.l2jserver.gameserver.network.serverpackets.ExEnchantSkillResult;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.network.serverpackets.UserInfo;
-import com.l2jserver.util.Rnd;
 
 /**
  * Format (ch) dd c: (id) 0xD0 h: (subid) 0x06 d: skill id d: skill lvl
@@ -148,7 +149,7 @@ public final class RequestExEnchantSkill extends L2GameClientPacket
 			final int rate = esd.getRate(player);
 			if (Rnd.get(100) <= rate)
 			{
-				if (Config.LOG_SKILL_ENCHANTS)
+				if (GeneralConfig.LOG_SKILL_ENCHANTS)
 				{
 					final LogRecord record = new LogRecord(Level.INFO, "Success");
 					record.setParameters(new Object[]
@@ -175,7 +176,7 @@ public final class RequestExEnchantSkill extends L2GameClientPacket
 				player.sendPacket(SystemMessageId.YOU_HAVE_FAILED_TO_ENCHANT_THE_SKILL_S1);
 				player.sendPacket(ExEnchantSkillResult.valueOf(false));
 				
-				if (Config.LOG_SKILL_ENCHANTS)
+				if (GeneralConfig.LOG_SKILL_ENCHANTS)
 				{
 					final LogRecord record = new LogRecord(Level.INFO, "Fail");
 					record.setParameters(new Object[]

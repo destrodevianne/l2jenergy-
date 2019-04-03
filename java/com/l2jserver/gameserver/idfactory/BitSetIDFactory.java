@@ -21,8 +21,8 @@ package com.l2jserver.gameserver.idfactory;
 import java.util.BitSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.l2jserver.commons.util.PrimeFinder;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.util.PrimeFinder;
 
 /**
  * This class ..

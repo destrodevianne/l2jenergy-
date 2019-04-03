@@ -20,7 +20,7 @@ package com.l2jserver.gameserver.model.olympiad;
 
 import java.util.List;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.OlympiadConfig;
 
 /**
  * @author DS
@@ -41,13 +41,13 @@ public class OlympiadGameNonClassed extends OlympiadGameNormal
 	@Override
 	protected final int getDivider()
 	{
-		return Config.ALT_OLY_DIVIDER_NON_CLASSED;
+		return OlympiadConfig.ALT_OLY_DIVIDER_NON_CLASSED;
 	}
 	
 	@Override
 	protected final int[][] getReward()
 	{
-		return Config.ALT_OLY_NONCLASSED_REWARD;
+		return OlympiadConfig.ALT_OLY_NONCLASSED_REWARD;
 	}
 	
 	@Override

@@ -18,7 +18,7 @@
  */
 package handlers.itemhandlers;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.ManorConfig;
 import com.l2jserver.gameserver.handler.IItemHandler;
 import com.l2jserver.gameserver.instancemanager.CastleManorManager;
 import com.l2jserver.gameserver.instancemanager.MapRegionManager;
@@ -41,7 +41,7 @@ public class Seed implements IItemHandler
 	@Override
 	public boolean useItem(L2Playable playable, L2ItemInstance item, boolean forceUse)
 	{
-		if (!Config.ALLOW_MANOR)
+		if (!ManorConfig.ALLOW_MANOR)
 		{
 			return false;
 		}

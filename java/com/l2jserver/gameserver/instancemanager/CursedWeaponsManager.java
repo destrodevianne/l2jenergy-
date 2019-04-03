@@ -32,8 +32,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.CursedWeapon;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.actor.L2Character;
@@ -49,7 +49,7 @@ import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.util.Broadcast;
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * @author Micht
@@ -67,7 +67,7 @@ public final class CursedWeaponsManager implements IXmlReader
 	{
 		_cursedWeapons = new HashMap<>();
 		
-		if (!Config.ALLOW_CURSED_WEAPONS)
+		if (!GeneralConfig.ALLOW_CURSED_WEAPONS)
 		{
 			return;
 		}

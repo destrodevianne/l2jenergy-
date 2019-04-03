@@ -22,8 +22,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledFuture;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -121,7 +121,7 @@ public final class Race extends Event
 		}
 		
 		// Check Custom Table - we use custom NPC's
-		if (!Config.CUSTOM_NPC_DATA)
+		if (!GeneralConfig.CUSTOM_NPC_DATA)
 		{
 			LOG.info("{}: Event can't be started, because custom npc table is disabled!", getName());
 			eventMaker.sendMessage("Event " + getName() + " can't be started because custom NPC table is disabled!");

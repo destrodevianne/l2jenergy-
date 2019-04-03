@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.handler.CommunityBoardHandler;
 import com.l2jserver.gameserver.handler.IWriteBoardHandler;

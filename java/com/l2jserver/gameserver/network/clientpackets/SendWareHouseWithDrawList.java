@@ -19,6 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.ClanPrivilege;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -138,7 +139,7 @@ public final class SendWareHouseWithDrawList extends L2GameClientPacket
 			L2ItemInstance item = warehouse.getItemByObjectId(i.getId());
 			if ((item == null) || (item.getCount() < i.getCount()))
 			{
-				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to withdraw non-existent item from warehouse.", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to withdraw non-existent item from warehouse.", GeneralConfig.DEFAULT_PUNISH);
 				return;
 			}
 			
@@ -168,7 +169,7 @@ public final class SendWareHouseWithDrawList extends L2GameClientPacket
 		}
 		
 		// Proceed to the transfer
-		InventoryUpdate playerIU = Config.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
+		InventoryUpdate playerIU = GeneralConfig.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
 		for (ItemHolder i : _items)
 		{
 			L2ItemInstance oldItem = warehouse.getItemByObjectId(i.getId());

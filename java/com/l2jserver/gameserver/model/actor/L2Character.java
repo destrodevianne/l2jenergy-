@@ -38,6 +38,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ThreadPoolManager;
@@ -45,6 +46,8 @@ import com.l2jserver.gameserver.ai.CtrlEvent;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.ai.L2AttackableAI;
 import com.l2jserver.gameserver.ai.L2CharacterAI;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.TerritoryWarConfig;
 import com.l2jserver.gameserver.data.xml.impl.CategoryData;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
 import com.l2jserver.gameserver.datatables.ItemTable;
@@ -154,9 +157,8 @@ import com.l2jserver.gameserver.network.serverpackets.TeleportToLocation;
 import com.l2jserver.gameserver.pathfinding.AbstractNodeLoc;
 import com.l2jserver.gameserver.pathfinding.PathFinding;
 import com.l2jserver.gameserver.taskmanager.AttackStanceTaskManager;
+import com.l2jserver.gameserver.util.EmptyQueue;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.EmptyQueue;
-import com.l2jserver.util.Rnd;
 
 /**
  * Mother class of all character objects of the world (PC, NPC...)<br>
@@ -4083,7 +4085,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 			{
 				try
 				{
-					if (Config.MOVE_BASED_KNOWNLIST)
+					if (GeneralConfig.MOVE_BASED_KNOWNLIST)
 					{
 						getKnownList().findObjects();
 					}
@@ -4164,7 +4166,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 			revalidateZone(true);
 		}
 		broadcastPacket(new StopMove(this));
-		if (Config.MOVE_BASED_KNOWNLIST && updateKnownObjects)
+		if (GeneralConfig.MOVE_BASED_KNOWNLIST && updateKnownObjects)
 		{
 			getKnownList().findObjects();
 		}
@@ -5103,7 +5105,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 			return false;
 		}
 		
-		if (TerritoryWarManager.PLAYER_WITH_WARD_CAN_BE_KILLED_IN_PEACEZONE && TerritoryWarManager.getInstance().isTWInProgress())
+		if (TerritoryWarConfig.PLAYER_WITH_WARD_CAN_BE_KILLED_IN_PEACEZONE && TerritoryWarManager.getInstance().isTWInProgress())
 		{
 			if (target.isPlayer() && target.getActingPlayer().isCombatFlagEquipped())
 			{

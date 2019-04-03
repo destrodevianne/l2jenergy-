@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.idfactory.IdFactory;
 import com.l2jserver.gameserver.model.itemcontainer.Inventory;
@@ -34,7 +35,6 @@ import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.pathfinding.AbstractNode;
 import com.l2jserver.gameserver.pathfinding.AbstractNodeLoc;
 import com.l2jserver.gameserver.pathfinding.PathFinding;
-import com.l2jserver.util.StringUtil;
 
 /**
  * @author Sami, DS Credits to Diamond

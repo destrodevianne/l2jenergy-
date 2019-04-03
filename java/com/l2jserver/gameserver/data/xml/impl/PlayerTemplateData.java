@@ -28,7 +28,7 @@ import org.w3c.dom.Node;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.actor.templates.L2PcTemplate;
 import com.l2jserver.gameserver.model.base.ClassId;
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * Loads player's base stats.

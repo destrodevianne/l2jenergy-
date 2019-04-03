@@ -20,7 +20,7 @@ package handlers.admincommandhandlers;
 
 import java.util.logging.Logger;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -150,7 +150,7 @@ public class AdminEnchant implements IAdminCommandHandler
 				}
 				catch (StringIndexOutOfBoundsException e)
 				{
-					if (Config.DEVELOPER)
+					if (GeneralConfig.DEVELOPER)
 					{
 						_log.warning("Set enchant error: " + e);
 					}
@@ -158,7 +158,7 @@ public class AdminEnchant implements IAdminCommandHandler
 				}
 				catch (NumberFormatException e)
 				{
-					if (Config.DEVELOPER)
+					if (GeneralConfig.DEVELOPER)
 					{
 						_log.warning("Set enchant error: " + e);
 					}

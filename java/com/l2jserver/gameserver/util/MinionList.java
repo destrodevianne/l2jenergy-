@@ -23,14 +23,15 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Logger;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2MonsterInstance;
 import com.l2jserver.gameserver.model.actor.templates.L2NpcTemplate;
 import com.l2jserver.gameserver.model.holders.MinionHolder;
-import com.l2jserver.util.Rnd;
 
 /**
  * @author luisantonioa, DS
@@ -386,7 +387,7 @@ public class MinionList
 		
 		minion.spawnMe(newX, newY, master.getZ());
 		
-		if (Config.DEBUG)
+		if (GeneralConfig.DEBUG)
 		{
 			_log.info("Spawned minion template " + minion.getId() + " with objid: " + minion.getObjectId() + " to boss " + master.getObjectId() + " ,at: " + minion.getX() + " x, " + minion.getY() + " y, " + minion.getZ() + " z");
 		}

@@ -35,10 +35,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.instancemanager.InstanceManager;
 import com.l2jserver.gameserver.model.L2CommandChannel;
@@ -259,7 +259,7 @@ public final class FinalEmperialTomb extends AbstractInstance
 			factory.setValidating(false);
 			factory.setIgnoringComments(true);
 			
-			File file = new File(Config.DATAPACK_ROOT + "/data/spawnZones/final_emperial_tomb.xml");
+			File file = new File(ServerConfig.DATAPACK_ROOT + "/data/spawnZones/final_emperial_tomb.xml");
 			if (!file.exists())
 			{
 				LOG.error("[Final Emperial Tomb] Missing final_emperial_tomb.xml. The quest wont work without it!");

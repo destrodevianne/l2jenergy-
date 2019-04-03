@@ -37,8 +37,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.instancemanager.MailManager;
 import com.l2jserver.gameserver.model.L2World;
@@ -56,8 +57,8 @@ public class L2TopManager
 	private static final String SELECT_MULTIPLER_L2TOP_DATA = "SELECT multipler FROM character_votes WHERE id=? AND has_reward=0";
 	private static final String UPDATE_L2TOP_DATA = "UPDATE character_votes SET has_reward=1 WHERE id=?";
 	
-	private final static String voteWeb = Config.DATAPACK_ROOT + "/data/l2top_vote-web.txt";
-	private final static String voteSms = Config.DATAPACK_ROOT + "/data/l2top_vote-sms.txt";
+	private final static String voteWeb = ServerConfig.DATAPACK_ROOT + "/data/l2top_vote-web.txt";
+	private final static String voteSms = ServerConfig.DATAPACK_ROOT + "/data/l2top_vote-sms.txt";
 	
 	protected L2TopManager()
 	{
@@ -108,7 +109,7 @@ public class L2TopManager
 		{
 			s = new Socket("l2top.ru", 80);
 			s.setSoTimeout(30000);
-			String request = "GET " + address + " HTTP/1.1\r\n" + "User-Agent: http:\\" + Config.GAMESERVER_HOSTNAME + " server\r\n" + "Host: http:\\" + Config.GAMESERVER_HOSTNAME + " \r\n" + "Accept: */*\r\n" + "Connection: close\r\n" + "\r\n";
+			String request = "GET " + address + " HTTP/1.1\r\n" + "User-Agent: http:\\" + ServerConfig.GAMESERVER_HOSTNAME + " server\r\n" + "Host: http:\\" + ServerConfig.GAMESERVER_HOSTNAME + " \r\n" + "Accept: */*\r\n" + "Connection: close\r\n" + "\r\n";
 			s.getOutputStream().write(request.getBytes());
 			BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream(), "Cp1251"));
 			for (String line = in.readLine(); line != null; line = in.readLine())

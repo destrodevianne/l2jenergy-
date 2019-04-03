@@ -25,6 +25,8 @@ import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.StringUtil;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.xml.impl.ClassListData;
@@ -57,7 +59,6 @@ import com.l2jserver.gameserver.network.serverpackets.MagicSkillUse;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.network.serverpackets.UserInfo;
-import com.l2jserver.util.StringUtil;
 
 /**
  * This class ...
@@ -1196,6 +1197,6 @@ public class L2VillageMasterInstance extends L2NpcInstance
 	
 	private static boolean isValidName(String name)
 	{
-		return Config.CLAN_NAME_TEMPLATE.matcher(name).matches();
+		return ServerConfig.CLAN_NAME_TEMPLATE.matcher(name).matches();
 	}
 }

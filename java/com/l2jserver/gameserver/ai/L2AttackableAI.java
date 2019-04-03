@@ -32,6 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ThreadPoolManager;
@@ -65,7 +66,6 @@ import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.model.skills.targets.L2TargetType;
 import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.Rnd;
 
 /**
  * This class manages AI of L2Attackable.

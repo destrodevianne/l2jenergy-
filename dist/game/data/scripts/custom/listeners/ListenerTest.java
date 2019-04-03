@@ -18,6 +18,7 @@
  */
 package custom.listeners;
 
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.events.Containers;
 import com.l2jserver.gameserver.model.events.EventType;
@@ -37,7 +38,6 @@ import com.l2jserver.gameserver.model.events.impl.sieges.castle.OnCastleSiegeSta
 import com.l2jserver.gameserver.model.events.listeners.ConsumerEventListener;
 import com.l2jserver.gameserver.model.events.returns.TerminateReturn;
 import com.l2jserver.gameserver.model.holders.ItemHolder;
-import com.l2jserver.util.Rnd;
 
 import ai.npc.AbstractNpcAI;
 

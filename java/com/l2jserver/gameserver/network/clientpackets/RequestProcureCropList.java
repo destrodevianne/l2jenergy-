@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.ManorConfig;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.instancemanager.CastleManorManager;
 import com.l2jserver.gameserver.model.CropProcure;
@@ -145,7 +146,7 @@ public class RequestProcureCropList extends L2GameClientPacket
 		}
 		
 		// Used when Config.ALT_MANOR_SAVE_ALL_ACTIONS == true
-		final int updateListSize = Config.ALT_MANOR_SAVE_ALL_ACTIONS ? _items.size() : 0;
+		final int updateListSize = ManorConfig.ALT_MANOR_SAVE_ALL_ACTIONS ? _items.size() : 0;
 		final List<CropProcure> updateList = new ArrayList<>(updateListSize);
 		
 		// Proceed the purchase
@@ -188,13 +189,13 @@ public class RequestProcureCropList extends L2GameClientPacket
 			}
 			player.addItem("Manor", i.getRewardId(), rewardItemCount, manager, true);
 			
-			if (Config.ALT_MANOR_SAVE_ALL_ACTIONS)
+			if (ManorConfig.ALT_MANOR_SAVE_ALL_ACTIONS)
 			{
 				updateList.add(cp);
 			}
 		}
 		
-		if (Config.ALT_MANOR_SAVE_ALL_ACTIONS)
+		if (ManorConfig.ALT_MANOR_SAVE_ALL_ACTIONS)
 		{
 			manor.updateCurrentProcure(castleId, updateList);
 		}

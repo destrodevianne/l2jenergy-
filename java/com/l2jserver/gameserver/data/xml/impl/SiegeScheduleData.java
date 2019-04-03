@@ -28,8 +28,8 @@ import org.w3c.dom.Node;
 
 import com.l2jserver.gameserver.model.SiegeScheduleDate;
 import com.l2jserver.gameserver.model.StatsSet;
+import com.l2jserver.gameserver.util.IXmlReader;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.data.xml.IXmlReader;
 
 /**
  * Siege Schedule data.

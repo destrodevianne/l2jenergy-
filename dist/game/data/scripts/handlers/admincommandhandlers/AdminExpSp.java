@@ -21,7 +21,7 @@ package handlers.admincommandhandlers;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.ClassListData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2Object;
@@ -153,7 +153,7 @@ public class AdminExpSp implements IAdminCommandHandler
 			player.broadcastUserInfo();
 			// Admin information
 			activeChar.sendAdminMessage("Added " + expval + " xp and " + spval + " sp to " + player.getName() + ".");
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				_log.fine("GM: " + activeChar.getName() + "(" + activeChar.getObjectId() + ") added " + expval + " xp and " + spval + " sp to " + player.getObjectId() + ".");
 			}
@@ -201,7 +201,7 @@ public class AdminExpSp implements IAdminCommandHandler
 			player.broadcastUserInfo();
 			// Admin information
 			activeChar.sendAdminMessage("Removed " + expval + " xp and " + spval + " sp from " + player.getName() + ".");
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				_log.fine("GM: " + activeChar.getName() + "(" + activeChar.getObjectId() + ") removed " + expval + " xp and " + spval + " sp from " + player.getObjectId() + ".");
 			}

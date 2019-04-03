@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ThreadPoolManager;
@@ -60,7 +61,6 @@ import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.AutoAttackStop;
 import com.l2jserver.gameserver.taskmanager.AttackStanceTaskManager;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.Rnd;
 
 /**
  * This class manages AI of L2Character.<br>

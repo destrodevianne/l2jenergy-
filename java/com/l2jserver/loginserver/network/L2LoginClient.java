@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -28,6 +28,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.loginserver.LoginController;
 import com.l2jserver.loginserver.SessionKey;
 import com.l2jserver.loginserver.network.serverpackets.L2LoginServerPacket;
@@ -35,12 +36,11 @@ import com.l2jserver.loginserver.network.serverpackets.LoginFail;
 import com.l2jserver.loginserver.network.serverpackets.LoginFail.LoginFailReason;
 import com.l2jserver.loginserver.network.serverpackets.PlayFail;
 import com.l2jserver.loginserver.network.serverpackets.PlayFail.PlayFailReason;
+import com.l2jserver.loginserver.security.ScrambledKeyPair;
+import com.l2jserver.loginserver.security.crypt.LoginCrypt;
 import com.l2jserver.mmocore.MMOClient;
 import com.l2jserver.mmocore.MMOConnection;
 import com.l2jserver.mmocore.SendablePacket;
-import com.l2jserver.util.Rnd;
-import com.l2jserver.util.crypt.LoginCrypt;
-import com.l2jserver.util.crypt.ScrambledKeyPair;
 
 /**
  * Represents a client connected into the LoginServer

@@ -25,7 +25,7 @@ import java.util.Set;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * Secondary Auth data.

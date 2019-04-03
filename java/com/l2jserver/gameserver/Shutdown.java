@@ -24,8 +24,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
-import com.l2jserver.UPnPService;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.UPnPService;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.ManorConfig;
+import com.l2jserver.gameserver.configuration.config.events.FishingConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.sql.impl.OfflineTradersTable;
 import com.l2jserver.gameserver.datatables.BotReportTable;
@@ -536,7 +539,7 @@ public class Shutdown extends Thread
 		LOG.info("Cursed Weapons Manager: Data saved({}ms).", tc.getEstimatedTimeAndRestartCounter());
 		
 		// Save all manor data
-		if (!Config.ALT_MANOR_SAVE_ALL_ACTIONS)
+		if (!ManorConfig.ALT_MANOR_SAVE_ALL_ACTIONS)
 		{
 			CastleManorManager.getInstance().storeMe();
 			LOG.info("Castle Manor Manager: Data saved({}ms).", tc.getEstimatedTimeAndRestartCounter());
@@ -554,14 +557,14 @@ public class Shutdown extends Thread
 		LOG.info("Global Variables Manager: Variables saved({}ms).", tc.getEstimatedTimeAndRestartCounter());
 		
 		// Save Fishing tournament data
-		if (Config.ALT_FISH_CHAMPIONSHIP_ENABLED)
+		if (FishingConfig.ALT_FISH_CHAMPIONSHIP_ENABLED)
 		{
 			FishingChampionshipManager.getInstance().shutdown();
 			LOG.info("Fishing Championship data has been saved({}ms).", tc.getEstimatedTimeAndRestartCounter());
 		}
 		
 		// Save items on ground before closing
-		if (Config.SAVE_DROPPED_ITEM)
+		if (GeneralConfig.SAVE_DROPPED_ITEM)
 		{
 			ItemsOnGroundManager.getInstance().saveInDb();
 			LOG.info("Items On Ground Manager: Data saved({}ms).", tc.getEstimatedTimeAndRestartCounter());
@@ -570,7 +573,7 @@ public class Shutdown extends Thread
 		}
 		
 		// Save bot reports to database
-		if (Config.BOTREPORT_ENABLE)
+		if (GeneralConfig.BOTREPORT_ENABLE)
 		{
 			BotReportTable.getInstance().saveReportedCharData();
 			LOG.info("Bot Report Table: Successfully saved reports to database!");

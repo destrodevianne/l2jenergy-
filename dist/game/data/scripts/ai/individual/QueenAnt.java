@@ -25,6 +25,7 @@ import java.util.concurrent.ScheduledFuture;
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.configuration.config.GrandBossConfig;
 import com.l2jserver.gameserver.enums.audio.Music;
 import com.l2jserver.gameserver.instancemanager.GrandBossManager;
 import com.l2jserver.gameserver.model.Location;
@@ -335,7 +336,7 @@ public final class QueenAnt extends AbstractNpcAI
 			npc.broadcastPacket(Music.BS02_D_10000.getPacket());
 			GrandBossManager.getInstance().setBossStatus(QUEEN, DEAD);
 			// Calculate Min and Max respawn times randomly.
-			long respawnTime = Config.QUEEN_ANT_SPAWN_INTERVAL + getRandom(-Config.QUEEN_ANT_SPAWN_RANDOM, Config.QUEEN_ANT_SPAWN_RANDOM);
+			long respawnTime = GrandBossConfig.QUEEN_ANT_SPAWN_INTERVAL + getRandom(-GrandBossConfig.QUEEN_ANT_SPAWN_RANDOM, GrandBossConfig.QUEEN_ANT_SPAWN_RANDOM);
 			respawnTime *= 3600000;
 			startQuestTimer("queen_unlock", respawnTime, null, null);
 			cancelQuestTimer("action", npc, null);

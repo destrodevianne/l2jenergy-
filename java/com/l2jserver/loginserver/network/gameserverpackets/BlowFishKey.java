@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -25,10 +25,10 @@ import javax.crypto.Cipher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.l2jserver.commons.network.BaseRecievePacket;
+import com.l2jserver.commons.security.crypt.NewCrypt;
 import com.l2jserver.loginserver.GameServerThread;
 import com.l2jserver.loginserver.network.L2JGameServerPacketHandler.GameServerState;
-import com.l2jserver.util.crypt.NewCrypt;
-import com.l2jserver.util.network.BaseRecievePacket;
 
 /**
  * @author -Wooden-

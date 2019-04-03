@@ -23,7 +23,8 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.l2jserver.Config;
+import com.l2jserver.commons.util.StringUtil;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.ClassListData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.datatables.SkillData;
@@ -37,7 +38,6 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.network.serverpackets.PledgeSkillList;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
-import com.l2jserver.util.StringUtil;
 
 /**
  * This class handles following admin commands:
@@ -480,7 +480,7 @@ public class AdminSkill implements IAdminCommandHandler
 				player.sendSkillList();
 				// Admin info.
 				activeChar.sendAdminMessage("You gave the skill " + name + " to " + player.getName() + ".");
-				if (Config.DEBUG)
+				if (GeneralConfig.DEBUG)
 				{
 					_log.fine("[GM]" + activeChar.getName() + " gave skill " + name + " to " + player.getName() + ".");
 				}
@@ -515,7 +515,7 @@ public class AdminSkill implements IAdminCommandHandler
 			player.removeSkill(skill);
 			// Admin information
 			activeChar.sendAdminMessage("You removed the skill " + skillname + " from " + player.getName() + ".");
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				_log.fine("[GM]" + activeChar.getName() + " removed skill " + skillname + " from " + player.getName() + ".");
 			}

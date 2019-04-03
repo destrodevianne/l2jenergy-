@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.L2WorldRegion;
@@ -48,7 +49,7 @@ public class KnownListUpdateTaskManager
 	
 	protected KnownListUpdateTaskManager()
 	{
-		ThreadPoolManager.getInstance().scheduleAiAtFixedRate(new KnownListUpdate(), 1000, Config.KNOWNLIST_UPDATE_INTERVAL);
+		ThreadPoolManager.getInstance().scheduleAiAtFixedRate(new KnownListUpdate(), 1000, GeneralConfig.KNOWNLIST_UPDATE_INTERVAL);
 	}
 	
 	private class KnownListUpdate implements Runnable

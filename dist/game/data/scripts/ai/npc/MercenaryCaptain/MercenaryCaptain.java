@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import com.l2jserver.gameserver.configuration.config.TerritoryWarConfig;
 import com.l2jserver.gameserver.data.xml.impl.MultisellData;
 import com.l2jserver.gameserver.instancemanager.TerritoryWarManager;
 import com.l2jserver.gameserver.instancemanager.TerritoryWarManager.Territory;
@@ -107,8 +108,8 @@ public final class MercenaryCaptain extends AbstractNpcAI
 				{
 					final NpcHtmlMessage html = new NpcHtmlMessage(npc.getObjectId());
 					html.setHtml(getHtm(player.getHtmlPrefix(), "36481-03.html"));
-					html.replace("%strider%", String.valueOf(TerritoryWarManager.MINTWBADGEFORSTRIDERS));
-					html.replace("%gstrider%", String.valueOf(TerritoryWarManager.MINTWBADGEFORBIGSTRIDER));
+					html.replace("%strider%", String.valueOf(TerritoryWarConfig.MINTWBADGEFORSTRIDERS));
+					html.replace("%gstrider%", String.valueOf(TerritoryWarConfig.MINTWBADGEFORBIGSTRIDER));
 					player.sendPacket(html);
 					break;
 				}
@@ -120,7 +121,7 @@ public final class MercenaryCaptain extends AbstractNpcAI
 				case "strider":
 				{
 					final String type = st.nextToken();
-					final int price = (type.equals("3")) ? TerritoryWarManager.MINTWBADGEFORBIGSTRIDER : TerritoryWarManager.MINTWBADGEFORSTRIDERS;
+					final int price = (type.equals("3")) ? TerritoryWarConfig.MINTWBADGEFORBIGSTRIDER : TerritoryWarConfig.MINTWBADGEFORSTRIDERS;
 					final int badgeId = NPCS.get(npc.getId());
 					if (getQuestItemsCount(player, badgeId) < price)
 					{

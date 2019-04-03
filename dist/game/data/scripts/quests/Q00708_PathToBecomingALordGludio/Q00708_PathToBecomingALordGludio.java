@@ -18,6 +18,7 @@
  */
 package quests.Q00708_PathToBecomingALordGludio;
 
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.FortManager;
 import com.l2jserver.gameserver.model.L2Clan;
@@ -31,7 +32,6 @@ import com.l2jserver.gameserver.model.quest.State;
 import com.l2jserver.gameserver.network.NpcStringId;
 import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
-import com.l2jserver.util.Rnd;
 
 public class Q00708_PathToBecomingALordGludio extends Quest
 {

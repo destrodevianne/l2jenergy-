@@ -36,6 +36,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.cache.HtmCache;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.datatables.SpawnTable;
@@ -377,7 +378,7 @@ public class L2Event
 				return "Cannot start event, invalid npc id.";
 			}
 			
-			try (FileReader fr = new FileReader(Config.DATAPACK_ROOT + "/data/events/" + _eventName);
+			try (FileReader fr = new FileReader(ServerConfig.DATAPACK_ROOT + "/data/events/" + _eventName);
 				BufferedReader br = new BufferedReader(fr))
 			{
 				_eventCreator = br.readLine();

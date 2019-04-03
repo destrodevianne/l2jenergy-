@@ -20,8 +20,9 @@ package com.l2jserver.gameserver.network.clientpackets;
 
 import java.util.StringTokenizer;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.ManorConfig;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.InstanceType;
@@ -160,7 +161,7 @@ public final class RequestBypassToServer extends L2GameClientPacket
 				}
 				else
 				{
-					if (Config.GMAUDIT)
+					if (GeneralConfig.GMAUDIT)
 					{
 						GMAudit.auditGMAction(activeChar.getName() + " [" + activeChar.getObjectId() + "]", _command, (activeChar.getTarget() != null ? activeChar.getTarget().getName() : "no-target"));
 					}
@@ -263,7 +264,7 @@ public final class RequestBypassToServer extends L2GameClientPacket
 			else if (_command.startsWith("manor_menu_select"))
 			{
 				final L2Npc lastNpc = activeChar.getLastFolkNPC();
-				if (Config.ALLOW_MANOR && (lastNpc != null) && lastNpc.canInteract(activeChar))
+				if (ManorConfig.ALLOW_MANOR && (lastNpc != null) && lastNpc.canInteract(activeChar))
 				{
 					final String[] split = _command.substring(_command.indexOf("?") + 1).split("&");
 					final int ask = Integer.parseInt(split[0].split("=")[1]);

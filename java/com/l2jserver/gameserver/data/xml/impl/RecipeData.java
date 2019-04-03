@@ -32,7 +32,7 @@ import com.l2jserver.gameserver.model.L2RecipeList;
 import com.l2jserver.gameserver.model.L2RecipeStatInstance;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * The Class RecipeData.

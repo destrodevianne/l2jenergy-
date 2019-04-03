@@ -42,9 +42,9 @@ import com.l2jserver.gameserver.model.primeshop.L2ProductItemComponent;
 import com.l2jserver.gameserver.network.serverpackets.ExBR_BuyProduct;
 import com.l2jserver.gameserver.network.serverpackets.ExBR_GamePoint;
 import com.l2jserver.gameserver.network.serverpackets.StatusUpdate;
+import com.l2jserver.gameserver.util.IXmlReader;
 import com.l2jserver.gameserver.util.TimeUtils;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.data.xml.IXmlReader;
 
 /**
  * @author Мо3олЬ

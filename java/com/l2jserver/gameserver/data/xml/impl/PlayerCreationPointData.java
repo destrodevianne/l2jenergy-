@@ -27,10 +27,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.base.ClassId;
-import com.l2jserver.util.Rnd;
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * @author Michael

@@ -28,6 +28,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
+import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
 import com.l2jserver.gameserver.datatables.ItemTable;
@@ -58,8 +60,6 @@ import com.l2jserver.gameserver.network.serverpackets.MagicSkillUse;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.network.serverpackets.StatusUpdate;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
-import com.l2jserver.util.Rnd;
-import com.l2jserver.util.StringUtil;
 
 /**
  * @author HorridoJoho

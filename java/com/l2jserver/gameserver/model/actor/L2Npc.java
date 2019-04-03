@@ -30,11 +30,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ItemsAutoDestroy;
 import com.l2jserver.gameserver.SevenSigns;
 import com.l2jserver.gameserver.SevenSignsFestival;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.cache.HtmCache;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.OlympiadConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.datatables.ItemTable;
@@ -98,7 +101,6 @@ import com.l2jserver.gameserver.network.serverpackets.ServerObjectInfo;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
 import com.l2jserver.gameserver.taskmanager.DecayTaskManager;
 import com.l2jserver.gameserver.util.Broadcast;
-import com.l2jserver.util.Rnd;
 
 /**
  * This class represents a Non-Player-Character in the world.<br>
@@ -304,8 +306,8 @@ public class L2Npc extends L2Character
 			return;
 		}
 		
-		int minWait = isMob() ? Config.MIN_MONSTER_ANIMATION : Config.MIN_NPC_ANIMATION;
-		int maxWait = isMob() ? Config.MAX_MONSTER_ANIMATION : Config.MAX_NPC_ANIMATION;
+		int minWait = isMob() ? GeneralConfig.MIN_MONSTER_ANIMATION : GeneralConfig.MIN_NPC_ANIMATION;
+		int maxWait = isMob() ? GeneralConfig.MAX_MONSTER_ANIMATION : GeneralConfig.MAX_NPC_ANIMATION;
 		
 		// Calculate the delay before the next animation
 		int interval = Rnd.get(minWait, maxWait) * 1000;
@@ -320,7 +322,7 @@ public class L2Npc extends L2Character
 	 */
 	public boolean hasRandomAnimation()
 	{
-		return ((Config.MAX_NPC_ANIMATION > 0) && _isRandomAnimationEnabled && !getAiType().equals(AIType.CORPSE));
+		return ((GeneralConfig.MAX_NPC_ANIMATION > 0) && _isRandomAnimationEnabled && !getAiType().equals(AIType.CORPSE));
 	}
 	
 	/**
@@ -867,7 +869,7 @@ public class L2Npc extends L2Character
 		
 		String temp = "data/html/default/" + pom + ".htm";
 		
-		if (!Config.LAZY_CACHE)
+		if (!GeneralConfig.LAZY_CACHE)
 		{
 			// If not running lazy cache the file must be in the cache or it doesnt exist
 			if (HtmCache.getInstance().contains(temp))
@@ -1086,7 +1088,7 @@ public class L2Npc extends L2Character
 			case 36402:
 				if (player.getOlympiadBuffCount() > 0)
 				{
-					filename = (player.getOlympiadBuffCount() == Config.ALT_OLY_MAX_BUFFS ? Olympiad.OLYMPIAD_HTML_PATH + "olympiad_buffs.htm" : Olympiad.OLYMPIAD_HTML_PATH + "olympiad_5buffs.htm");
+					filename = (player.getOlympiadBuffCount() == OlympiadConfig.ALT_OLY_MAX_BUFFS ? Olympiad.OLYMPIAD_HTML_PATH + "olympiad_buffs.htm" : Olympiad.OLYMPIAD_HTML_PATH + "olympiad_5buffs.htm");
 				}
 				else
 				{
@@ -1780,9 +1782,9 @@ public class L2Npc extends L2Character
 			item.dropMe(this, newX, newY, newZ);
 			
 			// Add drop to auto destroy item task.
-			if (!Config.LIST_PROTECTED_ITEMS.contains(itemId))
+			if (!GeneralConfig.LIST_PROTECTED_ITEMS.contains(itemId))
 			{
-				if (((Config.AUTODESTROY_ITEM_AFTER > 0) && !item.getItem().hasExImmediateEffect()) || ((Config.HERB_AUTO_DESTROY_TIME > 0) && item.getItem().hasExImmediateEffect()))
+				if (((GeneralConfig.AUTODESTROY_ITEM_AFTER > 0) && !item.getItem().hasExImmediateEffect()) || ((GeneralConfig.HERB_AUTO_DESTROY_TIME > 0) && item.getItem().hasExImmediateEffect()))
 				{
 					ItemsAutoDestroy.getInstance().addItem(item);
 				}
@@ -1790,7 +1792,7 @@ public class L2Npc extends L2Character
 			item.setProtected(false);
 			
 			// If stackable, end loop as entire count is included in 1 instance of item.
-			if (item.isStackable() || !Config.MULTIPLE_ITEM_DROP)
+			if (item.isStackable() || !GeneralConfig.MULTIPLE_ITEM_DROP)
 			{
 				break;
 			}

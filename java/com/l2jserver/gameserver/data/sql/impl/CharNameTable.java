@@ -30,8 +30,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
 /**
@@ -47,7 +47,7 @@ public class CharNameTable
 	
 	protected CharNameTable()
 	{
-		if (Config.CACHE_CHAR_NAMES)
+		if (GeneralConfig.CACHE_CHAR_NAMES)
 		{
 			loadAll();
 		}
@@ -94,7 +94,7 @@ public class CharNameTable
 			}
 		}
 		
-		if (Config.CACHE_CHAR_NAMES)
+		if (GeneralConfig.CACHE_CHAR_NAMES)
 		{
 			return -1;
 		}
@@ -143,7 +143,7 @@ public class CharNameTable
 			return name;
 		}
 		
-		if (Config.CACHE_CHAR_NAMES)
+		if (GeneralConfig.CACHE_CHAR_NAMES)
 		{
 			return null;
 		}

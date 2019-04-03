@@ -27,6 +27,7 @@ import java.util.StringTokenizer;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.SevenSigns;
+import com.l2jserver.gameserver.configuration.config.ManorConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.sql.impl.TeleportLocationTable;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
@@ -774,7 +775,7 @@ public final class CastleChamberlain extends AbstractNpcAI
 				if (isOwner(player, npc) && player.hasClanPrivilege(ClanPrivilege.CS_TAXES))
 				{
 					long seedIncome = 0;
-					if (Config.ALLOW_MANOR)
+					if (ManorConfig.ALLOW_MANOR)
 					{
 						for (SeedProduction sp : CastleManorManager.getInstance().getSeedProduction(castle.getResidenceId(), false))
 						{
@@ -1163,7 +1164,7 @@ public final class CastleChamberlain extends AbstractNpcAI
 			}
 			case "manor":
 			{
-				if (Config.ALLOW_MANOR)
+				if (ManorConfig.ALLOW_MANOR)
 				{
 					htmltext = (isOwner(player, npc) && player.hasClanPrivilege(ClanPrivilege.CS_MANOR_ADMIN)) ? "manor.html" : "chamberlain-21.html";
 				}

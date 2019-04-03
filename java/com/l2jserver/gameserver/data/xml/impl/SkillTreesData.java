@@ -51,7 +51,7 @@ import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.interfaces.ISkillsHolder;
 import com.l2jserver.gameserver.model.skills.CommonSkill;
 import com.l2jserver.gameserver.model.skills.Skill;
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * This class loads and manage the characters and pledges skills trees.<br>

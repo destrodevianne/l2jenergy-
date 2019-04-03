@@ -28,6 +28,7 @@ import static com.l2jserver.gameserver.network.SystemMessageId.INVENTORY_LESS_TH
 import static com.l2jserver.gameserver.network.SystemMessageId.NOT_ENOUGH_ITEMS;
 import static com.l2jserver.gameserver.network.serverpackets.TutorialCloseHtml.STATIC_PACKET;
 
+import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.data.xml.impl.ClassListData;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.model.Location;
@@ -43,7 +44,6 @@ import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.network.serverpackets.TutorialShowHtml;
 import com.l2jserver.gameserver.network.serverpackets.TutorialShowQuestionMark;
 import com.l2jserver.gameserver.network.serverpackets.UserInfo;
-import com.l2jserver.util.StringUtil;
 
 import ai.npc.AbstractNpcAI;
 

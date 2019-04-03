@@ -22,7 +22,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.l2jserver.commons.database.pool.impl.ConnectionFactory;
+import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.enums.ItemLocation;
 import com.l2jserver.gameserver.idfactory.IdFactory;
 import com.l2jserver.gameserver.model.L2World;

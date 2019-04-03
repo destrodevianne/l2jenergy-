@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.parser.hexid.HexidConfigParser;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.interfaces.IIdentifiable;
 import com.l2jserver.gameserver.network.serverpackets.AllyCrest;
@@ -101,19 +101,19 @@ public final class L2Crest implements IIdentifiable
 			case PLEDGE:
 			{
 				activeChar.sendPacket(new PledgeCrest(getId(), getData()));
-				path = "Crest.crest_" + Config.SERVER_ID + "_" + getId();
+				path = "Crest.crest_" + HexidConfigParser.SERVER_ID + "_" + getId();
 				break;
 			}
 			case PLEDGE_LARGE:
 			{
 				activeChar.sendPacket(new ExPledgeCrestLarge(getId(), getData()));
-				path = "Crest.crest_" + Config.SERVER_ID + "_" + getId() + "_l";
+				path = "Crest.crest_" + HexidConfigParser.SERVER_ID + "_" + getId() + "_l";
 				break;
 			}
 			case ALLY:
 			{
 				activeChar.sendPacket(new AllyCrest(getId(), getData()));
-				path = "Crest.crest_" + Config.SERVER_ID + "_" + getId();
+				path = "Crest.crest_" + HexidConfigParser.SERVER_ID + "_" + getId();
 				break;
 			}
 		}

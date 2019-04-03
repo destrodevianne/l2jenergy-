@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -112,7 +113,7 @@ public final class SendWareHouseDepositList extends L2GameClientPacket
 		
 		if (player.getActiveEnchantItemId() != L2PcInstance.ID_NONE)
 		{
-			Util.handleIllegalPlayerAction(player, "Player " + player.getName() + " tried to use enchant Exploit!", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(player, "Player " + player.getName() + " tried to use enchant Exploit!", GeneralConfig.DEFAULT_PUNISH);
 			return;
 		}
 		
@@ -172,7 +173,7 @@ public final class SendWareHouseDepositList extends L2GameClientPacket
 		}
 		
 		// Proceed to the transfer
-		InventoryUpdate playerIU = Config.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
+		InventoryUpdate playerIU = GeneralConfig.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
 		for (ItemHolder i : _items)
 		{
 			// Check validity of requested item

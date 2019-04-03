@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -18,9 +18,9 @@
  */
 package com.l2jserver.loginserver.network.gameserverpackets;
 
+import com.l2jserver.commons.network.BaseRecievePacket;
 import com.l2jserver.loginserver.GameServerThread;
 import com.l2jserver.loginserver.LoginController;
-import com.l2jserver.util.network.BaseRecievePacket;
 
 public class ReplyCharacters extends BaseRecievePacket
 {

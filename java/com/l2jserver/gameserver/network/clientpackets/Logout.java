@@ -21,8 +21,8 @@ package com.l2jserver.gameserver.network.clientpackets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.SevenSignsFestival;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.L2Event;
@@ -59,7 +59,7 @@ public final class Logout extends L2GameClientPacket
 		
 		if ((player.getActiveEnchantItemId() != L2PcInstance.ID_NONE) || (player.getActiveEnchantAttrItemId() != L2PcInstance.ID_NONE))
 		{
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				LOG.debug("Player {} tried to logout while enchanting.", player.getName());
 			}
@@ -77,12 +77,12 @@ public final class Logout extends L2GameClientPacket
 		// Don't allow leaving if player is fighting
 		if (AttackStanceTaskManager.getInstance().hasAttackStanceTask(player))
 		{
-			if (player.isGM() && Config.GM_RESTART_FIGHTING)
+			if (player.isGM() && GeneralConfig.GM_RESTART_FIGHTING)
 			{
 				return;
 			}
 			
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				LOG.debug("Player {} tried to logout while fighting.", player.getName());
 			}

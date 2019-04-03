@@ -25,6 +25,7 @@ import javax.script.ScriptException;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.cache.HtmCache;
+import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.data.sql.impl.CrestTable;
 import com.l2jserver.gameserver.data.sql.impl.TeleportLocationTable;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
@@ -132,7 +133,7 @@ public class AdminReload implements IAdminCommandHandler
 					if (st.hasMoreElements())
 					{
 						final String path = st.nextToken();
-						final File file = new File(Config.DATAPACK_ROOT, "data/html/" + path);
+						final File file = new File(ServerConfig.DATAPACK_ROOT, "data/html/" + path);
 						if (file.exists())
 						{
 							HtmCache.getInstance().reload(file);

@@ -19,6 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.enums.PlayerAction;
 import com.l2jserver.gameserver.handler.AdminCommandHandler;
@@ -87,7 +88,7 @@ public final class DlgAnswer extends L2GameClientPacket
 				IAdminCommandHandler ach = AdminCommandHandler.getInstance().getHandler(command);
 				if (AdminData.getInstance().hasAccess(command, activeChar.getAccessLevel()))
 				{
-					if (Config.GMAUDIT)
+					if (GeneralConfig.GMAUDIT)
 					{
 						GMAudit.auditGMAction(activeChar.getName() + " [" + activeChar.getObjectId() + "]", cmd, (activeChar.getTarget() != null ? activeChar.getTarget().getName() : "no-target"));
 					}

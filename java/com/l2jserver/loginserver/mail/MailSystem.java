@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -18,6 +18,8 @@
  */
 package com.l2jserver.loginserver.mail;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,37 +27,56 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import com.l2jserver.Config;
+import com.l2jserver.loginserver.configuration.config.EmailConfig;
+import com.l2jserver.loginserver.configuration.config.LoginConfig;
 import com.l2jserver.loginserver.model.data.MailContent;
-import com.l2jserver.util.data.xml.IXmlReader;
 
 /**
  * @author mrTJO
  */
-public class MailSystem implements IXmlReader
+public class MailSystem
 {
+	private static final Logger LOG = LoggerFactory.getLogger(MailSystem.class);
+	
 	private final Map<String, MailContent> _mailData = new HashMap<>();
 	
 	public MailSystem()
 	{
-		load();
+		loadMails();
 	}
 	
-	@Override
-	public void load()
+	private void loadMails()
 	{
-		_mailData.clear();
-		parseDatapackFile("data/mail/MailList.xml");
-		LOG.info("{}: eMail System Loaded.", getClass().getSimpleName());
-	}
-	
-	@Override
-	public void parseDocument(Document doc)
-	{
-		for (Node d = doc.getFirstChild(); d != null; d = d.getNextSibling())
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		factory.setValidating(false);
+		factory.setIgnoringComments(true);
+		File file = new File(LoginConfig.DATAPACK_ROOT + "data/mail/MailList.xml");
+		Document doc = null;
+		if (!file.exists())
+		{
+			LOG.warn("Cannot load email system - Missing file MailList.xml");
+			return;
+		}
+		
+		try
+		{
+			doc = factory.newDocumentBuilder().parse(file);
+		}
+		catch (Exception ex)
+		{
+			LOG.warn("Could not parse MailList.xml file!", ex);
+			return;
+		}
+		
+		Node n = doc.getFirstChild();
+		for (Node d = n.getFirstChild(); d != null; d = d.getNextSibling())
 		{
 			if (d.getNodeName().equals("mail"))
 			{
@@ -63,26 +84,28 @@ public class MailSystem implements IXmlReader
 				String subject = d.getAttributes().getNamedItem("subject").getNodeValue();
 				String maFile = d.getAttributes().getNamedItem("file").getNodeValue();
 				
-				try (FileInputStream fis = new FileInputStream(new File(Config.DATAPACK_ROOT, "data/mail/" + maFile));
+				File mailFile = new File(LoginConfig.DATAPACK_ROOT + "data/mail/" + maFile);
+				try (FileInputStream fis = new FileInputStream(mailFile);
 					BufferedInputStream bis = new BufferedInputStream(fis))
 				{
 					int bytes = bis.available();
 					byte[] raw = new byte[bytes];
 					
 					bis.read(raw);
-					String html = new String(raw, "UTF-8");
-					html = html.replaceAll(Config.EOL, "\n");
-					html = html.replace("%servermail%", Config.EMAIL_SERVERINFO_ADDRESS);
-					html = html.replace("%servername%", Config.EMAIL_SERVERINFO_NAME);
+					String html = new String(raw, UTF_8);
+					html = html.replaceAll(System.lineSeparator(), "\n");
+					html = html.replace("%servermail%", EmailConfig.EMAIL_SERVERINFO_ADDRESS);
+					html = html.replace("%servername%", EmailConfig.EMAIL_SERVERINFO_NAME);
 					
 					_mailData.put(mailId, new MailContent(subject, html));
 				}
-				catch (IOException e)
+				catch (IOException ex)
 				{
-					LOG.warn("IOException while reading {}", maFile);
+					LOG.warn("There has been an error while reading {}!", maFile, ex);
 				}
 			}
 		}
+		LOG.info("Email system loaded.");
 	}
 	
 	public void sendMail(String account, String messageId, String... args)
@@ -98,11 +121,11 @@ public class MailSystem implements IXmlReader
 	
 	public static MailSystem getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final MailSystem _instance = new MailSystem();
+		protected static final MailSystem INSTANCE = new MailSystem();
 	}
 }

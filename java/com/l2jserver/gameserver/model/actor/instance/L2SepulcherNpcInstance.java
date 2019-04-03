@@ -23,9 +23,10 @@ import java.util.concurrent.Future;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.instancemanager.FourSepulchersManager;
@@ -43,7 +44,6 @@ import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
 import com.l2jserver.gameserver.util.Util;
-import com.l2jserver.util.Rnd;
 
 /**
  * @author sandman
@@ -124,7 +124,7 @@ public class L2SepulcherNpcInstance extends L2Npc
 		// Check if the L2PcInstance already target the L2NpcInstance
 		if (this != player.getTarget())
 		{
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				LOG.debug("new target selected: {}", getObjectId());
 			}
@@ -219,7 +219,7 @@ public class L2SepulcherNpcInstance extends L2Npc
 				}
 				_spawnMonsterTask = ThreadPoolManager.getInstance().scheduleEffect(new SpawnMonster(getId()), 3500);
 				break;
-				
+			
 			case 31455:
 			case 31456:
 			case 31457:
@@ -241,7 +241,7 @@ public class L2SepulcherNpcInstance extends L2Npc
 				}
 				player.addItem("Quest", HALLS_KEY, 1, player, true);
 				break;
-				
+			
 			default:
 			{
 				if (hasListener(EventType.ON_NPC_QUEST_START))

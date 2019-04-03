@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
@@ -55,7 +55,7 @@ public class RequestExRqItemLink extends L2GameClientPacket
 				}
 				else
 				{
-					if (Config.DEBUG)
+					if (GeneralConfig.DEBUG)
 					{
 						LOG.debug("{} requested item link for item which wasnt published! ID: {}", getClient(), _objectId);
 					}

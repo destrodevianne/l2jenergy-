@@ -29,7 +29,7 @@ import com.l2jserver.gameserver.enums.MountType;
 import com.l2jserver.gameserver.model.L2PetData;
 import com.l2jserver.gameserver.model.L2PetLevelData;
 import com.l2jserver.gameserver.model.StatsSet;
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * This class parse and hold all pet parameters.<br>

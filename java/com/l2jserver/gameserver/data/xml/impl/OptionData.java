@@ -31,7 +31,7 @@ import com.l2jserver.gameserver.model.options.OptionsSkillHolder;
 import com.l2jserver.gameserver.model.options.OptionsSkillType;
 import com.l2jserver.gameserver.model.stats.Stats;
 import com.l2jserver.gameserver.model.stats.functions.FuncTemplate;
-import com.l2jserver.util.data.xml.IXmlReader;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * Item Option data.
