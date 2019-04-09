@@ -47,8 +47,10 @@ import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.ai.L2AttackableAI;
 import com.l2jserver.gameserver.ai.L2CharacterAI;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.configuration.config.TerritoryWarConfig;
 import com.l2jserver.gameserver.data.xml.impl.CategoryData;
+import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.enums.CategoryType;
@@ -4001,7 +4003,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 		int zPrev = getZ(); // the z coordinate may be modified by coordinate synchronizations
 		
 		double dx, dy, dz;
-		if (Config.COORD_SYNCHRONIZE == 1)
+		if (GeoDataConfig.COORD_SYNCHRONIZE == 1)
 		// the only method that can modify x,y while moving (otherwise _move would/should be set null)
 		{
 			dx = m._xDestination - xPrev;
@@ -4017,7 +4019,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 		final boolean isFloating = isFlying() || isInsideZone(ZoneId.WATER);
 		
 		// Z coordinate will follow geodata or client values
-		if ((Config.COORD_SYNCHRONIZE == 2) && !isFloating && !m.disregardingGeodata && ((GameTimeController.getInstance().getGameTicks() % 10) == 0 // once a second to reduce possible cpu load
+		if ((GeoDataConfig.COORD_SYNCHRONIZE == 2) && !isFloating && !m.disregardingGeodata && ((GameTimeController.getInstance().getGameTicks() % 10) == 0 // once a second to reduce possible cpu load
 		) && GeoData.getInstance().hasGeo(xPrev, yPrev))
 		{
 			int geoHeight = GeoData.getInstance().getSpawnHeight(xPrev, yPrev, zPrev);
@@ -4380,7 +4382,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 			
 			// Movement checks:
 			// When pathfinding enabled, for all characters except monsters returning home (could be changed later to teleport if pathfinding fails)
-			if (((Config.PATHFINDING > 0) && (!(isAttackable() && ((L2Attackable) this).isReturningToSpawnPoint()))) //
+			if (((GeoDataConfig.PATHFINDING > 0) && (!(isAttackable() && ((L2Attackable) this).isReturningToSpawnPoint()))) //
 				|| (isPlayer() && !(isInVehicle && (distance > 1500))) //
 				|| (this instanceof L2RiftInvaderInstance))
 			{
@@ -4432,7 +4434,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 			// Pathfinding checks. Only when geodata setting is 2, the LoS check gives shorter result
 			// than the original movement was and the LoS gives a shorter distance than 2000
 			// This way of detecting need for pathfinding could be changed.
-			if ((Config.PATHFINDING > 0) && ((originalDistance - distance) > 30) && (distance < 2000))
+			if ((GeoDataConfig.PATHFINDING > 0) && ((originalDistance - distance) > 30) && (distance < 2000))
 			{
 				// Path calculation
 				// Overrides previous movement check
@@ -4499,7 +4501,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 				}
 			}
 			// If no distance to go through, the movement is canceled
-			if ((distance < 1) && ((Config.PATHFINDING > 0) || isPlayable() || (this instanceof L2RiftInvaderInstance) || isAfraid()))
+			if ((distance < 1) && ((GeoDataConfig.PATHFINDING > 0) || isPlayable() || (this instanceof L2RiftInvaderInstance) || isAfraid()))
 			{
 				if (isSummon())
 				{
@@ -6297,9 +6299,9 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 	
 	public void reduceCurrentHp(double i, L2Character attacker, boolean awake, boolean isDOT, Skill skill)
 	{
-		if (Config.L2JMOD_CHAMPION_ENABLE && isChampion() && (Config.L2JMOD_CHAMPION_HP != 0))
+		if (ChampionData.getInstance().isEnabled() && isChampion())
 		{
-			getStatus().reduceHp(i / Config.L2JMOD_CHAMPION_HP, attacker, awake, isDOT, false);
+			getStatus().reduceHp(i / ChampionData.getInstance().getHpMultipler((L2Attackable) this), attacker, awake, isDOT, false);
 		}
 		else
 		{

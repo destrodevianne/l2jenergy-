@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
 import com.l2jserver.Config;
 import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.GeoData;
+import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.idfactory.IdFactory;
 import com.l2jserver.gameserver.model.itemcontainer.Inventory;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
@@ -62,7 +63,7 @@ public class CellPathFinding extends PathFinding
 	{
 		try
 		{
-			String[] array = Config.PATHFIND_BUFFERS.split(";");
+			String[] array = GeoDataConfig.PATHFIND_BUFFERS.split(";");
 			
 			_allBuffers = new BufferInfo[array.length];
 			
@@ -116,7 +117,7 @@ public class CellPathFinding extends PathFinding
 			return null;
 		}
 		
-		boolean debug = playable && Config.DEBUG_PATH;
+		boolean debug = playable && GeoDataConfig.DEBUG_PATH;
 		
 		if (debug)
 		{
@@ -174,7 +175,7 @@ public class CellPathFinding extends PathFinding
 			buffer.free();
 		}
 		
-		if ((path.size() < 3) || (Config.MAX_POSTFILTER_PASSES <= 0))
+		if ((path.size() < 3) || (GeoDataConfig.MAX_POSTFILTER_PASSES <= 0))
 		{
 			_findSuccess++;
 			return path;
@@ -225,7 +226,7 @@ public class CellPathFinding extends PathFinding
 			}
 		}
 		// only one postfilter pass for AI
-		while (playable && remove && (path.size() > 2) && (pass < Config.MAX_POSTFILTER_PASSES));
+		while (playable && remove && (path.size() > 2) && (pass < GeoDataConfig.MAX_POSTFILTER_PASSES));
 		
 		if (debug)
 		{
@@ -246,7 +247,7 @@ public class CellPathFinding extends PathFinding
 		
 		while (node.getParent() != null)
 		{
-			if (!Config.ADVANCED_DIAGONAL_STRATEGY && (node.getParent().getParent() != null))
+			if (!GeoDataConfig.ADVANCED_DIAGONAL_STRATEGY && (node.getParent().getParent() != null))
 			{
 				int tmpX = node.getLoc().getNodeX() - node.getParent().getParent().getLoc().getNodeX();
 				int tmpY = node.getLoc().getNodeY() - node.getParent().getParent().getLoc().getNodeY();

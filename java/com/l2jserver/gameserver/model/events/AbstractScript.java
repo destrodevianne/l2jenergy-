@@ -47,6 +47,7 @@ import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.commons.util.Util;
 import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.datatables.ItemTable;
@@ -2325,19 +2326,19 @@ public abstract class AbstractScript implements INamable
 		minAmount *= Config.RATE_QUEST_DROP;
 		maxAmount *= Config.RATE_QUEST_DROP;
 		dropChance *= Config.RATE_QUEST_DROP; // TODO separate configs for rate and amount
-		if ((npc != null) && Config.L2JMOD_CHAMPION_ENABLE && npc.isChampion())
+		if ((npc != null) && ChampionData.getInstance().isEnabled() && npc.isChampion())
 		{
 			if ((itemId == Inventory.ADENA_ID) || (itemId == Inventory.ANCIENT_ADENA_ID))
 			{
-				dropChance *= Config.L2JMOD_CHAMPION_ADENAS_REWARDS_CHANCE;
-				minAmount *= Config.L2JMOD_CHAMPION_ADENAS_REWARDS_AMOUNT;
-				maxAmount *= Config.L2JMOD_CHAMPION_ADENAS_REWARDS_AMOUNT;
+				dropChance *= ChampionData.getInstance().getRewardMultipler((L2Attackable) npc);
+				minAmount *= ChampionData.getInstance().getAdenaMultipler((L2Attackable) npc);
+				maxAmount *= ChampionData.getInstance().getAdenaMultipler((L2Attackable) npc);
 			}
 			else
 			{
-				dropChance *= Config.L2JMOD_CHAMPION_REWARDS_CHANCE;
-				minAmount *= Config.L2JMOD_CHAMPION_REWARDS_AMOUNT;
-				maxAmount *= Config.L2JMOD_CHAMPION_REWARDS_AMOUNT;
+				dropChance *= ChampionData.getInstance().getRewardMultipler((L2Attackable) npc);
+				minAmount *= ChampionData.getInstance().getRewardMultipler((L2Attackable) npc);
+				maxAmount *= ChampionData.getInstance().getRewardMultipler((L2Attackable) npc);
 			}
 		}
 		

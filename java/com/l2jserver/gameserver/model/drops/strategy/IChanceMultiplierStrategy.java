@@ -19,7 +19,9 @@
 package com.l2jserver.gameserver.model.drops.strategy;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.datatables.ItemTable;
+import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.drops.GeneralDropItem;
 import com.l2jserver.gameserver.model.itemcontainer.Inventory;
@@ -38,14 +40,14 @@ public interface IChanceMultiplierStrategy
 		double championmult;
 		if ((item.getItemId() == Inventory.ADENA_ID) || (item.getItemId() == Inventory.ANCIENT_ADENA_ID))
 		{
-			championmult = Config.L2JMOD_CHAMPION_ADENAS_REWARDS_CHANCE;
+			championmult = ChampionData.getInstance().getAdenaMultipler((L2Attackable) victim);
 		}
 		else
 		{
-			championmult = Config.L2JMOD_CHAMPION_REWARDS_CHANCE;
+			championmult = ChampionData.getInstance().getRewardMultipler((L2Attackable) victim);;
 		}
 		
-		return (Config.L2JMOD_CHAMPION_ENABLE && (victim != null) && victim.isChampion()) ? (Config.RATE_QUEST_DROP * championmult) : Config.RATE_QUEST_DROP;
+		return (ChampionData.getInstance().isEnabled() && (victim != null) && victim.isChampion()) ? (Config.RATE_QUEST_DROP * championmult) : Config.RATE_QUEST_DROP;
 	};
 	
 	public static IChanceMultiplierStrategy DEFAULT_STRATEGY(final double defaultMultiplier)
@@ -55,8 +57,9 @@ public interface IChanceMultiplierStrategy
 			float multiplier = 1;
 			if (victim.isChampion())
 			{
-				multiplier *= item.getItemId() != Inventory.ADENA_ID ? Config.L2JMOD_CHAMPION_REWARDS_CHANCE : Config.L2JMOD_CHAMPION_ADENAS_REWARDS_CHANCE;
+				multiplier *= item.getItemId() != Inventory.ADENA_ID ? ChampionData.getInstance().getRewardMultipler((L2Attackable) victim) : ChampionData.getInstance().getAdenaMultipler((L2Attackable) victim);
 			}
+			
 			Float dropChanceMultiplier = Config.RATE_DROP_CHANCE_MULTIPLIER.get(item.getItemId());
 			if (dropChanceMultiplier != null)
 			{

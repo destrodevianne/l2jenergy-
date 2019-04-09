@@ -24,30 +24,24 @@ import com.l2jserver.commons.configuration.annotations.Setting;
 /**
  * @author Мо3олЬ
  */
-@Configuration("manor.json")
-public class ManorConfig
+@Configuration("conquerableHallSiege.json")
+public class ConquerableHallSiegeConfig
 {
-	@Setting(name = "AllowManor")
-	public static boolean ALLOW_MANOR;
+	@Setting(name = "MinClanLevel")
+	public static int CHS_CLAN_MINLEVEL;
 	
-	@Setting(name = "AltManorRefreshTime")
-	public static int ALT_MANOR_REFRESH_TIME;
+	@Setting(name = "MaxAttackers")
+	public static int CHS_MAX_ATTACKERS;
 	
-	@Setting(name = "AltManorRefreshMin")
-	public static int ALT_MANOR_REFRESH_MIN;
+	@Setting(name = "MaxFlagsPerClan")
+	public static int CHS_MAX_FLAGS_PER_CLAN;
 	
-	@Setting(name = "AltManorApproveTime")
-	public static int ALT_MANOR_APPROVE_TIME;
+	@Setting(name = "EnableFame")
+	public static boolean CHS_ENABLE_FAME;
 	
-	@Setting(name = "AltManorApproveMin")
-	public static int ALT_MANOR_APPROVE_MIN;
+	@Setting(name = "FameAmount")
+	public static int CHS_FAME_AMOUNT;
 	
-	@Setting(name = "AltManorMaintenanceMin")
-	public static int ALT_MANOR_MAINTENANCE_MIN;
-	
-	@Setting(name = "AltManorSaveAllActions")
-	public static boolean ALT_MANOR_SAVE_ALL_ACTIONS;
-	
-	@Setting(name = "AltManorSavePeriodRate")
-	public static int ALT_MANOR_SAVE_PERIOD_RATE;
+	@Setting(name = "FameFrequency")
+	public static int CHS_FAME_FREQUENCY;
 }

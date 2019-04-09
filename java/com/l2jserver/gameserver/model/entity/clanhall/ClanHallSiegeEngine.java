@@ -31,9 +31,9 @@ import java.util.concurrent.ScheduledFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.ConquerableHallSiegeConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.instancemanager.CHSiegeManager;
 import com.l2jserver.gameserver.instancemanager.MapRegionManager;
@@ -435,19 +435,19 @@ public abstract class ClanHallSiegeEngine extends Quest implements Siegable
 	@Override
 	public boolean giveFame()
 	{
-		return Config.CHS_ENABLE_FAME;
+		return ConquerableHallSiegeConfig.CHS_ENABLE_FAME;
 	}
 	
 	@Override
 	public int getFameAmount()
 	{
-		return Config.CHS_FAME_AMOUNT;
+		return ConquerableHallSiegeConfig.CHS_FAME_AMOUNT;
 	}
 	
 	@Override
 	public int getFameFrequency()
 	{
-		return Config.CHS_FAME_FREQUENCY;
+		return ConquerableHallSiegeConfig.CHS_FAME_FREQUENCY;
 	}
 	
 	public final void broadcastNpcSay(final L2Npc npc, final int type, final NpcStringId messageId)

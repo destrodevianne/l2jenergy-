@@ -39,6 +39,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.GeoData;
+import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.pathfinding.AbstractNode;
@@ -396,7 +397,7 @@ public class GeoPathFinding extends PathFinding
 		{
 			LOG.info("Path Engine: - Loading Path Nodes...");
 			//@formatter:off
-			Files.lines(Paths.get(Config.PATHNODE_DIR.getPath(), "pn_index.txt"), StandardCharsets.UTF_8)
+			Files.lines(Paths.get(GeoDataConfig.PATHNODE_DIR.getPath(), "pn_index.txt"), StandardCharsets.UTF_8)
 				.map(String::trim)
 				.filter(l -> !l.isEmpty())
 				.forEach(line -> {
@@ -431,7 +432,7 @@ public class GeoPathFinding extends PathFinding
 			return;
 		}
 		short regionoffset = getRegionOffset(rx, ry);
-		File file = new File(Config.PATHNODE_DIR, rx + "_" + ry + ".pn");
+		File file = new File(GeoDataConfig.PATHNODE_DIR, rx + "_" + ry + ".pn");
 		LOG.info("Path Engine: - Loading: {} -> region offset: {} X: {} Y: {}", file.getName(), regionoffset, rx, ry);
 		int node = 0, size, index = 0;
 		
@@ -441,7 +442,7 @@ public class GeoPathFinding extends PathFinding
 		{
 			size = (int) roChannel.size();
 			MappedByteBuffer nodes;
-			if (Config.FORCE_GEODATA)
+			if (GeoDataConfig.FORCE_GEODATA)
 			{
 				// it is not guarantee, because the underlying operating system may have paged out some of the buffer's data
 				nodes = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, size).load();

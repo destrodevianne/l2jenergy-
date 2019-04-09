@@ -28,25 +28,35 @@ import com.l2jserver.commons.configuration.annotations.Setting;
 public class TerritoryWarConfig
 {
 	@Setting(name = "DefenderMaxClans")
-	public static int DEFENDERMAXCLANS; // Max number of clans
+	public static int DEFENDERMAXCLANS;
+	
 	@Setting(name = "DefenderMaxPlayers")
-	public static int DEFENDERMAXPLAYERS; // Max number of individual player
+	public static int DEFENDERMAXPLAYERS;
+	
 	@Setting(name = "ClanMinLevel", minValue = 0)
 	public static int CLANMINLEVEL;
-	@Setting(name = "PlayerMinLevel")
+	
+	@Setting(name = "PlayerMinLevel", minValue = 1)
 	public static int PLAYERMINLEVEL;
+	
 	@Setting(name = "MinTerritoryBadgeForNobless")
 	public static int MINTWBADGEFORNOBLESS;
+	
 	@Setting(name = "MinTerritoryBadgeForStriders")
 	public static int MINTWBADGEFORSTRIDERS;
+	
 	@Setting(name = "MinTerritoryBadgeForBigStrider")
 	public static int MINTWBADGEFORBIGSTRIDER;
+	
 	@Setting(name = "WarLength", increase = 60000)
-	public static Long WARLENGTH;
+	public static long WARLENGTH;
+	
 	@Setting(name = "PlayerWithWardCanBeKilledInPeaceZone")
 	public static boolean PLAYER_WITH_WARD_CAN_BE_KILLED_IN_PEACEZONE;
+	
 	@Setting(name = "SpawnWardsWhenTWIsNotInProgress")
 	public static boolean SPAWN_WARDS_WHEN_TW_IS_NOT_IN_PROGRESS;
+	
 	@Setting(name = "ReturnWardsWhenTWStarts")
 	public static boolean RETURN_WARDS_WHEN_TW_STARTS;
 }

@@ -18,6 +18,8 @@
  */
 package com.l2jserver.gameserver.configuration.config.community;
 
+import java.time.ZoneId;
+
 import com.l2jserver.commons.configuration.annotations.Configuration;
 import com.l2jserver.commons.configuration.annotations.Setting;
 
@@ -35,4 +37,12 @@ public class CBasicConfig
 	
 	@Setting(name = "CustomCommunityBoard")
 	public static boolean CUSTOM_CB_ENABLED;
+	
+	@Setting(name = "TimeZone", method = "timeZoneId")
+	public static ZoneId timeZoneId;
+	
+	public void timeZoneId(final String value)
+	{
+		timeZoneId = ZoneId.of(value);
+	}
 }

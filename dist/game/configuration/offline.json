@@ -1,0 +1,36 @@
+{
+	#======================================================
+    # Offline trade/craft
+    #======================================================
+    # Option to enable or disable offline trade feature.
+    "OfflineTradeEnable" : "false",
+
+    # Option to enable or disable offline craft feature. 
+    "OfflineCraftEnable" : "false",
+
+    # If set to True, off-line shops will be possible only peace zones. 
+    "OfflineModeInPeaceZone" : "false",
+
+    # If set to True, players in off-line shop mode wont take any damage, thus they cannot be killed. 
+    "OfflineModeNoDamage" : "false",
+
+    # If set to True, name color will be changed then entering offline mode
+    "OfflineSetNameColor" : "true",
+
+    # Color of the name in offline mode (if OfflineSetNameColor = True)
+    "OfflineNameColor" : "808080",
+
+    # Allow fame for characters in offline mode 
+    "OfflineFame" : "true",
+
+    #Restore offline traders/crafters after restart/shutdown. Default: false.
+    "RestoreOffliners" : "false",
+
+    #Do not restore offline characters, after OfflineMaxDays days spent from first restore.
+    #Require server restart to disconnect expired shops.
+    #0 = disabled (always restore). 
+    "OfflineMaxDays" : "10",
+
+    #Disconnect shop after finished selling, buying. 
+    "OfflineDisconnectFinished" : "true"
+}

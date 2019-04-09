@@ -40,6 +40,7 @@ import com.l2jserver.gameserver.LoginServerThread;
 import com.l2jserver.gameserver.LoginServerThread.SessionKey;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.OfflineConfig;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.xml.impl.SecondaryAuthData;
@@ -810,9 +811,9 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 							}
 						}
 						
-						if (Config.OFFLINE_SET_NAME_COLOR)
+						if (OfflineConfig.OFFLINE_SET_NAME_COLOR)
 						{
-							getActiveChar().getAppearance().setNameColor(Config.OFFLINE_NAME_COLOR);
+							getActiveChar().getAppearance().setNameColor(OfflineConfig.OFFLINE_NAME_COLOR);
 							getActiveChar().broadcastUserInfo();
 						}
 						
@@ -859,22 +860,22 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 			case PACKAGE_SELL:
 			case BUY:
 			{
-				canSetShop = Config.OFFLINE_TRADE_ENABLE;
+				canSetShop = OfflineConfig.OFFLINE_TRADE_ENABLE;
 				break;
 			}
 			case MANUFACTURE:
 			{
-				canSetShop = Config.OFFLINE_TRADE_ENABLE;
+				canSetShop = OfflineConfig.OFFLINE_TRADE_ENABLE;
 				break;
 			}
 			default:
 			{
-				canSetShop = Config.OFFLINE_CRAFT_ENABLE && player.isInCraftMode();
+				canSetShop = OfflineConfig.OFFLINE_CRAFT_ENABLE && player.isInCraftMode();
 				break;
 			}
 		}
 		
-		if (Config.OFFLINE_MODE_IN_PEACE_ZONE && !player.isInsideZone(ZoneId.PEACE))
+		if (OfflineConfig.OFFLINE_MODE_IN_PEACE_ZONE && !player.isInsideZone(ZoneId.PEACE))
 		{
 			canSetShop = false;
 		}

@@ -28,12 +28,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.sql.impl.TerritoryTable;
+import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.datatables.NpcPersonalAIData;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
@@ -652,18 +652,18 @@ public class L2Spawn implements IPositionable, IIdentifiable, INamable
 			((L2Attackable) mob).setChampion(false);
 		}
 		
-		if (Config.L2JMOD_CHAMPION_ENABLE)
+		if (ChampionData.getInstance().isEnabled())
 		{
 			// Set champion on next spawn
 			if (mob.isMonster() && !getTemplate().isUndying() && !mob.isRaid() && !mob.isRaidMinion() && //
-				(Config.L2JMOD_CHAMPION_FREQUENCY > 0) && //
-				(mob.getLevel() >= Config.L2JMOD_CHAMP_MIN_LVL) && //
-				(mob.getLevel() <= Config.L2JMOD_CHAMP_MAX_LVL) && //
-				(Config.L2JMOD_CHAMPION_ENABLE_IN_INSTANCES || (getInstanceId() == 0)))
+				(mob.getLevel() >= ChampionData.getInstance().getMinLv(false)) && //
+				(mob.getLevel() <= ChampionData.getInstance().getMaxLv(false)) && //
+				(ChampionData.getInstance().inInstanceEnabled() || (getInstanceId() == 0)))
 			{
-				if (Rnd.get(100) < Config.L2JMOD_CHAMPION_FREQUENCY)
+				if (Rnd.get(100) < ChampionData.getInstance().getChance(false))
 				{
 					((L2Attackable) mob).setChampion(true);
+					((L2Attackable) mob).setHardChampion(false);
 				}
 			}
 		}

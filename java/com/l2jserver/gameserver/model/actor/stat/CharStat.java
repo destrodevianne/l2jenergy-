@@ -21,8 +21,10 @@ package com.l2jserver.gameserver.model.actor.stat;
 import java.util.Arrays;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.model.Elementals;
 import com.l2jserver.gameserver.model.PcCondOverride;
+import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.items.L2Weapon;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
@@ -287,9 +289,9 @@ public class CharStat
 	public double getMAtk(L2Character target, Skill skill)
 	{
 		float bonusAtk = 1;
-		if (Config.L2JMOD_CHAMPION_ENABLE && _activeChar.isChampion())
+		if (ChampionData.getInstance().isEnabled() && _activeChar.isChampion())
 		{
-			bonusAtk = Config.L2JMOD_CHAMPION_ATK;
+			bonusAtk = ChampionData.getInstance().getAttackMultipler((L2Attackable) _activeChar);
 		}
 		if (_activeChar.isRaid())
 		{
@@ -306,9 +308,9 @@ public class CharStat
 	public int getMAtkSpd()
 	{
 		float bonusSpdAtk = 1;
-		if (Config.L2JMOD_CHAMPION_ENABLE && _activeChar.isChampion())
+		if (ChampionData.getInstance().isEnabled() && _activeChar.isChampion())
 		{
-			bonusSpdAtk = Config.L2JMOD_CHAMPION_SPD_ATK;
+			bonusSpdAtk = ChampionData.getInstance().getAttacSpdkMultipler((L2Attackable) _activeChar);
 		}
 		
 		double val = calcStat(Stats.MAGIC_ATTACK_SPEED, _activeChar.getTemplate().getBaseMAtkSpd() * bonusSpdAtk);
@@ -474,9 +476,9 @@ public class CharStat
 	public double getPAtk(L2Character target)
 	{
 		float bonusAtk = 1;
-		if (Config.L2JMOD_CHAMPION_ENABLE && _activeChar.isChampion())
+		if (ChampionData.getInstance().isEnabled() && _activeChar.isChampion())
 		{
-			bonusAtk = Config.L2JMOD_CHAMPION_ATK;
+			bonusAtk = ChampionData.getInstance().getAttackMultipler((L2Attackable) _activeChar);
 		}
 		if (_activeChar.isRaid())
 		{
@@ -491,9 +493,9 @@ public class CharStat
 	public double getPAtkSpd()
 	{
 		float bonusAtk = 1;
-		if (Config.L2JMOD_CHAMPION_ENABLE && _activeChar.isChampion())
+		if (ChampionData.getInstance().isEnabled() && _activeChar.isChampion())
 		{
-			bonusAtk = Config.L2JMOD_CHAMPION_SPD_ATK;
+			bonusAtk = ChampionData.getInstance().getAttacSpdkMultipler((L2Attackable) _activeChar);
 		}
 		return Math.round(calcStat(Stats.POWER_ATTACK_SPEED, _activeChar.getTemplate().getBasePAtkSpd() * bonusAtk, null, null));
 	}

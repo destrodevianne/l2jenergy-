@@ -29,6 +29,7 @@ import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.SevenSigns;
 import com.l2jserver.gameserver.SevenSignsFestival;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.data.xml.impl.HitConditionBonusData;
 import com.l2jserver.gameserver.data.xml.impl.KarmaData;
 import com.l2jserver.gameserver.enums.DispelCategory;
@@ -259,9 +260,9 @@ public final class Formulas
 		double hpRegenMultiplier = cha.isRaid() ? Config.RAID_HP_REGEN_MULTIPLIER : Config.HP_REGEN_MULTIPLIER;
 		double hpRegenBonus = 0;
 		
-		if (Config.L2JMOD_CHAMPION_ENABLE && cha.isChampion())
+		if (ChampionData.getInstance().isEnabled() && cha.isChampion())
 		{
-			hpRegenMultiplier *= Config.L2JMOD_CHAMPION_HP_REGEN;
+			hpRegenMultiplier *= ChampionData.getInstance().getHpRegMultipler((L2Attackable) cha);
 		}
 		
 		if (cha.isPlayer())

@@ -19,7 +19,9 @@
 package com.l2jserver.gameserver.model.drops.strategy;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.datatables.ItemTable;
+import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.drops.GeneralDropItem;
 import com.l2jserver.gameserver.model.itemcontainer.Inventory;
@@ -40,7 +42,7 @@ public interface IAmountMultiplierStrategy
 			double multiplier = 1;
 			if (victim.isChampion())
 			{
-				multiplier *= item.getItemId() != Inventory.ADENA_ID ? Config.L2JMOD_CHAMPION_REWARDS_AMOUNT : Config.L2JMOD_CHAMPION_ADENAS_REWARDS_AMOUNT;
+				multiplier *= item.getItemId() != Inventory.ADENA_ID ? ChampionData.getInstance().getRewardMultipler((L2Attackable) victim) : ChampionData.getInstance().getAdenaMultipler((L2Attackable) victim);
 			}
 			Float dropAmountMultiplier = Config.RATE_DROP_AMOUNT_MULTIPLIER.get(item.getItemId());
 			if (dropAmountMultiplier != null)

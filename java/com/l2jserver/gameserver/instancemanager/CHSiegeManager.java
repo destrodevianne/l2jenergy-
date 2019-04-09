@@ -27,8 +27,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.gameserver.configuration.config.ConquerableHallSiegeConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.StatsSet;
@@ -132,9 +132,9 @@ public final class CHSiegeManager
 	
 	public final void registerClan(L2Clan clan, SiegableHall hall, L2PcInstance player)
 	{
-		if (clan.getLevel() < Config.CHS_CLAN_MINLEVEL)
+		if (clan.getLevel() < ConquerableHallSiegeConfig.CHS_CLAN_MINLEVEL)
 		{
-			player.sendMessage(MessagesData.getInstance().getMessage(player, "chs_level_restriction").replace("%s%", Config.CHS_CLAN_MINLEVEL + ""));
+			player.sendMessage(MessagesData.getInstance().getMessage(player, "chs_level_restriction").replace("%s%", ConquerableHallSiegeConfig.CHS_CLAN_MINLEVEL + ""));
 		}
 		else if (hall.isWaitingBattle())
 		{
@@ -162,7 +162,7 @@ public final class CHSiegeManager
 		{
 			player.sendPacket(SystemMessageId.APPLICATION_DENIED_BECAUSE_ALREADY_SUBMITTED_A_REQUEST_FOR_ANOTHER_SIEGE_BATTLE);
 		}
-		else if (hall.getSiege().getAttackers().size() >= Config.CHS_MAX_ATTACKERS)
+		else if (hall.getSiege().getAttackers().size() >= ConquerableHallSiegeConfig.CHS_MAX_ATTACKERS)
 		{
 			player.sendPacket(SystemMessageId.ATTACKER_SIDE_FULL);
 		}

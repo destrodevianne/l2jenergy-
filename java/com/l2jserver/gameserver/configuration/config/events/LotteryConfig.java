@@ -29,16 +29,22 @@ public class LotteryConfig
 {
 	@Setting(name = "AllowLottery")
 	public static boolean ALLOW_LOTTERY;
+	
 	@Setting(name = "AltLotteryPrize")
 	public static long ALT_LOTTERY_PRIZE;
+	
 	@Setting(name = "AltLotteryTicketPrice")
 	public static long ALT_LOTTERY_TICKET_PRICE;
+	
 	@Setting(name = "AltLottery5NumberRate")
 	public static float ALT_LOTTERY_5_NUMBER_RATE;
+	
 	@Setting(name = "AltLottery4NumberRate")
 	public static float ALT_LOTTERY_4_NUMBER_RATE;
+	
 	@Setting(name = "AltLottery3NumberRate")
 	public static float ALT_LOTTERY_3_NUMBER_RATE;
+	
 	@Setting(name = "AltLottery2and1NumberPrize")
 	public static long ALT_LOTTERY_2_AND_1_NUMBER_PRIZE;
 }

@@ -29,6 +29,7 @@ public class GraciaSeedsConfig
 {
 	@Setting(name = "TiatKillCountForNextState")
 	public static int SOD_TIAT_KILL_COUNT;
+	
 	@Setting(name = "Stage2Length", increase = 60000)
 	public static long SOD_STAGE_2_LENGTH;
 }

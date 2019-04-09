@@ -21,6 +21,7 @@ package handlers.communityboard;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.ZonedDateTime;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.cache.HtmCache;
@@ -61,13 +62,15 @@ public final class HomeBoard implements IParseBoardHandler
 			final String customPath = CBasicConfig.CUSTOM_CB_ENABLED ? "Custom/" : "";
 			CommunityBoardHandler.getInstance().addBypass(activeChar, "Home", command);
 			
+			final ZonedDateTime time = ZonedDateTime.now().withZoneSameInstant(CBasicConfig.timeZoneId);
+			
 			String html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/" + customPath + "bbs_top.html");
 			html = html.replaceAll("%fav_count%", Integer.toString(getFavoriteCount(activeChar)));
 			html = html.replaceAll("%region_count%", Integer.toString(getRegionCount(activeChar)));
 			html = html.replaceAll("%clan_count%", Integer.toString(ClanTable.getInstance().getClanCount()));
 			
 			html = html.replace("<?cb_player_name?>", activeChar.getName());
-			html = html.replace("<?cb_time?>", String.valueOf(DifferentMethods.time()));
+			html = html.replace("<?cb_time?>", time.getHour() + ":" + time.getMinute());
 			html = html.replace("<?cb_online_players?>", String.valueOf(DifferentMethods.getPlayersCount("ALL_REAL")));
 			html = html.replace("<?cb_offtrade_players?>", String.valueOf(DifferentMethods.getPlayersCount("OFF_TRADE")));
 			CommunityBoardHandler.separateAndSend(html, activeChar);

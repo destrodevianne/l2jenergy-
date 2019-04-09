@@ -20,9 +20,11 @@ package com.l2jserver.gameserver.network.serverpackets;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
+import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.instancemanager.TownManager;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.PcCondOverride;
+import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.L2Summon;
@@ -99,9 +101,9 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 			{
 				_title = "Invisible";
 			}
-			else if (Config.L2JMOD_CHAMPION_ENABLE && cha.isChampion())
+			else if (ChampionData.getInstance().isEnabled() && cha.isChampion())
 			{
-				_title = (Config.L2JMOD_CHAMP_TITLE); // On every subclass
+				_title = ChampionData.getInstance().getTitle((L2Attackable) cha); // On every subclass
 			}
 			else if (cha.getTemplate().isUsingServerSideTitle())
 			{

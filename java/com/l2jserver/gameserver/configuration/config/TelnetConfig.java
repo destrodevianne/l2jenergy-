@@ -31,10 +31,13 @@ public class TelnetConfig
 {
 	@Setting(name = "EnableTelnet")
 	public static boolean IS_TELNET_ENABLED;
+	
 	@Setting(name = "Port", canNull = true)
 	public static int TELNET_PORT;
+	
 	@Setting(name = "Password", canNull = true)
 	public static String TELNET_PASSWORD;
+	
 	@Setting(name = "ListOfHosts", splitter = ",")
-	public static List<String> TELNET_HOSTS; // TODO: fix
+	public static List<String> TELNET_HOSTS; // TODO: test
 }

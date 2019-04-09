@@ -22,14 +22,15 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
+import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.handler.AdminCommandHandler;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.Location;
+import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -253,9 +254,9 @@ public class AdminMenu implements IAdminCommandHandler
 				target.reduceCurrentHp(target.getMaxHp() + target.getMaxCp() + 1, activeChar, null);
 				filename = "charmanage.htm";
 			}
-			else if (Config.L2JMOD_CHAMPION_ENABLE && target.isChampion())
+			else if (ChampionData.getInstance().isEnabled() && target.isChampion())
 			{
-				target.reduceCurrentHp((target.getMaxHp() * Config.L2JMOD_CHAMPION_HP) + 1, activeChar, null);
+				target.reduceCurrentHp((target.getMaxHp() * ChampionData.getInstance().getHpMultipler((L2Attackable) target)) + 1, activeChar, null);
 			}
 			else
 			{

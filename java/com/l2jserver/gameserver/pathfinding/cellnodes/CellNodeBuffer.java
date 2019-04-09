@@ -22,7 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 
 /**
  * @author DS Credits to Diamond
@@ -67,7 +67,7 @@ public class CellNodeBuffer
 		_targetY = ty;
 		_targetZ = tz;
 		_current = getNode(x, y, z);
-		_current.setCost(getCost(x, y, z, Config.HIGH_WEIGHT));
+		_current.setCost(getCost(x, y, z, GeoDataConfig.HIGH_WEIGHT));
 		
 		for (int count = 0; count < MAX_ITERATIONS; count++)
 		{
@@ -178,7 +178,7 @@ public class CellNodeBuffer
 			nodeN = addNode(x, y - 1, z, false);
 		}
 		
-		if (Config.ADVANCED_DIAGONAL_STRATEGY)
+		if (GeoDataConfig.ADVANCED_DIAGONAL_STRATEGY)
 		{
 			// SouthEast
 			if ((nodeE != null) && (nodeS != null))
@@ -270,29 +270,29 @@ public class CellNodeBuffer
 		final int geoZ = newNode.getLoc().getZ();
 		
 		final int stepZ = Math.abs(geoZ - _current.getLoc().getZ());
-		float weight = diagonal ? Config.DIAGONAL_WEIGHT : Config.LOW_WEIGHT;
+		float weight = diagonal ? GeoDataConfig.DIAGONAL_WEIGHT : GeoDataConfig.LOW_WEIGHT;
 		
 		if (!newNode.getLoc().canGoAll() || (stepZ > 16))
 		{
-			weight = Config.HIGH_WEIGHT;
+			weight = GeoDataConfig.HIGH_WEIGHT;
 		}
 		else
 		{
 			if (isHighWeight(x + 1, y, geoZ))
 			{
-				weight = Config.MEDIUM_WEIGHT;
+				weight = GeoDataConfig.MEDIUM_WEIGHT;
 			}
 			else if (isHighWeight(x - 1, y, geoZ))
 			{
-				weight = Config.MEDIUM_WEIGHT;
+				weight = GeoDataConfig.MEDIUM_WEIGHT;
 			}
 			else if (isHighWeight(x, y + 1, geoZ))
 			{
-				weight = Config.MEDIUM_WEIGHT;
+				weight = GeoDataConfig.MEDIUM_WEIGHT;
 			}
 			else if (isHighWeight(x, y - 1, geoZ))
 			{
-				weight = Config.MEDIUM_WEIGHT;
+				weight = GeoDataConfig.MEDIUM_WEIGHT;
 			}
 		}
 		

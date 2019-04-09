@@ -27,9 +27,9 @@ import java.util.Calendar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.LoginServerThread;
+import com.l2jserver.gameserver.configuration.config.OfflineConfig;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.model.L2ManufactureItem;
 import com.l2jserver.gameserver.model.L2World;
@@ -76,7 +76,7 @@ public class OfflineTradersTable
 						switch (pc.getPrivateStoreType())
 						{
 							case BUY:
-								if (!Config.OFFLINE_TRADE_ENABLE)
+								if (!OfflineConfig.OFFLINE_TRADE_ENABLE)
 								{
 									continue;
 								}
@@ -93,7 +93,7 @@ public class OfflineTradersTable
 								break;
 							case SELL:
 							case PACKAGE_SELL:
-								if (!Config.OFFLINE_TRADE_ENABLE)
+								if (!OfflineConfig.OFFLINE_TRADE_ENABLE)
 								{
 									continue;
 								}
@@ -109,7 +109,7 @@ public class OfflineTradersTable
 								}
 								break;
 							case MANUFACTURE:
-								if (!Config.OFFLINE_CRAFT_ENABLE)
+								if (!OfflineConfig.OFFLINE_CRAFT_ENABLE)
 								{
 									continue;
 								}
@@ -154,11 +154,11 @@ public class OfflineTradersTable
 			while (rs.next())
 			{
 				long time = rs.getLong("time");
-				if (Config.OFFLINE_MAX_DAYS > 0)
+				if (OfflineConfig.OFFLINE_MAX_DAYS > 0)
 				{
 					Calendar cal = Calendar.getInstance();
 					cal.setTimeInMillis(time);
-					cal.add(Calendar.DAY_OF_YEAR, Config.OFFLINE_MAX_DAYS);
+					cal.add(Calendar.DAY_OF_YEAR, OfflineConfig.OFFLINE_MAX_DAYS);
 					if (cal.getTimeInMillis() <= System.currentTimeMillis())
 					{
 						continue;
@@ -233,9 +233,9 @@ public class OfflineTradersTable
 						}
 					}
 					player.sitDown();
-					if (Config.OFFLINE_SET_NAME_COLOR)
+					if (OfflineConfig.OFFLINE_SET_NAME_COLOR)
 					{
-						player.getAppearance().setNameColor(Config.OFFLINE_NAME_COLOR);
+						player.getAppearance().setNameColor(OfflineConfig.OFFLINE_NAME_COLOR);
 					}
 					player.setPrivateStoreType(type);
 					player.setOnlineStatus(true, true);

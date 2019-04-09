@@ -18,14 +18,10 @@
  */
 package com.l2jserver;
 
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -41,7 +37,6 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.util.PropertiesParser;
 import com.l2jserver.commons.util.StringUtil;
-import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.holders.ItemHolder;
 import com.l2jserver.gameserver.model.itemcontainer.Inventory;
 import com.l2jserver.gameserver.util.FloodProtectorConfig;
@@ -73,8 +68,6 @@ public final class Config
 	public static final String RATES_CONFIG_FILE = "./config/Rates.properties";
 	public static final String SIEGE_CONFIGURATION_FILE = "./config/Siege.properties";
 	public static final String FLOOD_PROTECTOR_FILE = "./config/FloodProtector.properties";
-	public static final String CH_SIEGE_FILE = "./config/ConquerableHallSiege.properties";
-	public static final String GEODATA_FILE = "./config/GeoData.properties";
 	public static final String TOP_CONFIG_FILE = "config/services/Tops.properties";
 	
 	// --------------------------------------------------
@@ -412,27 +405,6 @@ public final class Config
 	// --------------------------------------------------
 	// L2JMods Settings
 	// --------------------------------------------------
-	public static boolean L2JMOD_CHAMPION_ENABLE;
-	public static boolean L2JMOD_CHAMPION_PASSIVE;
-	public static int L2JMOD_CHAMPION_FREQUENCY;
-	public static String L2JMOD_CHAMP_TITLE;
-	public static int L2JMOD_CHAMP_MIN_LVL;
-	public static int L2JMOD_CHAMP_MAX_LVL;
-	public static int L2JMOD_CHAMPION_HP;
-	public static float L2JMOD_CHAMPION_REWARDS_EXP_SP;
-	public static float L2JMOD_CHAMPION_REWARDS_CHANCE;
-	public static float L2JMOD_CHAMPION_REWARDS_AMOUNT;
-	public static float L2JMOD_CHAMPION_ADENAS_REWARDS_CHANCE;
-	public static float L2JMOD_CHAMPION_ADENAS_REWARDS_AMOUNT;
-	public static float L2JMOD_CHAMPION_HP_REGEN;
-	public static float L2JMOD_CHAMPION_ATK;
-	public static float L2JMOD_CHAMPION_SPD_ATK;
-	public static int L2JMOD_CHAMPION_REWARD_LOWER_LVL_ITEM_CHANCE;
-	public static int L2JMOD_CHAMPION_REWARD_HIGHER_LVL_ITEM_CHANCE;
-	public static int L2JMOD_CHAMPION_REWARD_ID;
-	public static int L2JMOD_CHAMPION_REWARD_QTY;
-	public static boolean L2JMOD_CHAMPION_ENABLE_VITALITY;
-	public static boolean L2JMOD_CHAMPION_ENABLE_IN_INSTANCES;
 	public static boolean TVT_EVENT_ENABLED;
 	public static boolean TVT_EVENT_IN_INSTANCE;
 	public static String TVT_EVENT_INSTANCE_FILE;
@@ -480,16 +452,7 @@ public final class Config
 	public static int BANKING_SYSTEM_ADENA;
 	public static boolean L2JMOD_ENABLE_WAREHOUSESORTING_CLAN;
 	public static boolean L2JMOD_ENABLE_WAREHOUSESORTING_PRIVATE;
-	public static boolean OFFLINE_TRADE_ENABLE;
-	public static boolean OFFLINE_CRAFT_ENABLE;
-	public static boolean OFFLINE_MODE_IN_PEACE_ZONE;
-	public static boolean OFFLINE_MODE_NO_DAMAGE;
-	public static boolean RESTORE_OFFLINERS;
-	public static int OFFLINE_MAX_DAYS;
-	public static boolean OFFLINE_DISCONNECT_FINISHED;
-	public static boolean OFFLINE_SET_NAME_COLOR;
-	public static int OFFLINE_NAME_COLOR;
-	public static boolean OFFLINE_FAME;
+	
 	public static boolean L2JMOD_ENABLE_MANA_POTIONS_SUPPORT;
 	public static boolean L2JMOD_DISPLAY_SERVER_TIME;
 	public static boolean WELCOME_MESSAGE_ENABLED;
@@ -726,31 +689,6 @@ public final class Config
 	public static double HP_REGEN_MULTIPLIER;
 	public static double MP_REGEN_MULTIPLIER;
 	public static double CP_REGEN_MULTIPLIER;
-	
-	// Conquerable Halls Settings
-	public static int CHS_CLAN_MINLEVEL;
-	public static int CHS_MAX_ATTACKERS;
-	public static int CHS_MAX_FLAGS_PER_CLAN;
-	public static boolean CHS_ENABLE_FAME;
-	public static int CHS_FAME_AMOUNT;
-	public static int CHS_FAME_FREQUENCY;
-	
-	// GeoData Settings
-	public static int PATHFINDING;
-	public static File PATHNODE_DIR;
-	public static String PATHFIND_BUFFERS;
-	public static float LOW_WEIGHT;
-	public static float MEDIUM_WEIGHT;
-	public static float HIGH_WEIGHT;
-	public static boolean ADVANCED_DIAGONAL_STRATEGY;
-	public static float DIAGONAL_WEIGHT;
-	public static int MAX_POSTFILTER_PASSES;
-	public static boolean DEBUG_PATH;
-	public static boolean FORCE_GEODATA;
-	public static int COORD_SYNCHRONIZE;
-	public static Path GEODATA_PATH;
-	public static boolean TRY_LOAD_UNSPECIFIED_REGIONS;
-	public static Map<String, Boolean> GEODATA_REGIONS;
 	
 	public static boolean L2_TOP_MANAGER_ENABLED;
 	public static String L2_TOP_WEB_ADDRESS;
@@ -1496,28 +1434,6 @@ public final class Config
 			// Load L2JMod L2Properties file (if exists)
 			final PropertiesParser L2JModSettings = new PropertiesParser(L2JMOD_CONFIG_FILE);
 			
-			L2JMOD_CHAMPION_ENABLE = L2JModSettings.getBoolean("ChampionEnable", false);
-			L2JMOD_CHAMPION_PASSIVE = L2JModSettings.getBoolean("ChampionPassive", false);
-			L2JMOD_CHAMPION_FREQUENCY = L2JModSettings.getInt("ChampionFrequency", -1);
-			L2JMOD_CHAMP_TITLE = L2JModSettings.getString("ChampionTitle", "Champion");
-			L2JMOD_CHAMP_MIN_LVL = L2JModSettings.getInt("ChampionMinLevel", 20);
-			L2JMOD_CHAMP_MAX_LVL = L2JModSettings.getInt("ChampionMaxLevel", 60);
-			L2JMOD_CHAMPION_HP = L2JModSettings.getInt("ChampionHp", 7);
-			L2JMOD_CHAMPION_HP_REGEN = L2JModSettings.getFloat("ChampionHpRegen", 1);
-			L2JMOD_CHAMPION_REWARDS_EXP_SP = L2JModSettings.getFloat("ChampionRewardsExpSp", 8);
-			L2JMOD_CHAMPION_REWARDS_CHANCE = L2JModSettings.getFloat("ChampionRewardsChance", 8);
-			L2JMOD_CHAMPION_REWARDS_AMOUNT = L2JModSettings.getFloat("ChampionRewardsAmount", 1);
-			L2JMOD_CHAMPION_ADENAS_REWARDS_CHANCE = L2JModSettings.getFloat("ChampionAdenasRewardsChance", 1);
-			L2JMOD_CHAMPION_ADENAS_REWARDS_AMOUNT = L2JModSettings.getFloat("ChampionAdenasRewardsAmount", 1);
-			L2JMOD_CHAMPION_ATK = L2JModSettings.getFloat("ChampionAtk", 1);
-			L2JMOD_CHAMPION_SPD_ATK = L2JModSettings.getFloat("ChampionSpdAtk", 1);
-			L2JMOD_CHAMPION_REWARD_LOWER_LVL_ITEM_CHANCE = L2JModSettings.getInt("ChampionRewardLowerLvlItemChance", 0);
-			L2JMOD_CHAMPION_REWARD_HIGHER_LVL_ITEM_CHANCE = L2JModSettings.getInt("ChampionRewardHigherLvlItemChance", 0);
-			L2JMOD_CHAMPION_REWARD_ID = L2JModSettings.getInt("ChampionRewardItemID", 6393);
-			L2JMOD_CHAMPION_REWARD_QTY = L2JModSettings.getInt("ChampionRewardItemQty", 1);
-			L2JMOD_CHAMPION_ENABLE_VITALITY = L2JModSettings.getBoolean("ChampionEnableVitality", false);
-			L2JMOD_CHAMPION_ENABLE_IN_INSTANCES = L2JModSettings.getBoolean("ChampionEnableInInstances", false);
-			
 			TVT_EVENT_ENABLED = L2JModSettings.getBoolean("TvTEventEnabled", false);
 			TVT_EVENT_IN_INSTANCE = L2JModSettings.getBoolean("TvTEventInInstance", false);
 			TVT_EVENT_INSTANCE_FILE = L2JModSettings.getString("TvTEventInstanceFile", "coliseum.xml");
@@ -1742,17 +1658,6 @@ public final class Config
 			BANKING_SYSTEM_GOLDBARS = L2JModSettings.getInt("BankingGoldbarCount", 1);
 			BANKING_SYSTEM_ADENA = L2JModSettings.getInt("BankingAdenaCount", 500000000);
 			
-			OFFLINE_TRADE_ENABLE = L2JModSettings.getBoolean("OfflineTradeEnable", false);
-			OFFLINE_CRAFT_ENABLE = L2JModSettings.getBoolean("OfflineCraftEnable", false);
-			OFFLINE_MODE_IN_PEACE_ZONE = L2JModSettings.getBoolean("OfflineModeInPeaceZone", false);
-			OFFLINE_MODE_NO_DAMAGE = L2JModSettings.getBoolean("OfflineModeNoDamage", false);
-			OFFLINE_SET_NAME_COLOR = L2JModSettings.getBoolean("OfflineSetNameColor", false);
-			OFFLINE_NAME_COLOR = Integer.decode("0x" + L2JModSettings.getString("OfflineNameColor", "808080"));
-			OFFLINE_FAME = L2JModSettings.getBoolean("OfflineFame", true);
-			RESTORE_OFFLINERS = L2JModSettings.getBoolean("RestoreOffliners", false);
-			OFFLINE_MAX_DAYS = L2JModSettings.getInt("OfflineMaxDays", 10);
-			OFFLINE_DISCONNECT_FINISHED = L2JModSettings.getBoolean("OfflineDisconnectFinished", true);
-			
 			L2JMOD_ENABLE_MANA_POTIONS_SUPPORT = L2JModSettings.getBoolean("EnableManaPotionSupport", false);
 			
 			L2JMOD_DISPLAY_SERVER_TIME = L2JModSettings.getBoolean("DisplayServerTime", false);
@@ -1909,53 +1814,6 @@ public final class Config
 			
 			PVP_NORMAL_TIME = PVPSettings.getInt("PvPVsNormalTime", 120000);
 			PVP_PVP_TIME = PVPSettings.getInt("PvPVsPvPTime", 60000);
-			
-			final PropertiesParser ClanHallSiege = new PropertiesParser(CH_SIEGE_FILE);
-			
-			CHS_MAX_ATTACKERS = ClanHallSiege.getInt("MaxAttackers", 500);
-			CHS_CLAN_MINLEVEL = ClanHallSiege.getInt("MinClanLevel", 4);
-			CHS_MAX_FLAGS_PER_CLAN = ClanHallSiege.getInt("MaxFlagsPerClan", 1);
-			CHS_ENABLE_FAME = ClanHallSiege.getBoolean("EnableFame", false);
-			CHS_FAME_AMOUNT = ClanHallSiege.getInt("FameAmount", 0);
-			CHS_FAME_FREQUENCY = ClanHallSiege.getInt("FameFrequency", 0);
-			
-			final PropertiesParser geoData = new PropertiesParser(GEODATA_FILE);
-			
-			try
-			{
-				PATHNODE_DIR = new File(geoData.getString("PathnodeDirectory", "data/pathnode").replaceAll("\\\\", "/")).getCanonicalFile();
-			}
-			catch (IOException e)
-			{
-				LOG.warn("Error setting pathnode directory!", e);
-				PATHNODE_DIR = new File("data/pathnode");
-			}
-			
-			PATHFINDING = geoData.getInt("PathFinding", 0);
-			PATHFIND_BUFFERS = geoData.getString("PathFindBuffers", "100x6;128x6;192x6;256x4;320x4;384x4;500x2");
-			LOW_WEIGHT = geoData.getFloat("LowWeight", 0.5f);
-			MEDIUM_WEIGHT = geoData.getFloat("MediumWeight", 2);
-			HIGH_WEIGHT = geoData.getFloat("HighWeight", 3);
-			ADVANCED_DIAGONAL_STRATEGY = geoData.getBoolean("AdvancedDiagonalStrategy", true);
-			DIAGONAL_WEIGHT = geoData.getFloat("DiagonalWeight", 0.707f);
-			MAX_POSTFILTER_PASSES = geoData.getInt("MaxPostfilterPasses", 3);
-			DEBUG_PATH = geoData.getBoolean("DebugPath", false);
-			FORCE_GEODATA = geoData.getBoolean("ForceGeoData", true);
-			COORD_SYNCHRONIZE = geoData.getInt("CoordSynchronize", -1);
-			GEODATA_PATH = Paths.get(geoData.getString("GeoDataPath", "./data/geodata"));
-			TRY_LOAD_UNSPECIFIED_REGIONS = geoData.getBoolean("TryLoadUnspecifiedRegions", true);
-			GEODATA_REGIONS = new HashMap<>();
-			for (int regionX = L2World.TILE_X_MIN; regionX <= L2World.TILE_X_MAX; regionX++)
-			{
-				for (int regionY = L2World.TILE_Y_MIN; regionY <= L2World.TILE_Y_MAX; regionY++)
-				{
-					String key = regionX + "_" + regionY;
-					if (geoData.containskey(regionX + "_" + regionY))
-					{
-						GEODATA_REGIONS.put(key, geoData.getBoolean(key, false));
-					}
-				}
-			}
 			
 			final PropertiesParser topSettings = new PropertiesParser(TOP_CONFIG_FILE);
 			L2_TOP_MANAGER_ENABLED = topSettings.getBoolean("L2TopManagerEnabled", false);
@@ -2128,27 +1986,6 @@ public final class Config
 				break;
 			case "karmaratedropequipweapon":
 				KARMA_RATE_DROP_EQUIP_WEAPON = Integer.parseInt(pValue);
-				break;
-			case "lowweight":
-				LOW_WEIGHT = Float.parseFloat(pValue);
-				break;
-			case "mediumweight":
-				MEDIUM_WEIGHT = Float.parseFloat(pValue);
-				break;
-			case "highweight":
-				HIGH_WEIGHT = Float.parseFloat(pValue);
-				break;
-			case "advanceddiagonalstrategy":
-				ADVANCED_DIAGONAL_STRATEGY = Boolean.parseBoolean(pValue);
-				break;
-			case "diagonalweight":
-				DIAGONAL_WEIGHT = Float.parseFloat(pValue);
-				break;
-			case "maxpostfilterpasses":
-				MAX_POSTFILTER_PASSES = Integer.parseInt(pValue);
-				break;
-			case "coordsynchronize":
-				COORD_SYNCHRONIZE = Integer.parseInt(pValue);
 				break;
 			case "deletecharafterdays":
 				DELETE_DAYS = Integer.parseInt(pValue);
@@ -2483,60 +2320,6 @@ public final class Config
 				break;
 			case "commonrecipelimit":
 				COMMON_RECIPE_LIMIT = Integer.parseInt(pValue);
-				break;
-			case "championenable":
-				L2JMOD_CHAMPION_ENABLE = Boolean.parseBoolean(pValue);
-				break;
-			case "championfrequency":
-				L2JMOD_CHAMPION_FREQUENCY = Integer.parseInt(pValue);
-				break;
-			case "championminlevel":
-				L2JMOD_CHAMP_MIN_LVL = Integer.parseInt(pValue);
-				break;
-			case "championmaxlevel":
-				L2JMOD_CHAMP_MAX_LVL = Integer.parseInt(pValue);
-				break;
-			case "championhp":
-				L2JMOD_CHAMPION_HP = Integer.parseInt(pValue);
-				break;
-			case "championhpregen":
-				L2JMOD_CHAMPION_HP_REGEN = Float.parseFloat(pValue);
-				break;
-			case "championrewardsexpsp":
-				L2JMOD_CHAMPION_REWARDS_EXP_SP = Float.parseFloat(pValue);
-				break;
-			case "championrewardschance":
-				L2JMOD_CHAMPION_REWARDS_CHANCE = Float.parseFloat(pValue);
-				break;
-			case "championrewardsamount":
-				L2JMOD_CHAMPION_REWARDS_AMOUNT = Float.parseFloat(pValue);
-				break;
-			case "championadenasrewardschance":
-				L2JMOD_CHAMPION_ADENAS_REWARDS_CHANCE = Float.parseFloat(pValue);
-				break;
-			case "championadenasrewardsamount":
-				L2JMOD_CHAMPION_ADENAS_REWARDS_AMOUNT = Float.parseFloat(pValue);
-				break;
-			case "championatk":
-				L2JMOD_CHAMPION_ATK = Float.parseFloat(pValue);
-				break;
-			case "championspdatk":
-				L2JMOD_CHAMPION_SPD_ATK = Float.parseFloat(pValue);
-				break;
-			case "championrewardlowerlvlitemchance":
-				L2JMOD_CHAMPION_REWARD_LOWER_LVL_ITEM_CHANCE = Integer.parseInt(pValue);
-				break;
-			case "championrewardhigherlvlitemchance":
-				L2JMOD_CHAMPION_REWARD_HIGHER_LVL_ITEM_CHANCE = Integer.parseInt(pValue);
-				break;
-			case "championrewarditemid":
-				L2JMOD_CHAMPION_REWARD_ID = Integer.parseInt(pValue);
-				break;
-			case "championrewarditemqty":
-				L2JMOD_CHAMPION_REWARD_QTY = Integer.parseInt(pValue);
-				break;
-			case "championenableininstances":
-				L2JMOD_CHAMPION_ENABLE_IN_INSTANCES = Boolean.parseBoolean(pValue);
 				break;
 			case "allowwedding":
 				L2JMOD_ALLOW_WEDDING = Boolean.parseBoolean(pValue);

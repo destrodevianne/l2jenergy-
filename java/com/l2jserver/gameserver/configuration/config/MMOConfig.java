@@ -29,12 +29,16 @@ public class MMOConfig
 {
 	@Setting(name = "SleepTime")
 	public static int MMO_SELECTOR_SLEEP_TIME;
+	
 	@Setting(name = "MaxSendPerPass")
 	public static int MMO_MAX_SEND_PER_PASS;
+	
 	@Setting(name = "MaxReadPerPass")
 	public static int MMO_MAX_READ_PER_PASS;
+	
 	@Setting(name = "HelperBufferCount")
 	public static int MMO_HELPER_BUFFER_COUNT;
+	
 	@Setting(name = "TcpNoDelay")
 	public static boolean MMO_TCP_NODELAY;
 }

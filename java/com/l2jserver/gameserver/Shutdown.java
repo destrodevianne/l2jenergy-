@@ -23,11 +23,11 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.UPnPService;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.ManorConfig;
+import com.l2jserver.gameserver.configuration.config.OfflineConfig;
 import com.l2jserver.gameserver.configuration.config.events.FishingConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.sql.impl.OfflineTradersTable;
@@ -215,7 +215,7 @@ public class Shutdown extends Thread
 			
 			try
 			{
-				if ((Config.OFFLINE_TRADE_ENABLE || Config.OFFLINE_CRAFT_ENABLE) && Config.RESTORE_OFFLINERS)
+				if ((OfflineConfig.OFFLINE_TRADE_ENABLE || OfflineConfig.OFFLINE_CRAFT_ENABLE) && OfflineConfig.RESTORE_OFFLINERS)
 				{
 					OfflineTradersTable.getInstance().storeOffliners();
 					LOG.info("Offline Traders Table: Offline shops stored({}ms).", tc.getEstimatedTimeAndRestartCounter());

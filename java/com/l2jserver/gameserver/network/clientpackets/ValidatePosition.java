@@ -18,8 +18,8 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.zone.ZoneId;
@@ -82,7 +82,7 @@ public class ValidatePosition extends L2GameClientPacket
 		
 		if (activeChar.isInBoat())
 		{
-			if (Config.COORD_SYNCHRONIZE == 2)
+			if (GeoDataConfig.COORD_SYNCHRONIZE == 2)
 			{
 				dx = _x - activeChar.getInVehiclePosition().getX();
 				dy = _y - activeChar.getInVehiclePosition().getY();
@@ -146,13 +146,13 @@ public class ValidatePosition extends L2GameClientPacket
 		}
 		else if (diffSq < 360000) // if too large, messes observation
 		{
-			if (Config.COORD_SYNCHRONIZE == -1) // Only Z coordinate synched to server,
+			if (GeoDataConfig.COORD_SYNCHRONIZE == -1) // Only Z coordinate synched to server,
 			// mainly used when no geodata but can be used also with geodata
 			{
 				activeChar.setXYZ(realX, realY, _z);
 				return;
 			}
-			if (Config.COORD_SYNCHRONIZE == 1) // Trusting also client x,y coordinates (should not be used with geodata)
+			if (GeoDataConfig.COORD_SYNCHRONIZE == 1) // Trusting also client x,y coordinates (should not be used with geodata)
 			{
 				if (!activeChar.isMoving() || !activeChar.validateMovementHeading(_heading)) // Heading changed on client = possible obstacle
 				{

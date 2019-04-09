@@ -29,16 +29,22 @@ public class FishingConfig
 {
 	@Setting(name = "AltFishChampionshipEnabled")
 	public static boolean ALT_FISH_CHAMPIONSHIP_ENABLED;
+	
 	@Setting(name = "AltFishChampionshipRewardItemId")
 	public static int ALT_FISH_CHAMPIONSHIP_REWARD_ITEM;
+	
 	@Setting(name = "AltFishChampionshipReward1")
 	public static int ALT_FISH_CHAMPIONSHIP_REWARD_1;
+	
 	@Setting(name = "AltFishChampionshipReward2")
 	public static int ALT_FISH_CHAMPIONSHIP_REWARD_2;
+	
 	@Setting(name = "AltFishChampionshipReward3")
 	public static int ALT_FISH_CHAMPIONSHIP_REWARD_3;
+	
 	@Setting(name = "AltFishChampionshipReward4")
 	public static int ALT_FISH_CHAMPIONSHIP_REWARD_4;
+	
 	@Setting(name = "AltFishChampionshipReward5")
 	public static int ALT_FISH_CHAMPIONSHIP_REWARD_5;
 }

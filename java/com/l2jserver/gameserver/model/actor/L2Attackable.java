@@ -40,6 +40,7 @@ import com.l2jserver.gameserver.ai.L2FortSiegeGuardAI;
 import com.l2jserver.gameserver.ai.L2SiegeGuardAI;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.PremiumConfig;
+import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.datatables.EventDroplist;
 import com.l2jserver.gameserver.datatables.EventDroplist.DateDrop;
 import com.l2jserver.gameserver.datatables.ItemTable;
@@ -84,7 +85,7 @@ public class L2Attackable extends L2Npc
 	// Raid
 	private boolean _isRaid = false;
 	private boolean _isRaidMinion = false;
-	//
+	private boolean _isHardChamp = false;
 	private boolean _champion = false;
 	private final Map<L2Character, AggroInfo> _aggroList = new ConcurrentHashMap<>();
 	private boolean _isReturningToSpawnPoint = false;
@@ -475,10 +476,10 @@ public class L2Attackable extends L2Npc
 							long exp = expSp[0];
 							int sp = expSp[1];
 							
-							if (Config.L2JMOD_CHAMPION_ENABLE && isChampion())
+							if (ChampionData.getInstance().isEnabled() && isChampion())
 							{
-								exp *= Config.L2JMOD_CHAMPION_REWARDS_EXP_SP;
-								sp *= Config.L2JMOD_CHAMPION_REWARDS_EXP_SP;
+								exp *= ChampionData.getInstance().getRewardMultipler(this);
+								sp *= ChampionData.getInstance().getRewardMultipler(this);
 							}
 							
 							exp *= penalty;
@@ -587,10 +588,10 @@ public class L2Attackable extends L2Npc
 						long exp = expSp[0];
 						int sp = expSp[1];
 						
-						if (Config.L2JMOD_CHAMPION_ENABLE && isChampion())
+						if (ChampionData.getInstance().isEnabled() && isChampion())
 						{
-							exp *= Config.L2JMOD_CHAMPION_REWARDS_EXP_SP;
-							sp *= Config.L2JMOD_CHAMPION_REWARDS_EXP_SP;
+							exp *= ChampionData.getInstance().getRewardMultipler(this);
+							sp *= ChampionData.getInstance().getRewardMultipler(this);
 						}
 						
 						exp *= partyMul;
@@ -1008,12 +1009,12 @@ public class L2Attackable extends L2Npc
 		}
 		
 		// Apply Special Item drop with random(rnd) quantity(qty) for champions.
-		if (Config.L2JMOD_CHAMPION_ENABLE && isChampion() && ((Config.L2JMOD_CHAMPION_REWARD_LOWER_LVL_ITEM_CHANCE > 0) || (Config.L2JMOD_CHAMPION_REWARD_HIGHER_LVL_ITEM_CHANCE > 0)))
+		if (ChampionData.getInstance().isEnabled() && isChampion() && ((ChampionData.getInstance().getLowerLvChance(this) > 0) || (ChampionData.getInstance().getHigherLvChance(this) > 0)))
 		{
-			int champqty = Rnd.get(Config.L2JMOD_CHAMPION_REWARD_QTY);
-			ItemHolder item = new ItemHolder(Config.L2JMOD_CHAMPION_REWARD_ID, ++champqty);
+			int champqty = Rnd.get(ChampionData.getInstance().getRewardCount(this));
+			ItemHolder item = new ItemHolder(ChampionData.getInstance().getRewardId(this), ++champqty);
 			
-			if ((player.getLevel() <= getLevel()) && (Rnd.get(100) < Config.L2JMOD_CHAMPION_REWARD_LOWER_LVL_ITEM_CHANCE))
+			if ((player.getLevel() <= getLevel()) && (Rnd.get(100) < ChampionData.getInstance().getLowerLvChance(this)))
 			{
 				if (Config.AUTO_LOOT || isFlying())
 				{
@@ -1024,7 +1025,7 @@ public class L2Attackable extends L2Npc
 					dropItem(player, item);
 				}
 			}
-			else if ((player.getLevel() > getLevel()) && (Rnd.get(100) < Config.L2JMOD_CHAMPION_REWARD_HIGHER_LVL_ITEM_CHANCE))
+			else if ((player.getLevel() > getLevel()) && (Rnd.get(100) < ChampionData.getInstance().getHigherLvChance(this)))
 			{
 				if (Config.AUTO_LOOT || isFlying())
 				{
@@ -1638,7 +1639,7 @@ public class L2Attackable extends L2Npc
 	 */
 	public boolean useVitalityRate()
 	{
-		return isChampion() ? Config.L2JMOD_CHAMPION_ENABLE_VITALITY : true;
+		return isChampion() ? ChampionData.getInstance().isEnabledVitality(this) : true;
 	}
 	
 	/** Return True if the L2Character is RaidBoss or his minion. */
@@ -1685,6 +1686,16 @@ public class L2Attackable extends L2Npc
 	public L2Attackable getLeader()
 	{
 		return null;
+	}
+	
+	public void setHardChampion(boolean isHardChamp)
+	{
+		_isHardChamp = isHardChamp;
+	}
+	
+	public boolean isHardChampion()
+	{
+		return _isHardChamp;
 	}
 	
 	public void setChampion(boolean champ)

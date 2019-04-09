@@ -1,0 +1,120 @@
+{
+	# =====================================================================
+    #                 Champion mod - General Settings
+    # =====================================================================
+    # Enable/Disable Champion Mod System.
+    "ChampionEnable" : "false",
+
+    # Enable spawning of the champions in instances
+    "ChampionEnableInInstances" : "false",
+
+    # =====================================================================
+    #                 Champion mod - Easy (Blue) champions
+    # =====================================================================
+    # Force Champion mobs to be passive?
+    # To leave champion mobs to default/Aggressive, set to False.
+    # To set all champion mobs to Passive, set True.
+    "ChampionPassiveEasy" : "true",
+
+    # Do you want to enable the vitality calculation when killing champion mobs?
+    # Be aware that it can lead to huge unbalance on your server, your rate for that mob would
+    # then be "mobXP x serverRate x vitalityRate x championXpRate
+    # Notes:
+    #	Works only if EnableVitality = True 
+    "ChampionEnableVitalityEasy" : "false",
+
+    # % chance for a mob to became Easy champion (0 to disable).
+    "ChampionFrequencyEasy" : "5",
+
+    # Title of all Easy Champions.
+    "ChampionTitleEasy" : "Easy",
+
+    # Min and max levels allowed for Easy Champions.
+    "ChampionMinLevelEasy" : "20",
+    "ChampionMaxLevelEasy" : "50",
+
+    # Hp multiplier for Easy Champios.
+    "ChampionHpEasy" : "5",
+
+    # Hp Regen Multiplier for Easy Champions.
+    "ChampionHpRegenEasy" : "1.0",
+
+    # Standard rewards multiplier for Easy Champions.
+    "ChampionRewardsEasy" : "4",
+
+    # Adena & Seal Stone rewards multiplier for Easy Champions.
+    "ChampionAdenasRewardsEasy" : "4",
+
+    # P. Attack and M. Attack bonus for Easy Champions.
+    "ChampionAtkEasy" : "1",
+
+    # Physical/Magical Attack Speed bonus for Easy Champions.
+    "ChampionSpdAtkEasy" : "1",
+
+    # Specified reward item ID for Easy Champions
+    "ChampionRewardItemIDEasy" : "6393",
+
+    # The amount of the specified reward a player will receive if they are awarded the item.
+    "ChampionRewardItemQtyEasy" : "1",
+
+    # % Chance to obtain a specified reward item from a LOWER lvl Champion mob.
+    "ChampionRewardLowerLvlItemChanceEasy" : "0",
+
+    # % Chance to obtain a specified reward item from a HIGHER lvl Champion mob.
+    "ChampionRewardHigherLvlItemChanceEasy" : "0",
+
+    # =====================================================================
+    #                 Champion mod - Hard (Red) champions
+    # =====================================================================
+    # Force Champion mobs to be passive?
+    # To leave champion mobs to default/Aggressive, set to False.
+    # To set all champion mobs to Passive, set True.
+    "ChampionPassiveHard" : "false",
+
+    # Do you want to enable the vitality calculation when killing champion mobs?
+    # Be aware that it can lead to huge unbalance on your server, your rate for that mob would
+    # then be "mobXP x serverRate x vitalityRate x championXpRate
+    # Notes:
+    #	Works only if EnableVitality = True 
+    "ChampionEnableVitalityHard" : "false",
+   
+    # % chance for a mob to became Hard champion (0 to disable).
+    "ChampionFrequencyHard" : "1",
+
+    # Title of all Hard Champions.
+    "ChampionTitleHard" : "Hard",
+
+    # Min and max levels allowed for Hard Champions.
+    "ChampionMinLevelHard" : "50",
+    "ChampionMaxLevelHard" : "90",
+
+    # Hp multiplier for Hard Champios.
+    "ChampionHpHard" : "15",
+
+    # Hp Regen Multiplier for Hard Champions.
+    "ChampionHpRegenHard" : "2",
+
+    # Standard rewards multiplier for Hard Champions.
+    "ChampionRewardsHard" : "10",
+
+    # Adena & Seal Stone rewards multiplier for Hard Champions.
+    "ChampionAdenasRewardsHard" : "10",
+
+    # P. Attack and M. Attack bonus for Hard Champions.
+    "ChampionAtkHard" : "2",
+
+    # Physical/Magical Attack Speed bonus for Hard Champions.
+    "ChampionSpdAtkHard" : "2",
+
+    # Specified reward item ID for Hard Champions
+    "ChampionRewardItemIDHard" : "6393",
+
+    # The amount of the specified reward a player will receive if they are awarded the item.
+    "ChampionRewardItemQtyHard" : "2",
+
+    # % Chance to obtain a specified reward item from a LOWER lvl Champion mob.
+    "ChampionRewardLowerLvlItemChanceHard" : "0",
+
+    # % Chance to obtain a specified reward item from a HIGHER lvl Champion mob.
+    "ChampionRewardHigherLvlItemChanceHard" : "0"
+}

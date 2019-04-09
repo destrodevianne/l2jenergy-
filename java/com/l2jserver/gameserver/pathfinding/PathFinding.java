@@ -20,7 +20,7 @@ package com.l2jserver.gameserver.pathfinding;
 
 import java.util.List;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.pathfinding.cellnodes.CellPathFinding;
 import com.l2jserver.gameserver.pathfinding.geonodes.GeoPathFinding;
@@ -32,7 +32,7 @@ public abstract class PathFinding
 {
 	public static PathFinding getInstance()
 	{
-		if (Config.PATHFINDING == 1)
+		if (GeoDataConfig.PATHFINDING == 1)
 		{
 			// Higher Memory Usage, Smaller Cpu Usage
 			return GeoPathFinding.getInstance();

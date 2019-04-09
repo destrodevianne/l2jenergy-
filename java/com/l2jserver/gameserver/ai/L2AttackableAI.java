@@ -37,6 +37,7 @@ import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.data.sql.impl.TerritoryTable;
+import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.enums.AISkillScope;
 import com.l2jserver.gameserver.enums.AIType;
 import com.l2jserver.gameserver.instancemanager.DimensionalRiftManager;
@@ -307,7 +308,7 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
 				return false;
 			}
 			
-			if (me.isChampion() && Config.L2JMOD_CHAMPION_PASSIVE)
+			if (me.isChampion() && ChampionData.getInstance().isPassive(me))
 			{
 				return false;
 			}

@@ -24,7 +24,7 @@ import java.nio.file.Path;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2World;
@@ -60,8 +60,8 @@ public class GeoData
 			{
 				for (int regionY = L2World.TILE_Y_MIN; regionY <= L2World.TILE_Y_MAX; regionY++)
 				{
-					final Path geoFilePath = Config.GEODATA_PATH.resolve(String.format(FILE_NAME_FORMAT, regionX, regionY));
-					final Boolean loadFile = Config.GEODATA_REGIONS.get(regionX + "_" + regionY);
+					final Path geoFilePath = GeoDataConfig.GEODATA_PATH.resolve(String.format(FILE_NAME_FORMAT, regionX, regionY));
+					final Boolean loadFile = GeoDataConfig.GEODATA_REGIONS.get(regionX + "_" + regionY);
 					if (loadFile != null)
 					{
 						if (loadFile)
@@ -71,7 +71,7 @@ public class GeoData
 							loadedRegions++;
 						}
 					}
-					else if (Config.TRY_LOAD_UNSPECIFIED_REGIONS && Files.exists(geoFilePath))
+					else if (GeoDataConfig.TRY_LOAD_UNSPECIFIED_REGIONS && Files.exists(geoFilePath))
 					{
 						try
 						{

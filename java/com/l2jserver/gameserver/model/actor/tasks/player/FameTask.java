@@ -19,6 +19,7 @@
 package com.l2jserver.gameserver.model.actor.tasks.player;
 
 import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.OfflineConfig;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
@@ -46,7 +47,7 @@ public class FameTask implements Runnable
 		{
 			return;
 		}
-		if (((_player.getClient() == null) || _player.getClient().isDetached()) && !Config.OFFLINE_FAME)
+		if (((_player.getClient() == null) || _player.getClient().isDetached()) && !OfflineConfig.OFFLINE_FAME)
 		{
 			return;
 		}

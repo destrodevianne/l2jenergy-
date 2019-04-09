@@ -165,4 +165,12 @@
 	    <set lang="en" val="Your premium will expire today." />
 		<set lang="ru" val="Сегодня истекает срок действия вашего премиум аккаунта." />
 	</message>
+	<message id="alt_birthday_mail_text">
+	    <set lang="en" val="Hello Adventurer!! Seeing as you're one year older now, I thought I would send you some birthday cheer :) Please find your birthday pack attached. May these gifts bring you joy and happiness on this very special day." />
+		<set lang="ru" val="Привет %s% !! Видя, что ты на %i% год старше, я подумала, что пошлю тебе поздравление с днем рождения :) Пожалуйста, получи свой подарок на день рождения. Пусть эти дары принесут вам радость и счастье в этот особенный день." />
+	</message>
+	<message id="alt_birthday_mail_subject">
+	    <set lang="en" val="Happy Birthday!" />
+		<set lang="ru" val="С Днем рожденья!" />
+	</message>
 </list>

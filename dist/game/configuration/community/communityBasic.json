@@ -9,5 +9,8 @@
     "BBSDefault" : "_bbshome",
 
     # Enable Custom Community Board.
-    "CustomCommunityBoard" : "true"
+    "CustomCommunityBoard" : "true",
+
+    # Время показанное в коммунити (указывается часовой пояс, можно найти https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+	"TimeZone" : "Europe/Kiev"
 }

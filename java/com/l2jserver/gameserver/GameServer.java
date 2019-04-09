@@ -40,7 +40,9 @@ import com.l2jserver.commons.util.Util;
 import com.l2jserver.commons.versioning.Version;
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.configuration.config.MMOConfig;
+import com.l2jserver.gameserver.configuration.config.OfflineConfig;
 import com.l2jserver.gameserver.configuration.config.PremiumConfig;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.configuration.config.TelnetConfig;
@@ -268,7 +270,7 @@ public final class GameServer
 		printSection("Geodata");
 		GeoData.getInstance();
 		
-		if (Config.PATHFINDING > 0)
+		if (GeoDataConfig.PATHFINDING > 0)
 		{
 			PathFinding.getInstance();
 		}
@@ -408,7 +410,7 @@ public final class GameServer
 		TvTManager.getInstance();
 		KnownListUpdateTaskManager.getInstance();
 		
-		if ((Config.OFFLINE_TRADE_ENABLE || Config.OFFLINE_CRAFT_ENABLE) && Config.RESTORE_OFFLINERS)
+		if ((OfflineConfig.OFFLINE_TRADE_ENABLE || OfflineConfig.OFFLINE_CRAFT_ENABLE) && OfflineConfig.RESTORE_OFFLINERS)
 		{
 			OfflineTradersTable.getInstance().restoreOfflineTraders();
 		}
@@ -494,7 +496,7 @@ public final class GameServer
 		final String gd = Util.parseArg(args, GEODATA, true);
 		if (gd != null)
 		{
-			Config.GEODATA_PATH = Paths.get(gd);
+			GeoDataConfig.GEODATA_PATH = Paths.get(gd);
 		}
 		
 		final String LOG_FOLDER = "./logs"; // Name of folder for log file

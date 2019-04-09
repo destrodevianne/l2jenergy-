@@ -23,6 +23,7 @@ import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.ai.L2CharacterAI;
 import com.l2jserver.gameserver.ai.L2SummonAI;
+import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.data.json.ExperienceData;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.enums.InstanceType;
@@ -684,7 +685,7 @@ public abstract class L2Summon extends L2Playable
 			return false;
 		}
 		
-		if ((this != target) && skill.isPhysical() && (Config.PATHFINDING > 0) && (PathFinding.getInstance().findPath(getX(), getY(), getZ(), target.getX(), target.getY(), target.getZ(), getInstanceId(), true) == null))
+		if ((this != target) && skill.isPhysical() && (GeoDataConfig.PATHFINDING > 0) && (PathFinding.getInstance().findPath(getX(), getY(), getZ(), target.getX(), target.getY(), target.getZ(), getInstanceId(), true) == null))
 		{
 			sendPacket(SystemMessageId.CANT_SEE_TARGET);
 			return false;

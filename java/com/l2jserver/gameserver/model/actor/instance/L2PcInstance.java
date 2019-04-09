@@ -64,6 +64,7 @@ import com.l2jserver.gameserver.cache.WarehouseCacheManager;
 import com.l2jserver.gameserver.communitybbs.BB.Forum;
 import com.l2jserver.gameserver.communitybbs.Manager.ForumsBBSManager;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.OfflineConfig;
 import com.l2jserver.gameserver.configuration.config.PcCafeConfig;
 import com.l2jserver.gameserver.configuration.config.PremiumConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
@@ -6263,7 +6264,7 @@ public final class L2PcInstance extends L2Playable
 	{
 		_privateStoreType = privateStoreType;
 		
-		if (Config.OFFLINE_DISCONNECT_FINISHED && (privateStoreType == PrivateStoreType.NONE) && ((getClient() == null) || getClient().isDetached()))
+		if (OfflineConfig.OFFLINE_DISCONNECT_FINISHED && (privateStoreType == PrivateStoreType.NONE) && ((getClient() == null) || getClient().isDetached()))
 		{
 			deleteMe();
 		}
