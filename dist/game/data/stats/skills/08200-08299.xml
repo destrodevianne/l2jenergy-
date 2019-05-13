@@ -1073,7 +1073,7 @@
 		<set name="isDebuff" val="true" />
 		<set name="lvlBonusRate" val="1" />
 		<set name="magicLvl" val="73" />
-		<set name="mpConsume2" val="149" />
+		<set name="mpConsume2" val="148" />
 		<set name="operateType" val="A2" />
 		<set name="reuseDelay" val="20000" />
 		<set name="rideState" val="NONE" />
