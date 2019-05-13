@@ -28,6 +28,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.l2jserver.Config;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.enums.QuestType;
 import com.l2jserver.gameserver.enums.audio.IAudio;
@@ -711,7 +712,7 @@ public final class QuestState
 	 */
 	public void giveAdena(long count, boolean applyRates)
 	{
-		giveItems(Inventory.ADENA_ID, count, applyRates ? 0 : 1);
+		giveItems(Inventory.ADENA_ID, applyRates ? count *= Config.RATE_QUEST_REWARD_ADENA : count);
 	}
 	
 	/**
