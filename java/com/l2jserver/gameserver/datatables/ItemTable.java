@@ -33,7 +33,6 @@ import org.slf4j.LoggerFactory;
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.EnchantItemHPBonusData;
 import com.l2jserver.gameserver.engines.DocumentEngine;
 import com.l2jserver.gameserver.enums.ItemLocation;
@@ -237,9 +236,9 @@ public class ItemTable
 			item.setCount(count);
 		}
 		
-		if (GeneralConfig.LOG_ITEMS && !process.equals("Reset"))
+		if (Config.LOG_ITEMS && !process.equals("Reset"))
 		{
-			if (!GeneralConfig.LOG_ITEMS_SMALL_LOG || (GeneralConfig.LOG_ITEMS_SMALL_LOG && (item.isEquipable() || (item.getId() == ADENA_ID))))
+			if (!Config.LOG_ITEMS_SMALL_LOG || (Config.LOG_ITEMS_SMALL_LOG && (item.isEquipable() || (item.getId() == ADENA_ID))))
 			{
 				LoggingUtils.logItem(LOG_ITEMS, "CREATE: ", process, item, actor.getName(), reference);
 			}
@@ -259,7 +258,7 @@ public class ItemTable
 					referenceName = (String) reference;
 				}
 				String targetName = (actor.getTarget() != null ? actor.getTarget().getName() : "no-target");
-				if (GeneralConfig.GMAUDIT)
+				if (Config.GMAUDIT)
 				{
 					GMAudit.auditGMAction(actor.getName() + " [" + actor.getObjectId() + "]", process + "(id: " + itemId + " count: " + count + " name: " + item.getItemName() + " objId: " + item.getObjectId() + ")", targetName, "L2Object referencing this action is: " + referenceName);
 				}
@@ -301,9 +300,9 @@ public class ItemTable
 			L2World.getInstance().removeObject(item);
 			IdFactory.getInstance().releaseId(item.getObjectId());
 			
-			if (GeneralConfig.LOG_ITEMS)
+			if (Config.LOG_ITEMS)
 			{
-				if (!GeneralConfig.LOG_ITEMS_SMALL_LOG || (GeneralConfig.LOG_ITEMS_SMALL_LOG && (item.isEquipable() || (item.getId() == ADENA_ID))))
+				if (!Config.LOG_ITEMS_SMALL_LOG || (Config.LOG_ITEMS_SMALL_LOG && (item.isEquipable() || (item.getId() == ADENA_ID))))
 				{
 					LoggingUtils.logItem(LOG_ITEMS, "DELETE: ", process, item, actor.getName(), reference);
 				}
@@ -323,7 +322,7 @@ public class ItemTable
 						referenceName = (String) reference;
 					}
 					String targetName = (actor.getTarget() != null ? actor.getTarget().getName() : "no-target");
-					if (GeneralConfig.GMAUDIT)
+					if (Config.GMAUDIT)
 					{
 						GMAudit.auditGMAction(actor.getName() + " [" + actor.getObjectId() + "]", process + "(id: " + item.getId() + " count: " + item.getCount() + " itemObjId: " + item.getObjectId() + ")", targetName, "L2Object referencing this action is: " + referenceName);
 					}

@@ -31,7 +31,6 @@ import org.w3c.dom.Node;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.util.filter.NumericNameFilter;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.community.CBasicConfig;
 import com.l2jserver.gameserver.enums.PcCafeType;
 import com.l2jserver.gameserver.model.StatsSet;
@@ -72,7 +71,7 @@ public final class MultisellData implements IXmlReader
 	{
 		_entries.clear();
 		parseDatapackDirectory("data/multisell", false);
-		if (GeneralConfig.CUSTOM_MULTISELL_LOAD)
+		if (Config.CUSTOM_MULTISELL_LOAD)
 		{
 			parseDatapackDirectory("data/multisell/custom", false);
 		}

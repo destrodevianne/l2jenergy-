@@ -18,7 +18,7 @@
  */
 package handlers.chathandlers;
 
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.handler.IChatHandler;
 import com.l2jserver.gameserver.instancemanager.TerritoryWarManager;
 import com.l2jserver.gameserver.model.L2World;
@@ -46,7 +46,7 @@ public class ChatBattlefield implements IChatHandler
 	{
 		if (TerritoryWarManager.getInstance().isTWChannelOpen() && (activeChar.getSiegeSide() > 0))
 		{
-			if (activeChar.isChatBanned() && Util.contains(GeneralConfig.BAN_CHAT_CHANNELS, type))
+			if (activeChar.isChatBanned() && Util.contains(Config.BAN_CHAT_CHANNELS, type))
 			{
 				activeChar.sendPacket(SystemMessageId.CHATTING_IS_CURRENTLY_PROHIBITED);
 				return;

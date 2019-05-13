@@ -18,8 +18,8 @@
  */
 package ai.npc.TownPets;
 
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -53,7 +53,7 @@ public final class TownPets extends AbstractNpcAI
 	{
 		super(TownPets.class.getSimpleName(), "ai/npc");
 		
-		if (GeneralConfig.ALLOW_PET_WALKERS)
+		if (Config.ALLOW_PET_WALKERS)
 		{
 			addSpawnId(PETS);
 		}

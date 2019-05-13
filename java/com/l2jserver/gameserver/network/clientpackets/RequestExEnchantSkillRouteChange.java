@@ -24,7 +24,6 @@ import java.util.logging.Logger;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.util.Rnd;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.EnchantSkillGroupsData;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.model.L2EnchantSkillGroup.EnchantSkillHolder;
@@ -169,7 +168,7 @@ public final class RequestExEnchantSkillRouteChange extends L2GameClientPacket
 			
 			if (skill != null)
 			{
-				if (GeneralConfig.LOG_SKILL_ENCHANTS)
+				if (Config.LOG_SKILL_ENCHANTS)
 				{
 					LogRecord record = new LogRecord(Level.INFO, "Route Change");
 					record.setParameters(new Object[]

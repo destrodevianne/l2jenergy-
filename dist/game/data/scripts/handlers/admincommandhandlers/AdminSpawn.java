@@ -25,9 +25,9 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.l2jserver.Config;
 import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.SevenSigns;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.datatables.SpawnTable;
@@ -416,7 +416,7 @@ public class AdminSpawn implements IAdminCommandHandler
 		try
 		{
 			final L2Spawn spawn = new L2Spawn(template);
-			if (GeneralConfig.SAVE_GMSPAWN_ON_CUSTOM)
+			if (Config.SAVE_GMSPAWN_ON_CUSTOM)
 			{
 				spawn.setCustom(true);
 			}

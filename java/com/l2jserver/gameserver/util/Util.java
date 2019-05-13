@@ -42,7 +42,6 @@ import com.l2jserver.commons.converter.Converter;
 import com.l2jserver.commons.util.filter.ExtFilter;
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.enums.HtmlActionScope;
 import com.l2jserver.gameserver.enums.IllegalActionPunishmentType;
@@ -514,7 +513,7 @@ public final class Util
 				bypass = bypass.substring(0, firstParameterStart + 1);
 			}
 			
-			if (GeneralConfig.HTML_ACTION_CACHE_DEBUG)
+			if (Config.HTML_ACTION_CACHE_DEBUG)
 			{
 				LOGGER.info("Cached html bypass(" + scope.toString() + "): '" + bypass + "'");
 			}
@@ -551,7 +550,7 @@ public final class Util
 				continue;
 			}
 			
-			if (GeneralConfig.HTML_ACTION_CACHE_DEBUG)
+			if (Config.HTML_ACTION_CACHE_DEBUG)
 			{
 				LOGGER.info("Cached html link(" + scope.toString() + "): '" + htmlLink + "'");
 			}
@@ -577,7 +576,7 @@ public final class Util
 			throw new IllegalArgumentException();
 		}
 		
-		if (GeneralConfig.HTML_ACTION_CACHE_DEBUG)
+		if (Config.HTML_ACTION_CACHE_DEBUG)
 		{
 			LOGGER.info("Set html action npc(" + scope.toString() + "): " + npcObjId);
 		}

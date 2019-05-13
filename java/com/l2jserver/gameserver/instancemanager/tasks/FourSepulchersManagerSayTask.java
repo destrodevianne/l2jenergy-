@@ -20,8 +20,8 @@ package com.l2jserver.gameserver.instancemanager.tasks;
 
 import java.util.Calendar;
 
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.instancemanager.FourSepulchersManager;
 
 /**
@@ -37,7 +37,7 @@ public final class FourSepulchersManagerSayTask implements Runnable
 		{
 			final Calendar tmp = Calendar.getInstance();
 			tmp.setTimeInMillis(Calendar.getInstance().getTimeInMillis() - FourSepulchersManager.getInstance().getWarmUpTimeEnd());
-			if ((tmp.get(Calendar.MINUTE) + 5) < GeneralConfig.FS_TIME_ATTACK)
+			if ((tmp.get(Calendar.MINUTE) + 5) < Config.FS_TIME_ATTACK)
 			{
 				FourSepulchersManager.getInstance().managerSay((byte) tmp.get(Calendar.MINUTE)); // byte
 				// because
@@ -48,7 +48,7 @@ public final class FourSepulchersManagerSayTask implements Runnable
 				ThreadPoolManager.getInstance().scheduleGeneral(new FourSepulchersManagerSayTask(), 5 * 60000);
 			}
 			// attack time ending chat
-			else if ((tmp.get(Calendar.MINUTE) + 5) >= GeneralConfig.FS_TIME_ATTACK)
+			else if ((tmp.get(Calendar.MINUTE) + 5) >= Config.FS_TIME_ATTACK)
 			{
 				FourSepulchersManager.getInstance().managerSay((byte) 90); // sending a unique id :D
 			}

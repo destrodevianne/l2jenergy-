@@ -28,7 +28,7 @@ import java.net.Socket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.configuration.config.TelnetConfig;
 import com.l2jserver.gameserver.handler.ITelnetHandler;
 import com.l2jserver.gameserver.handler.TelnetHandler;
@@ -46,7 +46,7 @@ public final class GameStatusThread extends Thread
 	
 	private void telnetOutput(int type, String text)
 	{
-		if (GeneralConfig.DEVELOPER)
+		if (Config.DEVELOPER)
 		{
 			if (type == 1)
 			{
@@ -90,12 +90,12 @@ public final class GameStatusThread extends Thread
 		telnetOutput(1, "Connection from: " + clientStringIP);
 		
 		// read and loop thru list of IPs, compare with newIP
-		if (GeneralConfig.DEVELOPER)
+		if (Config.DEVELOPER)
 		{
 			telnetOutput(2, "");
 		}
 		
-		if (GeneralConfig.DEVELOPER)
+		if (Config.DEVELOPER)
 		{
 			telnetOutput(3, "Comparing ip to list...");
 		}
@@ -110,7 +110,7 @@ public final class GameStatusThread extends Thread
 					result = true;
 				}
 				
-				if (GeneralConfig.DEVELOPER)
+				if (Config.DEVELOPER)
 				{
 					telnetOutput(3, clientStringIP + " = " + ipToCompare + "(" + host + ") = " + result);
 				}
@@ -121,7 +121,7 @@ public final class GameStatusThread extends Thread
 			}
 		}
 		
-		if (GeneralConfig.DEVELOPER)
+		if (Config.DEVELOPER)
 		{
 			telnetOutput(4, "Allow IP: " + result);
 		}

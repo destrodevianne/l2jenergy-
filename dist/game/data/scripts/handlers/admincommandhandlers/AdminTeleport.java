@@ -25,10 +25,10 @@ import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
+import com.l2jserver.Config;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.datatables.SpawnTable;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.instancemanager.MapRegionManager;
@@ -131,7 +131,7 @@ public class AdminTeleport implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				if (GeneralConfig.DEBUG)
+				if (Config.DEBUG)
 				{
 					_log.info("admin_walk: " + e);
 				}
@@ -543,7 +543,7 @@ public class AdminTeleport implements IAdminCommandHandler
 			try
 			{
 				spawn = new L2Spawn(target.getTemplate().getId());
-				if (GeneralConfig.SAVE_GMSPAWN_ON_CUSTOM)
+				if (Config.SAVE_GMSPAWN_ON_CUSTOM)
 				{
 					spawn.setCustom(true);
 				}
@@ -566,7 +566,7 @@ public class AdminTeleport implements IAdminCommandHandler
 				
 				activeChar.sendAdminMessage("Created " + target.getTemplate().getName() + " on " + target.getObjectId() + ".");
 				
-				if (GeneralConfig.DEBUG)
+				if (Config.DEBUG)
 				{
 					_log.fine("Spawn at X=" + spawn.getX() + " Y=" + spawn.getY() + " Z=" + spawn.getZ());
 					_log.warning("GM: " + activeChar.getName() + "(" + activeChar.getObjectId() + ") moved NPC " + target.getObjectId());
@@ -594,7 +594,7 @@ public class AdminTeleport implements IAdminCommandHandler
 			try
 			{
 				final L2Spawn spawnDat = new L2Spawn(target.getId());
-				if (GeneralConfig.SAVE_GMSPAWN_ON_CUSTOM)
+				if (Config.SAVE_GMSPAWN_ON_CUSTOM)
 				{
 					spawn.setCustom(true);
 				}

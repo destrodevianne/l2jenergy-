@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.AdminCommandHandler;
@@ -79,7 +79,7 @@ public final class SendBypassBuildCmd extends L2GameClientPacket
 			return;
 		}
 		
-		if (GeneralConfig.GMAUDIT)
+		if (Config.GMAUDIT)
 		{
 			GMAudit.auditGMAction(activeChar.getName() + " [" + activeChar.getObjectId() + "]", _command, (activeChar.getTarget() != null ? activeChar.getTarget().getName() : "no-target"));
 		}

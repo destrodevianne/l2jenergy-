@@ -24,7 +24,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.l2jserver.Config;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.model.ItemRequest;
@@ -137,7 +136,7 @@ public final class RequestPrivateStoreBuy extends L2GameClientPacket
 			if (storeList.getItemCount() > _items.size())
 			{
 				String msgErr = "[RequestPrivateStoreBuy] player " + getClient().getActiveChar().getName() + " tried to buy less items than sold by package-sell, ban this player for bot usage!";
-				Util.handleIllegalPlayerAction(getClient().getActiveChar(), msgErr, GeneralConfig.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(getClient().getActiveChar(), msgErr, Config.DEFAULT_PUNISH);
 				return;
 			}
 		}

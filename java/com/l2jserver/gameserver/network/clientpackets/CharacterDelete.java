@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.model.CharSelectInfoPackage;
 import com.l2jserver.gameserver.model.events.Containers;
 import com.l2jserver.gameserver.model.events.EventDispatcher;
@@ -53,7 +53,7 @@ public final class CharacterDelete extends L2GameClientPacket
 			return;
 		}
 		
-		if (GeneralConfig.DEBUG)
+		if (Config.DEBUG)
 		{
 			LOG.debug("Deleting slot: {}", _charSlot);
 		}

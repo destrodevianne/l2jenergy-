@@ -28,8 +28,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.l2jserver.Config;
 import com.l2jserver.commons.util.filter.HTMLFilter;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.util.Util;
 
@@ -42,7 +42,7 @@ public class HtmCache
 	
 	private static final HTMLFilter HTML_FILTER = new HTMLFilter();
 	
-	private static final Map<String, String> _cache = GeneralConfig.LAZY_CACHE ? new ConcurrentHashMap<>() : new HashMap<>();
+	private static final Map<String, String> _cache = Config.LAZY_CACHE ? new ConcurrentHashMap<>() : new HashMap<>();
 	
 	private int _loadedFiles;
 	private long _bytesBuffLen;
@@ -59,7 +59,7 @@ public class HtmCache
 	
 	public void reload(File f)
 	{
-		if (!GeneralConfig.LAZY_CACHE)
+		if (!Config.LAZY_CACHE)
 		{
 			LOG.info("Html cache start...");
 			parseDir(f);
@@ -188,7 +188,7 @@ public class HtmCache
 		}
 		
 		String content = _cache.get(path);
-		if (GeneralConfig.LAZY_CACHE && (content == null))
+		if (Config.LAZY_CACHE && (content == null))
 		{
 			content = loadFile(new File(ServerConfig.DATAPACK_ROOT, path));
 		}

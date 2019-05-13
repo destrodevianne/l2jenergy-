@@ -37,6 +37,8 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.util.PropertiesParser;
 import com.l2jserver.commons.util.StringUtil;
+import com.l2jserver.gameserver.configuration.config.MMOConfig;
+import com.l2jserver.gameserver.enums.IllegalActionPunishmentType;
 import com.l2jserver.gameserver.model.holders.ItemHolder;
 import com.l2jserver.gameserver.model.itemcontainer.Inventory;
 import com.l2jserver.gameserver.util.FloodProtectorConfig;
@@ -69,6 +71,7 @@ public final class Config
 	public static final String SIEGE_CONFIGURATION_FILE = "./config/Siege.properties";
 	public static final String FLOOD_PROTECTOR_FILE = "./config/FloodProtector.properties";
 	public static final String TOP_CONFIG_FILE = "config/services/Tops.properties";
+	public static final String GENERAL_CONFIG_FILE = "./config/General.properties";
 	
 	// --------------------------------------------------
 	// L2J Variable Definitions
@@ -381,7 +384,233 @@ public final class Config
 	public static boolean ALLOW_WYVERN_ALWAYS;
 	public static boolean ALLOW_WYVERN_DURING_SIEGE;
 	
+	// --------------------------------------------------
+	// General Settings
+	// --------------------------------------------------
+	public static boolean EVERYBODY_HAS_ADMIN_RIGHTS;
+	public static boolean SERVER_LIST_BRACKET;
+	public static int SERVER_LIST_TYPE;
+	public static int SERVER_LIST_AGE;
+	public static boolean SERVER_GMONLY;
+	public static boolean GM_HERO_AURA;
+	public static boolean GM_STARTUP_INVULNERABLE;
+	public static boolean GM_STARTUP_INVISIBLE;
+	public static boolean GM_STARTUP_SILENCE;
+	public static boolean GM_STARTUP_AUTO_LIST;
+	public static boolean GM_STARTUP_DIET_MODE;
+	public static boolean GM_ITEM_RESTRICTION;
+	public static boolean GM_SKILL_RESTRICTION;
+	public static boolean GM_TRADE_RESTRICTED_ITEMS;
+	public static boolean GM_RESTART_FIGHTING;
+	public static boolean GM_ANNOUNCER_NAME;
+	public static boolean GM_CRITANNOUNCER_NAME;
+	public static boolean GM_GIVE_SPECIAL_SKILLS;
+	public static boolean GM_GIVE_SPECIAL_AURA_SKILLS;
+	public static boolean GAMEGUARD_ENFORCE;
+	public static boolean GAMEGUARD_PROHIBITACTION;
+	public static boolean LOG_CHAT;
+	public static boolean LOG_AUTO_ANNOUNCEMENTS;
+	public static boolean LOG_ITEMS;
+	public static boolean LOG_ITEMS_SMALL_LOG;
+	public static boolean LOG_ITEM_ENCHANTS;
+	public static boolean LOG_SKILL_ENCHANTS;
+	public static boolean GMAUDIT;
+	public static boolean SKILL_CHECK_ENABLE;
+	public static boolean SKILL_CHECK_REMOVE;
+	public static boolean SKILL_CHECK_GM;
+	public static boolean DEBUG;
+	public static boolean DEBUG_INSTANCES;
+	public static boolean HTML_ACTION_CACHE_DEBUG;
+	public static boolean PACKET_HANDLER_DEBUG;
+	public static boolean DEVELOPER;
+	public static boolean ALT_DEV_NO_HANDLERS;
+	public static boolean ALT_DEV_NO_QUESTS;
+	public static boolean ALT_DEV_NO_SPAWNS;
+	public static boolean ALT_DEV_SHOW_QUESTS_LOAD_IN_LOGS;
+	public static boolean ALT_DEV_SHOW_SCRIPTS_LOAD_IN_LOGS;
+	public static int SCHEDULED_THREAD_CORE_POOL_SIZE_AI;
+	public static int SCHEDULED_THREAD_CORE_POOL_SIZE_EFFECTS;
+	public static int SCHEDULED_THREAD_CORE_POOL_SIZE_EVENTS;
+	public static int SCHEDULED_THREAD_CORE_POOL_SIZE_GENERAL;
+	public static int THREAD_CORE_POOL_SIZE_EVENT;
+	public static int THREAD_CORE_POOL_SIZE_GENERAL;
+	public static int THREAD_CORE_POOL_SIZE_GENERAL_PACKETS;
+	public static int THREAD_CORE_POOL_SIZE_IO_PACKETS;
+	public static int CLIENT_PACKET_QUEUE_SIZE;
+	public static int CLIENT_PACKET_QUEUE_MAX_BURST_SIZE;
+	public static int CLIENT_PACKET_QUEUE_MAX_PACKETS_PER_SECOND;
+	public static int CLIENT_PACKET_QUEUE_MEASURE_INTERVAL;
+	public static int CLIENT_PACKET_QUEUE_MAX_AVERAGE_PACKETS_PER_SECOND;
+	public static int CLIENT_PACKET_QUEUE_MAX_FLOODS_PER_MIN;
+	public static int CLIENT_PACKET_QUEUE_MAX_OVERFLOWS_PER_MIN;
+	public static int CLIENT_PACKET_QUEUE_MAX_UNDERFLOWS_PER_MIN;
+	public static int CLIENT_PACKET_QUEUE_MAX_UNKNOWN_PER_MIN;
+	public static boolean DEADLOCK_DETECTOR;
+	public static int DEADLOCK_CHECK_INTERVAL;
+	public static boolean RESTART_ON_DEADLOCK;
+	public static boolean ALLOW_DISCARDITEM;
+	public static int AUTODESTROY_ITEM_AFTER;
+	public static int HERB_AUTO_DESTROY_TIME;
+	public static List<Integer> LIST_PROTECTED_ITEMS;
+	public static boolean DATABASE_CLEAN_UP;
+	public static long CONNECTION_CLOSE_TIME;
+	public static int CHAR_STORE_INTERVAL;
+	public static boolean LAZY_ITEMS_UPDATE;
+	public static boolean UPDATE_ITEMS_ON_CHAR_STORE;
+	public static boolean DESTROY_DROPPED_PLAYER_ITEM;
+	public static boolean DESTROY_EQUIPABLE_PLAYER_ITEM;
+	public static boolean SAVE_DROPPED_ITEM;
+	public static boolean EMPTY_DROPPED_ITEM_TABLE_AFTER_LOAD;
+	public static int SAVE_DROPPED_ITEM_INTERVAL;
+	public static boolean CLEAR_DROPPED_ITEM_TABLE;
+	public static boolean AUTODELETE_INVALID_QUEST_DATA;
+	public static boolean PRECISE_DROP_CALCULATION;
+	public static boolean MULTIPLE_ITEM_DROP;
+	public static boolean FORCE_INVENTORY_UPDATE;
+	public static boolean LAZY_CACHE;
+	public static boolean CACHE_CHAR_NAMES;
+	public static int MIN_NPC_ANIMATION;
+	public static int MAX_NPC_ANIMATION;
+	public static int MIN_MONSTER_ANIMATION;
+	public static int MAX_MONSTER_ANIMATION;
+	public static boolean ENABLE_FALLING_DAMAGE;
+	public static boolean GRIDS_ALWAYS_ON;
+	public static int GRID_NEIGHBOR_TURNON_TIME;
+	public static int GRID_NEIGHBOR_TURNOFF_TIME;
+	public static boolean MOVE_BASED_KNOWNLIST;
+	public static long KNOWNLIST_UPDATE_INTERVAL;
+	public static int PEACE_ZONE_MODE;
+	public static String DEFAULT_GLOBAL_CHAT;
+	public static String DEFAULT_TRADE_CHAT;
+	public static boolean ALLOW_WAREHOUSE;
+	public static boolean WAREHOUSE_CACHE;
+	public static int WAREHOUSE_CACHE_TIME;
+	public static boolean ALLOW_REFUND;
+	public static boolean ALLOW_MAIL;
+	public static boolean ALLOW_ATTACHMENTS;
+	public static boolean ALLOW_WEAR;
+	public static int WEAR_DELAY;
+	public static int WEAR_PRICE;
+	public static int INSTANCE_FINISH_TIME;
+	public static boolean RESTORE_PLAYER_INSTANCE;
+	public static boolean ALLOW_SUMMON_IN_INSTANCE;
+	public static int EJECT_DEAD_PLAYER_TIME;
+	public static boolean ALLOW_LOTTERY;
+	public static boolean ALLOW_RACE;
+	public static boolean ALLOW_WATER;
+	public static boolean ALLOW_RENTPET;
+	public static boolean ALLOWFISHING;
+	public static boolean ALLOW_BOAT;
+	public static int BOAT_BROADCAST_RADIUS;
+	public static boolean ALLOW_CURSED_WEAPONS;
+	public static boolean ALLOW_MANOR;
+	public static boolean ALLOW_PET_WALKERS;
+	public static boolean SERVER_NEWS;
+	public static boolean USE_SAY_FILTER;
+	public static String CHAT_FILTER_CHARS;
+	public static int[] BAN_CHAT_CHANNELS;
+	public static int ALT_OLY_START_TIME;
+	public static int ALT_OLY_MIN;
+	public static int ALT_OLY_MAX_BUFFS;
+	public static long ALT_OLY_CPERIOD;
+	public static long ALT_OLY_BATTLE;
+	public static long ALT_OLY_WPERIOD;
+	public static long ALT_OLY_VPERIOD;
+	public static int ALT_OLY_START_POINTS;
+	public static int ALT_OLY_WEEKLY_POINTS;
+	public static int ALT_OLY_CLASSED;
+	public static int ALT_OLY_NONCLASSED;
+	public static int ALT_OLY_TEAMS;
+	public static int ALT_OLY_REG_DISPLAY;
+	public static int[][] ALT_OLY_CLASSED_REWARD;
+	public static int[][] ALT_OLY_NONCLASSED_REWARD;
+	public static int[][] ALT_OLY_TEAM_REWARD;
+	public static int ALT_OLY_COMP_RITEM;
+	public static int ALT_OLY_MIN_MATCHES;
+	public static int ALT_OLY_GP_PER_POINT;
+	public static int ALT_OLY_HERO_POINTS;
+	public static int ALT_OLY_RANK1_POINTS;
+	public static int ALT_OLY_RANK2_POINTS;
+	public static int ALT_OLY_RANK3_POINTS;
+	public static int ALT_OLY_RANK4_POINTS;
+	public static int ALT_OLY_RANK5_POINTS;
+	public static int ALT_OLY_MAX_POINTS;
+	public static int ALT_OLY_DIVIDER_CLASSED;
+	public static int ALT_OLY_DIVIDER_NON_CLASSED;
+	public static int ALT_OLY_MAX_WEEKLY_MATCHES;
+	public static int ALT_OLY_MAX_WEEKLY_MATCHES_NON_CLASSED;
+	public static int ALT_OLY_MAX_WEEKLY_MATCHES_CLASSED;
+	public static int ALT_OLY_MAX_WEEKLY_MATCHES_TEAM;
+	public static boolean ALT_OLY_LOG_FIGHTS;
+	public static boolean ALT_OLY_SHOW_MONTHLY_WINNERS;
+	public static boolean ALT_OLY_ANNOUNCE_GAMES;
+	public static List<Integer> LIST_OLY_RESTRICTED_ITEMS;
+	public static int ALT_OLY_ENCHANT_LIMIT;
+	public static int ALT_OLY_WAIT_TIME;
+	public static int ALT_MANOR_REFRESH_TIME;
+	public static int ALT_MANOR_REFRESH_MIN;
+	public static int ALT_MANOR_APPROVE_TIME;
+	public static int ALT_MANOR_APPROVE_MIN;
+	public static int ALT_MANOR_MAINTENANCE_MIN;
+	public static boolean ALT_MANOR_SAVE_ALL_ACTIONS;
+	public static int ALT_MANOR_SAVE_PERIOD_RATE;
+	public static long ALT_LOTTERY_PRIZE;
+	public static long ALT_LOTTERY_TICKET_PRICE;
+	public static float ALT_LOTTERY_5_NUMBER_RATE;
+	public static float ALT_LOTTERY_4_NUMBER_RATE;
+	public static float ALT_LOTTERY_3_NUMBER_RATE;
+	public static long ALT_LOTTERY_2_AND_1_NUMBER_PRIZE;
+	public static boolean ALT_ITEM_AUCTION_ENABLED;
+	public static int ALT_ITEM_AUCTION_EXPIRED_AFTER;
+	public static long ALT_ITEM_AUCTION_TIME_EXTENDS_ON_BID;
+	public static int FS_TIME_ATTACK;
+	public static int FS_TIME_COOLDOWN;
+	public static int FS_TIME_ENTRY;
+	public static int FS_TIME_WARMUP;
+	public static int FS_PARTY_MEMBER_COUNT;
+	public static int RIFT_MIN_PARTY_SIZE;
+	public static int RIFT_SPAWN_DELAY;
+	public static int RIFT_MAX_JUMPS;
+	public static int RIFT_AUTO_JUMPS_TIME_MIN;
+	public static int RIFT_AUTO_JUMPS_TIME_MAX;
+	public static float RIFT_BOSS_ROOM_TIME_MUTIPLY;
+	public static int RIFT_ENTER_COST_RECRUIT;
+	public static int RIFT_ENTER_COST_SOLDIER;
+	public static int RIFT_ENTER_COST_OFFICER;
+	public static int RIFT_ENTER_COST_CAPTAIN;
+	public static int RIFT_ENTER_COST_COMMANDER;
+	public static int RIFT_ENTER_COST_HERO;
+	public static IllegalActionPunishmentType DEFAULT_PUNISH;
+	public static int DEFAULT_PUNISH_PARAM;
+	public static boolean ONLY_GM_ITEMS_FREE;
+	public static boolean JAIL_IS_PVP;
+	public static boolean JAIL_DISABLE_CHAT;
+	public static boolean JAIL_DISABLE_TRANSACTION;
+	public static boolean CUSTOM_SPAWNLIST_TABLE;
+	public static boolean SAVE_GMSPAWN_ON_CUSTOM;
+	public static boolean CUSTOM_NPC_DATA;
+	public static boolean CUSTOM_TELEPORT_TABLE;
+	public static boolean CUSTOM_NPCBUFFER_TABLES;
+	public static boolean CUSTOM_SKILLS_LOAD;
+	public static boolean CUSTOM_ITEMS_LOAD;
+	public static boolean CUSTOM_MULTISELL_LOAD;
+	public static boolean CUSTOM_BUYLIST_LOAD;
+	public static int ALT_BIRTHDAY_GIFT;
+	public static String ALT_BIRTHDAY_MAIL_SUBJECT;
+	public static String ALT_BIRTHDAY_MAIL_TEXT;
+	public static boolean ENABLE_BLOCK_CHECKER_EVENT;
+	public static int MIN_BLOCK_CHECKER_TEAM_MEMBERS;
+	public static boolean HBCE_FAIR_PLAY;
+	public static boolean HELLBOUND_WITHOUT_QUEST;
 	public static int PLAYER_MOVEMENT_BLOCK_TIME;
+	public static int NORMAL_ENCHANT_COST_MULTIPLIER;
+	public static int SAFE_ENCHANT_COST_MULTIPLIER;
+	public static boolean BOTREPORT_ENABLE;
+	public static boolean ENABLE_ITEM_MALL;
+	public static boolean EX_JAPAN_MINIGAME;
+	public static String[] BOTREPORT_RESETPOINT_HOUR;
+	public static long BOTREPORT_REPORT_DELAY;
+	public static boolean BOTREPORT_ALLOW_REPORTS_FROM_SAME_CLAN_MEMBERS;
 	
 	// --------------------------------------------------
 	// FloodProtector Settings
@@ -1231,6 +1460,252 @@ public final class Config
 			SILENCE_MODE_EXCLUDE = character.getBoolean("SilenceModeExclude", false);
 			ALT_VALIDATE_TRIGGER_SKILLS = character.getBoolean("AltValidateTriggerSkills", false);
 			PLAYER_MOVEMENT_BLOCK_TIME = character.getInt("NpcTalkBlockingTime", 0) * 1000;
+			
+			// Load General L2Properties file (if exists)
+			final PropertiesParser General = new PropertiesParser(GENERAL_CONFIG_FILE);
+			EVERYBODY_HAS_ADMIN_RIGHTS = General.getBoolean("EverybodyHasAdminRights", false);
+			SERVER_LIST_BRACKET = General.getBoolean("ServerListBrackets", false);
+			SERVER_LIST_TYPE = getServerTypeId(General.getString("ServerListType", "Normal").split(","));
+			SERVER_LIST_AGE = General.getInt("ServerListAge", 0);
+			SERVER_GMONLY = General.getBoolean("ServerGMOnly", false);
+			GM_HERO_AURA = General.getBoolean("GMHeroAura", false);
+			GM_STARTUP_INVULNERABLE = General.getBoolean("GMStartupInvulnerable", false);
+			GM_STARTUP_INVISIBLE = General.getBoolean("GMStartupInvisible", false);
+			GM_STARTUP_SILENCE = General.getBoolean("GMStartupSilence", false);
+			GM_STARTUP_AUTO_LIST = General.getBoolean("GMStartupAutoList", false);
+			GM_STARTUP_DIET_MODE = General.getBoolean("GMStartupDietMode", false);
+			GM_ITEM_RESTRICTION = General.getBoolean("GMItemRestriction", true);
+			GM_SKILL_RESTRICTION = General.getBoolean("GMSkillRestriction", true);
+			GM_TRADE_RESTRICTED_ITEMS = General.getBoolean("GMTradeRestrictedItems", false);
+			GM_RESTART_FIGHTING = General.getBoolean("GMRestartFighting", true);
+			GM_ANNOUNCER_NAME = General.getBoolean("GMShowAnnouncerName", false);
+			GM_CRITANNOUNCER_NAME = General.getBoolean("GMShowCritAnnouncerName", false);
+			GM_GIVE_SPECIAL_SKILLS = General.getBoolean("GMGiveSpecialSkills", false);
+			GM_GIVE_SPECIAL_AURA_SKILLS = General.getBoolean("GMGiveSpecialAuraSkills", false);
+			GAMEGUARD_ENFORCE = General.getBoolean("GameGuardEnforce", false);
+			GAMEGUARD_PROHIBITACTION = General.getBoolean("GameGuardProhibitAction", false);
+			LOG_CHAT = General.getBoolean("LogChat", false);
+			LOG_AUTO_ANNOUNCEMENTS = General.getBoolean("LogAutoAnnouncements", false);
+			LOG_ITEMS = General.getBoolean("LogItems", false);
+			LOG_ITEMS_SMALL_LOG = General.getBoolean("LogItemsSmallLog", false);
+			LOG_ITEM_ENCHANTS = General.getBoolean("LogItemEnchants", false);
+			LOG_SKILL_ENCHANTS = General.getBoolean("LogSkillEnchants", false);
+			GMAUDIT = General.getBoolean("GMAudit", false);
+			SKILL_CHECK_ENABLE = General.getBoolean("SkillCheckEnable", false);
+			SKILL_CHECK_REMOVE = General.getBoolean("SkillCheckRemove", false);
+			SKILL_CHECK_GM = General.getBoolean("SkillCheckGM", true);
+			DEBUG = General.getBoolean("Debug", false);
+			DEBUG_INSTANCES = General.getBoolean("InstanceDebug", false);
+			HTML_ACTION_CACHE_DEBUG = General.getBoolean("HtmlActionCacheDebug", false);
+			PACKET_HANDLER_DEBUG = General.getBoolean("PacketHandlerDebug", false);
+			DEVELOPER = General.getBoolean("Developer", false);
+			ALT_DEV_NO_HANDLERS = General.getBoolean("AltDevNoHandlers", false) || Boolean.getBoolean("nohandlers");
+			ALT_DEV_NO_QUESTS = General.getBoolean("AltDevNoQuests", false) || Boolean.getBoolean("noquests");
+			ALT_DEV_NO_SPAWNS = General.getBoolean("AltDevNoSpawns", false) || Boolean.getBoolean("nospawns");
+			ALT_DEV_SHOW_QUESTS_LOAD_IN_LOGS = General.getBoolean("AltDevShowQuestsLoadInLogs", false);
+			ALT_DEV_SHOW_SCRIPTS_LOAD_IN_LOGS = General.getBoolean("AltDevShowScriptsLoadInLogs", false);
+			SCHEDULED_THREAD_CORE_POOL_SIZE_AI = General.getInt("ScheduledThreadCorePoolSizeForAI", 0);
+			SCHEDULED_THREAD_CORE_POOL_SIZE_EFFECTS = General.getInt("ScheduledThreadCorePoolSizeForEffects", 0);
+			SCHEDULED_THREAD_CORE_POOL_SIZE_EVENTS = General.getInt("ScheduledThreadCorePoolSizeForEvents", 0);
+			SCHEDULED_THREAD_CORE_POOL_SIZE_GENERAL = General.getInt("ScheduledThreadCorePoolSizeForGeneral", 0);
+			THREAD_CORE_POOL_SIZE_EVENT = General.getInt("ThreadCorePoolSizeForEvents", 0);
+			THREAD_CORE_POOL_SIZE_GENERAL = General.getInt("ThreadCorePoolSizeForGeneral", 0);
+			THREAD_CORE_POOL_SIZE_GENERAL_PACKETS = General.getInt("ThreadCorePoolSizeForGeneralPackets", 0);
+			THREAD_CORE_POOL_SIZE_IO_PACKETS = General.getInt("ThreadCorePoolSizeForIOPackets", 0);
+			CLIENT_PACKET_QUEUE_SIZE = General.getInt("ClientPacketQueueSize", 0);
+			if (CLIENT_PACKET_QUEUE_SIZE == 0)
+			{
+				CLIENT_PACKET_QUEUE_SIZE = MMOConfig.MMO_MAX_READ_PER_PASS + 2;
+			}
+			CLIENT_PACKET_QUEUE_MAX_BURST_SIZE = General.getInt("ClientPacketQueueMaxBurstSize", 0);
+			if (CLIENT_PACKET_QUEUE_MAX_BURST_SIZE == 0)
+			{
+				CLIENT_PACKET_QUEUE_MAX_BURST_SIZE = MMOConfig.MMO_MAX_READ_PER_PASS + 1;
+			}
+			CLIENT_PACKET_QUEUE_MAX_PACKETS_PER_SECOND = General.getInt("ClientPacketQueueMaxPacketsPerSecond", 80);
+			CLIENT_PACKET_QUEUE_MEASURE_INTERVAL = General.getInt("ClientPacketQueueMeasureInterval", 5);
+			CLIENT_PACKET_QUEUE_MAX_AVERAGE_PACKETS_PER_SECOND = General.getInt("ClientPacketQueueMaxAveragePacketsPerSecond", 40);
+			CLIENT_PACKET_QUEUE_MAX_FLOODS_PER_MIN = General.getInt("ClientPacketQueueMaxFloodsPerMin", 2);
+			CLIENT_PACKET_QUEUE_MAX_OVERFLOWS_PER_MIN = General.getInt("ClientPacketQueueMaxOverflowsPerMin", 1);
+			CLIENT_PACKET_QUEUE_MAX_UNDERFLOWS_PER_MIN = General.getInt("ClientPacketQueueMaxUnderflowsPerMin", 1);
+			CLIENT_PACKET_QUEUE_MAX_UNKNOWN_PER_MIN = General.getInt("ClientPacketQueueMaxUnknownPerMin", 5);
+			DEADLOCK_DETECTOR = General.getBoolean("DeadLockDetector", true);
+			DEADLOCK_CHECK_INTERVAL = General.getInt("DeadLockCheckInterval", 20);
+			RESTART_ON_DEADLOCK = General.getBoolean("RestartOnDeadlock", false);
+			ALLOW_DISCARDITEM = General.getBoolean("AllowDiscardItem", true);
+			AUTODESTROY_ITEM_AFTER = General.getInt("AutoDestroyDroppedItemAfter", 600);
+			HERB_AUTO_DESTROY_TIME = General.getInt("AutoDestroyHerbTime", 60) * 1000;
+			String[] split = General.getString("ListOfProtectedItems", "0").split(",");
+			LIST_PROTECTED_ITEMS = new ArrayList<>(split.length);
+			for (String id : split)
+			{
+				LIST_PROTECTED_ITEMS.add(Integer.parseInt(id));
+			}
+			DATABASE_CLEAN_UP = General.getBoolean("DatabaseCleanUp", true);
+			CONNECTION_CLOSE_TIME = General.getLong("ConnectionCloseTime", 60000);
+			CHAR_STORE_INTERVAL = General.getInt("CharacterDataStoreInterval", 15);
+			LAZY_ITEMS_UPDATE = General.getBoolean("LazyItemsUpdate", false);
+			UPDATE_ITEMS_ON_CHAR_STORE = General.getBoolean("UpdateItemsOnCharStore", false);
+			DESTROY_DROPPED_PLAYER_ITEM = General.getBoolean("DestroyPlayerDroppedItem", false);
+			DESTROY_EQUIPABLE_PLAYER_ITEM = General.getBoolean("DestroyEquipableItem", false);
+			SAVE_DROPPED_ITEM = General.getBoolean("SaveDroppedItem", false);
+			EMPTY_DROPPED_ITEM_TABLE_AFTER_LOAD = General.getBoolean("EmptyDroppedItemTableAfterLoad", false);
+			SAVE_DROPPED_ITEM_INTERVAL = General.getInt("SaveDroppedItemInterval", 60) * 60000;
+			CLEAR_DROPPED_ITEM_TABLE = General.getBoolean("ClearDroppedItemTable", false);
+			AUTODELETE_INVALID_QUEST_DATA = General.getBoolean("AutoDeleteInvalidQuestData", false);
+			PRECISE_DROP_CALCULATION = General.getBoolean("PreciseDropCalculation", true);
+			MULTIPLE_ITEM_DROP = General.getBoolean("MultipleItemDrop", true);
+			FORCE_INVENTORY_UPDATE = General.getBoolean("ForceInventoryUpdate", false);
+			LAZY_CACHE = General.getBoolean("LazyCache", true);
+			CACHE_CHAR_NAMES = General.getBoolean("CacheCharNames", true);
+			MIN_NPC_ANIMATION = General.getInt("MinNPCAnimation", 10);
+			MAX_NPC_ANIMATION = General.getInt("MaxNPCAnimation", 20);
+			MIN_MONSTER_ANIMATION = General.getInt("MinMonsterAnimation", 5);
+			MAX_MONSTER_ANIMATION = General.getInt("MaxMonsterAnimation", 20);
+			MOVE_BASED_KNOWNLIST = General.getBoolean("MoveBasedKnownlist", false);
+			KNOWNLIST_UPDATE_INTERVAL = General.getLong("KnownListUpdateInterval", 1250);
+			GRIDS_ALWAYS_ON = General.getBoolean("GridsAlwaysOn", false);
+			GRID_NEIGHBOR_TURNON_TIME = General.getInt("GridNeighborTurnOnTime", 1);
+			GRID_NEIGHBOR_TURNOFF_TIME = General.getInt("GridNeighborTurnOffTime", 90);
+			PEACE_ZONE_MODE = General.getInt("PeaceZoneMode", 0);
+			DEFAULT_GLOBAL_CHAT = General.getString("GlobalChat", "ON");
+			DEFAULT_TRADE_CHAT = General.getString("TradeChat", "ON");
+			ALLOW_WAREHOUSE = General.getBoolean("AllowWarehouse", true);
+			WAREHOUSE_CACHE = General.getBoolean("WarehouseCache", false);
+			WAREHOUSE_CACHE_TIME = General.getInt("WarehouseCacheTime", 15);
+			ALLOW_REFUND = General.getBoolean("AllowRefund", true);
+			ALLOW_MAIL = General.getBoolean("AllowMail", true);
+			ALLOW_ATTACHMENTS = General.getBoolean("AllowAttachments", true);
+			ALLOW_WEAR = General.getBoolean("AllowWear", true);
+			WEAR_DELAY = General.getInt("WearDelay", 5);
+			WEAR_PRICE = General.getInt("WearPrice", 10);
+			INSTANCE_FINISH_TIME = 1000 * General.getInt("DefaultFinishTime", 300);
+			RESTORE_PLAYER_INSTANCE = General.getBoolean("RestorePlayerInstance", false);
+			ALLOW_SUMMON_IN_INSTANCE = General.getBoolean("AllowSummonInInstance", false);
+			EJECT_DEAD_PLAYER_TIME = 1000 * General.getInt("EjectDeadPlayerTime", 60);
+			ALLOW_LOTTERY = General.getBoolean("AllowLottery", true);
+			ALLOW_RACE = General.getBoolean("AllowRace", true);
+			ALLOW_WATER = General.getBoolean("AllowWater", true);
+			ALLOW_RENTPET = General.getBoolean("AllowRentPet", false);
+			ALLOWFISHING = General.getBoolean("AllowFishing", true);
+			ALLOW_MANOR = General.getBoolean("AllowManor", true);
+			ALLOW_BOAT = General.getBoolean("AllowBoat", true);
+			BOAT_BROADCAST_RADIUS = General.getInt("BoatBroadcastRadius", 20000);
+			ALLOW_CURSED_WEAPONS = General.getBoolean("AllowCursedWeapons", true);
+			ALLOW_PET_WALKERS = General.getBoolean("AllowPetWalkers", true);
+			SERVER_NEWS = General.getBoolean("ShowServerNews", false);
+			USE_SAY_FILTER = General.getBoolean("UseChatFilter", false);
+			CHAT_FILTER_CHARS = General.getString("ChatFilterChars", "^_^");
+			String[] propertySplit4 = General.getString("BanChatChannels", "0;1;8;17").trim().split(";");
+			BAN_CHAT_CHANNELS = new int[propertySplit4.length];
+			try
+			{
+				int i = 0;
+				for (String chatId : propertySplit4)
+				{
+					BAN_CHAT_CHANNELS[i++] = Integer.parseInt(chatId);
+				}
+			}
+			catch (NumberFormatException nfe)
+			{
+				LOG.warn("Unable to load banned channels!", nfe);
+			}
+			ALT_MANOR_REFRESH_TIME = General.getInt("AltManorRefreshTime", 20);
+			ALT_MANOR_REFRESH_MIN = General.getInt("AltManorRefreshMin", 0);
+			ALT_MANOR_APPROVE_TIME = General.getInt("AltManorApproveTime", 4);
+			ALT_MANOR_APPROVE_MIN = General.getInt("AltManorApproveMin", 30);
+			ALT_MANOR_MAINTENANCE_MIN = General.getInt("AltManorMaintenanceMin", 6);
+			ALT_MANOR_SAVE_ALL_ACTIONS = General.getBoolean("AltManorSaveAllActions", false);
+			ALT_MANOR_SAVE_PERIOD_RATE = General.getInt("AltManorSavePeriodRate", 2);
+			ALT_LOTTERY_PRIZE = General.getLong("AltLotteryPrize", 50000);
+			ALT_LOTTERY_TICKET_PRICE = General.getLong("AltLotteryTicketPrice", 2000);
+			ALT_LOTTERY_5_NUMBER_RATE = General.getFloat("AltLottery5NumberRate", 0.6f);
+			ALT_LOTTERY_4_NUMBER_RATE = General.getFloat("AltLottery4NumberRate", 0.2f);
+			ALT_LOTTERY_3_NUMBER_RATE = General.getFloat("AltLottery3NumberRate", 0.2f);
+			ALT_LOTTERY_2_AND_1_NUMBER_PRIZE = General.getLong("AltLottery2and1NumberPrize", 200);
+			ALT_ITEM_AUCTION_ENABLED = General.getBoolean("AltItemAuctionEnabled", true);
+			ALT_ITEM_AUCTION_EXPIRED_AFTER = General.getInt("AltItemAuctionExpiredAfter", 14);
+			ALT_ITEM_AUCTION_TIME_EXTENDS_ON_BID = General.getInt("AltItemAuctionTimeExtendsOnBid", 0) * 1000;
+			FS_TIME_ATTACK = General.getInt("TimeOfAttack", 50);
+			FS_TIME_COOLDOWN = General.getInt("TimeOfCoolDown", 5);
+			FS_TIME_ENTRY = General.getInt("TimeOfEntry", 3);
+			FS_TIME_WARMUP = General.getInt("TimeOfWarmUp", 2);
+			FS_PARTY_MEMBER_COUNT = General.getInt("NumberOfNecessaryPartyMembers", 4);
+			if (FS_TIME_ATTACK <= 0)
+			{
+				FS_TIME_ATTACK = 50;
+			}
+			if (FS_TIME_COOLDOWN <= 0)
+			{
+				FS_TIME_COOLDOWN = 5;
+			}
+			if (FS_TIME_ENTRY <= 0)
+			{
+				FS_TIME_ENTRY = 3;
+			}
+			if (FS_TIME_ENTRY <= 0)
+			{
+				FS_TIME_ENTRY = 3;
+			}
+			if (FS_TIME_ENTRY <= 0)
+			{
+				FS_TIME_ENTRY = 3;
+			}
+			RIFT_MIN_PARTY_SIZE = General.getInt("RiftMinPartySize", 5);
+			RIFT_MAX_JUMPS = General.getInt("MaxRiftJumps", 4);
+			RIFT_SPAWN_DELAY = General.getInt("RiftSpawnDelay", 10000);
+			RIFT_AUTO_JUMPS_TIME_MIN = General.getInt("AutoJumpsDelayMin", 480);
+			RIFT_AUTO_JUMPS_TIME_MAX = General.getInt("AutoJumpsDelayMax", 600);
+			RIFT_BOSS_ROOM_TIME_MUTIPLY = General.getFloat("BossRoomTimeMultiply", 1.5f);
+			RIFT_ENTER_COST_RECRUIT = General.getInt("RecruitCost", 18);
+			RIFT_ENTER_COST_SOLDIER = General.getInt("SoldierCost", 21);
+			RIFT_ENTER_COST_OFFICER = General.getInt("OfficerCost", 24);
+			RIFT_ENTER_COST_CAPTAIN = General.getInt("CaptainCost", 27);
+			RIFT_ENTER_COST_COMMANDER = General.getInt("CommanderCost", 30);
+			RIFT_ENTER_COST_HERO = General.getInt("HeroCost", 33);
+			DEFAULT_PUNISH = IllegalActionPunishmentType.findByName(General.getString("DefaultPunish", "KICK"));
+			DEFAULT_PUNISH_PARAM = General.getInt("DefaultPunishParam", 0);
+			ONLY_GM_ITEMS_FREE = General.getBoolean("OnlyGMItemsFree", true);
+			JAIL_IS_PVP = General.getBoolean("JailIsPvp", false);
+			JAIL_DISABLE_CHAT = General.getBoolean("JailDisableChat", true);
+			JAIL_DISABLE_TRANSACTION = General.getBoolean("JailDisableTransaction", false);
+			CUSTOM_SPAWNLIST_TABLE = General.getBoolean("CustomSpawnlistTable", false);
+			SAVE_GMSPAWN_ON_CUSTOM = General.getBoolean("SaveGmSpawnOnCustom", false);
+			CUSTOM_NPC_DATA = General.getBoolean("CustomNpcData", false);
+			CUSTOM_TELEPORT_TABLE = General.getBoolean("CustomTeleportTable", false);
+			CUSTOM_NPCBUFFER_TABLES = General.getBoolean("CustomNpcBufferTables", false);
+			CUSTOM_SKILLS_LOAD = General.getBoolean("CustomSkillsLoad", false);
+			CUSTOM_ITEMS_LOAD = General.getBoolean("CustomItemsLoad", false);
+			CUSTOM_MULTISELL_LOAD = General.getBoolean("CustomMultisellLoad", false);
+			CUSTOM_BUYLIST_LOAD = General.getBoolean("CustomBuyListLoad", false);
+			ALT_BIRTHDAY_GIFT = General.getInt("AltBirthdayGift", 22187);
+			ALT_BIRTHDAY_MAIL_SUBJECT = General.getString("AltBirthdayMailSubject", "Happy Birthday!");
+			ALT_BIRTHDAY_MAIL_TEXT = General.getString("AltBirthdayMailText", "Hello Adventurer!! Seeing as you're one year older now, I thought I would send you some birthday cheer :) Please find your birthday pack attached. May these gifts bring you joy and happiness on this very special day."
+				+ EOL + EOL + "Sincerely, Alegria");
+			ENABLE_BLOCK_CHECKER_EVENT = General.getBoolean("EnableBlockCheckerEvent", false);
+			MIN_BLOCK_CHECKER_TEAM_MEMBERS = General.getInt("BlockCheckerMinTeamMembers", 2);
+			if (MIN_BLOCK_CHECKER_TEAM_MEMBERS < 1)
+			{
+				MIN_BLOCK_CHECKER_TEAM_MEMBERS = 1;
+			}
+			else if (MIN_BLOCK_CHECKER_TEAM_MEMBERS > 6)
+			{
+				MIN_BLOCK_CHECKER_TEAM_MEMBERS = 6;
+			}
+			HBCE_FAIR_PLAY = General.getBoolean("HBCEFairPlay", false);
+			HELLBOUND_WITHOUT_QUEST = General.getBoolean("HellboundWithoutQuest", false);
+			
+			NORMAL_ENCHANT_COST_MULTIPLIER = General.getInt("NormalEnchantCostMultipiler", 1);
+			SAFE_ENCHANT_COST_MULTIPLIER = General.getInt("SafeEnchantCostMultipiler", 5);
+			
+			BOTREPORT_ENABLE = General.getBoolean("EnableBotReportButton", false);
+			BOTREPORT_RESETPOINT_HOUR = General.getString("BotReportPointsResetHour", "00:00").split(":");
+			BOTREPORT_REPORT_DELAY = General.getInt("BotReportDelay", 30) * 60000;
+			BOTREPORT_ALLOW_REPORTS_FROM_SAME_CLAN_MEMBERS = General.getBoolean("AllowReportsFromSameClanMembers", false);
+			ENABLE_FALLING_DAMAGE = General.getBoolean("EnableFallingDamage", true);
+			
+			ENABLE_ITEM_MALL = General.getBoolean("EnableItemMall", false);
+			EX_JAPAN_MINIGAME = General.getBoolean("JapanMinigame", false);
 			
 			// Load FloodProtector L2Properties file
 			final PropertiesParser FloodProtectors = new PropertiesParser(FLOOD_PROTECTOR_FILE);
@@ -2589,6 +3064,41 @@ public final class Config
 		{
 			return _claimItems.get(job);
 		}
+	}
+	
+	public static int getServerTypeId(String[] serverTypes)
+	{
+		int tType = 0;
+		for (String cType : serverTypes)
+		{
+			switch (cType.trim().toLowerCase())
+			{
+				case "normal":
+					tType |= 0x01;
+					break;
+				case "relax":
+					tType |= 0x02;
+					break;
+				case "test":
+					tType |= 0x04;
+					break;
+				case "nolabel":
+					tType |= 0x08;
+					break;
+				case "restricted":
+					tType |= 0x10;
+					break;
+				case "event":
+					tType |= 0x20;
+					break;
+				case "free":
+					tType |= 0x40;
+					break;
+				default:
+					break;
+			}
+		}
+		return tType;
 	}
 	
 	/**

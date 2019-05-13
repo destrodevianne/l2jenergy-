@@ -23,7 +23,6 @@ import static com.l2jserver.gameserver.model.itemcontainer.Inventory.MAX_ADENA;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.util.StringUtil;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
@@ -109,7 +108,7 @@ public final class RequestSendPost extends L2GameClientPacket
 	@Override
 	public void runImpl()
 	{
-		if (!GeneralConfig.ALLOW_MAIL)
+		if (!Config.ALLOW_MAIL)
 		{
 			return;
 		}
@@ -120,7 +119,7 @@ public final class RequestSendPost extends L2GameClientPacket
 			return;
 		}
 		
-		if (!GeneralConfig.ALLOW_ATTACHMENTS)
+		if (!Config.ALLOW_ATTACHMENTS)
 		{
 			_items = null;
 			_isCod = false;
@@ -225,7 +224,7 @@ public final class RequestSendPost extends L2GameClientPacket
 			return;
 		}
 		
-		if (activeChar.isJailed() && ((GeneralConfig.JAIL_DISABLE_TRANSACTION && (_items != null)) || GeneralConfig.JAIL_DISABLE_CHAT))
+		if (activeChar.isJailed() && ((Config.JAIL_DISABLE_TRANSACTION && (_items != null)) || Config.JAIL_DISABLE_CHAT))
 		{
 			activeChar.sendPacket(SystemMessageId.CANT_FORWARD_NOT_IN_PEACE_ZONE);
 			return;
@@ -317,7 +316,7 @@ public final class RequestSendPost extends L2GameClientPacket
 		final String receiver = recv.toString();
 		
 		// Proceed to the transfer
-		InventoryUpdate playerIU = GeneralConfig.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
+		InventoryUpdate playerIU = Config.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
 		for (AttachmentItem i : _items)
 		{
 			// Check validity of requested item

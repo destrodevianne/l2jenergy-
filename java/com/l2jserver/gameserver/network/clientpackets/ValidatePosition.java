@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -63,7 +63,7 @@ public class ValidatePosition extends L2GameClientPacket
 		final int realY = activeChar.getY();
 		int realZ = activeChar.getZ();
 		
-		if (GeneralConfig.DEVELOPER)
+		if (Config.DEVELOPER)
 		{
 			LOG.debug("client pos: {} {} {} head {}", _x, _y, _z, _heading);
 			LOG.debug("server pos: {} {}  {} head {}", realX, realY, realZ, activeChar.getHeading());
@@ -190,7 +190,7 @@ public class ValidatePosition extends L2GameClientPacket
 				}
 				else
 				{
-					if (GeneralConfig.DEVELOPER)
+					if (Config.DEVELOPER)
 					{
 						LOG.debug("{}: Synchronizing position Server --> Client", activeChar.getName());
 					}

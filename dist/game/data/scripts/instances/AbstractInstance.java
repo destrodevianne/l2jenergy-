@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.enums.InstanceReenterType;
 import com.l2jserver.gameserver.instancemanager.InstanceManager;
 import com.l2jserver.gameserver.model.L2World;
@@ -93,7 +93,7 @@ public abstract class AbstractInstance extends AbstractNpcAI
 				handleRemoveBuffs(instance);
 			}
 			
-			if (GeneralConfig.DEBUG_INSTANCES)
+			if (Config.DEBUG_INSTANCES)
 			{
 				LOG.info("Instance {} ({}) has been created by player {}", inst.getName(), instance.getTemplateId(), player.getName());
 			}
@@ -102,7 +102,7 @@ public abstract class AbstractInstance extends AbstractNpcAI
 	
 	protected void finishInstance(InstanceWorld world)
 	{
-		finishInstance(world, GeneralConfig.INSTANCE_FINISH_TIME);
+		finishInstance(world, Config.INSTANCE_FINISH_TIME);
 	}
 	
 	protected void finishInstance(InstanceWorld world, int duration)
@@ -228,7 +228,7 @@ public abstract class AbstractInstance extends AbstractNpcAI
 			}
 		}
 		
-		if (GeneralConfig.DEBUG_INSTANCES)
+		if (Config.DEBUG_INSTANCES)
 		{
 			LOG.info("Time restrictions has been set for player in instance ID: {} ({})", world.getInstanceId(), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(time));
 		}

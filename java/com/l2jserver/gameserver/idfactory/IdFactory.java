@@ -32,7 +32,6 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.commons.database.ConnectionFactory;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 
 /**
  * This class ...
@@ -140,7 +139,7 @@ public abstract class IdFactory
 	protected IdFactory()
 	{
 		setAllCharacterOffline();
-		if (GeneralConfig.DATABASE_CLEAN_UP)
+		if (Config.DATABASE_CLEAN_UP)
 		{
 			if (Config.L2JMOD_ALLOW_WEDDING)
 			{

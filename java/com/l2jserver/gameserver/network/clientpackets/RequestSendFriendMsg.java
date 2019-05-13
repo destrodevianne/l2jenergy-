@@ -22,7 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -68,7 +68,7 @@ public final class RequestSendFriendMsg extends L2GameClientPacket
 			return;
 		}
 		
-		if (GeneralConfig.LOG_CHAT)
+		if (Config.LOG_CHAT)
 		{
 			LogRecord record = new LogRecord(Level.INFO, _message);
 			record.setLoggerName("chat");

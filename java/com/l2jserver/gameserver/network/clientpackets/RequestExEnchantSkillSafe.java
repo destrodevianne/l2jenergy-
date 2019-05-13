@@ -22,8 +22,8 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
+import com.l2jserver.Config;
 import com.l2jserver.commons.util.Rnd;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.EnchantSkillGroupsData;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.model.L2EnchantSkillGroup.EnchantSkillHolder;
@@ -146,7 +146,7 @@ public final class RequestExEnchantSkillSafe extends L2GameClientPacket
 			// ok. Destroy ONE copy of the book
 			if (Rnd.get(100) <= rate)
 			{
-				if (GeneralConfig.LOG_SKILL_ENCHANTS)
+				if (Config.LOG_SKILL_ENCHANTS)
 				{
 					LogRecord record = new LogRecord(Level.INFO, "Safe Success");
 					record.setParameters(new Object[]
@@ -169,7 +169,7 @@ public final class RequestExEnchantSkillSafe extends L2GameClientPacket
 			}
 			else
 			{
-				if (GeneralConfig.LOG_SKILL_ENCHANTS)
+				if (Config.LOG_SKILL_ENCHANTS)
 				{
 					LogRecord record = new LogRecord(Level.INFO, "Safe Fail");
 					record.setParameters(new Object[]

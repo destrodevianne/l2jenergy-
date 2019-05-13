@@ -35,9 +35,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+import com.l2jserver.Config;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.Rnd;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.SpawnTable;
@@ -278,12 +278,12 @@ public final class DimensionalRiftManager
 			return;
 		}
 		
-		if (player.getParty().getMemberCount() < GeneralConfig.RIFT_MIN_PARTY_SIZE)
+		if (player.getParty().getMemberCount() < Config.RIFT_MIN_PARTY_SIZE)
 		{
 			final NpcHtmlMessage html = new NpcHtmlMessage(npc.getObjectId());
 			html.setFile(player.getHtmlPrefix(), "data/html/seven_signs/rift/SmallParty.htm");
 			html.replace("%npc_name%", npc.getName());
-			html.replace("%count%", Integer.toString(GeneralConfig.RIFT_MIN_PARTY_SIZE));
+			html.replace("%count%", Integer.toString(Config.RIFT_MIN_PARTY_SIZE));
 			player.sendPacket(html);
 			return;
 		}
@@ -405,17 +405,17 @@ public final class DimensionalRiftManager
 		switch (type)
 		{
 			case 1:
-				return GeneralConfig.RIFT_ENTER_COST_RECRUIT;
+				return Config.RIFT_ENTER_COST_RECRUIT;
 			case 2:
-				return GeneralConfig.RIFT_ENTER_COST_SOLDIER;
+				return Config.RIFT_ENTER_COST_SOLDIER;
 			case 3:
-				return GeneralConfig.RIFT_ENTER_COST_OFFICER;
+				return Config.RIFT_ENTER_COST_OFFICER;
 			case 4:
-				return GeneralConfig.RIFT_ENTER_COST_CAPTAIN;
+				return Config.RIFT_ENTER_COST_CAPTAIN;
 			case 5:
-				return GeneralConfig.RIFT_ENTER_COST_COMMANDER;
+				return Config.RIFT_ENTER_COST_COMMANDER;
 			case 6:
-				return GeneralConfig.RIFT_ENTER_COST_HERO;
+				return Config.RIFT_ENTER_COST_HERO;
 			default:
 				throw new IndexOutOfBoundsException();
 		}
@@ -435,7 +435,7 @@ public final class DimensionalRiftManager
 		if (!player.isGM())
 		{
 			LOG.warn("Player {}({}) was cheating in dimension rift area!", player.getName(), player.getObjectId());
-			Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " tried to cheat in dimensional rift.", GeneralConfig.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " tried to cheat in dimensional rift.", Config.DEFAULT_PUNISH);
 		}
 	}
 	

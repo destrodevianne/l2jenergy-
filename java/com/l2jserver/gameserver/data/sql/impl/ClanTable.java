@@ -31,11 +31,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.l2jserver.Config;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.EnumIntBitmask;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.communitybbs.Manager.ForumsBBSManager;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.community.CBasicConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.idfactory.IdFactory;
@@ -163,7 +163,7 @@ public class ClanTable
 			return null;
 		}
 		
-		if (GeneralConfig.DEBUG)
+		if (Config.DEBUG)
 		{
 			LOG.debug("{}: {}({}) requested a clan creation.", getClass().getSimpleName(), player.getObjectId(), player.getName());
 		}

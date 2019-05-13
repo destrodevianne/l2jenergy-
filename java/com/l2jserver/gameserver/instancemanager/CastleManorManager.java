@@ -37,10 +37,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+import com.l2jserver.Config;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.ManorConfig;
 import com.l2jserver.gameserver.enums.ManorMode;
 import com.l2jserver.gameserver.model.CropProcure;
@@ -109,7 +109,7 @@ public final class CastleManorManager implements IXmlReader, IStorable
 			}
 			
 			// Send debug message
-			if (GeneralConfig.DEBUG)
+			if (Config.DEBUG)
 			{
 				LOG.info("{}: Current mode {}", getClass().getSimpleName(), _mode.toString());
 			}
@@ -428,7 +428,7 @@ public final class CastleManorManager implements IXmlReader, IStorable
 			}
 		}
 		scheduleModeChange();
-		if (GeneralConfig.DEBUG)
+		if (Config.DEBUG)
 		{
 			LOG.info("{}: Manor mode changed to {}!", getClass().getSimpleName(), _mode);
 		}

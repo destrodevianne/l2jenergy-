@@ -20,8 +20,8 @@ package handlers.admincommandhandlers;
 
 import java.util.StringTokenizer;
 
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.LoginServerThread;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.gameserverpackets.ServerStatus;
@@ -101,11 +101,11 @@ public class AdminLogin implements IAdminCommandHandler
 				}
 				catch (NumberFormatException e)
 				{
-					newType = GeneralConfig.getServerTypeId(modes);
+					newType = Config.getServerTypeId(modes);
 				}
-				if (GeneralConfig.SERVER_LIST_TYPE != newType)
+				if (Config.SERVER_LIST_TYPE != newType)
 				{
-					GeneralConfig.SERVER_LIST_TYPE = newType;
+					Config.SERVER_LIST_TYPE = newType;
 					LoginServerThread.getInstance().sendServerType();
 					activeChar.sendAdminMessage("Server Type changed to " + getServerTypeName(newType));
 					showMainPage(activeChar);
@@ -132,9 +132,9 @@ public class AdminLogin implements IAdminCommandHandler
 				try
 				{
 					age = Integer.parseInt(mode);
-					if (GeneralConfig.SERVER_LIST_AGE != age)
+					if (Config.SERVER_LIST_AGE != age)
 					{
-						GeneralConfig.SERVER_LIST_TYPE = age;
+						Config.SERVER_LIST_TYPE = age;
 						LoginServerThread.getInstance().sendServerStatus(ServerStatus.SERVER_AGE, age);
 						activeChar.sendAdminMessage("Server Age changed to " + age);
 						showMainPage(activeChar);
@@ -171,8 +171,8 @@ public class AdminLogin implements IAdminCommandHandler
 		html.setFile(activeChar.getHtmlPrefix(), "data/html/admin/login.htm");
 		html.replace("%server_name%", LoginServerThread.getInstance().getServerName());
 		html.replace("%status%", LoginServerThread.getInstance().getStatusString());
-		html.replace("%clock%", getServerTypeName(GeneralConfig.SERVER_LIST_TYPE));
-		html.replace("%brackets%", String.valueOf(GeneralConfig.SERVER_LIST_BRACKET));
+		html.replace("%clock%", getServerTypeName(Config.SERVER_LIST_TYPE));
+		html.replace("%brackets%", String.valueOf(Config.SERVER_LIST_BRACKET));
 		html.replace("%max_players%", String.valueOf(LoginServerThread.getInstance().getMaxPlayer()));
 		activeChar.sendPacket(html);
 	}
@@ -226,7 +226,7 @@ public class AdminLogin implements IAdminCommandHandler
 	private void allowToAll()
 	{
 		LoginServerThread.getInstance().setServerStatus(ServerStatus.STATUS_AUTO);
-		GeneralConfig.SERVER_GMONLY = false;
+		Config.SERVER_GMONLY = false;
 	}
 	
 	/**
@@ -235,7 +235,7 @@ public class AdminLogin implements IAdminCommandHandler
 	private void gmOnly()
 	{
 		LoginServerThread.getInstance().setServerStatus(ServerStatus.STATUS_GM_ONLY);
-		GeneralConfig.SERVER_GMONLY = true;
+		Config.SERVER_GMONLY = true;
 	}
 	
 	@Override

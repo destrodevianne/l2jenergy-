@@ -22,10 +22,10 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.enums.audio.Music;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -308,7 +308,7 @@ public class MC_Show extends AbstractNpcAI
 		hourDiff *= 3600000;
 		minDiff *= 60000;
 		diff = hourDiff + minDiff;
-		if (GeneralConfig.DEBUG)
+		if (Config.DEBUG)
 		{
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 			LOG.info("Fantasy Isle: MC show script starting at {} and is scheduled each next 4 hours.", format.format(System.currentTimeMillis() + diff));

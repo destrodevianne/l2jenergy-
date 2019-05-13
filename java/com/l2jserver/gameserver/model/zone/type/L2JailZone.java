@@ -18,8 +18,8 @@
  */
 package com.l2jserver.gameserver.model.zone.type;
 
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Character;
@@ -50,12 +50,12 @@ public class L2JailZone extends L2ZoneType
 		{
 			character.setInsideZone(ZoneId.JAIL, true);
 			character.setInsideZone(ZoneId.NO_SUMMON_FRIEND, true);
-			if (GeneralConfig.JAIL_IS_PVP)
+			if (Config.JAIL_IS_PVP)
 			{
 				character.setInsideZone(ZoneId.PVP, true);
 				character.sendPacket(SystemMessageId.ENTERED_COMBAT_ZONE);
 			}
-			if (GeneralConfig.JAIL_DISABLE_TRANSACTION)
+			if (Config.JAIL_DISABLE_TRANSACTION)
 			{
 				character.setInsideZone(ZoneId.NO_STORE, true);
 			}
@@ -71,7 +71,7 @@ public class L2JailZone extends L2ZoneType
 			player.setInsideZone(ZoneId.JAIL, false);
 			player.setInsideZone(ZoneId.NO_SUMMON_FRIEND, false);
 			
-			if (GeneralConfig.JAIL_IS_PVP)
+			if (Config.JAIL_IS_PVP)
 			{
 				character.setInsideZone(ZoneId.PVP, false);
 				character.sendPacket(SystemMessageId.LEFT_COMBAT_ZONE);
@@ -83,7 +83,7 @@ public class L2JailZone extends L2ZoneType
 				ThreadPoolManager.getInstance().scheduleGeneral(new TeleportTask(player, JAIL_IN_LOC), 2000);
 				character.sendMessage(MessagesData.getInstance().getMessage(null, "zone_jail_no_out"));
 			}
-			if (GeneralConfig.JAIL_DISABLE_TRANSACTION)
+			if (Config.JAIL_DISABLE_TRANSACTION)
 			{
 				character.setInsideZone(ZoneId.NO_STORE, false);
 			}

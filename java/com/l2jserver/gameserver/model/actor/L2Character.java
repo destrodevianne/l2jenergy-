@@ -46,7 +46,6 @@ import com.l2jserver.gameserver.ai.CtrlEvent;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.ai.L2AttackableAI;
 import com.l2jserver.gameserver.ai.L2CharacterAI;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.configuration.config.TerritoryWarConfig;
 import com.l2jserver.gameserver.data.xml.impl.CategoryData;
@@ -4087,7 +4086,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 			{
 				try
 				{
-					if (GeneralConfig.MOVE_BASED_KNOWNLIST)
+					if (Config.MOVE_BASED_KNOWNLIST)
 					{
 						getKnownList().findObjects();
 					}
@@ -4168,7 +4167,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 			revalidateZone(true);
 		}
 		broadcastPacket(new StopMove(this));
-		if (GeneralConfig.MOVE_BASED_KNOWNLIST && updateKnownObjects)
+		if (Config.MOVE_BASED_KNOWNLIST && updateKnownObjects)
 		{
 			getKnownList().findObjects();
 		}
