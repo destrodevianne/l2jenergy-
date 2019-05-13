@@ -28,8 +28,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.l2jserver.Config;
 import com.l2jserver.commons.database.ConnectionFactory;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.holders.ItemHolder;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 
@@ -136,7 +136,7 @@ public class NpcBufferTable
 			LOG.error("{}: Error reading npc_buffer table!", getClass().getSimpleName(), e);
 		}
 		
-		if (GeneralConfig.CUSTOM_NPCBUFFER_TABLES)
+		if (Config.CUSTOM_NPCBUFFER_TABLES)
 		{
 			try (Connection con = ConnectionFactory.getInstance().getConnection();
 				Statement s = con.createStatement();

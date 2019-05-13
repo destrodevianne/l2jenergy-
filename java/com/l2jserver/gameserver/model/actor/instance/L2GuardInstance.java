@@ -21,9 +21,9 @@ package com.l2jserver.gameserver.model.actor.instance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.l2jserver.Config;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.L2WorldRegion;
@@ -156,7 +156,7 @@ public class L2GuardInstance extends L2Attackable
 			// Check if the L2PcInstance is in the _aggroList of the L2GuardInstance
 			if (isInAggroList(player))
 			{
-				if (GeneralConfig.DEBUG)
+				if (Config.DEBUG)
 				{
 					LOG.debug("{}: Attacked guard {}", player.getObjectId(), getObjectId());
 				}

@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.serverpackets.ExShowReceivedPostList;
 
@@ -39,7 +39,7 @@ public final class RequestReceivedPostList extends L2GameClientPacket
 	public void runImpl()
 	{
 		final L2PcInstance activeChar = getClient().getActiveChar();
-		if ((activeChar == null) || !GeneralConfig.ALLOW_MAIL)
+		if ((activeChar == null) || !Config.ALLOW_MAIL)
 		{
 			return;
 		}

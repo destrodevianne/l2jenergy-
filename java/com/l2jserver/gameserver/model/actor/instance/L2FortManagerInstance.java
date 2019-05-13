@@ -26,7 +26,6 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.cache.HtmCache;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.sql.impl.TeleportLocationTable;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.SkillData;
@@ -479,7 +478,7 @@ public class L2FortManagerInstance extends L2MerchantInstance
 								if (st.countTokens() >= 1)
 								{
 									int fee;
-									if (GeneralConfig.DEBUG)
+									if (Config.DEBUG)
 									{
 										LOG.debug("Mp editing invoked");
 									}
@@ -524,7 +523,7 @@ public class L2FortManagerInstance extends L2MerchantInstance
 								if (st.countTokens() >= 1)
 								{
 									int fee;
-									if (GeneralConfig.DEBUG)
+									if (Config.DEBUG)
 									{
 										LOG.debug("Mp editing invoked");
 									}
@@ -569,7 +568,7 @@ public class L2FortManagerInstance extends L2MerchantInstance
 								if (st.countTokens() >= 1)
 								{
 									int fee;
-									if (GeneralConfig.DEBUG)
+									if (Config.DEBUG)
 									{
 										LOG.debug("Exp editing invoked");
 									}
@@ -733,7 +732,7 @@ public class L2FortManagerInstance extends L2MerchantInstance
 								if (st.countTokens() >= 1)
 								{
 									int fee;
-									if (GeneralConfig.DEBUG)
+									if (Config.DEBUG)
 									{
 										LOG.debug("Tele editing invoked");
 									}
@@ -778,7 +777,7 @@ public class L2FortManagerInstance extends L2MerchantInstance
 								if (st.countTokens() >= 1)
 								{
 									int fee;
-									if (GeneralConfig.DEBUG)
+									if (Config.DEBUG)
 									{
 										LOG.debug("Support editing invoked");
 									}
@@ -985,7 +984,7 @@ public class L2FortManagerInstance extends L2MerchantInstance
 	
 	private void doTeleport(L2PcInstance player, int val)
 	{
-		if (GeneralConfig.DEBUG)
+		if (Config.DEBUG)
 		{
 			LOG.debug("doTeleport(L2PcInstance player, int val) is called");
 		}
@@ -994,7 +993,7 @@ public class L2FortManagerInstance extends L2MerchantInstance
 		{
 			if (player.destroyItemByItemId("Teleport", list.getItemId(), list.getPrice(), this, true))
 			{
-				if (GeneralConfig.DEBUG)
+				if (Config.DEBUG)
 				{
 					LOG.debug("Teleporting player " + player.getName() + " for Fortress to new location: " + list.getLocX() + ":" + list.getLocY() + ":" + list.getLocZ());
 				}

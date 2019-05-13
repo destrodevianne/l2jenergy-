@@ -29,9 +29,9 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
+import com.l2jserver.Config;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.StringUtil;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.xml.impl.ClassListData;
 import com.l2jserver.gameserver.data.xml.impl.TransformData;
@@ -215,7 +215,7 @@ public class AdminEditChar implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				if (GeneralConfig.DEVELOPER)
+				if (Config.DEVELOPER)
 				{
 					_log.warning("Set karma error: " + e);
 				}
@@ -246,7 +246,7 @@ public class AdminEditChar implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				if (GeneralConfig.DEVELOPER)
+				if (Config.DEVELOPER)
 				{
 					_log.warning("Set pk error: " + e);
 				}
@@ -277,7 +277,7 @@ public class AdminEditChar implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				if (GeneralConfig.DEVELOPER)
+				if (Config.DEVELOPER)
 				{
 					_log.warning("Set pvp error: " + e);
 				}
@@ -308,7 +308,7 @@ public class AdminEditChar implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				if (GeneralConfig.DEVELOPER)
+				if (Config.DEVELOPER)
 				{
 					_log.warning("Set Fame error: " + e);
 				}
@@ -1060,7 +1060,7 @@ public class AdminEditChar implements IAdminCommandHandler
 			player.sendPacket(sm);
 			// Admin information
 			activeChar.sendAdminMessage("Successfully Changed karma for " + player.getName() + " from (" + oldKarma + ") to (" + newKarma + ").");
-			if (GeneralConfig.DEBUG)
+			if (Config.DEBUG)
 			{
 				_log.fine("[SET KARMA] [GM]" + activeChar.getName() + " Changed karma for " + player.getName() + " from (" + oldKarma + ") to (" + newKarma + ").");
 			}
@@ -1069,7 +1069,7 @@ public class AdminEditChar implements IAdminCommandHandler
 		{
 			// tell admin of mistake
 			activeChar.sendAdminMessage("You must enter a value for karma greater than or equal to 0.");
-			if (GeneralConfig.DEBUG)
+			if (Config.DEBUG)
 			{
 				_log.fine("[SET KARMA] ERROR: [GM]" + activeChar.getName() + " entered an incorrect value for new karma: " + newKarma + " for " + player.getName() + ".");
 			}

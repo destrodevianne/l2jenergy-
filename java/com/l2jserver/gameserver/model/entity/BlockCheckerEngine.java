@@ -27,9 +27,9 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.l2jserver.Config;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.datatables.SpawnTable;
 import com.l2jserver.gameserver.enums.Team;
@@ -308,7 +308,7 @@ public final class BlockCheckerEngine
 				
 				ThreadPoolManager.getInstance().executeGeneral(new EndEvent());
 				
-				if (GeneralConfig.DEBUG)
+				if (Config.DEBUG)
 				{
 					_log.config("Handys Block Checker Event at arena " + _arena + " ended due lack of players!");
 				}

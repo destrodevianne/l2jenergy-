@@ -21,8 +21,8 @@ package com.l2jserver.gameserver.cache;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
 /**
@@ -31,7 +31,7 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 public class WarehouseCacheManager
 {
 	protected final Map<L2PcInstance, Long> _cachedWh = new ConcurrentHashMap<>();
-	protected final long _cacheTime = GeneralConfig.WAREHOUSE_CACHE_TIME * 60000L;
+	protected final long _cacheTime = Config.WAREHOUSE_CACHE_TIME * 60000L;
 	
 	protected WarehouseCacheManager()
 	{

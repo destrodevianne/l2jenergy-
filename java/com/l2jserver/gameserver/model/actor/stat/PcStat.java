@@ -21,7 +21,6 @@ package com.l2jserver.gameserver.model.actor.stat;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.l2jserver.Config;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.PetDataTable;
 import com.l2jserver.gameserver.model.L2PetLevelData;
 import com.l2jserver.gameserver.model.PcCondOverride;
@@ -65,7 +64,7 @@ public class PcStat extends PlayableStat
 	
 	public void setStartingExp(long value)
 	{
-		if (GeneralConfig.BOTREPORT_ENABLE)
+		if (Config.BOTREPORT_ENABLE)
 		{
 			_startingXp = value;
 		}

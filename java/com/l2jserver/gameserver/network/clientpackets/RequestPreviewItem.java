@@ -23,7 +23,6 @@ import java.util.Map;
 
 import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.BuyListData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.L2Object;
@@ -161,7 +160,7 @@ public final class RequestPreviewItem extends L2GameClientPacket
 		final L2BuyList buyList = BuyListData.getInstance().getBuyList(_listId);
 		if (buyList == null)
 		{
-			Util.handleIllegalPlayerAction(activeChar, "Warning!! Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " sent a false BuyList list_id " + _listId, GeneralConfig.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(activeChar, "Warning!! Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " sent a false BuyList list_id " + _listId, Config.DEFAULT_PUNISH);
 			return;
 		}
 		
@@ -175,7 +174,7 @@ public final class RequestPreviewItem extends L2GameClientPacket
 			final Product product = buyList.getProductByItemId(itemId);
 			if (product == null)
 			{
-				Util.handleIllegalPlayerAction(activeChar, "Warning!! Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " sent a false BuyList list_id " + _listId + " and item_id " + itemId, GeneralConfig.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(activeChar, "Warning!! Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " sent a false BuyList list_id " + _listId + " and item_id " + itemId, Config.DEFAULT_PUNISH);
 				return;
 			}
 			
@@ -223,10 +222,10 @@ public final class RequestPreviewItem extends L2GameClientPacket
 			}
 			
 			itemList.put(slot, itemId);
-			totalPrice += GeneralConfig.WEAR_PRICE;
+			totalPrice += Config.WEAR_PRICE;
 			if (totalPrice > Inventory.MAX_ADENA)
 			{
-				Util.handleIllegalPlayerAction(activeChar, "Warning!! Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to purchase over " + Inventory.MAX_ADENA + " adena worth of goods.", GeneralConfig.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(activeChar, "Warning!! Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to purchase over " + Inventory.MAX_ADENA + " adena worth of goods.", Config.DEFAULT_PUNISH);
 				return;
 			}
 		}
@@ -242,7 +241,7 @@ public final class RequestPreviewItem extends L2GameClientPacket
 		{
 			activeChar.sendPacket(new ShopPreviewInfo(itemList));
 			// Schedule task
-			ThreadPoolManager.getInstance().scheduleGeneral(new RemoveWearItemsTask(activeChar), GeneralConfig.WEAR_DELAY * 1000);
+			ThreadPoolManager.getInstance().scheduleGeneral(new RemoveWearItemsTask(activeChar), Config.WEAR_DELAY * 1000);
 		}
 	}
 	

@@ -22,7 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.Config;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.xml.impl.SecondaryAuthData;
 import com.l2jserver.gameserver.instancemanager.AntiFeedManager;
@@ -131,7 +130,7 @@ public class CharacterSelect extends L2GameClientPacket
 					}
 					
 					// The L2PcInstance must be created here, so that it can be attached to the L2GameClient
-					if (GeneralConfig.DEBUG)
+					if (Config.DEBUG)
 					{
 						LOG.debug("selected slot: {}", _charSlot);
 					}

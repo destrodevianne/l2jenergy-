@@ -22,8 +22,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.l2jserver.Config;
 import com.l2jserver.commons.util.Rnd;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2CubicInstance;
 import com.l2jserver.gameserver.model.effects.L2EffectType;
@@ -140,7 +140,7 @@ public final class CubicAction implements Runnable
 				L2Character target = _cubic.getTarget();
 				if ((target != null) && !target.isDead())
 				{
-					if (GeneralConfig.DEBUG)
+					if (Config.DEBUG)
 					{
 						_log.info("L2CubicInstance: Action.run();");
 						_log.info("Cubic ID: " + _cubic.getId() + " Target: " + target.getName() + " distance: " + target.calculateDistance(_cubic.getOwner(), true, false));
@@ -155,7 +155,7 @@ public final class CubicAction implements Runnable
 					
 					if (skill.isContinuous())
 					{
-						if (GeneralConfig.DEBUG)
+						if (Config.DEBUG)
 						{
 							_log.info("L2CubicInstance: Action.run() skill " + skill);
 						}
@@ -164,7 +164,7 @@ public final class CubicAction implements Runnable
 					else
 					{
 						skill.activateSkill(_cubic, targets);
-						if (GeneralConfig.DEBUG)
+						if (Config.DEBUG)
 						{
 							_log.info("L2CubicInstance: Action.run(); other handler");
 						}
@@ -172,7 +172,7 @@ public final class CubicAction implements Runnable
 					
 					if (skill.hasEffectType(L2EffectType.MAGICAL_ATTACK))
 					{
-						if (GeneralConfig.DEBUG)
+						if (Config.DEBUG)
 						{
 							_log.info("L2CubicInstance: Action.run() skill " + skill);
 						}
@@ -180,7 +180,7 @@ public final class CubicAction implements Runnable
 					}
 					else if (skill.hasEffectType(L2EffectType.HP_DRAIN))
 					{
-						if (GeneralConfig.DEBUG)
+						if (Config.DEBUG)
 						{
 							_log.info("L2CubicInstance: Action.run() skill " + skill);
 						}
@@ -188,7 +188,7 @@ public final class CubicAction implements Runnable
 					}
 					else if (skill.hasEffectType(L2EffectType.STUN, L2EffectType.ROOT, L2EffectType.PARALYZE))
 					{
-						if (GeneralConfig.DEBUG)
+						if (Config.DEBUG)
 						{
 							_log.info("L2CubicInstance: Action.run() skill " + skill);
 						}
@@ -196,7 +196,7 @@ public final class CubicAction implements Runnable
 					}
 					else if (skill.hasEffectType(L2EffectType.DMG_OVER_TIME))
 					{
-						if (GeneralConfig.DEBUG)
+						if (Config.DEBUG)
 						{
 							_log.info("L2CubicInstance: Action.run() skill " + skill);
 						}
@@ -204,7 +204,7 @@ public final class CubicAction implements Runnable
 					}
 					else if (skill.hasEffectType(L2EffectType.AGGRESSION))
 					{
-						if (GeneralConfig.DEBUG)
+						if (Config.DEBUG)
 						{
 							_log.info("L2CubicInstance: Action.run() skill " + skill);
 						}

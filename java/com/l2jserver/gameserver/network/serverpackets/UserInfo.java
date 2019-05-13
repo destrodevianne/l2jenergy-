@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.json.ExperienceData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.instancemanager.CursedWeaponsManager;
@@ -225,7 +225,7 @@ public final class UserInfo extends L2GameServerPacket
 		
 		writeD(_activeChar.getClanCrestLargeId());
 		writeC(_activeChar.isNoble() ? 1 : 0); // 0x01: symbol on char menu ctrl+I
-		writeC(_activeChar.isHero() || (_activeChar.isGM() && GeneralConfig.GM_HERO_AURA) ? 1 : 0); // 0x01: Hero Aura
+		writeC(_activeChar.isHero() || (_activeChar.isGM() && Config.GM_HERO_AURA) ? 1 : 0); // 0x01: Hero Aura
 		
 		writeC(_activeChar.isFishing() ? 1 : 0); // Fishing Mode
 		Location loc = _activeChar.getFishingLoc();

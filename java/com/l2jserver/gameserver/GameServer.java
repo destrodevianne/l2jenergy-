@@ -39,7 +39,6 @@ import com.l2jserver.commons.util.MemoryWatchDog;
 import com.l2jserver.commons.util.Util;
 import com.l2jserver.commons.versioning.Version;
 import com.l2jserver.gameserver.cache.HtmCache;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.configuration.config.MMOConfig;
 import com.l2jserver.gameserver.configuration.config.OfflineConfig;
@@ -229,7 +228,7 @@ public final class GameServer
 		EnchantItemHPBonusData.getInstance();
 		MerchantPriceConfigTable.getInstance().loadInstances();
 		BuyListData.getInstance();
-		if (GeneralConfig.ENABLE_ITEM_MALL)
+		if (Config.ENABLE_ITEM_MALL)
 		{
 			ProductItemData.getInstance();
 		}
@@ -327,7 +326,7 @@ public final class GameServer
 		try
 		{
 			LOG.info("{}: Loading server scripts:", getClass().getSimpleName());
-			if (!GeneralConfig.ALT_DEV_NO_HANDLERS || !GeneralConfig.ALT_DEV_NO_QUESTS)
+			if (!Config.ALT_DEV_NO_HANDLERS || !Config.ALT_DEV_NO_QUESTS)
 			{
 				L2ScriptEngineManager.getInstance().executeScriptList(new File(ServerConfig.DATAPACK_ROOT, "data/scripts.cfg"));
 			}
@@ -363,12 +362,12 @@ public final class GameServer
 		
 		QuestManager.getInstance().report();
 		
-		if (GeneralConfig.SAVE_DROPPED_ITEM)
+		if (Config.SAVE_DROPPED_ITEM)
 		{
 			ItemsOnGroundManager.getInstance();
 		}
 		
-		if ((GeneralConfig.AUTODESTROY_ITEM_AFTER > 0) || (GeneralConfig.HERB_AUTO_DESTROY_TIME > 0))
+		if ((Config.AUTODESTROY_ITEM_AFTER > 0) || (Config.HERB_AUTO_DESTROY_TIME > 0))
 		{
 			ItemsAutoDestroy.getInstance();
 		}
@@ -389,7 +388,7 @@ public final class GameServer
 			CoupleManager.getInstance();
 		}
 		
-		if (GeneralConfig.EX_JAPAN_MINIGAME)
+		if (Config.EX_JAPAN_MINIGAME)
 		{
 			MiniGameScoreManager.getInstance();
 		}
@@ -397,7 +396,7 @@ public final class GameServer
 		
 		AntiFeedManager.getInstance().registerEvent(AntiFeedManager.GAME_ID);
 		
-		if (GeneralConfig.ALLOW_MAIL)
+		if (Config.ALLOW_MAIL)
 		{
 			MailManager.getInstance();
 		}
@@ -415,7 +414,7 @@ public final class GameServer
 			OfflineTradersTable.getInstance().restoreOfflineTraders();
 		}
 		
-		if (GeneralConfig.DEADLOCK_DETECTOR)
+		if (Config.DEADLOCK_DETECTOR)
 		{
 			_deadDetectThread = new DeadLockDetector();
 			_deadDetectThread.setDaemon(true);

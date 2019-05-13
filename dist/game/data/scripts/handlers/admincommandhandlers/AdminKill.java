@@ -21,7 +21,7 @@ package handlers.admincommandhandlers;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2Object;
@@ -157,7 +157,7 @@ public class AdminKill implements IAdminCommandHandler
 				target.setIsInvul(true);
 			}
 		}
-		if (GeneralConfig.DEBUG)
+		if (Config.DEBUG)
 		{
 			_log.fine("GM: " + activeChar.getName() + "(" + activeChar.getObjectId() + ")" + " killed character " + target.getObjectId());
 		}

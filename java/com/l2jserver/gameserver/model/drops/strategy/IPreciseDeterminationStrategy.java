@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model.drops.strategy;
 
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.model.drops.IDropItem;
 
 /**
@@ -28,7 +28,7 @@ public interface IPreciseDeterminationStrategy
 {
 	public static final IPreciseDeterminationStrategy ALWAYS = dropItem -> true;
 	
-	public static final IPreciseDeterminationStrategy DEFAULT = dropItem -> GeneralConfig.PRECISE_DROP_CALCULATION;
+	public static final IPreciseDeterminationStrategy DEFAULT = dropItem -> Config.PRECISE_DROP_CALCULATION;
 	
 	public static final IPreciseDeterminationStrategy NEVER = dropItem -> false;
 	

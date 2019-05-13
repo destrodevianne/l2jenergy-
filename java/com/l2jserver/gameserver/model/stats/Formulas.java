@@ -28,7 +28,6 @@ import com.l2jserver.Config;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.SevenSigns;
 import com.l2jserver.gameserver.SevenSignsFestival;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.data.xml.impl.HitConditionBonusData;
 import com.l2jserver.gameserver.data.xml.impl.KarmaData;
@@ -529,7 +528,7 @@ public final class Formulas
 		// Check the distance between the player and the player spawn point, in the center of the arena.
 		double distToCenter = activeChar.calculateDistance(festivalCenter[0], festivalCenter[1], 0, false, false);
 		
-		if (GeneralConfig.DEBUG)
+		if (Config.DEBUG)
 		{
 			LOG.debug("Distance: {}, RegenMulti: {}", distToCenter, ((distToCenter * 2.5) / 50));
 		}
@@ -1931,7 +1930,7 @@ public final class Formulas
 	 */
 	public static double calcFallDam(L2Character cha, int fallHeight)
 	{
-		if (!GeneralConfig.ENABLE_FALLING_DAMAGE || (fallHeight < 0))
+		if (!Config.ENABLE_FALLING_DAMAGE || (fallHeight < 0))
 		{
 			return 0;
 		}

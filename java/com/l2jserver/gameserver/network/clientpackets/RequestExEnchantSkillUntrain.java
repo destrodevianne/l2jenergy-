@@ -23,7 +23,6 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import com.l2jserver.Config;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.EnchantSkillGroupsData;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.model.L2EnchantSkillGroup.EnchantSkillHolder;
@@ -153,7 +152,7 @@ public final class RequestExEnchantSkillUntrain extends L2GameClientPacket
 		
 		player.addSp((int) (requiredSp * 0.8));
 		
-		if (GeneralConfig.LOG_SKILL_ENCHANTS)
+		if (Config.LOG_SKILL_ENCHANTS)
 		{
 			LogRecord record = new LogRecord(Level.INFO, "Untrain");
 			record.setParameters(new Object[]

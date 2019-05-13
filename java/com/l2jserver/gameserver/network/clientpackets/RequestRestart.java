@@ -21,8 +21,8 @@ package com.l2jserver.gameserver.network.clientpackets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.l2jserver.Config;
 import com.l2jserver.gameserver.SevenSignsFestival;
-import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.instancemanager.AntiFeedManager;
@@ -81,7 +81,7 @@ public final class RequestRestart extends L2GameClientPacket
 			return;
 		}
 		
-		if (AttackStanceTaskManager.getInstance().hasAttackStanceTask(player) && !(player.isGM() && GeneralConfig.GM_RESTART_FIGHTING))
+		if (AttackStanceTaskManager.getInstance().hasAttackStanceTask(player) && !(player.isGM() && Config.GM_RESTART_FIGHTING))
 		{
 			player.sendPacket(SystemMessageId.CANT_RESTART_WHILE_FIGHTING);
 			sendPacket(RestartResponse.valueOf(false));
