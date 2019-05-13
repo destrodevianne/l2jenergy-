@@ -154,7 +154,7 @@ public final class Wedding extends AbstractNpcAI
 						partner.doCast(skill);
 					}
 					
-					Broadcast.toAllOnlinePlayers(MessagesData.getInstance().getMessage(player, "dp_handler_hellbound_level").replace("%s%", player.getName() + "").replace("%i%", partner.getName() + ""));
+					Broadcast.toAllOnlinePlayers(MessagesData.getInstance().getMessage(player, "dp_wedding_married_notice").replace("%s%", player.getName() + "").replace("%i%", partner.getName() + ""));
 					htmltext = sendHtml(partner, "Accepted.html", null, null);
 				}
 				break;
