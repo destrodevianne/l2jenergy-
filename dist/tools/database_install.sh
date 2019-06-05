@@ -180,6 +180,7 @@ $MYL < sql/game/raidboss_spawnlist.sql &> /dev/null
 $MYL < sql/game/rainbowsprings_attacker_list.sql &> /dev/null
 $MYL < sql/game/random_spawn.sql &> /dev/null
 $MYL < sql/game/random_spawn_loc.sql &> /dev/null
+$MYL < sql/game/rim_kamaloka.sql &> /dev/null
 $MYL < sql/game/seven_signs.sql &> /dev/null
 $MYL < sql/game/seven_signs_festival.sql &> /dev/null
 $MYL < sql/game/seven_signs_status.sql &> /dev/null

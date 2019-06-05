@@ -277,6 +277,7 @@ echo Installing empty GameServer tables.
 %mysqlPath% -h %gshost% -u %gsuser% --password=%gspass% -D %gsdb% < sql/game/rainbowsprings_attacker_list.sql
 %mysqlPath% -h %gshost% -u %gsuser% --password=%gspass% -D %gsdb% < sql/game/random_spawn.sql
 %mysqlPath% -h %gshost% -u %gsuser% --password=%gspass% -D %gsdb% < sql/game/random_spawn_loc.sql
+%mysqlPath% -h %gshost% -u %gsuser% --password=%gspass% -D %gsdb% < sql/game/rim_kamaloka.sql
 %mysqlPath% -h %gshost% -u %gsuser% --password=%gspass% -D %gsdb% < sql/game/seven_signs.sql
 %mysqlPath% -h %gshost% -u %gsuser% --password=%gspass% -D %gsdb% < sql/game/seven_signs_festival.sql
 %mysqlPath% -h %gshost% -u %gsuser% --password=%gspass% -D %gsdb% < sql/game/seven_signs_status.sql
