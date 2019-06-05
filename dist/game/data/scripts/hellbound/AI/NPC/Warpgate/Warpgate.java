@@ -18,7 +18,7 @@
  */
 package hellbound.AI.NPC.Warpgate;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.PcCondOverride;
 import com.l2jserver.gameserver.model.actor.L2Character;

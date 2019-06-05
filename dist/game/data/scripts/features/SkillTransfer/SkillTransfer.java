@@ -18,7 +18,7 @@
  */
 package features.SkillTransfer;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.data.xml.impl.ClassListData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.enums.IllegalActionPunishmentType;

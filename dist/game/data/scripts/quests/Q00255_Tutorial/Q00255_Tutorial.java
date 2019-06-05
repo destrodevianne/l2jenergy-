@@ -18,7 +18,7 @@
  */
 package quests.Q00255_Tutorial;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.enums.audio.Voice;

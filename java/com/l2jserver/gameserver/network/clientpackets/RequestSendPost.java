@@ -21,8 +21,8 @@ package com.l2jserver.gameserver.network.clientpackets;
 import static com.l2jserver.gameserver.model.itemcontainer.Inventory.ADENA_ID;
 import static com.l2jserver.gameserver.model.itemcontainer.Inventory.MAX_ADENA;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.util.StringUtil;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;

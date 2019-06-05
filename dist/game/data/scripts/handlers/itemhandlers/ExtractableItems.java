@@ -20,8 +20,8 @@ package handlers.itemhandlers;
 
 import java.util.List;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.util.Rnd;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.handler.IItemHandler;
 import com.l2jserver.gameserver.model.L2ExtractableProduct;
 import com.l2jserver.gameserver.model.actor.L2Playable;

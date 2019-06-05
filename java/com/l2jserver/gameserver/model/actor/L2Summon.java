@@ -18,11 +18,11 @@
  */
 package com.l2jserver.gameserver.model.actor;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.ai.L2CharacterAI;
 import com.l2jserver.gameserver.ai.L2SummonAI;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.data.json.ExperienceData;
 import com.l2jserver.gameserver.datatables.ItemTable;

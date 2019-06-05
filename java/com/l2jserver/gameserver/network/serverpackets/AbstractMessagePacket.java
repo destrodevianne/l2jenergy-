@@ -21,7 +21,7 @@ package com.l2jserver.gameserver.network.serverpackets;
 import java.io.PrintStream;
 import java.util.Arrays;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.datatables.ItemTable;

@@ -21,8 +21,8 @@ package ai.npc.WyvernManager;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.SevenSigns;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;

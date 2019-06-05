@@ -23,8 +23,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.util.StringUtil;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;

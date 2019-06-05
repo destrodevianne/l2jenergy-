@@ -37,11 +37,11 @@ import java.util.Map;
 import java.util.StringJoiner;
 import java.util.logging.Logger;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.converter.Converter;
 import com.l2jserver.commons.util.filter.ExtFilter;
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.enums.HtmlActionScope;
 import com.l2jserver.gameserver.enums.IllegalActionPunishmentType;

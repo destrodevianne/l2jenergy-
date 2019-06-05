@@ -20,11 +20,11 @@ package com.l2jserver.gameserver.network.clientpackets;
 
 import java.util.concurrent.TimeUnit;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.ai.CtrlEvent;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.ai.NextAction;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.handler.IItemHandler;

@@ -28,7 +28,7 @@ import java.util.zip.ZipFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.Config;
 
 /**
  * @author Luis Arias

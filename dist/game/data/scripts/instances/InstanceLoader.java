@@ -49,6 +49,7 @@ import instances.NornilsGarden.NornilsGarden;
 import instances.NornilsGardenQuest.NornilsGardenQuest;
 import instances.PailakaDevilsLegacy.PailakaDevilsLegacy;
 import instances.PailakaSongOfIceAndFire.PailakaSongOfIceAndFire;
+import instances.RimKamaloka.RimKamaloka;
 import instances.SanctumOftheLordsOfDawn.SanctumOftheLordsOfDawn;
 import instances.SecretAreaInTheKeucereusFortress1.SecretAreaInTheKeucereusFortress1;
 
@@ -90,6 +91,7 @@ public final class InstanceLoader
 		NornilsGardenQuest.class,
 		PailakaDevilsLegacy.class,
 		PailakaSongOfIceAndFire.class,
+		RimKamaloka.class,
 		SanctumOftheLordsOfDawn.class,
 		SecretAreaInTheKeucereusFortress1.class,
 	};

@@ -29,9 +29,9 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.StringUtil;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.xml.impl.ClassListData;
 import com.l2jserver.gameserver.data.xml.impl.TransformData;

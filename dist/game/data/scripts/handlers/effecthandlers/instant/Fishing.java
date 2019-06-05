@@ -18,9 +18,9 @@
  */
 package handlers.effecthandlers.instant;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.GeoData;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.instancemanager.ZoneManager;
 import com.l2jserver.gameserver.model.Location;

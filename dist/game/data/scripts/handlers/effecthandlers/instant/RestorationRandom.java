@@ -21,8 +21,8 @@ package handlers.effecthandlers.instant;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.util.Rnd;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.model.L2ExtractableProductItem;
 import com.l2jserver.gameserver.model.L2ExtractableSkill;
 import com.l2jserver.gameserver.model.StatsSet;

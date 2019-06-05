@@ -26,9 +26,9 @@ import java.sql.Statement;
 import java.util.concurrent.ScheduledFuture;
 import java.util.logging.Level;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.util.Broadcast;
 
 /**

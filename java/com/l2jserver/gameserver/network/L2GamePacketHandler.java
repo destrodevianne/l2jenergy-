@@ -23,8 +23,8 @@ import java.nio.ByteBuffer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.util.Util;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.network.L2GameClient.GameClientState;
 import com.l2jserver.gameserver.network.clientpackets.*;
 import com.l2jserver.mmocore.IClientFactory;

@@ -20,7 +20,7 @@ package ai.npc.Trainers.HealerTrainer;
 
 import java.util.Collection;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.model.L2SkillLearn;

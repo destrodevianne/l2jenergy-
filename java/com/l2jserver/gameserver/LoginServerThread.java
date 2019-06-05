@@ -44,12 +44,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.network.BaseSendablePacket;
 import com.l2jserver.commons.security.crypt.NewCrypt;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.commons.util.Util;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.configuration.parser.IPConfigDataParser;
 import com.l2jserver.gameserver.configuration.parser.hexid.HexidConfigParser;

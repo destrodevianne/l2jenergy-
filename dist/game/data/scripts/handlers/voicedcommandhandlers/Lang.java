@@ -20,8 +20,8 @@ package handlers.voicedcommandhandlers;
 
 import java.util.StringTokenizer;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.util.StringUtil;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IVoicedCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;

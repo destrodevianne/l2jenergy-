@@ -21,7 +21,7 @@ package com.l2jserver.gameserver.network.clientpackets;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.data.xml.impl.MultisellData;
 import com.l2jserver.gameserver.model.Elementals;
 import com.l2jserver.gameserver.model.L2Augmentation;

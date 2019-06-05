@@ -23,8 +23,8 @@ import java.util.StringTokenizer;
 
 import javax.script.ScriptException;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.cache.HtmCache;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.data.sql.impl.CrestTable;
 import com.l2jserver.gameserver.data.sql.impl.TeleportLocationTable;

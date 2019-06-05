@@ -21,10 +21,10 @@ package handlers.bypasshandlers;
 import java.util.Calendar;
 import java.util.List;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.SevenSigns;
 import com.l2jserver.gameserver.SevenSignsFestival;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IBypassHandler;
 import com.l2jserver.gameserver.model.L2Party;

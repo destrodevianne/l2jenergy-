@@ -18,11 +18,11 @@
  */
 package ai.npc.ClassMaster;
 
-import static com.l2jserver.Config.ALLOW_CLASS_MASTERS;
-import static com.l2jserver.Config.ALLOW_ENTIRE_TREE;
-import static com.l2jserver.Config.ALTERNATE_CLASS_MASTER;
-import static com.l2jserver.Config.AUTO_LEARN_FS_SKILLS;
-import static com.l2jserver.Config.CLASS_MASTER_SETTINGS;
+import static com.l2jserver.gameserver.configuration.config.Config.ALLOW_CLASS_MASTERS;
+import static com.l2jserver.gameserver.configuration.config.Config.ALLOW_ENTIRE_TREE;
+import static com.l2jserver.gameserver.configuration.config.Config.ALTERNATE_CLASS_MASTER;
+import static com.l2jserver.gameserver.configuration.config.Config.AUTO_LEARN_FS_SKILLS;
+import static com.l2jserver.gameserver.configuration.config.Config.CLASS_MASTER_SETTINGS;
 import static com.l2jserver.gameserver.model.events.EventType.ON_PLAYER_LEVEL_CHANGED;
 import static com.l2jserver.gameserver.network.SystemMessageId.INVENTORY_LESS_THAN_80_PERCENT;
 import static com.l2jserver.gameserver.network.SystemMessageId.NOT_ENOUGH_ITEMS;

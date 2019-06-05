@@ -20,7 +20,7 @@ package handlers.voicedcommandhandlers;
 
 import java.time.Instant;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.PremiumConfig;
 import com.l2jserver.gameserver.handler.IVoicedCommandHandler;
 import com.l2jserver.gameserver.instancemanager.PremiumManager;

@@ -20,8 +20,8 @@ package com.l2jserver.gameserver.instancemanager.tasks;
 
 import java.util.Calendar;
 
-import com.l2jserver.Config;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.instancemanager.FourSepulchersManager;
 
 /**

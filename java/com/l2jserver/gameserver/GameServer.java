@@ -30,8 +30,6 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.Config;
-import com.l2jserver.Server;
 import com.l2jserver.commons.UPnPService;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.IPv4Filter;
@@ -39,6 +37,7 @@ import com.l2jserver.commons.util.MemoryWatchDog;
 import com.l2jserver.commons.util.Util;
 import com.l2jserver.commons.versioning.Version;
 import com.l2jserver.gameserver.cache.HtmCache;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.configuration.config.MMOConfig;
 import com.l2jserver.gameserver.configuration.config.OfflineConfig;
@@ -481,8 +480,6 @@ public final class GameServer
 	
 	public static void main(String[] args) throws Exception
 	{
-		Server.serverMode = Server.MODE_GAMESERVER;
-		
 		// Initialize configurations.
 		ConfigLoader.loading();
 		Config.load();

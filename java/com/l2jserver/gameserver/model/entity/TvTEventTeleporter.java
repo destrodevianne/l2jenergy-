@@ -18,9 +18,9 @@
  */
 package com.l2jserver.gameserver.model.entity;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.enums.DuelState;
 import com.l2jserver.gameserver.enums.Team;
 import com.l2jserver.gameserver.model.actor.L2Summon;

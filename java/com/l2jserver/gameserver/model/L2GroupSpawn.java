@@ -20,8 +20,8 @@ package com.l2jserver.gameserver.model;
 
 import java.util.logging.Level;
 
-import com.l2jserver.Config;
 import com.l2jserver.commons.util.Rnd;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.data.sql.impl.TerritoryTable;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2ControllableMobInstance;

@@ -20,7 +20,7 @@ package handlers.actionshifthandlers;
 
 import java.util.Set;
 
-import com.l2jserver.Config;
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.handler.IActionShiftHandler;
 import com.l2jserver.gameserver.instancemanager.WalkingManager;
