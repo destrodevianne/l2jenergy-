@@ -48,6 +48,7 @@
     <target name="jar" depends="compile" description="Create the jar files">
         <jar destfile="${build.dist.login}/l2jlogin.jar">
             <fileset dir="${build.classes}">
+            	<exclude name="**/commons/**" />
                 <exclude name="**/gameserver/**" />
             </fileset>
             <manifest>
@@ -62,6 +63,7 @@
         </jar>
         <jar destfile="${build.dist.game}/l2jserver.jar">
             <fileset dir="${build.classes}">
+            	<exclude name="**/commons/**" /> 
                 <exclude name="**/loginserver/**" />
             </fileset>
             <manifest>
@@ -74,6 +76,19 @@
             	<attribute name="Builder-Name" value="${user.name}" />
             </manifest>
         </jar>
+    	<jar destfile="${build.dist.libs}/l2j-commons.jar">
+    		<fileset dir="${build.classes}">
+    			<exclude name="**/loginserver/**" />
+    			<exclude name="**/gameserver/**" />
+    		</fileset>
+    		<manifest>
+    			<attribute name="Build-Date" value="${build.tstamp}" />
+    	        <attribute name="Implementation-Build" value="${build.revision}" />
+    	        <attribute name="Implementation-Version" value="${build.version}" />
+    	        <attribute name="Implementation-URL" value="http://l2jenergy.ru/" />
+    	        <attribute name="Builder-Name" value="${user.name}" />
+    	    </manifest>
+    	</jar>
     </target>
 	
     <target name="dist" depends="jar">
