@@ -64,9 +64,9 @@ public class Q00341_HuntingForWildBeasts extends Quest
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
-		final QuestState st = getQuestState(player, false);
+		final QuestState qs = getQuestState(player, false);
 		String htmltext = null;
-		if (st != null)
+		if (qs != null)
 		{
 			switch (event)
 			{
@@ -77,7 +77,7 @@ public class Q00341_HuntingForWildBeasts extends Quest
 				}
 				case "30078-04.htm":
 				{
-					st.startQuest();
+					qs.startQuest();
 					htmltext = event;
 					break;
 				}
@@ -87,23 +87,23 @@ public class Q00341_HuntingForWildBeasts extends Quest
 	}
 	
 	@Override
-	public String onTalk(L2Npc npc, L2PcInstance player)
+	public String onTalk(L2Npc npc, L2PcInstance talker)
 	{
-		final QuestState st = getQuestState(player, false);
-		String htmltext = getNoQuestMsg(player);
-		switch (st.getState())
+		final QuestState qs = getQuestState(talker, true);
+		String htmltext = getNoQuestMsg(talker);
+		switch (qs.getState())
 		{
 			case State.CREATED:
 			{
-				htmltext = player.getLevel() >= MIN_LVL ? "30078-01.html" : "30078-02.htm";
+				htmltext = talker.getLevel() >= MIN_LVL ? "30078-01.html" : "30078-02.htm";
 				break;
 			}
 			case State.STARTED:
 			{
-				if (st.isCond(2) && (st.getQuestItemsCount(BEAR_SKIN) >= REQUIRED_COUNT))
+				if (qs.isCond(2) && (qs.getQuestItemsCount(BEAR_SKIN) >= REQUIRED_COUNT))
 				{
-					st.giveAdena(ADENA_COUNT, true);
-					st.exitQuest(true, true);
+					qs.giveAdena(ADENA_COUNT, true);
+					qs.exitQuest(true, true);
 					htmltext = "30078-05.html";
 				}
 				else
@@ -117,28 +117,28 @@ public class Q00341_HuntingForWildBeasts extends Quest
 	}
 	
 	@Override
-	public String onKill(L2Npc npc, L2PcInstance player, boolean isPet)
+	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
 	{
-		final QuestState st = getQuestState(player, false);
-		if ((st != null) && st.isCond(1))
+		final QuestState qs = getQuestState(killer, false);
+		if ((qs != null) && qs.isCond(1))
 		{
-			long skins = st.getQuestItemsCount(BEAR_SKIN);
+			long skins = qs.getQuestItemsCount(BEAR_SKIN);
 			if (skins < REQUIRED_COUNT)
 			{
 				if (getRandom(100) < MONSTERS.get(npc.getId()))
 				{
-					st.giveItems(BEAR_SKIN, 1);
+					qs.giveItems(BEAR_SKIN, 1);
 					if ((++skins) < REQUIRED_COUNT)
 					{
-						st.playSound(Sound.ITEMSOUND_QUEST_ITEMGET);
+						qs.playSound(Sound.ITEMSOUND_QUEST_ITEMGET);
 					}
 					else
 					{
-						st.setCond(2, true);
+						qs.setCond(2, true);
 					}
 				}
 			}
 		}
-		return super.onKill(npc, player, isPet);
+		return super.onKill(npc, killer, isPet);
 	}
 }
