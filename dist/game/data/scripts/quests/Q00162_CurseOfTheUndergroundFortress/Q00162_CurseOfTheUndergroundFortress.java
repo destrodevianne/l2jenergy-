@@ -21,6 +21,7 @@ package quests.Q00162_CurseOfTheUndergroundFortress;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -31,9 +32,9 @@ import com.l2jserver.gameserver.model.quest.State;
 
 /**
  * Curse of the Underground Fortress (162)
- * @author xban1x
+ * @author xban1x, Sacrifice
  */
-public class Q00162_CurseOfTheUndergroundFortress extends Quest
+public final class Q00162_CurseOfTheUndergroundFortress extends Quest
 {
 	// NPC
 	private static final int UNOREN = 30147;
@@ -70,9 +71,9 @@ public class Q00162_CurseOfTheUndergroundFortress extends Quest
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
-		final QuestState st = getQuestState(player, false);
+		final QuestState qs = getQuestState(player, false);
 		String htmltext = null;
-		if (st != null)
+		if (qs != null)
 		{
 			switch (event)
 			{
@@ -83,7 +84,7 @@ public class Q00162_CurseOfTheUndergroundFortress extends Quest
 				}
 				case "30147-04.htm":
 				{
-					st.startQuest();
+					qs.startQuest();
 					htmltext = event;
 					break;
 				}
@@ -95,24 +96,25 @@ public class Q00162_CurseOfTheUndergroundFortress extends Quest
 	@Override
 	public String onKill(L2Npc npc, L2PcInstance killer, boolean isSummon)
 	{
-		final QuestState st = getQuestState(killer, false);
-		if ((st != null) && st.isCond(1))
+		final QuestState qs = getQuestState(killer, false);
+		if ((qs != null) && qs.isCond(1))
 		{
 			if (MONSTERS_SKULLS.containsKey(npc.getId()))
 			{
 				if (getRandom(100) < MONSTERS_SKULLS.get(npc.getId()))
 				{
-					long skulls = st.getQuestItemsCount(ELF_SKULL);
+					long skulls = qs.getQuestItemsCount(ELF_SKULL);
 					if (skulls < 3)
 					{
-						st.giveItems(ELF_SKULL, 1);
-						if (((++skulls) >= 3) && (st.getQuestItemsCount(BONE_FRAGMENT) >= 10))
+						qs.giveItems(ELF_SKULL, 1 * (int) Config.RATE_QUEST_DROP);
+						if (((++skulls) >= 3) && (qs.getQuestItemsCount(BONE_FRAGMENT) >= 10))
 						{
-							st.setCond(2, true);
+							
+							qs.setCond(2, true);
 						}
 						else
 						{
-							st.playSound(Sound.ITEMSOUND_QUEST_ITEMGET);
+							qs.playSound(Sound.ITEMSOUND_QUEST_ITEMGET);
 						}
 					}
 				}
@@ -121,17 +123,17 @@ public class Q00162_CurseOfTheUndergroundFortress extends Quest
 			{
 				if (getRandom(100) < MONSTERS_BONES.get(npc.getId()))
 				{
-					long bones = st.getQuestItemsCount(BONE_FRAGMENT);
+					long bones = qs.getQuestItemsCount(BONE_FRAGMENT);
 					if (bones < 10)
 					{
-						st.giveItems(BONE_FRAGMENT, 1);
-						if (((++bones) >= 10) && (st.getQuestItemsCount(ELF_SKULL) >= 3))
+						qs.giveItems(BONE_FRAGMENT, 1 * (int) Config.RATE_QUEST_DROP);
+						if (((++bones) >= 10) && (qs.getQuestItemsCount(ELF_SKULL) >= 3))
 						{
-							st.setCond(2, true);
+							qs.setCond(2, true);
 						}
 						else
 						{
-							st.playSound(Sound.ITEMSOUND_QUEST_ITEMGET);
+							qs.playSound(Sound.ITEMSOUND_QUEST_ITEMGET);
 						}
 					}
 				}
@@ -141,25 +143,25 @@ public class Q00162_CurseOfTheUndergroundFortress extends Quest
 	}
 	
 	@Override
-	public String onTalk(L2Npc npc, L2PcInstance player)
+	public String onTalk(L2Npc npc, L2PcInstance talker)
 	{
-		final QuestState st = getQuestState(player, true);
-		String htmltext = getNoQuestMsg(player);
-		switch (st.getState())
+		final QuestState qs = getQuestState(talker, true);
+		String htmltext = getNoQuestMsg(talker);
+		switch (qs.getState())
 		{
 			case State.CREATED:
 			{
-				htmltext = (player.getRace() != Race.DARK_ELF) ? (player.getLevel() >= MIN_LVL) ? "30147-02.htm" : "30147-01.htm" : "30147-00.htm";
+				htmltext = (talker.getRace() != Race.DARK_ELF) ? (talker.getLevel() >= MIN_LVL) ? "30147-02.htm" : "30147-01.htm" : "30147-00.htm";
 				break;
 			}
 			case State.STARTED:
 			{
-				if ((st.getQuestItemsCount(BONE_FRAGMENT) + st.getQuestItemsCount(ELF_SKULL)) >= REQUIRED_COUNT)
+				if ((qs.getQuestItemsCount(BONE_FRAGMENT) + qs.getQuestItemsCount(ELF_SKULL)) >= REQUIRED_COUNT)
 				{
-					st.giveItems(BONE_SHIELD, 1);
-					st.addExpAndSp(22652, 1004);
-					st.giveAdena(24000, true);
-					st.exitQuest(false, true);
+					qs.giveItems(BONE_SHIELD, 1);
+					qs.addExpAndSp(22652, 1004);
+					qs.giveAdena(24000, true);
+					qs.exitQuest(false, true);
 					htmltext = "30147-06.html";
 				}
 				else
@@ -170,7 +172,7 @@ public class Q00162_CurseOfTheUndergroundFortress extends Quest
 			}
 			case State.COMPLETED:
 			{
-				htmltext = getAlreadyCompletedMsg(player);
+				htmltext = getAlreadyCompletedMsg(talker);
 				break;
 			}
 		}
