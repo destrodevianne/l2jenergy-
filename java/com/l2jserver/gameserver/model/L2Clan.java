@@ -117,7 +117,7 @@ public class L2Clan implements IIdentifiable, INamable
 	private int _clanId;
 	private L2ClanMember _leader;
 	private String _allyName;
-	private int _allyId;
+	private int _allyId = 0;
 	private int _level;
 	private int _castleId;
 	private int _fortId;
