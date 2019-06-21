@@ -39,6 +39,10 @@
 		<set name="icon" val="icon.etc_pi_gift_box_i04" />
 		<set name="material" val="COTTON" />
 		<set name="is_stackable" val="true" />
+		<set name="default_action" val="PEEL" />
+		<set name="handler" val="ExtractableItems" />
+		<set name="immediate_effect" val="true" />
+		<set name="capsuled_items" val="9546,1,1,8.3333;9547,1,1,8.3333;9548,1,1,8.3333;9549,1,1,8.3333;9550,1,1,8.3333;9551,1,1,8.3333;9552,1,1,8.3333;9554,1,1,8.3333;9553,1,1,8.3333;9555,1,1,8.3333;9556,1,1,8.3333;9557,1,1,8.3333"/>
 	</item>
 	<item id="22205" type="EtcItem" name="Attribute Crystal Box - Event">
 		<!-- Description: Box containing an Attribute Crystal. Which one could it be? -->
