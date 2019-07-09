@@ -148,6 +148,16 @@ public class L2ProductItem
 		return _maxStock;
 	}
 	
+	public boolean getLimit()
+	{
+		return  getCurrentStock() >= _maxStock;
+	}
+	
+	public boolean isLimited()
+	{
+		return _maxStock > 0;
+	}
+	
 	public long getStartSaleDate()
 	{
 		return _startSaleDate.toEpochSecond();

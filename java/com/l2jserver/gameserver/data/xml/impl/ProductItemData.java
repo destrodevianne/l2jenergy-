@@ -143,7 +143,7 @@ public class ProductItemData implements IXmlReader
 			return;
 		}
 		
-		if ((count < 0) || (count > 99))
+		if ((count <= 0) || (count >= 99))
 		{
 			activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_WRONG_USER_STATE));
 			Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " tried to buy invalid itemcount [" + count + "] from Prime", IllegalActionPunishmentType.JAIL);
@@ -168,6 +168,11 @@ public class ProductItemData implements IXmlReader
 			else if (!ProductItemData.getInstance().calcStartEndTime(product.getProductId()))
 			{
 				activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_SALE_PERIOD_ENDED));
+				return;
+			}
+			else if (product.isLimited() && (product.getLimit() || ((product.getMaxStock() - product.getCurrentStock()) < count))) // TODO: Доделать
+			{
+				activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_SOLD_OUT));
 				return;
 			}
 			
