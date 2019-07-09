@@ -23,6 +23,7 @@ import java.util.List;
 
 import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.ManorConfig;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.instancemanager.CastleManorManager;
 import com.l2jserver.gameserver.model.CropProcure;
@@ -165,6 +166,7 @@ public class RequestProcureCropList extends L2GameClientPacket
 				sm.addItemName(i.getId());
 				sm.addLong(i.getCount());
 				player.sendPacket(sm);
+				tradeFailureNotification(player, i);
 				continue;
 			}
 			
@@ -179,6 +181,7 @@ public class RequestProcureCropList extends L2GameClientPacket
 				
 				sm = SystemMessage.getSystemMessage(SystemMessageId.YOU_NOT_ENOUGH_ADENA);
 				player.sendPacket(sm);
+				player.sendMessage(MessagesData.getInstance().getMessage(player, "you_need_adena_pay_foreign_manor_trading_fee").replace("%s%", fee + ""));
 				continue;
 			}
 			
@@ -240,6 +243,13 @@ public class RequestProcureCropList extends L2GameClientPacket
 			}
 			return _rewardId;
 		}
+	}
+	
+	private void tradeFailureNotification(L2PcInstance player, CropHolder crop)
+	{
+		final String rewardName = ItemTable.getInstance().getTemplate(crop.getRewardId()).getName();
+		final String cropName = ItemTable.getInstance().getTemplate(crop.getId()).getName();
+		player.sendMessage(MessagesData.getInstance().getMessage(player, "not_enough_offered_trade_for_unit").replace("%s%", rewardName + "").replace("%i%", cropName + ""));
 	}
 	
 	@Override

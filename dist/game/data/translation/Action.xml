@@ -173,4 +173,12 @@
 	    <set lang="en" val="Happy Birthday!" />
 		<set lang="ru" val="С Днем рожденья!" />
 	</message>
+	<message id="you_need_adena_pay_foreign_manor_trading_fee">
+	    <set lang="en" val="You need %s% adena to pay foreign manor trading fee." />
+		<set lang="ru" val="Вам понадобится %s% адена(ы), чтобы заплатить комиссию за торговлю с чужим поместьем." />
+	</message>
+	<message id="not_enough_offered_trade_for_unit">
+	    <set lang="en" val="Not enough of %s% offered to trade for 1 unit of %i%." />
+		<set lang="ru" val="Недостаточно %s%, предложенных для торговли за 1 единицу %i%." />
+	</message>
 </list>
