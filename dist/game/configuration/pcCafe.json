@@ -24,5 +24,32 @@
     "AltPcBangDailyBonusEnabled" : "true",
 
 	# Amount of Pc Bang points for daily entrance
-    "AltPcBangDailyBonusPoints" : "1000"
+    "AltPcBangDailyBonusPoints" : "1000",
+    
+    # The maximum number of attempts to enter a promo code
+    "AltPcBangPointsMaxEnterAttempts" : "5",
+
+    # Blocking time on which it is prohibited to enter a code (min)
+    "AltPcBangPointsBanTime" : "5",
+
+    # Coupon Code Format
+    "AltPcBangPointsCouponTemplate" : "[A-Za-z0-9]{20,20}",
+
+    # Whether to allow PC Bang points earned to be converted into the currency of ItemMall
+    "AltPcBangPointToItemMall" : "false",
+
+    # PC Bang points exchange rate for the game store currency (option PcBangPointToItemMall is true)
+    "AltPcBangPointToItemMallRate" : "100",
+
+    # Maximum level to sharpen PC Bang weapon (off-like 23)
+    "AltPcBangEnchantMaxLevel" : "23",
+
+    # The level of safe sharpening weapons PC Bang (off-like 3)
+    "AltPcBangEnchantSafeLevel" : "3",
+
+    # The cost of rental wyverns (off-like 2500)
+    "AltPcBangWiwernRentPrice" : "2500",
+
+    # Wyvern rental time (off-like 5 min)
+    "AltPcBangWiwernRentTime" : "5"
 }

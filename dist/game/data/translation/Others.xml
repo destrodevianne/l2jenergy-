@@ -285,4 +285,16 @@
 	    <set lang="en" val="You don't have the access rights to use this command!" />
 		<set lang="ru" val="У вас нет прав доступа для использования этой команды!" />
 	</message>
+	<message id="pc_cafe_wrong_coupon_code_format">
+	    <set lang="en" val="Wrong coupon code format. Try to enter serial number again!" />
+		<set lang="ru" val="Не верный формат кода купона. Попробуйте повторить ввод!" />
+	</message>
+	  <message id="pc_cafe_coupon_code_already_been_used">
+	    <set lang="en" val="This coupon already has been used. Please enter true number of the coupon!" />
+		<set lang="ru" val="Данный купон уже был использован. Введите верный номер купона!" />
+	</message>
+	  <message id="pc_cafe_wrong_coupon_code">
+	    <set lang="en" val="Wrong coupon code. Try once again!" />
+		<set lang="ru" val="Не верный код купона. Попробуйте повторить ввод!" />
+	</message>
 </list>

@@ -170,6 +170,7 @@ $MYL < sql/game/olympiad_data.sql &> /dev/null
 $MYL < sql/game/olympiad_fights.sql &> /dev/null
 $MYL < sql/game/olympiad_nobles.sql &> /dev/null
 $MYL < sql/game/olympiad_nobles_eom.sql &> /dev/null
+$MYL < sql/game/pccafe_coupons.sql &> /dev/null
 $MYL < sql/game/petition_feedback.sql &> /dev/null
 $MYL < sql/game/pets.sql &> /dev/null
 $MYL < sql/game/pets_skills.sql &> /dev/null

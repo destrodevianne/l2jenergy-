@@ -37,6 +37,7 @@ import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import ai.npc.AbstractNpcAI;
 
 /**
+ * AdventureGuildsman AI test (находится в доработке)
  * @author Мо3олЬ
  */
 public class AdventureGuildsman extends AbstractNpcAI
@@ -124,23 +125,23 @@ public class AdventureGuildsman extends AbstractNpcAI
 		POINTSSKILL.put("S448", new int[] { 4400, 3, 950 }); // Acumen - 950 points
 
 		// Pet Skill                      ID   LV  QTY Points
-		PETSKILL.put("P4391", new int[] { 4391, 2, 300 }); // Wind Walk - 300 points
-		PETSKILL.put("P4392", new int[] { 4392, 2, 150 }); // Shield - 150 points
-		PETSKILL.put("P4393", new int[] { 4393, 2, 300 }); // Might - 300 points
-		PETSKILL.put("P4394", new int[] { 4394, 3, 300 }); // Blessed Body - 300 points
-		PETSKILL.put("P4395", new int[] { 4395, 3, 300 }); // Blessed Soul - 300 points
+		PETSKILL.put("P4391", new int[] { 4397, 1, 300 }); // Berserker Spirit - 300 points
+		PETSKILL.put("P4392", new int[] { 4393, 2, 300 }); // Might - 300 points
+		PETSKILL.put("P4393", new int[] { 4392, 2, 150 }); // Shield - 150 points
+		PETSKILL.put("P4394", new int[] { 4391, 2, 300 }); // Wind Walk - 300 points
+		PETSKILL.put("P4395", new int[] { 4404, 2, 650 }); // Focus - 650 points
 		PETSKILL.put("P4396", new int[] { 4396, 1, 300 }); // Magic Barrier - 300 points
-		PETSKILL.put("P4397", new int[] { 4397, 1, 300 }); // Berserker Spirit - 300 points
-		PETSKILL.put("P4398", new int[] { 4398, 2, 150 }); // Bless Shield - 150 points
-		PETSKILL.put("P4399", new int[] { 4399, 2, 300 }); // Vampiric Rage - 300 points
-		PETSKILL.put("P4440", new int[] { 4400, 2, 600 }); // Acumen - 600 points
-		PETSKILL.put("P4401", new int[] { 4401, 2, 300 }); // Empower - 300 points
+		PETSKILL.put("P4397", new int[] { 4405, 2, 800 }); // Death Whisper - 800 points
+		PETSKILL.put("P4398", new int[] { 4403, 2, 300 }); // Guidance - 300 points
+		PETSKILL.put("P4399", new int[] { 4398, 2, 150 }); // Bless Shield - 150 points
+		PETSKILL.put("P4400", new int[] { 4394, 3, 300 }); // Blessed Body - 300 points
+		PETSKILL.put("P4401", new int[] { 4395, 3, 300 }); // Blessed Soul - 300 points
 		PETSKILL.put("P4402", new int[] { 4402, 1, 400 }); // Haste - 400 points
-		PETSKILL.put("P4403", new int[] { 4403, 2, 300 }); // Guidance - 300 points
-		PETSKILL.put("P4404", new int[] { 4404, 2, 650 }); // Focus - 650 points
-		PETSKILL.put("P4405", new int[] { 4405, 2, 800 }); // Death Whisper - 800 points
-		PETSKILL.put("P4406", new int[] { 4406, 2, 300 }); // Agility - 300 points
-				
+		PETSKILL.put("P4403", new int[] { 4406, 2, 300 }); // Agility - 300 points
+		PETSKILL.put("P4404", new int[] { 4399, 2, 300 }); // Vampiric Rage - 300 points
+		PETSKILL.put("P4405", new int[] { 4401, 2, 300 }); // Empower - 300 points
+		PETSKILL.put("P4406", new int[] { 4400, 2, 600 }); // Acumen - 600 points
+		
 		// Teleporters                            x       y       z    QTY Points
 		// Talking Island Teleporters
 		TELEPORTERS.put("TELE_01", new int[] { -112367, 234703, -3688, 30 }); // Elven Ruins 30 points
@@ -264,7 +265,7 @@ public class AdventureGuildsman extends AbstractNpcAI
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
-		String htmltext = null;
+		String htmtext = null;
 		
 		switch (event)
 		{
@@ -274,24 +275,51 @@ public class AdventureGuildsman extends AbstractNpcAI
 				player.sendPacket(ExShowQuestInfo.STATIC_PACKET);
 				break;
 			}
+			case "pccafe_coupon":
+			{
+				htmtext = "pccoupon001.htm";
+				break;
+			}
+			case "show_pccafe_coupon_ui":
+			{
+				// player.sendPacket(new RequestPCCafeCouponUse()); // TODO: нужена реализация
+				break;
+			}
 			case "pccafe_list":
 			{
-				htmltext = "pccafe_list001.htm";
+				htmtext = "pccafe_list001.htm";
 				break;
 			}
 			case "life_crystal":
 			{
-				htmltext = npc.getId() + "-1.htm";
-				break;
-			}
-			case "buff_list":
-			{
-				htmltext = "pccafe_buff_1001.htm";
+				htmtext = npc.getId() + "-1.htm";
 				break;
 			}
 			case "item_list":
 			{
-				htmltext = "pccafe_item001.htm";
+				htmtext = "pccafe_item001.htm";
+				break;
+			}
+			case "buff_list":
+			{
+				if (player.getLevel() < 40) // ниже 40-го уровня
+				{
+					htmtext = "pccafe_buff_1001.htm";
+				}
+				else if ((player.getLevel() >= 40) & (player.getLevel() < 54)) // TODO: fix for 40-54 уровня
+				{
+					htmtext = "pccafe_buff_2001.htm";
+				}
+				else if (player.getLevel() >= 55) // выше 55-го уровня
+				{
+					htmtext = "pccafe_buff_3001.htm";
+				}
+				// htmtext = "pccafe_buff_warning.htm"; // TODO: нужена реализация
+				break;
+			}
+			case "buff_list_pet":
+			{
+				htmtext = "pccafe_summon_newbuff_001.htm";
 				break;
 			}
 			case "life_crystal_help.htm":
@@ -300,14 +328,16 @@ public class AdventureGuildsman extends AbstractNpcAI
 			case "pccafe_help_inzone001.htm":
 			case "pccafe_help_lottery001.htm":
 			case "pccafe_help_lottery002.htm":
+			case "pccafe_buff_1002.htm":
+			case "pccafe_buff_2002.htm":
+			case "pccafe_buff_3002.htm":
+			case "pccafe_buff_warning.htm":
+			case "pccafe_summon_newbuff_002.htm":
+			case "pccoupon001.htm":
+			case "pccoupon_error_under20.htm":
 			case "pccafe_wyvern001.htm":
 			{
-				htmltext = event;
-				break;
-			}
-			case "buff_list_pet":
-			{
-				htmltext = "pccafe_newbuff_001.htm";
+				htmtext = event;
 				break;
 			}
 			case "give_lottery_ticket":
@@ -319,83 +349,40 @@ public class AdventureGuildsman extends AbstractNpcAI
 				}
 				else
 				{
-					htmltext = "pccafe_help_lottery_notoneday.htm";
+					htmtext = "pccafe_help_lottery_notoneday.htm";
 				}
 				break;
 			}
 			case "trade_100":
 			{
-				htmltext = tradeItem(player, PCCAFE_5TH_LOTTERY_TICKET_30DAYS, 100);
+				htmtext = tradeItem(player, PCCAFE_5TH_LOTTERY_TICKET_30DAYS, 100);
 				break;
 			}
 			case "trade_1000":
 			{
-				htmltext = tradeItem(player, PCCAFE_4TH_LOTTERY_TICKET_30DAYS, 1000);
+				htmtext = tradeItem(player, PCCAFE_4TH_LOTTERY_TICKET_30DAYS, 1000);
 				break;
 			}
 			case "trade_2000":
 			{
-				htmltext = tradeItem(player, PCCAFE_3RD_LOTTERY_TICKET_30DAYS, 2000);
+				htmtext = tradeItem(player, PCCAFE_3RD_LOTTERY_TICKET_30DAYS, 2000);
 				break;
 			}
 			case "trade_10000":
 			{
-				htmltext = tradeItem(player, PCCAFE_2ND_LOTTERY_TICKET_30DAYS, 10000);
+				htmtext = tradeItem(player, PCCAFE_2ND_LOTTERY_TICKET_30DAYS, 10000);
 				break;
 			}
 			case "trade_100000":
 			{
-				htmltext = tradeItem(player, PCCAFE_1ST_LOTTERY_TICKET_30DAYS, 100000);
+				htmtext = tradeItem(player, PCCAFE_1ST_LOTTERY_TICKET_30DAYS, 100000);
 				break;
 			}
 		}
+		
 		if (event.startsWith("tele"))
 		{
-			htmltext = npc.getId() + "-2.htm";
-		}
-		else if (POINTSSKILL.containsKey(event))
-		{
-			if (player.getLevel() < 55)
-			{
-				htmltext = "pccafe_skill_nolevel.htm";
-			}
-			else if (player.getPcCafePoints() >= POINTSSKILL.get(event)[2])
-			{
-				player.setPcCafePoints(player.getPcCafePoints() - POINTSSKILL.get(event)[2]);
-				SystemMessage smsgpc = SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT);
-				smsgpc.addInt(POINTSSKILL.get(event)[2]);
-				player.sendPacket(smsgpc);
-				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), POINTSSKILL.get(event)[2], 1, PcCafeType.CONSUME, 12));
-				npc.setTarget(player);
-				npc.doCast(SkillData.getInstance().getSkill(POINTSSKILL.get(event)[0], POINTSSKILL.get(event)[1]));
-				return "pccafe_skill_info.htm";
-			}
-			else
-			{
-				htmltext = "pccafe_notpoint001.htm";
-			}
-		}
-		else if (PETSKILL.containsKey(event))
-		{
-			if ((player.getSummon() == null) || !(player.getSummon() instanceof L2ServitorInstance))
-			{
-				htmltext = "pccafe_notsummon.htm";
-			}
-			else if (player.getPcCafePoints() >= PETSKILL.get(event)[2])
-			{
-				player.setPcCafePoints(player.getPcCafePoints() - PETSKILL.get(event)[2]);
-				SystemMessage smsgpc = SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT);
-				smsgpc.addInt(PETSKILL.get(event)[2]);
-				player.sendPacket(smsgpc);
-				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), PETSKILL.get(event)[2], 1, PcCafeType.CONSUME, 12));
-				npc.setTarget(player.getSummon());
-				npc.doCast(SkillData.getInstance().getSkill(PETSKILL.get(event)[0], PETSKILL.get(event)[1]));
-				return "pccafe_pet_skill_info.htm";
-			}
-			else
-			{
-				htmltext = "pccafe_notpoint001.htm";
-			}
+			htmtext = npc.getId() + "-2.htm";
 		}
 		else if (TELEPORTERS.containsKey(event))
 		{
@@ -409,45 +396,215 @@ public class AdventureGuildsman extends AbstractNpcAI
 				player.teleToLocation(TELEPORTERS.get(event)[0], TELEPORTERS.get(event)[1], TELEPORTERS.get(event)[2]);
 				return null;
 			}
-			htmltext = "pccafe_notpoint001.htm";
+			htmtext = "pccafe_notpoint001.htm";
 		}
-		else if (event.equalsIgnoreCase("warrior"))
+		else if (event.equalsIgnoreCase("warrior40"))
 		{
-			if (player.getLevel() < 40)
-			{
-				htmltext = "pccafe_skill_nolevel.html";
-			}
-			else if (player.getPcCafePoints() >= 3100)
+			if (player.getPcCafePoints() >= 3100)
 			{
 				player.setPcCafePoints(player.getPcCafePoints() - 3100);
-				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(5600));
+				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(3100));
 				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -3100, 1, PcCafeType.CONSUME, 12));
 				npc.setTarget(player);
-				npc.doCast(SkillData.getInstance().getSkill(4397, 2));
-				npc.doCast(SkillData.getInstance().getSkill(4393, 3));
-				npc.doCast(SkillData.getInstance().getSkill(4392, 3));
-				npc.doCast(SkillData.getInstance().getSkill(4391, 2));
-				npc.doCast(SkillData.getInstance().getSkill(4404, 3));
-				npc.doCast(SkillData.getInstance().getSkill(4396, 2));
-				npc.doCast(SkillData.getInstance().getSkill(4405, 3));
-				npc.doCast(SkillData.getInstance().getSkill(4403, 3));
-				npc.doCast(SkillData.getInstance().getSkill(4398, 3));
-				npc.doCast(SkillData.getInstance().getSkill(4394, 4));
-				npc.doCast(SkillData.getInstance().getSkill(4402, 2));
-				npc.doCast(SkillData.getInstance().getSkill(4406, 3));
-				npc.doCast(SkillData.getInstance().getSkill(4399, 3));
-				htmltext = "pccafe_skill_info.htm";
+				npc.doCast(SkillData.getInstance().getSkill(4397, 1)); // Berserker Spirit
+				npc.doCast(SkillData.getInstance().getSkill(4393, 1)); // Might
+				npc.doCast(SkillData.getInstance().getSkill(4392, 1)); // Shield
+				npc.doCast(SkillData.getInstance().getSkill(4391, 1)); // Wind Walk
+				npc.doCast(SkillData.getInstance().getSkill(4404, 1)); // Focus
+				npc.doCast(SkillData.getInstance().getSkill(4405, 1)); // Death Whisper
+				npc.doCast(SkillData.getInstance().getSkill(4403, 1)); // Guidance
+				npc.doCast(SkillData.getInstance().getSkill(4398, 1)); // Bless Shield
+				npc.doCast(SkillData.getInstance().getSkill(4394, 1)); // Blessed Body
+				npc.doCast(SkillData.getInstance().getSkill(4402, 1)); // Haste
+				npc.doCast(SkillData.getInstance().getSkill(4406, 1)); // Agility
+				npc.doCast(SkillData.getInstance().getSkill(4399, 1)); // Vampiric Rage
+				htmtext = "pccafe_buff_1001.htm";
 			}
 			else
 			{
-				htmltext = "pccafe_notpoint001.htm";
+				htmtext = "pccafe_notpoint001.htm";
+			}
+		}
+		else if (event.equalsIgnoreCase("mage40"))
+		{
+			if (player.getPcCafePoints() >= 1600)
+			{
+				player.setPcCafePoints(player.getPcCafePoints() - 1600);
+				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(1600));
+				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -1600, 1, PcCafeType.CONSUME, 12));
+				npc.setTarget(player);
+				npc.doCast(SkillData.getInstance().getSkill(4397, 1)); // Berserker Spirit
+				npc.doCast(SkillData.getInstance().getSkill(4396, 1)); // Magic Barrier
+				npc.doCast(SkillData.getInstance().getSkill(4392, 1)); // Shield
+				npc.doCast(SkillData.getInstance().getSkill(4391, 1)); // Wind Walk
+				npc.doCast(SkillData.getInstance().getSkill(4394, 1)); // Blessed Body
+				npc.doCast(SkillData.getInstance().getSkill(4395, 1)); // Blessed Soul
+				npc.doCast(SkillData.getInstance().getSkill(4401, 1)); // Empower
+				npc.doCast(SkillData.getInstance().getSkill(4400, 1)); // Acumen
+				htmtext = "pccafe_buff_1001.htm";
+			}
+			else
+			{
+				htmtext = "pccafe_notpoint001.htm";
+			}
+		}
+		else if (event.equalsIgnoreCase("warrior54"))
+		{
+			if (player.getPcCafePoints() >= 4000)
+			{
+				player.setPcCafePoints(player.getPcCafePoints() - 4000);
+				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(4000));
+				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -4000, 1, PcCafeType.CONSUME, 12));
+				npc.setTarget(player);
+				npc.doCast(SkillData.getInstance().getSkill(4397, 1)); // Berserker Spirit
+				npc.doCast(SkillData.getInstance().getSkill(4393, 2)); // Might
+				npc.doCast(SkillData.getInstance().getSkill(4392, 2)); // Shield
+				npc.doCast(SkillData.getInstance().getSkill(4391, 2)); // Wind Walk
+				npc.doCast(SkillData.getInstance().getSkill(4404, 2)); // Focus
+				npc.doCast(SkillData.getInstance().getSkill(4405, 2)); // Death Whisper
+				npc.doCast(SkillData.getInstance().getSkill(4403, 2)); // Guidance
+				npc.doCast(SkillData.getInstance().getSkill(4398, 2)); // Bless Shield
+				npc.doCast(SkillData.getInstance().getSkill(4394, 3)); // Blessed Body
+				npc.doCast(SkillData.getInstance().getSkill(4402, 1)); // Haste
+				npc.doCast(SkillData.getInstance().getSkill(4406, 2)); // Agility
+				npc.doCast(SkillData.getInstance().getSkill(4399, 2)); // Vampiric Rage
+				htmtext = "pccafe_buff_2001.htm";
+			}
+			else
+			{
+				htmtext = "pccafe_notpoint001.htm";
+			}
+		}
+		else if (event.equalsIgnoreCase("mage54"))
+		{
+			if (player.getPcCafePoints() >= 2100)
+			{
+				player.setPcCafePoints(player.getPcCafePoints() - 2100);
+				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(2100));
+				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -2100, 1, PcCafeType.CONSUME, 12));
+				npc.setTarget(player);
+				npc.doCast(SkillData.getInstance().getSkill(4397, 1)); // Berserker Spirit
+				npc.doCast(SkillData.getInstance().getSkill(4396, 1)); // Magic Barrier
+				npc.doCast(SkillData.getInstance().getSkill(4392, 2)); // Shield
+				npc.doCast(SkillData.getInstance().getSkill(4391, 2)); // Wind Walk
+				npc.doCast(SkillData.getInstance().getSkill(4394, 3)); // Blessed Body
+				npc.doCast(SkillData.getInstance().getSkill(4395, 3)); // Blessed Soul
+				npc.doCast(SkillData.getInstance().getSkill(4401, 2)); // Empower
+				npc.doCast(SkillData.getInstance().getSkill(4400, 2)); // Acumen
+				htmtext = "pccafe_buff_2001.htm";
+			}
+			else
+			{
+				htmtext = "pccafe_notpoint001.htm";
+			}
+		}
+		else if (event.equalsIgnoreCase("warrior55"))
+		{
+			if (player.getPcCafePoints() >= 5600)
+			{
+				player.setPcCafePoints(player.getPcCafePoints() - 5600);
+				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(5600));
+				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -5600, 1, PcCafeType.CONSUME, 12));
+				npc.setTarget(player);
+				npc.doCast(SkillData.getInstance().getSkill(4397, 2)); // Berserker Spirit
+				npc.doCast(SkillData.getInstance().getSkill(4393, 3)); // Might
+				npc.doCast(SkillData.getInstance().getSkill(4392, 3)); // Shield
+				npc.doCast(SkillData.getInstance().getSkill(4391, 2)); // Wind Walk
+				npc.doCast(SkillData.getInstance().getSkill(4404, 3)); // Focus
+				npc.doCast(SkillData.getInstance().getSkill(4405, 3)); // Death Whisper
+				npc.doCast(SkillData.getInstance().getSkill(4403, 3)); // Guidance
+				npc.doCast(SkillData.getInstance().getSkill(4398, 3)); // Bless Shield
+				npc.doCast(SkillData.getInstance().getSkill(4394, 4)); // Blessed Body
+				npc.doCast(SkillData.getInstance().getSkill(4402, 2)); // Haste
+				npc.doCast(SkillData.getInstance().getSkill(4406, 3)); // Agility
+				npc.doCast(SkillData.getInstance().getSkill(4399, 3)); // Vampiric Rage
+				htmtext = "pccafe_buff_3001.htm";
+			}
+			else
+			{
+				htmtext = "pccafe_notpoint001.htm";
+			}
+		}
+		else if (event.equalsIgnoreCase("mage55"))
+		{
+			if (player.getPcCafePoints() >= 3000)
+			{
+				player.setPcCafePoints(player.getPcCafePoints() - 3000);
+				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(3000));
+				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -3000, 1, PcCafeType.CONSUME, 12));
+				npc.setTarget(player);
+				npc.doCast(SkillData.getInstance().getSkill(4397, 2)); // Berserker Spirit
+				npc.doCast(SkillData.getInstance().getSkill(4396, 2)); // Magic Barrier
+				npc.doCast(SkillData.getInstance().getSkill(4392, 3)); // Shield
+				npc.doCast(SkillData.getInstance().getSkill(4391, 2)); // Wind Walk
+				npc.doCast(SkillData.getInstance().getSkill(4394, 4)); // Blessed Body
+				npc.doCast(SkillData.getInstance().getSkill(4395, 4)); // Blessed Soul
+				npc.doCast(SkillData.getInstance().getSkill(4401, 3)); // Empower
+				npc.doCast(SkillData.getInstance().getSkill(4400, 3)); // Acumen
+				htmtext = "pccafe_buff_3001.htm";
+			}
+			else
+			{
+				htmtext = "pccafe_notpoint001.htm";
+			}
+		}
+		else if (POINTSSKILL.containsKey(event)) // TODO: need fix
+		{
+			if (player.getLevel() < 40) // ниже 40-го уровня
+			{
+				if (player.getPcCafePoints() >= POINTSSKILL.get(event)[2])
+				{
+					player.setPcCafePoints(player.getPcCafePoints() - POINTSSKILL.get(event)[2]);
+					SystemMessage smsgpc = SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT);
+					smsgpc.addInt(POINTSSKILL.get(event)[2]);
+					player.sendPacket(smsgpc);
+					player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -POINTSSKILL.get(event)[2], 1, PcCafeType.CONSUME, 12));
+					npc.setTarget(player);
+					npc.doCast(SkillData.getInstance().getSkill(POINTSSKILL.get(event)[0], POINTSSKILL.get(event)[1]));
+					return "pccafe_buff_1002.htm";
+				}
+				htmtext = "pccafe_notpoint001.htm";
+			}
+			else if ((player.getLevel() >= 40) & (player.getLevel() < 54)) // TODO: fix for 40-54 уровня
+			{
+				if (player.getPcCafePoints() >= POINTSSKILL.get(event)[2])
+				{
+					player.setPcCafePoints(player.getPcCafePoints() - POINTSSKILL.get(event)[2]);
+					SystemMessage smsgpc = SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT);
+					smsgpc.addInt(POINTSSKILL.get(event)[2]);
+					player.sendPacket(smsgpc);
+					player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -POINTSSKILL.get(event)[2], 1, PcCafeType.CONSUME, 12));
+					npc.setTarget(player);
+					npc.doCast(SkillData.getInstance().getSkill(POINTSSKILL.get(event)[0], POINTSSKILL.get(event)[1]));
+					return "pccafe_buff_2002.htm";
+				}
+				htmtext = "pccafe_notpoint001.htm";
+			}
+			else if (player.getLevel() >= 55) // выше 55-го уровня
+			{
+				if (player.getPcCafePoints() >= POINTSSKILL.get(event)[2])
+				{
+					player.setPcCafePoints(player.getPcCafePoints() - POINTSSKILL.get(event)[2]);
+					SystemMessage smsgpc = SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT);
+					smsgpc.addInt(POINTSSKILL.get(event)[2]);
+					player.sendPacket(smsgpc);
+					player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -POINTSSKILL.get(event)[2], 1, PcCafeType.CONSUME, 12));
+					npc.setTarget(player);
+					npc.doCast(SkillData.getInstance().getSkill(POINTSSKILL.get(event)[0], POINTSSKILL.get(event)[1]));
+					return "pccafe_buff_3002.htm";
+				}
+				htmtext = "pccafe_notpoint001.htm";
+			}
+			else
+			{
+				htmtext = "pccafe_skill_nolevel.htm";
 			}
 		}
 		else if (event.equalsIgnoreCase("pet_warrior"))
 		{
 			if ((player.getSummon() == null) || !(player.getSummon() instanceof L2ServitorInstance))
 			{
-				htmltext = "pccafe_notsummon.htm";
+				htmtext = "pccafe_notsummon.htm";
 			}
 			else if (player.getPcCafePoints() >= 4000)
 			{
@@ -468,44 +625,18 @@ public class AdventureGuildsman extends AbstractNpcAI
 				npc.doCast(SkillData.getInstance().getSkill(4402, 1));
 				npc.doCast(SkillData.getInstance().getSkill(4406, 2));
 				npc.doCast(SkillData.getInstance().getSkill(4399, 2));
-				htmltext = "pccafe_pet_skill_info.htm";
+				htmtext = "pccafe_summon_newbuff_001.htm";
 			}
 			else
 			{
-				htmltext = "pccafe_notpoint001.htm";
-			}
-		}
-		else if (event.equalsIgnoreCase("mage"))
-		{
-			if (player.getLevel() < 40)
-			{
-				htmltext = "pccafe_skill_nolevel.htm";
-			}
-			else if (player.getPcCafePoints() >= 1600)
-			{
-				player.setPcCafePoints(player.getPcCafePoints() - 1600);
-				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(3000));
-				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -1600, 1, PcCafeType.CONSUME, 12));
-				npc.setTarget(player);
-				npc.doCast(SkillData.getInstance().getSkill(4397, 1));
-				npc.doCast(SkillData.getInstance().getSkill(4396, 1));
-				npc.doCast(SkillData.getInstance().getSkill(4392, 1));
-				npc.doCast(SkillData.getInstance().getSkill(4391, 1));
-				npc.doCast(SkillData.getInstance().getSkill(4395, 1));
-				npc.doCast(SkillData.getInstance().getSkill(4401, 1));
-				npc.doCast(SkillData.getInstance().getSkill(4400, 1));
-				htmltext = "pccafe_buff_1001.htm";
-			}
-			else
-			{
-				htmltext = "pccafe_notpoint001.htm";
+				htmtext = "pccafe_notpoint001.htm";
 			}
 		}
 		else if (event.equalsIgnoreCase("pet_mage"))
 		{
 			if ((player.getSummon() == null) || !(player.getSummon() instanceof L2ServitorInstance))
 			{
-				htmltext = "pccafe_notsummon.htm";
+				htmtext = "pccafe_notsummon.htm";
 			}
 			else if (player.getPcCafePoints() >= 2100)
 			{
@@ -520,11 +651,33 @@ public class AdventureGuildsman extends AbstractNpcAI
 				npc.doCast(SkillData.getInstance().getSkill(4395, 3));
 				npc.doCast(SkillData.getInstance().getSkill(4401, 2));
 				npc.doCast(SkillData.getInstance().getSkill(4400, 2));
-				htmltext = "pccafe_pet_skill_info.htm";
+				htmtext = "pccafe_summon_newbuff_001.htm";
 			}
 			else
 			{
-				htmltext = "pccafe_notpoint001.htm";
+				htmtext = "pccafe_notpoint001.htm";
+			}
+		}
+		else if (PETSKILL.containsKey(event))
+		{
+			if ((player.getSummon() == null) || !(player.getSummon() instanceof L2ServitorInstance))
+			{
+				htmtext = "pccafe_notsummon.htm";
+			}
+			else if (player.getPcCafePoints() >= PETSKILL.get(event)[2])
+			{
+				player.setPcCafePoints(player.getPcCafePoints() - PETSKILL.get(event)[2]);
+				SystemMessage smsgpc = SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT);
+				smsgpc.addInt(PETSKILL.get(event)[2]);
+				player.sendPacket(smsgpc);
+				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -PETSKILL.get(event)[2], 1, PcCafeType.CONSUME, 12));
+				npc.setTarget(player.getSummon());
+				npc.doCast(SkillData.getInstance().getSkill(PETSKILL.get(event)[0], PETSKILL.get(event)[1]));
+				return "pccafe_summon_newbuff_002.htm";
+			}
+			else
+			{
+				htmtext = "pccafe_notpoint001.htm";
 			}
 		}
 		else if (event.equalsIgnoreCase("wyvern"))
@@ -540,19 +693,19 @@ public class AdventureGuildsman extends AbstractNpcAI
 				player.untransform();
 			}
 			
-			if (player.getPcCafePoints() >= 2500)
+			if (player.getPcCafePoints() >= PcCafeConfig.ALT_PC_BANG_WIVERN_PRICE)
 			{
-				player.setPcCafePoints(player.getPcCafePoints() - 2500);
-				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(2500));
-				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -2500, 1, PcCafeType.CONSUME, 12));
+				player.setPcCafePoints(player.getPcCafePoints() - PcCafeConfig.ALT_PC_BANG_WIVERN_PRICE);
+				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(PcCafeConfig.ALT_PC_BANG_WIVERN_PRICE));
+				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -PcCafeConfig.ALT_PC_BANG_WIVERN_PRICE, 1, PcCafeType.CONSUME, 12));
 				player.dismount();
 				player.mount(12621, 0, true);
 				player.addSkill(CommonSkill.WYVERN_BREATH.getSkill());
 				return null;
 			}
-			htmltext = "pccafe_notpoint001.htm";
+			htmtext = "pccafe_notpoint001.htm";
 		}
-		return htmltext;
+		return htmtext;
 	}
 	
 	private String tradeItem(L2PcInstance player, int itemId, int points)

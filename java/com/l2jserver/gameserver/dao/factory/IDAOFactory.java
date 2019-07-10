@@ -24,6 +24,7 @@ import com.l2jserver.gameserver.dao.HennaDAO;
 import com.l2jserver.gameserver.dao.ItemDAO;
 import com.l2jserver.gameserver.dao.ItemMallDAO;
 import com.l2jserver.gameserver.dao.ItemReuseDAO;
+import com.l2jserver.gameserver.dao.PcCafeDAO;
 import com.l2jserver.gameserver.dao.PetDAO;
 import com.l2jserver.gameserver.dao.PetSkillSaveDAO;
 import com.l2jserver.gameserver.dao.PlayerDAO;
@@ -56,6 +57,8 @@ public interface IDAOFactory
 	ItemMallDAO getItemMallDAO();
 	
 	ItemReuseDAO getItemReuseDAO();
+	
+	PcCafeDAO getPcCafeDAO();
 	
 	PetDAO getPetDAO();
 	

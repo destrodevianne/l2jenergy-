@@ -18,6 +18,8 @@
  */
 package com.l2jserver.gameserver.configuration.config;
 
+import java.util.regex.Pattern;
+
 import com.l2jserver.commons.configuration.annotations.Configuration;
 import com.l2jserver.commons.configuration.annotations.Setting;
 
@@ -50,4 +52,36 @@ public class PcCafeConfig
 	
 	@Setting(name = "AltPcBangDailyBonusPoints")
 	public static int ALT_PCBANG_DIALY_BONUS_POINTS;
+	
+	@Setting(name = "AltPcBangPointsMaxEnterAttempts")
+	public static int ALT_PCBANG_POINTS_MAX_CODE_ENTER_ATTEMPTS;
+	
+	@Setting(name = "AltPcBangPointsBanTime")
+	public static long ALT_PCBANG_POINTS_BAN_TIME;
+	
+	@Setting(name = "AltPcBangPointsCouponTemplate", method = "patternPcBangPointsCoupon")
+	public static Pattern ALT_PCBANG_POINTS_COUPON_TEMPLATE;
+	
+	@Setting(name = "AltPcBangPointToItemMall")
+	public static boolean PC_BANG_TO_ITEMMALL;
+	
+	@Setting(name = "AltPcBangPointToItemMallRate")
+	public static int PC_BANG_TO_ITEMMALL_RATE;
+	
+	@Setting(name = "AltPcBangEnchantMaxLevel")
+	public static int PC_BANG_ENCHANT_MAX;
+	
+	@Setting(name = "AltPcBangEnchantSafeLevel")
+	public static int PC_BANG_SAFE_ENCHANT;
+	
+	@Setting(name = "AltPcBangWiwernRentPrice")
+	public static int ALT_PC_BANG_WIVERN_PRICE;
+	
+	@Setting(name = "AltPcBangWiwernRentTime")
+	public static int ALT_PC_BANG_WIVERN_TIME;
+	
+	public void patternPcBangPointsCoupon(final String value)
+	{
+		ALT_PCBANG_POINTS_COUPON_TEMPLATE = Pattern.compile(value);
+	}
 }

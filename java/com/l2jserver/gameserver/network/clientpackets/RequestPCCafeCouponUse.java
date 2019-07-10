@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -18,25 +18,34 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
+import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
+import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+
 /**
  * Format: (ch) S
- * @author -Wooden- TODO: GodKratos: This packet is wrong in Gracia Final!!
+ * @author -Wooden-, Мо3олЬ
  */
 public final class RequestPCCafeCouponUse extends L2GameClientPacket
 {
 	private static final String _C__D0_19_REQUESTPCCAFECOUPONUSE = "[C] D0:19 RequestPCCafeCouponUse";
-	private String _str;
+	
+	private String _couponCode;
 	
 	@Override
 	protected void readImpl()
 	{
-		_str = readS();
+		_couponCode = readS();
 	}
 	
 	@Override
 	protected void runImpl()
 	{
-		LOG.info("C5: RequestPCCafeCouponUse: S: {}", _str);
+		L2PcInstance player = getClient().getActiveChar();
+		if (player == null)
+		{
+			return;
+		}
+		DAOFactory.getInstance().getPcCafeDAO().requestEnterCode(player, _couponCode);
 	}
 	
 	@Override
