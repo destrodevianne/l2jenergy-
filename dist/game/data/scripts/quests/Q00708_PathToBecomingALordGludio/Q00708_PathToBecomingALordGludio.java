@@ -18,13 +18,10 @@
  */
 package quests.Q00708_PathToBecomingALordGludio;
 
-import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.FortManager;
-import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.entity.Castle;
 import com.l2jserver.gameserver.model.entity.Fort;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
@@ -32,37 +29,49 @@ import com.l2jserver.gameserver.model.quest.State;
 import com.l2jserver.gameserver.network.NpcStringId;
 import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
+import com.l2jserver.gameserver.util.Util;
 
+/**
+ * Path to Becoming a Lord - Gludio (708)
+ * @author Pandragon
+ */
 public class Q00708_PathToBecomingALordGludio extends Quest
 {
-	private static final int Sayres = 35100;
-	private static final int Pinter = 30298;
-	private static final int Bathis = 30332;
-	private static final int HeadlessKnight = 20280;
+	// NPCs
+	private static final int SAYRES = 35100;
+	private static final int PINTER = 30298;
+	private static final int BATHIS = 30332;
 	
-	private static final int HeadlessKnightsArmor = 13848;
+	// Items
+	private static final int HEADLESS_ARMOR = 13848;
+	private static final int VARNISH = 1865;
+	private static final int ANIMAL_SKIN = 1867;
+	private static final int IRON_ORE = 1869;
+	private static final int COKES = 1879;
 	
-	private static final int[] Mobs =
+	// Monsters
+	private static final int HEADLESS_KNIGHT = 27393;
+	
+	private static final int[] MOBS =
 	{
-		20045,
-		20051,
-		20099,
-		HeadlessKnight
+		20045, // Skeleton Scout
+		20051, // Skeleton Bowman
+		20099, // Skeleton
+		HEADLESS_KNIGHT
 	};
 	
-	private static final int GludioCastle = 1;
+	private static final int GLUDIO_CASTLE = 1;
 	
 	public Q00708_PathToBecomingALordGludio()
 	{
 		super(708, Q00708_PathToBecomingALordGludio.class.getSimpleName(), "Path To Becoming A Lord Gludio");
-		addStartNpc(Sayres);
-		addTalkId(Sayres);
-		addTalkId(Pinter);
-		addTalkId(Bathis);
-		addKillId(Mobs);
+		addStartNpc(SAYRES);
+		addKillId(MOBS);
+		addTalkId(SAYRES, PINTER, BATHIS);
+		
 		_questItemIds = new int[]
 		{
-			HeadlessKnightsArmor
+			HEADLESS_ARMOR
 		};
 	}
 	
@@ -70,210 +79,119 @@ public class Q00708_PathToBecomingALordGludio extends Quest
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
 		String htmltext = event;
+		
 		final QuestState qs = player.getQuestState(getName());
+		if (qs == null)
+		{
+			return htmltext;
+		}
 		
-		final Castle castle = CastleManager.getInstance().getCastleById(GludioCastle);
-		if (castle.getOwner() == null)
+		switch (event)
 		{
-			return "Castle has no lord";
-		}
-		final L2PcInstance castleOwner = castle.getOwner().getLeader().getPlayerInstance();
-		if (event.equals("sayres_q708_03.htm"))
-		{
-			qs.startQuest();
-		}
-		else if (event.equals("sayres_q708_05.htm"))
-		{
-			qs.setCond(2);
-		}
-		else if (event.equals("sayres_q708_08.htm"))
-		{
-			if (isLordAvailable(2, qs))
+			case "35100-02.htm":
+			case "30298-04.html":
 			{
-				castleOwner.getQuestState(getName()).set("confidant", String.valueOf(qs.getPlayer().getObjectId()));
-				castleOwner.getQuestState(getName()).setCond(3);
-				qs.setState(State.STARTED);
+				htmltext = event;
+				break;
 			}
-			else
+			case "35100-04.html":
 			{
-				htmltext = "sayres_q708_05a.htm";
-			}
-		}
-		else if (event.equals("pinter_q708_03.htm"))
-		{
-			if (isLordAvailable(3, qs))
-			{
-				castleOwner.getQuestState(getName()).setCond(4);
-			}
-			else
-			{
-				htmltext = "pinter_q708_03a.htm";
-			}
-		}
-		else if (event.equals("bathis_q708_02.htm"))
-		{
-			qs.setCond(6);
-		}
-		else if (event.equals("bathis_q708_05.htm"))
-		{
-			takeItems(player, HeadlessKnightsArmor, 1);
-			qs.setCond(8);
-			npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_SHOUT, npc.getId(), NpcStringId.LISTEN_YOU_VILLAGERS_OUR_LIEGE_WHO_WILL_SOON_BECOME_A_LORD_HAS_DEFEATED_THE_HEADLESS_KNIGHT_YOU_CAN_NOW_REST_EASY));
-		}
-		else if (event.equals("pinter_q708_05.htm"))
-		{
-			if (isLordAvailable(8, qs))
-			{
-				takeItems(player, 1867, 100);
-				takeItems(player, 1865, 100);
-				takeItems(player, 1869, 100);
-				takeItems(player, 1879, 50);
-				castleOwner.getQuestState(getName()).setCond(9);
-			}
-			else
-			{
-				htmltext = "pinter_q708_03a.htm";
-			}
-		}
-		else if (event.equals("sayres_q708_12.htm"))
-		{
-			if (castleOwner != null)
-			{
-				final NpcSay packet = new NpcSay(npc.getObjectId(), Say2.NPC_SHOUT, npc.getId(), NpcStringId.S1_HAS_BECOME_LORD_OF_THE_TOWN_OF_GLUDIO_LONG_MAY_HE_REIGN);
-				packet.addStringParameter(player.getName());
-				npc.broadcastPacket(packet);
-				
-				/**
-				 * Territory terr = TerritoryWarManager.getInstance().getTerritory(castle.getId()); terr.setLordId(castleOwner.getObjectId()); terr.updateDataInDB(); terr.updateState();
-				 */
-				
-				qs.exitQuest(true, true);
-			}
-		}
-		return htmltext;
-	}
-	
-	@Override
-	public String onTalk(L2Npc npc, L2PcInstance player)
-	{
-		final QuestState qs = getQuestState(player, true);
-		String htmltext = getNoQuestMsg(player);
-		final Castle castle = CastleManager.getInstance().getCastleById(GludioCastle);
-		if (castle.getOwner() == null)
-		{
-			return "Castle has no lord";
-		}
-		final L2PcInstance castleOwner = castle.getOwner().getLeader().getPlayerInstance();
-		
-		switch (npc.getId())
-		{
-			case Sayres:
-			{
-				if (qs.isCond(0))
+				if (qs.isCreated())
 				{
-					if (castleOwner == qs.getPlayer())
-					{
-						if (!hasFort())
-						{
-							htmltext = "sayres_q708_01.htm";
-						}
-						else
-						{
-							htmltext = "sayres_q708_00.htm";
-							qs.exitQuest(true);
-						}
-					}
-					else if (isLordAvailable(2, qs))
-					{
-						if (castleOwner.calculateDistance(npc, false, false) <= 200)
-						{
-							htmltext = "sayres_q708_07.htm";
-						}
-						else
-						{
-							htmltext = "sayres_q708_05a.htm";
-						}
-					}
-					else if (qs.getState() == State.STARTED)
-					{
-						htmltext = "sayres_q708_08a.htm";
-					}
-					else
-					{
-						htmltext = "sayres_q708_00a.htm";
-						qs.exitQuest(true);
-					}
-				}
-				else if (qs.isCond(1))
-				{
-					htmltext = "sayres_q708_04.htm";
-				}
-				else if (qs.isCond(2))
-				{
-					htmltext = "sayres_q708_06.htm";
-				}
-				else if (qs.isCond(4))
-				{
-					qs.set("cond", "5");
-					htmltext = "sayres_q708_09.htm";
-				}
-				else if (qs.isCond(5))
-				{
-					htmltext = "sayres_q708_10.htm";
-				}
-				else if ((qs.getCond() > 5) && (qs.getCond() < 9))
-				{
-					htmltext = "sayres_q708_08.htm";
-				}
-				else if (qs.isCond(9))
-				{
-					htmltext = "sayres_q708_11.htm";
+					qs.startQuest();
+					htmltext = event;
 				}
 				break;
 			}
-			case Pinter:
+			case "35100-08.html":
 			{
-				if ((qs.getState() == State.STARTED) && qs.isCond(0) && isLordAvailable(3, qs))
+				if (qs.isCond(1))
 				{
-					if (castleOwner.getQuestState(getName()).getInt("confidant") == qs.getPlayer().getObjectId())
-					{
-						htmltext = "pinter_q708_01.htm";
-					}
-				}
-				else if ((qs.getState() == State.STARTED) && qs.isCond(0) && isLordAvailable(8, qs))
-				{
-					if ((getQuestItemsCount(player, 1867) >= 100) && (getQuestItemsCount(player, 1865) >= 100) && (getQuestItemsCount(player, 1869) >= 100) && (getQuestItemsCount(player, 1879) >= 50))
-					{
-						htmltext = "pinter_q708_04.htm";
-					}
-					else
-					{
-						htmltext = "pinter_q708_04a.htm";
-					}
-				}
-				else if ((qs.getState() == State.STARTED) && qs.isCond(0) && isLordAvailable(9, qs))
-				{
-					htmltext = "pinter_q708_06.htm";
+					qs.setCond(2);
+					htmltext = event;
 				}
 				break;
 			}
-			case Bathis:
+			case "35100-12.html":
+			{
+				final QuestState qs0 = getQuestState(player.getClan().getLeader().getPlayerInstance(), false);
+				if (qs0.isCond(2))
+				{
+					qs0.set("clanmember", player.getId());
+					qs0.setCond(3);
+					// htmltext = event; // TODO: %name%, your mission is to help
+					htmltext = event.replace("%name%", player.getName());
+				}
+				break;
+			}
+			case "30298-05.html":
+			{
+				final QuestState qs0 = getQuestState(player.getClan().getLeader().getPlayerInstance(), false);
+				if (qs0.isCond(3))
+				{
+					qs0.setCond(4);
+					htmltext = event;
+				}
+				break;
+			}
+			case "30298-09.html":
+			{
+				final QuestState qs0 = getQuestState(player.getClan().getLeader().getPlayerInstance(), false);
+				if (qs0.isCond(4) && (getQuestItemsCount(player, VARNISH) >= 100) && (getQuestItemsCount(player, ANIMAL_SKIN) >= 100) && (getQuestItemsCount(player, IRON_ORE) >= 100) && (getQuestItemsCount(player, COKES) >= 50))
+				{
+					qs0.setCond(5);
+					htmltext = event;
+				}
+				break;
+			}
+			case "30332-02.html":
 			{
 				if (qs.isCond(5))
 				{
-					htmltext = "bathis_q708_01.htm";
+					qs.setCond(6);
+					htmltext = event;
 				}
-				else if (qs.isCond(6))
+				break;
+			}
+			case "30332-05.html":
+			{
+				if (qs.isCond(7) && (getQuestItemsCount(player, HEADLESS_ARMOR) >= 1))
 				{
-					htmltext = "bathis_q708_03.htm";
+					takeItems(player, HEADLESS_ARMOR, -1);
+					npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_SHOUT, npc.getId(), NpcStringId.LISTEN_YOU_VILLAGERS_OUR_LIEGE_WHO_WILL_SOON_BECOME_A_LORD_HAS_DEFEATED_THE_HEADLESS_KNIGHT_YOU_CAN_NOW_REST_EASY));
+					qs.setCond(9);
+					htmltext = event;
 				}
-				else if (qs.isCond(7))
+				break;
+			}
+			case "35100-23.html":
+			{
+				if (qs.isCond(9))
 				{
-					htmltext = "bathis_q708_04.htm";
-				}
-				else if (qs.isCond(8))
-				{
-					htmltext = "sophia_q709_06.htm";
+					if (CastleManager.getInstance().getCastleById(GLUDIO_CASTLE).getSiege().isInProgress())
+					{
+						return "35100-22а.html";
+					}
+					
+					for (Fort fort : FortManager.getInstance().getForts())
+					{
+						if (!fort.isBorderFortress() && fort.getSiege().isInProgress())
+						{
+							return "35100-22а.html";
+						}
+						else if (!fort.isBorderFortress() && (fort.getContractedCastleId() != GLUDIO_CASTLE))
+						{
+							return "35100-22b.html";
+						}
+					}
+					
+					// DeclareLord(gludio_dominion, player);
+					CastleManager.getInstance().getCastleById(GLUDIO_CASTLE).setShowNpcCrest(true);
+					NpcSay packet = new NpcSay(npc.getObjectId(), Say2.NPC_SHOUT, npc.getId(), NpcStringId.S1_HAS_BECOME_LORD_OF_THE_TOWN_OF_GLUDIO_LONG_MAY_HE_REIGN);
+					packet.addStringParameter(player.getName());
+					npc.broadcastPacket(packet);
+					qs.exitQuest(false, true);
+					htmltext = event;
 				}
 				break;
 			}
@@ -282,49 +200,216 @@ public class Q00708_PathToBecomingALordGludio extends Quest
 	}
 	
 	@Override
-	public final String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
+	public String onTalk(L2Npc npc, L2PcInstance talker)
+	{
+		final QuestState qs = getQuestState(talker, true);
+		String htmltext = getNoQuestMsg(talker);
+		
+		if ((talker.getClan() == null) || (talker.getClan().getLeaderId() != CastleManager.getInstance().getCastleById(GLUDIO_CASTLE).getOwnerId()))
+		{
+			return htmltext;
+		}
+		
+		switch (npc.getId())
+		{
+			case SAYRES:
+			{
+				switch (qs.getState())
+				{
+					case State.CREATED:
+					{
+						final L2PcInstance leader = talker.getClan().getLeader().getPlayerInstance();
+						
+						if (qs.getPlayer() != leader)
+						{
+							final QuestState qs0 = getQuestState(leader, false);
+							if (qs0.isCond(2))
+							{
+								if (Util.checkIfInRange(1500, talker, leader, true) && leader.isOnline())
+								{
+									htmltext = "35100-11.html";
+								}
+								else
+								{
+									htmltext = "35100-10.html";
+								}
+							}
+							else if (qs0.isCond(3))
+							{
+								htmltext = "35100-13а.html";
+							}
+							else
+							{
+								htmltext = "35100-09.html";
+							}
+						}
+						else
+						{
+							htmltext = "35100-01.htm";
+						}
+						break;
+					}
+					case State.STARTED:
+					{
+						switch (qs.getCond())
+						{
+							case 1:
+							{
+								htmltext = "35100-06.html";
+								break;
+							}
+							case 2:
+							{
+								htmltext = "35100-14.html";
+								break;
+							}
+							case 3:
+							{
+								htmltext = "35100-15.html";
+								break;
+							}
+							case 4:
+							{
+								htmltext = "35100-16.html";
+								break;
+							}
+							case 5:
+							{
+								htmltext = "35100-18.html";
+								break;
+							}
+							case 6:
+							{
+								htmltext = "35100-19.html";
+								break;
+							}
+							case 7:
+							{
+								htmltext = "35100-20.html";
+								break;
+							}
+							case 8:
+							{
+								htmltext = "35100-21.html";
+								break;
+							}
+							case 9:
+							{
+								htmltext = "35100-22.html";
+								break;
+							}
+						}
+					}
+					case State.COMPLETED:
+					{
+						htmltext = getAlreadyCompletedMsg(talker);
+						break;
+					}
+				}
+				break;
+			}
+			case PINTER:
+			{
+				final L2PcInstance leader = talker.getClan().getLeader().getPlayerInstance();
+				
+				if (qs.getPlayer() != leader)
+				{
+					final QuestState qs0 = getQuestState(leader, false);
+					if (leader.isOnline())
+					{
+						if (talker.getId() == qs0.getInt("clanmember"))
+						{
+							switch (qs0.getCond())
+							{
+								case 3:
+								{
+									htmltext = "30298-03.html";
+									break;
+								}
+								case 4:
+								{
+									if ((getQuestItemsCount(talker, VARNISH) >= 100) && (getQuestItemsCount(talker, ANIMAL_SKIN) >= 100) && (getQuestItemsCount(talker, IRON_ORE) >= 100) && (getQuestItemsCount(talker, COKES) >= 50))
+									{
+										htmltext = "30298-08.html";
+									}
+									else
+									{
+										htmltext = "30298-07.html";
+									}
+									break;
+								}
+								case 5:
+								{
+									htmltext = "30298-12.html";
+									break;
+								}
+							}
+							
+						}
+						else
+						{
+							htmltext = "30298-03a.html";
+						}
+					}
+					else
+					{
+						htmltext = "30298-01.html";
+					}
+				}
+				break;
+			}
+			case BATHIS:
+			{
+				switch (qs.getCond())
+				{
+					case 5:
+					{
+						htmltext = "30332-01.html";
+						break;
+					}
+					case 6:
+					{
+						htmltext = "30332-03.html";
+						break;
+					}
+					case 7:
+					{
+						if (getQuestItemsCount(talker, HEADLESS_ARMOR) >= 1)
+						{
+							htmltext = "30332-04.html";
+						}
+						break;
+					}
+					case 9:
+					{
+						htmltext = "30332-06.html";
+						break;
+					}
+				}
+				break;
+			}
+		}
+		return htmltext;
+	}
+	
+	@Override
+	public final String onKill(L2Npc npc, L2PcInstance killer, boolean isSummon)
 	{
 		final QuestState qs = killer.getQuestState(getName());
 		
 		if ((qs != null) && qs.isCond(6))
 		{
-			if ((npc.getId() != HeadlessKnight) && (Rnd.get(9) == 0))
+			if (npc.getId() == HEADLESS_KNIGHT)
 			{
-				addSpawn(HeadlessKnight, npc, true, 300000);
-			}
-			else if (npc.getId() == HeadlessKnight)
-			{
-				giveItems(killer, HeadlessKnightsArmor, 1);
+				npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.DOES_MY_MISSION_TO_BLOCK_THE_SUPPLIES_END_HERE));
+				giveItems(killer, HEADLESS_ARMOR, 1);
 				qs.setCond(7);
 			}
-		}
-		return null;
-	}
-	
-	private boolean isLordAvailable(int cond, QuestState qs)
-	{
-		final Castle castle = CastleManager.getInstance().getCastleById(GludioCastle);
-		final L2Clan owner = castle.getOwner();
-		final L2PcInstance castleOwner = castle.getOwner().getLeader().getPlayerInstance();
-		if (owner != null)
-		{
-			if ((castleOwner != null) && (castleOwner != qs.getPlayer()) && (owner == qs.getPlayer().getClan()) && (castleOwner.getQuestState(getName()) != null) && castleOwner.getQuestState(getName()).isCond(cond))
+			else if (getRandom(100) < 10)
 			{
-				return true;
+				addSpawn(HEADLESS_KNIGHT, npc, false, 100000);
 			}
 		}
-		return false;
-	}
-	
-	private boolean hasFort()
-	{
-		for (Fort fortress : FortManager.getInstance().getForts())
-		{
-			if (fortress.getContractedCastleId() == GludioCastle)
-			{
-				return true;
-			}
-		}
-		return false;
+		return super.onKill(npc, killer, isSummon);
 	}
 }
