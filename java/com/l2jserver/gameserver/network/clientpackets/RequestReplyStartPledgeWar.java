@@ -56,7 +56,7 @@ public final class RequestReplyStartPledgeWar extends L2GameClientPacket
 		
 		if (_answer == 1)
 		{
-			ClanTable.getInstance().storeclanswars(requestor.getClanId(), activeChar.getClanId());
+			ClanTable.getInstance().storeClanWars(requestor.getClanId(), activeChar.getClanId());
 		}
 		else
 		{
