@@ -49,6 +49,10 @@
 		<set name="icon" val="icon.etc_pi_gift_box_i04" />
 		<set name="material" val="COTTON" />
 		<set name="is_stackable" val="true" />
+		<set name="default_action" val="PEEL" />
+		<set name="handler" val="ExtractableItems" />
+		<set name="immediate_effect" val="true" />
+		<set name="capsuled_items" val="4342,1,1,16.6666;4343,1,1,16.6666;4344,1,1,16.6666;4345,1,1,16.6666;4346,1,1,16.6666;9557,1,1,16.6666"/>
 	</item>
 	<item id="22206" type="EtcItem" name="Soul Crystal - Stage 17 Box - Event">
 		<!-- Description: Box containing a Soul Crystal - Step 17. Which one could it be? -->
