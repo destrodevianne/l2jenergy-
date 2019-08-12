@@ -689,8 +689,21 @@
 	</skill>
 	<skill id="22251" levels="1" name="Honey Rice Cakes">
 		<!-- none -->
-		<set name="operateType" val="P" />
-		<set name="targetType" val="NONE" />
+		<set name="icon" val="BranchSys.icon.br_taiwan_newyear_food_c_i00" />
+		<set name="blockedInOlympiad" val="true" />
+		<set name="isMagic" val="2" /> <!-- Static Skill -->
+		<set name="itemConsumeCount" val="1" />
+		<set name="itemConsumeId" val="21704" />
+		<set name="magicLvl" val="1" />
+		<set name="operateType" val="A1" />
+		<set name="reuseDelay" val="300000" />
+		<set name="rideState" val="NONE;STRIDER;WYVERN;WOLF" />
+		<set name="targetType" val="SELF" />
+		<effects>
+			<effect name="MaxMp">
+				<param power="50" />
+			</effect>
+		</effects>
 	</skill>
 	<skill id="22252" levels="1" name="Energy Replenishing Beverage">
 		<!-- none -->
