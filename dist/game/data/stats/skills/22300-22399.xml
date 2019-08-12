@@ -322,25 +322,87 @@
 	</skill>
 	<skill id="22355" levels="1" name="Soul Crystal Box - Level 17">
 		<!-- Desciption: There is no available description. -->
-		<set name="blockedInOlympiad" val="true" />
-		<set name="operateType" val="P" />
-		<set name="targetType" val="NONE" />
+		<table name="#extractableItems">15541,1,33.0;15542,1,33.0;15543,1,34.0</table>
+        <set name="capsuled_items_skill" val="#extractableItems" />
+        <set name="itemConsumeCount" val="1" />
+        <set name="itemConsumeId" val="22206" />
+        <set name="blockedInOlympiad" val="true" />
+        <set name="isMagic" val="2" />
+        <set name="operateType" val="A1" />
+        <set name="rideState" val="NONE;STRIDER;WYVERN;WOLF" />
+        <set name="targetType" val="SELF" />
+        <cond msgId="129">
+            <and>
+                <player invSize="10" />
+                <player weight="80" />
+            </and>
+        </cond>
+        <effects>
+            <effect name="RestorationRandom" />
+        </effects>
 	</skill>
 	<skill id="22356" levels="1" name="Soul Crystal Box - Level 18">
 		<!-- Desciption: There is no available description. -->
-		<set name="blockedInOlympiad" val="true" />
-		<set name="operateType" val="P" />
-		<set name="targetType" val="NONE" />
+		 <table name="#extractableItems">15826,1,33.0;15827,1,33.0;15828,1,34.0</table>
+        <set name="capsuled_items_skill" val="#extractableItems" />
+        <set name="itemConsumeCount" val="1" />
+        <set name="itemConsumeId" val="22207" />
+        <set name="blockedInOlympiad" val="true" />
+        <set name="isMagic" val="2" />
+        <set name="operateType" val="A1" />
+        <set name="rideState" val="NONE;STRIDER;WYVERN;WOLF" />
+        <set name="targetType" val="SELF" />
+        <cond msgId="129">
+            <and>
+                <player invSize="10" />
+                <player weight="80" />
+            </and>
+        </cond>
+        <effects>
+            <effect name="RestorationRandom" />
+        </effects>
 	</skill>
 	<skill id="22357" levels="1" name="S84 High-Grade Weapon Box">
 		<!-- Desciption: There is no available description. -->
-		<set name="operateType" val="P" />
-		<set name="targetType" val="NONE" />
+		<table name="#extractableItems">15558,1,7.1429;15559,1,7.15560;15561,1,7.1429;15562,1,7.1429;15563,1,7.1429;15564,1,7.1429;15565,1,7.1429;15566,1,7.1429;15567,1,7.1429;15568,1,7.1429;15569,1,7.1429;15570,1,7.1429;15571,1,7.1429</table>
+        <set name="capsuled_items_skill" val="#extractableItems" />
+        <set name="itemConsumeCount" val="1" />
+        <set name="itemConsumeId" val="22202" />
+        <set name="blockedInOlympiad" val="true" />
+        <set name="isMagic" val="2" />
+        <set name="operateType" val="A1" />
+        <set name="rideState" val="NONE;STRIDER;WYVERN;WOLF" />
+        <set name="targetType" val="SELF" />
+        <cond msgId="129">
+            <and>
+                <player invSize="10" />
+                <player weight="80" />
+            </and>
+        </cond>
+        <effects>
+            <effect name="RestorationRandom" />
+        </effects>
 	</skill>
 	<skill id="22358" levels="1" name="Vorpal Armor Box">
 		<!-- Desciption: There is no available description. -->
-		<set name="operateType" val="P" />
-		<set name="targetType" val="NONE" />
+		 <table name="#extractableItems">15743,1,5.8824;15744,1,5.8824;15745,1,5.8824;15746,1,5.8824;15747,1,5.8824;15748,1,5.8824;15749,1,5.8824;15750,1,5.8824;15751,1,5.8824;15752,1,5.8824;15753,1,5.8824;15754,1,5.8824;15755,1,5.8824;15756,1,5.8824;15757,1,5.8824;15758,1,5.8824;15759,1,5.8824</table>
+        <set name="capsuled_items_skill" val="#extractableItems" />
+        <set name="itemConsumeCount" val="1" />
+        <set name="itemConsumeId" val="22203" />
+        <set name="blockedInOlympiad" val="true" />
+        <set name="isMagic" val="2" />
+        <set name="operateType" val="A1" />
+        <set name="rideState" val="NONE;STRIDER;WYVERN;WOLF" />
+        <set name="targetType" val="SELF" />
+        <cond msgId="129">
+            <and>
+                <player invSize="10" />
+                <player weight="80" />
+            </and>
+        </cond>
+        <effects>
+            <effect name="RestorationRandom" />
+        </effects>
 	</skill>
 	<skill id="22359" levels="1" name="Scroll: Enchant Weapon of Destruction (S-Grade)">
 		<!-- Desciption: There is no available description. -->
@@ -444,18 +506,66 @@
 	</skill>
 	<skill id="22377" levels="1" name="Bad Bunny's Necklace Box">
 		<!-- Desciption: There is no available description. -->
-		<set name="operateType" val="P" />
-		<set name="targetType" val="NONE" />
+		<table name="#extractableItems">22211,1,70.0;22214,1,30.0</table>
+		<set name="capsuled_items_skill" val="#extractableItems" />
+        <set name="itemConsumeCount" val="1" />
+        <set name="itemConsumeId" val="22208" />
+        <set name="blockedInOlympiad" val="true" />
+        <set name="isMagic" val="2" />
+        <set name="operateType" val="A1" />
+        <set name="rideState" val="NONE;STRIDER;WYVERN;WOLF" />
+        <set name="targetType" val="SELF" />
+        <cond msgId="129">
+            <and>
+                <player invSize="10" />
+                <player weight="80" />
+            </and>
+        </cond>
+        <effects>
+            <effect name="RestorationRandom" />
+        </effects>
 	</skill>
 	<skill id="22378" levels="1" name="Bad Bunny's Earring Box">
 		<!-- Desciption: There is no available description. -->
-		<set name="operateType" val="P" />
-		<set name="targetType" val="NONE" />
+		<table name="#extractableItems">22212,1,70.0;22215,1,30.0</table>
+		<set name="capsuled_items_skill" val="#extractableItems" />
+        <set name="itemConsumeCount" val="1" />
+        <set name="itemConsumeId" val="22209" />
+        <set name="blockedInOlympiad" val="true" />
+        <set name="isMagic" val="2" />
+        <set name="operateType" val="A1" />
+        <set name="rideState" val="NONE;STRIDER;WYVERN;WOLF" />
+        <set name="targetType" val="SELF" />
+        <cond msgId="129">
+            <and>
+                <player invSize="10" />
+                <player weight="80" />
+            </and>
+        </cond>
+        <effects>
+            <effect name="RestorationRandom" />
+        </effects>
 	</skill>
 	<skill id="22379" levels="1" name="Bad Bunny's Ring Box">
 		<!-- Desciption: There is no available description. -->
-		<set name="operateType" val="P" />
-		<set name="targetType" val="NONE" />
+		<table name="#extractableItems">22213,1,70.0;22216,1,30.0</table>
+		<set name="capsuled_items_skill" val="#extractableItems" />
+        <set name="itemConsumeCount" val="1" />
+        <set name="itemConsumeId" val="22210" />
+        <set name="blockedInOlympiad" val="true" />
+        <set name="isMagic" val="2" />
+        <set name="operateType" val="A1" />
+        <set name="rideState" val="NONE;STRIDER;WYVERN;WOLF" />
+        <set name="targetType" val="SELF" />
+        <cond msgId="129">
+            <and>
+                <player invSize="10" />
+                <player weight="80" />
+            </and>
+        </cond>
+        <effects>
+            <effect name="RestorationRandom" />
+        </effects>
 	</skill>
 	<skill id="22380" levels="1" name="Lantern Agathion's Gift Set">
 		<!-- Desciption: There is no available description. -->
