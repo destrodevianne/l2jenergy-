@@ -394,8 +394,10 @@
 	<item id="15426" type="EtcItem" name="Hero's Summon Point - Event">
 		<set name="icon" val="icon.etc_pccafe_point_i00" />
 		<set name="default_action" val="SKILL_REDUCE" />
+		<set name="immediate_effect" val="true" />
 		<set name="material" val="FISH" />
 		<set name="weight" val="100" />
+		<set name="reuse_delay" val="604800000" />
 		<set name="is_tradable" val="false" />
 		<set name="is_dropable" val="false" />
 		<set name="is_destroyable" val="false" />
