@@ -45,6 +45,7 @@ import com.l2jserver.gameserver.configuration.config.PremiumConfig;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.configuration.config.TelnetConfig;
 import com.l2jserver.gameserver.configuration.config.community.CTeleportConfig;
+import com.l2jserver.gameserver.configuration.config.events.WeddingConfig;
 import com.l2jserver.gameserver.configuration.loader.ConfigLoader;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.json.ExperienceData;
@@ -382,7 +383,7 @@ public final class GameServer
 		
 		LOG.info("AutoSpawnHandler: Loaded {} handlers in total.", AutoSpawnHandler.getInstance().size());
 		
-		if (Config.L2JMOD_ALLOW_WEDDING)
+		if (WeddingConfig.ALLOW_WEDDING)
 		{
 			CoupleManager.getInstance();
 		}

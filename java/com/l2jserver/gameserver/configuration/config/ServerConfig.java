@@ -82,7 +82,7 @@ public class ServerConfig
 	@Setting(name = "MaxProtocolRevision", maxValue = 273)
 	public static int MAX_PROTOCOL_REVISION;
 	
-	@Setting(name = "ReserveHostOnLogin")
+	@Setting(ignore = true)
 	public static boolean RESERVE_HOST_ON_LOGIN;
 	
 	public void patternPlayerName(final String value)

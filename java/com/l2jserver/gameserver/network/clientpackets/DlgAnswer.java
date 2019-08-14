@@ -19,6 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.events.WeddingConfig;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.enums.PlayerAction;
 import com.l2jserver.gameserver.handler.AdminCommandHandler;
@@ -70,7 +71,7 @@ public final class DlgAnswer extends L2GameClientPacket
 		{
 			if (activeChar.removeAction(PlayerAction.USER_ENGAGE))
 			{
-				if (Config.L2JMOD_ALLOW_WEDDING)
+				if (WeddingConfig.ALLOW_WEDDING)
 				{
 					activeChar.engageAnswer(_answer);
 				}

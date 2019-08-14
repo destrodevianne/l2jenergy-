@@ -29,7 +29,7 @@ import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.SevenSigns;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.events.WeddingConfig;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.enums.PlayerAction;
 import com.l2jserver.gameserver.handler.IVoicedCommandHandler;
@@ -101,7 +101,7 @@ public class Wedding implements IVoicedCommandHandler
 		{
 			activeChar.sendMessage("You are now divorced.");
 			
-			AdenaAmount = (activeChar.getAdena() / 100) * Config.L2JMOD_WEDDING_DIVORCE_COSTS;
+			AdenaAmount = (activeChar.getAdena() / 100) * WeddingConfig.WEDDING_DIVORCE_COSTS;
 			activeChar.getInventory().reduceAdena("Wedding", AdenaAmount, activeChar, null);
 			
 		}
@@ -148,7 +148,7 @@ public class Wedding implements IVoicedCommandHandler
 		else if (activeChar.getPartnerId() != 0)
 		{
 			activeChar.sendMessage("You are already engaged.");
-			if (Config.L2JMOD_WEDDING_PUNISH_INFIDELITY)
+			if (WeddingConfig.WEDDING_PUNISH_INFIDELITY)
 			{
 				activeChar.startAbnormalVisualEffect(true, AbnormalVisualEffect.BIG_HEAD); // give player a Big Head
 				// lets recycle the sevensigns debuffs
@@ -204,7 +204,7 @@ public class Wedding implements IVoicedCommandHandler
 			return false;
 		}
 		
-		if ((ptarget.getAppearance().getSex() == activeChar.getAppearance().getSex()) && !Config.L2JMOD_WEDDING_SAMESEX)
+		if ((ptarget.getAppearance().getSex() == activeChar.getAppearance().getSex()) && !WeddingConfig.WEDDING_SAMESEX)
 		{
 			activeChar.sendMessage("Gay marriage is not allowed on this server!");
 			return false;
@@ -456,9 +456,9 @@ public class Wedding implements IVoicedCommandHandler
 			return false;
 		}
 		
-		final int teleportTimer = Config.L2JMOD_WEDDING_TELEPORT_DURATION * 1000;
+		final int teleportTimer = WeddingConfig.WEDDING_TELEPORT_DURATION * 1000;
 		activeChar.sendMessage("After " + (teleportTimer / 60000) + " min. you will be teleported to your partner.");
-		activeChar.getInventory().reduceAdena("Wedding", Config.L2JMOD_WEDDING_TELEPORT_PRICE, activeChar, null);
+		activeChar.getInventory().reduceAdena("Wedding", WeddingConfig.WEDDING_TELEPORT_PRICE, activeChar, null);
 		
 		activeChar.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
 		// SoE Animation section

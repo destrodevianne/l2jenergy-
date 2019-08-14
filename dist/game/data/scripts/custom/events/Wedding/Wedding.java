@@ -18,7 +18,7 @@
  */
 package custom.events.Wedding;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.events.WeddingConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.instancemanager.CoupleManager;
 import com.l2jserver.gameserver.model.L2World;
@@ -120,14 +120,14 @@ public final class Wedding extends AbstractNpcAI
 				{
 					htmltext = sendHtml(partner, "NoFormal.html", null, null);
 				}
-				else if ((player.getAdena() < Config.L2JMOD_WEDDING_PRICE) || (partner.getAdena() < Config.L2JMOD_WEDDING_PRICE))
+				else if ((player.getAdena() < WeddingConfig.WEDDING_PRICE) || (partner.getAdena() < WeddingConfig.WEDDING_PRICE))
 				{
-					htmltext = sendHtml(partner, "Adena.html", "%fee%", String.valueOf(Config.L2JMOD_WEDDING_PRICE));
+					htmltext = sendHtml(partner, "Adena.html", "%fee%", String.valueOf(WeddingConfig.WEDDING_PRICE));
 				}
 				else
 				{
-					player.reduceAdena("Wedding", Config.L2JMOD_WEDDING_PRICE, player.getLastFolkNPC(), true);
-					partner.reduceAdena("Wedding", Config.L2JMOD_WEDDING_PRICE, player.getLastFolkNPC(), true);
+					player.reduceAdena("Wedding", WeddingConfig.WEDDING_PRICE, player.getLastFolkNPC(), true);
+					partner.reduceAdena("Wedding", WeddingConfig.WEDDING_PRICE, player.getLastFolkNPC(), true);
 					
 					// Accept the wedding request
 					player.setMarryAccepted(true);
@@ -180,7 +180,7 @@ public final class Wedding extends AbstractNpcAI
 	public String onFirstTalk(L2Npc npc, L2PcInstance player)
 	{
 		final String htmltext = getHtm(player.getHtmlPrefix(), "Start.html");
-		return htmltext.replaceAll("%fee%", String.valueOf(Config.L2JMOD_WEDDING_PRICE));
+		return htmltext.replaceAll("%fee%", String.valueOf(WeddingConfig.WEDDING_PRICE));
 	}
 	
 	private String sendHtml(L2PcInstance player, String fileName, String regex, String replacement)
@@ -196,7 +196,7 @@ public final class Wedding extends AbstractNpcAI
 	
 	private static boolean isWearingFormalWear(L2PcInstance player)
 	{
-		if (Config.L2JMOD_WEDDING_FORMALWEAR)
+		if (WeddingConfig.WEDDING_FORMALWEAR)
 		{
 			final L2ItemInstance formalWear = player.getChestArmorInstance();
 			return (formalWear != null) && (formalWear.getId() == FORMAL_WEAR);

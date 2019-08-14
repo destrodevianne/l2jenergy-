@@ -40,6 +40,7 @@ import com.l2jserver.gameserver.LoginServerThread.SessionKey;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.OfflineConfig;
+import com.l2jserver.gameserver.configuration.config.events.WeddingConfig;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.xml.impl.SecondaryAuthData;
@@ -586,7 +587,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 				ps.execute();
 			}
 			
-			if (Config.L2JMOD_ALLOW_WEDDING)
+			if (WeddingConfig.ALLOW_WEDDING)
 			{
 				try (PreparedStatement ps = con.prepareStatement("DELETE FROM mods_wedding WHERE player1Id = ? OR player2Id = ?"))
 				{
