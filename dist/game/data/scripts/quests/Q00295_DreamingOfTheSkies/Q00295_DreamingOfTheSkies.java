@@ -45,8 +45,8 @@ public final class Q00295_DreamingOfTheSkies extends Quest
 	{
 		super(295, Q00295_DreamingOfTheSkies.class.getSimpleName(), "Dreaming of the Skies");
 		addStartNpc(ARIN);
-		addTalkId(ARIN);
 		addKillId(MAGICAL_WEAVER);
+		addTalkId(ARIN);
 		registerQuestItems(FLOATING_STONE);
 	}
 	
@@ -54,12 +54,12 @@ public final class Q00295_DreamingOfTheSkies extends Quest
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
 		final QuestState qs = getQuestState(player, false);
-		if ((qs != null) && qs.isCreated() && event.equals("30536-03.htm"))
+		if ((qs != null) && qs.isCreated() && event.equals("30536-03.html"))
 		{
 			qs.startQuest();
 			return event;
 		}
-		return null;
+		return super.onAdvEvent(event, npc, player);
 	}
 	
 	@Override
@@ -83,7 +83,7 @@ public final class Q00295_DreamingOfTheSkies extends Quest
 		String html = getNoQuestMsg(talker);
 		if (qs.isCreated())
 		{
-			html = (talker.getLevel() >= MIN_LVL) ? "30536-02.htm" : "30536-01.htm";
+			html = (talker.getLevel() >= MIN_LVL) ? "30536-02.html" : "30536-01.html";
 		}
 		else if (qs.isStarted())
 		{
@@ -99,6 +99,7 @@ public final class Q00295_DreamingOfTheSkies extends Quest
 					giveItems(talker, RING_OF_FIREFLY, 1);
 					html = "30536-05.html";
 				}
+				addExpAndSp(talker, 0, 500);
 				takeItems(talker, FLOATING_STONE, -1);
 				qs.exitQuest(true, true);
 			}
