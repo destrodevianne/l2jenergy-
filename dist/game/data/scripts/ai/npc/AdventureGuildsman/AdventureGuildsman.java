@@ -32,6 +32,7 @@ import com.l2jserver.gameserver.model.variables.PlayerVariables;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.ExPCCafePointInfo;
 import com.l2jserver.gameserver.network.serverpackets.ExShowQuestInfo;
+import com.l2jserver.gameserver.network.serverpackets.ShowPCCafeCouponShowUI;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
 import ai.npc.AbstractNpcAI;
@@ -282,7 +283,7 @@ public class AdventureGuildsman extends AbstractNpcAI
 			}
 			case "show_pccafe_coupon_ui":
 			{
-				// player.sendPacket(new RequestPCCafeCouponUse()); // TODO: нужена реализация
+				player.sendPacket(ShowPCCafeCouponShowUI.STATIC_PACKET); // TODO: нужена реализация
 				break;
 			}
 			case "pccafe_list":
