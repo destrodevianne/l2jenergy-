@@ -74,6 +74,22 @@ public class ExShowScreenMessage extends L2GameServerPacket
 		_npcString = -1;
 	}
 	
+	public ExShowScreenMessage(String text, int position, int time)
+	{
+		_type = 2;
+		_sysMessageId = -1;
+		_unk1 = 0;
+		_unk2 = 0;
+		_unk3 = 0;
+		_fade = false;
+		_position = position;
+		_text = text;
+		_time = time;
+		_size = 0;
+		_effect = false;
+		_npcString = -1;
+	}
+	
 	/**
 	 * Display a NPC String on the screen for a given position and time.
 	 * @param npcString the NPC String Id
