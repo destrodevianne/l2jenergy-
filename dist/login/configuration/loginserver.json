@@ -82,8 +82,8 @@
     # URL = jdbc:hsqldb:hsql://localhost/l2jenergy
     # URL = jdbc:sqlserver://localhost/database = l2jenergy/user = sa/password = 
     # URL = jdbc:mariadb://localhost/l2jenergy
-    # Default: jdbc:mysql://localhost/l2jenergy?useSSL=false&serverTimezone=UTC
-    "URL" : "jdbc:mysql://localhost/l2jenergy?useSSL=false&serverTimezone=UTC",
+    # Default: jdbc:mariadb://localhost/l2jenergy
+    "URL" : "jdbc:mariadb://localhost/l2jenergy",
     # Database user info (default is "root" but it's not recommended)
     "Login" : "root",
 
