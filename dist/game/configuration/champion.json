@@ -62,6 +62,9 @@
 
     # % Chance to obtain a specified reward item from a HIGHER lvl Champion mob.
     "ChampionRewardHigherLvlItemChanceEasy" : "0",
+    
+    # Champion aura mob 2 - red; 1 - blue; 0 - disable.
+    "ChampionAuraEasy" : "1",
 
     # =====================================================================
     #                 Champion mod - Hard (Red) champions
@@ -116,5 +119,8 @@
     "ChampionRewardLowerLvlItemChanceHard" : "0",
 
     # % Chance to obtain a specified reward item from a HIGHER lvl Champion mob.
-    "ChampionRewardHigherLvlItemChanceHard" : "0"
+    "ChampionRewardHigherLvlItemChanceHard" : "0",
+    
+    # Champion aura mob 2 - red; 1 - blue; 0 - disable.
+    "ChampionAuraHard" : "2"
 }
