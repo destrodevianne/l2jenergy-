@@ -116,6 +116,11 @@ public class ChampionData
 		return ChampionConfig.CHAMPION_ENABLE_IN_INSTANCES;
 	}
 	
+	public int getEnabledAura(L2Attackable champion)
+	{
+		return champion.isHardChampion() ? ChampionConfig.CHAMPION_AURA_HARD : ChampionConfig.CHAMPION_AURA_EASY;
+	}
+	
 	public static ChampionData getInstance()
 	{
 		return SingletonHolder.INSTANCE;
