@@ -65,7 +65,6 @@ public final class Config
 	public static final String FORTSIEGE_CONFIGURATION_FILE = "./config/FortSiege.properties";
 	public static final String L2JMOD_CONFIG_FILE = "./config/L2JMods.properties";
 	public static final String NPC_CONFIG_FILE = "./config/NPC.properties";
-	public static final String PVP_CONFIG_FILE = "./config/PVP.properties";
 	public static final String RATES_CONFIG_FILE = "./config/Rates.properties";
 	public static final String SIEGE_CONFIGURATION_FILE = "./config/Siege.properties";
 	public static final String FLOOD_PROTECTOR_FILE = "./config/FloodProtector.properties";
@@ -767,17 +766,6 @@ public final class Config
 	public static double DROP_ITEM_MIN_LEVEL_GAP_CHANCE;
 	
 	// --------------------------------------------------
-	// PvP Settings
-	// --------------------------------------------------
-	public static boolean KARMA_DROP_GM;
-	public static boolean KARMA_AWARD_PK_KILL;
-	public static int KARMA_PK_LIMIT;
-	public static String KARMA_NONDROPPABLE_PET_ITEMS;
-	public static String KARMA_NONDROPPABLE_ITEMS;
-	public static int[] KARMA_LIST_NONDROPPABLE_PET_ITEMS;
-	public static int[] KARMA_LIST_NONDROPPABLE_ITEMS;
-	
-	// --------------------------------------------------
 	// Rate Settings
 	// --------------------------------------------------
 	public static float RATE_XP;
@@ -879,9 +867,6 @@ public final class Config
 	// --------------------------------------------------
 	public static int MAX_ITEM_IN_PACKET;
 	public static boolean CHECK_KNOWN;
-	
-	public static int PVP_NORMAL_TIME;
-	public static int PVP_PVP_TIME;
 	
 	public static double ENCHANT_CHANCE_ELEMENT_STONE;
 	public static double ENCHANT_CHANCE_ELEMENT_CRYSTAL;
@@ -2237,38 +2222,6 @@ public final class Config
 		RWHO_PRIV_STORE_FACTOR = L2JModSettings.getFloat("RemotePrivStoreFactor", 0);
 		RWHO_FORCE_INC = L2JModSettings.getInt("RemoteWhoForceInc", 0);
 		
-		// Load PvP L2Properties file (if exists)
-		final PropertiesParser PVPSettings = new PropertiesParser(PVP_CONFIG_FILE);
-		
-		KARMA_DROP_GM = PVPSettings.getBoolean("CanGMDropEquipment", false);
-		KARMA_AWARD_PK_KILL = PVPSettings.getBoolean("AwardPKKillPVPPoint", false);
-		KARMA_PK_LIMIT = PVPSettings.getInt("MinimumPKRequiredToDrop", 5);
-		KARMA_NONDROPPABLE_PET_ITEMS = PVPSettings.getString("ListOfPetItems", "2375,3500,3501,3502,4422,4423,4424,4425,6648,6649,6650,9882");
-		KARMA_NONDROPPABLE_ITEMS = PVPSettings.getString("ListOfNonDroppableItems", "57,1147,425,1146,461,10,2368,7,6,2370,2369,6842,6611,6612,6613,6614,6615,6616,6617,6618,6619,6620,6621,7694,8181,5575,7694,9388,9389,9390");
-		
-		String[] karma = KARMA_NONDROPPABLE_PET_ITEMS.split(",");
-		KARMA_LIST_NONDROPPABLE_PET_ITEMS = new int[karma.length];
-		
-		for (int i = 0; i < karma.length; i++)
-		{
-			KARMA_LIST_NONDROPPABLE_PET_ITEMS[i] = Integer.parseInt(karma[i]);
-		}
-		
-		karma = KARMA_NONDROPPABLE_ITEMS.split(",");
-		KARMA_LIST_NONDROPPABLE_ITEMS = new int[karma.length];
-		
-		for (int i = 0; i < karma.length; i++)
-		{
-			KARMA_LIST_NONDROPPABLE_ITEMS[i] = Integer.parseInt(karma[i]);
-		}
-		
-		// sorting so binarySearch can be used later
-		Arrays.sort(KARMA_LIST_NONDROPPABLE_PET_ITEMS);
-		Arrays.sort(KARMA_LIST_NONDROPPABLE_ITEMS);
-		
-		PVP_NORMAL_TIME = PVPSettings.getInt("PvPVsNormalTime", 120000);
-		PVP_PVP_TIME = PVPSettings.getInt("PvPVsPvPTime", 60000);
-		
 		final PropertiesParser topSettings = new PropertiesParser(TOP_CONFIG_FILE);
 		L2_TOP_MANAGER_ENABLED = topSettings.getBoolean("L2TopManagerEnabled", false);
 		
@@ -2808,21 +2761,6 @@ public final class Config
 				break;
 			case "antifeedinterval":
 				L2JMOD_ANTIFEED_INTERVAL = 1000 * Integer.parseInt(pValue);
-				break;
-			case "cangmdropequipment":
-				KARMA_DROP_GM = Boolean.parseBoolean(pValue);
-				break;
-			case "awardpkkillpvppoint":
-				KARMA_AWARD_PK_KILL = Boolean.parseBoolean(pValue);
-				break;
-			case "minimumpkrequiredtodrop":
-				KARMA_PK_LIMIT = Integer.parseInt(pValue);
-				break;
-			case "pvpvsnormaltime":
-				PVP_NORMAL_TIME = Integer.parseInt(pValue);
-				break;
-			case "pvpvspvptime":
-				PVP_PVP_TIME = Integer.parseInt(pValue);
 				break;
 			default:
 				try

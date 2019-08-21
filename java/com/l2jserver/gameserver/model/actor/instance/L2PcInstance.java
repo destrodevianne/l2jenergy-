@@ -66,6 +66,7 @@ import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.OfflineConfig;
 import com.l2jserver.gameserver.configuration.config.PcCafeConfig;
 import com.l2jserver.gameserver.configuration.config.PremiumConfig;
+import com.l2jserver.gameserver.configuration.config.PvPConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.sql.impl.CharSummonTable;
@@ -5380,11 +5381,11 @@ public final class L2PcInstance extends L2Playable
 			return;
 		}
 		
-		if ((!isInsideZone(ZoneId.PVP) || (pk == null)) && (!isGM() || Config.KARMA_DROP_GM))
+		if ((!isInsideZone(ZoneId.PVP) || (pk == null)) && (!isGM() || PvPConfig.KARMA_DROP_GM))
 		{
 			boolean isKarmaDrop = false;
 			boolean isKillerNpc = (killer instanceof L2Npc);
-			int pkLimit = Config.KARMA_PK_LIMIT;
+			int pkLimit = PvPConfig.KARMA_PK_LIMIT;
 			
 			int dropEquip = 0;
 			int dropEquipWeapon = 0;
@@ -5424,8 +5425,8 @@ public final class L2PcInstance extends L2Playable
 						!itemDrop.isDropable() || (itemDrop.getId() == Inventory.ADENA_ID) || // Adena
 						(itemDrop.getItem().getType2() == ItemType2.QUEST) || // Quest Items
 						(hasSummon() && (getSummon().getControlObjectId() == itemDrop.getId())) || // Control Item of active pet
-						(Arrays.binarySearch(Config.KARMA_LIST_NONDROPPABLE_ITEMS, itemDrop.getId()) >= 0) || // Item listed in the non droppable item list
-						(Arrays.binarySearch(Config.KARMA_LIST_NONDROPPABLE_PET_ITEMS, itemDrop.getId()) >= 0 // Item listed in the non droppable pet item list
+						(Arrays.binarySearch(PvPConfig.KARMA_LIST_NONDROPPABLE_ITEMS, itemDrop.getId()) >= 0) || // Item listed in the non droppable item list
+						(Arrays.binarySearch(PvPConfig.KARMA_LIST_NONDROPPABLE_PET_ITEMS, itemDrop.getId()) >= 0 // Item listed in the non droppable pet item list
 						))
 					{
 						continue;
@@ -5526,7 +5527,7 @@ public final class L2PcInstance extends L2Playable
 			// 'No war' or 'One way war' -> 'Normal PK'
 			if (targetPlayer.getKarma() > 0) // Target player has karma
 			{
-				if (Config.KARMA_AWARD_PK_KILL)
+				if (PvPConfig.KARMA_AWARD_PK_KILL)
 				{
 					increasePvpKills(target);
 				}
@@ -5588,7 +5589,7 @@ public final class L2PcInstance extends L2Playable
 		{
 			return;
 		}
-		setPvpFlagLasts(System.currentTimeMillis() + Config.PVP_NORMAL_TIME);
+		setPvpFlagLasts(System.currentTimeMillis() + PvPConfig.PVP_NORMAL_TIME);
 		
 		if (getPvpFlag() == 0)
 		{
@@ -5613,11 +5614,11 @@ public final class L2PcInstance extends L2Playable
 		{
 			if (checkIfPvP(player_target))
 			{
-				setPvpFlagLasts(System.currentTimeMillis() + Config.PVP_PVP_TIME);
+				setPvpFlagLasts(System.currentTimeMillis() + PvPConfig.PVP_PVP_TIME);
 			}
 			else
 			{
-				setPvpFlagLasts(System.currentTimeMillis() + Config.PVP_NORMAL_TIME);
+				setPvpFlagLasts(System.currentTimeMillis() + PvPConfig.PVP_NORMAL_TIME);
 			}
 			if (getPvpFlag() == 0)
 			{
