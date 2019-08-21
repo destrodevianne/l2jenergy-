@@ -1808,8 +1808,8 @@
 		<!-- "For 4 hours, recovers vitality when Exp. is acquired through hunting." -->
 		<set name="abnormalLvl" val="1" />
 		<set name="abnormalTime" val="14400" />
-		<set name="abnormalType" val="NEVIT_HOURGLASS" />
-		<set name="abnormalVisualEffect" val="NEVIT_ADVENT" />
+		<set name="abnormalType" val="VP_KEEP" />
+		<set name="abnormalVisualEffect" val="VP_KEEP" />
 		<set name="isMagic" val="2" /> <!-- Static Skill -->
 		<set name="irreplaceableBuff" val="true" />
 		<set name="itemConsumeCount" val="1" />
@@ -1829,8 +1829,8 @@
 		<!-- "For 4 hours, recovers vitality when Exp. is acquired through hunting." -->
 		<set name="abnormalLvl" val="1" />
 		<set name="abnormalTime" val="14400" />
-		<set name="abnormalType" val="NEVIT_HOURGLASS" />
-		<set name="abnormalVisualEffect" val="NEVIT_ADVENT" />
+		<set name="abnormalType" val="VP_KEEP" />
+		<set name="abnormalVisualEffect" val="VP_KEEP" />
 		<set name="isMagic" val="2" /> <!-- Static Skill -->
 		<set name="irreplaceableBuff" val="true" />
 		<set name="itemConsumeCount" val="1" />
