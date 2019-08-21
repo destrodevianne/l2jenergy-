@@ -38,6 +38,7 @@ import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
@@ -1100,10 +1101,10 @@ public class SevenSignsFestival implements SpawnListener
 		{
 			if (player.getClan() != null)
 			{
-				player.getClan().addReputationScore(Config.FESTIVAL_WIN_POINTS, true);
+				player.getClan().addReputationScore(FeatureConfig.FESTIVAL_WIN_POINTS, true);
 				SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.CLAN_MEMBER_C1_WAS_IN_HIGHEST_RANKED_PARTY_IN_FESTIVAL_OF_DARKNESS_AND_GAINED_S2_REPUTATION);
 				sm.addString(partyMemberName);
-				sm.addInt(Config.FESTIVAL_WIN_POINTS);
+				sm.addInt(FeatureConfig.FESTIVAL_WIN_POINTS);
 				player.getClan().broadcastToOnlineMembers(sm);
 			}
 		}
@@ -1123,10 +1124,10 @@ public class SevenSignsFestival implements SpawnListener
 							L2Clan clan = ClanTable.getInstance().getClanByName(clanName);
 							if (clan != null)
 							{
-								clan.addReputationScore(Config.FESTIVAL_WIN_POINTS, true);
+								clan.addReputationScore(FeatureConfig.FESTIVAL_WIN_POINTS, true);
 								SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.CLAN_MEMBER_C1_WAS_IN_HIGHEST_RANKED_PARTY_IN_FESTIVAL_OF_DARKNESS_AND_GAINED_S2_REPUTATION);
 								sm.addString(partyMemberName);
-								sm.addInt(Config.FESTIVAL_WIN_POINTS);
+								sm.addInt(FeatureConfig.FESTIVAL_WIN_POINTS);
 								clan.broadcastToOnlineMembers(sm);
 							}
 						}

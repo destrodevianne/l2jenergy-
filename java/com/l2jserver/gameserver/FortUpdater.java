@@ -21,7 +21,7 @@ package com.l2jserver.gameserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.entity.Fort;
 import com.l2jserver.gameserver.model.itemcontainer.Inventory;
@@ -72,10 +72,10 @@ public class FortUpdater implements Runnable
 					
 					if (_fort.getFortState() == 2)
 					{
-						if (_clan.getWarehouse().getAdena() >= Config.FS_FEE_FOR_CASTLE)
+						if (_clan.getWarehouse().getAdena() >= FeatureConfig.FS_FEE_FOR_CASTLE)
 						{
-							_clan.getWarehouse().destroyItemByItemId("FS_fee_for_Castle", Inventory.ADENA_ID, Config.FS_FEE_FOR_CASTLE, null, null);
-							_fort.getContractedCastle().addToTreasuryNoTax(Config.FS_FEE_FOR_CASTLE);
+							_clan.getWarehouse().destroyItemByItemId("FS_fee_for_Castle", Inventory.ADENA_ID, FeatureConfig.FS_FEE_FOR_CASTLE, null, null);
+							_fort.getContractedCastle().addToTreasuryNoTax(FeatureConfig.FS_FEE_FOR_CASTLE);
 							_fort.raiseSupplyLvL();
 						}
 						else
@@ -92,7 +92,7 @@ public class FortUpdater implements Runnable
 					{
 						return;
 					}
-					if (_fort.getOwnedTime() > (Config.FS_MAX_OWN_TIME * 3600))
+					if (_fort.getOwnedTime() > (FeatureConfig.FS_MAX_OWN_TIME * 3600))
 					{
 						_fort.removeOwner(true);
 						_fort.setFortState(0, 0);

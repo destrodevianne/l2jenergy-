@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -18,7 +18,7 @@
  */
 package ai.individual;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -80,7 +80,7 @@ public final class Ballista extends AbstractNpcAI
 			{
 				if ((caster.getClan() != null) && (caster.getClan().getLevel() >= MIN_CLAN_LV))
 				{
-					caster.getClan().addReputationScore(Config.BALLISTA_POINTS, true);
+					caster.getClan().addReputationScore(FeatureConfig.BALLISTA_POINTS, true);
 					caster.sendPacket(SystemMessageId.BALLISTA_DESTROYED_CLAN_REPU_INCREASED);
 				}
 			}

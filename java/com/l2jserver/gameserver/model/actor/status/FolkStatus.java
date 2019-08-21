@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model.actor.status;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2ClanHallManagerInstance;
@@ -46,7 +46,7 @@ public class FolkStatus extends NpcStatus
 	public final void reduceMp(double value)
 	{
 		// If Clan Hall buff are free and it's a Clan Hall Manager MP won't get reduced.
-		if (Config.CH_BUFF_FREE && (getActiveChar() instanceof L2ClanHallManagerInstance))
+		if (FeatureConfig.CH_BUFF_FREE && (getActiveChar() instanceof L2ClanHallManagerInstance))
 		{
 			return;
 		}

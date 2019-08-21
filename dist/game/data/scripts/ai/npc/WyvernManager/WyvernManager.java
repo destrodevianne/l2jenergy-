@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.l2jserver.gameserver.SevenSigns;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -232,7 +232,7 @@ public final class WyvernManager extends AbstractNpcAI
 				{
 					htmltext = "wyvernmanager-02.html";
 				}
-				else if (Config.ALLOW_WYVERN_ALWAYS)
+				else if (FeatureConfig.ALLOW_WYVERN_ALWAYS)
 				{
 					htmltext = replaceAll(npc, player.getHtmlPrefix());
 				}
@@ -253,9 +253,9 @@ public final class WyvernManager extends AbstractNpcAI
 			}
 			case "RideWyvern":
 			{
-				if (!Config.ALLOW_WYVERN_ALWAYS)
+				if (!FeatureConfig.ALLOW_WYVERN_ALWAYS)
 				{
-					if (!Config.ALLOW_WYVERN_DURING_SIEGE && (isInSiege(npc) || player.isInSiege()))
+					if (!FeatureConfig.ALLOW_WYVERN_DURING_SIEGE && (isInSiege(npc) || player.isInSiege()))
 					{
 						player.sendMessage(MessagesData.getInstance().getMessage(player, "no_summon_wyvern_in_siege"));
 						return null;
@@ -289,7 +289,7 @@ public final class WyvernManager extends AbstractNpcAI
 		}
 		else
 		{
-			if (Config.ALLOW_WYVERN_ALWAYS)
+			if (FeatureConfig.ALLOW_WYVERN_ALWAYS)
 			{
 				htmltext = replaceAll(npc, player.getHtmlPrefix());
 			}

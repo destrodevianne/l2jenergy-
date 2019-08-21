@@ -41,6 +41,7 @@ import com.l2jserver.commons.util.EnumIntBitmask;
 import com.l2jserver.gameserver.communitybbs.BB.Forum;
 import com.l2jserver.gameserver.communitybbs.Manager.ForumsBBSManager;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.configuration.config.community.CBasicConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
@@ -871,7 +872,7 @@ public class L2Clan implements IIdentifiable, INamable
 	 */
 	public void increaseBloodOathCount()
 	{
-		_bloodOathCount += Config.FS_BLOOD_OATH_COUNT;
+		_bloodOathCount += FeatureConfig.FS_BLOOD_OATH_COUNT;
 		DAOFactory.getInstance().getClanDAO().updateBloodOathCount(getBloodOathCount(), getId());
 	}
 	
@@ -1423,7 +1424,7 @@ public class L2Clan implements IIdentifiable, INamable
 		
 		// Royal Guard 5000 points per each
 		// Order of Knights 10000 points per each
-		if ((pledgeType != -1) && (((getReputationScore() < Config.ROYAL_GUARD_COST) && (pledgeType < L2Clan.SUBUNIT_KNIGHT1)) || ((getReputationScore() < Config.KNIGHT_UNIT_COST) && (pledgeType > L2Clan.SUBUNIT_ROYAL2))))
+		if ((pledgeType != -1) && (((getReputationScore() < FeatureConfig.ROYAL_GUARD_COST) && (pledgeType < L2Clan.SUBUNIT_KNIGHT1)) || ((getReputationScore() < FeatureConfig.KNIGHT_UNIT_COST) && (pledgeType > L2Clan.SUBUNIT_ROYAL2))))
 		{
 			player.sendPacket(SystemMessageId.THE_CLAN_REPUTATION_SCORE_IS_TOO_LOW);
 			return null;
@@ -1447,11 +1448,11 @@ public class L2Clan implements IIdentifiable, INamable
 				// Order of Knights 10000 points per each
 				if (pledgeType < L2Clan.SUBUNIT_KNIGHT1)
 				{
-					setReputationScore(getReputationScore() - Config.ROYAL_GUARD_COST, true);
+					setReputationScore(getReputationScore() - FeatureConfig.ROYAL_GUARD_COST, true);
 				}
 				else
 				{
-					setReputationScore(getReputationScore() - Config.KNIGHT_UNIT_COST, true);
+					setReputationScore(getReputationScore() - FeatureConfig.KNIGHT_UNIT_COST, true);
 					// TODO: clan lvl9 or more can reinforce knights cheaper if first knight unit already created, use Config.KNIGHT_REINFORCE_COST
 				}
 			}
@@ -2238,11 +2239,11 @@ public class L2Clan implements IIdentifiable, INamable
 			case 5:
 			{
 				// Upgrade to 6
-				if ((getReputationScore() >= Config.CLAN_LEVEL_6_COST) && (getMembersCount() >= Config.CLAN_LEVEL_6_REQUIREMENT))
+				if ((getReputationScore() >= FeatureConfig.CLAN_LEVEL_6_COST) && (getMembersCount() >= FeatureConfig.CLAN_LEVEL_6_REQUIREMENT))
 				{
-					setReputationScore(getReputationScore() - Config.CLAN_LEVEL_6_COST, true);
+					setReputationScore(getReputationScore() - FeatureConfig.CLAN_LEVEL_6_COST, true);
 					final SystemMessage cr = SystemMessage.getSystemMessage(SystemMessageId.S1_DEDUCTED_FROM_CLAN_REP);
-					cr.addInt(Config.CLAN_LEVEL_6_COST);
+					cr.addInt(FeatureConfig.CLAN_LEVEL_6_COST);
 					player.sendPacket(cr);
 					increaseClanLevel = true;
 				}
@@ -2251,11 +2252,11 @@ public class L2Clan implements IIdentifiable, INamable
 			case 6:
 			{
 				// Upgrade to 7
-				if ((getReputationScore() >= Config.CLAN_LEVEL_7_COST) && (getMembersCount() >= Config.CLAN_LEVEL_7_REQUIREMENT))
+				if ((getReputationScore() >= FeatureConfig.CLAN_LEVEL_7_COST) && (getMembersCount() >= FeatureConfig.CLAN_LEVEL_7_REQUIREMENT))
 				{
-					setReputationScore(getReputationScore() - Config.CLAN_LEVEL_7_COST, true);
+					setReputationScore(getReputationScore() - FeatureConfig.CLAN_LEVEL_7_COST, true);
 					final SystemMessage cr = SystemMessage.getSystemMessage(SystemMessageId.S1_DEDUCTED_FROM_CLAN_REP);
-					cr.addInt(Config.CLAN_LEVEL_7_COST);
+					cr.addInt(FeatureConfig.CLAN_LEVEL_7_COST);
 					player.sendPacket(cr);
 					increaseClanLevel = true;
 				}
@@ -2264,11 +2265,11 @@ public class L2Clan implements IIdentifiable, INamable
 			case 7:
 			{
 				// Upgrade to 8
-				if ((getReputationScore() >= Config.CLAN_LEVEL_8_COST) && (getMembersCount() >= Config.CLAN_LEVEL_8_REQUIREMENT))
+				if ((getReputationScore() >= FeatureConfig.CLAN_LEVEL_8_COST) && (getMembersCount() >= FeatureConfig.CLAN_LEVEL_8_REQUIREMENT))
 				{
-					setReputationScore(getReputationScore() - Config.CLAN_LEVEL_8_COST, true);
+					setReputationScore(getReputationScore() - FeatureConfig.CLAN_LEVEL_8_COST, true);
 					final SystemMessage cr = SystemMessage.getSystemMessage(SystemMessageId.S1_DEDUCTED_FROM_CLAN_REP);
-					cr.addInt(Config.CLAN_LEVEL_8_COST);
+					cr.addInt(FeatureConfig.CLAN_LEVEL_8_COST);
 					player.sendPacket(cr);
 					increaseClanLevel = true;
 				}
@@ -2277,14 +2278,14 @@ public class L2Clan implements IIdentifiable, INamable
 			case 8:
 			{
 				// Upgrade to 9
-				if ((getReputationScore() >= Config.CLAN_LEVEL_9_COST) && (player.getInventory().getItemByItemId(9910) != null) && (getMembersCount() >= Config.CLAN_LEVEL_9_REQUIREMENT))
+				if ((getReputationScore() >= FeatureConfig.CLAN_LEVEL_9_COST) && (player.getInventory().getItemByItemId(9910) != null) && (getMembersCount() >= FeatureConfig.CLAN_LEVEL_9_REQUIREMENT))
 				{
 					// itemId 9910 == Blood Oath
 					if (player.destroyItemByItemId("ClanLvl", 9910, 150, player.getTarget(), false))
 					{
-						setReputationScore(getReputationScore() - Config.CLAN_LEVEL_9_COST, true);
+						setReputationScore(getReputationScore() - FeatureConfig.CLAN_LEVEL_9_COST, true);
 						final SystemMessage cr = SystemMessage.getSystemMessage(SystemMessageId.S1_DEDUCTED_FROM_CLAN_REP);
-						cr.addInt(Config.CLAN_LEVEL_9_COST);
+						cr.addInt(FeatureConfig.CLAN_LEVEL_9_COST);
 						player.sendPacket(cr);
 						final SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.S2_S1_DISAPPEARED);
 						sm.addItemName(9910);
@@ -2298,14 +2299,14 @@ public class L2Clan implements IIdentifiable, INamable
 			case 9:
 			{
 				// Upgrade to 10
-				if ((getReputationScore() >= Config.CLAN_LEVEL_10_COST) && (player.getInventory().getItemByItemId(9911) != null) && (getMembersCount() >= Config.CLAN_LEVEL_10_REQUIREMENT))
+				if ((getReputationScore() >= FeatureConfig.CLAN_LEVEL_10_COST) && (player.getInventory().getItemByItemId(9911) != null) && (getMembersCount() >= FeatureConfig.CLAN_LEVEL_10_REQUIREMENT))
 				{
 					// itemId 9911 == Blood Alliance
 					if (player.destroyItemByItemId("ClanLvl", 9911, 5, player.getTarget(), false))
 					{
-						setReputationScore(getReputationScore() - Config.CLAN_LEVEL_10_COST, true);
+						setReputationScore(getReputationScore() - FeatureConfig.CLAN_LEVEL_10_COST, true);
 						final SystemMessage cr = SystemMessage.getSystemMessage(SystemMessageId.S1_DEDUCTED_FROM_CLAN_REP);
-						cr.addInt(Config.CLAN_LEVEL_10_COST);
+						cr.addInt(FeatureConfig.CLAN_LEVEL_10_COST);
 						player.sendPacket(cr);
 						final SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.S2_S1_DISAPPEARED);
 						sm.addItemName(9911);
@@ -2329,11 +2330,11 @@ public class L2Clan implements IIdentifiable, INamable
 					}
 				}
 				
-				if (hasTerritory && (getReputationScore() >= Config.CLAN_LEVEL_11_COST) && (getMembersCount() >= Config.CLAN_LEVEL_11_REQUIREMENT))
+				if (hasTerritory && (getReputationScore() >= FeatureConfig.CLAN_LEVEL_11_COST) && (getMembersCount() >= FeatureConfig.CLAN_LEVEL_11_REQUIREMENT))
 				{
-					setReputationScore(getReputationScore() - Config.CLAN_LEVEL_11_COST, true);
+					setReputationScore(getReputationScore() - FeatureConfig.CLAN_LEVEL_11_COST, true);
 					final SystemMessage cr = SystemMessage.getSystemMessage(SystemMessageId.S1_DEDUCTED_FROM_CLAN_REP);
-					cr.addInt(Config.CLAN_LEVEL_11_COST);
+					cr.addInt(FeatureConfig.CLAN_LEVEL_11_COST);
 					player.sendPacket(cr);
 					increaseClanLevel = true;
 				}

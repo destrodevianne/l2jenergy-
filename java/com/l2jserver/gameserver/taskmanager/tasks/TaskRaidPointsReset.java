@@ -22,7 +22,7 @@ import java.util.Calendar;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.instancemanager.RaidBossPointsManager;
 import com.l2jserver.gameserver.model.L2Clan;
@@ -59,43 +59,43 @@ public class TaskRaidPointsReset extends Task
 						switch (entry.getValue())
 						{
 							case 1:
-								reputation = Config.RAID_RANKING_1ST;
+								reputation = FeatureConfig.RAID_RANKING_1ST;
 								break;
 							case 2:
-								reputation = Config.RAID_RANKING_2ND;
+								reputation = FeatureConfig.RAID_RANKING_2ND;
 								break;
 							case 3:
-								reputation = Config.RAID_RANKING_3RD;
+								reputation = FeatureConfig.RAID_RANKING_3RD;
 								break;
 							case 4:
-								reputation = Config.RAID_RANKING_4TH;
+								reputation = FeatureConfig.RAID_RANKING_4TH;
 								break;
 							case 5:
-								reputation = Config.RAID_RANKING_5TH;
+								reputation = FeatureConfig.RAID_RANKING_5TH;
 								break;
 							case 6:
-								reputation = Config.RAID_RANKING_6TH;
+								reputation = FeatureConfig.RAID_RANKING_6TH;
 								break;
 							case 7:
-								reputation = Config.RAID_RANKING_7TH;
+								reputation = FeatureConfig.RAID_RANKING_7TH;
 								break;
 							case 8:
-								reputation = Config.RAID_RANKING_8TH;
+								reputation = FeatureConfig.RAID_RANKING_8TH;
 								break;
 							case 9:
-								reputation = Config.RAID_RANKING_9TH;
+								reputation = FeatureConfig.RAID_RANKING_9TH;
 								break;
 							case 10:
-								reputation = Config.RAID_RANKING_10TH;
+								reputation = FeatureConfig.RAID_RANKING_10TH;
 								break;
 							default:
 								if (entry.getValue() <= 50)
 								{
-									reputation = Config.RAID_RANKING_UP_TO_50TH;
+									reputation = FeatureConfig.RAID_RANKING_UP_TO_50TH;
 								}
 								else
 								{
-									reputation = Config.RAID_RANKING_UP_TO_100TH;
+									reputation = FeatureConfig.RAID_RANKING_UP_TO_100TH;
 								}
 								break;
 						}

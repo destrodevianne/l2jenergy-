@@ -32,6 +32,7 @@ import java.util.logging.Logger;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
@@ -982,16 +983,16 @@ public final class Castle extends AbstractResidence
 			if (_formerOwner != ClanTable.getInstance().getClan(getOwnerId()))
 			{
 				int maxreward = Math.max(0, _formerOwner.getReputationScore());
-				_formerOwner.takeReputationScore(Config.LOOSE_CASTLE_POINTS, true);
+				_formerOwner.takeReputationScore(FeatureConfig.LOOSE_CASTLE_POINTS, true);
 				L2Clan owner = ClanTable.getInstance().getClan(getOwnerId());
 				if (owner != null)
 				{
-					owner.addReputationScore(Math.min(Config.TAKE_CASTLE_POINTS, maxreward), true);
+					owner.addReputationScore(Math.min(FeatureConfig.TAKE_CASTLE_POINTS, maxreward), true);
 				}
 			}
 			else
 			{
-				_formerOwner.addReputationScore(Config.CASTLE_DEFENDED_POINTS, true);
+				_formerOwner.addReputationScore(FeatureConfig.CASTLE_DEFENDED_POINTS, true);
 			}
 		}
 		else
@@ -999,7 +1000,7 @@ public final class Castle extends AbstractResidence
 			L2Clan owner = ClanTable.getInstance().getClan(getOwnerId());
 			if (owner != null)
 			{
-				owner.addReputationScore(Config.TAKE_CASTLE_POINTS, true);
+				owner.addReputationScore(FeatureConfig.TAKE_CASTLE_POINTS, true);
 			}
 		}
 	}

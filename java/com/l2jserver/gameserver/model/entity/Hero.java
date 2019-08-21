@@ -39,7 +39,7 @@ import org.slf4j.LoggerFactory;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.cache.HtmCache;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.xml.impl.ClassListData;
@@ -937,10 +937,10 @@ public class Hero
 		final L2Clan clan = player.getClan();
 		if ((clan != null) && (clan.getLevel() >= 5))
 		{
-			clan.addReputationScore(Config.HERO_POINTS, true);
+			clan.addReputationScore(FeatureConfig.HERO_POINTS, true);
 			final SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.CLAN_MEMBER_C1_BECAME_HERO_AND_GAINED_S2_REPUTATION_POINTS);
 			sm.addString(CharNameTable.getInstance().getNameById(player.getObjectId()));
-			sm.addInt(Config.HERO_POINTS);
+			sm.addInt(FeatureConfig.HERO_POINTS);
 			clan.broadcastToOnlineMembers(sm);
 		}
 		

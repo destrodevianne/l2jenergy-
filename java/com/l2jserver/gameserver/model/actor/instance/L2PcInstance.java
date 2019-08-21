@@ -63,6 +63,7 @@ import com.l2jserver.gameserver.cache.WarehouseCacheManager;
 import com.l2jserver.gameserver.communitybbs.BB.Forum;
 import com.l2jserver.gameserver.communitybbs.Manager.ForumsBBSManager;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.configuration.config.OfflineConfig;
 import com.l2jserver.gameserver.configuration.config.PcCafeConfig;
 import com.l2jserver.gameserver.configuration.config.PremiumConfig;
@@ -2225,15 +2226,15 @@ public final class L2PcInstance extends L2Playable
 			{
 				if (getLvlJoinedAcademy() <= 16)
 				{
-					_clan.addReputationScore(Config.JOIN_ACADEMY_MAX_REP_SCORE, true);
+					_clan.addReputationScore(FeatureConfig.JOIN_ACADEMY_MAX_REP_SCORE, true);
 				}
 				else if (getLvlJoinedAcademy() >= 39)
 				{
-					_clan.addReputationScore(Config.JOIN_ACADEMY_MIN_REP_SCORE, true);
+					_clan.addReputationScore(FeatureConfig.JOIN_ACADEMY_MIN_REP_SCORE, true);
 				}
 				else
 				{
-					_clan.addReputationScore((Config.JOIN_ACADEMY_MAX_REP_SCORE - ((getLvlJoinedAcademy() - 16) * 20)), true);
+					_clan.addReputationScore((FeatureConfig.JOIN_ACADEMY_MAX_REP_SCORE - ((getLvlJoinedAcademy() - 16) * 20)), true);
 				}
 				setLvlJoinedAcademy(0);
 				// oust pledge member from the academy, cuz he has finished his 2nd class transfer
@@ -5297,12 +5298,12 @@ public final class L2PcInstance extends L2Playable
 									// when your reputation score is 0 or below, the other clan cannot acquire any reputation points
 									if (getClan().getReputationScore() > 0)
 									{
-										pk.getClan().addReputationScore(Config.REPUTATION_SCORE_PER_KILL, false);
+										pk.getClan().addReputationScore(FeatureConfig.REPUTATION_SCORE_PER_KILL, false);
 									}
 									// when the opposing sides reputation score is 0 or below, your clans reputation score does not decrease
 									if (pk.getClan().getReputationScore() > 0)
 									{
-										_clan.takeReputationScore(Config.REPUTATION_SCORE_PER_KILL, false);
+										_clan.takeReputationScore(FeatureConfig.REPUTATION_SCORE_PER_KILL, false);
 									}
 								}
 							}

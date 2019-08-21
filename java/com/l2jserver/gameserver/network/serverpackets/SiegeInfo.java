@@ -20,7 +20,7 @@ package com.l2jserver.gameserver.network.serverpackets;
 
 import java.util.Calendar;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.instancemanager.CHSiegeManager;
 import com.l2jserver.gameserver.model.L2Clan;
@@ -109,8 +109,8 @@ public class SiegeInfo extends L2GameServerPacket
 				cal.set(Calendar.SECOND, 0);
 				
 				writeD(0x00);
-				writeD(Config.SIEGE_HOUR_LIST.size());
-				for (int hour : Config.SIEGE_HOUR_LIST)
+				writeD(FeatureConfig.SIEGE_HOUR_LIST.size());
+				for (int hour : FeatureConfig.SIEGE_HOUR_LIST)
 				{
 					cal.set(Calendar.HOUR_OF_DAY, hour);
 					writeD((int) (cal.getTimeInMillis() / 1000));

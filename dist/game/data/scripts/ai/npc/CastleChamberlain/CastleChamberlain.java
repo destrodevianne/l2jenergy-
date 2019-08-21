@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -27,6 +27,7 @@ import java.util.StringTokenizer;
 
 import com.l2jserver.gameserver.SevenSigns;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.configuration.config.ManorConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.sql.impl.TeleportLocationTable;
@@ -208,19 +209,19 @@ public final class CastleChamberlain extends AbstractNpcAI
 		switch (func)
 		{
 			case Castle.FUNC_RESTORE_EXP:
-				fee = (level == 45) ? Config.CS_EXPREG1_FEE : Config.CS_EXPREG2_FEE;
+				fee = (level == 45) ? FeatureConfig.CS_EXPREG1_FEE : FeatureConfig.CS_EXPREG2_FEE;
 				break;
 			case Castle.FUNC_RESTORE_HP:
-				fee = (level == 300) ? Config.CS_HPREG1_FEE : Config.CS_HPREG2_FEE;
+				fee = (level == 300) ? FeatureConfig.CS_HPREG1_FEE : FeatureConfig.CS_HPREG2_FEE;
 				break;
 			case Castle.FUNC_RESTORE_MP:
-				fee = (level == 40) ? Config.CS_MPREG1_FEE : Config.CS_MPREG2_FEE;
+				fee = (level == 40) ? FeatureConfig.CS_MPREG1_FEE : FeatureConfig.CS_MPREG2_FEE;
 				break;
 			case Castle.FUNC_SUPPORT:
-				fee = (level == 5) ? Config.CS_SUPPORT1_FEE : Config.CS_SUPPORT2_FEE;
+				fee = (level == 5) ? FeatureConfig.CS_SUPPORT1_FEE : FeatureConfig.CS_SUPPORT2_FEE;
 				break;
 			case Castle.FUNC_TELEPORT:
-				fee = (level == 1) ? Config.CS_TELE1_FEE : Config.CS_TELE2_FEE;
+				fee = (level == 1) ? FeatureConfig.CS_TELE1_FEE : FeatureConfig.CS_TELE2_FEE;
 				break;
 		}
 		return fee;
@@ -232,19 +233,19 @@ public final class CastleChamberlain extends AbstractNpcAI
 		switch (func)
 		{
 			case Castle.FUNC_RESTORE_EXP:
-				ratio = Config.CS_EXPREG_FEE_RATIO;
+				ratio = FeatureConfig.CS_EXPREG_FEE_RATIO;
 				break;
 			case Castle.FUNC_RESTORE_HP:
-				ratio = Config.CS_HPREG_FEE_RATIO;
+				ratio = FeatureConfig.CS_HPREG_FEE_RATIO;
 				break;
 			case Castle.FUNC_RESTORE_MP:
-				ratio = Config.CS_MPREG_FEE_RATIO;
+				ratio = FeatureConfig.CS_MPREG_FEE_RATIO;
 				break;
 			case Castle.FUNC_SUPPORT:
-				ratio = Config.CS_SUPPORT_FEE_RATIO;
+				ratio = FeatureConfig.CS_SUPPORT_FEE_RATIO;
 				break;
 			case Castle.FUNC_TELEPORT:
-				ratio = Config.CS_TELE_FEE_RATIO;
+				ratio = FeatureConfig.CS_TELE_FEE_RATIO;
 				break;
 		}
 		return ratio;
@@ -260,13 +261,13 @@ public final class CastleChamberlain extends AbstractNpcAI
 				switch (level)
 				{
 					case 2:
-						price = Config.OUTER_DOOR_UPGRADE_PRICE2;
+						price = FeatureConfig.OUTER_DOOR_UPGRADE_PRICE2;
 						break;
 					case 3:
-						price = Config.OUTER_DOOR_UPGRADE_PRICE3;
+						price = FeatureConfig.OUTER_DOOR_UPGRADE_PRICE3;
 						break;
 					case 5:
-						price = Config.OUTER_DOOR_UPGRADE_PRICE5;
+						price = FeatureConfig.OUTER_DOOR_UPGRADE_PRICE5;
 						break;
 				}
 				break;
@@ -276,13 +277,13 @@ public final class CastleChamberlain extends AbstractNpcAI
 				switch (level)
 				{
 					case 2:
-						price = Config.INNER_DOOR_UPGRADE_PRICE2;
+						price = FeatureConfig.INNER_DOOR_UPGRADE_PRICE2;
 						break;
 					case 3:
-						price = Config.INNER_DOOR_UPGRADE_PRICE3;
+						price = FeatureConfig.INNER_DOOR_UPGRADE_PRICE3;
 						break;
 					case 5:
-						price = Config.INNER_DOOR_UPGRADE_PRICE5;
+						price = FeatureConfig.INNER_DOOR_UPGRADE_PRICE5;
 						break;
 				}
 				break;
@@ -292,13 +293,13 @@ public final class CastleChamberlain extends AbstractNpcAI
 				switch (level)
 				{
 					case 2:
-						price = Config.WALL_UPGRADE_PRICE2;
+						price = FeatureConfig.WALL_UPGRADE_PRICE2;
 						break;
 					case 3:
-						price = Config.WALL_UPGRADE_PRICE3;
+						price = FeatureConfig.WALL_UPGRADE_PRICE3;
 						break;
 					case 5:
-						price = Config.WALL_UPGRADE_PRICE5;
+						price = FeatureConfig.WALL_UPGRADE_PRICE5;
 						break;
 				}
 				break;
@@ -358,16 +359,16 @@ public final class CastleChamberlain extends AbstractNpcAI
 		switch (level)
 		{
 			case 1:
-				price = Config.TRAP_UPGRADE_PRICE1;
+				price = FeatureConfig.TRAP_UPGRADE_PRICE1;
 				break;
 			case 2:
-				price = Config.TRAP_UPGRADE_PRICE2;
+				price = FeatureConfig.TRAP_UPGRADE_PRICE2;
 				break;
 			case 3:
-				price = Config.TRAP_UPGRADE_PRICE3;
+				price = FeatureConfig.TRAP_UPGRADE_PRICE3;
 				break;
 			case 4:
-				price = Config.TRAP_UPGRADE_PRICE4;
+				price = FeatureConfig.TRAP_UPGRADE_PRICE4;
 				break;
 		}
 		
