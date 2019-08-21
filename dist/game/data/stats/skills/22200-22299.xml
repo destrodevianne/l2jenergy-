@@ -954,33 +954,145 @@
 	</skill>
 	<skill id="22283" levels="1" name="PC Cafe Blessing">
 		<!-- "For 20 minute(s), recovers energy when Exp. is acquired through hunting." -->
-		<set name="operateType" val="P" />
-		<set name="targetType" val="NONE" />
+		<set name="icon" val="BranchSys.icon.br_flag_of_bookmark_i00" />
+		<set name="abnormalLvl" val="3" />
+		<set name="abnormalTime" val="1200" />
+		<set name="abnormalType" val="VP_KEEP" />
+		<set name="abnormalVisualEffect" val="VP_KEEP" />
+		<set name="effectPoint" val="100" />
+		<set name="affectScope" val="PARTY" />
+		<set name="blockedInOlympiad" val="true" />
+		<set name="isMagic" val="2" /> <!-- Static Skill -->
+		<set name="irreplaceableBuff" val="true" />
+		<set name="itemConsumeCount" val="1" />
+		<set name="itemConsumeId" val="21863" /> <!-- PC Cafe Blessing -->
+		<set name="magicLvl" val="-1" />
+		<set name="reuseDelay" val="3600000" />
+		<set name="operateType" val="A2" />
+		<set name="rideState" val="NONE;STRIDER;WYVERN;WOLF" />
+		<set name="targetType" val="SELF" />
+		<effects>
+			<effect name="Buff">
+				<sub stat="vitalityConsumeRate" val="10" />
+			</effect>
+		</effects>
 	</skill>
 	<skill id="22284" levels="1" name="PC Cafe Energy">
 		<!-- "For 60 minute(s), energy is replenished when Exp. is acquired through hunting." -->
-		<set name="operateType" val="P" />
-		<set name="targetType" val="NONE" />
+		<set name="icon" val="icon.etc_pccafe_point_i00" />
+		<set name="abnormalLvl" val="4" />
+		<set name="abnormalTime" val="3600" />
+		<set name="abnormalType" val="VP_KEEP" />
+		<set name="abnormalVisualEffect" val="VP_KEEP" />
+		<set name="effectPoint" val="100" />
+		<set name="blockedInOlympiad" val="true" />
+		<set name="isMagic" val="2" /> <!-- Static Skill -->
+		<set name="irreplaceableBuff" val="true" />
+		<set name="itemConsumeCount" val="1" />
+		<set name="itemConsumeId" val="21861" /> <!-- PC Cafe Energy - 1 hour -->
+		<set name="magicLvl" val="-1" />
+		<set name="reuseDelay" val="3600000" />
+		<set name="operateType" val="A2" />
+		<set name="rideState" val="NONE;STRIDER;WYVERN;WOLF" />
+		<set name="targetType" val="SELF" />
+		<effects>
+			<effect name="Buff">
+				<sub stat="vitalityConsumeRate" val="10" />
+			</effect>
+		</effects>
 	</skill>
 	<skill id="22285" levels="1" name="PC Cafe Energy">
 		<!-- "For 2 hours, recovers energy when Exp. is acquired through hunting." -->
-		<set name="operateType" val="P" />
-		<set name="targetType" val="NONE" />
+		<set name="icon" val="icon.etc_pccafe_point_i00" />
+		<set name="abnormalLvl" val="4" />
+		<set name="abnormalTime" val="7200" />
+		<set name="abnormalType" val="VP_KEEP" />
+		<set name="abnormalVisualEffect" val="VP_KEEP" />
+		<set name="effectPoint" val="100" />
+		<set name="blockedInOlympiad" val="true" />
+		<set name="isMagic" val="2" /> <!-- Static Skill -->
+		<set name="irreplaceableBuff" val="true" />
+		<set name="itemConsumeCount" val="1" />
+		<set name="itemConsumeId" val="21865" /> <!-- PC Cafe Energy - 2 hour -->
+		<set name="magicLvl" val="-1" />
+		<set name="reuseDelay" val="3600000" />
+		<set name="operateType" val="A2" />
+		<set name="rideState" val="NONE;STRIDER;WYVERN;WOLF" />
+		<set name="targetType" val="SELF" />
+		<effects>
+			<effect name="Buff">
+				<sub stat="vitalityConsumeRate" val="10" />
+			</effect>
+		</effects>
 	</skill>
 	<skill id="22286" levels="1" name="PC Cafe Energy">
 		<!-- "For 3 hours, recovers energy when Exp. is acquired through hunting." -->
-		<set name="operateType" val="P" />
-		<set name="targetType" val="NONE" />
+		<set name="icon" val="icon.etc_pccafe_point_i00" />
+		<set name="abnormalLvl" val="4" />
+		<set name="abnormalTime" val="10800" />
+		<set name="abnormalType" val="VP_KEEP" />
+		<set name="abnormalVisualEffect" val="VP_KEEP" />
+		<set name="effectPoint" val="100" />
+		<set name="blockedInOlympiad" val="true" />
+		<set name="isMagic" val="2" /> <!-- Static Skill -->
+		<set name="irreplaceableBuff" val="true" />
+		<set name="itemConsumeCount" val="1" />
+		<set name="itemConsumeId" val="21866" /> <!-- PC Cafe Energy - 3 hour -->
+		<set name="magicLvl" val="-1" />
+		<set name="reuseDelay" val="3600000" />
+		<set name="operateType" val="A2" />
+		<set name="rideState" val="NONE;STRIDER;WYVERN;WOLF" />
+		<set name="targetType" val="SELF" />
+		<effects>
+			<effect name="Buff">
+				<sub stat="vitalityConsumeRate" val="10" />
+			</effect>
+		</effects>
 	</skill>
 	<skill id="22287" levels="1" name="PC Cafe Energy">
 		<!-- "For 4 hours, recovers energy when Exp. is acquired through hunting." -->
-		<set name="operateType" val="P" />
-		<set name="targetType" val="NONE" />
+		<set name="icon" val="icon.etc_pccafe_point_i00" />
+		<set name="abnormalLvl" val="4" />
+		<set name="abnormalTime" val="14400" />
+		<set name="abnormalType" val="VP_KEEP" />
+		<set name="abnormalVisualEffect" val="VP_KEEP" />
+		<set name="effectPoint" val="100" />
+		<set name="blockedInOlympiad" val="true" />
+		<set name="isMagic" val="2" /> <!-- Static Skill -->
+		<set name="irreplaceableBuff" val="true" />
+		<set name="itemConsumeCount" val="1" />
+		<set name="itemConsumeId" val="21867" /> <!-- PC Cafe Energy - 4 hour -->
+		<set name="magicLvl" val="-1" />
+		<set name="reuseDelay" val="3600000" />
+		<set name="operateType" val="A2" />
+		<set name="rideState" val="NONE;STRIDER;WYVERN;WOLF" />
+		<set name="targetType" val="SELF" />
+		<effects>
+			<effect name="Buff">
+				<sub stat="vitalityConsumeRate" val="10" />
+			</effect>
+		</effects>
 	</skill>
 	<skill id="22288" levels="1" name="PC Cafe Energy Pack">
-		<!-- none -->
-		<set name="operateType" val="P" />
-		<set name="targetType" val="NONE" />
+		<!-- High Five Confirmed -->
+		<table name="#extractableItems">21861,3,25.0;21865,3,25.0;21866,3,25.0;21867,3,25.0</table>
+        <set name="capsuled_items_skill" val="#extractableItems" />
+        <set name="itemConsumeCount" val="1" />
+        <set name="itemConsumeId" val="21862" />
+		<set name="blockedInOlympiad" val="true" />
+        <set name="isMagic" val="2" />
+        <set name="operateType" val="A1" />
+        <set name="rideState" val="NONE;STRIDER;WYVERN;WOLF" />
+        <set name="targetType" val="SELF" />
+        <cond msgId="129">
+            <and>
+                <player invSize="10" />
+                <player weight="80" />
+            </and>
+        </cond>
+        <effects>
+            <effect name="RestorationRandom" />
+        </effects>
 	</skill>
 	<skill id="22289" levels="1" name="Santa Claus's Treasure Box">
 		<!-- none -->
