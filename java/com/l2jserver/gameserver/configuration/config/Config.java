@@ -60,14 +60,14 @@ public final class Config
 	// L2J Property File Definitions
 	// --------------------------------------------------
 	public static final String CHARACTER_CONFIG_FILE = "./config/Character.properties";
+	public static final String FLOOD_PROTECTOR_FILE = "./config/FloodProtector.properties";
 	public static final String FORTSIEGE_CONFIGURATION_FILE = "./config/FortSiege.properties";
+	public static final String GENERAL_CONFIG_FILE = "./config/General.properties";
 	public static final String L2JMOD_CONFIG_FILE = "./config/L2JMods.properties";
 	public static final String NPC_CONFIG_FILE = "./config/NPC.properties";
 	public static final String RATES_CONFIG_FILE = "./config/Rates.properties";
 	public static final String SIEGE_CONFIGURATION_FILE = "./config/Siege.properties";
-	public static final String FLOOD_PROTECTOR_FILE = "./config/FloodProtector.properties";
 	public static final String TOP_CONFIG_FILE = "config/services/Tops.properties";
-	public static final String GENERAL_CONFIG_FILE = "./config/General.properties";
 	
 	// --------------------------------------------------
 	// L2J Variable Definitions
