@@ -1082,97 +1082,185 @@
 	<item id="21857" type="EtcItem" name="Hero's Gold Chest - 90-day limited period">
 		<!-- Description: Hero's Gold Chest. Gift box containing 1 each of a Hero's Treasure Box, Dimensional Support Pack, Potion Support Pack, and Supplies Support Pack. Cannot be exchanged, dropped, or destroyed. Can be stored in a private warehouse. -->
 		<set name="icon" val="icon.etc_treasure_box_i08" />
+		<set name="default_action" val="PEEL" />
+        <set name="immediate_effect" val="true" />
 		<set name="material" val="STEEL" />
 		<set name="is_tradable" val="false" />
 		<set name="is_dropable" val="false" />
 		<set name="is_destroyable" val="false" />
+		<set name="is_sellable" val="false" />
+		<set name="is_oly_restricted" val="true" />
+		<set name="handler" val="ExtractableItems" />
+        <set name="capsuled_items" val="16852,1,1,100;21858,1,1,100;21859,1,1,100;21860,1,1,100" />
+		<set name="time" val="129600" />
 	</item>
 	<item id="21858" type="EtcItem" name="Dimensional Support Pack - 90-day limited period">
 		<!-- Description: Dimensional support pack. Gift box containing 2 high quality hunting helper exchange coupon, 3 feathers of blessing, 5 Kamaloka (Near Kamaloka, Hall of the Abyss, Labyrinth of the Abyss) entrance passes, and 3 Vitality Replenishing Beverages. Cannot be exchanged, dropped, or destroyed. Can be stored in a private warehouse. -->
 		<set name="icon" val="icon.etc_pi_gift_box_i04" />
+		<set name="default_action" val="PEEL" />
+        <set name="immediate_effect" val="true" />
 		<set name="material" val="STEEL" />
 		<set name="is_tradable" val="false" />
 		<set name="is_dropable" val="false" />
 		<set name="is_destroyable" val="false" />
+		<set name="is_sellable" val="false" />
+		<set name="is_oly_restricted" val="true" />
+		<set name="handler" val="ExtractableItems" />
+        <set name="capsuled_items" val="14074,2,2,100;13300,3,3,100;13297,5,5,100;13298,5,5,100;13299,5,5,100;14055,3,3,100" />
+		<set name="time" val="129600" />
 	</item>
 	<item id="21859" type="EtcItem" name="Potion Support Pack - 90-day limited period">
 		<!-- Description: Potion support pack. Gift box containing 20 highest power temporary healing potion, 50 greater healing potions, 5 fresh milks, and 5 energy of sprouts. Cannot be exchanged, dropped, or destroyed. Can be stored in a private warehouse. -->
 		<set name="icon" val="icon.etc_pi_gift_box_i04" />
+		<set name="default_action" val="PEEL" />
+        <set name="immediate_effect" val="true" />
 		<set name="material" val="STEEL" />
 		<set name="is_tradable" val="false" />
 		<set name="is_dropable" val="false" />
 		<set name="is_destroyable" val="false" />
+		<set name="is_sellable" val="false" />
+		<set name="is_oly_restricted" val="true" />
+		<set name="handler" val="ExtractableItems" />
+        <set name="capsuled_items" val="14701,20,20,100;14700,50,50,100;14739,5,5,100;17163,5,5,100" />
+		<set name="time" val="129600" />
 	</item>
 	<item id="21860" type="EtcItem" name="Supplies Support Pack - 90-day limited period">
 		<!-- Description: Supplies support pack. Gift box containing 200,000 mysterious soulshots and spirits according to grade. Cannot be exchanged, dropped, or destroyed. Can be stored in a private warehouse. -->
 		<set name="icon" val="icon.etc_pi_gift_box_i04" />
+		<set name="default_action" val="PEEL" />
+        <set name="immediate_effect" val="true" />
 		<set name="material" val="STEEL" />
 		<set name="is_tradable" val="false" />
 		<set name="is_dropable" val="false" />
 		<set name="is_destroyable" val="false" />
+		<set name="is_sellable" val="false" />
+		<set name="is_oly_restricted" val="true" />
+		<set name="handler" val="ExtractableItems" />
+        <set name="capsuled_items" val="21845,20000,20000,100;21846,20000,20000,100;21847,20000,20000,100;21848,20000,20000,100;21849,20000,20000,100;21850,20000,20000,100;21851,20000,20000,100;21852,20000,20000,100;21853,20000,20000,100;21854,20000,20000,100;21855,20000,20000,100;21856,20000,20000,100" />
+		<set name="time" val="129600" />
 	</item>
-	<item id="21861" type="EtcItem" name="PC Vitality - 1 hour">
+	<item id="21861" type="EtcItem" name="PC Cafe Energy - 1 hour">
 		<!-- Description: When used, for 1 hour(s), energy is replenished when Exp. is acquired through hunting. Re-use time is 60 minutes. Can only be used at levels 1~75. Cannot be exchanged, dropped, or destroyed. Can be stored in a private warehouse. -->
 		<set name="icon" val="icon.etc_pccafe_point_i00" />
+		<set name="default_action" val="SKILL_REDUCE" />
 		<set name="material" val="STEEL" />
+		<set name="etcitem_type" val="POTION" />
+		<set name="reuse_delay" val="3600000" />
 		<set name="is_tradable" val="false" />
 		<set name="is_dropable" val="false" />
 		<set name="is_destroyable" val="false" />
 		<set name="is_stackable" val="true" />
+		<set name="is_sellable" val="false" />
+		<set name="is_oly_restricted" val="true" />
+		<set name="handler" val="ItemSkills" />
+		<set name="item_skill" val="22284-1" />
+		<cond msgId="1902">
+			<player levelRange="1;75" />
+		</cond>
 	</item>
-	<item id="21862" type="EtcItem" name="PC Vitality Pack">
+	<item id="21862" type="EtcItem" name="PC Cafe Energy Pack">
 		<!-- Description: PC cafe energy pack. Gift box containing 3 PC cafe energies. When used, duration can receive a 1~4 hour PC Cafe Energy with a certain rate of chance. Can only be used at levels 1~75. Cannot be exchanged, dropped, or destroyed. Can be stored in a private warehouse. -->
 		<set name="icon" val="icon.etc_pi_gift_box_i04" />
+		<set name="default_action" val="CAPSULE" />
 		<set name="material" val="STEEL" />
 		<set name="is_tradable" val="false" />
 		<set name="is_dropable" val="false" />
 		<set name="is_destroyable" val="false" />
 		<set name="is_stackable" val="true" />
+		<set name="handler" val="ItemSkills" />
+        <set name="item_skill" val="22288-1" />
+		<cond msgId="1902">
+			<player levelRange="1;75" />
+		</cond>
 	</item>
-	<item id="21863" type="EtcItem" name="PC Blessing">
+	<item id="21863" type="EtcItem" name="PC Cafe Blessing">
 		<!-- Description: When used, for 20 minute(s), energy is replenished for party members, including the user, when Exp. is acquired through hunting. Re-use time is 60 minutes. Cannot be exchanged, dropped, or destroyed. Can be stored in a private warehouse. -->
 		<set name="icon" val="BranchSys.icon.br_flag_of_bookmark_i00" />
+		<set name="default_action" val="SKILL_REDUCE" />
 		<set name="material" val="STEEL" />
+		<set name="etcitem_type" val="POTION" />
+		<set name="shared_reuse_group" val="107" />
 		<set name="is_tradable" val="false" />
 		<set name="is_dropable" val="false" />
 		<set name="is_destroyable" val="false" />
 		<set name="is_stackable" val="true" />
+		<set name="is_sellable" val="false" />
+		<set name="reuse_delay" val="3600000" />
+		<set name="is_oly_restricted" val="true" />
+		<set name="handler" val="ItemSkills" />
+		<set name="item_skill" val="22283-1" />
 	</item>
-	<item id="21864" type="EtcItem" name="PC Blessing Pack">
+	<item id="21864" type="EtcItem" name="PC Cafe Blessing Pack">
 		<!-- Description: PC cafe blessing pack. Gift box containing 1 PC cafe blessing. Cannot be exchanged, dropped, or destroyed. Can be stored in a private warehouse. -->
 		<set name="icon" val="icon.etc_pi_gift_box_i04" />
+		<set name="default_action" val="PEEL" />
+        <set name="immediate_effect" val="true" />
 		<set name="material" val="STEEL" />
 		<set name="is_tradable" val="false" />
 		<set name="is_dropable" val="false" />
 		<set name="is_destroyable" val="false" />
 		<set name="is_stackable" val="true" />
+		<set name="is_sellable" val="false" />
+		<set name="is_oly_restricted" val="true" />
+		<set name="handler" val="ExtractableItems" />
+        <set name="capsuled_items" val="21863,1,1,100" />
 	</item>
-	<item id="21865" type="EtcItem" name="PC Vitality - 2 hour">
+	<item id="21865" type="EtcItem" name="PC Cafe Energy - 2 hour">
 		<!-- Description: When used, for 2 hour(s), energy is replenished when Exp. is acquired through hunting. Re-use time is 60 minutes. Can only be used at levels 1~75. Cannot be exchanged, dropped, or destroyed. Can be stored in a private warehouse. -->
 		<set name="icon" val="icon.etc_pccafe_point_i00" />
+		<set name="default_action" val="SKILL_REDUCE" />
 		<set name="material" val="STEEL" />
+		<set name="etcitem_type" val="POTION" />
+		<set name="reuse_delay" val="3600000" />
 		<set name="is_tradable" val="false" />
 		<set name="is_dropable" val="false" />
 		<set name="is_destroyable" val="false" />
 		<set name="is_stackable" val="true" />
+		<set name="is_sellable" val="false" />
+		<set name="is_oly_restricted" val="true" />
+		<set name="handler" val="ItemSkills" />
+		<set name="item_skill" val="22285-1" />
+		<cond msgId="1902">
+			<player levelRange="1;75" />
+		</cond>
 	</item>
-	<item id="21866" type="EtcItem" name="PC Vitality - 3 hour">
+	<item id="21866" type="EtcItem" name="PC Cafe Energy - 3 hour">
 		<!-- Description: When used, for 3 hour(s), energy is replenished when Exp. is acquired through hunting. Re-use time is 60 minutes. Can only be used at levels 1~75. Cannot be exchanged, dropped, or destroyed. Can be stored in a private warehouse. -->
 		<set name="icon" val="icon.etc_pccafe_point_i00" />
+		<set name="default_action" val="SKILL_REDUCE" />
 		<set name="material" val="STEEL" />
+		<set name="etcitem_type" val="POTION" />
+		<set name="reuse_delay" val="3600000" />
 		<set name="is_tradable" val="false" />
 		<set name="is_dropable" val="false" />
 		<set name="is_destroyable" val="false" />
 		<set name="is_stackable" val="true" />
+		<set name="is_sellable" val="false" />
+		<set name="is_oly_restricted" val="true" />
+		<set name="handler" val="ItemSkills" />
+		<set name="item_skill" val="22286-1" />
+		<cond msgId="1902">
+			<player levelRange="1;75" />
+		</cond>
 	</item>
-	<item id="21867" type="EtcItem" name="PC Vitality - 4 hour">
+	<item id="21867" type="EtcItem" name="PC Cafe Energy - 4 hour">
 		<!-- Description: When used, for 4 hour(s), energy is replenished when Exp. is acquired through hunting. Re-use time is 60 minutes. Can only be used at levels 1~75. Cannot be exchanged, dropped, or destroyed. Can be stored in a private warehouse. -->
 		<set name="icon" val="icon.etc_pccafe_point_i00" />
+		<set name="default_action" val="SKILL_REDUCE" />
 		<set name="material" val="STEEL" />
+		<set name="etcitem_type" val="POTION" />
+		<set name="reuse_delay" val="3600000" />
 		<set name="is_tradable" val="false" />
 		<set name="is_dropable" val="false" />
 		<set name="is_destroyable" val="false" />
 		<set name="is_stackable" val="true" />
+		<set name="is_sellable" val="false" />
+		<set name="is_oly_restricted" val="true" />
+		<set name="handler" val="ItemSkills" />
+		<set name="item_skill" val="22287-1" />
+		<cond msgId="1902">
+			<player levelRange="1;75" />
+		</cond>
 	</item>
 	<item id="21868" type="EtcItem" name="Joy of Halloween">
 		<!-- Description: Gift provided for Halloween. When used, can obtain 20 Belldandy Summon Scrolls. Cannot be exchanged or dropped. Can be stored in a private warehouse. -->
