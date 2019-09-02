@@ -659,34 +659,6 @@ public final class Config
 	public static int KARMA_RATE_DROP_EQUIP_WEAPON;
 	
 	// --------------------------------------------------
-	// Seven Signs Settings
-	// --------------------------------------------------
-	public static boolean ALT_GAME_CASTLE_DAWN;
-	public static boolean ALT_GAME_CASTLE_DUSK;
-	public static boolean ALT_GAME_REQUIRE_CLAN_CASTLE;
-	public static int ALT_FESTIVAL_MIN_PLAYER;
-	public static int ALT_MAXIMUM_PLAYER_CONTRIB;
-	public static long ALT_FESTIVAL_MANAGER_START;
-	public static long ALT_FESTIVAL_LENGTH;
-	public static long ALT_FESTIVAL_CYCLE_LENGTH;
-	public static long ALT_FESTIVAL_FIRST_SPAWN;
-	public static long ALT_FESTIVAL_FIRST_SWARM;
-	public static long ALT_FESTIVAL_SECOND_SPAWN;
-	public static long ALT_FESTIVAL_SECOND_SWARM;
-	public static long ALT_FESTIVAL_CHEST_SPAWN;
-	public static double ALT_SIEGE_DAWN_GATES_PDEF_MULT;
-	public static double ALT_SIEGE_DUSK_GATES_PDEF_MULT;
-	public static double ALT_SIEGE_DAWN_GATES_MDEF_MULT;
-	public static double ALT_SIEGE_DUSK_GATES_MDEF_MULT;
-	public static boolean ALT_STRICT_SEVENSIGNS;
-	public static boolean ALT_SEVENSIGNS_LAZY_UPDATE;
-	public static int SSQ_DAWN_TICKET_QUANTITY;
-	public static int SSQ_DAWN_TICKET_PRICE;
-	public static int SSQ_DAWN_TICKET_BUNDLE;
-	public static int SSQ_MANORS_AGREEMENT_ID;
-	public static int SSQ_JOIN_DAWN_ADENA_FEE;
-	
-	// --------------------------------------------------
 	// Vitality Settings
 	// --------------------------------------------------
 	public static boolean ENABLE_VITALITY;
@@ -2350,15 +2322,6 @@ public final class Config
 				break;
 			case "castlezonefameaquirepoints":
 				CASTLE_ZONE_FAME_AQUIRE_POINTS = Integer.parseInt(pValue);
-				break;
-			case "altcastlefordawn":
-				ALT_GAME_CASTLE_DAWN = Boolean.parseBoolean(pValue);
-				break;
-			case "altcastlefordusk":
-				ALT_GAME_CASTLE_DUSK = Boolean.parseBoolean(pValue);
-				break;
-			case "altrequireclancastle":
-				ALT_GAME_REQUIRE_CLAN_CASTLE = Boolean.parseBoolean(pValue);
 				break;
 			case "altfreeteleporting":
 				ALT_GAME_FREE_TELEPORT = Boolean.parseBoolean(pValue);

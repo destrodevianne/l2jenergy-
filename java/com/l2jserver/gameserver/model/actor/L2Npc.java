@@ -36,6 +36,7 @@ import com.l2jserver.gameserver.SevenSignsFestival;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.configuration.config.OlympiadConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
@@ -993,7 +994,7 @@ public class L2Npc extends L2Character
 				filename += "blkmrkt_1.htm";
 				break;
 			case 31113: // Merchant of Mammon
-				if (Config.ALT_STRICT_SEVENSIGNS)
+				if (FeatureConfig.ALT_STRICT_SEVENSIGNS)
 				{
 					switch (compWinner)
 					{
@@ -1021,7 +1022,7 @@ public class L2Npc extends L2Character
 				filename += "mammmerch_1.htm";
 				break;
 			case 31126: // Blacksmith of Mammon
-				if (Config.ALT_STRICT_SEVENSIGNS)
+				if (FeatureConfig.ALT_STRICT_SEVENSIGNS)
 				{
 					switch (compWinner)
 					{

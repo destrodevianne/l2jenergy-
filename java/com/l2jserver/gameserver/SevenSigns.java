@@ -34,6 +34,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.model.AutoSpawnHandler;
@@ -1036,7 +1037,7 @@ public class SevenSigns
 			_signsDuskSealTotals.put(chosenSeal, _signsDuskSealTotals.get(chosenSeal) + 1);
 		}
 		
-		if (!Config.ALT_SEVENSIGNS_LAZY_UPDATE)
+		if (!FeatureConfig.ALT_SEVENSIGNS_LAZY_UPDATE)
 		{
 			saveSevenSignsStatus();
 		}
@@ -1064,7 +1065,7 @@ public class SevenSigns
 		if (removeReward)
 		{
 			_signsPlayerData.put(objectId, currPlayer);
-			if (!Config.ALT_SEVENSIGNS_LAZY_UPDATE)
+			if (!FeatureConfig.ALT_SEVENSIGNS_LAZY_UPDATE)
 			{
 				saveSevenSignsData(objectId);
 				saveSevenSignsStatus();
@@ -1092,7 +1093,7 @@ public class SevenSigns
 		long totalAncientAdena = currPlayer.getLong("ancient_adena_amount") + calcAncientAdenaReward(blueCount, greenCount, redCount);
 		long totalContribScore = currPlayer.getLong("contribution_score") + contribScore;
 		
-		if (totalContribScore > Config.ALT_MAXIMUM_PLAYER_CONTRIB)
+		if (totalContribScore > FeatureConfig.ALT_MAXIMUM_PLAYER_CONTRIB)
 		{
 			return -1;
 		}
@@ -1114,7 +1115,7 @@ public class SevenSigns
 				break;
 		}
 		
-		if (!Config.ALT_SEVENSIGNS_LAZY_UPDATE)
+		if (!FeatureConfig.ALT_SEVENSIGNS_LAZY_UPDATE)
 		{
 			saveSevenSignsData(objectId);
 			saveSevenSignsStatus();

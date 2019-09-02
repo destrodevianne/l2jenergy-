@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.model.stats.functions.formulas;
 
 import com.l2jserver.gameserver.SevenSigns;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.model.stats.Stats;
@@ -47,11 +47,11 @@ public class FuncGatesPDefMod extends AbstractFunction
 	{
 		if (SevenSigns.getInstance().getSealOwner(SevenSigns.SEAL_STRIFE) == SevenSigns.CABAL_DAWN)
 		{
-			return initVal * Config.ALT_SIEGE_DAWN_GATES_PDEF_MULT;
+			return initVal * FeatureConfig.ALT_SIEGE_DAWN_GATES_PDEF_MULT;
 		}
 		else if (SevenSigns.getInstance().getSealOwner(SevenSigns.SEAL_STRIFE) == SevenSigns.CABAL_DUSK)
 		{
-			return initVal * Config.ALT_SIEGE_DUSK_GATES_PDEF_MULT;
+			return initVal * FeatureConfig.ALT_SIEGE_DUSK_GATES_PDEF_MULT;
 		}
 		return initVal;
 	}

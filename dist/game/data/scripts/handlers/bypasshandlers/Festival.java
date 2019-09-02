@@ -24,7 +24,7 @@ import java.util.List;
 import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.SevenSigns;
 import com.l2jserver.gameserver.SevenSignsFestival;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IBypassHandler;
 import com.l2jserver.gameserver.model.L2Party;
@@ -101,7 +101,7 @@ public class Festival implements IBypassHandler
 					}
 					
 					// Check to see if the party has at least 5 members.
-					if (party.getMemberCount() < Config.ALT_FESTIVAL_MIN_PLAYER)
+					if (party.getMemberCount() < FeatureConfig.ALT_FESTIVAL_MIN_PLAYER)
 					{
 						npc.showChatWindow(activeChar, 2, "b", false);
 						return true;
@@ -311,7 +311,7 @@ public class Festival implements IBypassHandler
 					}
 					else
 					{
-						if (party.getMemberCount() > Config.ALT_FESTIVAL_MIN_PLAYER)
+						if (party.getMemberCount() > FeatureConfig.ALT_FESTIVAL_MIN_PLAYER)
 						{
 							party.removePartyMember(activeChar, messageType.Expelled);
 						}

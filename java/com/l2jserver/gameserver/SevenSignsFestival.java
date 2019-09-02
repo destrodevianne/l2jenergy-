@@ -91,7 +91,7 @@ public class SevenSignsFestival implements SpawnListener
 	 * The monster swarm time is the time before the monsters swarm to the center of the arena, after they are spawned.<br>
 	 * The chest spawn time is for when the bonus festival chests spawn, usually towards the end of the festival.
 	 */
-	public static final long FESTIVAL_SIGNUP_TIME = Config.ALT_FESTIVAL_CYCLE_LENGTH - Config.ALT_FESTIVAL_LENGTH - 60000;
+	public static final long FESTIVAL_SIGNUP_TIME = FeatureConfig.ALT_FESTIVAL_CYCLE_LENGTH - FeatureConfig.ALT_FESTIVAL_LENGTH - 60000;
 	
 	// Key Constants \\
 	private static final int FESTIVAL_MAX_OFFSET_X = 230;
@@ -922,10 +922,10 @@ public class SevenSignsFestival implements SpawnListener
 			return; // already started
 		}
 		_managerInstance = new FestivalManager();
-		setNextFestivalStart(Config.ALT_FESTIVAL_MANAGER_START + FESTIVAL_SIGNUP_TIME);
-		_managerScheduledTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(_managerInstance, Config.ALT_FESTIVAL_MANAGER_START, Config.ALT_FESTIVAL_CYCLE_LENGTH);
+		setNextFestivalStart(FeatureConfig.ALT_FESTIVAL_MANAGER_START + FESTIVAL_SIGNUP_TIME);
+		_managerScheduledTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(_managerInstance, FeatureConfig.ALT_FESTIVAL_MANAGER_START, FeatureConfig.ALT_FESTIVAL_CYCLE_LENGTH);
 		
-		LOG.info("SevenSignsFestival: The first Festival of Darkness cycle begins in {} minute(s).", TimeUnit.MILLISECONDS.toMinutes(Config.ALT_FESTIVAL_MANAGER_START));
+		LOG.info("SevenSignsFestival: The first Festival of Darkness cycle begins in {} minute(s).", TimeUnit.MILLISECONDS.toMinutes(FeatureConfig.ALT_FESTIVAL_MANAGER_START));
 	}
 	
 	/**
@@ -1232,7 +1232,7 @@ public class SevenSignsFestival implements SpawnListener
 	
 	public void setNextCycleStart()
 	{
-		_nextFestivalCycleStart = System.currentTimeMillis() + Config.ALT_FESTIVAL_CYCLE_LENGTH;
+		_nextFestivalCycleStart = System.currentTimeMillis() + FeatureConfig.ALT_FESTIVAL_CYCLE_LENGTH;
 	}
 	
 	public void setNextFestivalStart(long milliFromNow)
@@ -1431,7 +1431,7 @@ public class SevenSignsFestival implements SpawnListener
 			setParticipants(oracle, festivalId, festivalParty);
 			
 			// Check on disconnect if min player in party
-			if ((festivalParty != null) && (festivalParty.getMemberCount() < Config.ALT_FESTIVAL_MIN_PLAYER))
+			if ((festivalParty != null) && (festivalParty.getMemberCount() < FeatureConfig.ALT_FESTIVAL_MIN_PLAYER))
 			{
 				updateParticipants(player, null); // under minimum count
 				festivalParty.removePartyMember(player, messageType.Expelled);
@@ -1760,7 +1760,7 @@ public class SevenSignsFestival implements SpawnListener
 			
 			// Set the next start timers.
 			setNextCycleStart();
-			setNextFestivalStart(Config.ALT_FESTIVAL_CYCLE_LENGTH - FESTIVAL_SIGNUP_TIME);
+			setNextFestivalStart(FeatureConfig.ALT_FESTIVAL_CYCLE_LENGTH - FESTIVAL_SIGNUP_TIME);
 		}
 		
 		@Override
@@ -1776,7 +1776,7 @@ public class SevenSignsFestival implements SpawnListener
 				
 				// If the next period is due to start before the end of this
 				// festival cycle, then don't run it.
-				if (SevenSigns.getInstance().getMilliToPeriodChange() < Config.ALT_FESTIVAL_CYCLE_LENGTH)
+				if (SevenSigns.getInstance().getMilliToPeriodChange() < FeatureConfig.ALT_FESTIVAL_CYCLE_LENGTH)
 				{
 					return;
 				}
@@ -1814,8 +1814,8 @@ public class SevenSignsFestival implements SpawnListener
 						try
 						{
 							setNextCycleStart();
-							setNextFestivalStart(Config.ALT_FESTIVAL_CYCLE_LENGTH - FESTIVAL_SIGNUP_TIME);
-							wait(Config.ALT_FESTIVAL_CYCLE_LENGTH - FESTIVAL_SIGNUP_TIME);
+							setNextFestivalStart(FeatureConfig.ALT_FESTIVAL_CYCLE_LENGTH - FESTIVAL_SIGNUP_TIME);
+							wait(FeatureConfig.ALT_FESTIVAL_CYCLE_LENGTH - FESTIVAL_SIGNUP_TIME);
 							for (L2DarknessFestival festivalInst : _festivalInstances.values())
 							{
 								if (!festivalInst._npcInsts.isEmpty())
@@ -1856,19 +1856,19 @@ public class SevenSignsFestival implements SpawnListener
 				// Prevent future signups while festival is in progress.
 				_festivalInitialized = true;
 				
-				setNextFestivalStart(Config.ALT_FESTIVAL_CYCLE_LENGTH);
+				setNextFestivalStart(FeatureConfig.ALT_FESTIVAL_CYCLE_LENGTH);
 				sendMessageToAll("Festival Guide", NpcStringId.THE_MAIN_EVENT_IS_NOW_STARTING);
 				
 				// Stand by for a short length of time before starting the festival.
 				try
 				{
-					wait(Config.ALT_FESTIVAL_FIRST_SPAWN);
+					wait(FeatureConfig.ALT_FESTIVAL_FIRST_SPAWN);
 				}
 				catch (InterruptedException e)
 				{
 				}
 				
-				elapsedTime = Config.ALT_FESTIVAL_FIRST_SPAWN;
+				elapsedTime = FeatureConfig.ALT_FESTIVAL_FIRST_SPAWN;
 				
 				// Participants can now opt to increase the challenge, if desired.
 				_festivalInProgress = true;
@@ -1884,13 +1884,13 @@ public class SevenSignsFestival implements SpawnListener
 				// After a short time period, move all idle spawns to the center of the arena.
 				try
 				{
-					wait(Config.ALT_FESTIVAL_FIRST_SWARM - Config.ALT_FESTIVAL_FIRST_SPAWN);
+					wait(FeatureConfig.ALT_FESTIVAL_FIRST_SWARM - FeatureConfig.ALT_FESTIVAL_FIRST_SPAWN);
 				}
 				catch (InterruptedException e)
 				{
 				}
 				
-				elapsedTime += Config.ALT_FESTIVAL_FIRST_SWARM - Config.ALT_FESTIVAL_FIRST_SPAWN;
+				elapsedTime += FeatureConfig.ALT_FESTIVAL_FIRST_SWARM - FeatureConfig.ALT_FESTIVAL_FIRST_SPAWN;
 				
 				for (L2DarknessFestival festivalInst : _festivalInstances.values())
 				{
@@ -1900,7 +1900,7 @@ public class SevenSignsFestival implements SpawnListener
 				// Stand by until the time comes for the second spawn.
 				try
 				{
-					wait(Config.ALT_FESTIVAL_SECOND_SPAWN - Config.ALT_FESTIVAL_FIRST_SWARM);
+					wait(FeatureConfig.ALT_FESTIVAL_SECOND_SPAWN - FeatureConfig.ALT_FESTIVAL_FIRST_SWARM);
 				}
 				catch (InterruptedException e)
 				{
@@ -1912,7 +1912,7 @@ public class SevenSignsFestival implements SpawnListener
 				{
 					festivalInst.spawnFestivalMonsters(FESTIVAL_DEFAULT_RESPAWN / 2, 2);
 					
-					long end = (Config.ALT_FESTIVAL_LENGTH - Config.ALT_FESTIVAL_SECOND_SPAWN) / 60000;
+					long end = (FeatureConfig.ALT_FESTIVAL_LENGTH - FeatureConfig.ALT_FESTIVAL_SECOND_SPAWN) / 60000;
 					if (end == 2)
 					{
 						festivalInst.sendMessageToParticipants(NpcStringId.THE_FESTIVAL_OF_DARKNESS_WILL_END_IN_TWO_MINUTES);
@@ -1923,12 +1923,12 @@ public class SevenSignsFestival implements SpawnListener
 					}
 				}
 				
-				elapsedTime += Config.ALT_FESTIVAL_SECOND_SPAWN - Config.ALT_FESTIVAL_FIRST_SWARM;
+				elapsedTime += FeatureConfig.ALT_FESTIVAL_SECOND_SPAWN - FeatureConfig.ALT_FESTIVAL_FIRST_SWARM;
 				
 				// After another short time period, again move all idle spawns to the center of the arena.
 				try
 				{
-					wait(Config.ALT_FESTIVAL_SECOND_SWARM - Config.ALT_FESTIVAL_SECOND_SPAWN);
+					wait(FeatureConfig.ALT_FESTIVAL_SECOND_SWARM - FeatureConfig.ALT_FESTIVAL_SECOND_SPAWN);
 				}
 				catch (InterruptedException e)
 				{
@@ -1939,12 +1939,12 @@ public class SevenSignsFestival implements SpawnListener
 					festivalInst.moveMonstersToCenter();
 				}
 				
-				elapsedTime += Config.ALT_FESTIVAL_SECOND_SWARM - Config.ALT_FESTIVAL_SECOND_SPAWN;
+				elapsedTime += FeatureConfig.ALT_FESTIVAL_SECOND_SWARM - FeatureConfig.ALT_FESTIVAL_SECOND_SPAWN;
 				
 				// Stand by until the time comes for the chests to be spawned.
 				try
 				{
-					wait(Config.ALT_FESTIVAL_CHEST_SPAWN - Config.ALT_FESTIVAL_SECOND_SWARM);
+					wait(FeatureConfig.ALT_FESTIVAL_CHEST_SPAWN - FeatureConfig.ALT_FESTIVAL_SECOND_SWARM);
 				}
 				catch (InterruptedException e)
 				{
@@ -1958,12 +1958,12 @@ public class SevenSignsFestival implements SpawnListener
 					festivalInst.sendMessageToParticipants("The chests have spawned! Be quick, the festival will end soon."); // FIXME What is the correct npcString?
 				}
 				
-				elapsedTime += Config.ALT_FESTIVAL_CHEST_SPAWN - Config.ALT_FESTIVAL_SECOND_SWARM;
+				elapsedTime += FeatureConfig.ALT_FESTIVAL_CHEST_SPAWN - FeatureConfig.ALT_FESTIVAL_SECOND_SWARM;
 				
 				// Stand by and wait until it's time to end the festival.
 				try
 				{
-					wait(Config.ALT_FESTIVAL_LENGTH - elapsedTime);
+					wait(FeatureConfig.ALT_FESTIVAL_LENGTH - elapsedTime);
 				}
 				catch (InterruptedException e)
 				{

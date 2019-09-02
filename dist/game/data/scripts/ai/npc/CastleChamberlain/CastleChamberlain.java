@@ -26,7 +26,6 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 import com.l2jserver.gameserver.SevenSigns;
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.configuration.config.ManorConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
@@ -1241,12 +1240,12 @@ public final class CastleChamberlain extends AbstractNpcAI
 						if ((SevenSigns.getInstance().getPlayerCabal(player.getObjectId()) == SevenSigns.CABAL_DAWN) && SevenSigns.getInstance().isCompetitionPeriod())
 						{
 							final int ticketCount = castle.getTicketBuyCount();
-							if (ticketCount < (Config.SSQ_DAWN_TICKET_QUANTITY / Config.SSQ_DAWN_TICKET_BUNDLE))
+							if (ticketCount < (FeatureConfig.SSQ_DAWN_TICKET_QUANTITY / FeatureConfig.SSQ_DAWN_TICKET_BUNDLE))
 							{
 								final NpcHtmlMessage html = getHtmlPacket(player, npc, "ssq_selldawnticket.html");
-								html.replace("%DawnTicketLeft%", String.valueOf(Config.SSQ_DAWN_TICKET_QUANTITY - (ticketCount * Config.SSQ_DAWN_TICKET_BUNDLE)));
-								html.replace("%DawnTicketBundle%", String.valueOf(Config.SSQ_DAWN_TICKET_BUNDLE));
-								html.replace("%DawnTicketPrice%", String.valueOf(Config.SSQ_DAWN_TICKET_PRICE * Config.SSQ_DAWN_TICKET_BUNDLE));
+								html.replace("%DawnTicketLeft%", String.valueOf(FeatureConfig.SSQ_DAWN_TICKET_QUANTITY - (ticketCount * FeatureConfig.SSQ_DAWN_TICKET_BUNDLE)));
+								html.replace("%DawnTicketBundle%", String.valueOf(FeatureConfig.SSQ_DAWN_TICKET_BUNDLE));
+								html.replace("%DawnTicketPrice%", String.valueOf(FeatureConfig.SSQ_DAWN_TICKET_PRICE * FeatureConfig.SSQ_DAWN_TICKET_BUNDLE));
 								player.sendPacket(html);
 							}
 							else
@@ -1279,13 +1278,13 @@ public final class CastleChamberlain extends AbstractNpcAI
 						if ((SevenSigns.getInstance().getPlayerCabal(player.getObjectId()) == SevenSigns.CABAL_DAWN) && SevenSigns.getInstance().isCompetitionPeriod())
 						{
 							final int ticketCount = castle.getTicketBuyCount();
-							if (ticketCount < (Config.SSQ_DAWN_TICKET_QUANTITY / Config.SSQ_DAWN_TICKET_BUNDLE))
+							if (ticketCount < (FeatureConfig.SSQ_DAWN_TICKET_QUANTITY / FeatureConfig.SSQ_DAWN_TICKET_BUNDLE))
 							{
-								final long totalCost = Config.SSQ_DAWN_TICKET_PRICE * Config.SSQ_DAWN_TICKET_BUNDLE;
+								final long totalCost = FeatureConfig.SSQ_DAWN_TICKET_PRICE * FeatureConfig.SSQ_DAWN_TICKET_BUNDLE;
 								if (player.getAdena() >= totalCost)
 								{
 									takeItems(player, Inventory.ADENA_ID, totalCost);
-									giveItems(player, Config.SSQ_MANORS_AGREEMENT_ID, Config.SSQ_DAWN_TICKET_BUNDLE);
+									giveItems(player, FeatureConfig.SSQ_MANORS_AGREEMENT_ID, FeatureConfig.SSQ_DAWN_TICKET_BUNDLE);
 									castle.setTicketBuyCount(ticketCount + 1);
 								}
 								else
