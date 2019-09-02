@@ -18,14 +18,11 @@
  */
 package quests.Q00716_PathToBecomingALordRune;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.FortManager;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.entity.Castle;
 import com.l2jserver.gameserver.model.entity.Fort;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
@@ -33,239 +30,358 @@ import com.l2jserver.gameserver.model.quest.State;
 import com.l2jserver.gameserver.network.NpcStringId;
 import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
+import com.l2jserver.gameserver.util.Util;
 
 import quests.Q00021_HiddenTruth.Q00021_HiddenTruth;
-import quests.Q00025_HidingBehindTheTruth.Q00025_HidingBehindTheTruth;
 
-public class Q00716_PathToBecomingALordRune extends Quest
+/**
+ * Path to Becoming a Lord - Rune (716)
+ * @author Pandragon
+ */
+public final class Q00716_PathToBecomingALordRune extends Quest
 {
-	private static final int Frederick = 35509;
-	private static final int Agripel = 31348;
-	private static final int Innocentin = 31328;
-	
-	private static final int RuneCastle = 8;
-	private static List<Integer> Pagans = new ArrayList<>();
-	
-	static
+	// NPCs
+	private static final int FREDERICK = 35509;
+	private static final int AGRIPEL = 31348;
+	private static final int INNOCENTIN = 31328;
+	// Monsters
+	private static final int[] PAGANS =
 	{
-		for (int i = 22138; i <= 22176; i++)
-		{
-			Pagans.add(i);
-		}
-		for (int i = 22188; i <= 22195; i++)
-		{
-			Pagans.add(i);
-		}
-	}
+		22136, // Doorman Zombie
+		22137, // Penance Guard
+		22138, // Chapel Guard
+		22139, // Old Aristocrat's Soldier
+		22140, // Zombie Worker
+		22141, // Forgotten Victim
+		22142, // Triol's Layperson
+		22143, // Triol's Believer
+		22144, // Resurrected Temple Knight
+		22145, // Ritual Sacrifice
+		22146, // Triol's Priest
+		22147, // Ritual Offering
+		22148, // Triol's Believer
+		22149, // Ritual Offering
+		22150, // Triol's Believer
+		22151, // Triol's Priest
+		22152, // Temple Guard
+		22153, // Temple Guard Captain
+		22154, // Ritual Sacrifice
+		22155, // Triol's High Priest
+		22156, // Triol's Priest
+		22157, // Triol's Priest
+		22158, // Triol's Believer
+		22159, // Triol's High Priest
+		22160, // Triol's Priest
+		22161, // Ritual Sacrifice
+		22163, // Triol's High Priest
+		22164, // Triol's Believer
+		22165, // Triol's Priest
+		22166, // Triol's Believer
+		22167, // Triol's High Priest
+		22168, // Triol's Priest
+		22169, // Ritual Sacrifice
+		22170, // Triol's Believer
+		22171, // Triol's High Priest
+		22172, // Ritual Sacrifice
+		22173, // Triol's Priest
+		22174, // Triol's Priest
+		22175, // Andreas' Captain of the Royal Guard
+		22176, // Andreas' Royal Guards
+		22194, // Penance Guard
+	};
+	// Misc
+	private static final int CASTLE_ID = 8; // Rune
 	
 	public Q00716_PathToBecomingALordRune()
 	{
-		super(716, Q00716_PathToBecomingALordRune.class.getSimpleName(), "Path To Becoming A Lord Rune");
-		addStartNpc(Frederick);
-		addTalkId(Frederick);
-		addTalkId(new int[]
-		{
-			Agripel,
-			Innocentin
-		});
-		for (int i : Pagans)
-		{
-			addKillId(i);
-		}
+		super(716, Q00716_PathToBecomingALordRune.class.getSimpleName(), "Path to Becoming a Lord - Rune");
+		addStartNpc(FREDERICK);
+		addTalkId(FREDERICK, AGRIPEL, INNOCENTIN);
+		addKillId(PAGANS);
 	}
 	
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
-		final QuestState qs = player.getQuestState(getName());
+		final QuestState qs = getQuestState(player, false);
+		String htmltext = null;
 		if (qs == null)
 		{
-			return null;
+			return htmltext;
 		}
-		final Castle castle = CastleManager.getInstance().getCastleById(RuneCastle);
-		if (castle.getOwner() == null)
-		{
-			return "Castle has no lord";
-		}
-		final L2PcInstance castleOwner = castle.getOwner().getLeader().getPlayerInstance();
-		if (event.equals("frederick_q716_03.htm"))
-		{
-			qs.startQuest();
-		}
-		else if (event.equals("agripel_q716_03.htm"))
-		{
-			qs.setCond(3);
-		}
-		else if (event.equals("frederick_q716_08.htm"))
-		{
-			castleOwner.getQuestState(Q00716_PathToBecomingALordRune.class.getSimpleName()).set("confidant", String.valueOf(qs.getPlayer().getObjectId()));
-			castleOwner.getQuestState(Q00716_PathToBecomingALordRune.class.getSimpleName()).setCond(5);
-			qs.setState(State.STARTED);
-		}
-		else if (event.equals("innocentin_q716_03.htm"))
-		{
-			if ((castleOwner != null) && (castleOwner != qs.getPlayer()) && (castleOwner.getQuestState(Q00716_PathToBecomingALordRune.class.getSimpleName()) != null) && (castleOwner.getQuestState(Q00716_PathToBecomingALordRune.class.getSimpleName()).isCond(5)))
-			{
-				castleOwner.getQuestState(Q00716_PathToBecomingALordRune.class.getSimpleName()).setCond(6);
-			}
-		}
-		else if (event.equals("agripel_q716_08.htm"))
-		{
-			qs.setCond(8);
-		}
-		return event;
-	}
-	
-	@Override
-	public String onTalk(L2Npc npc, L2PcInstance player)
-	{
-		final QuestState qs = getQuestState(player, true);
-		String htmltext = getNoQuestMsg(player);
-		final Castle castle = CastleManager.getInstance().getCastleById(RuneCastle);
-		if (castle.getOwner() == null)
-		{
-			return "Castle has no lord";
-		}
-		final L2PcInstance castleOwner = castle.getOwner().getLeader().getPlayerInstance();
 		
-		switch (npc.getId())
+		switch (event)
 		{
-			case Frederick:
+			case "35509-02.html":
+			case "31348-02.html":
+			case "31328-04.html":
+			case "31348-06.html":
+			case "31348-07.html":
+			case "31348-08.html":
 			{
-				if (qs.isCond(0))
+				htmltext = event;
+				break;
+			}
+			case "35509-04.html":
+			{
+				if (qs.isCreated())
 				{
-					if (castleOwner == qs.getPlayer())
-					{
-						if (!hasFort())
-						{
-							htmltext = "frederick_q716_01.htm";
-						}
-						else
-						{
-							htmltext = "frederick_q716_00.htm";
-							qs.exitQuest(true);
-						}
-					}
-					else if ((castleOwner != null) && (castleOwner != qs.getPlayer()) && (castleOwner.getQuestState(Q00716_PathToBecomingALordRune.class.getSimpleName()) != null) && (castleOwner.getQuestState(Q00716_PathToBecomingALordRune.class.getSimpleName()).isCond(4)))
-					{
-						if (castleOwner.calculateDistance(npc, false, false) <= 200)
-						{
-							htmltext = "frederick_q716_07.htm";
-						}
-						else
-						{
-							htmltext = "frederick_q716_07a.htm";
-						}
-					}
-					else if (qs.getState() == State.STARTED)
-					{
-						htmltext = "frederick_q716_00b.htm";
-					}
-					else
-					{
-						htmltext = "frederick_q716_00a.htm";
-						qs.exitQuest(true);
-					}
-				}
-				else if (qs.isCond(1))
-				{
-					final QuestState hidingBehindTheTruth = qs.getPlayer().getQuestState(Q00025_HidingBehindTheTruth.class.getSimpleName());
-					final QuestState hiddenTruth = qs.getPlayer().getQuestState(Q00021_HiddenTruth.class.getSimpleName());
-					if ((hidingBehindTheTruth != null) && hidingBehindTheTruth.isCompleted() && (hiddenTruth != null) && hiddenTruth.isCompleted())
-					{
-						qs.setCond(2);
-						htmltext = "frederick_q716_04.htm";
-					}
-					else
-					{
-						htmltext = "frederick_q716_03.htm";
-					}
-				}
-				else if (qs.isCond(2))
-				{
-					htmltext = "frederick_q716_04a.htm";
-				}
-				else if (qs.isCond(3))
-				{
-					qs.setCond(4);
-					htmltext = "frederick_q716_05.htm";
-				}
-				else if (qs.isCond(4))
-				{
-					htmltext = "frederick_q716_06.htm";
-				}
-				else if (qs.isCond(5))
-				{
-					htmltext = "frederick_q716_09.htm";
-				}
-				else if (qs.isCond(6))
-				{
-					qs.setCond(7);
-					htmltext = "frederick_q716_10.htm";
-				}
-				else if (qs.isCond(7))
-				{
-					htmltext = "frederick_q716_11.htm";
-				}
-				else if (qs.isCond(8))
-				{
-					if (castleOwner != null)
-					{
-						final NpcSay packet = new NpcSay(npc.getObjectId(), Say2.NPC_SHOUT, npc.getId(), NpcStringId.S1_HAS_BECOME_THE_LORD_OF_THE_TOWN_OF_RUNE_MAY_THERE_BE_GLORY_IN_THE_TERRITORY_OF_RUNE);
-						packet.addStringParameter(player.getName());
-						npc.broadcastPacket(packet);
-						
-						/**
-						 * Territory terr = TerritoryWarManager.getInstance().getTerritory(castle.getId()); terr.setLordId(castleOwner.getObjectId()); terr.updateDataInDB(); terr.updateState();
-						 */
-						
-						htmltext = "frederick_q716_12.htm";
-						qs.exitQuest(true, true);
-					}
+					qs.startQuest();
+					htmltext = event;
 				}
 				break;
 			}
-			case Agripel:
+			case "31348-03.html":
 			{
 				if (qs.isCond(2))
 				{
-					htmltext = "agripel_q716_01.htm";
-				}
-				else if (qs.isCond(7))
-				{
-					if ((qs.get("paganCount") != null) && (qs.getInt("paganCount") >= 100))
-					{
-						htmltext = "agripel_q716_07.htm";
-					}
-					else
-					{
-						htmltext = "agripel_q716_04.htm";
-					}
-				}
-				else if (qs.isCond(8))
-				{
-					htmltext = "agripel_q716_09.htm";
+					qs.setCond(3);
+					htmltext = event;
 				}
 				break;
 			}
-			case Innocentin:
+			case "35509-16.html":
 			{
-				if ((qs.getState() == State.STARTED) && qs.isCond(0))
+				final QuestState qs0 = getQuestState(player.getClan().getLeader().getPlayerInstance(), false);
+				if (qs0.isCond(4))
 				{
-					if ((castleOwner != null) && (castleOwner != qs.getPlayer()) && (castleOwner.getQuestState(Q00716_PathToBecomingALordRune.class.getSimpleName()) != null) && (castleOwner.getQuestState(Q00716_PathToBecomingALordRune.class.getSimpleName()).isCond(5)))
+					qs0.set("clanmember", player.getId());
+					qs0.setCond(5);
+					htmltext = event; // TODO: %name%, I will give you one mission.
+				}
+				break;
+			}
+			case "31328-05.html":
+			{
+				final QuestState qs0 = getQuestState(player.getClan().getLeader().getPlayerInstance(), false);
+				if (qs0.isCond(5))
+				{
+					qs0.setMemoState(0);
+					qs0.setCond(6);
+					htmltext = event;
+				}
+				break;
+			}
+			case "31348-10.html":
+			{
+				if (qs.isCond(7))
+				{
+					qs.setCond(8);
+					htmltext = event;
+				}
+				break;
+			}
+		}
+		return htmltext;
+	}
+	
+	@Override
+	public String onTalk(L2Npc npc, L2PcInstance talker)
+	{
+		final QuestState qs = getQuestState(talker, true);
+		String htmltext = getNoQuestMsg(talker);
+		
+		if ((talker.getClan() == null) || (talker.getClan().getLeaderId() != CastleManager.getInstance().getCastleById(CASTLE_ID).getOwnerId()))
+		{
+			return htmltext;
+		}
+		
+		switch (npc.getId())
+		{
+			case FREDERICK:
+			{
+				switch (qs.getState())
+				{
+					case State.CREATED:
 					{
-						if (castleOwner.getQuestState(Q00716_PathToBecomingALordRune.class.getSimpleName()).getInt("confidant") == qs.getPlayer().getObjectId())
+						final L2PcInstance leader = talker.getClan().getLeader().getPlayerInstance();
+						
+						if (qs.getPlayer() != leader)
 						{
-							htmltext = "innocentin_q716_01.htm";
+							final QuestState qs0 = getQuestState(leader, false);
+							if (qs0.isCond(4))
+							{
+								if (Util.checkIfInRange(1500, talker, leader, true) && leader.isOnline())
+								{
+									htmltext = "35509-15.html";
+								}
+								else
+								{
+									htmltext = "35509-14.html";
+								}
+							}
+							else if (qs0.isCond(5))
+							{
+								htmltext = "35509-17.html";
+							}
+							else
+							{
+								htmltext = "35509-13.html";
+							}
 						}
 						else
 						{
-							htmltext = "innocentin_q716_00.htm";
+							htmltext = "35509-01.htm";
 						}
+						break;
+					}
+					case State.STARTED:
+					{
+						switch (qs.getCond())
+						{
+							case 1:
+							{
+								QuestState qs1 = getQuestState(talker, false);
+								qs1 = talker.getQuestState(Q00021_HiddenTruth.class.getSimpleName());
+								QuestState qs2 = getQuestState(talker, false);
+								qs2 = talker.getQuestState("25_HidingBehindTheTruth");
+								
+								if ((qs1 != null) && qs1.isCompleted() && (qs2 != null) && qs2.isCompleted())
+								{
+									qs.setCond(2);
+									htmltext = "35509-05.html";
+								}
+								else
+								{
+									htmltext = "35509-06.html";
+								}
+								break;
+							}
+							case 2:
+							{
+								htmltext = "35509-07.html";
+								break;
+							}
+							case 3:
+							{
+								qs.setCond(4);
+								htmltext = "35509-09.html";
+								break;
+							}
+							case 4:
+							{
+								htmltext = "35509-10.html";
+								break;
+							}
+							case 5:
+							{
+								htmltext = "35509-18.html";
+								break;
+							}
+							case 6:
+							{
+								qs.setCond(7);
+								htmltext = "35509-19.html";
+								break;
+							}
+							case 7:
+							{
+								htmltext = "35509-20.html";
+								break;
+							}
+							case 8:
+							{
+								if (CastleManager.getInstance().getCastleById(CASTLE_ID).getSiege().isInProgress())
+								{
+									return "35509-21a.html";
+								}
+								
+								for (Fort fort : FortManager.getInstance().getForts())
+								{
+									if (!fort.isBorderFortress() && fort.getSiege().isInProgress())
+									{
+										return "35509-21a.html";
+									}
+									else if (!fort.isBorderFortress() && (fort.getContractedCastleId() != CASTLE_ID))
+									{
+										return "35509-21b.html";
+									}
+								}
+								
+								// DeclareLord(rune_dominion, player);
+								CastleManager.getInstance().getCastleById(CASTLE_ID).setShowNpcCrest(true);
+								NpcSay packet = new NpcSay(npc.getObjectId(), Say2.NPC_SHOUT, npc.getId(), NpcStringId.S1_HAS_BECOME_THE_LORD_OF_THE_TOWN_OF_RUNE_MAY_THERE_BE_GLORY_IN_THE_TERRITORY_OF_RUNE);
+								packet.addStringParameter(talker.getName());
+								npc.broadcastPacket(packet);
+								qs.exitQuest(false, true);
+								htmltext = "35509-21.html";
+								break;
+							}
+						}
+					}
+					case State.COMPLETED:
+					{
+						htmltext = getAlreadyCompletedMsg(talker);
+						break;
+					}
+				}
+				break;
+			}
+			case AGRIPEL:
+			{
+				switch (qs.getCond())
+				{
+					case 2:
+					{
+						htmltext = "31348-01.html";
+						break;
+					}
+					case 3:
+					case 4:
+					case 5:
+					case 6:
+					{
+						htmltext = "31348-04.html";
+						break;
+					}
+					case 7:
+					{
+						if (qs.getMemoState() >= 100)
+						{
+							htmltext = "31348-09.html";
+						}
+						else
+						{
+							htmltext = "31348-05.html";
+						}
+						break;
+					}
+					case 8:
+					{
+						htmltext = "31348-11.html";
+						break;
+					}
+				}
+				break;
+			}
+			case INNOCENTIN:
+			{
+				final L2PcInstance leader = talker.getClan().getLeader().getPlayerInstance();
+				
+				if (qs.getPlayer() != leader)
+				{
+					final QuestState qs0 = getQuestState(leader, false);
+					if (qs.getMemoState() >= 100)
+					{
+						htmltext = "31328-06.html";
 					}
 					else
 					{
-						htmltext = "innocentin_q716_00a.htm";
+						if (leader.isOnline())
+						{
+							if (talker.getId() == qs0.getInt("clanmember"))
+							{
+								htmltext = "31328-03.html";
+							}
+							else
+							{
+								htmltext = "31328-03а.html";
+							}
+						}
+						else
+						{
+							htmltext = "31328-01.html";
+						}
 					}
 				}
 				break;
@@ -275,45 +391,26 @@ public class Q00716_PathToBecomingALordRune extends Quest
 	}
 	
 	@Override
-	public String onKill(L2Npc npc, L2PcInstance killer, boolean isPet)
+	public String onKill(L2Npc npc, L2PcInstance killer, boolean isSummon)
 	{
-		final QuestState qs = killer.getQuestState(getName());
-		if (qs == null)
+		if (killer.getClan() == null)
 		{
-			return null;
+			return super.onKill(npc, killer, isSummon);
 		}
-		if (qs.getState() != State.STARTED)
+		
+		final L2PcInstance leader = killer.getClan().getLeader().getPlayerInstance();
+		final QuestState qs = getQuestState(leader, false);
+		if ((qs != null) && qs.isCond(7) && leader.isOnline() && (killer != leader) && (killer.getId() == qs.getInt("clanmember")))
 		{
-			return null;
-		}
-		final Castle castle = CastleManager.getInstance().getCastleById(RuneCastle);
-		final L2PcInstance castleOwner = castle.getOwner().getLeader().getPlayerInstance();
-		if ((qs.getState() == State.STARTED) && qs.isCond(0))
-		{
-			if ((castleOwner != null) && (castleOwner != qs.getPlayer()) && (castleOwner.getQuestState(Q00716_PathToBecomingALordRune.class.getSimpleName()) != null) && (castleOwner.getQuestState(Q00716_PathToBecomingALordRune.class.getSimpleName()).isCond(7)))
+			if (qs.getMemoState() < 100)
 			{
-				if (castleOwner.getQuestState(Q00716_PathToBecomingALordRune.class.getSimpleName()).get("paganCount") != null)
-				{
-					castleOwner.getQuestState(Q00716_PathToBecomingALordRune.class.getSimpleName()).set("paganCount", String.valueOf(castleOwner.getQuestState(Q00716_PathToBecomingALordRune.class.getSimpleName()).getInt("paganCount") + 1));
-				}
-				else
-				{
-					castleOwner.getQuestState(Q00716_PathToBecomingALordRune.class.getSimpleName()).set("paganCount", "1");
-				}
+				qs.setMemoState(qs.getMemoState() + 1);
+			}
+			else
+			{
+				playSound(leader, Sound.ITEMSOUND_QUEST_MIDDLE);
 			}
 		}
-		return null;
-	}
-	
-	private boolean hasFort()
-	{
-		for (Fort fortress : FortManager.getInstance().getForts())
-		{
-			if (fortress.getContractedCastleId() == RuneCastle)
-			{
-				return true;
-			}
-		}
-		return false;
+		return super.onKill(npc, killer, isSummon);
 	}
 }
