@@ -190,6 +190,7 @@ import handlers.communityboard.RegionBoard;
 import handlers.communityboard.SellBoard;
 import handlers.communityboard.ShopBoard;
 import handlers.communityboard.TeleportBoard;
+import handlers.custom.AutoAdenaBar;
 import handlers.custom.CustomAnnouncePkPvP;
 import handlers.itemhandlers.BeastSoulShot;
 import handlers.itemhandlers.BeastSpiritShot;
@@ -609,6 +610,7 @@ public class MasterHandler
 		},
 		{
 			// Custom Handlers
+			AutoAdenaBar.class,
 			CustomAnnouncePkPvP.class
 		}
 	};

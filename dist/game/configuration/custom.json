@@ -16,8 +16,12 @@
     # Banking System
     # =====================================================================
     # Enable/Disable Banking System
-    # Default: False
+    # Default: false
     "BankingEnabled" : "false",
+    
+    # Enable/Disable Auto Banking System
+    # Default: false
+    "AutoBankingEnabled" : "false",
 
     # Amount of Goldbars a player gets when they use the ".deposit" command. Also the same amount they will lose with ".withdraw".
     # Default: 1
@@ -26,6 +30,9 @@
     # Amount of Adena a player gets when they use the ".withdraw" command. Also the same amount they will lose with ".deposit".
     # Default: 500000000
     "BankingAdenaCount" : "500000000",
+    
+    # Default: 510000000
+    "AutoBankingAdenaMinCount" : "510000000",
 	
     # =====================================================================
     # Hellbound Status Voice Command
