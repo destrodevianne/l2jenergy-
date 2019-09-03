@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.l2jserver.gameserver.GameTimeController;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CustomConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IUserCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -75,7 +75,7 @@ public class Time implements IUserCommandHandler
 			sm.addString(m);
 		}
 		activeChar.sendPacket(sm);
-		if (Config.L2JMOD_DISPLAY_SERVER_TIME)
+		if (CustomConfig.DISPLAY_SERVER_TIME)
 		{
 			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_time").replace("%s%", fmt.format(new Date(System.currentTimeMillis())) + ""));
 		}

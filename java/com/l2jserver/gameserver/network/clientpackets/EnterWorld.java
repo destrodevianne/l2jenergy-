@@ -23,6 +23,7 @@ import com.l2jserver.gameserver.LoginServerThread;
 import com.l2jserver.gameserver.SevenSigns;
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CustomConfig;
 import com.l2jserver.gameserver.configuration.config.PcCafeConfig;
 import com.l2jserver.gameserver.configuration.config.events.WeddingConfig;
 import com.l2jserver.gameserver.data.sql.impl.AnnouncementsTable;
@@ -547,9 +548,9 @@ public class EnterWorld extends L2GameClientPacket
 		
 		TvTEvent.onLogin(activeChar);
 		
-		if (Config.WELCOME_MESSAGE_ENABLED)
+		if (CustomConfig.WELCOME_MESSAGE_ENABLED)
 		{
-			activeChar.sendPacket(new ExShowScreenMessage(Config.WELCOME_MESSAGE_TEXT, Config.WELCOME_MESSAGE_TIME));
+			activeChar.sendPacket(new ExShowScreenMessage(MessagesData.getInstance().getMessage(activeChar, "welcome_message_text"), CustomConfig.WELCOME_MESSAGE_TIME));
 		}
 		
 		final int birthday = activeChar.checkBirthDay();

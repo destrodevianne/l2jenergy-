@@ -1,0 +1,99 @@
+{
+    # =====================================================================
+    # CUSTOM - non-retail-like systems that have been integrated into the L2jEnergy project.
+    # Be warned that there may be no support for these mods beyond the original author's assistance.
+    # =====================================================================
+    # Warehouse Sorting
+    # Shows Withdraw Window sorted by ItemType (Armor/Weapon/Spellbook....)
+    # =====================================================================
+    # Default: false
+	"EnableWarehouseSortingClan" : "false",
+    
+	# Default: false
+	"EnableWarehouseSortingPrivate" : "false",
+	
+    # =====================================================================
+    # Banking System
+    # =====================================================================
+    # Enable/Disable Banking System
+    # Default: False
+    "BankingEnabled" : "false",
+
+    # Amount of Goldbars a player gets when they use the ".deposit" command. Also the same amount they will lose with ".withdraw".
+    # Default: 1
+    "BankingGoldbarCount" : "1",
+
+    # Amount of Adena a player gets when they use the ".withdraw" command. Also the same amount they will lose with ".deposit".
+    # Default: 500000000
+    "BankingAdenaCount" : "500000000",
+	
+    # =====================================================================
+    # Hellbound Status Voice Command
+    # =====================================================================
+    # This option will enable using of the voice commands .hellbound
+    # for retrieving information about current Hellbound level and trust.
+    # Default: false
+    "HellboundStatus" : "false",
+	
+	# =====================================================================
+    # Password Change
+    # =====================================================================
+    # Enables .changepassword voiced command which allows the players to change their account's password ingame.
+    # Default: false
+    "AllowChangePassword" : "false",
+
+	# =====================================================================
+    # Debug enable/disable voice command
+    # =====================================================================
+    # This option will enable voice command .debug allowing players
+    # to turn on/off debugging on self only.
+    # (admin command //debug can enable debugging on any character)
+    # Use admin_command_access_rights table for defining access rights.
+    # Default: false
+    "DebugVoiceCommand" : "false",
+
+    # =====================================================================
+    # Mana Drugs/Potions
+    # =====================================================================
+    # This option will enable core support for:
+    # Mana Drug (item ID 726), using skill ID 10000.
+    # Mana Potion (item ID 728), using skill ID 10001.
+	# Default: false
+    "EnableManaPotionSupport" : "false",
+
+    # =====================================================================
+    # Display Server Time
+    # =====================================================================
+    # This option will enable displaying of the local server time for /time command.
+	# Default: false
+    "DisplayServerTime" : "false",
+
+    # =====================================================================
+    # Chat Moderation
+    # =====================================================================
+    # This option will enable using of the voice commands .banchat and .unbanchat
+    # for players with corresponding access level (default: 7).
+    # Check access_levels.sql and admin_command_access_rights for details.
+    # Default: false
+    "ChatAdmin" : "false",
+	
+    # =====================================================================
+    # Welcome message
+    # =====================================================================
+    # Show screen welcome message on character login
+    # Default: False
+    "ScreenWelcomeMessageEnable" : "false",
+
+    # Show screen welcome message for x seconds when character log in to game if enabled
+    "ScreenWelcomeMessageTime" : "10",
+
+    # =====================================================================
+    # Pvp/pk Announce
+    # =====================================================================
+    # Default: False
+    "AnnouncePkPvP" : "false",
+
+    # Announce this as normal system message
+    # Default: True
+    "AnnouncePkPvPNormalMessage" : "true"
+}

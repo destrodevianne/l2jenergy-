@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CustomConfig;
 import com.l2jserver.gameserver.configuration.config.PremiumConfig;
 import com.l2jserver.gameserver.configuration.config.events.WeddingConfig;
 import com.l2jserver.gameserver.handler.ActionHandler;
@@ -548,11 +549,11 @@ public class MasterHandler
 			// CastleVCmd.class,
 			// SetVCmd.class,
 			(WeddingConfig.ALLOW_WEDDING ? Wedding.class : null),
-			(Config.BANKING_SYSTEM_ENABLED ? Banking.class : null),
-			(Config.L2JMOD_CHAT_ADMIN ? ChatAdmin.class : null),
+			(CustomConfig.BANKING_SYSTEM_ENABLED ? Banking.class : null),
+			(CustomConfig.CHAT_ADMIN ? ChatAdmin.class : null),
 			(Config.L2JMOD_MULTILANG_ENABLE && Config.L2JMOD_MULTILANG_VOICED_ALLOW ? Lang.class : null),
-			(Config.L2JMOD_DEBUG_VOICE_COMMAND ? Debug.class : null),
-			(Config.L2JMOD_ALLOW_CHANGE_PASSWORD ? ChangePassword.class : null),
+			(CustomConfig.DEBUG_VOICE_COMMAND ? Debug.class : null),
+			(CustomConfig.ALLOW_CHANGE_PASSWORD ? ChangePassword.class : null),
 			(PremiumConfig.PREMIUM_ALLOW_VOICED ? Premium.class : null),
 		},
 		{

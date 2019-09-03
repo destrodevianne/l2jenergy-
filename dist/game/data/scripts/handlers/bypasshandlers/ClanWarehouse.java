@@ -18,7 +18,7 @@
  */
 package handlers.bypasshandlers;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CustomConfig;
 import com.l2jserver.gameserver.handler.IBypassHandler;
 import com.l2jserver.gameserver.model.ClanPrivilege;
 import com.l2jserver.gameserver.model.actor.L2Character;
@@ -73,7 +73,7 @@ public class ClanWarehouse implements IBypassHandler
 		{
 			if (command.toLowerCase().startsWith(COMMANDS[0])) // WithdrawC
 			{
-				if (Config.L2JMOD_ENABLE_WAREHOUSESORTING_CLAN)
+				if (CustomConfig.ENABLE_WAREHOUSESORTING_CLAN)
 				{
 					final NpcHtmlMessage msg = new NpcHtmlMessage(((L2Npc) target).getObjectId());
 					msg.setFile(activeChar.getHtmlPrefix(), "data/html/mods/WhSortedC.htm");

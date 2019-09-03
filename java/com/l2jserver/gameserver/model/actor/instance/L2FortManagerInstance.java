@@ -26,6 +26,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CustomConfig;
 import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.data.sql.impl.TeleportLocationTable;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
@@ -250,7 +251,7 @@ public class L2FortManagerInstance extends L2MerchantInstance
 					}
 					else if (val.equalsIgnoreCase("withdraw"))
 					{
-						if (Config.L2JMOD_ENABLE_WAREHOUSESORTING_CLAN)
+						if (CustomConfig.ENABLE_WAREHOUSESORTING_CLAN)
 						{
 							String htmFile = "data/html/mods/WhSortedC.htm";
 							String htmContent = HtmCache.getInstance().getHtm(player.getHtmlPrefix(), htmFile);

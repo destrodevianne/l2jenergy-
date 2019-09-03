@@ -18,7 +18,7 @@
  */
 package handlers.bypasshandlers;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CustomConfig;
 import com.l2jserver.gameserver.handler.IBypassHandler;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -57,7 +57,7 @@ public class PrivateWarehouse implements IBypassHandler
 		{
 			if (command.toLowerCase().startsWith(COMMANDS[0])) // WithdrawP
 			{
-				if (Config.L2JMOD_ENABLE_WAREHOUSESORTING_PRIVATE)
+				if (CustomConfig.ENABLE_WAREHOUSESORTING_PRIVATE)
 				{
 					final NpcHtmlMessage msg = new NpcHtmlMessage(((L2Npc) target).getObjectId());
 					msg.setFile(activeChar.getHtmlPrefix(), "data/html/mods/WhSortedP.htm");

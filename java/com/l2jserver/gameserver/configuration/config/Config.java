@@ -506,27 +506,10 @@ public final class Config
 	public static int TVT_EVENT_MAX_PARTICIPANTS_PER_IP;
 	public static boolean TVT_ALLOW_VOICED_COMMAND;
 	
-	public static boolean L2JMOD_HELLBOUND_STATUS;
-	public static boolean BANKING_SYSTEM_ENABLED;
-	public static int BANKING_SYSTEM_GOLDBARS;
-	public static int BANKING_SYSTEM_ADENA;
-	public static boolean L2JMOD_ENABLE_WAREHOUSESORTING_CLAN;
-	public static boolean L2JMOD_ENABLE_WAREHOUSESORTING_PRIVATE;
-	
-	public static boolean L2JMOD_ENABLE_MANA_POTIONS_SUPPORT;
-	public static boolean L2JMOD_DISPLAY_SERVER_TIME;
-	public static boolean WELCOME_MESSAGE_ENABLED;
-	public static String WELCOME_MESSAGE_TEXT;
-	public static int WELCOME_MESSAGE_TIME;
 	public static boolean L2JMOD_ANTIFEED_ENABLE;
 	public static boolean L2JMOD_ANTIFEED_DUALBOX;
 	public static boolean L2JMOD_ANTIFEED_DISCONNECTED_AS_DUALBOX;
 	public static int L2JMOD_ANTIFEED_INTERVAL;
-	public static boolean ANNOUNCE_PK_PVP;
-	public static boolean ANNOUNCE_PK_PVP_NORMAL_MESSAGE;
-	public static String ANNOUNCE_PK_MSG;
-	public static String ANNOUNCE_PVP_MSG;
-	public static boolean L2JMOD_CHAT_ADMIN;
 	public static boolean L2JMOD_MULTILANG_ENABLE;
 	public static List<String> L2JMOD_MULTILANG_ALLOWED = new ArrayList<>();
 	public static String L2JMOD_MULTILANG_DEFAULT;
@@ -536,12 +519,10 @@ public final class Config
 	public static boolean L2JMOD_MULTILANG_NS_ENABLE;
 	public static List<String> L2JMOD_MULTILANG_NS_ALLOWED = new ArrayList<>();
 	public static boolean L2WALKER_PROTECTION;
-	public static boolean L2JMOD_DEBUG_VOICE_COMMAND;
 	public static int L2JMOD_DUALBOX_CHECK_MAX_PLAYERS_PER_IP;
 	public static int L2JMOD_DUALBOX_CHECK_MAX_OLYMPIAD_PARTICIPANTS_PER_IP;
 	public static int L2JMOD_DUALBOX_CHECK_MAX_L2EVENT_PARTICIPANTS_PER_IP;
 	public static Map<Integer, Integer> L2JMOD_DUALBOX_CHECK_WHITELIST;
-	public static boolean L2JMOD_ALLOW_CHANGE_PASSWORD;
 	
 	// RWHO system (off emulation)
 	public static boolean SENDSTATUS_TRADE_JUST_OFFLINE;
@@ -1521,9 +1502,6 @@ public final class Config
 		TVT_EVENT_RUNNING_TIME = L2JModSettings.getInt("TvTEventRunningTime", 1800);
 		TVT_EVENT_PARTICIPATION_NPC_ID = L2JModSettings.getInt("TvTEventParticipationNpcId", 0);
 		
-		L2JMOD_ENABLE_WAREHOUSESORTING_CLAN = L2JModSettings.getBoolean("EnableWarehouseSortingClan", false);
-		L2JMOD_ENABLE_WAREHOUSESORTING_PRIVATE = L2JModSettings.getBoolean("EnableWarehouseSortingPrivate", false);
-		
 		if (TVT_EVENT_PARTICIPATION_NPC_ID == 0)
 		{
 			TVT_EVENT_ENABLED = false;
@@ -1723,28 +1701,10 @@ public final class Config
 			}
 		}
 		
-		BANKING_SYSTEM_ENABLED = L2JModSettings.getBoolean("BankingEnabled", false);
-		BANKING_SYSTEM_GOLDBARS = L2JModSettings.getInt("BankingGoldbarCount", 1);
-		BANKING_SYSTEM_ADENA = L2JModSettings.getInt("BankingAdenaCount", 500000000);
-		
-		L2JMOD_ENABLE_MANA_POTIONS_SUPPORT = L2JModSettings.getBoolean("EnableManaPotionSupport", false);
-		
-		L2JMOD_DISPLAY_SERVER_TIME = L2JModSettings.getBoolean("DisplayServerTime", false);
-		
-		WELCOME_MESSAGE_ENABLED = L2JModSettings.getBoolean("ScreenWelcomeMessageEnable", false);
-		WELCOME_MESSAGE_TEXT = L2JModSettings.getString("ScreenWelcomeMessageText", "Welcome to L2J server!");
-		WELCOME_MESSAGE_TIME = L2JModSettings.getInt("ScreenWelcomeMessageTime", 10) * 1000;
-		
 		L2JMOD_ANTIFEED_ENABLE = L2JModSettings.getBoolean("AntiFeedEnable", false);
 		L2JMOD_ANTIFEED_DUALBOX = L2JModSettings.getBoolean("AntiFeedDualbox", true);
 		L2JMOD_ANTIFEED_DISCONNECTED_AS_DUALBOX = L2JModSettings.getBoolean("AntiFeedDisconnectedAsDualbox", true);
 		L2JMOD_ANTIFEED_INTERVAL = L2JModSettings.getInt("AntiFeedInterval", 120) * 1000;
-		ANNOUNCE_PK_PVP = L2JModSettings.getBoolean("AnnouncePkPvP", false);
-		ANNOUNCE_PK_PVP_NORMAL_MESSAGE = L2JModSettings.getBoolean("AnnouncePkPvPNormalMessage", true);
-		ANNOUNCE_PK_MSG = L2JModSettings.getString("AnnouncePkMsg", "$killer has slaughtered $target");
-		ANNOUNCE_PVP_MSG = L2JModSettings.getString("AnnouncePvpMsg", "$killer has defeated $target");
-		
-		L2JMOD_CHAT_ADMIN = L2JModSettings.getBoolean("ChatAdmin", false);
 		
 		L2JMOD_MULTILANG_DEFAULT = L2JModSettings.getString("MultiLangDefault", "en");
 		L2JMOD_MULTILANG_ENABLE = L2JModSettings.getBoolean("MultiLangEnable", false);
@@ -1760,7 +1720,6 @@ public final class Config
 			LOG.warn("MultiLang[Config.load()]: default language: {} is not in allowed list !", L2JMOD_MULTILANG_DEFAULT);
 		}
 		
-		L2JMOD_HELLBOUND_STATUS = L2JModSettings.getBoolean("HellboundStatus", false);
 		L2JMOD_MULTILANG_VOICED_ALLOW = L2JModSettings.getBoolean("MultiLangVoiceCommand", true);
 		L2JMOD_MULTILANG_SM_ENABLE = L2JModSettings.getBoolean("MultiLangSystemMessageEnable", false);
 		allowed = L2JModSettings.getString("MultiLangSystemMessageAllowed", "").split(";");
@@ -1784,7 +1743,6 @@ public final class Config
 		}
 		
 		L2WALKER_PROTECTION = L2JModSettings.getBoolean("L2WalkerProtection", false);
-		L2JMOD_DEBUG_VOICE_COMMAND = L2JModSettings.getBoolean("DebugVoiceCommand", false);
 		
 		L2JMOD_DUALBOX_CHECK_MAX_PLAYERS_PER_IP = L2JModSettings.getInt("DualboxCheckMaxPlayersPerIP", 0);
 		L2JMOD_DUALBOX_CHECK_MAX_OLYMPIAD_PARTICIPANTS_PER_IP = L2JModSettings.getInt("DualboxCheckMaxOlympiadParticipantsPerIP", 0);
@@ -1816,7 +1774,6 @@ public final class Config
 				}
 			}
 		}
-		L2JMOD_ALLOW_CHANGE_PASSWORD = L2JModSettings.getBoolean("AllowChangePassword", false);
 		
 		SENDSTATUS_TRADE_JUST_OFFLINE = L2JModSettings.getBoolean("SendStatusTradeJustOffline", false);
 		SENDSTATUS_TRADE_MOD = L2JModSettings.getDouble("SendStatusTradeMod", 1);
@@ -2355,18 +2312,6 @@ public final class Config
 				break;
 			case "tvteventparticipationnpcid":
 				TVT_EVENT_PARTICIPATION_NPC_ID = Integer.parseInt(pValue);
-				break;
-			case "enablewarehousesortingclan":
-				L2JMOD_ENABLE_WAREHOUSESORTING_CLAN = Boolean.parseBoolean(pValue);
-				break;
-			case "enablewarehousesortingprivate":
-				L2JMOD_ENABLE_WAREHOUSESORTING_PRIVATE = Boolean.parseBoolean(pValue);
-				break;
-			case "enablemanapotionsupport":
-				L2JMOD_ENABLE_MANA_POTIONS_SUPPORT = Boolean.parseBoolean(pValue);
-				break;
-			case "displayservertime":
-				L2JMOD_DISPLAY_SERVER_TIME = Boolean.parseBoolean(pValue);
 				break;
 			case "antifeedenable":
 				L2JMOD_ANTIFEED_ENABLE = Boolean.parseBoolean(pValue);

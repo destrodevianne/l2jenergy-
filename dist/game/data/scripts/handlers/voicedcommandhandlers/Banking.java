@@ -18,7 +18,7 @@
  */
 package handlers.voicedcommandhandlers;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CustomConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IVoicedCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -41,40 +41,40 @@ public class Banking implements IVoicedCommandHandler
 	{
 		if (command.equals("bank"))
 		{
-			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_usage_deposit_withdraw").replace("%s%", Config.BANKING_SYSTEM_ADENA + "").replace("%i%", Config.BANKING_SYSTEM_GOLDBARS + ""));
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_usage_deposit_withdraw").replace("%s%", CustomConfig.BANKING_SYSTEM_ADENA + "").replace("%i%", CustomConfig.BANKING_SYSTEM_GOLDBARS + ""));
 		}
 		else if (command.equals("deposit"))
 		{
-			if (activeChar.getInventory().getInventoryItemCount(57, 0) >= Config.BANKING_SYSTEM_ADENA)
+			if (activeChar.getInventory().getInventoryItemCount(57, 0) >= CustomConfig.BANKING_SYSTEM_ADENA)
 			{
-				if (!activeChar.reduceAdena("Goldbar", Config.BANKING_SYSTEM_ADENA, activeChar, false))
+				if (!activeChar.reduceAdena("Goldbar", CustomConfig.BANKING_SYSTEM_ADENA, activeChar, false))
 				{
 					return false;
 				}
-				activeChar.getInventory().addItem("Goldbar", 3470, Config.BANKING_SYSTEM_GOLDBARS, activeChar, null);
+				activeChar.getInventory().addItem("Goldbar", 3470, CustomConfig.BANKING_SYSTEM_GOLDBARS, activeChar, null);
 				activeChar.getInventory().updateDatabase();
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_you_now_have_goldbar_and_adena").replace("%i%", Config.BANKING_SYSTEM_GOLDBARS + "").replace("%s%", Config.BANKING_SYSTEM_ADENA + ""));
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_you_now_have_goldbar_and_adena").replace("%i%", CustomConfig.BANKING_SYSTEM_GOLDBARS + "").replace("%s%", CustomConfig.BANKING_SYSTEM_ADENA + ""));
 			}
 			else
 			{
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_you_not_have_enough_goldbars_convert").replace("%s%", Config.BANKING_SYSTEM_ADENA + ""));
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_you_not_have_enough_goldbars_convert").replace("%s%", CustomConfig.BANKING_SYSTEM_ADENA + ""));
 			}
 		}
 		else if (command.equals("withdraw"))
 		{
-			if (activeChar.getInventory().getInventoryItemCount(3470, 0) >= Config.BANKING_SYSTEM_GOLDBARS)
+			if (activeChar.getInventory().getInventoryItemCount(3470, 0) >= CustomConfig.BANKING_SYSTEM_GOLDBARS)
 			{
-				if (!activeChar.destroyItemByItemId("Adena", 3470, Config.BANKING_SYSTEM_GOLDBARS, activeChar, false))
+				if (!activeChar.destroyItemByItemId("Adena", 3470, CustomConfig.BANKING_SYSTEM_GOLDBARS, activeChar, false))
 				{
 					return false;
 				}
-				activeChar.getInventory().addAdena("Adena", Config.BANKING_SYSTEM_ADENA, activeChar, null);
+				activeChar.getInventory().addAdena("Adena", CustomConfig.BANKING_SYSTEM_ADENA, activeChar, null);
 				activeChar.getInventory().updateDatabase();
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_you_now_have_adena_and_goldbar").replace("%s%", Config.BANKING_SYSTEM_ADENA + "").replace("%i%", Config.BANKING_SYSTEM_GOLDBARS + ""));
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_you_now_have_adena_and_goldbar").replace("%s%", CustomConfig.BANKING_SYSTEM_ADENA + "").replace("%i%", CustomConfig.BANKING_SYSTEM_GOLDBARS + ""));
 			}
 			else
 			{
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_you_not_have_goldbars_into").replace("%s%", Config.BANKING_SYSTEM_ADENA + ""));
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "dp_handler_you_not_have_goldbars_into").replace("%s%", CustomConfig.BANKING_SYSTEM_ADENA + ""));
 			}
 		}
 		return true;
