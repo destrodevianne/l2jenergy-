@@ -26,6 +26,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.gameserver.enums.Sex;
 import com.l2jserver.gameserver.instancemanager.SiegeManager;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
@@ -43,7 +44,7 @@ public class L2ClanMember
 	private int _powerGrade;
 	private int _level;
 	private int _classId;
-	private boolean _sex;
+	private Sex _sex;
 	private int _raceOrdinal;
 	private L2PcInstance _player;
 	private int _pledgeType;
@@ -72,7 +73,8 @@ public class L2ClanMember
 		_powerGrade = clanMember.getInt("power_grade");
 		_apprentice = clanMember.getInt("apprentice");
 		_sponsor = clanMember.getInt("sponsor");
-		_sex = clanMember.getInt("sex") != 0;
+		// _sex = clanMember.getInt("sex") != 0;
+		_sex = Sex.values()[clanMember.getInt("sex")];
 		_raceOrdinal = clanMember.getInt("race");
 	}
 	
@@ -356,7 +358,7 @@ public class L2ClanMember
 	 * Gets the player's sex.
 	 * @return the sex
 	 */
-	public boolean getSex()
+	public Sex getSex()
 	{
 		if (_player != null)
 		{

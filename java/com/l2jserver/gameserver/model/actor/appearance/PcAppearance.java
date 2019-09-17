@@ -18,6 +18,7 @@
  */
 package com.l2jserver.gameserver.model.actor.appearance;
 
+import com.l2jserver.gameserver.enums.Sex;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
 public class PcAppearance
@@ -32,7 +33,7 @@ public class PcAppearance
 	
 	private byte _hairStyle;
 	
-	private boolean _sex; // Female true(1)
+	private Sex _sex; // Female true(1)
 	
 	/** true if the player is invisible */
 	private boolean _ghostmode = false;
@@ -49,12 +50,12 @@ public class PcAppearance
 	/** The default title color is 0xECF9A2. */
 	private int _titleColor = DEFAULT_TITLE_COLOR;
 	
-	public PcAppearance(byte face, byte hColor, byte hStyle, boolean sex)
+	public PcAppearance(byte face, byte hColor, byte hStyle, Sex randomSex)
 	{
 		_face = face;
 		_hairColor = hColor;
 		_hairStyle = hStyle;
-		_sex = sex;
+		_sex = randomSex;
 	}
 	
 	/**
@@ -139,7 +140,7 @@ public class PcAppearance
 	/**
 	 * @return true if char is female
 	 */
-	public final boolean getSex()
+	public final Sex getSex()
 	{
 		return _sex;
 	}
@@ -147,7 +148,7 @@ public class PcAppearance
 	/**
 	 * @param isfemale
 	 */
-	public final void setSex(boolean isfemale)
+	public final void setSex(Sex isfemale)
 	{
 		_sex = isfemale;
 	}

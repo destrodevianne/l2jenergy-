@@ -53,7 +53,7 @@ public class GMViewCharacterInfo extends L2GameServerPacket
 		writeD(_activeChar.getObjectId());
 		writeS(_activeChar.getName());
 		writeD(_activeChar.getRace().ordinal());
-		writeD(_activeChar.getAppearance().getSex() ? 1 : 0);
+		writeD(_activeChar.getAppearance().getSex().ordinal());
 		writeD(_activeChar.getClassId().getId());
 		writeD(_activeChar.getLevel());
 		writeQ(_activeChar.getExp());

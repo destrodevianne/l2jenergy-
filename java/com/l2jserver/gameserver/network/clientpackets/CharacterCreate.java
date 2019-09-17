@@ -31,6 +31,7 @@ import com.l2jserver.gameserver.data.xml.impl.InitialShortcutData;
 import com.l2jserver.gameserver.data.xml.impl.PlayerCreationPointData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.datatables.SkillData;
+import com.l2jserver.gameserver.enums.Sex;
 import com.l2jserver.gameserver.model.L2SkillLearn;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.Location;
@@ -181,7 +182,7 @@ public final class CharacterCreate extends L2GameClientPacket
 				sendPacket(new CharCreateFail(CharCreateFail.REASON_CREATION_FAILED));
 				return;
 			}
-			final PcAppearance app = new PcAppearance(_face, _hairColor, _hairStyle, _sex != 0);
+			final PcAppearance app = new PcAppearance(_face, _hairColor, _hairStyle, Sex.values()[_sex]);
 			newChar = L2PcInstance.create(_classId, getClient().getAccountName(), _name, app);
 		}
 		

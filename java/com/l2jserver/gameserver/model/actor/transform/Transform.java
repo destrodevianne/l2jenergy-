@@ -114,7 +114,7 @@ public final class Transform implements IIdentifiable
 	
 	public TransformTemplate getTemplate(L2PcInstance player)
 	{
-		return player != null ? (player.getAppearance().getSex() ? _femaleTemplate : _maleTemplate) : null;
+		return player != null ? (player.getAppearance().getSex() != null ? _femaleTemplate : _maleTemplate) : null;
 	}
 	
 	public void setTemplate(boolean male, TransformTemplate template)

@@ -73,8 +73,8 @@ public class PlayerDAOMySQLImpl implements PlayerDAO
 				if (rset.next())
 				{
 					final int activeClassId = rset.getInt("classid");
-					final boolean female = rset.getInt("sex") != Sex.MALE.ordinal();
-					PcAppearance app = new PcAppearance(rset.getByte("face"), rset.getByte("hairColor"), rset.getByte("hairStyle"), female);
+					// final boolean female = rset.getInt("sex") != Sex.MALE.ordinal();
+					PcAppearance app = new PcAppearance(rset.getByte("face"), rset.getByte("hairColor"), rset.getByte("hairStyle"), Sex.values()[rset.getInt("sex")]);
 					
 					player = new L2PcInstance(objectId, activeClassId, rset.getString("account_name"), app);
 					player.setName(rset.getString("char_name"));
@@ -262,7 +262,7 @@ public class PlayerDAOMySQLImpl implements PlayerDAO
 			ps.setInt(11, player.getAppearance().getFace());
 			ps.setInt(12, player.getAppearance().getHairStyle());
 			ps.setInt(13, player.getAppearance().getHairColor());
-			ps.setInt(14, player.getAppearance().getSex() ? 1 : 0);
+			ps.setInt(14, player.getAppearance().getSex().ordinal());
 			ps.setLong(15, player.getBaseExp());
 			ps.setInt(16, player.getBaseSp());
 			ps.setInt(17, player.getKarma());
@@ -318,7 +318,7 @@ public class PlayerDAOMySQLImpl implements PlayerDAO
 			ps.setInt(8, player.getAppearance().getFace());
 			ps.setInt(9, player.getAppearance().getHairStyle());
 			ps.setInt(10, player.getAppearance().getHairColor());
-			ps.setInt(11, player.getAppearance().getSex() ? 1 : 0);
+			ps.setInt(11, player.getAppearance().getSex().ordinal());
 			ps.setInt(12, player.getHeading());
 			ps.setInt(13, player.inObserverMode() ? player.getLastLocation().getX() : player.getX());
 			ps.setInt(14, player.inObserverMode() ? player.getLastLocation().getY() : player.getY());

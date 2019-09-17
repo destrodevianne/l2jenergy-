@@ -52,7 +52,7 @@ public final class PledgeShowMemberListUpdate extends L2GameServerPacket
 		_level = player.getLevel();
 		_classId = player.getClassId().getId();
 		_race = player.getRace().ordinal();
-		_sex = player.getAppearance().getSex() ? 1 : 0;
+		_sex = player.getAppearance().getSex().ordinal();
 		_objectId = player.getObjectId();
 		_isOnline = player.isOnline();
 	}
@@ -66,7 +66,7 @@ public final class PledgeShowMemberListUpdate extends L2GameServerPacket
 		_isOnline = member.isOnline();
 		_pledgeType = member.getPledgeType();
 		_race = member.getRaceOrdinal();
-		_sex = member.getSex() ? 1 : 0;
+		_sex = member.getSex().ordinal();
 		if (_pledgeType == L2Clan.SUBUNIT_ACADEMY)
 		{
 			_hasSponsor = member.getSponsor() != 0 ? 1 : 0;

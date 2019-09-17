@@ -35,6 +35,7 @@ import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.xml.impl.ClassListData;
 import com.l2jserver.gameserver.data.xml.impl.TransformData;
+import com.l2jserver.gameserver.enums.Sex;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2World;
@@ -484,9 +485,26 @@ public class AdminEditChar implements IAdminCommandHandler
 			{
 				return false;
 			}
-			player.getAppearance().setSex(player.getAppearance().getSex() ? false : true);
-			player.sendMessage("Your gender has been changed by a GM");
-			player.broadcastUserInfo();
+			
+			Sex male = Sex.MALE;
+			Sex female = Sex.FEMALE;
+			
+			if (male != player.getAppearance().getSex())
+			{
+				player.getAppearance().setSex(male);
+				player.sendMessage("Your gender has been changed by a GM.");
+				player.decayMe();
+				player.spawnMe(player.getX(), player.getY(), player.getZ());
+				player.broadcastUserInfo();
+			}
+			else
+			{
+				player.getAppearance().setSex(female);
+				player.sendMessage("Your gender has been changed by a GM.");
+				player.decayMe();
+				player.spawnMe(player.getX(), player.getY(), player.getZ());
+				player.broadcastUserInfo();
+			}
 		}
 		else if (command.startsWith("admin_setcolor"))
 		{

@@ -189,6 +189,7 @@ import handlers.communityboard.MemoBoard;
 import handlers.communityboard.RegionBoard;
 import handlers.communityboard.SellBoard;
 import handlers.communityboard.ShopBoard;
+import handlers.communityboard.StatisticsBoard;
 import handlers.communityboard.TeleportBoard;
 import handlers.custom.AutoAdenaBar;
 import handlers.custom.CustomAnnouncePkPvP;
@@ -483,6 +484,7 @@ public class MasterHandler
 			RegionBoard.class,
 			SellBoard.class,
 			ShopBoard.class,
+			StatisticsBoard.class,
 			TeleportBoard.class,
 		},
 		{

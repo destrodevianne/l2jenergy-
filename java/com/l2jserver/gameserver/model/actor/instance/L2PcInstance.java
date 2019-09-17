@@ -342,11 +342,11 @@ import com.l2jserver.gameserver.util.Util;
  * This class represents all player characters in the world.<br>
  * There is always a client-thread connected to this (except if a player-store is activated upon logout).
  */
-public final class L2PcInstance extends L2Playable
+public class L2PcInstance extends L2Playable
 {
 	public static final int ID_NONE = -1;
 	public static final int REQUEST_TIMEOUT = 15;
-	private static final Logger LOG = LoggerFactory.getLogger(L2PcInstance.class);
+	protected static final Logger LOG = LoggerFactory.getLogger(L2PcInstance.class);
 	private static final String COND_OVERRIDE_KEY = "cond_override";
 	// during fall validations will be disabled for 10 ms.
 	private static final int FALLING_VALIDATION_DELAY = 10000;
@@ -705,7 +705,7 @@ public final class L2PcInstance extends L2Playable
 	 * @param accountName the account name
 	 * @param app the player appearance
 	 */
-	private L2PcInstance(int classId, String accountName, PcAppearance app)
+	protected L2PcInstance(int classId, String accountName, PcAppearance app)
 	{
 		this(IdFactory.getInstance().getNextId(), classId, accountName, app);
 	}
@@ -12464,7 +12464,7 @@ public final class L2PcInstance extends L2Playable
 		{
 			return getTransformation().getCollisionRadius(this);
 		}
-		return getAppearance().getSex() ? getBaseTemplate().getFCollisionRadiusFemale() : getBaseTemplate().getfCollisionRadius();
+		return getAppearance().getSex() != null ? getBaseTemplate().getFCollisionRadiusFemale() : getBaseTemplate().getfCollisionRadius();
 	}
 	
 	public double getCollisionHeight()
@@ -12477,7 +12477,7 @@ public final class L2PcInstance extends L2Playable
 		{
 			return getTransformation().getCollisionHeight(this);
 		}
-		return getAppearance().getSex() ? getBaseTemplate().getFCollisionHeightFemale() : getBaseTemplate().getfCollisionHeight();
+		return getAppearance().getSex() != null ? getBaseTemplate().getFCollisionHeightFemale() : getBaseTemplate().getfCollisionHeight();
 	}
 	
 	public final int getClientX()
