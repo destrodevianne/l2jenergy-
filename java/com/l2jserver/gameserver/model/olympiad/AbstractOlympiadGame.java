@@ -45,6 +45,7 @@ import com.l2jserver.gameserver.network.serverpackets.InventoryUpdate;
 import com.l2jserver.gameserver.network.serverpackets.L2GameServerPacket;
 import com.l2jserver.gameserver.network.serverpackets.SkillCoolTime;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
+import com.l2jserver.gameserver.network.serverpackets.UserInfo;
 
 /**
  * @author godson, GodKratos, Pere, DS
@@ -442,6 +443,16 @@ public abstract class AbstractOlympiadGame
 				player.sendPacket(sm);
 			}
 			player.sendPacket(iu);
+			
+			if (OlympiadConfig.OLYMPIAD_WIN_REWARDS_FAME)
+			{
+				int value = OlympiadConfig.OLYMPIAD_WIN_FAME_AMOUNT;
+				player.setFame(player.getFame() + value);
+				SystemMessage fameMsg = SystemMessage.getSystemMessage(SystemMessageId.ACQUIRED_S1_REPUTATION_SCORE);
+				fameMsg.addInt(value);
+				player.sendPacket(fameMsg);
+				player.sendPacket(new UserInfo(player));
+			}
 		}
 		catch (Exception e)
 		{

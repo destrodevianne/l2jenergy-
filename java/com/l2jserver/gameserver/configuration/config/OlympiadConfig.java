@@ -159,6 +159,12 @@ public class OlympiadConfig
 	@Setting(name = "AltOlyPeriodMultiplier")
 	public static int ALT_OLY_PERIOD_MULTIPLIER;
 	
+	@Setting(name = "AltOlyWinFameReward")
+	public static boolean OLYMPIAD_WIN_REWARDS_FAME;
+	
+	@Setting(name = "AltOlyWinFameAmount")
+	public static int OLYMPIAD_WIN_FAME_AMOUNT;
+	
 	public static int[][] parseItemsList(String line) // TODO: переписать
 	{
 		final String[] propertySplit = line.split(";");

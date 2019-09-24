@@ -129,7 +129,7 @@
     "AltOlyMaxWeeklyMatchesTeam" : "10",
 
     # =====================================================================
-    # Custom Olympiad period settings
+    # Custom Olympiad settings
     # =====================================================================
     # Example for Olympiad every 2 weeks:
     #    AltOlyUseCustomPeriodSettings = True
@@ -147,5 +147,11 @@
     # The value is a multiplier of period type, i.e. if type is MONTH and multiplier is 2, then Olympiad will occur every 2 months.
     # Default: 1
     # Note! If type = DAY, multiplier must be >= 7!
-    "AltOlyPeriodMultiplier" : "1"
+    "AltOlyPeriodMultiplier" : "1",
+    
+    # Enable/disable custom reward fame.
+    "AltOlyWinFameReward" : "false",
+    
+    # Default: 100
+    "AltOlyWinFameAmount" : "100"
 }
