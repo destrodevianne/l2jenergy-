@@ -1,0 +1,12 @@
+{
+    #======================================================
+    #              Setting Community Board Stats
+    #======================================================
+    # Enable Community Board Statistic.
+    "CommunityStatsEnable" : "true",
+    
+    # Time in which to update short statistics in the community. (minutes)
+    "CommunityStatsUpdateTime" : "1",
+	
+	"CommunityStatsCount" : "10"
+}
