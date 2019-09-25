@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -21,6 +21,7 @@ package handlers.admincommandhandlers;
 import java.util.StringTokenizer;
 
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.actor.stat.PcStat;
@@ -30,7 +31,6 @@ import com.l2jserver.gameserver.model.actor.stat.PcStat;
  */
 public class AdminVitality implements IAdminCommandHandler
 {
-	
 	private static final String[] ADMIN_COMMANDS =
 	{
 		"admin_set_vitality",
@@ -50,7 +50,7 @@ public class AdminVitality implements IAdminCommandHandler
 		
 		if (!Config.ENABLE_VITALITY)
 		{
-			activeChar.sendAdminMessage("Vitality is not enabled on the server!");
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_vitality_not_enabled_server"));
 			return false;
 		}
 		
@@ -73,11 +73,10 @@ public class AdminVitality implements IAdminCommandHandler
 				}
 				catch (Exception e)
 				{
-					activeChar.sendAdminMessage("Incorrect vitality");
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_incorrect_vitality"));
 				}
-				
 				target.setVitalityPoints(vitality, true);
-				target.sendMessage("Admin set your Vitality points to " + vitality);
+				target.sendMessage(MessagesData.getInstance().getMessage(target, "admin_your_set_vitality_points").replace("%i%", vitality + ""));
 			}
 			else if (cmd.equals("admin_set_vitality_level"))
 			{
@@ -87,7 +86,7 @@ public class AdminVitality implements IAdminCommandHandler
 				}
 				catch (Exception e)
 				{
-					activeChar.sendAdminMessage("Incorrect vitality level (0-4)");
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_incorrect_vitality_level"));
 				}
 				
 				if ((level >= 0) && (level <= 4))
@@ -101,34 +100,31 @@ public class AdminVitality implements IAdminCommandHandler
 						vitality = PcStat.VITALITY_LEVELS[level - 1];
 					}
 					target.setVitalityPoints(vitality, true);
-					target.sendMessage("Admin set your Vitality level to " + level);
+					target.sendMessage(MessagesData.getInstance().getMessage(target, "admin_your_set_vitality_level").replace("%i%", level + ""));
 				}
 				else
 				{
-					activeChar.sendAdminMessage("Incorrect vitality level (0-4)");
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_incorrect_vitality_level"));
 				}
 			}
 			else if (cmd.equals("admin_full_vitality"))
 			{
 				target.setVitalityPoints(PcStat.MAX_VITALITY_POINTS, true);
-				target.sendMessage("Admin completly recharged your Vitality");
+				target.sendMessage(MessagesData.getInstance().getMessage(target, "admin_completly_recharged_your_vitality"));
 			}
 			else if (cmd.equals("admin_empty_vitality"))
 			{
 				target.setVitalityPoints(PcStat.MIN_VITALITY_POINTS, true);
-				target.sendMessage("Admin completly emptied your Vitality");
+				target.sendMessage(MessagesData.getInstance().getMessage(target, "admin_completly_emptied_your_vitality"));
 			}
 			else if (cmd.equals("admin_get_vitality"))
 			{
-				level = target.getVitalityLevel();
-				vitality = target.getVitalityPoints();
-				
-				activeChar.sendAdminMessage("Player vitality level: " + level);
-				activeChar.sendAdminMessage("Player vitality points: " + vitality);
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_vitality_level").replace("%i%", target.getVitalityLevel() + ""));
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_vitality_points").replace("%i%", target.getVitalityPoints() + ""));
 			}
 			return true;
 		}
-		activeChar.sendAdminMessage("Target not found or not a player");
+		activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_target_not_found_not_player"));
 		return false;
 	}
 	

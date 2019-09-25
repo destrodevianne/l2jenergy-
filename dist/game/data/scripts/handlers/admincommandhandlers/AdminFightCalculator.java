@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -32,10 +32,6 @@ import com.l2jserver.gameserver.model.stats.Formulas;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 
-/**
- * This class handles following admin commands: - gm = turns gm mode on/off
- * @version $Revision: 1.1.2.1 $ $Date: 2005/03/15 21:32:48 $
- */
 public class AdminFightCalculator implements IAdminCommandHandler
 {
 	private static final String[] ADMIN_COMMANDS =

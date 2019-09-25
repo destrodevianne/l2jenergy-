@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -25,12 +25,8 @@ import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.instance.L2DoorInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.Castle;
+import com.l2jserver.gameserver.network.SystemMessageId;
 
-/**
- * This class handles following admin commands: - open1 = open coloseum door 24190001 - open2 = open coloseum door 24190002 - open3 = open coloseum door 24190003 - open4 = open coloseum door 24190004 - openall = open all coloseum door - close1 = close coloseum door 24190001 - close2 = close coloseum
- * door 24190002 - close3 = close coloseum door 24190003 - close4 = close coloseum door 24190004 - closeall = close all coloseum door - open = open selected door - close = close selected door
- * @version $Revision: 1.2.4.5 $ $Date: 2005/04/11 10:06:06 $
- */
 public class AdminDoorControl implements IAdminCommandHandler
 {
 	private static DoorData _doorTable = DoorData.getInstance();
@@ -120,7 +116,7 @@ public class AdminDoorControl implements IAdminCommandHandler
 				}
 				else
 				{
-					activeChar.sendAdminMessage("Incorrect target.");
+					activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);
 				}
 			}
 			
@@ -133,7 +129,7 @@ public class AdminDoorControl implements IAdminCommandHandler
 				}
 				else
 				{
-					activeChar.sendAdminMessage("Incorrect target.");
+					activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);
 				}
 			}
 		}

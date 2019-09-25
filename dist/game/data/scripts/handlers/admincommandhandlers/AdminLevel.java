@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -21,6 +21,7 @@ package handlers.admincommandhandlers;
 import java.util.StringTokenizer;
 
 import com.l2jserver.gameserver.data.json.ExperienceData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -59,7 +60,7 @@ public class AdminLevel implements IAdminCommandHandler
 			}
 			catch (NumberFormatException e)
 			{
-				activeChar.sendAdminMessage("Wrong Number Format");
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_wrong_number_format"));
 			}
 		}
 		else if (actualCommand.equalsIgnoreCase("admin_set_level"))
@@ -86,7 +87,7 @@ public class AdminLevel implements IAdminCommandHandler
 			}
 			catch (NumberFormatException e)
 			{
-				activeChar.sendAdminMessage("Level require number as value!");
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_level_require_number_value"));
 				return false;
 			}
 		}

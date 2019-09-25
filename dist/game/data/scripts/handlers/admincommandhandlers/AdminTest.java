@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -23,6 +23,7 @@ import java.util.StringTokenizer;
 
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2Object;
@@ -31,9 +32,6 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.network.serverpackets.MagicSkillUse;
 
-/**
- * @version $Revision: 1.2 $ $Date: 2004/06/27 08:12:59 $
- */
 public class AdminTest implements IAdminCommandHandler
 {
 	private static final String[] ADMIN_COMMANDS =
@@ -71,11 +69,11 @@ public class AdminTest implements IAdminCommandHandler
 			}
 			catch (NumberFormatException e)
 			{
-				activeChar.sendAdminMessage("Command format is //skill_test <ID>");
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_skill_test"));
 			}
 			catch (NoSuchElementException nsee)
 			{
-				activeChar.sendAdminMessage("Command format is //skill_test <ID>");
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_skill_test"));
 			}
 		}
 		else if (command.equals("admin_known on"))

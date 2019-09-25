@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -23,6 +23,7 @@ import java.util.StringTokenizer;
 
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
@@ -49,7 +50,7 @@ public class AdminHtml implements IAdminCommandHandler
 			{
 				if (!st.hasMoreTokens())
 				{
-					activeChar.sendAdminMessage("Usage: //html path");
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_html_path"));
 					return false;
 				}
 				
@@ -61,7 +62,7 @@ public class AdminHtml implements IAdminCommandHandler
 			{
 				if (!st.hasMoreTokens())
 				{
-					activeChar.sendAdminMessage("Usage: //loadhtml path");
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_loadhtml_path"));
 					return false;
 				}
 				
@@ -108,7 +109,7 @@ public class AdminHtml implements IAdminCommandHandler
 		}
 		else
 		{
-			html.setHtml("<html><body>My text is missing:<br>" + path + "</body></html>");
+			html.setHtml("<html><body>" + MessagesData.getInstance().getMessage(activeChar, "admin_htm_text_missing") + "<br>" + path + "</body></html>");
 		}
 		activeChar.sendHTMLMessage(path);
 		activeChar.sendPacket(html);
@@ -117,8 +118,6 @@ public class AdminHtml implements IAdminCommandHandler
 	@Override
 	public String[] getAdminCommandList()
 	{
-		
 		return ADMIN_COMMANDS;
 	}
-	
 }

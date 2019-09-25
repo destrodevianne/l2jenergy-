@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -20,6 +20,7 @@ package handlers.admincommandhandlers;
 
 import java.util.StringTokenizer;
 
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
@@ -63,14 +64,13 @@ public class AdminHellbound implements IAdminCommandHandler
 				{
 					throw new NumberFormatException();
 				}
-				
 				HellboundEngine.getInstance().setLevel(level);
-				activeChar.sendAdminMessage("Hellbound level set to " + level);
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_hellbound_level_set").replace("%i%", level + ""));
 				return true;
 			}
 			catch (Exception e)
 			{
-				activeChar.sendAdminMessage("Usage: //hellbound_setlevel 0-11");
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_hellbound_setlevel"));
 				return false;
 			}
 		}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -18,19 +18,18 @@
  */
 package handlers.admincommandhandlers;
 
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
-/**
- * This class handles following admin commands: - gm = turns gm mode off
- * @version $Revision: 1.2.4.4 $ $Date: 2005/04/11 10:06:06 $
- */
 public class AdminGm implements IAdminCommandHandler
 {
-	private static Logger _log = Logger.getLogger(AdminGm.class.getName());
+	private static Logger LOG = LoggerFactory.getLogger(AdminGm.class);
+	
 	private static final String[] ADMIN_COMMANDS =
 	{
 		"admin_gm"
@@ -43,8 +42,8 @@ public class AdminGm implements IAdminCommandHandler
 		{
 			AdminData.getInstance().deleteGm(activeChar);
 			activeChar.setAccessLevel(0);
-			activeChar.sendMessage("You no longer have GM status.");
-			_log.info("GM: " + activeChar.getName() + "(" + activeChar.getObjectId() + ") turned his GM status off");
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_you_no_longer_gm_status"));
+			LOG.info("GM: {}({}) turned his GM status off", activeChar.getName(), activeChar.getObjectId());
 		}
 		return true;
 	}

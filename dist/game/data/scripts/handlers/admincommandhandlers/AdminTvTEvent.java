@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -19,6 +19,7 @@
 package handlers.admincommandhandlers;
 
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -47,7 +48,7 @@ public class AdminTvTEvent implements IAdminCommandHandler
 			
 			if (!(target instanceof L2PcInstance))
 			{
-				activeChar.sendAdminMessage("You should select a player!");
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_should_select_player"));
 				return true;
 			}
 			
@@ -59,7 +60,7 @@ public class AdminTvTEvent implements IAdminCommandHandler
 			
 			if (!(target instanceof L2PcInstance))
 			{
-				activeChar.sendAdminMessage("You should select a player!");
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_should_select_player"));
 				return true;
 			}
 			
@@ -69,7 +70,6 @@ public class AdminTvTEvent implements IAdminCommandHandler
 		{
 			TvTManager.getInstance().skipDelay();
 		}
-		
 		return true;
 	}
 	
@@ -83,13 +83,13 @@ public class AdminTvTEvent implements IAdminCommandHandler
 	{
 		if (playerInstance.isOnEvent())
 		{
-			activeChar.sendAdminMessage("Player already participated in the event!");
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_already_participated_event"));
 			return;
 		}
 		
 		if (!TvTEvent.addParticipant(playerInstance))
 		{
-			activeChar.sendAdminMessage("Player instance could not be added, it seems to be null!");
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_instance_could_not_added_null"));
 			return;
 		}
 		
@@ -103,7 +103,7 @@ public class AdminTvTEvent implements IAdminCommandHandler
 	{
 		if (!TvTEvent.removeParticipant(playerInstance.getObjectId()))
 		{
-			activeChar.sendAdminMessage("Player is not part of the event!");
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_player_not_part_event"));
 			return;
 		}
 		

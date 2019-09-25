@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -18,6 +18,7 @@
  */
 package handlers.admincommandhandlers;
 
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.Elementals;
 import com.l2jserver.gameserver.model.L2Object;
@@ -27,10 +28,6 @@ import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.InventoryUpdate;
 
-/**
- * This class handles following admin commands: - delete = deletes target
- * @version $Revision: 1.2.2.1.2.4 $ $Date: 2005/04/11 10:05:56 $
- */
 public class AdminElement implements IAdminCommandHandler
 {
 	private static final String[] ADMIN_COMMANDS =
@@ -88,19 +85,17 @@ public class AdminElement implements IAdminCommandHandler
 				int value = Integer.parseInt(args[2]);
 				if ((element < -1) || (element > 5) || (value < 0) || (value > 450))
 				{
-					activeChar.sendAdminMessage("Usage: //setlh/setlc/setlg/setlb/setll/setlw/setls <element> <value>[0-450]");
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_setlh_1"));
 					return false;
 				}
-				
 				setElement(activeChar, element, value, armorType);
 			}
 			catch (Exception e)
 			{
-				activeChar.sendAdminMessage("Usage: //setlh/setlc/setlg/setlb/setll/setlw/setls <element>[0-5] <value>[0-450]");
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_setlh_2"));
 				return false;
 			}
 		}
-		
 		return true;
 	}
 	
@@ -144,7 +139,7 @@ public class AdminElement implements IAdminCommandHandler
 			Elementals element = itemInstance.getElemental(type);
 			if (element == null)
 			{
-				old = "None";
+				old = "" + MessagesData.getInstance().getMessage(activeChar, "admin_htm_none") + "";
 			}
 			else
 			{
@@ -165,7 +160,7 @@ public class AdminElement implements IAdminCommandHandler
 			
 			if (itemInstance.getElementals() == null)
 			{
-				current = "None";
+				current = "" + MessagesData.getInstance().getMessage(activeChar, "admin_htm_none") + "";
 			}
 			else
 			{
@@ -178,10 +173,10 @@ public class AdminElement implements IAdminCommandHandler
 			player.sendPacket(iu);
 			
 			// informations
-			activeChar.sendAdminMessage("Changed elemental power of " + player.getName() + "'s " + itemInstance.getItem().getName() + " from " + old + " to " + current + ".");
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_changed_elemental_power").replace("%i%", player.getName() + "").replace("%s%", itemInstance.getItem().getName() + "").replace("%t%", old + "").replace("%c%", current + ""));
 			if (player != activeChar)
 			{
-				player.sendMessage(activeChar.getName() + " has changed the elemental power of your " + itemInstance.getItem().getName() + " from " + old + " to " + current + ".");
+				player.sendMessage(MessagesData.getInstance().getMessage(activeChar, "admin_has_changed_elemental_power_of_your").replace("%i%", activeChar.getName() + "").replace("%s%", itemInstance.getItem().getName() + "").replace("%t%", old + "").replace("%c%", current + ""));
 			}
 		}
 	}

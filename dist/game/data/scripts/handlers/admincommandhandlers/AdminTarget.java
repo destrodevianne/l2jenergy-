@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -18,14 +18,11 @@
  */
 package handlers.admincommandhandlers;
 
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
-/**
- * This class handles following admin commands: - target name = sets player with respective name as target
- * @version $Revision: 1.2.4.3 $ $Date: 2005/04/11 10:05:56 $
- */
 public class AdminTarget implements IAdminCommandHandler
 {
 	private static final String[] ADMIN_COMMANDS =
@@ -61,12 +58,12 @@ public class AdminTarget implements IAdminCommandHandler
 			}
 			else
 			{
-				activeChar.sendAdminMessage("Player " + targetName + " not found");
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_player_not_found").replace("%i%", targetName + ""));
 			}
 		}
 		catch (IndexOutOfBoundsException e)
 		{
-			activeChar.sendAdminMessage("Please specify correct name.");
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_please_specify_correct_name"));
 		}
 	}
 }

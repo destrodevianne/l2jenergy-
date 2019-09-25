@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -28,10 +28,6 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.network.SystemMessageId;
 
-/**
- * This class handles following admin commands: - itemcreate = show menu - create_item <id> [num] = creates num items with respective id, if num is not specified, assumes 1.
- * @version $Revision: 1.2.2.2.2.3 $ $Date: 2005/04/11 10:06:06 $
- */
 public class AdminCreateItem implements IAdminCommandHandler
 {
 	private static final String[] ADMIN_COMMANDS =

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -18,21 +18,16 @@
  */
 package handlers.admincommandhandlers;
 
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
-/**
- * This class handles following admin commands:
- * <ul>
- * <li>admin_unblockip</li>
- * </ul>
- * @version $Revision: 1.3.2.6.2.4 $ $Date: 2005/04/11 10:06:06 $
- */
 public class AdminUnblockIp implements IAdminCommandHandler
 {
-	private static final Logger _log = Logger.getLogger(AdminUnblockIp.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(AdminUnblockIp.class);
 	
 	private static final String[] ADMIN_COMMANDS =
 	{
@@ -42,7 +37,6 @@ public class AdminUnblockIp implements IAdminCommandHandler
 	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
-		
 		if (command.startsWith("admin_unblockip "))
 		{
 			try
@@ -50,15 +44,14 @@ public class AdminUnblockIp implements IAdminCommandHandler
 				String ipAddress = command.substring(16);
 				if (unblockIp(ipAddress, activeChar))
 				{
-					activeChar.sendAdminMessage("Removed IP " + ipAddress + " from blocklist!");
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_removed_ip_from_blocklist").replace("%i%", ipAddress + ""));
 				}
 			}
 			catch (StringIndexOutOfBoundsException e)
 			{
-				activeChar.sendAdminMessage("Usage: //unblockip <ip>");
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_unblockip"));
 			}
 		}
-		
 		return true;
 	}
 	
@@ -71,7 +64,7 @@ public class AdminUnblockIp implements IAdminCommandHandler
 	private boolean unblockIp(String ipAddress, L2PcInstance activeChar)
 	{
 		// LoginServerThread.getInstance().unBlockip(ipAddress);
-		_log.warning("IP removed by GM " + activeChar.getName());
+		LOG.info("IP removed by GM {}", activeChar.getName());
 		return true;
 	}
 }

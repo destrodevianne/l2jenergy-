@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -18,6 +18,7 @@
  */
 package handlers.admincommandhandlers;
 
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.L2Character;
@@ -27,10 +28,6 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
 
-/**
- * This class handles following admin commands: - targetsay <message> = makes talk a L2Character
- * @author nonom
- */
 public class AdminTargetSay implements IAdminCommandHandler
 {
 	private static final String[] ADMIN_COMMANDS =
@@ -58,7 +55,7 @@ public class AdminTargetSay implements IAdminCommandHandler
 			}
 			catch (StringIndexOutOfBoundsException e)
 			{
-				activeChar.sendAdminMessage("Usage: //targetsay <text>");
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_targetsay"));
 				return false;
 			}
 		}

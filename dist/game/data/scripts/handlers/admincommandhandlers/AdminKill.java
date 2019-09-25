@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -32,11 +32,6 @@ import com.l2jserver.gameserver.model.actor.instance.L2ControllableMobInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 
-/**
- * This class handles following admin commands: - kill = kills target L2Character - kill_monster = kills target non-player - kill <radius> = If radius is specified, then ALL players only in that radius will be killed. - kill_monster <radius> = If radius is specified, then ALL non-players only in
- * that radius will be killed.
- * @version $Revision: 1.2.4.5 $ $Date: 2007/07/31 10:06:06 $
- */
 public class AdminKill implements IAdminCommandHandler
 {
 	private static Logger _log = Logger.getLogger(AdminKill.class.getName());

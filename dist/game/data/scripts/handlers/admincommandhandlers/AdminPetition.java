@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -18,6 +18,7 @@
  */
 package handlers.admincommandhandlers;
 
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.instancemanager.PetitionManager;
 import com.l2jserver.gameserver.model.L2Object;
@@ -117,7 +118,7 @@ public class AdminPetition implements IAdminCommandHandler
 			}
 			catch (StringIndexOutOfBoundsException e)
 			{
-				activeChar.sendAdminMessage("Usage: //force_peti text");
+				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_force_peti"));
 				return false;
 			}
 		}

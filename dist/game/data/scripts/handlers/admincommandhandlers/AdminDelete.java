@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -18,6 +18,7 @@
  */
 package handlers.admincommandhandlers;
 
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.SpawnTable;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.instancemanager.RaidBossSpawnManager;
@@ -25,11 +26,8 @@ import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2Spawn;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jserver.gameserver.network.SystemMessageId;
 
-/**
- * This class handles following admin commands: - delete = deletes target
- * @version $Revision: 1.2.2.1.2.4 $ $Date: 2005/04/11 10:05:56 $
- */
 public class AdminDelete implements IAdminCommandHandler
 {
 	private static final String[] ADMIN_COMMANDS =
@@ -76,12 +74,11 @@ public class AdminDelete implements IAdminCommandHandler
 					SpawnTable.getInstance().deleteSpawn(spawn, true);
 				}
 			}
-			
-			activeChar.sendAdminMessage("Deleted " + target.getName() + " from " + target.getObjectId() + ".");
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_deleted_from").replace("%i%", target.getName() + "").replace("%s%", target.getObjectId() + ""));
 		}
 		else
 		{
-			activeChar.sendAdminMessage("Incorrect target.");
+			activeChar.sendPacket(SystemMessageId.INCORRECT_TARGET);
 		}
 	}
 }

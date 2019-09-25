@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -21,11 +21,11 @@ package handlers.admincommandhandlers;
 import java.util.StringTokenizer;
 
 import com.l2jserver.gameserver.GeoData;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
-import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.util.GeoUtils;
 
 /**
@@ -59,11 +59,12 @@ public class AdminGeodata implements IAdminCommandHandler
 				
 				if (GeoData.getInstance().hasGeoPos(geoX, geoY))
 				{
-					activeChar.sendAdminMessage("WorldX: " + worldX + ", WorldY: " + worldY + ", WorldZ: " + worldZ + ", GeoX: " + geoX + ", GeoY: " + geoY + ", GeoZ: " + GeoData.getInstance().getNearestZ(geoX, geoY, worldZ));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_world_x_y_z_geo_x_y_z").replace("%i%", worldX + "").replace("%s%", worldY + "").replace("%c%", worldZ + "").replace("%t%", geoX + "").replace("%y%", geoY
+						+ "").replace("%z%", GeoData.getInstance().getNearestZ(geoX, geoY, worldZ) + ""));
 				}
 				else
 				{
-					activeChar.sendAdminMessage("There is no geodata at this position.");
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_there_no_geodata_position"));
 				}
 				break;
 			}
@@ -77,11 +78,12 @@ public class AdminGeodata implements IAdminCommandHandler
 				
 				if (GeoData.getInstance().hasGeoPos(geoX, geoY))
 				{
-					activeChar.sendAdminMessage("WorldX: " + worldX + ", WorldY: " + worldY + ", WorldZ: " + worldZ + ", GeoX: " + geoX + ", GeoY: " + geoY + ", GeoZ: " + GeoData.getInstance().getSpawnHeight(worldX, worldY, worldZ));
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_world_x_y_z_geo_x_y_z").replace("%i%", worldX + "").replace("%s%", worldY + "").replace("%c%", worldZ + "").replace("%t%", geoX + "").replace("%y%", geoY
+						+ "").replace("%z%", GeoData.getInstance().getSpawnHeight(worldX, worldY, worldZ) + ""));
 				}
 				else
 				{
-					activeChar.sendAdminMessage("There is no geodata at this position.");
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_there_no_geodata_position"));
 				}
 				break;
 			}
@@ -92,11 +94,11 @@ public class AdminGeodata implements IAdminCommandHandler
 				{
 					if (GeoData.getInstance().canSeeTarget(activeChar, target))
 					{
-						activeChar.sendAdminMessage("Can move beeline.");
+						activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_can_move_beeline"));
 					}
 					else
 					{
-						activeChar.sendAdminMessage("Can not move beeline!");
+						activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_can_not_move_beeline"));
 					}
 				}
 				else
@@ -112,11 +114,11 @@ public class AdminGeodata implements IAdminCommandHandler
 				{
 					if (GeoData.getInstance().canSeeTarget(activeChar, target))
 					{
-						activeChar.sendAdminMessage("Can see target.");
+						activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_can_see_target"));
 					}
 					else
 					{
-						activeChar.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.CANT_SEE_TARGET));
+						activeChar.sendPacket(SystemMessageId.CANT_SEE_TARGET);
 					}
 				}
 				else

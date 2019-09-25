@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 import com.l2jserver.gameserver.cache.HtmCache;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.instancemanager.GrandBossManager;
 import com.l2jserver.gameserver.instancemanager.QuestManager;
@@ -75,7 +76,7 @@ public class AdminGrandBoss implements IAdminCommandHandler
 				}
 				else
 				{
-					NpcHtmlMessage html = new NpcHtmlMessage(0, 1);
+					NpcHtmlMessage html = new NpcHtmlMessage();
 					html.setHtml(HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/admin/grandboss.htm"));
 					activeChar.sendPacket(html);
 				}
@@ -95,12 +96,12 @@ public class AdminGrandBoss implements IAdminCommandHandler
 					}
 					else
 					{
-						activeChar.sendAdminMessage("Wrong ID!");
+						activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_wrong_id"));
 					}
 				}
 				else
 				{
-					activeChar.sendAdminMessage("Usage: //grandboss_skip Id");
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_grandboss_skip"));
 				}
 				break;
 			}
@@ -126,13 +127,13 @@ public class AdminGrandBoss implements IAdminCommandHandler
 						}
 						default:
 						{
-							activeChar.sendAdminMessage("Wrong ID!");
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_wrong_id"));
 						}
 					}
 				}
 				else
 				{
-					activeChar.sendAdminMessage("Usage: //grandboss_respawn Id");
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_grandboss_respawn"));
 				}
 				break;
 			}
@@ -156,13 +157,13 @@ public class AdminGrandBoss implements IAdminCommandHandler
 						}
 						default:
 						{
-							activeChar.sendAdminMessage("Wrong ID!");
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_wrong_id"));
 						}
 					}
 				}
 				else
 				{
-					activeChar.sendAdminMessage("Usage: //grandboss_minions Id");
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_grandboss_minions"));
 				}
 				break;
 			}
@@ -188,13 +189,13 @@ public class AdminGrandBoss implements IAdminCommandHandler
 						}
 						default:
 						{
-							activeChar.sendAdminMessage("Wrong ID!");
+							activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_wrong_id"));
 						}
 					}
 				}
 				else
 				{
-					activeChar.sendAdminMessage("Usage: //grandboss_abort Id");
+					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_grandboss_abort"));
 				}
 			}
 				break;
@@ -257,25 +258,25 @@ public class AdminGrandBoss implements IAdminCommandHandler
 					case 0:
 					{
 						textColor = "00FF00"; // Green
-						text = "Alive";
+						text = "" + MessagesData.getInstance().getMessage(activeChar, "admin_grandboss_alive") + "";
 						break;
 					}
 					case 1:
 					{
 						textColor = "FFFF00"; // Yellow
-						text = "Waiting";
+						text = "" + MessagesData.getInstance().getMessage(activeChar, "admin_grandboss_waiting") + "";
 						break;
 					}
 					case 2:
 					{
 						textColor = "FF9900"; // Orange
-						text = "In Fight";
+						text = "" + MessagesData.getInstance().getMessage(activeChar, "admin_grandboss_fight") + "";
 						break;
 					}
 					case 3:
 					{
 						textColor = "FF0000"; // Red
-						text = "Dead";
+						text = "" + MessagesData.getInstance().getMessage(activeChar, "admin_grandboss_dead") + "";
 						break;
 					}
 				}
@@ -288,13 +289,13 @@ public class AdminGrandBoss implements IAdminCommandHandler
 					case 0:
 					{
 						textColor = "00FF00"; // Green
-						text = "Alive";
+						text = "" + MessagesData.getInstance().getMessage(activeChar, "admin_grandboss_alive") + "";
 						break;
 					}
 					case 1:
 					{
 						textColor = "FF0000"; // Red
-						text = "Dead";
+						text = "" + MessagesData.getInstance().getMessage(activeChar, "admin_grandboss_dead") + "";
 						break;
 					}
 				}
@@ -307,13 +308,13 @@ public class AdminGrandBoss implements IAdminCommandHandler
 			html.setHtml(HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), htmlPatch));
 			html.replace("%bossStatus%", text);
 			html.replace("%bossColor%", textColor);
-			html.replace("%respawnTime%", bossStatus == deadStatus ? bossRespawn : "Already respawned!");
-			html.replace("%playersInside%", bossZone != null ? String.valueOf(bossZone.getPlayersInside().size()) : "Zone not found!");
+			html.replace("%respawnTime%", bossStatus == deadStatus ? bossRespawn : "" + MessagesData.getInstance().getMessage(activeChar, "admin_already_respawned") + "");
+			html.replace("%playersInside%", bossZone != null ? String.valueOf(bossZone.getPlayersInside().size()) : "" + MessagesData.getInstance().getMessage(activeChar, "admin_zone_not_found") + "");
 			activeChar.sendPacket(html);
 		}
 		else
 		{
-			activeChar.sendAdminMessage("Wrong ID!");
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_wrong_id"));
 		}
 	}
 	

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -18,6 +18,7 @@
  */
 package handlers.admincommandhandlers;
 
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2World;
@@ -76,12 +77,12 @@ public class AdminDebug implements IAdminCommandHandler
 		if (target.isDebug())
 		{
 			target.setDebug(null);
-			activeChar.sendAdminMessage("Stop debugging " + target.getName());
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_stop_debugging").replace("%i%", target.getName() + ""));
 		}
 		else
 		{
 			target.setDebug(activeChar);
-			activeChar.sendAdminMessage("Start debugging " + target.getName());
+			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_start_debugging").replace("%i%", target.getName() + ""));
 		}
 	}
 }
