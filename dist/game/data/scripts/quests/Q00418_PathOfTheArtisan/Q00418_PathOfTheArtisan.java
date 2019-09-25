@@ -476,11 +476,11 @@ public final class Q00418_PathOfTheArtisan extends Quest
 									qs.setCond(2);
 								}
 							}
-						}
-						else
-						{
-							giveItems(killer, BOOGLE_RATMAN_LEADERS_TOOTH, 1);
-							playSound(killer, Sound.ITEMSOUND_QUEST_ITEMGET);
+							else
+							{
+								giveItems(killer, BOOGLE_RATMAN_LEADERS_TOOTH, 1);
+								playSound(killer, Sound.ITEMSOUND_QUEST_ITEMGET);
+							}
 						}
 					}
 					break;
