@@ -106,5 +106,20 @@ public final class MagicalAttackMp extends AbstractEffect
 			target.stopEffectsOnDamage(true);
 			target.setCurrentMp(target.getCurrentMp() - mp);
 		}
+		
+		if (target.isPlayer())
+		{
+			final SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.S2_MP_HAS_BEEN_DRAINED_BY_C1);
+			sm.addString(activeChar.getName());
+			sm.addInt((int) mp);
+			target.sendPacket(sm);
+		}
+		
+		if (activeChar.isPlayer())
+		{
+			final SystemMessage sm2 = SystemMessage.getSystemMessage(SystemMessageId.YOUR_OPPONENTS_MP_WAS_REDUCED_BY_S1);
+			sm2.addInt((int) mp);
+			activeChar.sendPacket(sm2);
+		}
 	}
 }
