@@ -39,7 +39,7 @@ import com.l2jserver.gameserver.LoginServerThread;
 import com.l2jserver.gameserver.LoginServerThread.SessionKey;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.configuration.config.Config;
-import com.l2jserver.gameserver.configuration.config.OfflineConfig;
+import com.l2jserver.gameserver.configuration.config.custom.OfflineConfig;
 import com.l2jserver.gameserver.configuration.config.events.WeddingConfig;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;

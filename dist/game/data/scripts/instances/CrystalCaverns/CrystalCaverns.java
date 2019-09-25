@@ -26,7 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.enums.TrapAction;
 import com.l2jserver.gameserver.instancemanager.InstanceManager;
 import com.l2jserver.gameserver.model.L2Object;
@@ -1475,7 +1475,7 @@ public final class CrystalCaverns extends AbstractInstance
 	
 	private void giveRewards(L2PcInstance player, int instanceId, int bossCry, boolean isBaylor)
 	{
-		final int num = Math.max((int) Config.RATE_DEATH_DROP_CHANCE_MULTIPLIER, 1);
+		final int num = Math.max((int) RatesConfig.RATE_DEATH_DROP_CHANCE_MULTIPLIER, 1);
 		
 		L2Party party = player.getParty();
 		if (party != null)

@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.l2jserver.gameserver.GameTimeController;
-import com.l2jserver.gameserver.configuration.config.CustomConfig;
+import com.l2jserver.gameserver.configuration.config.custom.CustomConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IUserCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;

@@ -38,7 +38,8 @@ import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.SevenSignsFestival;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.configuration.config.Config;
-import com.l2jserver.gameserver.configuration.config.PremiumConfig;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
+import com.l2jserver.gameserver.configuration.config.custom.PremiumConfig;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.enums.PartyDistributionType;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
@@ -766,7 +767,7 @@ public class L2Party extends AbstractPlayerGroup
 			sqLevelSum += (member.getLevel() * member.getLevel());
 		}
 		
-		final float vitalityPoints = (target.getVitalityPoints(partyDmg) * Config.RATE_PARTY_XP) / validMembers.size();
+		final float vitalityPoints = (target.getVitalityPoints(partyDmg) * RatesConfig.RATE_PARTY_XP) / validMembers.size();
 		final boolean useVitalityRate = target.useVitalityRate();
 		
 		for (L2PcInstance member : rewardedMembers)
@@ -953,12 +954,12 @@ public class L2Party extends AbstractPlayerGroup
 	
 	private double getExpBonus(int membersCount)
 	{
-		return (membersCount < 2) ? (getBaseExpSpBonus(membersCount)) : (getBaseExpSpBonus(membersCount) * Config.RATE_PARTY_XP);
+		return (membersCount < 2) ? (getBaseExpSpBonus(membersCount)) : (getBaseExpSpBonus(membersCount) * RatesConfig.RATE_PARTY_XP);
 	}
 	
 	private double getSpBonus(int membersCount)
 	{
-		return (membersCount < 2) ? (getBaseExpSpBonus(membersCount)) : (getBaseExpSpBonus(membersCount) * Config.RATE_PARTY_SP);
+		return (membersCount < 2) ? (getBaseExpSpBonus(membersCount)) : (getBaseExpSpBonus(membersCount) * RatesConfig.RATE_PARTY_SP);
 	}
 	
 	@Override

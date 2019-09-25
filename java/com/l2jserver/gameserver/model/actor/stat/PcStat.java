@@ -21,6 +21,7 @@ package com.l2jserver.gameserver.model.actor.stat;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.data.xml.impl.PetDataTable;
 import com.l2jserver.gameserver.model.L2PetLevelData;
 import com.l2jserver.gameserver.model.PcCondOverride;
@@ -379,12 +380,12 @@ public class PcStat extends PlayableStat
 			if (points > 0)
 			{
 				// vitality increased
-				points *= Config.RATE_VITALITY_GAIN;
+				points *= RatesConfig.RATE_VITALITY_GAIN;
 			}
 			else
 			{
 				// vitality decreased
-				points *= Config.RATE_VITALITY_LOST;
+				points *= RatesConfig.RATE_VITALITY_LOST;
 			}
 		}
 		
@@ -415,16 +416,16 @@ public class PcStat extends PlayableStat
 			switch (getVitalityLevel())
 			{
 				case 1:
-					vitality = Config.RATE_VITALITY_LEVEL_1;
+					vitality = RatesConfig.RATE_VITALITY_LEVEL_1;
 					break;
 				case 2:
-					vitality = Config.RATE_VITALITY_LEVEL_2;
+					vitality = RatesConfig.RATE_VITALITY_LEVEL_2;
 					break;
 				case 3:
-					vitality = Config.RATE_VITALITY_LEVEL_3;
+					vitality = RatesConfig.RATE_VITALITY_LEVEL_3;
 					break;
 				case 4:
-					vitality = Config.RATE_VITALITY_LEVEL_4;
+					vitality = RatesConfig.RATE_VITALITY_LEVEL_4;
 					break;
 			}
 		}

@@ -18,7 +18,7 @@
  */
 package handlers.bypasshandlers;
 
-import com.l2jserver.gameserver.configuration.config.CustomConfig;
+import com.l2jserver.gameserver.configuration.config.custom.CustomConfig;
 import com.l2jserver.gameserver.handler.IBypassHandler;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Npc;

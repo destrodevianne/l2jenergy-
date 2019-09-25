@@ -26,8 +26,8 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.configuration.config.Config;
-import com.l2jserver.gameserver.configuration.config.CustomConfig;
 import com.l2jserver.gameserver.configuration.config.FeatureConfig;
+import com.l2jserver.gameserver.configuration.config.custom.CustomConfig;
 import com.l2jserver.gameserver.data.sql.impl.TeleportLocationTable;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.SkillData;

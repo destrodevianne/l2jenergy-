@@ -64,10 +64,11 @@ import com.l2jserver.gameserver.communitybbs.BB.Forum;
 import com.l2jserver.gameserver.communitybbs.Manager.ForumsBBSManager;
 import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.FeatureConfig;
-import com.l2jserver.gameserver.configuration.config.OfflineConfig;
-import com.l2jserver.gameserver.configuration.config.PcCafeConfig;
-import com.l2jserver.gameserver.configuration.config.PremiumConfig;
 import com.l2jserver.gameserver.configuration.config.PvPConfig;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
+import com.l2jserver.gameserver.configuration.config.custom.OfflineConfig;
+import com.l2jserver.gameserver.configuration.config.custom.PremiumConfig;
+import com.l2jserver.gameserver.configuration.config.events.PcCafeConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.sql.impl.CharSummonTable;
@@ -5397,19 +5398,19 @@ public class L2PcInstance extends L2Playable
 			if ((getKarma() > 0) && (getPkKills() >= pkLimit))
 			{
 				isKarmaDrop = true;
-				dropPercent = Config.KARMA_RATE_DROP;
-				dropEquip = Config.KARMA_RATE_DROP_EQUIP;
-				dropEquipWeapon = Config.KARMA_RATE_DROP_EQUIP_WEAPON;
-				dropItem = Config.KARMA_RATE_DROP_ITEM;
-				dropLimit = Config.KARMA_DROP_LIMIT;
+				dropPercent = RatesConfig.KARMA_RATE_DROP;
+				dropEquip = RatesConfig.KARMA_RATE_DROP_EQUIP;
+				dropEquipWeapon = RatesConfig.KARMA_RATE_DROP_EQUIP_WEAPON;
+				dropItem = RatesConfig.KARMA_RATE_DROP_ITEM;
+				dropLimit = RatesConfig.KARMA_DROP_LIMIT;
 			}
 			else if (isKillerNpc && (getLevel() > 4) && !isFestivalParticipant())
 			{
-				dropPercent = Config.PLAYER_RATE_DROP;
-				dropEquip = Config.PLAYER_RATE_DROP_EQUIP;
-				dropEquipWeapon = Config.PLAYER_RATE_DROP_EQUIP_WEAPON;
-				dropItem = Config.PLAYER_RATE_DROP_ITEM;
-				dropLimit = Config.PLAYER_DROP_LIMIT;
+				dropPercent = RatesConfig.PLAYER_RATE_DROP;
+				dropEquip = RatesConfig.PLAYER_RATE_DROP_EQUIP;
+				dropEquipWeapon = RatesConfig.PLAYER_RATE_DROP_EQUIP_WEAPON;
+				dropItem = RatesConfig.PLAYER_RATE_DROP_ITEM;
+				dropLimit = RatesConfig.PLAYER_DROP_LIMIT;
 			}
 			
 			if ((dropPercent > 0) && (Rnd.get(100) < dropPercent))
@@ -5827,7 +5828,7 @@ public class L2PcInstance extends L2Playable
 		
 		if (getKarma() > 0)
 		{
-			percentLost *= Config.RATE_KARMA_EXP_LOST;
+			percentLost *= RatesConfig.RATE_KARMA_EXP_LOST;
 		}
 		
 		// Calculate the Experience loss

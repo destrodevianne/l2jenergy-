@@ -18,7 +18,7 @@
  */
 package quests.Q00051_OFullesSpecialBait;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -88,7 +88,7 @@ public class Q00051_OFullesSpecialBait extends Quest
 		final QuestState st = getQuestState(partyMember, false);
 		if (st.getQuestItemsCount(LOST_BAIT) < 100)
 		{
-			float chance = 33 * Config.RATE_QUEST_DROP;
+			float chance = 33 * RatesConfig.RATE_QUEST_DROP;
 			if (getRandom(100) < chance)
 			{
 				st.rewardItems(LOST_BAIT, 1);

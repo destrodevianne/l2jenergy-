@@ -47,6 +47,7 @@ import com.l2jserver.commons.util.Util;
 import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
@@ -2095,36 +2096,36 @@ public abstract class AbstractScript implements INamable
 		{
 			if (itemId == Inventory.ADENA_ID)
 			{
-				count *= Config.RATE_QUEST_REWARD_ADENA;
+				count *= RatesConfig.RATE_QUEST_REWARD_ADENA;
 			}
-			else if (Config.RATE_QUEST_REWARD_USE_MULTIPLIERS)
+			else if (RatesConfig.RATE_QUEST_REWARD_USE_MULTIPLIERS)
 			{
 				if (item instanceof L2EtcItem)
 				{
 					switch (((L2EtcItem) item).getItemType())
 					{
 						case POTION:
-							count *= Config.RATE_QUEST_REWARD_POTION;
+							count *= RatesConfig.RATE_QUEST_REWARD_POTION;
 							break;
 						case SCRL_ENCHANT_WP:
 						case SCRL_ENCHANT_AM:
 						case SCROLL:
-							count *= Config.RATE_QUEST_REWARD_SCROLL;
+							count *= RatesConfig.RATE_QUEST_REWARD_SCROLL;
 							break;
 						case RECIPE:
-							count *= Config.RATE_QUEST_REWARD_RECIPE;
+							count *= RatesConfig.RATE_QUEST_REWARD_RECIPE;
 							break;
 						case MATERIAL:
-							count *= Config.RATE_QUEST_REWARD_MATERIAL;
+							count *= RatesConfig.RATE_QUEST_REWARD_MATERIAL;
 							break;
 						default:
-							count *= Config.RATE_QUEST_REWARD;
+							count *= RatesConfig.RATE_QUEST_REWARD;
 					}
 				}
 			}
 			else
 			{
-				count *= Config.RATE_QUEST_REWARD;
+				count *= RatesConfig.RATE_QUEST_REWARD;
 			}
 		}
 		catch (Exception e)
@@ -2323,9 +2324,9 @@ public abstract class AbstractScript implements INamable
 			return true;
 		}
 		
-		minAmount *= Config.RATE_QUEST_DROP;
-		maxAmount *= Config.RATE_QUEST_DROP;
-		dropChance *= Config.RATE_QUEST_DROP; // TODO separate configs for rate and amount
+		minAmount *= RatesConfig.RATE_QUEST_DROP;
+		maxAmount *= RatesConfig.RATE_QUEST_DROP;
+		dropChance *= RatesConfig.RATE_QUEST_DROP; // TODO separate configs for rate and amount
 		if ((npc != null) && ChampionData.getInstance().isEnabled() && npc.isChampion())
 		{
 			if ((itemId == Inventory.ADENA_ID) || (itemId == Inventory.ANCIENT_ADENA_ID))
@@ -3005,7 +3006,7 @@ public abstract class AbstractScript implements INamable
 	 */
 	public static void addExpAndSp(L2PcInstance player, long exp, int sp)
 	{
-		player.addExpAndSpQuest((long) (exp * Config.RATE_QUEST_REWARD_XP), (int) (sp * Config.RATE_QUEST_REWARD_SP));
+		player.addExpAndSpQuest((long) (exp * RatesConfig.RATE_QUEST_REWARD_XP), (int) (sp * RatesConfig.RATE_QUEST_REWARD_SP));
 	}
 	
 	/**

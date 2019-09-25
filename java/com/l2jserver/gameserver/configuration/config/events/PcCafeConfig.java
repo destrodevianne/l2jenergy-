@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.gameserver.configuration.config;
+package com.l2jserver.gameserver.configuration.config.events;
 
 import java.util.regex.Pattern;
 
@@ -26,7 +26,7 @@ import com.l2jserver.commons.configuration.annotations.Setting;
 /**
  * @author Мо3олЬ
  */
-@Configuration("pcCafe.json")
+@Configuration("events/pcCafe.json")
 public class PcCafeConfig
 {
 	@Setting(name = "AltPcBangPointsEnabled")

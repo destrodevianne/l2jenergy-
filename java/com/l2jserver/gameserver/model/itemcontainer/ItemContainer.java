@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.enums.ItemLocation;
 import com.l2jserver.gameserver.model.L2World;
@@ -239,7 +240,7 @@ public abstract class ItemContainer
 			item = olditem;
 			
 			// Updates database
-			float adenaRate = Config.RATE_DROP_AMOUNT_MULTIPLIER.getOrDefault(Inventory.ADENA_ID, 1f);
+			float adenaRate = RatesConfig.RATE_DROP_AMOUNT_MULTIPLIER.getOrDefault(Inventory.ADENA_ID, 1f);
 			if ((item.getId() == Inventory.ADENA_ID) && (count < (10000 * adenaRate)))
 			{
 				// Small adena changes won't be saved to database all the time
@@ -323,7 +324,7 @@ public abstract class ItemContainer
 			}
 			// Updates database
 			// If Adena drop rate is not present it will be x1.
-			float adenaRate = Config.RATE_DROP_AMOUNT_MULTIPLIER.getOrDefault(Inventory.ADENA_ID, 1f);
+			float adenaRate = RatesConfig.RATE_DROP_AMOUNT_MULTIPLIER.getOrDefault(Inventory.ADENA_ID, 1f);
 			if ((itemId == Inventory.ADENA_ID) && (count < (10000 * adenaRate)))
 			{
 				// Small adena changes won't be saved to database all the time

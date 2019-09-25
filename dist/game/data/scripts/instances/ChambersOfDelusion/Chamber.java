@@ -23,7 +23,7 @@ import java.util.concurrent.ScheduledFuture;
 
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.instancemanager.InstanceManager;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2Party;
@@ -534,19 +534,19 @@ public abstract class Chamber extends AbstractInstance
 			{
 				if (getRandom(100) < 33)
 				{
-					npc.dropItem(attacker, ENRIA, (int) (3 * Config.RATE_QUEST_DROP));
+					npc.dropItem(attacker, ENRIA, (int) (3 * RatesConfig.RATE_QUEST_DROP));
 				}
 				if (getRandom(100) < 50)
 				{
-					npc.dropItem(attacker, THONS, (int) (4 * Config.RATE_QUEST_DROP));
+					npc.dropItem(attacker, THONS, (int) (4 * RatesConfig.RATE_QUEST_DROP));
 				}
 				if (getRandom(100) < 50)
 				{
-					npc.dropItem(attacker, ASOFE, (int) (4 * Config.RATE_QUEST_DROP));
+					npc.dropItem(attacker, ASOFE, (int) (4 * RatesConfig.RATE_QUEST_DROP));
 				}
 				if (getRandom(100) < 16)
 				{
-					npc.dropItem(attacker, LEONARD, (int) (2 * Config.RATE_QUEST_DROP));
+					npc.dropItem(attacker, LEONARD, (int) (2 * RatesConfig.RATE_QUEST_DROP));
 				}
 				
 				npc.broadcastEvent("SCE_LUCKY", 2000, null);

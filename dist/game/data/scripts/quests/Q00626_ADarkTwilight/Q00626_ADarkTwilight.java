@@ -21,7 +21,7 @@ package quests.Q00626_ADarkTwilight;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -124,7 +124,7 @@ public class Q00626_ADarkTwilight extends Quest
 		if (partyMember != null)
 		{
 			final QuestState st = getQuestState(partyMember, false);
-			final float chance = (MONSTERS.get(npc.getId()) * Config.RATE_QUEST_DROP);
+			final float chance = (MONSTERS.get(npc.getId()) * RatesConfig.RATE_QUEST_DROP);
 			if (getRandom(1000) < chance)
 			{
 				st.giveItems(BLOOD_OF_SAINT, 1);

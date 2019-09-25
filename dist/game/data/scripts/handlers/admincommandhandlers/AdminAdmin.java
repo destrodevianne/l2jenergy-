@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
@@ -342,11 +343,11 @@ public class AdminAdmin implements IAdminCommandHandler
 			+ MessagesData.getInstance().getMessage(activeChar, "admin_html_title_config_panel") + "</td><td width=60><button value=\"Back\" action=\"bypass -h admin_admin4\" width=60 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr></table></center><br>");
 		replyMSG.append("<center><table width=260><tr><td width=140></td><td width=40></td><td width=40></td></tr>");
 		replyMSG.append("<tr><td><font color=\"00AA00\">Drop:</font></td><td></td><td></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate EXP</font> = " + Config.RATE_XP + "</td><td><edit var=\"param1\" width=40 height=15></td><td><button value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_button_set")
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate EXP</font> = " + RatesConfig.RATE_XP + "</td><td><edit var=\"param1\" width=40 height=15></td><td><button value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_button_set")
 			+ "\" action=\"bypass -h admin_setconfig RateXp $param1\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate SP</font> = " + Config.RATE_SP + "</td><td><edit var=\"param2\" width=40 height=15></td><td><button value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_button_set")
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate SP</font> = " + RatesConfig.RATE_SP + "</td><td><edit var=\"param2\" width=40 height=15></td><td><button value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_button_set")
 			+ "\" action=\"bypass -h admin_setconfig RateSp $param2\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate Drop Spoil</font> = " + Config.RATE_CORPSE_DROP_CHANCE_MULTIPLIER + "</td><td><edit var=\"param4\" width=40 height=15></td><td><button value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_button_set")
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Rate Drop Spoil</font> = " + RatesConfig.RATE_CORPSE_DROP_CHANCE_MULTIPLIER + "</td><td><edit var=\"param4\" width=40 height=15></td><td><button value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_button_set")
 			+ "\" action=\"bypass -h admin_setconfig RateDropSpoil $param4\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
 		replyMSG.append("<tr><td width=140></td><td width=40></td><td width=40></td></tr>");
 		replyMSG.append("<tr><td><font color=\"00AA00\">Enchant:</font></td><td></td><td></td></tr>");

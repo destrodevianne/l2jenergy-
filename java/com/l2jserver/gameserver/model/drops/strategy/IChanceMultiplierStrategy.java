@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model.drops.strategy;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
@@ -31,8 +31,8 @@ import com.l2jserver.gameserver.model.itemcontainer.Inventory;
  */
 public interface IChanceMultiplierStrategy
 {
-	public static final IChanceMultiplierStrategy DROP = DEFAULT_STRATEGY(Config.RATE_DEATH_DROP_CHANCE_MULTIPLIER);
-	public static final IChanceMultiplierStrategy SPOIL = DEFAULT_STRATEGY(Config.RATE_CORPSE_DROP_CHANCE_MULTIPLIER);// TODO:fix add * Config.PREMIUM_RATE_SPOIL_CHANCE
+	public static final IChanceMultiplierStrategy DROP = DEFAULT_STRATEGY(RatesConfig.RATE_DEATH_DROP_CHANCE_MULTIPLIER);
+	public static final IChanceMultiplierStrategy SPOIL = DEFAULT_STRATEGY(RatesConfig.RATE_CORPSE_DROP_CHANCE_MULTIPLIER);// TODO:fix add * Config.PREMIUM_RATE_SPOIL_CHANCE
 	public static final IChanceMultiplierStrategy STATIC = (item, victim) -> 1;
 	
 	public static final IChanceMultiplierStrategy QUEST = (item, victim) ->
@@ -47,7 +47,7 @@ public interface IChanceMultiplierStrategy
 			championmult = ChampionData.getInstance().getRewardMultipler((L2Attackable) victim);;
 		}
 		
-		return (ChampionData.getInstance().isEnabled() && (victim != null) && victim.isChampion()) ? (Config.RATE_QUEST_DROP * championmult) : Config.RATE_QUEST_DROP;
+		return (ChampionData.getInstance().isEnabled() && (victim != null) && victim.isChampion()) ? (RatesConfig.RATE_QUEST_DROP * championmult) : RatesConfig.RATE_QUEST_DROP;
 	};
 	
 	public static IChanceMultiplierStrategy DEFAULT_STRATEGY(final double defaultMultiplier)
@@ -60,18 +60,18 @@ public interface IChanceMultiplierStrategy
 				multiplier *= item.getItemId() != Inventory.ADENA_ID ? ChampionData.getInstance().getRewardMultipler((L2Attackable) victim) : ChampionData.getInstance().getAdenaMultipler((L2Attackable) victim);
 			}
 			
-			Float dropChanceMultiplier = Config.RATE_DROP_CHANCE_MULTIPLIER.get(item.getItemId());
+			Float dropChanceMultiplier = RatesConfig.RATE_DROP_CHANCE_MULTIPLIER.get(item.getItemId());
 			if (dropChanceMultiplier != null)
 			{
 				multiplier *= dropChanceMultiplier;
 			}
 			else if (ItemTable.getInstance().getTemplate(item.getItemId()).hasExImmediateEffect())
 			{
-				multiplier *= Config.RATE_HERB_DROP_CHANCE_MULTIPLIER;
+				multiplier *= RatesConfig.RATE_HERB_DROP_CHANCE_MULTIPLIER;
 			}
 			else if (victim.isRaid())
 			{
-				multiplier *= Config.RATE_RAID_DROP_CHANCE_MULTIPLIER;
+				multiplier *= RatesConfig.RATE_RAID_DROP_CHANCE_MULTIPLIER;
 			}
 			else
 			{

@@ -18,7 +18,7 @@
  */
 package handlers.itemhandlers;
 
-import com.l2jserver.gameserver.configuration.config.CustomConfig;
+import com.l2jserver.gameserver.configuration.config.custom.CustomConfig;
 import com.l2jserver.gameserver.model.actor.L2Playable;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;

@@ -27,7 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.configuration.config.Config;
-import com.l2jserver.gameserver.configuration.config.OlympiadConfig;
+import com.l2jserver.gameserver.configuration.config.events.OlympiadConfig;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.model.Elementals;
 import com.l2jserver.gameserver.model.L2Object;

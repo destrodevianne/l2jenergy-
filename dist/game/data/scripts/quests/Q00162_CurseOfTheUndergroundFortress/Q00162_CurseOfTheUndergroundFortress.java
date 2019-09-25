@@ -21,7 +21,7 @@ package quests.Q00162_CurseOfTheUndergroundFortress;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -106,7 +106,7 @@ public final class Q00162_CurseOfTheUndergroundFortress extends Quest
 					long skulls = qs.getQuestItemsCount(ELF_SKULL);
 					if (skulls < 3)
 					{
-						qs.giveItems(ELF_SKULL, 1 * (int) Config.RATE_QUEST_DROP);
+						qs.giveItems(ELF_SKULL, 1 * (int) RatesConfig.RATE_QUEST_DROP);
 						if (((++skulls) >= 3) && (qs.getQuestItemsCount(BONE_FRAGMENT) >= 10))
 						{
 							
@@ -126,7 +126,7 @@ public final class Q00162_CurseOfTheUndergroundFortress extends Quest
 					long bones = qs.getQuestItemsCount(BONE_FRAGMENT);
 					if (bones < 10)
 					{
-						qs.giveItems(BONE_FRAGMENT, 1 * (int) Config.RATE_QUEST_DROP);
+						qs.giveItems(BONE_FRAGMENT, 1 * (int) RatesConfig.RATE_QUEST_DROP);
 						if (((++bones) >= 10) && (qs.getQuestItemsCount(ELF_SKULL) >= 3))
 						{
 							qs.setCond(2, true);

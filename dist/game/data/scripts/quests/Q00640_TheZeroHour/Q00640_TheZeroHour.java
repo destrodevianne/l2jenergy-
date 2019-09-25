@@ -18,7 +18,7 @@
  */
 package quests.Q00640_TheZeroHour;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -262,7 +262,7 @@ public class Q00640_TheZeroHour extends Quest
 		}
 		else
 		{
-			questState.giveItems(FANG_OF_STAKATO, (long) Config.RATE_QUEST_DROP);
+			questState.giveItems(FANG_OF_STAKATO, (long) RatesConfig.RATE_QUEST_DROP);
 			questState.playSound(Sound.ITEMSOUND_QUEST_ITEMGET);
 		}
 		return super.onKill(npc, killer, isSummon);

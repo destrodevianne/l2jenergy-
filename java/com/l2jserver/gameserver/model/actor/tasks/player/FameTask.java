@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.model.actor.tasks.player;
 
 import com.l2jserver.gameserver.configuration.config.Config;
-import com.l2jserver.gameserver.configuration.config.OfflineConfig;
+import com.l2jserver.gameserver.configuration.config.custom.OfflineConfig;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;

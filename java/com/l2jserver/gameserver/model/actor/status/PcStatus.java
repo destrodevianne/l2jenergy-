@@ -20,7 +20,7 @@ package com.l2jserver.gameserver.model.actor.status;
 
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.configuration.config.OfflineConfig;
+import com.l2jserver.gameserver.configuration.config.custom.OfflineConfig;
 import com.l2jserver.gameserver.enums.DuelState;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.instancemanager.DuelManager;

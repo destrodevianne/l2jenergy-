@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.model.items.L2Item;
 
@@ -93,12 +93,12 @@ public final class L2Seed
 	
 	public final int getSeedLimit()
 	{
-		return _limitSeeds * Config.RATE_DROP_MANOR;
+		return _limitSeeds * RatesConfig.RATE_DROP_MANOR;
 	}
 	
 	public final int getCropLimit()
 	{
-		return _limitCrops * Config.RATE_DROP_MANOR;
+		return _limitCrops * RatesConfig.RATE_DROP_MANOR;
 	}
 	
 	public final int getSeedReferencePrice()

@@ -28,6 +28,7 @@ import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.CharSummonTable;
 import com.l2jserver.gameserver.data.sql.impl.SummonEffectsTable;
@@ -1013,7 +1014,7 @@ public class L2PetInstance extends L2Summon
 	@Override
 	public void addExpAndSp(long addToExp, int addToSp)
 	{
-		getStat().addExpAndSp(Math.round(addToExp * (isSinEater() ? Config.SINEATER_XP_RATE : Config.PET_XP_RATE)), addToSp);
+		getStat().addExpAndSp(Math.round(addToExp * (isSinEater() ? RatesConfig.SINEATER_XP_RATE : RatesConfig.PET_XP_RATE)), addToSp);
 	}
 	
 	public boolean isSinEater()

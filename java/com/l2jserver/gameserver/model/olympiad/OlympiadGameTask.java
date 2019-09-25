@@ -22,7 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.OlympiadConfig;
+import com.l2jserver.gameserver.configuration.config.events.OlympiadConfig;
 import com.l2jserver.gameserver.model.zone.type.L2OlympiadStadiumZone;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;

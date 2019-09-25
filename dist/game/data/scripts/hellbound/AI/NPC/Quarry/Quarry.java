@@ -19,7 +19,7 @@
 package hellbound.AI.NPC.Quarry;
 
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.instancemanager.ZoneManager;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.actor.L2Character;
@@ -117,7 +117,7 @@ public final class Quarry extends AbstractNpcAI
 						{
 							if (getRandom(10000) < item.getChance())
 							{
-								npc.dropItem((L2PcInstance) npc.getTarget(), item.getId(), (int) (item.getCount() * Config.RATE_QUEST_DROP));
+								npc.dropItem((L2PcInstance) npc.getTarget(), item.getId(), (int) (item.getCount() * RatesConfig.RATE_QUEST_DROP));
 								break;
 							}
 						}

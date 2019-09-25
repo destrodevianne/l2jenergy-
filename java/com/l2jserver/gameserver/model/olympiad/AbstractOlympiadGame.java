@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.configuration.config.Config;
-import com.l2jserver.gameserver.configuration.config.OlympiadConfig;
+import com.l2jserver.gameserver.configuration.config.events.OlympiadConfig;
 import com.l2jserver.gameserver.instancemanager.AntiFeedManager;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.FortManager;

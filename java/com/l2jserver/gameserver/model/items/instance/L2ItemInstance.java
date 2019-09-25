@@ -37,7 +37,7 @@ import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.configuration.config.Config;
-import com.l2jserver.gameserver.configuration.config.OlympiadConfig;
+import com.l2jserver.gameserver.configuration.config.events.OlympiadConfig;
 import com.l2jserver.gameserver.data.xml.impl.EnchantItemOptionsData;
 import com.l2jserver.gameserver.data.xml.impl.OptionData;
 import com.l2jserver.gameserver.datatables.ItemTable;

@@ -18,7 +18,7 @@
  */
 package quests.Q00690_JudesRequest;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -144,7 +144,7 @@ public class Q00690_JudesRequest extends Quest
 			chance = 246;
 		}
 		// Apply the quest drop rate:
-		chance *= Config.RATE_QUEST_DROP;
+		chance *= RatesConfig.RATE_QUEST_DROP;
 		// Normalize
 		chance %= 1000;
 		

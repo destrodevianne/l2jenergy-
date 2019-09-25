@@ -28,6 +28,7 @@ import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.SevenSigns;
 import com.l2jserver.gameserver.SevenSignsFestival;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.data.xml.impl.HitConditionBonusData;
 import com.l2jserver.gameserver.data.xml.impl.KarmaData;
@@ -2171,7 +2172,7 @@ public final class Formulas
 		double karmaLooseMul = KarmaData.getInstance().getMultiplier(player.getLevel());
 		if (exp > 0) // Received exp
 		{
-			exp /= Config.RATE_KARMA_LOST;
+			exp /= RatesConfig.RATE_KARMA_LOST;
 		}
 		return (int) ((Math.abs(exp) / karmaLooseMul) / 30);
 	}

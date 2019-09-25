@@ -23,8 +23,9 @@ import com.l2jserver.gameserver.LoginServerThread;
 import com.l2jserver.gameserver.SevenSigns;
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.configuration.config.Config;
-import com.l2jserver.gameserver.configuration.config.CustomConfig;
-import com.l2jserver.gameserver.configuration.config.PcCafeConfig;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
+import com.l2jserver.gameserver.configuration.config.custom.CustomConfig;
+import com.l2jserver.gameserver.configuration.config.events.PcCafeConfig;
 import com.l2jserver.gameserver.configuration.config.events.WeddingConfig;
 import com.l2jserver.gameserver.data.sql.impl.AnnouncementsTable;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
@@ -348,7 +349,7 @@ public class EnterWorld extends L2GameClientPacket
 		
 		if (Config.ENABLE_VITALITY && Config.RECOVER_VITALITY_ON_RECONNECT)
 		{
-			float points = (Config.RATE_RECOVERY_ON_RECONNECT * (System.currentTimeMillis() - activeChar.getLastAccess())) / 60000;
+			float points = (RatesConfig.RATE_RECOVERY_ON_RECONNECT * (System.currentTimeMillis() - activeChar.getLastAccess())) / 60000;
 			if (points > 0)
 			{
 				activeChar.updateVitalityPoints(points, false, true);

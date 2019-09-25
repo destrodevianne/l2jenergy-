@@ -18,7 +18,7 @@
  */
 package handlers.effecthandlers.instant;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.enums.MountType;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.actor.L2Character;
@@ -62,7 +62,7 @@ public final class FoodForPet extends AbstractEffect
 		if (activeChar.isPet())
 		{
 			final L2PetInstance pet = (L2PetInstance) activeChar;
-			pet.setCurrentFed(pet.getCurrentFed() + (_normal * Config.PET_FOOD_RATE));
+			pet.setCurrentFed(pet.getCurrentFed() + (_normal * RatesConfig.PET_FOOD_RATE));
 		}
 		else if (activeChar.isPlayer())
 		{

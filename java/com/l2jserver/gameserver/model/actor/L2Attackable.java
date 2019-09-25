@@ -38,7 +38,8 @@ import com.l2jserver.gameserver.ai.L2CharacterAI;
 import com.l2jserver.gameserver.ai.L2FortSiegeGuardAI;
 import com.l2jserver.gameserver.ai.L2SiegeGuardAI;
 import com.l2jserver.gameserver.configuration.config.Config;
-import com.l2jserver.gameserver.configuration.config.PremiumConfig;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
+import com.l2jserver.gameserver.configuration.config.custom.PremiumConfig;
 import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.datatables.EventDroplist;
 import com.l2jserver.gameserver.datatables.EventDroplist.DateDrop;
@@ -1503,7 +1504,7 @@ public class L2Attackable extends L2Npc
 			{
 				count += diff;
 			}
-			_harvestItem.set(new ItemHolder(_seed.getCropId(), seeder.isPremium() ? count * Config.RATE_DROP_MANOR * PremiumConfig.PREMIUM_RATE_DROP_MANOR : count * Config.RATE_DROP_MANOR));
+			_harvestItem.set(new ItemHolder(_seed.getCropId(), seeder.isPremium() ? count * RatesConfig.RATE_DROP_MANOR * PremiumConfig.PREMIUM_RATE_DROP_MANOR : count * RatesConfig.RATE_DROP_MANOR));
 		}
 	}
 	

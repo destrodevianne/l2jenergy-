@@ -26,7 +26,7 @@ import java.util.List;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.Rnd;
-import com.l2jserver.gameserver.configuration.config.OlympiadConfig;
+import com.l2jserver.gameserver.configuration.config.events.OlympiadConfig;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Character;

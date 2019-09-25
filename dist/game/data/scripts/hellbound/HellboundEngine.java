@@ -18,7 +18,7 @@
  */
 package hellbound;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
 import com.l2jserver.gameserver.instancemanager.GlobalVariablesManager;
 import com.l2jserver.gameserver.model.L2Spawn;
@@ -347,7 +347,7 @@ public final class HellboundEngine extends AbstractNpcAI
 		int reward = trust;
 		if (useRates)
 		{
-			reward = (int) (trust * (trust > 0 ? Config.RATE_HB_TRUST_INCREASE : Config.RATE_HB_TRUST_DECREASE));
+			reward = (int) (trust * (trust > 0 ? RatesConfig.RATE_HB_TRUST_INCREASE : RatesConfig.RATE_HB_TRUST_DECREASE));
 		}
 		
 		final int finalTrust = Math.max(getTrust() + reward, _minTrust);

@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model.conditions;
 
-import com.l2jserver.gameserver.configuration.config.PcCafeConfig;
+import com.l2jserver.gameserver.configuration.config.events.PcCafeConfig;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.items.L2Item;

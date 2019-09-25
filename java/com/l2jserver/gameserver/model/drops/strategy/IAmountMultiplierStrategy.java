@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model.drops.strategy;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
@@ -31,8 +31,8 @@ import com.l2jserver.gameserver.model.itemcontainer.Inventory;
  */
 public interface IAmountMultiplierStrategy
 {
-	public static final IAmountMultiplierStrategy DROP = DEFAULT_STRATEGY(Config.RATE_DEATH_DROP_AMOUNT_MULTIPLIER);
-	public static final IAmountMultiplierStrategy SPOIL = DEFAULT_STRATEGY(Config.RATE_CORPSE_DROP_AMOUNT_MULTIPLIER); // TODO:fix add * Config.PREMIUM_RATE_SPOIL_AMMOUNT
+	public static final IAmountMultiplierStrategy DROP = DEFAULT_STRATEGY(RatesConfig.RATE_DEATH_DROP_AMOUNT_MULTIPLIER);
+	public static final IAmountMultiplierStrategy SPOIL = DEFAULT_STRATEGY(RatesConfig.RATE_CORPSE_DROP_AMOUNT_MULTIPLIER); // TODO:fix add * Config.PREMIUM_RATE_SPOIL_AMMOUNT
 	public static final IAmountMultiplierStrategy STATIC = (item, victim) -> 1;
 	
 	public static IAmountMultiplierStrategy DEFAULT_STRATEGY(final double defaultMultiplier)
@@ -44,18 +44,18 @@ public interface IAmountMultiplierStrategy
 			{
 				multiplier *= item.getItemId() != Inventory.ADENA_ID ? ChampionData.getInstance().getRewardMultipler((L2Attackable) victim) : ChampionData.getInstance().getAdenaMultipler((L2Attackable) victim);
 			}
-			Float dropAmountMultiplier = Config.RATE_DROP_AMOUNT_MULTIPLIER.get(item.getItemId());
+			Float dropAmountMultiplier = RatesConfig.RATE_DROP_AMOUNT_MULTIPLIER.get(item.getItemId());
 			if (dropAmountMultiplier != null)
 			{
 				multiplier *= dropAmountMultiplier;
 			}
 			else if (ItemTable.getInstance().getTemplate(item.getItemId()).hasExImmediateEffect())
 			{
-				multiplier *= Config.RATE_HERB_DROP_AMOUNT_MULTIPLIER;
+				multiplier *= RatesConfig.RATE_HERB_DROP_AMOUNT_MULTIPLIER;
 			}
 			else if (victim.isRaid())
 			{
-				multiplier *= Config.RATE_RAID_DROP_AMOUNT_MULTIPLIER;
+				multiplier *= RatesConfig.RATE_RAID_DROP_AMOUNT_MULTIPLIER;
 			}
 			else
 			{

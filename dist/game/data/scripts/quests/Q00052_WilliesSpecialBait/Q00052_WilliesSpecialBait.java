@@ -18,7 +18,7 @@
  */
 package quests.Q00052_WilliesSpecialBait;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -88,7 +88,7 @@ public class Q00052_WilliesSpecialBait extends Quest
 		final QuestState st = getQuestState(partyMember, false);
 		if (st.getQuestItemsCount(TARLK_EYE) < 100)
 		{
-			float chance = 33 * Config.RATE_QUEST_DROP;
+			float chance = 33 * RatesConfig.RATE_QUEST_DROP;
 			if (getRandom(100) < chance)
 			{
 				st.rewardItems(TARLK_EYE, 1);

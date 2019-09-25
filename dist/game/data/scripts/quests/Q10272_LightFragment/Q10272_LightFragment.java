@@ -18,7 +18,7 @@
  */
 package quests.Q10272_LightFragment;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -149,7 +149,7 @@ public class Q10272_LightFragment extends Quest
 			final long count = st.getQuestItemsCount(FRAGMENT_POWDER);
 			if (count < 100)
 			{
-				int chance = (int) (Config.RATE_QUEST_DROP * DROP_CHANCE);
+				int chance = (int) (RatesConfig.RATE_QUEST_DROP * DROP_CHANCE);
 				int numItems = chance / 100;
 				chance = chance % 100;
 				if (getRandom(100) < chance)

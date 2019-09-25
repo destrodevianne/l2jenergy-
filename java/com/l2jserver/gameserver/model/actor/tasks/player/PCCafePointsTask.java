@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.model.actor.tasks.player;
 
 import com.l2jserver.commons.util.Rnd;
-import com.l2jserver.gameserver.configuration.config.PcCafeConfig;
+import com.l2jserver.gameserver.configuration.config.events.PcCafeConfig;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
 /**

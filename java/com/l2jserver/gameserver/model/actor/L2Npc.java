@@ -37,7 +37,8 @@ import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.FeatureConfig;
-import com.l2jserver.gameserver.configuration.config.OlympiadConfig;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
+import com.l2jserver.gameserver.configuration.config.events.OlympiadConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.datatables.ItemTable;
@@ -1169,7 +1170,7 @@ public class L2Npc extends L2Character
 	 */
 	public long getExpReward()
 	{
-		return (long) (getLevel() * getLevel() * getTemplate().getExpRate() * Config.RATE_XP);
+		return (long) (getLevel() * getLevel() * getTemplate().getExpRate() * RatesConfig.RATE_XP);
 	}
 	
 	/**
@@ -1177,7 +1178,7 @@ public class L2Npc extends L2Character
 	 */
 	public int getSpReward()
 	{
-		return (int) (getTemplate().getSP() * Config.RATE_SP);
+		return (int) (getTemplate().getSP() * RatesConfig.RATE_SP);
 	}
 	
 	/**

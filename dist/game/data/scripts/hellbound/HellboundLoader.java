@@ -21,7 +21,7 @@ package hellbound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.gameserver.configuration.config.CustomConfig;
+import com.l2jserver.gameserver.configuration.config.custom.CustomConfig;
 import com.l2jserver.gameserver.handler.AdminCommandHandler;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.handler.IVoicedCommandHandler;

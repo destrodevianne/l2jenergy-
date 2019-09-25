@@ -21,7 +21,7 @@ package ai.npc.AdventureGuildsman;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.l2jserver.gameserver.configuration.config.PcCafeConfig;
+import com.l2jserver.gameserver.configuration.config.events.PcCafeConfig;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.enums.PcCafeType;
 import com.l2jserver.gameserver.model.actor.L2Npc;

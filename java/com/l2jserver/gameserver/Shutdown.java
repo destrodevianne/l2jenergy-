@@ -27,7 +27,7 @@ import com.l2jserver.commons.UPnPService;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.ManorConfig;
-import com.l2jserver.gameserver.configuration.config.OfflineConfig;
+import com.l2jserver.gameserver.configuration.config.custom.OfflineConfig;
 import com.l2jserver.gameserver.configuration.config.events.FishingConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.sql.impl.OfflineTradersTable;

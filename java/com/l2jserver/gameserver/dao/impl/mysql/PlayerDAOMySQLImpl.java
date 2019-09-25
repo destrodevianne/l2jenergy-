@@ -29,7 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.ConnectionFactory;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.custom.TopsConfig;
 import com.l2jserver.gameserver.dao.PlayerDAO;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
@@ -429,7 +429,7 @@ public class PlayerDAOMySQLImpl implements PlayerDAO
 	public void clean()
 	{
 		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DAY_OF_YEAR, -Config.TOP_SAVE_DAYS);
+		calendar.add(Calendar.DAY_OF_YEAR, -TopsConfig.TOP_SAVE_DAYS);
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
 			PreparedStatement ps = con.prepareStatement(DELETE_TOP_DATA))
 		{

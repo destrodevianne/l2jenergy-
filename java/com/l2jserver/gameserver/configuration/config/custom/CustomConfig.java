@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.gameserver.configuration.config;
+package com.l2jserver.gameserver.configuration.config.custom;
 
 import com.l2jserver.commons.configuration.annotations.Configuration;
 import com.l2jserver.commons.configuration.annotations.Setting;
@@ -24,7 +24,7 @@ import com.l2jserver.commons.configuration.annotations.Setting;
 /**
  * @author Мо3олЬ
  */
-@Configuration("custom.json")
+@Configuration("custom/custom.json")
 public class CustomConfig
 {
 	@Setting(name = "EnableWarehouseSortingClan")

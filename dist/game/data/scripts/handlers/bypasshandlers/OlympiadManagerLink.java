@@ -21,7 +21,7 @@ package handlers.bypasshandlers;
 import java.util.Collection;
 import java.util.List;
 
-import com.l2jserver.gameserver.configuration.config.OlympiadConfig;
+import com.l2jserver.gameserver.configuration.config.events.OlympiadConfig;
 import com.l2jserver.gameserver.data.sql.impl.NpcBufferTable;
 import com.l2jserver.gameserver.data.sql.impl.NpcBufferTable.NpcBufferData;
 import com.l2jserver.gameserver.data.xml.impl.MultisellData;

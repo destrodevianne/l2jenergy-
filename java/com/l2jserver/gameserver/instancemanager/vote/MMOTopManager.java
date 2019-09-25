@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.custom.TopsConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.instancemanager.MailManager;
 import com.l2jserver.gameserver.model.L2World;
@@ -54,7 +54,7 @@ public class MMOTopManager
 	
 	protected MMOTopManager()
 	{
-		if (Config.MMO_TOP_MANAGER_ENABLED)
+		if (TopsConfig.MMO_TOP_MANAGER_ENABLED)
 		{
 			load();
 			LOG.info("MMOTopManager: Started.");
@@ -67,9 +67,9 @@ public class MMOTopManager
 	
 	public void load()
 	{
-		ThreadPoolManager.getInstance().scheduleAiAtFixedRate(new ConnectAndUpdate(), Config.TOP_MANAGER_INTERVAL, Config.TOP_MANAGER_INTERVAL);
-		ThreadPoolManager.getInstance().scheduleAiAtFixedRate(new Clean(), Config.TOP_MANAGER_INTERVAL, Config.TOP_MANAGER_INTERVAL);
-		ThreadPoolManager.getInstance().scheduleAiAtFixedRate(new GiveReward(), Config.TOP_MANAGER_INTERVAL, Config.TOP_MANAGER_INTERVAL);
+		ThreadPoolManager.getInstance().scheduleAiAtFixedRate(new ConnectAndUpdate(), TopsConfig.TOP_MANAGER_INTERVAL, TopsConfig.TOP_MANAGER_INTERVAL);
+		ThreadPoolManager.getInstance().scheduleAiAtFixedRate(new Clean(), TopsConfig.TOP_MANAGER_INTERVAL, TopsConfig.TOP_MANAGER_INTERVAL);
+		ThreadPoolManager.getInstance().scheduleAiAtFixedRate(new GiveReward(), TopsConfig.TOP_MANAGER_INTERVAL, TopsConfig.TOP_MANAGER_INTERVAL);
 	}
 	
 	public void getPage(String address)
@@ -119,7 +119,7 @@ public class MMOTopManager
 						calendar.set(13, second);
 						calendar.set(14, 0);
 						long voteTime = calendar.getTimeInMillis() / 1000;
-						if ((voteTime + (Config.TOP_SAVE_DAYS * 86400)) > (System.currentTimeMillis() / 1000))
+						if ((voteTime + (TopsConfig.TOP_SAVE_DAYS * 86400)) > (System.currentTimeMillis() / 1000))
 						{
 							DAOFactory.getInstance().getPlayerDAO().checkAndSave(voteTime, charName, voteType);
 						}
@@ -163,12 +163,12 @@ public class MMOTopManager
 						L2PcInstance pl = (L2PcInstance) L2World.getInstance().findObject(charId);
 						
 						String text1 = "Reward MMOTop raiting!"; // TODO: перенести в xml
-						String text2 = "Thank you for your vote in MMOTop raiting. Best regards " + Config.TOP_SERVER_ADDRESS; // TODO: перенести в xml
+						String text2 = "Thank you for your vote in MMOTop raiting. Best regards " + TopsConfig.TOP_SERVER_ADDRESS; // TODO: перенести в xml
 						Message msg = new Message(pl.getObjectId(), text1, text2, Message.SendBySystem.NEWS);
 						Mail attachments = msg.createAttachments();
-						attachments.addItem("MMOTop", Config.MMO_TOP_REWARD_ID, Config.MMO_TOP_REWARD_COUNT * mult, null, null);
+						attachments.addItem("MMOTop", TopsConfig.MMO_TOP_REWARD_ID, TopsConfig.MMO_TOP_REWARD_COUNT * mult, null, null);
 						MailManager.getInstance().sendMessage(msg);
-						LOG.info("MMOTOP: " + winner.getName() + "[charId:" + winner.getObjectId() + "]  item: [id:" + Config.MMO_TOP_REWARD_ID + "count:" + (Config.MMO_TOP_REWARD_COUNT * mult) + ']');
+						LOG.info("MMOTOP: " + winner.getName() + "[charId:" + winner.getObjectId() + "]  item: [id:" + TopsConfig.MMO_TOP_REWARD_ID + "count:" + (TopsConfig.MMO_TOP_REWARD_COUNT * mult) + ']');
 					}
 				}
 			}
@@ -189,7 +189,7 @@ public class MMOTopManager
 		@Override
 		public void run()
 		{
-			getPage(Config.MMO_TOP_WEB_ADDRESS);
+			getPage(TopsConfig.MMO_TOP_WEB_ADDRESS);
 			parse();
 		}
 	}

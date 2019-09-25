@@ -39,7 +39,6 @@ import com.l2jserver.commons.util.PropertiesParser;
 import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.enums.IllegalActionPunishmentType;
 import com.l2jserver.gameserver.model.holders.ItemHolder;
-import com.l2jserver.gameserver.model.itemcontainer.Inventory;
 import com.l2jserver.gameserver.util.FloodProtectorConfig;
 
 /**
@@ -65,9 +64,7 @@ public final class Config
 	public static final String GENERAL_CONFIG_FILE = "./config/General.properties";
 	public static final String L2JMOD_CONFIG_FILE = "./config/L2JMods.properties";
 	public static final String NPC_CONFIG_FILE = "./config/NPC.properties";
-	public static final String RATES_CONFIG_FILE = "./config/Rates.properties";
 	public static final String SIEGE_CONFIGURATION_FILE = "./config/Siege.properties";
-	public static final String TOP_CONFIG_FILE = "config/services/Tops.properties";
 	
 	// --------------------------------------------------
 	// L2J Variable Definitions
@@ -588,72 +585,11 @@ public final class Config
 	public static double DROP_ITEM_MIN_LEVEL_GAP_CHANCE;
 	
 	// --------------------------------------------------
-	// Rate Settings
-	// --------------------------------------------------
-	public static float RATE_XP;
-	public static float RATE_SP;
-	public static float RATE_PARTY_XP;
-	public static float RATE_PARTY_SP;
-	public static float RATE_HB_TRUST_INCREASE;
-	public static float RATE_HB_TRUST_DECREASE;
-	public static float RATE_EXTRACTABLE;
-	public static int RATE_DROP_MANOR;
-	public static float RATE_QUEST_DROP;
-	public static float RATE_QUEST_REWARD;
-	public static float RATE_QUEST_REWARD_XP;
-	public static float RATE_QUEST_REWARD_SP;
-	public static float RATE_QUEST_REWARD_ADENA;
-	public static boolean RATE_QUEST_REWARD_USE_MULTIPLIERS;
-	public static float RATE_QUEST_REWARD_POTION;
-	public static float RATE_QUEST_REWARD_SCROLL;
-	public static float RATE_QUEST_REWARD_RECIPE;
-	public static float RATE_QUEST_REWARD_MATERIAL;
-	public static float RATE_DEATH_DROP_AMOUNT_MULTIPLIER;
-	public static float RATE_CORPSE_DROP_AMOUNT_MULTIPLIER;
-	public static float RATE_HERB_DROP_AMOUNT_MULTIPLIER;
-	public static float RATE_RAID_DROP_AMOUNT_MULTIPLIER;
-	public static float RATE_DEATH_DROP_CHANCE_MULTIPLIER;
-	public static float RATE_CORPSE_DROP_CHANCE_MULTIPLIER;
-	public static float RATE_HERB_DROP_CHANCE_MULTIPLIER;
-	public static float RATE_RAID_DROP_CHANCE_MULTIPLIER;
-	public static Map<Integer, Float> RATE_DROP_AMOUNT_MULTIPLIER;
-	public static Map<Integer, Float> RATE_DROP_CHANCE_MULTIPLIER;
-	public static float RATE_KARMA_LOST;
-	public static float RATE_KARMA_EXP_LOST;
-	public static float RATE_SIEGE_GUARDS_PRICE;
-	public static float RATE_DROP_COMMON_HERBS;
-	public static float RATE_DROP_HP_HERBS;
-	public static float RATE_DROP_MP_HERBS;
-	public static float RATE_DROP_SPECIAL_HERBS;
-	public static int PLAYER_DROP_LIMIT;
-	public static int PLAYER_RATE_DROP;
-	public static int PLAYER_RATE_DROP_ITEM;
-	public static int PLAYER_RATE_DROP_EQUIP;
-	public static int PLAYER_RATE_DROP_EQUIP_WEAPON;
-	public static float PET_XP_RATE;
-	public static int PET_FOOD_RATE;
-	public static float SINEATER_XP_RATE;
-	public static int KARMA_DROP_LIMIT;
-	public static int KARMA_RATE_DROP;
-	public static int KARMA_RATE_DROP_ITEM;
-	public static int KARMA_RATE_DROP_EQUIP;
-	public static int KARMA_RATE_DROP_EQUIP_WEAPON;
-	
-	// --------------------------------------------------
 	// Vitality Settings
 	// --------------------------------------------------
 	public static boolean ENABLE_VITALITY;
 	public static boolean RECOVER_VITALITY_ON_RECONNECT;
 	public static boolean ENABLE_DROP_VITALITY_HERBS;
-	public static float RATE_VITALITY_LEVEL_1;
-	public static float RATE_VITALITY_LEVEL_2;
-	public static float RATE_VITALITY_LEVEL_3;
-	public static float RATE_VITALITY_LEVEL_4;
-	public static float RATE_DROP_VITALITY_HERBS;
-	public static float RATE_RECOVERY_VITALITY_PEACE_ZONE;
-	public static float RATE_VITALITY_LOST;
-	public static float RATE_VITALITY_GAIN;
-	public static float RATE_RECOVERY_ON_RECONNECT;
 	public static int STARTING_VITALITY_POINTS;
 	
 	// --------------------------------------------------
@@ -688,20 +624,6 @@ public final class Config
 	public static double HP_REGEN_MULTIPLIER;
 	public static double MP_REGEN_MULTIPLIER;
 	public static double CP_REGEN_MULTIPLIER;
-	
-	public static boolean L2_TOP_MANAGER_ENABLED;
-	public static String L2_TOP_WEB_ADDRESS;
-	public static String L2_TOP_SMS_ADDRESS;
-	public static int L2_TOP_REWARD_ID;
-	public static int L2_TOP_REWARD_COUNT;
-	public static String L2_TOP_SERVER_PREFIX;
-	public static boolean MMO_TOP_MANAGER_ENABLED;
-	public static String MMO_TOP_WEB_ADDRESS;
-	public static int MMO_TOP_REWARD_ID;
-	public static int MMO_TOP_REWARD_COUNT;
-	public static int TOP_MANAGER_INTERVAL;
-	public static String TOP_SERVER_ADDRESS;
-	public static int TOP_SAVE_DAYS;
 	
 	/**
 	 * This class initializes all global variables for configuration.<br>
@@ -1376,121 +1298,6 @@ public final class Config
 		DROP_ITEM_MAX_LEVEL_DIFFERENCE = NPC.getInt("DropItemMaxLevelDifference", 10);
 		DROP_ITEM_MIN_LEVEL_GAP_CHANCE = NPC.getDouble("DropItemMinLevelGapChance", 10);
 		
-		// Load Rates L2Properties file (if exists)
-		final PropertiesParser RatesSettings = new PropertiesParser(RATES_CONFIG_FILE);
-		
-		RATE_XP = RatesSettings.getFloat("RateXp", 1);
-		RATE_SP = RatesSettings.getFloat("RateSp", 1);
-		RATE_PARTY_XP = RatesSettings.getFloat("RatePartyXp", 1);
-		RATE_PARTY_SP = RatesSettings.getFloat("RatePartySp", 1);
-		RATE_EXTRACTABLE = RatesSettings.getFloat("RateExtractable", 1);
-		RATE_DROP_MANOR = RatesSettings.getInt("RateDropManor", 1);
-		RATE_QUEST_DROP = RatesSettings.getFloat("RateQuestDrop", 1);
-		RATE_QUEST_REWARD = RatesSettings.getFloat("RateQuestReward", 1);
-		RATE_QUEST_REWARD_XP = RatesSettings.getFloat("RateQuestRewardXP", 1);
-		RATE_QUEST_REWARD_SP = RatesSettings.getFloat("RateQuestRewardSP", 1);
-		RATE_QUEST_REWARD_ADENA = RatesSettings.getFloat("RateQuestRewardAdena", 1);
-		RATE_QUEST_REWARD_USE_MULTIPLIERS = RatesSettings.getBoolean("UseQuestRewardMultipliers", false);
-		RATE_QUEST_REWARD_POTION = RatesSettings.getFloat("RateQuestRewardPotion", 1);
-		RATE_QUEST_REWARD_SCROLL = RatesSettings.getFloat("RateQuestRewardScroll", 1);
-		RATE_QUEST_REWARD_RECIPE = RatesSettings.getFloat("RateQuestRewardRecipe", 1);
-		RATE_QUEST_REWARD_MATERIAL = RatesSettings.getFloat("RateQuestRewardMaterial", 1);
-		RATE_HB_TRUST_INCREASE = RatesSettings.getFloat("RateHellboundTrustIncrease", 1);
-		RATE_HB_TRUST_DECREASE = RatesSettings.getFloat("RateHellboundTrustDecrease", 1);
-		
-		RATE_VITALITY_LEVEL_1 = RatesSettings.getFloat("RateVitalityLevel1", 1.5f);
-		RATE_VITALITY_LEVEL_2 = RatesSettings.getFloat("RateVitalityLevel2", 2);
-		RATE_VITALITY_LEVEL_3 = RatesSettings.getFloat("RateVitalityLevel3", 2.5f);
-		RATE_VITALITY_LEVEL_4 = RatesSettings.getFloat("RateVitalityLevel4", 3);
-		RATE_RECOVERY_VITALITY_PEACE_ZONE = RatesSettings.getFloat("RateRecoveryPeaceZone", 1);
-		RATE_VITALITY_LOST = RatesSettings.getFloat("RateVitalityLost", 1);
-		RATE_VITALITY_GAIN = RatesSettings.getFloat("RateVitalityGain", 1);
-		RATE_RECOVERY_ON_RECONNECT = RatesSettings.getFloat("RateRecoveryOnReconnect", 4);
-		RATE_KARMA_LOST = RatesSettings.getFloat("RateKarmaLost", -1);
-		if (RATE_KARMA_LOST == -1)
-		{
-			RATE_KARMA_LOST = RATE_XP;
-		}
-		RATE_KARMA_EXP_LOST = RatesSettings.getFloat("RateKarmaExpLost", 1);
-		RATE_SIEGE_GUARDS_PRICE = RatesSettings.getFloat("RateSiegeGuardsPrice", 1);
-		PLAYER_DROP_LIMIT = RatesSettings.getInt("PlayerDropLimit", 3);
-		PLAYER_RATE_DROP = RatesSettings.getInt("PlayerRateDrop", 5);
-		PLAYER_RATE_DROP_ITEM = RatesSettings.getInt("PlayerRateDropItem", 70);
-		PLAYER_RATE_DROP_EQUIP = RatesSettings.getInt("PlayerRateDropEquip", 25);
-		PLAYER_RATE_DROP_EQUIP_WEAPON = RatesSettings.getInt("PlayerRateDropEquipWeapon", 5);
-		PET_XP_RATE = RatesSettings.getFloat("PetXpRate", 1);
-		PET_FOOD_RATE = RatesSettings.getInt("PetFoodRate", 1);
-		SINEATER_XP_RATE = RatesSettings.getFloat("SinEaterXpRate", 1);
-		KARMA_DROP_LIMIT = RatesSettings.getInt("KarmaDropLimit", 10);
-		KARMA_RATE_DROP = RatesSettings.getInt("KarmaRateDrop", 70);
-		KARMA_RATE_DROP_ITEM = RatesSettings.getInt("KarmaRateDropItem", 50);
-		KARMA_RATE_DROP_EQUIP = RatesSettings.getInt("KarmaRateDropEquip", 40);
-		KARMA_RATE_DROP_EQUIP_WEAPON = RatesSettings.getInt("KarmaRateDropEquipWeapon", 10);
-		
-		RATE_DEATH_DROP_AMOUNT_MULTIPLIER = RatesSettings.getFloat("DeathDropAmountMultiplier", 1);
-		RATE_CORPSE_DROP_AMOUNT_MULTIPLIER = RatesSettings.getFloat("CorpseDropAmountMultiplier", 1);
-		RATE_HERB_DROP_AMOUNT_MULTIPLIER = RatesSettings.getFloat("HerbDropAmountMultiplier", 1);
-		RATE_RAID_DROP_AMOUNT_MULTIPLIER = RatesSettings.getFloat("RaidDropAmountMultiplier", 1);
-		RATE_DEATH_DROP_CHANCE_MULTIPLIER = RatesSettings.getFloat("DeathDropChanceMultiplier", 1);
-		RATE_CORPSE_DROP_CHANCE_MULTIPLIER = RatesSettings.getFloat("CorpseDropChanceMultiplier", 1);
-		RATE_HERB_DROP_CHANCE_MULTIPLIER = RatesSettings.getFloat("HerbDropChanceMultiplier", 1);
-		RATE_RAID_DROP_CHANCE_MULTIPLIER = RatesSettings.getFloat("RaidDropChanceMultiplier", 1);
-		String[] dropAmountMultiplier = RatesSettings.getString("DropAmountMultiplierByItemId", "").split(";");
-		RATE_DROP_AMOUNT_MULTIPLIER = new HashMap<>(dropAmountMultiplier.length);
-		if (!dropAmountMultiplier[0].isEmpty())
-		{
-			for (String item : dropAmountMultiplier)
-			{
-				String[] itemSplit = item.split(",");
-				if (itemSplit.length != 2)
-				{
-					LOG.warn("Config.load(): invalid config property -> RateDropItemsById {}", item);
-				}
-				else
-				{
-					try
-					{
-						RATE_DROP_AMOUNT_MULTIPLIER.put(Integer.valueOf(itemSplit[0]), Float.valueOf(itemSplit[1]));
-					}
-					catch (NumberFormatException nfe)
-					{
-						if (!item.isEmpty())
-						{
-							LOG.warn("Config.load(): invalid config property -> RateDropItemsById {}", item);
-						}
-					}
-				}
-			}
-		}
-		
-		String[] dropChanceMultiplier = RatesSettings.getString("DropChanceMultiplierByItemId", "").split(";");
-		RATE_DROP_CHANCE_MULTIPLIER = new HashMap<>(dropChanceMultiplier.length);
-		if (!dropChanceMultiplier[0].isEmpty())
-		{
-			for (String item : dropChanceMultiplier)
-			{
-				String[] itemSplit = item.split(",");
-				if (itemSplit.length != 2)
-				{
-					LOG.warn("Config.load(): invalid config property -> RateDropItemsById {}", item);
-				}
-				else
-				{
-					try
-					{
-						RATE_DROP_CHANCE_MULTIPLIER.put(Integer.valueOf(itemSplit[0]), Float.valueOf(itemSplit[1]));
-					}
-					catch (NumberFormatException nfe)
-					{
-						if (!item.isEmpty())
-						{
-							LOG.warn("Config.load(): invalid config property -> RateDropItemsById {}", item);
-						}
-					}
-				}
-			}
-		}
-		
 		// Load L2JMod L2Properties file (if exists)
 		final PropertiesParser L2JModSettings = new PropertiesParser(L2JMOD_CONFIG_FILE);
 		
@@ -1808,23 +1615,6 @@ public final class Config
 		RWHO_ONLINE_INCREMENT = L2JModSettings.getInt("RemoteOnlineIncrement", 0);
 		RWHO_PRIV_STORE_FACTOR = L2JModSettings.getFloat("RemotePrivStoreFactor", 0);
 		RWHO_FORCE_INC = L2JModSettings.getInt("RemoteWhoForceInc", 0);
-		
-		final PropertiesParser topSettings = new PropertiesParser(TOP_CONFIG_FILE);
-		L2_TOP_MANAGER_ENABLED = topSettings.getBoolean("L2TopManagerEnabled", false);
-		
-		L2_TOP_WEB_ADDRESS = topSettings.getString("L2TopWebAddress", "");
-		L2_TOP_SMS_ADDRESS = topSettings.getString("L2TopSmsAddress", "");
-		L2_TOP_SERVER_PREFIX = topSettings.getString("L2TopServerPrefix", "");
-		L2_TOP_REWARD_ID = topSettings.getInt("L2TopRewardId", 57);
-		L2_TOP_REWARD_COUNT = topSettings.getInt("L2TopRewardCount", 1000);
-		MMO_TOP_MANAGER_ENABLED = topSettings.getBoolean("MMOTopEnable", false);
-		MMO_TOP_WEB_ADDRESS = topSettings.getString("MMOTopUrl", "");
-		MMO_TOP_REWARD_ID = topSettings.getInt("MMOTopRewardId", 57);
-		MMO_TOP_REWARD_COUNT = topSettings.getInt("MMOTopRewardCount", 1000);
-		
-		TOP_MANAGER_INTERVAL = topSettings.getInt("TopManagerInterval", 300000);
-		TOP_SERVER_ADDRESS = topSettings.getString("TopServerAddress", "L2jenergy");
-		TOP_SAVE_DAYS = topSettings.getInt("TopSaveDays", 30);
 	}
 	
 	/**
@@ -1837,145 +1627,6 @@ public final class Config
 	{
 		switch (pName.trim().toLowerCase())
 		{
-			// rates.properties
-			case "ratexp":
-				RATE_XP = Float.parseFloat(pValue);
-				break;
-			case "ratesp":
-				RATE_SP = Float.parseFloat(pValue);
-				break;
-			case "ratepartyxp":
-				RATE_PARTY_XP = Float.parseFloat(pValue);
-				break;
-			case "rateextractable":
-				RATE_EXTRACTABLE = Float.parseFloat(pValue);
-				break;
-			case "ratedropadena":
-				RATE_DROP_AMOUNT_MULTIPLIER.put(Inventory.ADENA_ID, Float.parseFloat(pValue));
-				break;
-			case "ratedropmanor":
-				RATE_DROP_MANOR = Integer.parseInt(pValue);
-				break;
-			case "ratequestdrop":
-				RATE_QUEST_DROP = Float.parseFloat(pValue);
-				break;
-			case "ratequestreward":
-				RATE_QUEST_REWARD = Float.parseFloat(pValue);
-				break;
-			case "ratequestrewardxp":
-				RATE_QUEST_REWARD_XP = Float.parseFloat(pValue);
-				break;
-			case "ratequestrewardsp":
-				RATE_QUEST_REWARD_SP = Float.parseFloat(pValue);
-				break;
-			case "ratequestrewardadena":
-				RATE_QUEST_REWARD_ADENA = Float.parseFloat(pValue);
-				break;
-			case "usequestrewardmultipliers":
-				RATE_QUEST_REWARD_USE_MULTIPLIERS = Boolean.parseBoolean(pValue);
-				break;
-			case "ratequestrewardpotion":
-				RATE_QUEST_REWARD_POTION = Float.parseFloat(pValue);
-				break;
-			case "ratequestrewardscroll":
-				RATE_QUEST_REWARD_SCROLL = Float.parseFloat(pValue);
-				break;
-			case "ratequestrewardrecipe":
-				RATE_QUEST_REWARD_RECIPE = Float.parseFloat(pValue);
-				break;
-			case "ratequestrewardmaterial":
-				RATE_QUEST_REWARD_MATERIAL = Float.parseFloat(pValue);
-				break;
-			case "ratehellboundtrustincrease":
-				RATE_HB_TRUST_INCREASE = Float.parseFloat(pValue);
-				break;
-			case "ratehellboundtrustdecrease":
-				RATE_HB_TRUST_DECREASE = Float.parseFloat(pValue);
-				break;
-			case "ratevitalitylevel1":
-				RATE_VITALITY_LEVEL_1 = Float.parseFloat(pValue);
-				break;
-			case "ratevitalitylevel2":
-				RATE_VITALITY_LEVEL_2 = Float.parseFloat(pValue);
-				break;
-			case "ratevitalitylevel3":
-				RATE_VITALITY_LEVEL_3 = Float.parseFloat(pValue);
-				break;
-			case "ratevitalitylevel4":
-				RATE_VITALITY_LEVEL_4 = Float.parseFloat(pValue);
-				break;
-			case "raterecoverypeacezone":
-				RATE_RECOVERY_VITALITY_PEACE_ZONE = Float.parseFloat(pValue);
-				break;
-			case "ratevitalitylost":
-				RATE_VITALITY_LOST = Float.parseFloat(pValue);
-				break;
-			case "ratevitalitygain":
-				RATE_VITALITY_GAIN = Float.parseFloat(pValue);
-				break;
-			case "raterecoveryonreconnect":
-				RATE_RECOVERY_ON_RECONNECT = Float.parseFloat(pValue);
-				break;
-			case "ratekarmaexplost":
-				RATE_KARMA_EXP_LOST = Float.parseFloat(pValue);
-				break;
-			case "ratesiegeguardsprice":
-				RATE_SIEGE_GUARDS_PRICE = Float.parseFloat(pValue);
-				break;
-			case "ratecommonherbs":
-				RATE_DROP_COMMON_HERBS = Float.parseFloat(pValue);
-				break;
-			case "ratehpherbs":
-				RATE_DROP_HP_HERBS = Float.parseFloat(pValue);
-				break;
-			case "ratempherbs":
-				RATE_DROP_MP_HERBS = Float.parseFloat(pValue);
-				break;
-			case "ratespecialherbs":
-				RATE_DROP_SPECIAL_HERBS = Float.parseFloat(pValue);
-				break;
-			case "ratevitalityherbs":
-				RATE_DROP_VITALITY_HERBS = Float.parseFloat(pValue);
-				break;
-			case "playerdroplimit":
-				PLAYER_DROP_LIMIT = Integer.parseInt(pValue);
-				break;
-			case "playerratedrop":
-				PLAYER_RATE_DROP = Integer.parseInt(pValue);
-				break;
-			case "playerratedropitem":
-				PLAYER_RATE_DROP_ITEM = Integer.parseInt(pValue);
-				break;
-			case "playerratedropequip":
-				PLAYER_RATE_DROP_EQUIP = Integer.parseInt(pValue);
-				break;
-			case "playerratedropequipweapon":
-				PLAYER_RATE_DROP_EQUIP_WEAPON = Integer.parseInt(pValue);
-				break;
-			case "petxprate":
-				PET_XP_RATE = Float.parseFloat(pValue);
-				break;
-			case "petfoodrate":
-				PET_FOOD_RATE = Integer.parseInt(pValue);
-				break;
-			case "sineaterxprate":
-				SINEATER_XP_RATE = Float.parseFloat(pValue);
-				break;
-			case "karmadroplimit":
-				KARMA_DROP_LIMIT = Integer.parseInt(pValue);
-				break;
-			case "karmaratedrop":
-				KARMA_RATE_DROP = Integer.parseInt(pValue);
-				break;
-			case "karmaratedropitem":
-				KARMA_RATE_DROP_ITEM = Integer.parseInt(pValue);
-				break;
-			case "karmaratedropequip":
-				KARMA_RATE_DROP_EQUIP = Integer.parseInt(pValue);
-				break;
-			case "karmaratedropequipweapon":
-				KARMA_RATE_DROP_EQUIP_WEAPON = Integer.parseInt(pValue);
-				break;
 			case "deletecharafterdays":
 				DELETE_DAYS = Integer.parseInt(pValue);
 				break;

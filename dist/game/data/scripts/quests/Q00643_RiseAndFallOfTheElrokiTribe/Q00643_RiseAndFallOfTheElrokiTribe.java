@@ -18,7 +18,7 @@
  */
 package quests.Q00643_RiseAndFallOfTheElrokiTribe;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -195,7 +195,7 @@ public class Q00643_RiseAndFallOfTheElrokiTribe extends Quest
 		
 		if (Util.contains(MOBS1, npcId))
 		{
-			float chance = (CHANCE_MOBS1 * Config.RATE_QUEST_DROP);
+			float chance = (CHANCE_MOBS1 * RatesConfig.RATE_QUEST_DROP);
 			if (getRandom(1000) < chance)
 			{
 				st.rewardItems(BONES_OF_A_PLAINS_DINOSAUR, 2);
@@ -209,7 +209,7 @@ public class Q00643_RiseAndFallOfTheElrokiTribe extends Quest
 		
 		if (Util.contains(MOBS2, npcId))
 		{
-			float chance = (CHANCE_MOBS2 * Config.RATE_QUEST_DROP);
+			float chance = (CHANCE_MOBS2 * RatesConfig.RATE_QUEST_DROP);
 			if (getRandom(1000) < chance)
 			{
 				st.rewardItems(BONES_OF_A_PLAINS_DINOSAUR, 1);
@@ -219,7 +219,7 @@ public class Q00643_RiseAndFallOfTheElrokiTribe extends Quest
 		
 		if (npcId == DEINONYCHUS)
 		{
-			float chance = (CHANCE_DEINO * Config.RATE_QUEST_DROP);
+			float chance = (CHANCE_DEINO * RatesConfig.RATE_QUEST_DROP);
 			if (getRandom(1000) < chance)
 			{
 				st.rewardItems(BONES_OF_A_PLAINS_DINOSAUR, 1);

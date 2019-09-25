@@ -20,7 +20,7 @@ package quests.Q00279_TargetOfOpportunity;
 
 import java.util.Arrays;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -101,7 +101,7 @@ public final class Q00279_TargetOfOpportunity extends Quest
 		}
 		
 		final QuestState st = getQuestState(pl, false);
-		if (getRandom(1000) < (int) (311 * Config.RATE_QUEST_DROP))
+		if (getRandom(1000) < (int) (311 * RatesConfig.RATE_QUEST_DROP))
 		{
 			if (!st.hasQuestItems(SEAL_COMPONENTS[idx]))
 			{

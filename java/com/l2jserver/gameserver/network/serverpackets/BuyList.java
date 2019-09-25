@@ -20,7 +20,7 @@ package com.l2jserver.gameserver.network.serverpackets;
 
 import java.util.Collection;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.model.buylist.L2BuyList;
 import com.l2jserver.gameserver.model.buylist.Product;
 
@@ -80,7 +80,7 @@ public final class BuyList extends L2GameServerPacket
 				
 				if ((product.getItemId() >= 3960) && (product.getItemId() <= 4026))
 				{
-					writeQ((long) (product.getPrice() * Config.RATE_SIEGE_GUARDS_PRICE * (1 + _taxRate)));
+					writeQ((long) (product.getPrice() * RatesConfig.RATE_SIEGE_GUARDS_PRICE * (1 + _taxRate)));
 				}
 				else
 				{

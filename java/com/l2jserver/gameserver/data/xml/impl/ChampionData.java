@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.data.xml.impl;
 
-import com.l2jserver.gameserver.configuration.config.ChampionConfig;
+import com.l2jserver.gameserver.configuration.config.custom.ChampionConfig;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
 
 /**

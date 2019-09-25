@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.gameserver.configuration.config;
+package com.l2jserver.gameserver.configuration.config.custom;
 
 import java.util.Map;
 
@@ -27,7 +27,7 @@ import com.l2jserver.gameserver.util.Util;
 /**
  * @author Мо3олЬ
  */
-@Configuration("premium.json")
+@Configuration("custom/premium.json")
 public class PremiumConfig
 {
 	@Setting(name = "EnablePremiumSystem")

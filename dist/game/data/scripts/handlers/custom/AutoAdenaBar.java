@@ -18,7 +18,7 @@
  */
 package handlers.custom;
 
-import com.l2jserver.gameserver.configuration.config.CustomConfig;
+import com.l2jserver.gameserver.configuration.config.custom.CustomConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.events.Containers;

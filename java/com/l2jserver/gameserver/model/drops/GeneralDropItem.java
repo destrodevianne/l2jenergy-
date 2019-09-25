@@ -20,7 +20,7 @@ package com.l2jserver.gameserver.model.drops;
 
 import java.util.List;
 
-import com.l2jserver.gameserver.configuration.config.PremiumConfig;
+import com.l2jserver.gameserver.configuration.config.custom.PremiumConfig;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.drops.strategy.IAmountMultiplierStrategy;
 import com.l2jserver.gameserver.model.drops.strategy.IChanceMultiplierStrategy;

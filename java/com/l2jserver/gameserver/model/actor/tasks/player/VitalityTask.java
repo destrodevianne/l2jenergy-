@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model.actor.tasks.player;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.actor.stat.PcStat;
 import com.l2jserver.gameserver.model.zone.ZoneId;
@@ -50,7 +50,7 @@ public class VitalityTask implements Runnable
 			return;
 		}
 		
-		_player.updateVitalityPoints(Config.RATE_RECOVERY_VITALITY_PEACE_ZONE, false, false);
+		_player.updateVitalityPoints(RatesConfig.RATE_RECOVERY_VITALITY_PEACE_ZONE, false, false);
 		_player.sendPacket(new ExVitalityPointInfo(_player.getVitalityPoints()));
 	}
 }

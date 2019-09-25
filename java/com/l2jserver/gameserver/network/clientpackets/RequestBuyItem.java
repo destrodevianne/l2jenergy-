@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.data.xml.impl.BuyListData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.L2Object;
@@ -174,7 +175,7 @@ public final class RequestBuyItem extends L2GameClientPacket
 			price = product.getPrice();
 			if ((product.getItemId() >= 3960) && (product.getItemId() <= 4026))
 			{
-				price *= Config.RATE_SIEGE_GUARDS_PRICE;
+				price *= RatesConfig.RATE_SIEGE_GUARDS_PRICE;
 			}
 			
 			if (price < 0)

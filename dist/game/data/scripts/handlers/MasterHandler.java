@@ -27,8 +27,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.configuration.config.Config;
-import com.l2jserver.gameserver.configuration.config.CustomConfig;
-import com.l2jserver.gameserver.configuration.config.PremiumConfig;
+import com.l2jserver.gameserver.configuration.config.custom.CustomConfig;
+import com.l2jserver.gameserver.configuration.config.custom.PremiumConfig;
 import com.l2jserver.gameserver.configuration.config.events.WeddingConfig;
 import com.l2jserver.gameserver.handler.ActionHandler;
 import com.l2jserver.gameserver.handler.ActionShiftHandler;
