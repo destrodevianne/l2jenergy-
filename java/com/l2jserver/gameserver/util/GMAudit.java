@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -23,9 +23,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.l2jserver.commons.util.Util;
 import com.l2jserver.gameserver.configuration.config.Config;
 
 /**
@@ -33,11 +35,11 @@ import com.l2jserver.gameserver.configuration.config.Config;
  */
 public class GMAudit
 {
-	private static final Logger _log = Logger.getLogger(GMAudit.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(GMAudit.class);
 	
 	static
 	{
-		new File("log/GMAudit").mkdirs();
+		new File("logs/GMAudit").mkdirs();
 	}
 	
 	/**
@@ -51,20 +53,20 @@ public class GMAudit
 	{
 		final SimpleDateFormat _formatter = new SimpleDateFormat("dd/MM/yyyy H:mm:ss");
 		final String date = _formatter.format(new Date());
-		String name = com.l2jserver.commons.util.Util.replaceIllegalCharacters(gmName);
-		if (!com.l2jserver.commons.util.Util.isValidFileName(name))
+		String name = Util.replaceIllegalCharacters(gmName);
+		if (!Util.isValidFileName(name))
 		{
 			name = "INVALID_GM_NAME_" + date;
 		}
 		
-		final File file = new File("log/GMAudit/" + name + ".txt");
+		final File file = new File("logs/GMAudit/" + name + ".txt");
 		try (FileWriter save = new FileWriter(file, true))
 		{
 			save.write(date + ">" + gmName + ">" + action + ">" + target + ">" + params + Config.EOL);
 		}
 		catch (IOException e)
 		{
-			_log.log(Level.SEVERE, "GMAudit for GM " + gmName + " could not be saved: ", e);
+			LOG.error("GMAudit for GM {} could not be saved!", gmName, e);
 		}
 	}
 	
