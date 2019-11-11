@@ -26,13 +26,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.enums.AISkillScope;
 import com.l2jserver.gameserver.enums.AIType;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.enums.Sex;
 import com.l2jserver.gameserver.model.StatsSet;
+import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.drops.DropListScope;
@@ -534,6 +537,27 @@ public final class L2NpcTemplate extends L2CharTemplate implements IIdentifiable
 			}
 			
 			calculatedDrops.addAll(drops);
+		}
+		
+		// champion extra drop
+		if (victim.isChampion())
+		{
+			if ((victim.getLevel() < killer.getLevel()) && (Rnd.get(100) < ChampionData.getInstance().getLowerLvChance((L2Attackable) victim)))
+			{
+				return calculatedDrops;
+			}
+			if ((victim.getLevel() > killer.getLevel()) && (Rnd.get(100) < ChampionData.getInstance().getHigherLvChance((L2Attackable) victim)))
+			{
+				return calculatedDrops;
+			}
+			
+			// create list
+			if (calculatedDrops == null)
+			{
+				calculatedDrops = new ArrayList<>();
+			}
+			
+			calculatedDrops.add(new ItemHolder(ChampionData.getInstance().getRewardId((L2Attackable) victim), ChampionData.getInstance().getRewardCount((L2Attackable) victim)));
 		}
 		return calculatedDrops;
 	}

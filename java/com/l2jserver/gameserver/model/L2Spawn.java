@@ -666,6 +666,18 @@ public class L2Spawn implements IPositionable, IIdentifiable, INamable
 					((L2Attackable) mob).setHardChampion(false);
 				}
 			}
+			
+			if (mob.isMonster() && !getTemplate().isUndying() && !mob.isRaid() && !mob.isRaidMinion() && //
+				(mob.getLevel() >= ChampionData.getInstance().getMinLv(true)) && //
+				(mob.getLevel() <= ChampionData.getInstance().getMaxLv(true)) && //
+				(ChampionData.getInstance().inInstanceEnabled() || (getInstanceId() == 0)))
+			{
+				if (Rnd.get(100) < ChampionData.getInstance().getChance(true))
+				{
+					((L2Attackable) mob).setChampion(true);
+					((L2Attackable) mob).setHardChampion(true);
+				}
+			}
 		}
 		
 		// Reset summoner

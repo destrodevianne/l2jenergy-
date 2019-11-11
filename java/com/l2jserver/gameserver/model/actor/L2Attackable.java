@@ -1007,36 +1007,6 @@ public class L2Attackable extends L2Npc
 				}
 			}
 		}
-		
-		// Apply Special Item drop with random(rnd) quantity(qty) for champions.
-		if (ChampionData.getInstance().isEnabled() && isChampion() && ((ChampionData.getInstance().getLowerLvChance(this) > 0) || (ChampionData.getInstance().getHigherLvChance(this) > 0)))
-		{
-			int champqty = Rnd.get(ChampionData.getInstance().getRewardCount(this));
-			ItemHolder item = new ItemHolder(ChampionData.getInstance().getRewardId(this), ++champqty);
-			
-			if ((player.getLevel() <= getLevel()) && (Rnd.get(100) < ChampionData.getInstance().getLowerLvChance(this)))
-			{
-				if (Config.AUTO_LOOT || isFlying())
-				{
-					player.addItem("ChampionLoot", item.getId(), item.getCount(), this, true); // Give the item(s) to the L2PcInstance that has killed the L2Attackable
-				}
-				else
-				{
-					dropItem(player, item);
-				}
-			}
-			else if ((player.getLevel() > getLevel()) && (Rnd.get(100) < ChampionData.getInstance().getHigherLvChance(this)))
-			{
-				if (Config.AUTO_LOOT || isFlying())
-				{
-					player.addItem("ChampionLoot", item.getId(), item.getCount(), this, true); // Give the item(s) to the L2PcInstance that has killed the L2Attackable
-				}
-				else
-				{
-					dropItem(player, item);
-				}
-			}
-		}
 	}
 	
 	/**

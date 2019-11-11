@@ -31,25 +31,25 @@
 
     # Min and max levels allowed for Easy Champions.
     "ChampionMinLevelEasy" : "20",
-    "ChampionMaxLevelEasy" : "50",
+    "ChampionMaxLevelEasy" : "70",
 
     # Hp multiplier for Easy Champios.
     "ChampionHpEasy" : "5",
 
     # Hp Regen Multiplier for Easy Champions.
-    "ChampionHpRegenEasy" : "1.0",
+    "ChampionHpRegenEasy" : "2.0",
 
     # Standard rewards multiplier for Easy Champions.
-    "ChampionRewardsEasy" : "4",
+    "ChampionRewardsEasy" : "1",
 
     # Adena & Seal Stone rewards multiplier for Easy Champions.
-    "ChampionAdenasRewardsEasy" : "4",
+    "ChampionAdenasRewardsEasy" : "2",
 
     # P. Attack and M. Attack bonus for Easy Champions.
-    "ChampionAtkEasy" : "1",
+    "ChampionAtkEasy" : "3",
 
     # Physical/Magical Attack Speed bonus for Easy Champions.
-    "ChampionSpdAtkEasy" : "1",
+    "ChampionSpdAtkEasy" : "2",
 
     # Specified reward item ID for Easy Champions
     "ChampionRewardItemIDEasy" : "6393",
@@ -63,7 +63,7 @@
     # % Chance to obtain a specified reward item from a HIGHER lvl Champion mob.
     "ChampionRewardHigherLvlItemChanceEasy" : "0",
     
-    # Champion aura mob 2 - red; 1 - blue; 0 - disable.
+    # Champion aura mob 2-RED; 1-BLUE; NONE - disable.
     "ChampionAuraEasy" : "1",
 
     # =====================================================================
@@ -95,32 +95,32 @@
     "ChampionHpHard" : "15",
 
     # Hp Regen Multiplier for Hard Champions.
-    "ChampionHpRegenHard" : "2",
+    "ChampionHpRegenHard" : "3.5",
 
     # Standard rewards multiplier for Hard Champions.
-    "ChampionRewardsHard" : "10",
+    "ChampionRewardsHard" : "1",
 
     # Adena & Seal Stone rewards multiplier for Hard Champions.
     "ChampionAdenasRewardsHard" : "10",
 
     # P. Attack and M. Attack bonus for Hard Champions.
-    "ChampionAtkHard" : "2",
+    "ChampionAtkHard" : "5",
 
     # Physical/Magical Attack Speed bonus for Hard Champions.
-    "ChampionSpdAtkHard" : "2",
+    "ChampionSpdAtkHard" : "3",
 
     # Specified reward item ID for Hard Champions
     "ChampionRewardItemIDHard" : "6393",
 
     # The amount of the specified reward a player will receive if they are awarded the item.
-    "ChampionRewardItemQtyHard" : "2",
+    "ChampionRewardItemQtyHard" : "3",
 
     # % Chance to obtain a specified reward item from a LOWER lvl Champion mob.
-    "ChampionRewardLowerLvlItemChanceHard" : "0",
+    "ChampionRewardLowerLvlItemChanceHard" : "1",
 
     # % Chance to obtain a specified reward item from a HIGHER lvl Champion mob.
-    "ChampionRewardHigherLvlItemChanceHard" : "0",
+    "ChampionRewardHigherLvlItemChanceHard" : "3",
     
-    # Champion aura mob 2 - red; 1 - blue; 0 - disable.
+    # Champion aura mob 2-RED; 1-BLUE; NONE - disable.
     "ChampionAuraHard" : "2"
 }

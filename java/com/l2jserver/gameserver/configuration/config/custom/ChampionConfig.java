@@ -129,9 +129,9 @@ public class ChampionConfig
 	@Setting(name = "ChampionEnableInInstances")
 	public static boolean CHAMPION_ENABLE_IN_INSTANCES;
 	
-	@Setting(name = "ChampionAuraHard", minValue = 0, maxValue = 2)
+	@Setting(name = "ChampionAuraHard")
 	public static int CHAMPION_AURA_HARD;
 	
-	@Setting(name = "ChampionAuraEasy", minValue = 0, maxValue = 2)
+	@Setting(name = "ChampionAuraEasy")
 	public static int CHAMPION_AURA_EASY;
 }
