@@ -367,7 +367,7 @@ public class L2DoorInstance extends L2Character
 		
 		L2PcInstance actingPlayer = attacker.getActingPlayer();
 		
-		if (getClanHall() != null)
+		if ((getClanHall() != null) && getClanHall().isSiegableHall())
 		{
 			SiegableHall hall = (SiegableHall) getClanHall();
 			if (!hall.isSiegableHall())
