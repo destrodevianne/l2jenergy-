@@ -115,7 +115,7 @@ public class L2RaidBossInstance extends L2MonsterInstance
 	
 	protected void checkAndReturnToSpawn()
 	{
-		if (isDead() || isMovementDisabled() || !canReturnToSpawnPoint())
+		if (isDead() || isMovementDisabled() || !canReturnToSpawnPoint() || isWalker())
 		{
 			return;
 		}
