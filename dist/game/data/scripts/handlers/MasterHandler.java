@@ -112,6 +112,7 @@ import handlers.admincommandhandlers.AdminPetition;
 import handlers.admincommandhandlers.AdminPledge;
 import handlers.admincommandhandlers.AdminPolymorph;
 import handlers.admincommandhandlers.AdminPremium;
+import handlers.admincommandhandlers.AdminPremiumItem;
 import handlers.admincommandhandlers.AdminPunishment;
 import handlers.admincommandhandlers.AdminQuest;
 import handlers.admincommandhandlers.AdminReload;
@@ -396,8 +397,9 @@ public class MasterHandler
 			AdminPetition.class,
 			AdminPForge.class,
 			AdminPledge.class,
-			AdminPremium.class,
 			AdminPolymorph.class,
+			AdminPremium.class,
+			AdminPremiumItem.class,
 			AdminPunishment.class,
 			AdminQuest.class,
 			AdminReload.class,

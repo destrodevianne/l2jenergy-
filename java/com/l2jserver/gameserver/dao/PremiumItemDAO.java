@@ -31,4 +31,6 @@ public interface PremiumItemDAO
 	void update(L2PcInstance player, int itemNum, long newcount);
 	
 	void delete(L2PcInstance player, int itemNum);
+	
+	void add(L2PcInstance player, int itemId, long itemCount, String itemSender);
 }

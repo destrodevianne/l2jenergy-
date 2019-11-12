@@ -1204,6 +1204,15 @@
 	    <set lang="en" val="Account %s% has no premium status." />
 		<set lang="ru" val="Аккаунт %s% не имеет премиум статуса." />
 	</message>
+	<!-- AdminPremiumItem Messages -->
+	<message id="admin_usage_create_premium_item">
+	    <set lang="en" val="Usage: //give_premium_item [itemId] [amount]" />
+		<set lang="ru" val="Применение: //give_premium_item [ид предмета] [колиствео]" />
+	</message>
+	<message id="admin_you_have_spawned_dimensional_storage">
+	    <set lang="en" val="You have send %s% (%i%) at %c%'s dimensional storage." />
+		<set lang="ru" val="Вы отправили %s% (%i%) в хранилище к Менеджеру Витаминов для игрока %c%." />
+	</message>
 	<!-- AdminPunishment Messages -->   <!-- TODO: Fix add message -->
 	<!-- AdminQuest Messages -->   <!-- TODO: Fix add message -->
 	<!-- AdminReload Messages -->

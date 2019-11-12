@@ -603,4 +603,8 @@
 	<admin command="admin_premium_add3" accessLevel="7" />
 	<admin command="admin_premium_info" accessLevel="7" />
 	<admin command="admin_premium_remove" accessLevel="7" />
+	
+	<!-- ADMIN GIVE PREMIUM ITEM -->
+	<admin command="admin_premium_giveitem" accessLevel="7" />
+	<admin command="admin_give_premium_item" accessLevel="7" />
 </list>
