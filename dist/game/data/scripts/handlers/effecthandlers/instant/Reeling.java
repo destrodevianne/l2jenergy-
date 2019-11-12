@@ -77,6 +77,7 @@ public final class Reeling extends AbstractEffect
 		
 		final L2PcInstance player = activeChar.getActingPlayer();
 		final L2Fishing fish = player.getFishCombat();
+		
 		if (fish == null)
 		{
 			// Reeling skill is available only while fishing
@@ -84,26 +85,32 @@ public final class Reeling extends AbstractEffect
 			player.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
+		
 		final L2Weapon weaponItem = player.getActiveWeaponItem();
 		final L2ItemInstance weaponInst = activeChar.getActiveWeaponInstance();
+		
 		if ((weaponInst == null) || (weaponItem == null))
 		{
 			return;
 		}
+		
 		int SS = 1;
 		int pen = 0;
+		
 		if (activeChar.isChargedShot(ShotType.FISH_SOULSHOTS))
 		{
 			SS = 2;
 		}
+		
 		final L2FishingRod fishingRod = FishingRodsData.getInstance().getFishingRod(weaponItem.getId());
 		final double gradeBonus = fishingRod.getFishingRodLevel() * 0.1; // TODO: Check this formula (is guessed)
 		int dmg = (int) ((fishingRod.getFishingRodDamage() + player.calcStat(Stats.FISHING_EXPERTISE, 1, null, null) + _power) * gradeBonus * SS);
-		// Penalty 5% less damage dealt
-		if (player.getSkillLevel(1315) <= (info.getSkill().getLevel() - 2)) // 1315 - Fish Expertise
+		
+		// Penalty 50% less damage dealt
+		if (player.getSkillLevel(1315) <= (info.getSkill().getLevel() - 3)) // 1315 - Fish Expertise
 		{
 			player.sendPacket(SystemMessageId.REELING_PUMPING_3_LEVELS_HIGHER_THAN_FISHING_PENALTY);
-			pen = (int) (dmg * 0.05);
+			pen = (int) (dmg * 0.5);
 			dmg = dmg - pen;
 		}
 		if (SS > 1)
