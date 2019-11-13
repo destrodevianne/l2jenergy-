@@ -129,4 +129,8 @@
         <set lang="en" val="You cannot change the password so often!" />
 		<set lang="ru" val="Вы не можете часто менять пароль!" />
     </message>
+    <message id="you_cannot_repair_often">
+        <set lang="en" val="You cannot repair a character within the next 30 minute(s)!" />
+		<set lang="ru" val="Вы не можете восстановить персонажа в течение следующих 30 минут!" />
+    </message>
 </list>

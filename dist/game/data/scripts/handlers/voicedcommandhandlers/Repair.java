@@ -18,8 +18,12 @@
  */
 package handlers.voicedcommandhandlers;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
+import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IVoicedCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
@@ -30,6 +34,9 @@ import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
  */
 public final class Repair implements IVoicedCommandHandler
 {
+	private static final Map<Integer, Long> REUSES = new ConcurrentHashMap<>();
+	private static final int REUSE = 30 * 60 * 1000; // 30 Min
+	
 	private static final String[] VOICED_COMMANDS =
 	{
 		"repair"
@@ -63,6 +70,14 @@ public final class Repair implements IVoicedCommandHandler
 		
 		if (command.equals("repair") && (repairChar != null))
 		{
+			final Long timeStamp = REUSES.get(activeChar.getObjectId());
+			if ((timeStamp != null) && ((System.currentTimeMillis() - REUSE) < timeStamp.longValue()))
+			{
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "you_cannot_repair_often"));
+				return false;
+			}
+			REUSES.put(activeChar.getObjectId(), System.currentTimeMillis());
+			
 			if (DAOFactory.getInstance().getPlayerDAO().checkAccount(activeChar, repairChar))
 			{
 				if (checkChar(activeChar, repairChar))
