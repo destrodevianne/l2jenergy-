@@ -34,7 +34,7 @@ public class AdminPremiumItem implements IAdminCommandHandler
 {
 	private static final String[] ADMIN_COMMANDS =
 	{
-		"admin_premium_itemcreate",
+		"admin_premium_giveitem",
 		"admin_give_premium_item"
 	};
 	
