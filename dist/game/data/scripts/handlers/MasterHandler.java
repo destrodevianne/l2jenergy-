@@ -292,6 +292,7 @@ import handlers.voicedcommandhandlers.Banking;
 import handlers.voicedcommandhandlers.ChangePassword;
 import handlers.voicedcommandhandlers.ChatAdmin;
 import handlers.voicedcommandhandlers.Debug;
+import handlers.voicedcommandhandlers.Help;
 import handlers.voicedcommandhandlers.Lang;
 import handlers.voicedcommandhandlers.Premium;
 import handlers.voicedcommandhandlers.Repair;
@@ -562,6 +563,7 @@ public class MasterHandler
 			(CustomConfig.ALLOW_CHANGE_PASSWORD ? ChangePassword.class : null),
 			(PremiumConfig.PREMIUM_ALLOW_VOICED ? Premium.class : null),
 			Repair.class,
+			Help.class,
 		},
 		{
 			// Target Handlers
