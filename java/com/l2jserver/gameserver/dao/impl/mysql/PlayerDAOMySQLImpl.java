@@ -58,6 +58,12 @@ public class PlayerDAOMySQLImpl implements PlayerDAO
 	private static final String SELECT_CHARACTER_TOP_DATA = "SELECT * FROM character_votes WHERE id=? AND date=? AND multipler=?";
 	private static final String INSERT_TOP_DATA = "INSERT INTO character_votes (date, id, nick, multipler) values (?,?,?,?)";
 	private static final String DELETE_TOP_DATA = "DELETE FROM character_votes WHERE date<?";
+	private static final String SELECT_REPAIR_CHARACTERS = "SELECT `account_name` FROM `characters` WHERE `char_name` = ?";
+	private static final String SELECT_REPAIR_CHARACTERS_ID = "SELECT `charId` FROM `characters` WHERE `char_name` = ?";
+	private static final String SELECT_REPAIR_CHARACTERS_JAIL = "SELECT `key`, `expiration` FROM `punishments` WHERE `key` = ? AND `type` = 'JAIL'";
+	private static final String UPDATE_REPAIR_CHARACTERS = "UPDATE `characters` SET `x` = 17867, `y` = 170259, `z` = -3503 WHERE `charId` = ?";
+	private static final String UPDATE_REPAIR_CHARACTERS_ID = "UPDATE `items` SET `loc`= 'WAREHOUSE' WHERE `owner_id` = ? AND `loc` = 'PAPERDOLL'";
+	private static final String DELETE_REPAIR_CHARACTERS = "DELETE FROM `character_shortcuts` WHERE `charId` = ?";
 	
 	@Override
 	public L2PcInstance load(int objectId)
@@ -439,6 +445,140 @@ public class PlayerDAOMySQLImpl implements PlayerDAO
 		catch (Exception e)
 		{
 			LOG.warn("", e);
+		}
+	}
+	
+	@Override
+	public String getCharList(L2PcInstance player)
+	{
+		String result = "";
+		String repCharAcc = player.getAccountName();
+		try (Connection con = ConnectionFactory.getInstance().getConnection();
+			PreparedStatement ps = con.prepareStatement("SELECT char_name FROM characters WHERE account_name=?"))
+		{
+			ps.setString(1, repCharAcc);
+			try (ResultSet rs = ps.executeQuery())
+			{
+				while (rs.next())
+				{
+					if (player.getName().compareTo(rs.getString(1)) != 0)
+					{
+						result += rs.getString(1) + ";";
+					}
+				}
+			}
+		}
+		catch (SQLException e)
+		{
+			LOG.warn("Repair Attempt: Output Result for searching characters on account: {}", result, e);
+			return result;
+		}
+		return result;
+	}
+	
+	@Override
+	public boolean checkAccount(L2PcInstance player, String repairplayer)
+	{
+		boolean result = false;
+		String repairCharAccount = "";
+		
+		try (Connection con = ConnectionFactory.getInstance().getConnection();
+			PreparedStatement ps = con.prepareStatement(SELECT_REPAIR_CHARACTERS))
+		{
+			ps.setString(1, repairplayer);
+			
+			try (ResultSet rs = ps.executeQuery())
+			{
+				if (rs.next())
+				{
+					repairCharAccount = rs.getString(1);
+				}
+			}
+		}
+		catch (SQLException e)
+		{
+			LOG.warn("Could not repair character: {}", repairplayer, e);
+			return result;
+		}
+		
+		if (player.getAccountName().compareTo(repairCharAccount) == 0)
+		{
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
+	public boolean checkJail(L2PcInstance player)
+	{
+		boolean result = false;
+		int key = 0;
+		long expiration = 0;
+		
+		try (Connection con = ConnectionFactory.getInstance().getConnection();
+			PreparedStatement ps = con.prepareStatement(SELECT_REPAIR_CHARACTERS_JAIL))
+		{
+			ps.setInt(1, key);
+			
+			try (ResultSet rs = ps.executeQuery())
+			{
+				if (rs.next())
+				{
+					key = rs.getInt(1);
+					expiration = rs.getLong(2);
+				}
+			}
+		}
+		catch (SQLException e)
+		{
+			LOG.warn("Could not repair character from jail!", e);
+			return result;
+		}
+		
+		if ((player.getId() == key) && (expiration >= System.currentTimeMillis()))
+		{
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
+	public void repairBadCharacter(String playerName)
+	{
+		try (Connection con = ConnectionFactory.getInstance().getConnection();
+			PreparedStatement ps = con.prepareStatement(SELECT_REPAIR_CHARACTERS_ID);
+			PreparedStatement ps2 = con.prepareStatement(UPDATE_REPAIR_CHARACTERS);
+			PreparedStatement ps3 = con.prepareStatement(DELETE_REPAIR_CHARACTERS);
+			PreparedStatement ps4 = con.prepareStatement(UPDATE_REPAIR_CHARACTERS_ID))
+		{
+			ps.setString(1, playerName);
+			
+			try (ResultSet rs = ps.executeQuery())
+			{
+				int objId = 0;
+				if (rs.next())
+				{
+					objId = rs.getInt(1);
+				}
+				
+				if (objId == 0)
+				{
+					return;
+				}
+				
+				ps2.setInt(1, objId);
+				ps2.execute();
+				
+				ps3.setInt(1, objId);
+				ps3.execute();
+				
+				ps4.setInt(1, objId);
+				ps4.execute();
+			}
+		}
+		catch (SQLException e)
+		{
+			LOG.warn("Could not repair character: {}", playerName, e);
 		}
 	}
 }

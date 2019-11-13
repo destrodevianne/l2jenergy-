@@ -294,6 +294,7 @@ import handlers.voicedcommandhandlers.ChatAdmin;
 import handlers.voicedcommandhandlers.Debug;
 import handlers.voicedcommandhandlers.Lang;
 import handlers.voicedcommandhandlers.Premium;
+import handlers.voicedcommandhandlers.Repair;
 import handlers.voicedcommandhandlers.StatsVCmd;
 import handlers.voicedcommandhandlers.Wedding;
 
@@ -560,6 +561,7 @@ public class MasterHandler
 			(CustomConfig.DEBUG_VOICE_COMMAND ? Debug.class : null),
 			(CustomConfig.ALLOW_CHANGE_PASSWORD ? ChangePassword.class : null),
 			(PremiumConfig.PREMIUM_ALLOW_VOICED ? Premium.class : null),
+			Repair.class,
 		},
 		{
 			// Target Handlers

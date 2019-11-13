@@ -32,6 +32,8 @@ import com.l2jserver.gameserver.handler.BypassHandler;
 import com.l2jserver.gameserver.handler.CommunityBoardHandler;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.handler.IBypassHandler;
+import com.l2jserver.gameserver.handler.IVoicedCommandHandler;
+import com.l2jserver.gameserver.handler.VoicedCommandHandler;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.L2Character;
@@ -65,6 +67,7 @@ public final class RequestBypassToServer extends L2GameClientPacket
 		"_friend",
 		"_match",
 		"_diary",
+		"voice_",
 		"_olympiad?command",
 		"manor_menu_select"
 	};
@@ -200,6 +203,28 @@ public final class RequestBypassToServer extends L2GameClientPacket
 				}
 				
 				activeChar.sendPacket(ActionFailed.STATIC_PACKET);
+			}
+			else if (_command.startsWith("voice_"))
+			{
+				String params = "";
+				String command;
+				if (_command.indexOf(" ") != -1)
+				{
+					command = _command.substring(6, _command.indexOf(" "));
+					params = _command.substring(_command.indexOf(" ") + 1);
+				}
+				else
+				{
+					command = _command.substring(6);
+				}
+				
+				IVoicedCommandHandler vc = VoicedCommandHandler.getInstance().getHandler(command);
+				
+				if (vc == null)
+				{
+					return;
+				}
+				vc.useVoicedCommand(command, activeChar, params);
 			}
 			else if (_command.startsWith("item_"))
 			{

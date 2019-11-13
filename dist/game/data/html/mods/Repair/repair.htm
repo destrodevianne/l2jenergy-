@@ -1,0 +1,36 @@
+<html><title>Repair Character</title>
+<body>
+    <center>
+    <img src="l2ui.SquareGray" width=260 height=1><br1>
+    <table width="265" cellpadding="5" bgcolor="452822">
+    <tr>
+        <td width="45" valign="top" align="center"><img src="icon.skill4376" width="32" height="32"></td>
+        <td valign="top"><font color="FF6600">Character Repair</font><br1>
+		Use this tool, to fix problems with your<br1>
+        other character<br1>
+		(like client crashing when logging in)</td>
+    </tr>
+    </table><br1>
+    <img src="l2ui.SquareGray" width="260" height="1"><br1>
+    <table width="265" cellpadding="5">
+    <tr>
+        <td valign="top" align="center"><font color="FF6600">Enter broken character name</font><br1>
+        Enter character name, that you wish to<br1>attempt to fix. It will be moved to Floran<br1>
+        and removed shortcuts and keyboard<br1>configuration.</td>
+    </tr>
+    <tr>
+	    <td><center><combobox width=170 height=17 var="crar_name" list="%acc_chars%"></center></td>
+		
+	</tr>
+    </table><br><br><br>
+    <img src="l2ui.SquareGray" width="260" height="1"><br1>
+    <table width="278" cellpadding="3" bgcolor="303030">
+    <tr>    
+        <td align="center">
+            <button value="Repair" action="bypass -h voice_repair $crar_name" width="140" height="21" back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF">
+        </td>
+    </tr>    
+    </table>
+</center>
+</body>
+</html>

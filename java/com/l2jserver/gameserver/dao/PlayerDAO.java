@@ -39,4 +39,12 @@ public interface PlayerDAO
 	void checkAndSave(long date, String nick, int mult);
 	
 	void clean();
+	
+	boolean checkAccount(L2PcInstance player, String repairplayer);
+	
+	boolean checkJail(L2PcInstance player);
+	
+	void repairBadCharacter(String playerName);
+	
+	String getCharList(L2PcInstance player);
 }
