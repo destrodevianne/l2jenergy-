@@ -139,6 +139,7 @@ import com.l2jserver.gameserver.instancemanager.TerritoryWarManager;
 import com.l2jserver.gameserver.instancemanager.WalkingManager;
 import com.l2jserver.gameserver.instancemanager.ZoneManager;
 import com.l2jserver.gameserver.instancemanager.games.FishingChampionshipManager;
+import com.l2jserver.gameserver.instancemanager.games.Lottery;
 import com.l2jserver.gameserver.instancemanager.games.MiniGameScoreManager;
 import com.l2jserver.gameserver.instancemanager.vote.L2TopManager;
 import com.l2jserver.gameserver.instancemanager.vote.MMOTopManager;
@@ -310,6 +311,7 @@ public final class GameServer
 		PetitionManager.getInstance();
 		AugmentationData.getInstance(); // TODO: log
 		CursedWeaponsManager.getInstance();
+		Lottery.getInstance();
 		TransformData.getInstance();
 		BotReportTable.getInstance();
 		
