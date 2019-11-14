@@ -54,6 +54,9 @@ public class CustomConfig
 	@Setting(name = "AllowChangePassword")
 	public static boolean ALLOW_CHANGE_PASSWORD;
 	
+	@Setting(name = "AllowRepairVoiceCommand")
+	public static boolean ALLOW_REPAIR_VOICE_COMMAND;
+	
 	@Setting(name = "DebugVoiceCommand")
 	public static boolean DEBUG_VOICE_COMMAND;
 	

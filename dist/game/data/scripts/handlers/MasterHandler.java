@@ -562,7 +562,7 @@ public class MasterHandler
 			(CustomConfig.DEBUG_VOICE_COMMAND ? Debug.class : null),
 			(CustomConfig.ALLOW_CHANGE_PASSWORD ? ChangePassword.class : null),
 			(PremiumConfig.PREMIUM_ALLOW_VOICED ? Premium.class : null),
-			Repair.class,
+			(CustomConfig.ALLOW_REPAIR_VOICE_COMMAND ? Repair.class : null),
 			Help.class,
 		},
 		{

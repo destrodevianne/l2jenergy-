@@ -35,7 +35,7 @@
     "AutoBankingAdenaMinCount" : "510000000",
 	
     # =====================================================================
-    # Hellbound Status Voice Command
+    # Hellbound Status voice command
     # =====================================================================
     # This option will enable using of the voice commands .hellbound
     # for retrieving information about current Hellbound level and trust.
@@ -43,11 +43,18 @@
     "HellboundStatus" : "false",
 	
 	# =====================================================================
-    # Password Change
+    # Password Change voice command
     # =====================================================================
     # Enables .changepassword voiced command which allows the players to change their account's password ingame.
     # Default: false
     "AllowChangePassword" : "false",
+
+    # =====================================================================
+    # Repair voice command
+    # =====================================================================
+    # Enables .repair
+    # Default: false
+    "AllowRepairVoiceCommand" : "false",
 
 	# =====================================================================
     # Debug enable/disable voice command
@@ -69,7 +76,7 @@
     "EnableManaPotionSupport" : "false",
 
     # =====================================================================
-    # Display Server Time
+    # Display Server Time 
     # =====================================================================
     # This option will enable displaying of the local server time for /time command.
 	# Default: false
