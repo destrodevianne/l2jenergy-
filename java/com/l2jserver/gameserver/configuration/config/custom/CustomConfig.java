@@ -57,6 +57,9 @@ public class CustomConfig
 	@Setting(name = "AllowRepairVoiceCommand")
 	public static boolean ALLOW_REPAIR_VOICE_COMMAND;
 	
+	@Setting(name = "AllowHelpVoiceCommand")
+	public static boolean ALLOW_HELP_VOICE_COMMAND;
+	
 	@Setting(name = "DebugVoiceCommand")
 	public static boolean DEBUG_VOICE_COMMAND;
 	

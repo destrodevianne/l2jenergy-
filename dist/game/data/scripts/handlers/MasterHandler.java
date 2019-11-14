@@ -563,7 +563,7 @@ public class MasterHandler
 			(CustomConfig.ALLOW_CHANGE_PASSWORD ? ChangePassword.class : null),
 			(PremiumConfig.PREMIUM_ALLOW_VOICED ? Premium.class : null),
 			(CustomConfig.ALLOW_REPAIR_VOICE_COMMAND ? Repair.class : null),
-			Help.class,
+			(CustomConfig.ALLOW_HELP_VOICE_COMMAND ? Help.class : null),
 		},
 		{
 			// Target Handlers
