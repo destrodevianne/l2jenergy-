@@ -33,8 +33,10 @@ import com.l2jserver.gameserver.model.actor.L2Summon;
 import com.l2jserver.gameserver.model.effects.AbstractEffect;
 import com.l2jserver.gameserver.model.effects.EffectTaskInfo;
 import com.l2jserver.gameserver.model.effects.EffectTickTask;
+import com.l2jserver.gameserver.model.effects.L2EffectType;
 import com.l2jserver.gameserver.model.stats.Formulas;
 import com.l2jserver.gameserver.network.SystemMessageId;
+import com.l2jserver.gameserver.network.serverpackets.MoveToLocation;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
 /**
@@ -385,23 +387,30 @@ public final class BuffInfo
 	 */
 	private void addAbnormalVisualEffects()
 	{
+		boolean UpdateAVE = false;
 		if (_skill.hasAbnormalVisualEffects())
 		{
 			_effected.startAbnormalVisualEffect(false, _skill.getAbnormalVisualEffects());
+			UpdateAVE = true;
 		}
 		
 		if (_effected.isPlayer() && _skill.hasAbnormalVisualEffectsEvent())
 		{
 			_effected.startAbnormalVisualEffect(false, _skill.getAbnormalVisualEffectsEvent());
+			UpdateAVE = true;
 		}
 		
 		if (_skill.hasAbnormalVisualEffectsSpecial())
 		{
 			_effected.startAbnormalVisualEffect(false, _skill.getAbnormalVisualEffectsSpecial());
+			UpdateAVE = true;
 		}
 		
 		// Update abnormal visual effects.
-		_effected.updateAbnormalEffect();
+		if (UpdateAVE)
+		{
+			_effected.updateAbnormalEffect();
+		}
 	}
 	
 	/**
@@ -415,22 +424,33 @@ public final class BuffInfo
 			return;
 		}
 		
+		boolean UpdateAVE = false;
 		if (_skill.hasAbnormalVisualEffects())
 		{
 			_effected.stopAbnormalVisualEffect(false, _skill.getAbnormalVisualEffects());
+			UpdateAVE = true;
 		}
 		
 		if (_effected.isPlayer() && _skill.hasAbnormalVisualEffectsEvent())
 		{
 			_effected.stopAbnormalVisualEffect(false, _skill.getAbnormalVisualEffectsEvent());
+			UpdateAVE = true;
 		}
 		
 		if (_skill.hasAbnormalVisualEffectsSpecial())
 		{
 			_effected.stopAbnormalVisualEffect(false, _skill.getAbnormalVisualEffectsSpecial());
+			UpdateAVE = true;
 		}
 		
-		_effected.updateAbnormalEffect();
+		if (UpdateAVE)
+		{
+			if (_skill.hasEffectType(L2EffectType.FEAR) && _effected.isMoving())
+			{
+				_effected.broadcastPacket(new MoveToLocation(_effected));
+			}
+		}
+		
 	}
 	
 	/**
