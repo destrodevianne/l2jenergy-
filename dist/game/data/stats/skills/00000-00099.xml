@@ -57,8 +57,7 @@
 				<param ignoreShieldDefence="true" />
 			</effect>
 		</enchant1Effects>
-		<enchant7Effects>
-		</enchant7Effects>
+		<enchant7Effects />
 		<enchant7pvpEffects>
 			<effect name="PhysicalAttack">
 				<param power="#enchDuel" />
@@ -210,8 +209,7 @@
 				<param criticalChance="15" />
 			</effect>
 		</enchant1Effects>
-		<enchant7Effects>
-		</enchant7Effects>
+		<enchant7Effects />
 		<enchant7pvpEffects>
 			<effect name="EnergyAttack">
 				<param power="#ench7pvpPower" />
@@ -281,8 +279,7 @@
 				<param criticalChance="15" />
 			</effect>
 		</enchant1Effects>
-		<enchant2Effects>
-		</enchant2Effects>
+		<enchant7Effects />
 		<enchant2pvpEffects>
 			<effect name="EnergyAttack">
 				<param power="1827" />
@@ -295,8 +292,7 @@
 				<param criticalChance="15" />
 			</effect>
 		</enchant2pveEffects>
-		<enchant7Effects>
-		</enchant7Effects>
+		<enchant7Effects />
 		<enchant7pvpEffects>
 			<effect name="EnergyAttack">
 				<param power="#ench7pvpPower" />
@@ -370,8 +366,7 @@
 				<param criticalChance="15" />
 			</effect>
 		</enchant1Effects>
-		<enchant7Effects>
-		</enchant7Effects>
+		<enchant7Effects />
 		<enchant7pvpEffects>
 			<effect name="EnergyAttack">
 				<param power="#ench7pvpPower" />
@@ -476,8 +471,7 @@
 				<param criticalChance="15" />
 			</effect>
 		</enchant1Effects>
-		<enchant7Effects>
-		</enchant7Effects>
+		<enchant7Effects />
 		<enchant7pvpEffects>
 			<effect name="EnergyAttack">
 				<param power="#ench7pvpPower" />
@@ -733,8 +727,7 @@
 				<param criticalChance="15" />
 			</effect>
 		</enchant1Effects>
-		<enchant7Effects>
-		</enchant7Effects>
+		<enchant7Effects />
 		<enchant7pvpEffects>
 			<effect name="EnergyAttack">
 				<param power="#ench7pvpPower" />
@@ -847,8 +840,7 @@
 				<param criticalChance="15" />
 			</effect>
 		</enchant1Effects>
-		<enchant7Effects>
-		</enchant7Effects>
+		<enchant7Effects />
 		<enchant7pvpEffects>
 			<effect name="PhysicalAttack">
 				<param power="#enchDuel" />
@@ -1168,8 +1160,7 @@
 				<param halfLethal="15" />
 			</effect>
 		</enchant1Effects>
-		<enchant7Effects>
-		</enchant7Effects>
+		<enchant7Effects />
 		<enchant7pvpEffects>
 			<effect name="Backstab">
 				<param power="#enchDuel" />
@@ -1307,8 +1298,7 @@
 				<param criticalChance="15" />
 			</effect>
 		</enchant1Effects>
-		<enchant7Effects>
-		</enchant7Effects>
+		<enchant7Effects />
 		<enchant7pvpEffects>
 			<effect name="EnergyAttack">
 				<param power="#ench7pvpPower" />
@@ -1378,8 +1368,7 @@
 				<param ignoreShieldDefence="true" />
 			</effect>
 		</enchant1Effects>
-		<enchant7Effects>
-		</enchant7Effects>
+		<enchant7Effects />
 		<enchant7pvpEffects>
 			<effect name="PhysicalAttack">
 				<param power="#enchDuel" />
@@ -1731,8 +1720,7 @@
 				<param criticalChance="15" />
 			</effect>
 		</enchant1Effects>
-		<enchant7Effects>
-		</enchant7Effects>
+		<enchant7Effects />
 		<enchant7pvpEffects>
 			<effect name="EnergyAttack">
 				<param power="#ench7pvpPower" />
@@ -2119,7 +2107,7 @@
 				<mul stat="critDmg" val="1.2">
 					<using kind="DUALFIST" />
 				</mul>
-				<mul stat="runSpd" val="0.7" />
+				<mul stat="runSpd" val="1.3" />
 			</effect>
 		</effects>
 	</skill>
