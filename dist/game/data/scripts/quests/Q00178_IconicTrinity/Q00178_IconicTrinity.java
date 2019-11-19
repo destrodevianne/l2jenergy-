@@ -80,7 +80,7 @@ public final class Q00178_IconicTrinity extends Quest
 				htmltext = htmltext.replaceAll("%name1%", player.getName());
 				break;
 			}
-			case "32138-14.htm":
+			case "32138-14.html":
 			{
 				if ((qs.isMemoState(10) && (player.getLevel() <= TWENTY_LEVEL) && (player.getClassId() == ClassId.maleSoldier)) || (player.getClassId() == ClassId.femaleSoldier))
 				{
