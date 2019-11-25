@@ -72,16 +72,15 @@ public class PcCafeDAOMySQLImpl implements PcCafeDAO
 					{
 						player.getVariables().set(PlayerVariables.PCC_CODE_ATTEMPTS, newcode);
 						player.sendMessage(MessagesData.getInstance().getMessage(player, "pc_cafe_coupon_code_already_been_used"));
-						
 					}
 					else
 					{
 						calculateCodeReward(player, couponCode, value);
 					}
-					
+					player.getVariables().set(PlayerVariables.PCC_CODE_ATTEMPTS, newcode);
+					player.sendMessage(MessagesData.getInstance().getMessage(player, "pc_cafe_wrong_coupon_code"));
 				}
 				player.getVariables().set(PlayerVariables.PCC_CODE_ATTEMPTS, newcode);
-				player.sendMessage(MessagesData.getInstance().getMessage(player, "pc_cafe_wrong_coupon_code"));
 			}
 		}
 		catch (Exception e)

@@ -23,9 +23,7 @@ package com.l2jserver.gameserver.network.serverpackets;
  */
 public class ShowPCCafeCouponShowUI extends L2GameServerPacket
 {
-	public static final ShowPCCafeCouponShowUI STATIC_PACKET = new ShowPCCafeCouponShowUI();
-	
-	private ShowPCCafeCouponShowUI()
+	public ShowPCCafeCouponShowUI()
 	{
 	}
 	

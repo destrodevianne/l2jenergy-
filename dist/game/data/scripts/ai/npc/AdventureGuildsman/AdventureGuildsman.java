@@ -70,7 +70,6 @@ public class AdventureGuildsman extends AbstractNpcAI
  
 	static
 	{
-		//TODO: Реализовать баф для персонажей ниже 40, 40-54, 55 и выше ур.
 		// баф для персонажей ниже 40 ур.    ID   LV  Points
 		POINTSSKILL.put("S401", new int[] { 4397, 1, 300 }); // Berserker Spirit - 300 points
 		POINTSSKILL.put("S402", new int[] { 4393, 1, 200 }); // Might - 200 points
@@ -270,7 +269,6 @@ public class AdventureGuildsman extends AbstractNpcAI
 		
 		switch (event)
 		{
-			
 			case "quest_list":
 			{
 				player.sendPacket(ExShowQuestInfo.STATIC_PACKET);
@@ -283,7 +281,14 @@ public class AdventureGuildsman extends AbstractNpcAI
 			}
 			case "show_pccafe_coupon_ui":
 			{
-				player.sendPacket(ShowPCCafeCouponShowUI.STATIC_PACKET); // TODO: нужена реализация
+				if (player.getVariables().getLong(PlayerVariables.PCC_CODE_ATTEMPTS, 1) < PcCafeConfig.ALT_PCBANG_POINTS_MAX_CODE_ENTER_ATTEMPTS)
+				{
+					player.sendPacket(new ShowPCCafeCouponShowUI());
+				}
+				else
+				{
+					htmtext = "max_attempts.htm";
+				}
 				break;
 			}
 			case "pccafe_list":
@@ -307,7 +312,7 @@ public class AdventureGuildsman extends AbstractNpcAI
 				{
 					htmtext = "pccafe_buff_1001.htm";
 				}
-				else if ((player.getLevel() >= 40) & (player.getLevel() < 54)) // TODO: fix for 40-54 уровня
+				else if ((player.getLevel() >= 40) & (player.getLevel() < 54)) // для 40-54 уровня
 				{
 					htmtext = "pccafe_buff_2001.htm";
 				}
@@ -549,7 +554,7 @@ public class AdventureGuildsman extends AbstractNpcAI
 				htmtext = "pccafe_notpoint001.htm";
 			}
 		}
-		else if (POINTSSKILL.containsKey(event)) // TODO: need fix
+		else if (POINTSSKILL.containsKey(event))
 		{
 			if (player.getLevel() < 40) // ниже 40-го уровня
 			{
@@ -566,7 +571,7 @@ public class AdventureGuildsman extends AbstractNpcAI
 				}
 				htmtext = "pccafe_notpoint001.htm";
 			}
-			else if ((player.getLevel() >= 40) & (player.getLevel() < 54)) // TODO: fix for 40-54 уровня
+			else if ((player.getLevel() >= 40) & (player.getLevel() < 54)) // для 40-54 уровня
 			{
 				if (player.getPcCafePoints() >= POINTSSKILL.get(event)[2])
 				{
