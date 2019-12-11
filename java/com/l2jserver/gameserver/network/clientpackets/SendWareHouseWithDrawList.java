@@ -32,6 +32,8 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.InventoryUpdate;
 import com.l2jserver.gameserver.network.serverpackets.ItemList;
 import com.l2jserver.gameserver.network.serverpackets.StatusUpdate;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 import com.l2jserver.gameserver.util.Util;
 
 /**
@@ -83,7 +85,7 @@ public final class SendWareHouseWithDrawList extends L2GameClientPacket
 			return;
 		}
 		
-		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("withdraw"))
+		if (!FloodProtectors.performAction(getClient(), Action.TRANSACTION))
 		{
 			player.sendMessage(MessagesData.getInstance().getMessage(player, "withdrawing_too_fast"));
 			return;

@@ -21,6 +21,8 @@ package com.l2jserver.gameserver.network.clientpackets;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.items.L2Henna;
 import com.l2jserver.gameserver.network.SystemMessageId;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
 /**
  * @author Zoey76
@@ -45,7 +47,7 @@ public final class RequestHennaRemove extends L2GameClientPacket
 			return;
 		}
 		
-		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("HennaRemove"))
+		if (!FloodProtectors.performAction(getClient(), Action.TRANSACTION))
 		{
 			sendActionFailed();
 			return;

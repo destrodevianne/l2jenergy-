@@ -26,6 +26,8 @@ import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.holders.PetItemHolder;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
 /**
  * @author HorridoJoho, UnAfraid
@@ -47,7 +49,7 @@ public class SummonItems extends ItemSkillsTemplate
 		}
 		
 		final L2PcInstance activeChar = playable.getActingPlayer();
-		if (!activeChar.getFloodProtectors().getItemPetSummon().tryPerformAction("summon items") || (activeChar.getBlockCheckerArena() != -1) || activeChar.inObserverMode() || activeChar.isAllSkillsDisabled() || activeChar.isCastingNow())
+		if (!FloodProtectors.performAction(activeChar.getClient(), Action.ITEM_PET_SUMMON) || (activeChar.getBlockCheckerArena() != -1) || activeChar.inObserverMode() || activeChar.isAllSkillsDisabled() || activeChar.isCastingNow())
 		{
 			return false;
 		}

@@ -23,6 +23,8 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.itemauction.ItemAuction;
 import com.l2jserver.gameserver.model.itemauction.ItemAuctionInstance;
 import com.l2jserver.gameserver.network.serverpackets.ExItemAuctionInfoPacket;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
 /**
  * @author Forsaiken
@@ -48,7 +50,7 @@ public final class RequestInfoItemAuction extends L2GameClientPacket
 			return;
 		}
 		
-		if (!getClient().getFloodProtectors().getItemAuction().tryPerformAction("RequestInfoItemAuction"))
+		if (!FloodProtectors.performAction(getClient(), Action.ITEM_AUCTION))
 		{
 			return;
 		}

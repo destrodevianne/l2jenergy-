@@ -34,6 +34,8 @@ import com.l2jserver.gameserver.network.serverpackets.InventoryUpdate;
 import com.l2jserver.gameserver.network.serverpackets.ItemList;
 import com.l2jserver.gameserver.network.serverpackets.StatusUpdate;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 import com.l2jserver.gameserver.util.Util;
 
 /**
@@ -72,7 +74,7 @@ public final class RequestDestroyItem extends L2GameClientPacket
 			return;
 		}
 		
-		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("destroy"))
+		if (!FloodProtectors.performAction(getClient(), Action.TRANSACTION))
 		{
 			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "destroying_items_too_fast"));
 			return;

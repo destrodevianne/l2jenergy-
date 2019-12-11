@@ -1,0 +1,56 @@
+{
+	 # =====================================================================
+     #                       Flood Protectors Settings
+     # =====================================================================
+     # The values are shown on ms. They can be setted to 0 to be disabled.
+     # UseItem - item usage flooding
+     "UseItemTime" : "0",
+     
+     # RollDice - rolling dice flooding
+     "RollDiceTime" : "4200",
+
+     # Firework - firework flooding
+     "FireworkTime" : "4200",
+
+     # ItemPetSummon - item summoning and pet mounting flooding
+     "ItemPetSummonTime" : "1600",
+
+     # HeroVoice - hero voice flooding
+     "HeroVoiceTime" : "10000",
+
+     # GlobalChat - global chat flooding
+     "GlobalChatTime" : "500",
+
+     # TradeChat - trade chat flooding
+     "TradeChatTime" : "500",
+
+     # Subclass - subclass flooding
+     "SubclassTime" : "2000",
+
+     # DropItem - drop item flooding
+     "DropItemTime" : "1000",
+
+     # ServerBypass - server bypass flooding
+     "ServerBypassTime" : "500",
+ 
+     # Multisell - multisell list request flooding
+     "MultisellTime" : "100",
+
+     # All kind of other transactions - to/from pet, private store, warehouse, destroy
+     "TransactionTime" : "1000",
+     
+     # Manufacture
+     "ManufactureTime" : "300",
+
+     # Manor
+     "ManorTime" : "3000",
+
+     # SendMail - sending mail interval, 10s on retail
+     "SendMailTime" : "10000",
+
+     # CharacterSelect - attempts to load character
+     "CharacterSelectTime" : "3000",
+     
+     # Item Auction - Request for refresh
+     "ItemAuctionTime" : "900"
+}

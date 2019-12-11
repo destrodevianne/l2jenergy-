@@ -41,6 +41,8 @@ import com.l2jserver.gameserver.network.serverpackets.CharSelected;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.network.serverpackets.SSQInfo;
 import com.l2jserver.gameserver.network.serverpackets.ServerClose;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 import com.l2jserver.gameserver.util.LoggingUtils;
 
 /**
@@ -78,7 +80,7 @@ public class CharacterSelect extends L2GameClientPacket
 	protected void runImpl()
 	{
 		final L2GameClient client = getClient();
-		if (!client.getFloodProtectors().getCharacterSelect().tryPerformAction("CharacterSelect"))
+		if (!FloodProtectors.performAction(client, Action.CHARACTER_SELECT))
 		{
 			return;
 		}

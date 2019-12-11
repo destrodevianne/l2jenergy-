@@ -59,6 +59,8 @@ import com.l2jserver.gameserver.network.serverpackets.MagicSkillUse;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.network.serverpackets.UserInfo;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
 /**
  * This class ...
@@ -487,7 +489,7 @@ public class L2VillageMasterInstance extends L2NpcInstance
 						/**
 						 * If the character is less than level 75 on any of their previously chosen classes then disallow them to change to their most recently added sub-class choice.
 						 */
-						if (!player.getFloodProtectors().getSubclass().tryPerformAction("add subclass"))
+						if (!FloodProtectors.performAction(player.getClient(), Action.SUBCLASS))
 						{
 							_log.warning(L2VillageMasterInstance.class.getName() + ": Player " + player.getName() + " has performed a subclass change too fast");
 							return;
@@ -553,7 +555,7 @@ public class L2VillageMasterInstance extends L2NpcInstance
 						/**
 						 * If the character is less than level 75 on any of their previously chosen classes then disallow them to change to their most recently added sub-class choice. Note: paramOne = classIndex
 						 */
-						if (!player.getFloodProtectors().getSubclass().tryPerformAction("change class"))
+						if (!FloodProtectors.performAction(player.getClient(), Action.SUBCLASS))
 						{
 							_log.warning(L2VillageMasterInstance.class.getName() + ": Player " + player.getName() + " has performed a subclass change too fast");
 							return;
@@ -632,7 +634,7 @@ public class L2VillageMasterInstance extends L2NpcInstance
 						/**
 						 * Warning: the information about this subclass will be removed from the subclass list even if false!
 						 */
-						if (!player.getFloodProtectors().getSubclass().tryPerformAction("change class"))
+						if (!FloodProtectors.performAction(player.getClient(), Action.SUBCLASS))
 						{
 							_log.warning(L2VillageMasterInstance.class.getName() + ": Player " + player.getName() + " has performed a subclass change too fast");
 							return;

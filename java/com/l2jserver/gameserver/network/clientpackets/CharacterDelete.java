@@ -26,6 +26,8 @@ import com.l2jserver.gameserver.model.events.impl.character.player.OnPlayerDelet
 import com.l2jserver.gameserver.network.serverpackets.CharDeleteFail;
 import com.l2jserver.gameserver.network.serverpackets.CharDeleteSuccess;
 import com.l2jserver.gameserver.network.serverpackets.CharSelectionInfo;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
 /**
  * This class ...
@@ -47,7 +49,7 @@ public final class CharacterDelete extends L2GameClientPacket
 	@Override
 	protected void runImpl()
 	{
-		if (!getClient().getFloodProtectors().getCharacterSelect().tryPerformAction("CharacterDelete"))
+		if (!FloodProtectors.performAction(getClient(), Action.CHARACTER_SELECT))
 		{
 			sendPacket(new CharDeleteFail(CharDeleteFail.REASON_DELETION_FAILED));
 			return;

@@ -23,6 +23,8 @@ import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.TradeList;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
 /**
  * This packet manages the trade response.
@@ -46,7 +48,7 @@ public final class TradeDone extends L2GameClientPacket
 			return;
 		}
 		
-		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("trade"))
+		if (!FloodProtectors.performAction(getClient(), Action.TRANSACTION))
 		{
 			player.sendMessage(MessagesData.getInstance().getMessage(player, "trading_too_fast"));
 			return;

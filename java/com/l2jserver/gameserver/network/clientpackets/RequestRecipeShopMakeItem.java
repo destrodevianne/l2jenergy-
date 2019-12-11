@@ -23,6 +23,8 @@ import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 import com.l2jserver.gameserver.util.Util;
 
 /**
@@ -54,7 +56,7 @@ public final class RequestRecipeShopMakeItem extends L2GameClientPacket
 			return;
 		}
 		
-		if (!getClient().getFloodProtectors().getManufacture().tryPerformAction("RecipeShopMake"))
+		if (!FloodProtectors.performAction(getClient(), Action.MANUFACTURE))
 		{
 			return;
 		}

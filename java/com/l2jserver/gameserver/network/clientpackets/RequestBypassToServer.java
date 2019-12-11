@@ -48,6 +48,8 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.ConfirmDlg;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 import com.l2jserver.gameserver.util.GMAudit;
 import com.l2jserver.gameserver.util.Util;
 
@@ -124,7 +126,7 @@ public final class RequestBypassToServer extends L2GameClientPacket
 			}
 		}
 		
-		if (!getClient().getFloodProtectors().getServerBypass().tryPerformAction(_command))
+		if (!FloodProtectors.performAction(getClient(), Action.SERVER_BYPASS))
 		{
 			return;
 		}

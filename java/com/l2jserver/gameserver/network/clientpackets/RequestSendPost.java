@@ -41,6 +41,8 @@ import com.l2jserver.gameserver.network.serverpackets.InventoryUpdate;
 import com.l2jserver.gameserver.network.serverpackets.ItemList;
 import com.l2jserver.gameserver.network.serverpackets.StatusUpdate;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
 /**
  * @author Migi, DS
@@ -250,7 +252,7 @@ public final class RequestSendPost extends L2GameClientPacket
 			return;
 		}
 		
-		if (!getClient().getFloodProtectors().getSendMail().tryPerformAction("sendmail"))
+		if (!FloodProtectors.performAction(getClient(), Action.SENDMAIL))
 		{
 			activeChar.sendPacket(SystemMessageId.CANT_FORWARD_LESS_THAN_MINUTE);
 			return;

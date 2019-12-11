@@ -40,9 +40,6 @@ public class ChatTell implements IChatHandler
 		2
 	};
 	
-	/**
-	 * Handle chat type 'tell'
-	 */
 	@Override
 	public void handleChat(int type, L2PcInstance activeChar, String target, String text)
 	{
@@ -108,9 +105,6 @@ public class ChatTell implements IChatHandler
 		}
 	}
 	
-	/**
-	 * Returns the chat types registered to this handler.
-	 */
 	@Override
 	public int[] getChatTypeList()
 	{

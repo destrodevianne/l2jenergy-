@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -36,9 +36,6 @@ public class ChatParty implements IChatHandler
 		3
 	};
 	
-	/**
-	 * Handle chat type 'party'
-	 */
 	@Override
 	public void handleChat(int type, L2PcInstance activeChar, String target, String text)
 	{
@@ -55,9 +52,6 @@ public class ChatParty implements IChatHandler
 		}
 	}
 	
-	/**
-	 * Returns the chat types registered to this handler.
-	 */
 	@Override
 	public int[] getChatTypeList()
 	{

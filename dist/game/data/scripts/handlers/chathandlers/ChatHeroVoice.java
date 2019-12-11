@@ -27,6 +27,8 @@ import com.l2jserver.gameserver.model.PcCondOverride;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 import com.l2jserver.gameserver.util.Util;
 
 /**
@@ -40,9 +42,6 @@ public class ChatHeroVoice implements IChatHandler
 		17
 	};
 	
-	/**
-	 * Handle chat type 'hero voice'
-	 */
 	@Override
 	public void handleChat(int type, L2PcInstance activeChar, String target, String text)
 	{
@@ -54,7 +53,7 @@ public class ChatHeroVoice implements IChatHandler
 				return;
 			}
 			
-			if (!activeChar.getFloodProtectors().getHeroVoice().tryPerformAction("hero voice"))
+			if (!FloodProtectors.performAction(activeChar.getClient(), Action.HERO_VOICE))
 			{
 				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "no_hero_speak"));
 				return;
@@ -71,9 +70,6 @@ public class ChatHeroVoice implements IChatHandler
 		}
 	}
 	
-	/**
-	 * Returns the chat types registered to this handler.
-	 */
 	@Override
 	public int[] getChatTypeList()
 	{

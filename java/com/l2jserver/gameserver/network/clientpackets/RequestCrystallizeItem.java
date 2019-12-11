@@ -32,6 +32,8 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.InventoryUpdate;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 import com.l2jserver.gameserver.util.Util;
 
 /**
@@ -63,7 +65,7 @@ public final class RequestCrystallizeItem extends L2GameClientPacket
 			return;
 		}
 		
-		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("crystallize"))
+		if (!FloodProtectors.performAction(getClient(), Action.TRANSACTION))
 		{
 			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "crystallizing_too_fast"));
 			return;

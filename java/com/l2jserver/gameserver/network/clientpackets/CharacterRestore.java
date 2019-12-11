@@ -22,6 +22,8 @@ import com.l2jserver.gameserver.model.CharSelectInfoPackage;
 import com.l2jserver.gameserver.model.events.EventDispatcher;
 import com.l2jserver.gameserver.model.events.impl.character.player.OnPlayerRestore;
 import com.l2jserver.gameserver.network.serverpackets.CharSelectionInfo;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
 /**
  * This class ...
@@ -43,7 +45,7 @@ public final class CharacterRestore extends L2GameClientPacket
 	@Override
 	protected void runImpl()
 	{
-		if (!getClient().getFloodProtectors().getCharacterSelect().tryPerformAction("CharacterRestore"))
+		if (!FloodProtectors.performAction(getClient(), Action.CHARACTER_SELECT))
 		{
 			return;
 		}

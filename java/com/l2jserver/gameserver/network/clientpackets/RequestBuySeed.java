@@ -40,6 +40,8 @@ import com.l2jserver.gameserver.model.holders.ItemHolder;
 import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 import com.l2jserver.gameserver.util.Util;
 
 /**
@@ -83,7 +85,7 @@ public class RequestBuySeed extends L2GameClientPacket
 		{
 			return;
 		}
-		else if (!getClient().getFloodProtectors().getManor().tryPerformAction("BuySeed"))
+		else if (!FloodProtectors.performAction(getClient(), Action.MANOR))
 		{
 			player.sendMessage(MessagesData.getInstance().getMessage(player, "buying_seeds_too_fast"));
 			return;

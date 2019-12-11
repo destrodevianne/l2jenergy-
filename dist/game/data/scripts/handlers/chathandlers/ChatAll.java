@@ -30,6 +30,8 @@ import com.l2jserver.gameserver.model.BlockList;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 import com.l2jserver.gameserver.util.Util;
 
 /**
@@ -45,9 +47,6 @@ public class ChatAll implements IChatHandler
 		0
 	};
 	
-	/**
-	 * Handle chat type 'all'
-	 */
 	@Override
 	public void handleChat(int type, L2PcInstance activeChar, String params, String text)
 	{
@@ -104,6 +103,11 @@ public class ChatAll implements IChatHandler
 			}
 			else
 			{
+				if (!FloodProtectors.performAction(activeChar.getClient(), Action.GLOBAL_CHAT))
+				{
+					return;
+				}
+				
 				CreatureSay cs = new CreatureSay(activeChar.getObjectId(), type, activeChar.getAppearance().getVisibleName(), text);
 				Collection<L2PcInstance> plrs = activeChar.getKnownList().getKnownPlayers().values();
 				for (L2PcInstance player : plrs)
@@ -119,9 +123,6 @@ public class ChatAll implements IChatHandler
 		}
 	}
 	
-	/**
-	 * Returns the chat types registered to this handler.
-	 */
 	@Override
 	public int[] getChatTypeList()
 	{

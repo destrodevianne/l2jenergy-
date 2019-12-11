@@ -28,6 +28,8 @@ import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.TradeList;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
 /**
  * This class ...
@@ -86,7 +88,7 @@ public final class RequestPrivateStoreSell extends L2GameClientPacket
 			return;
 		}
 		
-		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("privatestoresell"))
+		if (!FloodProtectors.performAction(getClient(), Action.TRANSACTION))
 		{
 			player.sendMessage(MessagesData.getInstance().getMessage(player, "selling_too_fast"));
 			return;

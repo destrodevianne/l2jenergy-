@@ -37,6 +37,8 @@ import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.ExBuySellList;
 import com.l2jserver.gameserver.network.serverpackets.StatusUpdate;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 import com.l2jserver.gameserver.util.Util;
 
 /**
@@ -92,7 +94,7 @@ public final class RequestSellItem extends L2GameClientPacket
 			return;
 		}
 		
-		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("buy"))
+		if (!FloodProtectors.performAction(getClient(), Action.TRANSACTION))
 		{
 			player.sendMessage(MessagesData.getInstance().getMessage(player, "buying_too_fast"));
 			return;

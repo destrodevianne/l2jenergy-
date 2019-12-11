@@ -49,6 +49,8 @@ import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.ExUseSharedGroupItem;
 import com.l2jserver.gameserver.network.serverpackets.ItemList;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
 public final class UseItem extends L2GameClientPacket
 {
@@ -77,7 +79,7 @@ public final class UseItem extends L2GameClientPacket
 		}
 		
 		// Flood protect UseItem
-		if (!getClient().getFloodProtectors().getUseItem().tryPerformAction("use item"))
+		if (!FloodProtectors.performAction(getClient(), Action.USE_ITEM))
 		{
 			return;
 		}

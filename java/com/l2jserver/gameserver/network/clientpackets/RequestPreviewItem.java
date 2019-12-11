@@ -41,6 +41,8 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.ShopPreviewInfo;
 import com.l2jserver.gameserver.network.serverpackets.UserInfo;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 import com.l2jserver.gameserver.util.Util;
 
 /**
@@ -121,7 +123,7 @@ public final class RequestPreviewItem extends L2GameClientPacket
 			return;
 		}
 		
-		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("buy"))
+		if (!FloodProtectors.performAction(getClient(), Action.TRANSACTION))
 		{
 			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "buying_too_fast"));
 			return;

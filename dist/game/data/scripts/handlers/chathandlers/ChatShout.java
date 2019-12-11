@@ -28,6 +28,8 @@ import com.l2jserver.gameserver.model.PcCondOverride;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 import com.l2jserver.gameserver.util.Util;
 
 /**
@@ -41,9 +43,6 @@ public class ChatShout implements IChatHandler
 		1
 	};
 	
-	/**
-	 * Handle chat type 'shout'
-	 */
 	@Override
 	public void handleChat(int type, L2PcInstance activeChar, String target, String text)
 	{
@@ -67,7 +66,7 @@ public class ChatShout implements IChatHandler
 		}
 		else if (Config.DEFAULT_GLOBAL_CHAT.equalsIgnoreCase("global"))
 		{
-			if (!activeChar.canOverrideCond(PcCondOverride.CHAT_CONDITIONS) && !activeChar.getFloodProtectors().getGlobalChat().tryPerformAction("global chat"))
+			if (!activeChar.canOverrideCond(PcCondOverride.CHAT_CONDITIONS) && !FloodProtectors.performAction(activeChar.getClient(), Action.GLOBAL_CHAT))
 			{
 				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "no_spam_channel"));
 				return;
@@ -83,9 +82,6 @@ public class ChatShout implements IChatHandler
 		}
 	}
 	
-	/**
-	 * Returns the chat types registered to this handler.
-	 */
 	@Override
 	public int[] getChatTypeList()
 	{

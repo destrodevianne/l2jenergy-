@@ -22,6 +22,8 @@ import com.l2jserver.gameserver.data.xml.impl.RecipeData;
 import com.l2jserver.gameserver.model.L2RecipeList;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.serverpackets.RecipeBookItemList;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
 public final class RequestRecipeBookDestroy extends L2GameClientPacket
 {
@@ -47,7 +49,7 @@ public final class RequestRecipeBookDestroy extends L2GameClientPacket
 			return;
 		}
 		
-		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("RecipeDestroy"))
+		if (!FloodProtectors.performAction(getClient(), Action.TRANSACTION))
 		{
 			return;
 		}

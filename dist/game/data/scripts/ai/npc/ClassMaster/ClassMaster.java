@@ -44,6 +44,8 @@ import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.network.serverpackets.TutorialShowHtml;
 import com.l2jserver.gameserver.network.serverpackets.TutorialShowQuestionMark;
 import com.l2jserver.gameserver.network.serverpackets.UserInfo;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
 import ai.npc.AbstractNpcAI;
 
@@ -227,7 +229,7 @@ public final class ClassMaster extends AbstractNpcAI
 			return;
 		}
 		
-		if (!player.getFloodProtectors().getServerBypass().tryPerformAction("changeclass"))
+		if (!FloodProtectors.performAction(player.getClient(), Action.SERVER_BYPASS))
 		{
 			return;
 		}

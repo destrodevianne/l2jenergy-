@@ -24,6 +24,8 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.itemauction.ItemAuction;
 import com.l2jserver.gameserver.model.itemauction.ItemAuctionInstance;
 import com.l2jserver.gameserver.model.itemcontainer.Inventory;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
 /**
  * @author Forsaiken
@@ -52,7 +54,7 @@ public final class RequestBidItemAuction extends L2GameClientPacket
 		}
 		
 		// can't use auction fp here
-		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("auction"))
+		if (!FloodProtectors.performAction(getClient(), Action.TRANSACTION))
 		{
 			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "auction_fast"));
 			return;

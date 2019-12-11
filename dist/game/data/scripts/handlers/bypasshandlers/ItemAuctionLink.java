@@ -32,6 +32,8 @@ import com.l2jserver.gameserver.model.itemauction.ItemAuction;
 import com.l2jserver.gameserver.model.itemauction.ItemAuctionInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.ExItemAuctionInfoPacket;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
 public class ItemAuctionLink implements IBypassHandler
 {
@@ -74,7 +76,7 @@ public class ItemAuctionLink implements IBypassHandler
 			String cmd = st.nextToken();
 			if ("show".equalsIgnoreCase(cmd))
 			{
-				if (!activeChar.getFloodProtectors().getItemAuction().tryPerformAction("RequestInfoItemAuction"))
+				if (!FloodProtectors.performAction(activeChar.getClient(), Action.ITEM_AUCTION))
 				{
 					return false;
 				}

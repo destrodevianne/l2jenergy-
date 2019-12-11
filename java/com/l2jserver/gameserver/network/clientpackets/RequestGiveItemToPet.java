@@ -25,6 +25,8 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PetInstance;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 import com.l2jserver.gameserver.util.Util;
 
 /**
@@ -54,7 +56,7 @@ public final class RequestGiveItemToPet extends L2GameClientPacket
 			return;
 		}
 		
-		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("giveitemtopet"))
+		if (!FloodProtectors.performAction(getClient(), Action.TRANSACTION))
 		{
 			player.sendMessage(MessagesData.getInstance().getMessage(player, "give_item_pet_too_fast"));
 			return;

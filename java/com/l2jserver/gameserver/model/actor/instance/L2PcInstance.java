@@ -336,7 +336,6 @@ import com.l2jserver.gameserver.network.serverpackets.UserInfo;
 import com.l2jserver.gameserver.network.serverpackets.ValidateLocation;
 import com.l2jserver.gameserver.taskmanager.AttackStanceTaskManager;
 import com.l2jserver.gameserver.util.Broadcast;
-import com.l2jserver.gameserver.util.FloodProtectors;
 import com.l2jserver.gameserver.util.Util;
 
 /**
@@ -11894,11 +11893,6 @@ public class L2PcInstance extends L2Playable
 	public boolean isInHideoutSiege()
 	{
 		return _isInHideoutSiege;
-	}
-	
-	public FloodProtectors getFloodProtectors()
-	{
-		return getClient().getFloodProtectors();
 	}
 	
 	public boolean isFlyingMounted()

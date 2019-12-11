@@ -36,6 +36,8 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.ItemList;
 import com.l2jserver.gameserver.network.serverpackets.StatusUpdate;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
 /**
  * The Class MultiSellChoose.
@@ -98,7 +100,7 @@ public class MultiSellChoose extends L2GameClientPacket
 			return;
 		}
 		
-		if (!getClient().getFloodProtectors().getMultiSell().tryPerformAction("multisell choose"))
+		if (!FloodProtectors.performAction(getClient(), Action.MULTISELL))
 		{
 			player.setMultiSell(null);
 			return;

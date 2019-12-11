@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J DataPack
+ * Copyright (C) 2004-2019 L2J DataPack
  * 
  * This file is part of L2J DataPack.
  * 
@@ -28,6 +28,8 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.Dice;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.util.Broadcast;
+import com.l2jserver.gameserver.util.FloodProtectors;
+import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
 public class RollingDice implements IItemHandler
 {
@@ -82,7 +84,7 @@ public class RollingDice implements IItemHandler
 	private int rollDice(L2PcInstance player)
 	{
 		// Check if the dice is ready
-		if (!player.getFloodProtectors().getRollDice().tryPerformAction("roll dice"))
+		if (!FloodProtectors.performAction(player.getClient(), Action.ROLL_DICE))
 		{
 			return 0;
 		}
