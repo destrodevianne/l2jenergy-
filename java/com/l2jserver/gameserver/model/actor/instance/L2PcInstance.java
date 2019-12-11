@@ -12843,9 +12843,14 @@ public class L2PcInstance extends L2Playable
 	 * @param includeQuestInv check also quest inventory
 	 * @return
 	 */
-	public boolean isInventoryUnder90(boolean includeQuestInv)
+	public boolean isInventoryUnder90(boolean includeQuestInventory)
 	{
-		return (getInventory().getSize(includeQuestInv) <= (getInventoryLimit() * 0.9));
+		if (includeQuestInventory)
+		{
+			return (getInventory().getSize() <= (getInventoryLimit() * 0.9)) || (getInventory().getSize(false) <= (getQuestInventoryLimit() * 0.9));
+		}
+		return getInventory().getSize() <= (getInventoryLimit() * 0.9);
+		
 	}
 	
 	public boolean havePetInvItems()
