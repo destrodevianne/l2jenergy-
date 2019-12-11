@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -96,10 +96,10 @@ import com.l2jserver.gameserver.model.events.impl.character.player.inventory.OnP
 import com.l2jserver.gameserver.model.events.impl.character.trap.OnTrapAction;
 import com.l2jserver.gameserver.model.events.impl.clan.OnClanWarFinish;
 import com.l2jserver.gameserver.model.events.impl.clan.OnClanWarStart;
-import com.l2jserver.gameserver.model.events.impl.events.OnTvTEventFinish;
-import com.l2jserver.gameserver.model.events.impl.events.OnTvTEventKill;
-import com.l2jserver.gameserver.model.events.impl.events.OnTvTEventRegistrationStart;
-import com.l2jserver.gameserver.model.events.impl.events.OnTvTEventStart;
+import com.l2jserver.gameserver.model.events.impl.events.OnEventFinish;
+import com.l2jserver.gameserver.model.events.impl.events.OnEventKill;
+import com.l2jserver.gameserver.model.events.impl.events.OnEventRegistrationStart;
+import com.l2jserver.gameserver.model.events.impl.events.OnEventStart;
 import com.l2jserver.gameserver.model.events.impl.item.OnItemBypassEvent;
 import com.l2jserver.gameserver.model.events.impl.item.OnItemCreate;
 import com.l2jserver.gameserver.model.events.impl.item.OnItemTalk;
@@ -245,11 +245,11 @@ public enum EventType
 	// Trap events
 	ON_TRAP_ACTION(OnTrapAction.class, void.class),
 	
-	// TvT events.
-	ON_TVT_EVENT_FINISH(OnTvTEventFinish.class, void.class),
-	ON_TVT_EVENT_KILL(OnTvTEventKill.class, void.class),
-	ON_TVT_EVENT_REGISTRATION_START(OnTvTEventRegistrationStart.class, void.class),
-	ON_TVT_EVENT_START(OnTvTEventStart.class, void.class);
+	// events.
+	ON_EVENT_FINISH(OnEventFinish.class, void.class),
+	ON_EVENT_KILL(OnEventKill.class, void.class),
+	ON_EVENT_REGISTRATION_START(OnEventRegistrationStart.class, void.class),
+	ON_EVENT_START(OnEventStart.class, void.class);
 	
 	private final Class<? extends IBaseEvent> _eventClass;
 	private final Class<?>[] _returnClass;

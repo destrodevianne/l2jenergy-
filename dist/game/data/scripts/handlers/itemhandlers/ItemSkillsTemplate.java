@@ -21,7 +21,7 @@ package handlers.itemhandlers;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.handler.IItemHandler;
 import com.l2jserver.gameserver.model.actor.L2Playable;
-import com.l2jserver.gameserver.model.entity.TvTEvent;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
@@ -44,7 +44,7 @@ public class ItemSkillsTemplate implements IItemHandler
 			return false;
 		}
 		
-		if (!TvTEvent.onScrollUse(playable.getObjectId()))
+		if (!GameEventManager.onScrollUse(playable.getObjectId()))
 		{
 			playable.sendPacket(ActionFailed.STATIC_PACKET);
 			return false;

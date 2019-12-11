@@ -100,7 +100,7 @@ import com.l2jserver.gameserver.model.conditions.ConditionPlayerSouls;
 import com.l2jserver.gameserver.model.conditions.ConditionPlayerState;
 import com.l2jserver.gameserver.model.conditions.ConditionPlayerSubclass;
 import com.l2jserver.gameserver.model.conditions.ConditionPlayerTransformationId;
-import com.l2jserver.gameserver.model.conditions.ConditionPlayerTvTEvent;
+import com.l2jserver.gameserver.model.conditions.ConditionPlayerEvent;
 import com.l2jserver.gameserver.model.conditions.ConditionPlayerVehicleMounted;
 import com.l2jserver.gameserver.model.conditions.ConditionPlayerWeight;
 import com.l2jserver.gameserver.model.conditions.ConditionSiegeZone;
@@ -644,7 +644,7 @@ public abstract class DocumentBase
 				case "ontvtevent":
 				{
 					boolean val = Boolean.parseBoolean(a.getNodeValue());
-					cond = joinAnd(cond, new ConditionPlayerTvTEvent(val));
+					cond = joinAnd(cond, new ConditionPlayerEvent(val));
 					break;
 				}
 				case "pledgeclass":

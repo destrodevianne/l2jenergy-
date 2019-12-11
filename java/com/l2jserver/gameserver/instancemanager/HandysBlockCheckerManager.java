@@ -35,9 +35,7 @@ import com.l2jserver.gameserver.model.itemcontainer.PcInventory;
 import com.l2jserver.gameserver.model.olympiad.OlympiadManager;
 import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.network.SystemMessageId;
-import com.l2jserver.gameserver.network.serverpackets.ExCubeGameAddPlayer;
-import com.l2jserver.gameserver.network.serverpackets.ExCubeGameChangeTeam;
-import com.l2jserver.gameserver.network.serverpackets.ExCubeGameRemovePlayer;
+import com.l2jserver.gameserver.network.serverpackets.ExBlockUpSetList;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
 /**
@@ -212,7 +210,7 @@ public final class HandysBlockCheckerManager
 				holder.addPlayer(player, 0);
 				isRed = true;
 			}
-			holder.broadCastPacketToTeam(new ExCubeGameAddPlayer(player, isRed));
+			holder.broadCastPacketToTeam(new ExBlockUpSetList(player, isRed, false));
 			return true;
 		}
 	}
@@ -231,7 +229,7 @@ public final class HandysBlockCheckerManager
 			boolean isRed = team == 0 ? true : false;
 			
 			holder.removePlayer(player, team);
-			holder.broadCastPacketToTeam(new ExCubeGameRemovePlayer(player, isRed));
+			holder.broadCastPacketToTeam(new ExBlockUpSetList(player, isRed, true));
 			
 			// End event if theres an empty team
 			int teamSize = isRed ? holder.getRedTeamSize() : holder.getBlueTeamSize();
@@ -281,7 +279,7 @@ public final class HandysBlockCheckerManager
 			{
 				holder.removePlayer(player, 1);
 			}
-			holder.broadCastPacketToTeam(new ExCubeGameChangeTeam(player, isFromRed));
+			holder.broadCastPacketToTeam(new ExBlockUpSetList(player, isFromRed));
 		}
 	}
 	

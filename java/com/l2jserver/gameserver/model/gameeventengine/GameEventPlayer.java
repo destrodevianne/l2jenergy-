@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -16,26 +16,41 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.gameserver.network.serverpackets;
+package com.l2jserver.gameserver.model.gameeventengine;
 
-/**
- * @author mrTJO
- */
-public class ExCubeGameCloseUI extends L2GameServerPacket
+import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+
+public class GameEventPlayer
 {
-	/**
-	 * Close Minigame Waiting List
-	 */
-	public ExCubeGameCloseUI()
+	private final L2PcInstance _player;
+	
+	protected GameEventPlayer(L2PcInstance player)
 	{
-		
+		_player = player;
 	}
 	
-	@Override
-	protected void writeImpl()
+	public boolean isOnEvent()
 	{
-		writeC(0xfe);
-		writeH(0x97);
-		writeD(0xffffffff);
+		return GameEventManager.isStarted() && GameEventManager.isPlayerParticipant(getPlayer().getObjectId());
+	}
+	
+	public boolean isBlockingExit()
+	{
+		return true;
+	}
+	
+	public boolean isBlockingDeathPenalty()
+	{
+		return true;
+	}
+	
+	public boolean canRevive()
+	{
+		return false;
+	}
+	
+	public L2PcInstance getPlayer()
+	{
+		return _player;
 	}
 }

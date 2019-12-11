@@ -57,9 +57,9 @@ import com.l2jserver.gameserver.model.entity.Fort;
 import com.l2jserver.gameserver.model.entity.FortSiege;
 import com.l2jserver.gameserver.model.entity.L2Event;
 import com.l2jserver.gameserver.model.entity.Siege;
-import com.l2jserver.gameserver.model.entity.TvTEvent;
 import com.l2jserver.gameserver.model.entity.clanhall.AuctionableHall;
 import com.l2jserver.gameserver.model.entity.clanhall.SiegableHall;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.skills.CommonSkill;
@@ -547,7 +547,7 @@ public class EnterWorld extends L2GameClientPacket
 			}
 		}
 		
-		TvTEvent.onLogin(activeChar);
+		GameEventManager.onLogin(activeChar);
 		
 		if (CustomConfig.WELCOME_MESSAGE_ENABLED)
 		{

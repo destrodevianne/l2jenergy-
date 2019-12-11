@@ -25,9 +25,7 @@ import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.network.SystemMessageId;
-import com.l2jserver.gameserver.network.serverpackets.ExCubeGameChangeTimeToStart;
-import com.l2jserver.gameserver.network.serverpackets.ExCubeGameRequestReady;
-import com.l2jserver.gameserver.network.serverpackets.ExCubeGameTeamList;
+import com.l2jserver.gameserver.network.serverpackets.ExBlockUpSetList;
 
 /**
  * Handys Block Checker Event AI.
@@ -73,7 +71,7 @@ public class HandysBlockCheckerEvent extends Quest
 		{
 			ArenaParticipantsHolder holder = HandysBlockCheckerManager.getInstance().getHolder(arena);
 			
-			final ExCubeGameTeamList tl = new ExCubeGameTeamList(holder.getRedPlayers(), holder.getBluePlayers(), arena);
+			final ExBlockUpSetList tl = new ExBlockUpSetList(holder.getRedPlayers(), holder.getBluePlayers(), arena);
 			
 			player.sendPacket(tl);
 			
@@ -84,8 +82,8 @@ public class HandysBlockCheckerEvent extends Quest
 			if ((countBlue >= minMembers) && (countRed >= minMembers))
 			{
 				holder.updateEvent();
-				holder.broadCastPacketToTeam(new ExCubeGameRequestReady());
-				holder.broadCastPacketToTeam(new ExCubeGameChangeTimeToStart(10));
+				holder.broadCastPacketToTeam(new ExBlockUpSetList(false));
+				holder.broadCastPacketToTeam(new ExBlockUpSetList(10));
 			}
 		}
 		return null;

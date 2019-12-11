@@ -22,6 +22,7 @@ import java.util.Arrays;
 
 import com.l2jserver.gameserver.model.PcCondOverride;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.items.L2EtcItem;
 import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
@@ -60,6 +61,12 @@ public class RequestUnEquipItem extends L2GameClientPacket
 		// Wear-items are not to be unequipped.
 		if (item == null)
 		{
+			return;
+		}
+		
+		if (!GameEventManager.onRequestUnEquipItem(activeChar))
+		{
+			// TODO: fix
 			return;
 		}
 		

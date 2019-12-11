@@ -35,7 +35,7 @@ import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Summon;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.entity.TvTEvent;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.model.zone.type.L2OlympiadStadiumZone;
@@ -126,7 +126,7 @@ public abstract class AbstractOlympiadGame
 		}
 		
 		// safety precautions
-		if (player.inObserverMode() || TvTEvent.isPlayerParticipant(player.getObjectId()))
+		if (player.inObserverMode() || GameEventManager.isPlayerParticipant(player.getObjectId()))
 		{
 			return SystemMessage.getSystemMessage(SystemMessageId.THE_GAME_HAS_BEEN_CANCELLED_BECAUSE_THE_OTHER_PARTY_DOES_NOT_MEET_THE_REQUIREMENTS_FOR_JOINING_THE_GAME);
 		}

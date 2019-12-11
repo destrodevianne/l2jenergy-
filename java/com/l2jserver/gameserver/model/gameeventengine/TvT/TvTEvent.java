@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.gameserver.model.entity;
+package com.l2jserver.gameserver.model.gameeventengine.TvT;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -35,6 +35,7 @@ import com.l2jserver.gameserver.data.xml.impl.DoorData;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.datatables.SpawnTable;
+import com.l2jserver.gameserver.enums.GameEventState;
 import com.l2jserver.gameserver.instancemanager.AntiFeedManager;
 import com.l2jserver.gameserver.instancemanager.InstanceManager;
 import com.l2jserver.gameserver.model.L2Spawn;
@@ -46,11 +47,14 @@ import com.l2jserver.gameserver.model.actor.instance.L2DoorInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PetInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2ServitorInstance;
+import com.l2jserver.gameserver.model.entity.Instance;
 import com.l2jserver.gameserver.model.events.EventDispatcher;
-import com.l2jserver.gameserver.model.events.impl.events.OnTvTEventFinish;
-import com.l2jserver.gameserver.model.events.impl.events.OnTvTEventKill;
-import com.l2jserver.gameserver.model.events.impl.events.OnTvTEventRegistrationStart;
-import com.l2jserver.gameserver.model.events.impl.events.OnTvTEventStart;
+import com.l2jserver.gameserver.model.events.impl.events.OnEventFinish;
+import com.l2jserver.gameserver.model.events.impl.events.OnEventKill;
+import com.l2jserver.gameserver.model.events.impl.events.OnEventRegistrationStart;
+import com.l2jserver.gameserver.model.events.impl.events.OnEventStart;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventListener;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventTeam;
 import com.l2jserver.gameserver.model.itemcontainer.PcInventory;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -66,38 +70,16 @@ import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
  */
 public class TvTEvent
 {
-	enum EventState
-	{
-		INACTIVE,
-		INACTIVATING,
-		PARTICIPATING,
-		STARTING,
-		STARTED,
-		REWARDING
-	}
-	
 	protected static final Logger LOG = LoggerFactory.getLogger(TvTEvent.class);
-	/** html path **/
+	
 	private static final String htmlPath = "data/scripts/custom/events/TvT/TvTManager/";
-	/**
-	 * The teams of the TvTEvent<br>
-	 */
-	private static TvTEventTeam[] _teams = new TvTEventTeam[2];
-	/**
-	 * The state of the TvTEvent<br>
-	 */
-	private static EventState _state = EventState.INACTIVE;
-	/**
-	 * The spawn of the participation npc<br>
-	 */
+	
+	private static GameEventTeam[] _teams = new GameEventTeam[2];
+	
+	private static GameEventState _state = GameEventState.INACTIVE;
+	
 	private static L2Spawn _npcSpawn = null;
-	/**
-	 * the npc instance of the participation npc<br>
-	 */
 	private static L2Npc _lastNpcSpawn = null;
-	/**
-	 * Instance id<br>
-	 */
 	private static int _TvTEventInstance = 0;
 	
 	private TvTEvent()
@@ -105,23 +87,13 @@ public class TvTEvent
 		// Prevent external initialization.
 	}
 	
-	/**
-	 * Teams initializing<br>
-	 */
 	public static void init()
 	{
 		AntiFeedManager.getInstance().registerEvent(AntiFeedManager.TVT_ID);
-		_teams[0] = new TvTEventTeam(Config.TVT_EVENT_TEAM_1_NAME, Config.TVT_EVENT_TEAM_1_COORDINATES);
-		_teams[1] = new TvTEventTeam(Config.TVT_EVENT_TEAM_2_NAME, Config.TVT_EVENT_TEAM_2_COORDINATES);
+		_teams[0] = new GameEventTeam(Config.TVT_EVENT_TEAM_1_NAME, Config.TVT_EVENT_TEAM_1_COORDINATES);
+		_teams[1] = new GameEventTeam(Config.TVT_EVENT_TEAM_2_NAME, Config.TVT_EVENT_TEAM_2_COORDINATES);
 	}
 	
-	/**
-	 * Starts the participation of the TvTEvent<br>
-	 * 1. Get L2NpcTemplate by Config.TVT_EVENT_PARTICIPATION_NPC_ID<br>
-	 * 2. Try to spawn a new npc of it<br>
-	 * <br>
-	 * @return boolean: true if success, otherwise false<br>
-	 */
 	public static boolean startParticipation()
 	{
 		try
@@ -150,9 +122,8 @@ public class TvTEvent
 			LOG.warn("TvTEventEngine[TvTEvent.startParticipation()]: exception", e);
 			return false;
 		}
-		
-		setState(EventState.PARTICIPATING);
-		EventDispatcher.getInstance().notifyEventAsync(new OnTvTEventRegistrationStart());
+		setState(GameEventState.PARTICIPATING);
+		EventDispatcher.getInstance().notifyEventAsync(new OnEventRegistrationStart());
 		return true;
 	}
 	
@@ -170,20 +141,10 @@ public class TvTEvent
 		return maxLevelId;
 	}
 	
-	/**
-	 * Starts the TvTEvent fight<br>
-	 * 1. Set state EventState.STARTING<br>
-	 * 2. Close doors specified in configs<br>
-	 * 3. Abort if not enough participants(return false)<br>
-	 * 4. Set state EventState.STARTED<br>
-	 * 5. Teleport all participants to team spot<br>
-	 * <br>
-	 * @return boolean: true if success, otherwise false<br>
-	 */
 	public static boolean startFight()
 	{
 		// Set state to STARTING
-		setState(EventState.STARTING);
+		setState(GameEventState.STARTING);
 		
 		// Randomize and balance team distribution
 		Map<Integer, L2PcInstance> allParticipants = new HashMap<>();
@@ -243,7 +204,7 @@ public class TvTEvent
 		if ((_teams[0].getParticipatedPlayerCount() < Config.TVT_EVENT_MIN_PLAYERS_IN_TEAMS) || (_teams[1].getParticipatedPlayerCount() < Config.TVT_EVENT_MIN_PLAYERS_IN_TEAMS))
 		{
 			// Set state INACTIVE
-			setState(EventState.INACTIVE);
+			setState(GameEventState.INACTIVE);
 			// Cleanup of teams
 			_teams[0].cleanMe();
 			_teams[1].cleanMe();
@@ -296,10 +257,10 @@ public class TvTEvent
 		// Closes all doors specified in configs for tvt
 		closeDoors(Config.TVT_DOORS_IDS_TO_CLOSE);
 		// Set state STARTED
-		setState(EventState.STARTED);
+		setState(GameEventState.STARTED);
 		
 		// Iterate over all teams
-		for (TvTEventTeam team : _teams)
+		for (GameEventTeam team : _teams)
 		{
 			// Iterate over all participated player instances in this team
 			for (L2PcInstance playerInstance : team.getParticipatedPlayers().values())
@@ -315,20 +276,10 @@ public class TvTEvent
 		}
 		
 		// Notify to scripts.
-		EventDispatcher.getInstance().notifyEventAsync(new OnTvTEventStart());
+		EventDispatcher.getInstance().notifyEventAsync(new OnEventStart());
 		return true;
 	}
 	
-	/**
-	 * Calculates the TvTEvent reward<br>
-	 * 1. If both teams are at a tie(points equals), send it as system message to all participants, if one of the teams have 0 participants left online abort rewarding<br>
-	 * 2. Wait till teams are not at a tie anymore<br>
-	 * 3. Set state EvcentState.REWARDING<br>
-	 * 4. Reward team with more points<br>
-	 * 5. Show win html to wining team participants<br>
-	 * <br>
-	 * @return String: winning team name<br>
-	 */
 	public static String calculateRewards()
 	{
 		if (_teams[0].getPoints() == _teams[1].getPoints())
@@ -337,7 +288,7 @@ public class TvTEvent
 			if ((_teams[0].getParticipatedPlayerCount() == 0) || (_teams[1].getParticipatedPlayerCount() == 0))
 			{
 				// set state to rewarding
-				setState(EventState.REWARDING);
+				setState(GameEventState.REWARDING);
 				// return here, the fight can't be completed
 				return "TvT Event: Event has ended. No team won due to inactivity!";
 			}
@@ -354,18 +305,18 @@ public class TvTEvent
 		}
 		
 		// Set state REWARDING so nobody can point anymore
-		setState(EventState.REWARDING);
+		setState(GameEventState.REWARDING);
 		
 		// Get team which has more points
-		TvTEventTeam team = _teams[_teams[0].getPoints() > _teams[1].getPoints() ? 0 : 1];
+		GameEventTeam team = _teams[_teams[0].getPoints() > _teams[1].getPoints() ? 0 : 1];
 		rewardTeam(team);
 		
 		// Notify to scripts.
-		EventDispatcher.getInstance().notifyEventAsync(new OnTvTEventFinish());
+		EventDispatcher.getInstance().notifyEventAsync(new OnEventFinish());
 		return "TvT Event: Event finish. Team " + team.getName() + " won with " + team.getPoints() + " kills.";
 	}
 	
-	private static void rewardTeam(TvTEventTeam team)
+	private static void rewardTeam(GameEventTeam team)
 	{
 		// Iterate over all participated player instances of the winning team
 		for (L2PcInstance playerInstance : team.getParticipatedPlayers().values())
@@ -424,19 +375,10 @@ public class TvTEvent
 		}
 	}
 	
-	/**
-	 * Stops the TvTEvent fight<br>
-	 * 1. Set state EventState.INACTIVATING<br>
-	 * 2. Remove tvt npc from world<br>
-	 * 3. Open doors specified in configs<br>
-	 * 4. Teleport all participants back to participation npc location<br>
-	 * 5. Teams cleaning<br>
-	 * 6. Set state EventState.INACTIVE<br>
-	 */
 	public static void stopFight()
 	{
 		// Set state INACTIVATING
-		setState(EventState.INACTIVATING);
+		setState(GameEventState.INACTIVATING);
 		// Unspawn event npc
 		unSpawnNpc();
 		// Opens all doors specified in configs for tvt
@@ -445,7 +387,7 @@ public class TvTEvent
 		closeDoors(Config.TVT_DOORS_IDS_TO_OPEN);
 		
 		// Iterate over all teams
-		for (TvTEventTeam team : _teams)
+		for (GameEventTeam team : _teams)
 		{
 			for (L2PcInstance playerInstance : team.getParticipatedPlayers().values())
 			{
@@ -464,18 +406,10 @@ public class TvTEvent
 		_teams[0].cleanMe();
 		_teams[1].cleanMe();
 		// Set state INACTIVE
-		setState(EventState.INACTIVE);
+		setState(GameEventState.INACTIVE);
 		AntiFeedManager.getInstance().clear(AntiFeedManager.TVT_ID);
 	}
 	
-	/**
-	 * Adds a player to a TvTEvent team<br>
-	 * 1. Calculate the id of the team in which the player should be added<br>
-	 * 2. Add the player to the calculated team<br>
-	 * <br>
-	 * @param playerInstance as L2PcInstance<br>
-	 * @return boolean: true if success, otherwise false<br>
-	 */
 	public static synchronized boolean addParticipant(L2PcInstance playerInstance)
 	{
 		// Check for nullpoitner
@@ -495,18 +429,10 @@ public class TvTEvent
 		{
 			teamId = (byte) (_teams[0].getParticipatedPlayerCount() > _teams[1].getParticipatedPlayerCount() ? 1 : 0);
 		}
-		playerInstance.addEventListener(new TvTEventListener(playerInstance));
+		playerInstance.addEventListener(new GameEventListener(playerInstance));
 		return _teams[teamId].addPlayer(playerInstance);
 	}
 	
-	/**
-	 * Removes a TvTEvent player from it's team<br>
-	 * 1. Get team id of the player<br>
-	 * 2. Remove player from it's team<br>
-	 * <br>
-	 * @param playerObjectId
-	 * @return boolean: true if success, otherwise false
-	 */
 	public static boolean removeParticipant(int playerObjectId)
 	{
 		// Get the teamId of the player
@@ -521,11 +447,10 @@ public class TvTEvent
 			final L2PcInstance player = L2World.getInstance().getPlayer(playerObjectId);
 			if (player != null)
 			{
-				player.removeEventListener(TvTEventListener.class);
+				player.removeEventListener(GameEventListener.class);
 			}
 			return true;
 		}
-		
 		return false;
 	}
 	
@@ -721,12 +646,6 @@ public class TvTEvent
 		return true;
 	}
 	
-	/**
-	 * Called on every scroll use<br>
-	 * <br>
-	 * @param playerObjectId
-	 * @return boolean: true if player is allowed to use scroll, otherwise false
-	 */
 	public static boolean onScrollUse(int playerObjectId)
 	{
 		if (!isStarted())
@@ -738,15 +657,9 @@ public class TvTEvent
 		{
 			return false;
 		}
-		
 		return true;
 	}
 	
-	/**
-	 * Called on every potion use
-	 * @param playerObjectId
-	 * @return boolean: true if player is allowed to use potions, otherwise false
-	 */
 	public static boolean onPotionUse(int playerObjectId)
 	{
 		if (!isStarted())
@@ -758,15 +671,9 @@ public class TvTEvent
 		{
 			return false;
 		}
-		
 		return true;
 	}
 	
-	/**
-	 * Called on every escape use(thanks to nbd)
-	 * @param playerObjectId
-	 * @return boolean: true if player is not in tvt event, otherwise false
-	 */
 	public static boolean onEscapeUse(int playerObjectId)
 	{
 		if (!isStarted())
@@ -778,15 +685,9 @@ public class TvTEvent
 		{
 			return false;
 		}
-		
 		return true;
 	}
 	
-	/**
-	 * Called on every summon item use
-	 * @param playerObjectId
-	 * @return boolean: true if player is allowed to summon by item, otherwise false
-	 */
 	public static boolean onItemSummon(int playerObjectId)
 	{
 		if (!isStarted())
@@ -798,16 +699,9 @@ public class TvTEvent
 		{
 			return false;
 		}
-		
 		return true;
 	}
 	
-	/**
-	 * Is called when a player is killed<br>
-	 * <br>
-	 * @param killerCharacter as L2Character<br>
-	 * @param killedPlayerInstance as L2PcInstance<br>
-	 */
 	public static void onKill(L2Character killerCharacter, L2PcInstance killedPlayerInstance)
 	{
 		if ((killedPlayerInstance == null) || !isStarted())
@@ -853,7 +747,7 @@ public class TvTEvent
 		
 		if ((killerTeamId != -1) && (killedTeamId != -1) && (killerTeamId != killedTeamId))
 		{
-			TvTEventTeam killerTeam = _teams[killerTeamId];
+			GameEventTeam killerTeam = _teams[killerTeamId];
 			
 			killerTeam.increasePoints();
 			
@@ -868,14 +762,10 @@ public class TvTEvent
 			}
 			
 			// Notify to scripts.
-			EventDispatcher.getInstance().notifyEventAsync(new OnTvTEventKill(killerPlayerInstance, killedPlayerInstance, killerTeam));
+			EventDispatcher.getInstance().notifyEventAsync(new OnEventKill(killerPlayerInstance, killedPlayerInstance, killerTeam));
 		}
 	}
 	
-	/**
-	 * Called on Appearing packet received (player finished teleporting)
-	 * @param playerInstance
-	 */
 	public static void onTeleported(L2PcInstance playerInstance)
 	{
 		if (!isStarted() || (playerInstance == null) || !isPlayerParticipant(playerInstance.getObjectId()))
@@ -913,12 +803,6 @@ public class TvTEvent
 		}
 	}
 	
-	/**
-	 * @param source
-	 * @param target
-	 * @param skill
-	 * @return true if player valid for skill
-	 */
 	public static final boolean checkForTvTSkill(L2PcInstance source, L2PcInstance target, Skill skill)
 	{
 		if (!isStarted())
@@ -952,12 +836,7 @@ public class TvTEvent
 		return true;
 	}
 	
-	/**
-	 * Sets the TvTEvent state<br>
-	 * <br>
-	 * @param state as EventState<br>
-	 */
-	private static void setState(EventState state)
+	private static void setState(GameEventState state)
 	{
 		synchronized (_state)
 		{
@@ -965,183 +844,110 @@ public class TvTEvent
 		}
 	}
 	
-	/**
-	 * Is TvTEvent inactive?<br>
-	 * <br>
-	 * @return boolean: true if event is inactive(waiting for next event cycle), otherwise false<br>
-	 */
 	public static boolean isInactive()
 	{
 		boolean isInactive;
 		
 		synchronized (_state)
 		{
-			isInactive = _state == EventState.INACTIVE;
+			isInactive = _state == GameEventState.INACTIVE;
 		}
-		
 		return isInactive;
 	}
 	
-	/**
-	 * Is TvTEvent in inactivating?<br>
-	 * <br>
-	 * @return boolean: true if event is in inactivating progress, otherwise false<br>
-	 */
 	public static boolean isInactivating()
 	{
 		boolean isInactivating;
 		
 		synchronized (_state)
 		{
-			isInactivating = _state == EventState.INACTIVATING;
+			isInactivating = _state == GameEventState.INACTIVATING;
 		}
-		
 		return isInactivating;
 	}
 	
-	/**
-	 * Is TvTEvent in participation?<br>
-	 * <br>
-	 * @return boolean: true if event is in participation progress, otherwise false<br>
-	 */
 	public static boolean isParticipating()
 	{
 		boolean isParticipating;
 		
 		synchronized (_state)
 		{
-			isParticipating = _state == EventState.PARTICIPATING;
+			isParticipating = _state == GameEventState.PARTICIPATING;
 		}
-		
 		return isParticipating;
 	}
 	
-	/**
-	 * Is TvTEvent starting?<br>
-	 * <br>
-	 * @return boolean: true if event is starting up(setting up fighting spot, teleport players etc.), otherwise false<br>
-	 */
 	public static boolean isStarting()
 	{
 		boolean isStarting;
 		
 		synchronized (_state)
 		{
-			isStarting = _state == EventState.STARTING;
+			isStarting = _state == GameEventState.STARTING;
 		}
-		
 		return isStarting;
 	}
 	
-	/**
-	 * Is TvTEvent started?<br>
-	 * <br>
-	 * @return boolean: true if event is started, otherwise false<br>
-	 */
 	public static boolean isStarted()
 	{
 		boolean isStarted;
 		
 		synchronized (_state)
 		{
-			isStarted = _state == EventState.STARTED;
+			isStarted = _state == GameEventState.STARTED;
 		}
-		
 		return isStarted;
 	}
 	
-	/**
-	 * Is TvTEvent rewarding?<br>
-	 * <br>
-	 * @return boolean: true if event is currently rewarding, otherwise false<br>
-	 */
 	public static boolean isRewarding()
 	{
 		boolean isRewarding;
 		
 		synchronized (_state)
 		{
-			isRewarding = _state == EventState.REWARDING;
+			isRewarding = _state == GameEventState.REWARDING;
 		}
-		
 		return isRewarding;
 	}
 	
-	/**
-	 * Returns the team id of a player, if player is not participant it returns -1
-	 * @param playerObjectId
-	 * @return byte: team name of the given playerName, if not in event -1
-	 */
 	public static byte getParticipantTeamId(int playerObjectId)
 	{
 		return (byte) (_teams[0].containsPlayer(playerObjectId) ? 0 : (_teams[1].containsPlayer(playerObjectId) ? 1 : -1));
 	}
 	
-	/**
-	 * Returns the team of a player, if player is not participant it returns null
-	 * @param playerObjectId
-	 * @return TvTEventTeam: team of the given playerObjectId, if not in event null
-	 */
-	public static TvTEventTeam getParticipantTeam(int playerObjectId)
+	public static GameEventTeam getParticipantTeam(int playerObjectId)
 	{
 		return (_teams[0].containsPlayer(playerObjectId) ? _teams[0] : (_teams[1].containsPlayer(playerObjectId) ? _teams[1] : null));
 	}
 	
-	/**
-	 * Returns the enemy team of a player, if player is not participant it returns null
-	 * @param playerObjectId
-	 * @return TvTEventTeam: enemy team of the given playerObjectId, if not in event null
-	 */
-	public static TvTEventTeam getParticipantEnemyTeam(int playerObjectId)
+	public static GameEventTeam getParticipantEnemyTeam(int playerObjectId)
 	{
 		return (_teams[0].containsPlayer(playerObjectId) ? _teams[1] : (_teams[1].containsPlayer(playerObjectId) ? _teams[0] : null));
 	}
 	
-	/**
-	 * Returns the team coordinates in which the player is in, if player is not in a team return null
-	 * @param playerObjectId
-	 * @return int[]: coordinates of teams, 2 elements, index 0 for team 1 and index 1 for team 2
-	 */
 	public static int[] getParticipantTeamCoordinates(int playerObjectId)
 	{
 		return _teams[0].containsPlayer(playerObjectId) ? _teams[0].getCoordinates() : (_teams[1].containsPlayer(playerObjectId) ? _teams[1].getCoordinates() : null);
 	}
 	
-	/**
-	 * Is given player participant of the event?
-	 * @param playerObjectId
-	 * @return boolean: true if player is participant, ohterwise false
-	 */
 	public static boolean isPlayerParticipant(int playerObjectId)
 	{
 		if (!isParticipating() && !isStarting() && !isStarted())
 		{
 			return false;
 		}
-		
 		return _teams[0].containsPlayer(playerObjectId) || _teams[1].containsPlayer(playerObjectId);
 	}
 	
-	/**
-	 * Returns participated player count<br>
-	 * <br>
-	 * @return int: amount of players registered in the event<br>
-	 */
 	public static int getParticipatedPlayersCount()
 	{
 		if (!isParticipating() && !isStarting() && !isStarted())
 		{
 			return 0;
 		}
-		
 		return _teams[0].getParticipatedPlayerCount() + _teams[1].getParticipatedPlayerCount();
 	}
 	
-	/**
-	 * Returns teams names<br>
-	 * <br>
-	 * @return String[]: names of teams, 2 elements, index 0 for team 1 and index 1 for team 2<br>
-	 */
 	public static String[] getTeamNames()
 	{
 		return new String[]
@@ -1151,11 +957,6 @@ public class TvTEvent
 		};
 	}
 	
-	/**
-	 * Returns player count of both teams<br>
-	 * <br>
-	 * @return int[]: player count of teams, 2 elements, index 0 for team 1 and index 1 for team 2<br>
-	 */
 	public static int[] getTeamsPlayerCounts()
 	{
 		return new int[]
@@ -1165,10 +966,6 @@ public class TvTEvent
 		};
 	}
 	
-	/**
-	 * Returns points count of both teams
-	 * @return int[]: points of teams, 2 elements, index 0 for team 1 and index 1 for team 2<br>
-	 */
 	public static int[] getTeamsPoints()
 	{
 		return new int[]

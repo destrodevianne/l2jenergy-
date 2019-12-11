@@ -27,8 +27,7 @@ import com.l2jserver.gameserver.model.entity.BlockCheckerEngine;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.network.serverpackets.AbstractNpcInfo;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
-import com.l2jserver.gameserver.network.serverpackets.ExCubeGameChangePoints;
-import com.l2jserver.gameserver.network.serverpackets.ExCubeGameExtendedChangePoints;
+import com.l2jserver.gameserver.network.serverpackets.ExBlockUpSetState;
 
 /**
  * @author BiggBoss
@@ -150,8 +149,8 @@ public class L2BlockInstance extends L2MonsterInstance
 		int timeLeft = (int) ((eng.getStarterTime() - System.currentTimeMillis()) / 1000);
 		boolean isRed = eng.getHolder().getRedPlayers().contains(player);
 		
-		ExCubeGameChangePoints changePoints = new ExCubeGameChangePoints(timeLeft, eng.getBluePoints(), eng.getRedPoints());
-		ExCubeGameExtendedChangePoints secretPoints = new ExCubeGameExtendedChangePoints(timeLeft, eng.getBluePoints(), eng.getRedPoints(), isRed, player, eng.getPlayerPoints(player, isRed));
+		ExBlockUpSetState changePoints = new ExBlockUpSetState(timeLeft, eng.getBluePoints(), eng.getRedPoints());
+		ExBlockUpSetState secretPoints = new ExBlockUpSetState(timeLeft, eng.getBluePoints(), eng.getRedPoints(), isRed, player, eng.getPlayerPoints(player, isRed));
 		
 		eng.getHolder().broadCastPacketToTeam(changePoints);
 		eng.getHolder().broadCastPacketToTeam(secretPoints);

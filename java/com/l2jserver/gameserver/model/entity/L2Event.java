@@ -40,6 +40,7 @@ import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.datatables.SpawnTable;
+import com.l2jserver.gameserver.enums.GameEventState;
 import com.l2jserver.gameserver.instancemanager.AntiFeedManager;
 import com.l2jserver.gameserver.model.L2Spawn;
 import com.l2jserver.gameserver.model.L2World;
@@ -60,7 +61,7 @@ public class L2Event
 {
 	protected static final Logger LOG = LoggerFactory.getLogger(L2Event.class);
 	
-	public static EventState eventState = EventState.OFF;
+	public static GameEventState eventState = GameEventState.INACTIVE;
 	public static String _eventName = "";
 	public static String _eventCreator = "";
 	public static String _eventInfo = "";
@@ -70,13 +71,6 @@ public class L2Event
 	public static final Map<Integer, List<L2PcInstance>> _teams = new ConcurrentHashMap<>();
 	public static int _npcId = 0;
 	private static final Map<L2PcInstance, PlayerEventHolder> _connectionLossData = new ConcurrentHashMap<>();
-	
-	public enum EventState
-	{
-		OFF, // Not running
-		STANDBY, // Waiting for participants to register
-		ON // Registration is over and the event has started.
-	}
 	
 	/**
 	 * @param player
@@ -130,7 +124,7 @@ public class L2Event
 	public static void showEventHtml(L2PcInstance player, String objectid)
 	{
 		// TODO: work on this
-		if (eventState == EventState.STANDBY)
+		if (eventState == GameEventState.PARTICIPATING)
 		{
 			try
 			{
@@ -231,11 +225,11 @@ public class L2Event
 		
 		switch (eventState)
 		{
-			case OFF:
+			case INACTIVE:
 				return false;
-			case STANDBY:
+			case PARTICIPATING:
 				return _registeredPlayers.contains(player);
-			case ON:
+			case STARTED:
 				for (List<L2PcInstance> teamList : _teams.values())
 				{
 					if (teamList.contains(player))
@@ -254,7 +248,7 @@ public class L2Event
 	 */
 	public static void registerPlayer(L2PcInstance player)
 	{
-		if (eventState != EventState.STANDBY)
+		if (eventState != GameEventState.PARTICIPATING)
 		{
 			player.sendMessage(MessagesData.getInstance().getMessage(player, "event_time_register_over"));
 			return;
@@ -355,12 +349,12 @@ public class L2Event
 		{
 			switch (eventState)
 			{
-				case ON:
+				case STARTED:
 					return "Cannot start event, it is already on.";
-				case STANDBY:
+				case PARTICIPATING:
 					return "Cannot start event, it is on standby mode.";
-				case OFF: // Event is off, so no problem turning it on.
-					eventState = EventState.STANDBY;
+				case INACTIVE: // Event is off, so no problem turning it on.
+					eventState = GameEventState.PARTICIPATING;
 					break;
 			}
 			
@@ -426,12 +420,12 @@ public class L2Event
 		{
 			switch (eventState)
 			{
-				case ON:
+				case STARTED:
 					return "Cannot start event, it is already on.";
-				case STANDBY:
-					eventState = EventState.ON;
+				case PARTICIPATING:
+					eventState = GameEventState.STARTED;
 					break;
-				case OFF: // Event is off, so no problem turning it on.
+				case INACTIVE: // Event is off, so no problem turning it on.
 					return "Cannot start event, it is off. Participation start is required.";
 			}
 			
@@ -495,9 +489,9 @@ public class L2Event
 	{
 		switch (eventState)
 		{
-			case OFF:
+			case INACTIVE:
 				return "Cannot finish event, it is already off.";
-			case STANDBY:
+			case PARTICIPATING:
 				for (L2PcInstance player : _registeredPlayers)
 				{
 					removeAndResetPlayer(player);
@@ -510,9 +504,9 @@ public class L2Event
 				_connectionLossData.clear();
 				_teamsNumber = 0;
 				_eventName = "";
-				eventState = EventState.OFF;
+				eventState = GameEventState.INACTIVE;
 				return "The event has been stopped at STANDBY mode, all players unregistered and all event npcs unspawned.";
-			case ON:
+			case STARTED:
 				for (List<L2PcInstance> teamList : _teams.values())
 				{
 					for (L2PcInstance player : teamList)
@@ -521,7 +515,7 @@ public class L2Event
 					}
 				}
 				
-				eventState = EventState.OFF;
+				eventState = GameEventState.INACTIVE;
 				AntiFeedManager.getInstance().clear(AntiFeedManager.TVT_ID);
 				unspawnEventNpcs(); // Just in case
 				// _npcs.clear();

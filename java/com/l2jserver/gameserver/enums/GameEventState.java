@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -16,31 +16,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.gameserver.network.serverpackets;
+package com.l2jserver.gameserver.enums;
 
 /**
- * @author mrTJO
+ * @author Мо3олЬ
  */
-public class ExCubeGameChangeTimeToStart extends L2GameServerPacket
+public enum GameEventState
 {
-	int _seconds;
-	
-	/**
-	 * Update Minigame Waiting List Time to Start
-	 * @param seconds
-	 */
-	public ExCubeGameChangeTimeToStart(int seconds)
-	{
-		_seconds = seconds;
-	}
-	
-	@Override
-	protected void writeImpl()
-	{
-		writeC(0xfe);
-		writeH(0x97);
-		writeD(0x03);
-		
-		writeD(_seconds);
-	}
+	INACTIVE,
+	INACTIVATING,
+	PARTICIPATING,
+	STARTING,
+	STARTED,
+	REWARDING
 }

@@ -22,7 +22,7 @@ import com.l2jserver.gameserver.data.xml.impl.PetDataTable;
 import com.l2jserver.gameserver.model.L2PetData;
 import com.l2jserver.gameserver.model.actor.L2Playable;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.entity.TvTEvent;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.holders.PetItemHolder;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -41,7 +41,7 @@ public class SummonItems extends ItemSkillsTemplate
 			return false;
 		}
 		
-		if (!TvTEvent.onItemSummon(playable.getObjectId()))
+		if (!GameEventManager.onItemSummon(playable.getObjectId()))
 		{
 			return false;
 		}

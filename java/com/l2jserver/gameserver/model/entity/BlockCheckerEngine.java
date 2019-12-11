@@ -46,10 +46,8 @@ import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.ExBasicActionList;
-import com.l2jserver.gameserver.network.serverpackets.ExCubeGameChangePoints;
-import com.l2jserver.gameserver.network.serverpackets.ExCubeGameCloseUI;
-import com.l2jserver.gameserver.network.serverpackets.ExCubeGameEnd;
-import com.l2jserver.gameserver.network.serverpackets.ExCubeGameExtendedChangePoints;
+import com.l2jserver.gameserver.network.serverpackets.ExBlockUpSetList;
+import com.l2jserver.gameserver.network.serverpackets.ExBlockUpSetState;
 import com.l2jserver.gameserver.network.serverpackets.RelationChanged;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
@@ -327,8 +325,6 @@ public final class BlockCheckerEngine
 	{
 		// In event used skills
 		private final Skill _freeze, _transformationRed, _transformationBlue;
-		// Common and unparametizer packet
-		private final ExCubeGameCloseUI _closeUserInterface = new ExCubeGameCloseUI();
 		
 		public StartEvent()
 		{
@@ -349,8 +345,9 @@ public final class BlockCheckerEngine
 			// Initialize packets avoiding create a new one per player
 			_redPoints = _spawns.size() / 2;
 			_bluePoints = _spawns.size() / 2;
-			final ExCubeGameChangePoints initialPoints = new ExCubeGameChangePoints(300, _bluePoints, _redPoints);
-			ExCubeGameExtendedChangePoints clientSetUp;
+			
+			final ExBlockUpSetState initialPoints = new ExBlockUpSetState(300, _bluePoints, _redPoints);
+			ExBlockUpSetState clientSetUp;
 			
 			for (L2PcInstance player : _holder.getAllPlayers())
 			{
@@ -362,7 +359,7 @@ public final class BlockCheckerEngine
 				// Send the secret client packet set up
 				boolean isRed = _holder.getRedPlayers().contains(player);
 				
-				clientSetUp = new ExCubeGameExtendedChangePoints(300, _bluePoints, _redPoints, isRed, player, 0);
+				clientSetUp = new ExBlockUpSetState(300, _bluePoints, _redPoints, isRed, player, 0);
 				player.sendPacket(clientSetUp);
 				
 				player.sendPacket(ActionFailed.STATIC_PACKET);
@@ -410,7 +407,7 @@ public final class BlockCheckerEngine
 				player.setInsideZone(ZoneId.PVP, true);
 				// Send needed packets
 				player.sendPacket(initialPoints);
-				player.sendPacket(_closeUserInterface);
+				player.sendPacket(new ExBlockUpSetList(true));
 				// ExBasicActionList
 				player.sendPacket(ExBasicActionList.STATIC_PACKET);
 				broadcastRelationChanged(player);
@@ -540,7 +537,7 @@ public final class BlockCheckerEngine
 			_bluePoints += _numOfBoxes / 2;
 			
 			int timeLeft = (int) ((getStarterTime() - System.currentTimeMillis()) / 1000);
-			ExCubeGameChangePoints changePoints = new ExCubeGameChangePoints(timeLeft, getBluePoints(), getRedPoints());
+			ExBlockUpSetState changePoints = new ExBlockUpSetState(timeLeft, getBluePoints(), getRedPoints());
 			getHolder().broadCastPacketToTeam(changePoints);
 		}
 	}
@@ -724,7 +721,7 @@ public final class BlockCheckerEngine
 		 */
 		private void setPlayersBack()
 		{
-			final ExCubeGameEnd end = new ExCubeGameEnd(_isRedWinner);
+			final ExBlockUpSetState end = new ExBlockUpSetState(_isRedWinner);
 			
 			for (L2PcInstance player : _holder.getAllPlayers())
 			{

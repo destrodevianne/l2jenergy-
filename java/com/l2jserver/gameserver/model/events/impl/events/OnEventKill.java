@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -18,17 +18,45 @@
  */
 package com.l2jserver.gameserver.model.events.impl.events;
 
+import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.events.EventType;
 import com.l2jserver.gameserver.model.events.impl.IBaseEvent;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventTeam;
 
 /**
  * @author UnAfraid
  */
-public class OnTvTEventRegistrationStart implements IBaseEvent
+public class OnEventKill implements IBaseEvent
 {
+	private final L2PcInstance _killer;
+	private final L2PcInstance _victim;
+	private final GameEventTeam _killerTeam;
+	
+	public OnEventKill(L2PcInstance killer, L2PcInstance victim, GameEventTeam killerTeam)
+	{
+		_killer = killer;
+		_victim = victim;
+		_killerTeam = killerTeam;
+	}
+	
+	public L2PcInstance getKiller()
+	{
+		return _killer;
+	}
+	
+	public L2PcInstance getVictim()
+	{
+		return _victim;
+	}
+	
+	public GameEventTeam getKillerTeam()
+	{
+		return _killerTeam;
+	}
+	
 	@Override
 	public EventType getType()
 	{
-		return EventType.ON_TVT_EVENT_REGISTRATION_START;
+		return EventType.ON_EVENT_KILL;
 	}
 }

@@ -26,7 +26,7 @@ import com.l2jserver.gameserver.handler.CommunityBoardHandler;
 import com.l2jserver.gameserver.handler.IParseBoardHandler;
 import com.l2jserver.gameserver.instancemanager.AntiFeedManager;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.entity.TvTEvent;
+import com.l2jserver.gameserver.model.gameeventengine.TvT.TvTEvent;
 import com.l2jserver.gameserver.model.olympiad.OlympiadManager;
 
 /**
@@ -71,10 +71,16 @@ public class EventBoard implements IParseBoardHandler
 				activeChar.sendMessage("The event enabled.");
 			}
 			
+			if ((activeChar == null) || !TvTEvent.isParticipating())
+			{
+				return false;
+			}
+			
 			if (command.equalsIgnoreCase("_bbsevents:tvt_reg"))
 			{
 				if (TvTEvent.isParticipating())
 				{
+					
 					int playerLevel = activeChar.getLevel();
 					final int team1Count = TvTEvent.getTeamsPlayerCounts()[0];
 					final int team2Count = TvTEvent.getTeamsPlayerCounts()[1];

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -21,13 +21,9 @@ package com.l2jserver.gameserver.network.clientpackets;
 import com.l2jserver.gameserver.instancemanager.HandysBlockCheckerManager;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
-/**
- * Format: chdd d: Arena d: Team
- * @author mrTJO
- */
-public final class RequestExCubeGameChangeTeam extends L2GameClientPacket
+public class RequestExBlockGameEnter extends L2GameClientPacket
 {
-	private static final String _C__D0_5A_REQUESTEXCUBEGAMECHANGETEAM = "[C] D0:5A RequestExCubeGameChangeTeam";
+	private static final String _C__D0_5A_REQUESTEXBLOCKGAMEENTER = "[C] D0:5A RequestExBlockGameEnter";
 	
 	private int _arena;
 	private int _team;
@@ -35,7 +31,7 @@ public final class RequestExCubeGameChangeTeam extends L2GameClientPacket
 	@Override
 	protected void readImpl()
 	{
-		// client sends -1,0,1,2 for arena parameter
+		
 		_arena = readD() + 1;
 		_team = readD();
 	}
@@ -58,8 +54,7 @@ public final class RequestExCubeGameChangeTeam extends L2GameClientPacket
 				HandysBlockCheckerManager.getInstance().changePlayerToTeam(player, _arena, _team);
 				break;
 			case -1:
-			// Remove Player (me)
-			{
+				// Remove Player (me)
 				int team = HandysBlockCheckerManager.getInstance().getHolder(_arena).getPlayerTeam(player);
 				// client sends two times this packet if click on exit
 				// client did not send this packet on restart
@@ -68,7 +63,6 @@ public final class RequestExCubeGameChangeTeam extends L2GameClientPacket
 					HandysBlockCheckerManager.getInstance().removePlayer(player, _arena, team);
 				}
 				break;
-			}
 			default:
 				LOG.warn("Wrong Cube Game Team ID: {}", _team);
 				break;
@@ -78,6 +72,6 @@ public final class RequestExCubeGameChangeTeam extends L2GameClientPacket
 	@Override
 	public String getType()
 	{
-		return _C__D0_5A_REQUESTEXCUBEGAMECHANGETEAM;
+		return _C__D0_5A_REQUESTEXBLOCKGAMEENTER;
 	}
 }

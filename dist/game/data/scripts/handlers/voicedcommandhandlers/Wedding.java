@@ -40,7 +40,7 @@ import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.L2Event;
-import com.l2jserver.gameserver.model.entity.TvTEvent;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.skills.AbnormalVisualEffect;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.model.zone.ZoneId;
@@ -335,7 +335,7 @@ public class Wedding implements IVoicedCommandHandler
 		}
 		
 		// Thanks nbd
-		if (!TvTEvent.onEscapeUse(activeChar.getObjectId()))
+		if (!GameEventManager.onEscapeUse(activeChar.getObjectId()))
 		{
 			activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 			return false;
@@ -444,7 +444,7 @@ public class Wedding implements IVoicedCommandHandler
 			}
 		}
 		
-		if (!TvTEvent.onEscapeUse(partner.getObjectId()))
+		if (!GameEventManager.onEscapeUse(partner.getObjectId()))
 		{
 			activeChar.sendMessage("Your partner is in an event.");
 			return false;

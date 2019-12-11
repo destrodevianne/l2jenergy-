@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -16,40 +16,47 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.gameserver.network.serverpackets;
+package com.l2jserver.gameserver.model.gameeventengine;
 
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jserver.gameserver.model.interfaces.IEventListener;
 
-/**
- * @author mrTJO
- */
-public class ExCubeGameAddPlayer extends L2GameServerPacket
+public final class GameEventListener implements IEventListener
 {
-	L2PcInstance _player;
-	boolean _isRedTeam;
+	private final L2PcInstance _player;
 	
-	/**
-	 * Add Player To Minigame Waiting List
-	 * @param player Player Instance
-	 * @param isRedTeam Is Player from Red Team?
-	 */
-	public ExCubeGameAddPlayer(L2PcInstance player, boolean isRedTeam)
+	public GameEventListener(L2PcInstance player)
 	{
 		_player = player;
-		_isRedTeam = isRedTeam;
 	}
 	
 	@Override
-	protected void writeImpl()
+	public boolean isOnEvent()
 	{
-		writeC(0xfe);
-		writeH(0x97);
-		writeD(0x01);
-		
-		writeD(0xffffffff);
-		
-		writeD(_isRedTeam ? 0x01 : 0x00);
-		writeD(_player.getObjectId());
-		writeS(_player.getName());
+		return GameEventManager.isStarted() && GameEventManager.isPlayerParticipant(getPlayer().getObjectId());
+	}
+	
+	@Override
+	public boolean isBlockingExit()
+	{
+		return true;
+	}
+	
+	@Override
+	public boolean isBlockingDeathPenalty()
+	{
+		return true;
+	}
+	
+	@Override
+	public boolean canRevive()
+	{
+		return false;
+	}
+	
+	@Override
+	public L2PcInstance getPlayer()
+	{
+		return _player;
 	}
 }

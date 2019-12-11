@@ -56,7 +56,7 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.conditions.Condition;
 import com.l2jserver.gameserver.model.effects.AbstractEffect;
 import com.l2jserver.gameserver.model.effects.L2EffectType;
-import com.l2jserver.gameserver.model.entity.TvTEvent;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.holders.ItemHolder;
 import com.l2jserver.gameserver.model.interfaces.IIdentifiable;
 import com.l2jserver.gameserver.model.skills.targets.AffectScope;
@@ -1099,7 +1099,7 @@ public class Skill implements IIdentifiable
 					}
 				}
 				
-				if (!TvTEvent.checkForTvTSkill(player, targetPlayer, skill))
+				if (!GameEventManager.checkForEventSkill(player, targetPlayer, skill))
 				{
 					return false;
 				}

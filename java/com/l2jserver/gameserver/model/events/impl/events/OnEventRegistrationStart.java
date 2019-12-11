@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -16,32 +16,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.gameserver.network.serverpackets;
+package com.l2jserver.gameserver.model.events.impl.events;
+
+import com.l2jserver.gameserver.model.events.EventType;
+import com.l2jserver.gameserver.model.events.impl.IBaseEvent;
 
 /**
- * *
- * @author mrTJO
+ * @author UnAfraid
  */
-public class ExCubeGameEnd extends L2GameServerPacket
+public class OnEventRegistrationStart implements IBaseEvent
 {
-	boolean _isRedTeamWin;
-	
-	/**
-	 * Show Minigame Results
-	 * @param isRedTeamWin Is Red Team Winner?
-	 */
-	public ExCubeGameEnd(boolean isRedTeamWin)
-	{
-		_isRedTeamWin = isRedTeamWin;
-	}
-	
 	@Override
-	protected void writeImpl()
+	public EventType getType()
 	{
-		writeC(0xfe);
-		writeH(0x98);
-		writeD(0x01);
-		
-		writeD(_isRedTeamWin ? 0x01 : 0x00);
+		return EventType.ON_EVENT_REGISTRATION_START;
 	}
 }

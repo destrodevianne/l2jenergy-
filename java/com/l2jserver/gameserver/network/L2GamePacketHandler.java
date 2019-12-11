@@ -1061,13 +1061,13 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient>, 
 								// RequestExCleftEnter
 								break;
 							case 0x5a:
-								msg = new RequestExCubeGameChangeTeam();
+								msg = new RequestExBlockGameEnter();
 								break;
 							case 0x5b:
 								msg = new EndScenePlayer();
 								break;
 							case 0x5c:
-								msg = new RequestExCubeGameReadyAnswer();
+								msg = new RequestExBlockGameVote();
 								break;
 							case 0x63:
 								msg = new RequestSeedPhase();

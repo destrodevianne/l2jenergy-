@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.gameserver.model.entity;
+package com.l2jserver.gameserver.model.gameeventengine.TvT;
 
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
@@ -28,39 +28,19 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
 public class TvTEventTeleporter implements Runnable
 {
-	/** The instance of the player to teleport */
 	private L2PcInstance _playerInstance = null;
-	/** Coordinates of the spot to teleport to */
 	private int[] _coordinates = new int[3];
-	/** Admin removed this player from event */
 	private boolean _adminRemove = false;
 	
-	/**
-	 * Initialize the teleporter and start the delayed task.
-	 * @param playerInstance
-	 * @param coordinates
-	 * @param fastSchedule
-	 * @param adminRemove
-	 */
 	public TvTEventTeleporter(L2PcInstance playerInstance, int[] coordinates, boolean fastSchedule, boolean adminRemove)
 	{
 		_playerInstance = playerInstance;
 		_coordinates = coordinates;
 		_adminRemove = adminRemove;
-		
 		long delay = (TvTEvent.isStarted() ? Config.TVT_EVENT_RESPAWN_TELEPORT_DELAY : Config.TVT_EVENT_START_LEAVE_TELEPORT_DELAY) * 1000;
-		
 		ThreadPoolManager.getInstance().scheduleGeneral(this, fastSchedule ? 0 : delay);
 	}
 	
-	/**
-	 * The task method to teleport the player<br>
-	 * 1. Unsummon pet if there is one<br>
-	 * 2. Remove all effects<br>
-	 * 3. Revive and full heal the player<br>
-	 * 4. Teleport the player<br>
-	 * 5. Broadcast status and user info
-	 */
 	@Override
 	public void run()
 	{

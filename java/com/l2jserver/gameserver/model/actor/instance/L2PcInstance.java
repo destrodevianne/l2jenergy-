@@ -197,7 +197,6 @@ import com.l2jserver.gameserver.model.entity.L2Event;
 import com.l2jserver.gameserver.model.entity.NevitSystem;
 import com.l2jserver.gameserver.model.entity.RecoBonus;
 import com.l2jserver.gameserver.model.entity.Siege;
-import com.l2jserver.gameserver.model.entity.TvTEvent;
 import com.l2jserver.gameserver.model.events.Containers;
 import com.l2jserver.gameserver.model.events.EventDispatcher;
 import com.l2jserver.gameserver.model.events.impl.character.player.OnPlayerEquipItem;
@@ -218,6 +217,7 @@ import com.l2jserver.gameserver.model.events.impl.character.player.OnPlayerTrans
 import com.l2jserver.gameserver.model.events.returns.TerminateReturn;
 import com.l2jserver.gameserver.model.fishing.L2Fish;
 import com.l2jserver.gameserver.model.fishing.L2Fishing;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.holders.AdditionalSkillHolder;
 import com.l2jserver.gameserver.model.holders.ItemHolder;
 import com.l2jserver.gameserver.model.holders.PlayerEventHolder;
@@ -5241,7 +5241,7 @@ public class L2PcInstance extends L2Playable
 			{
 				EventDispatcher.getInstance().notifyEventAsync(new OnPlayerPvPKill(pk, this), this);
 				
-				TvTEvent.onKill(killer, this);
+				GameEventManager.onKill(killer, this);
 				
 				if (L2Event.isParticipant(pk))
 				{
@@ -9919,7 +9919,7 @@ public class L2PcInstance extends L2Playable
 			summon.updateAndBroadcastStatus(0);
 		}
 		
-		TvTEvent.onTeleported(this);
+		GameEventManager.onTeleported(this);
 	}
 	
 	@Override
@@ -10562,7 +10562,7 @@ public class L2PcInstance extends L2Playable
 		// TvT Event removal
 		try
 		{
-			TvTEvent.onLogout(this);
+			GameEventManager.onLogout(this);
 		}
 		catch (Exception e)
 		{
@@ -13471,7 +13471,7 @@ public class L2PcInstance extends L2Playable
 			return false;
 		}
 		
-		if (target.isFestivalParticipant() || target.isFlyingMounted() || target.isCombatFlagEquipped() || !TvTEvent.onEscapeUse(target.getObjectId()))
+		if (target.isFestivalParticipant() || target.isFlyingMounted() || target.isCombatFlagEquipped() || !GameEventManager.onEscapeUse(target.getObjectId()))
 		{
 			sendPacket(SystemMessageId.YOUR_TARGET_IS_IN_AN_AREA_WHICH_BLOCKS_SUMMONING);
 			return false;

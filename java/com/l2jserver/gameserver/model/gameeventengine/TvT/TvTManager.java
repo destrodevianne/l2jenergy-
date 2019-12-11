@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.gameserver.model.entity;
+package com.l2jserver.gameserver.model.gameeventengine.TvT;
 
 import java.util.Calendar;
 import java.util.concurrent.ScheduledFuture;
@@ -35,14 +35,8 @@ public class TvTManager
 {
 	protected static final Logger LOG = LoggerFactory.getLogger(TvTManager.class);
 	
-	/**
-	 * Task for event cycles<br>
-	 */
 	private TvTStartTask _task;
 	
-	/**
-	 * New instance only by getInstance()<br>
-	 */
 	protected TvTManager()
 	{
 		if (Config.TVT_EVENT_ENABLED)
@@ -50,27 +44,14 @@ public class TvTManager
 			TvTEvent.init();
 			
 			scheduleEventStart();
-			LOG.info("TvTEventEngine[TvTManager.TvTManager()]: Started.");
+			LOG.info("EventEngine[TvT Event]: Started.");
 		}
 		else
 		{
-			LOG.info("TvTEventEngine[TvTManager.TvTManager()]: Engine is disabled.");
+			LOG.info("EventEngine[TvT Event]: Engine is disabled.");
 		}
 	}
 	
-	/**
-	 * Initialize new/Returns the one and only instance<br>
-	 * <br>
-	 * @return TvTManager<br>
-	 */
-	public static TvTManager getInstance()
-	{
-		return SingletonHolder._instance;
-	}
-	
-	/**
-	 * Starts TvTStartTask
-	 */
 	public void scheduleEventStart()
 	{
 		try
@@ -105,7 +86,7 @@ public class TvTManager
 		}
 		catch (Exception e)
 		{
-			LOG.warn("TvTEventEngine[TvTManager.scheduleEventStart()]: Error figuring out a start time. Check TvTEventInterval in config file.");
+			LOG.warn("EventEngine[TvT Event]: Error figuring out a start time. Check TvTEventInterval in config file.");
 		}
 	}
 	
@@ -118,37 +99,30 @@ public class TvTManager
 		return _task.getStartTime();
 	}
 	
-	/**
-	 * Method to start participation
-	 */
 	public void startReg()
 	{
 		if (!TvTEvent.startParticipation())
 		{
 			Broadcast.toAllOnlinePlayers("TvT Event: Event was cancelled.", true);
-			LOG.warn("TvTEventEngine[TvTManager.run()]: Error spawning event npc for participation.");
+			LOG.warn("EventEngine[TvT Event]: Error spawning event npc for participation.");
 			
 			scheduleEventStart();
 		}
 		else
 		{
 			Broadcast.toAllOnlinePlayers("TvT Event: Registration opened for " + Config.TVT_EVENT_PARTICIPATION_TIME + " minute(s).", true);
-			
 			// schedule registration end
 			_task.setStartTime(System.currentTimeMillis() + (60000L * Config.TVT_EVENT_PARTICIPATION_TIME));
 			ThreadPoolManager.getInstance().executeGeneral(_task);
 		}
 	}
 	
-	/**
-	 * Method to start the fight
-	 */
 	public void startEvent()
 	{
 		if (!TvTEvent.startFight())
 		{
 			Broadcast.toAllOnlinePlayers("TvT Event: Event cancelled due to lack of Participation.", true);
-			LOG.info("TvTEventEngine[TvTManager.run()]: Lack of registration, abort event.");
+			LOG.info("EventEngine[TvT Event]: Lack of registration, abort event.");
 			
 			scheduleEventStart();
 		}
@@ -160,9 +134,6 @@ public class TvTManager
 		}
 	}
 	
-	/**
-	 * Method to end the event and reward
-	 */
 	public void endEvent()
 	{
 		Broadcast.toAllOnlinePlayers(TvTEvent.calculateRewards());
@@ -181,9 +152,6 @@ public class TvTManager
 		}
 	}
 	
-	/**
-	 * Class for TvT cycles
-	 */
 	class TvTStartTask implements Runnable
 	{
 		private long _startTime;
@@ -306,6 +274,11 @@ public class TvTManager
 				}
 			}
 		}
+	}
+	
+	public static TvTManager getInstance()
+	{
+		return SingletonHolder._instance;
 	}
 	
 	private static class SingletonHolder

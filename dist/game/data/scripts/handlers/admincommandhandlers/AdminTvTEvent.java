@@ -23,9 +23,9 @@ import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.entity.TvTEvent;
-import com.l2jserver.gameserver.model.entity.TvTEventTeleporter;
-import com.l2jserver.gameserver.model.entity.TvTManager;
+import com.l2jserver.gameserver.model.gameeventengine.TvT.TvTEventTeleporter;
+import com.l2jserver.gameserver.model.gameeventengine.TvT.TvTEvent;
+import com.l2jserver.gameserver.model.gameeventengine.TvT.TvTManager;
 
 /**
  * @author HorridoJoho

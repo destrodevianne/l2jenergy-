@@ -148,8 +148,8 @@ import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.PartyMatchRoomList;
 import com.l2jserver.gameserver.model.PartyMatchWaitingList;
 import com.l2jserver.gameserver.model.entity.Hero;
-import com.l2jserver.gameserver.model.entity.TvTManager;
 import com.l2jserver.gameserver.model.events.EventDispatcher;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.olympiad.Olympiad;
 import com.l2jserver.gameserver.network.L2GameClient;
 import com.l2jserver.gameserver.network.L2GamePacketHandler;
@@ -408,7 +408,7 @@ public final class GameServer
 		Runtime.getRuntime().addShutdownHook(Shutdown.getInstance());
 		
 		LOG.info("IdFactory: Free ObjectID's remaining: {}", IdFactory.getInstance().size());
-		TvTManager.getInstance();
+		GameEventManager.getEventsInstances();
 		KnownListUpdateTaskManager.getInstance();
 		
 		if ((OfflineConfig.OFFLINE_TRADE_ENABLE || OfflineConfig.OFFLINE_CRAFT_ENABLE) && OfflineConfig.RESTORE_OFFLINERS)

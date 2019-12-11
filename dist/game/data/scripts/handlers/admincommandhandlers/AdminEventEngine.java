@@ -31,12 +31,12 @@ import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.data.xml.impl.TransformData;
+import com.l2jserver.gameserver.enums.GameEventState;
 import com.l2jserver.gameserver.enums.audio.Music;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.L2Event;
-import com.l2jserver.gameserver.model.entity.L2Event.EventState;
 import com.l2jserver.gameserver.network.serverpackets.CharInfo;
 import com.l2jserver.gameserver.network.serverpackets.ExBrExtraUserInfo;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
@@ -94,7 +94,7 @@ public class AdminEventEngine implements IAdminCommandHandler
 		{
 			if (actualCommand.equals("admin_event"))
 			{
-				if (L2Event.eventState != EventState.OFF)
+				if (L2Event.eventState != GameEventState.INACTIVE)
 				{
 					showEventControl(activeChar);
 				}

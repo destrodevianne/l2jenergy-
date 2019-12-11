@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -16,27 +16,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.gameserver.network.serverpackets;
+package com.l2jserver.gameserver.model.events.impl.events;
+
+import com.l2jserver.gameserver.model.events.EventType;
+import com.l2jserver.gameserver.model.events.impl.IBaseEvent;
 
 /**
- * Format: (chd)
- * @author mrTJO
+ * @author UnAfraid
  */
-public class ExCubeGameRequestReady extends L2GameServerPacket
+public class OnEventFinish implements IBaseEvent
 {
-	/**
-	 * Show Confirm Dialog for 10 seconds
-	 */
-	public ExCubeGameRequestReady()
-	{
-		
-	}
-	
 	@Override
-	protected void writeImpl()
+	public EventType getType()
 	{
-		writeC(0xfe);
-		writeH(0x97);
-		writeD(0x04);
+		return EventType.ON_EVENT_FINISH;
 	}
 }

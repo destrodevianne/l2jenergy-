@@ -16,39 +16,38 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.gameserver.network.serverpackets;
+package com.l2jserver.gameserver.model.conditions;
 
+import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
+import com.l2jserver.gameserver.model.items.L2Item;
+import com.l2jserver.gameserver.model.skills.Skill;
 
 /**
- * @author mrTJO
+ * The Class ConditionPlayerEvent.
  */
-public class ExCubeGameRemovePlayer extends L2GameServerPacket
+public class ConditionPlayerEvent extends Condition
 {
-	L2PcInstance _player;
-	boolean _isRedTeam;
+	private final boolean _val;
 	
 	/**
-	 * Remove Player from Minigame Waiting List
-	 * @param player Player to Remove
-	 * @param isRedTeam Is Player from Red Team?
+	 * Instantiates a new condition player tv t event.
+	 * @param val the val
 	 */
-	public ExCubeGameRemovePlayer(L2PcInstance player, boolean isRedTeam)
+	public ConditionPlayerEvent(boolean val)
 	{
-		_player = player;
-		_isRedTeam = isRedTeam;
+		_val = val;
 	}
 	
 	@Override
-	protected void writeImpl()
+	public boolean testImpl(L2Character effector, L2Character effected, Skill skill, L2Item item)
 	{
-		writeC(0xfe);
-		writeH(0x97);
-		writeD(0x02);
-		
-		writeD(0xffffffff);
-		
-		writeD(_isRedTeam ? 0x01 : 0x00);
-		writeD(_player.getObjectId());
+		final L2PcInstance player = effector.getActingPlayer();
+		if ((player == null) || !GameEventManager.isStarted())
+		{
+			return !_val;
+		}
+		return (GameEventManager.isPlayerParticipant(player.getObjectId()) == _val);
 	}
 }

@@ -33,6 +33,7 @@ import com.l2jserver.gameserver.instancemanager.FortSiegeManager;
 import com.l2jserver.gameserver.model.PcCondOverride;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.effects.L2EffectType;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.itemcontainer.Inventory;
 import com.l2jserver.gameserver.model.items.L2EtcItem;
@@ -177,6 +178,12 @@ public final class UseItem extends L2GameClientPacket
 		{
 			// Don't allow to put formal wear while a cursed weapon is equipped.
 			if (activeChar.isCursedWeaponEquipped() && (_itemId == FORMAL_WEAR_ID))
+			{
+				return;
+			}
+			
+			// Equip or unEquip
+			if (!GameEventManager.onUseItem(activeChar))
 			{
 				return;
 			}

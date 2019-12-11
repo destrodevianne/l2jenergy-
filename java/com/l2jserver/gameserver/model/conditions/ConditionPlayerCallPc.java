@@ -20,7 +20,7 @@ package com.l2jserver.gameserver.model.conditions;
 
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.entity.TvTEvent;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.model.zone.ZoneId;
@@ -58,7 +58,7 @@ public class ConditionPlayerCallPc extends Condition
 		{
 			canCallPlayer = false;
 		}
-		else if (!TvTEvent.onEscapeUse(player.getObjectId()))
+		else if (!GameEventManager.onEscapeUse(player.getObjectId()))
 		{
 			player.sendPacket(SystemMessageId.YOUR_TARGET_IS_IN_AN_AREA_WHICH_BLOCKS_SUMMONING);
 			canCallPlayer = false;

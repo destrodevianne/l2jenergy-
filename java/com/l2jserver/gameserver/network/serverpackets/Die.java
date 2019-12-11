@@ -31,12 +31,13 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.Castle;
 import com.l2jserver.gameserver.model.entity.Fort;
 import com.l2jserver.gameserver.model.entity.clanhall.SiegableHall;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.olympiad.OlympiadManager;
 
 public class Die extends L2GameServerPacket
 {
 	private final int _charObjId;
-	private final boolean _canTeleport;
+	private boolean _canTeleport;
 	private final boolean _sweepable;
 	private L2AccessLevel _access = AdminData.getInstance().getAccessLevel(0);
 	private L2Clan _clan;
@@ -54,6 +55,10 @@ public class Die extends L2GameServerPacket
 			_access = player.getAccessLevel();
 			_clan = player.getClan();
 			_isJailed = player.isJailed();
+			if (GameEventManager.isStarted() && GameEventManager.isPlayerParticipant(_charObjId))
+			{
+				_canTeleport = false;
+			}
 		}
 		_canTeleport = cha.canRevive() && !cha.isPendingRevive();
 		_sweepable = cha.isSweepActive();

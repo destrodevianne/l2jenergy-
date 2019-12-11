@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -18,11 +18,28 @@
  */
 package com.l2jserver.gameserver.enums;
 
-/**
- * @author UnAfraid
- */
-public enum EventState
+public enum MessageType
 {
-	STARTED,
-	FINISHED,
+	CUSTOM(-1),
+	TEXT(0),
+	FINISH(1),
+	START(2),
+	GAME_OVER(3),
+	NUMBER_1(4),
+	NUMBER_2(5),
+	NUMBER_3(6),
+	NUMBER_4(7),
+	NUMBER_5(8);
+	
+	private final int _type;
+	
+	private MessageType(int type)
+	{
+		_type = type;
+	}
+	
+	public int getType()
+	{
+		return _type;
+	}
 }
