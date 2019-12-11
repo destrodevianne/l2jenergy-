@@ -34,7 +34,7 @@
      "ServerBypassTime" : "500",
  
      # Multisell - multisell list request flooding
-     "MultisellTime" : "100",
+     "MultiSellTime" : "100",
 
      # All kind of other transactions - to/from pet, private store, warehouse, destroy
      "TransactionTime" : "1000",
