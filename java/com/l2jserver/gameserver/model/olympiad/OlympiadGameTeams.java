@@ -30,8 +30,8 @@ import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.zone.type.L2OlympiadStadiumZone;
 import com.l2jserver.gameserver.network.SystemMessageId;
-import com.l2jserver.gameserver.network.serverpackets.ExOlympiadMatchResult;
 import com.l2jserver.gameserver.network.serverpackets.ExOlympiadUserInfo;
+import com.l2jserver.gameserver.network.serverpackets.ExReceiveOlympiad;
 import com.l2jserver.gameserver.network.serverpackets.L2GameServerPacket;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
@@ -559,7 +559,7 @@ public class OlympiadGameTeams extends AbstractOlympiadGame
 			return;
 		}
 		
-		ExOlympiadMatchResult result = null;
+		ExReceiveOlympiad result = null;
 		
 		boolean tie = false;
 		int winside = 0;
@@ -612,11 +612,11 @@ public class OlympiadGameTeams extends AbstractOlympiadGame
 				}
 				if (winside == 1)
 				{
-					result = new ExOlympiadMatchResult(tie, winside, list1, list2);
+					result = new ExReceiveOlympiad(tie, winside, list1, list2);
 				}
 				else
 				{
-					result = new ExOlympiadMatchResult(tie, winside, list2, list1);
+					result = new ExReceiveOlympiad(tie, winside, list2, list1);
 				}
 				stadium.broadcastPacket(result);
 			}
@@ -827,11 +827,11 @@ public class OlympiadGameTeams extends AbstractOlympiadGame
 			
 			if (winside == 1)
 			{
-				result = new ExOlympiadMatchResult(tie, winside, list1, list2);
+				result = new ExReceiveOlympiad(tie, winside, list1, list2);
 			}
 			else
 			{
-				result = new ExOlympiadMatchResult(tie, winside, list2, list1);
+				result = new ExReceiveOlympiad(tie, winside, list2, list1);
 			}
 			stadium.broadcastPacket(result);
 			return;
@@ -974,11 +974,11 @@ public class OlympiadGameTeams extends AbstractOlympiadGame
 			}
 			if (winside == 1)
 			{
-				result = new ExOlympiadMatchResult(tie, winside, list1, list2);
+				result = new ExReceiveOlympiad(tie, winside, list1, list2);
 			}
 			else
 			{
-				result = new ExOlympiadMatchResult(tie, winside, list2, list1);
+				result = new ExReceiveOlympiad(tie, winside, list2, list1);
 			}
 			stadium.broadcastPacket(result);
 		}

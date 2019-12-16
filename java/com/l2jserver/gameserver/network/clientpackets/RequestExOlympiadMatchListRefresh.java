@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.network.serverpackets.ExOlympiadMatchList;
+import com.l2jserver.gameserver.network.serverpackets.ExReceiveOlympiad;
 
 /**
  * Format: (ch)d d: unknown (always 0?)
@@ -44,7 +44,7 @@ public class RequestExOlympiadMatchListRefresh extends L2GameClientPacket
 			return;
 		}
 		
-		activeChar.sendPacket(new ExOlympiadMatchList());
+		activeChar.sendPacket(new ExReceiveOlympiad());
 	}
 	
 	@Override

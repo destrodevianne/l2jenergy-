@@ -29,7 +29,7 @@ import com.l2jserver.gameserver.model.olympiad.OlympiadGameManager;
 import com.l2jserver.gameserver.model.olympiad.OlympiadGameTask;
 import com.l2jserver.gameserver.model.olympiad.OlympiadManager;
 import com.l2jserver.gameserver.network.SystemMessageId;
-import com.l2jserver.gameserver.network.serverpackets.ExOlympiadMatchList;
+import com.l2jserver.gameserver.network.serverpackets.ExReceiveOlympiad;
 
 /**
  * @author DS
@@ -57,7 +57,7 @@ public class OlympiadObservation implements IBypassHandler
 					return false;
 				}
 				
-				activeChar.sendPacket(new ExOlympiadMatchList());
+				activeChar.sendPacket(new ExReceiveOlympiad());
 			}
 			else
 			{
