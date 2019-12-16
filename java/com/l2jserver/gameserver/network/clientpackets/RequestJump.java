@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2J Server
  * 
  * This file is part of L2J Server.
  * 
@@ -18,57 +18,42 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.instancemanager.HandysBlockCheckerManager;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
+import com.l2jserver.gameserver.network.serverpackets.ExJumpToLocation;
 
-/**
- * Format: chddd d: Arena d: Answer
- * @author mrTJO
- */
-public final class RequestExCubeGameReadyAnswer extends L2GameClientPacket
+public class RequestJump extends L2GameClientPacket
 {
-	private static final String _C__D0_5C_REQUESTEXCUBEGAMEREADYANSWER = "[C] D0:5C RequestExCubeGameReadyAnswer";
-	
-	private int _arena;
-	private int _answer;
+	private static final String _C__D0_53_REQUESTJUMP = "[C] D0:53 RequestJump";
 	
 	@Override
 	protected void readImpl()
 	{
-		// client sends -1,0,1,2 for arena parameter
-		_arena = readD() + 1;
-		// client sends 1 if clicked confirm on not clicked, 0 if clicked cancel
-		_answer = readD();
+		// trigger packet
 	}
 	
 	@Override
-	public void runImpl()
+	protected void runImpl()
 	{
-		L2PcInstance player = getClient().getActiveChar();
-		
+		L2PcInstance player = getActiveChar();
 		if (player == null)
 		{
 			return;
 		}
 		
-		switch (_answer)
+		if (player.tryJump())
 		{
-			case 0:
-				// Cancel - Answer No
-				break;
-			case 1:
-				// OK or Time Over
-				HandysBlockCheckerManager.getInstance().increaseArenaVotes(_arena);
-				break;
-			default:
-				LOG.warn("Unknown Cube Game Answer ID: {}", _answer);
-				break;
+			sendPacket(new ExJumpToLocation(player));
+		}
+		else
+		{
+			sendPacket(ActionFailed.STATIC_PACKET);
 		}
 	}
 	
 	@Override
 	public String getType()
 	{
-		return _C__D0_5C_REQUESTEXCUBEGAMEREADYANSWER;
+		return _C__D0_53_REQUESTJUMP;
 	}
 }

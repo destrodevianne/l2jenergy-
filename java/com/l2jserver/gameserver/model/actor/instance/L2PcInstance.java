@@ -13683,4 +13683,17 @@ public class L2PcInstance extends L2Playable
 			_userSession.put(key, val);
 		}
 	}
+	
+	private long _nextJumpTime;
+	
+	public boolean tryJump()
+	{
+		long time = System.currentTimeMillis();
+		if (_nextJumpTime < time)
+		{
+			_nextJumpTime = time + 3000;
+			return true;
+		}
+		return false;
+	}
 }

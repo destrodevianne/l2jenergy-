@@ -1040,7 +1040,7 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient>, 
 								msg = new RequestWithDrawPremiumItem();
 								break;
 							case 0x53:
-								// RequestJump
+								msg = new RequestJump();
 								break;
 							case 0x54:
 								// RequestStartShowCrataeCubeRank
