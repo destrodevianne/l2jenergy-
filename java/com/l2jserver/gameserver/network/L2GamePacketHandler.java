@@ -1187,10 +1187,10 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient>, 
 								// BrLectureMark
 								break;
 							case 0x91:
-								// RequestGoodsInventoryInfo
+								msg = new RequestGoodsInventoryInfo();
 								break;
 							case 0x92:
-								// RequestUseGoodsInventoryItem
+								msg = new RequestUseGoodsInventoryItem();
 								break;
 							default:
 								printDebugDoubleOpcode(opcode, id2, buf, state, client);
