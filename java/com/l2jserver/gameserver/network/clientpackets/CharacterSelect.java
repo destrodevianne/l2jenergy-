@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2jEnergy Server
  * 
- * This file is part of L2J Server.
+ * This file is part of L2jEnergy Server.
  * 
- * L2J Server is free software: you can redistribute it and/or modify
+ * L2jEnergy Server is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * L2J Server is distributed in the hope that it will be useful,
+ * L2jEnergy Server is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
@@ -45,10 +45,6 @@ import com.l2jserver.gameserver.util.FloodProtectors;
 import com.l2jserver.gameserver.util.FloodProtectors.Action;
 import com.l2jserver.gameserver.util.LoggingUtils;
 
-/**
- * This class ...
- * @version $Revision: 1.5.2.1.2.5 $ $Date: 2005/03/27 15:29:30 $
- */
 public class CharacterSelect extends L2GameClientPacket
 {
 	private static final String _C__12_CHARACTERSELECT = "[C] 12 CharacterSelect";
@@ -157,7 +153,7 @@ public class CharacterSelect extends L2GameClientPacket
 						return;
 					}
 					
-					sendPacket(new SSQInfo());
+					sendPacket(SSQInfo.sendSky());
 					
 					client.setState(GameClientState.ENTERING);
 					CharSelected cs = new CharSelected(cha, client.getSessionId().playOkID1);

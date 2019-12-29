@@ -711,15 +711,23 @@ public class AdminEffects implements IAdminCommandHandler
 	{
 		L2GameServerPacket packet = null;
 		
-		if (type.equals("signsky"))
+		if (type.equals("ssqinfo"))
 		{
 			if (state.equals("dawn"))
 			{
-				packet = new SSQInfo(2);
+				packet = SSQInfo.DAWN_SKY_PACKET;
 			}
 			else if (state.equals("dusk"))
 			{
-				packet = new SSQInfo(1);
+				packet = SSQInfo.DUSK_SKY_PACKET;
+			}
+			else if (state.equals("red"))
+			{
+				packet = SSQInfo.RED_SKY_PACKET;
+			}
+			else if (state.equals("regular"))
+			{
+				packet = SSQInfo.REGULAR_SKY_PACKET;
 			}
 		}
 		else if (type.equals("sky"))

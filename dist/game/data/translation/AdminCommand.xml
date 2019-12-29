@@ -727,7 +727,7 @@
 		<set lang="ru" val="Применение: //earthquake [интенсивность] [продолжительность]" />
 	</message>
 	<message id="admin_usage_atmosphere">
-	    <set lang="en" val="Usage: //atmosphere [signsky dawn|dusk]|[sky day|night|red] [duration]" />
+	    <set lang="en" val="Usage: //atmosphere [ssqinfo dawn|dusk|red|regular]|[sky day|night|red] [duration]" />
 		<set lang="ru" val="Применение: //atmosphere [знак неба рассвет|сумерки]|[необо день|ночь|красное] [продолжительность]" />
 	</message>
 	<message id="admin_usage_play_sounds_pagenumber">

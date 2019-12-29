@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2jEnergy Server
  * 
- * This file is part of L2J Server.
+ * This file is part of L2jEnergy Server.
  * 
- * L2J Server is free software: you can redistribute it and/or modify
+ * L2jEnergy Server is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * L2J Server is distributed in the hope that it will be useful,
+ * L2jEnergy Server is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
@@ -20,32 +20,34 @@ package com.l2jserver.gameserver.network.serverpackets;
 
 import com.l2jserver.gameserver.SevenSigns;
 
-/**
- * Changes the sky color depending on the outcome of the Seven Signs competition.
- * @author Tempy
- */
 public class SSQInfo extends L2GameServerPacket
 {
-	private int _state = 0;
+	public static final SSQInfo REGULAR_SKY_PACKET = new SSQInfo(256);
+	public static final SSQInfo DUSK_SKY_PACKET = new SSQInfo(257);
+	public static final SSQInfo DAWN_SKY_PACKET = new SSQInfo(258);
+	public static final SSQInfo RED_SKY_PACKET = new SSQInfo(259);
 	
-	public SSQInfo()
+	private final int _state;
+	
+	public static SSQInfo sendSky()
 	{
-		int compWinner = SevenSigns.getInstance().getCabalHighestScore();
-		
 		if (SevenSigns.getInstance().isSealValidationPeriod())
 		{
+			final int compWinner = SevenSigns.getInstance().getCabalHighestScore();
 			if (compWinner == SevenSigns.CABAL_DAWN)
 			{
-				_state = 2;
+				return DAWN_SKY_PACKET;
 			}
-			else if (compWinner == SevenSigns.CABAL_DUSK)
+			
+			if (compWinner == SevenSigns.CABAL_DUSK)
 			{
-				_state = 1;
+				return DUSK_SKY_PACKET;
 			}
 		}
+		return REGULAR_SKY_PACKET;
 	}
 	
-	public SSQInfo(int state)
+	private SSQInfo(int state)
 	{
 		_state = state;
 	}
@@ -54,6 +56,6 @@ public class SSQInfo extends L2GameServerPacket
 	protected final void writeImpl()
 	{
 		writeC(0x73);
-		writeH(256 + _state);
+		writeH(_state);
 	}
 }

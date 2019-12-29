@@ -32,6 +32,11 @@ import com.l2jserver.gameserver.util.Util;
  */
 public final class AdminManor implements IAdminCommandHandler
 {
+	private static final String[] ADMIN_COMMANDS =
+	{
+		"admin_manor"
+	};
+	
 	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
@@ -59,9 +64,6 @@ public final class AdminManor implements IAdminCommandHandler
 	@Override
 	public String[] getAdminCommandList()
 	{
-		return new String[]
-		{
-			"admin_manor"
-		};
+		return ADMIN_COMMANDS;
 	}
 }

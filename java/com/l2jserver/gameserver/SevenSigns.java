@@ -1536,9 +1536,7 @@ public class SevenSigns
 			
 			teleLosingCabalFromDungeons(getCabalShortName(getCabalHighestScore()));
 			
-			SSQInfo ss = new SSQInfo();
-			
-			Broadcast.toAllOnlinePlayers(ss);
+			Broadcast.toAllOnlinePlayers(SSQInfo.sendSky());
 			spawnSevenSignsNPC();
 			
 			LOG.info("SevenSigns: The {} period has begun!", getCurrentPeriodName());

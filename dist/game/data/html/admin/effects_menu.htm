@@ -65,15 +65,21 @@
         <button action="" value="World Based" width=270 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF">
         <table width=270 border=0 bgcolor="444444">
             <tr>
+                <td><button value="SSQ Norm" action="bypass -h admin_atmosphere_menu ssqinfo regular" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+			    <td><button value="SSQ Dawn" action="bypass -h admin_atmosphere_menu ssqinfo dawn" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+			    <td><button value="SSQ Dusk" action="bypass -h admin_atmosphere_menu ssqinfo dusk" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+			    <td><button value="SSQ Red" action="bypass -h admin_atmosphere_menu ssqinfo red" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+		    </tr>
+            <tr>
                 <td><button value="DaySky" action="bypass -h admin_atmosphere_menu sky day 0" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+                <td><button value="RedSky" action="bypass -h admin_atmosphere_menu sky red $qbox" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
                 <td><button value="NightSky" action="bypass -h admin_atmosphere_menu sky night 0" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
-                <td><button value="DawnSky" action="bypass -h admin_atmosphere_menu signsky dawn 0" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
-                <td><button value="DuskSky" action="bypass -h admin_atmosphere_menu signsky dusk 0" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+                <td><button value="E.Quake" action="bypass -h admin_earthquake_menu $qbox" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
             </tr>
 			<tr>
-                <td><button value="RedSky" action="bypass -h admin_atmosphere_menu sky red $qbox" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
-                <td><button value="E.Quake" action="bypass -h admin_earthquake_menu $qbox" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
                 <td><button value="Sounds" action="bypass -h admin_play_sounds" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+                <td></td>
+                <td></td>
                 <td><button value="MobGroup" action="bypass -h admin_mobmenu" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
             </tr>
 		</table>
