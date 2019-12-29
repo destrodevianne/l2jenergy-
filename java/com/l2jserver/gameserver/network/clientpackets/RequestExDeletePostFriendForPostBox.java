@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2jEnergy Server
  * 
- * This file is part of L2J Server.
+ * This file is part of L2jEnergy Server.
  * 
- * L2J Server is free software: you can redistribute it and/or modify
+ * L2jEnergy Server is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * L2J Server is distributed in the hope that it will be useful,
+ * L2jEnergy Server is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
@@ -19,16 +19,19 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.network.serverpackets.ExConfirmAddingContact;
+import com.l2jserver.gameserver.network.SystemMessageId;
+import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
 /**
  * Format: (ch)S S: Character Name
  * @author UnAfraid & mrTJO
  */
-public class RequestExAddContactToContactList extends L2GameClientPacket
+public class RequestExDeletePostFriendForPostBox extends L2GameClientPacket
 {
-	private static final String _C__D0_84_REQUESTEXADDCONTACTTOCONTACTLIST = "[C] D0:84 RequestExAddContactToContactList";
+	private static final String _C__D0_85_REQUESTEXDELETEPOSTFRIENDFORPOSTBOX = "[C] D0:85 RequestExDeletePostFriendForPostBox";
+	
 	private String _name;
 	
 	@Override
@@ -56,13 +59,15 @@ public class RequestExAddContactToContactList extends L2GameClientPacket
 			return;
 		}
 		
-		boolean charAdded = activeChar.getContactList().add(_name);
-		activeChar.sendPacket(new ExConfirmAddingContact(_name, charAdded));
+		DAOFactory.getInstance().getPlayerPostFriendDAO().remove(activeChar, _name);
+		SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.S1_WAS_SUCCESSFULLY_DELETED_FROM_YOUR_CONTACT_LIST);
+		sm.addString(_name);
+		activeChar.sendPacket(sm);
 	}
 	
 	@Override
 	public String getType()
 	{
-		return _C__D0_84_REQUESTEXADDCONTACTTOCONTACTLIST;
+		return _C__D0_85_REQUESTEXDELETEPOSTFRIENDFORPOSTBOX;
 	}
 }

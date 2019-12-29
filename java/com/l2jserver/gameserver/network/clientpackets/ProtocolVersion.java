@@ -22,7 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
-import com.l2jserver.gameserver.network.serverpackets.KeyPacket;
+import com.l2jserver.gameserver.network.serverpackets.VersionCheck;
 import com.l2jserver.gameserver.network.serverpackets.L2GameServerPacket;
 import com.l2jserver.gameserver.network.serverpackets.SendStatus;
 import com.l2jserver.gameserver.util.LoggingUtils;
@@ -66,13 +66,13 @@ public final class ProtocolVersion extends L2GameClientPacket
 				getClient()
 			});
 			
-			KeyPacket pk = new KeyPacket(getClient().enableCrypt(), 0);
+			VersionCheck pk = new VersionCheck(getClient().enableCrypt(), 0);
 			getClient().setProtocolOk(false);
 			getClient().close(pk);
 		}
 		else
 		{
-			KeyPacket pk = new KeyPacket(getClient().enableCrypt(), 1);
+			VersionCheck pk = new VersionCheck(getClient().enableCrypt(), 1);
 			getClient().sendPacket(pk);
 			getClient().setProtocolOk(true);
 		}

@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2jEnergy Server
  * 
- * This file is part of L2J Server.
+ * This file is part of L2jEnergy Server.
  * 
- * L2J Server is free software: you can redistribute it and/or modify
+ * L2jEnergy Server is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * L2J Server is distributed in the hope that it will be useful,
+ * L2jEnergy Server is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
@@ -19,25 +19,22 @@
 package com.l2jserver.gameserver.network.serverpackets;
 
 /**
- * @author mrTJO & UnAfraid
+ * @author mochitto
  */
-public class ExConfirmAddingContact extends L2GameServerPacket
+public class ExNavitAdventPointInfo extends L2GameServerPacket
 {
-	private final String _charName;
-	private final boolean _added;
+	private final int _points;
 	
-	public ExConfirmAddingContact(String charName, boolean added)
+	public ExNavitAdventPointInfo(int points)
 	{
-		_charName = charName;
-		_added = added;
+		_points = points;
 	}
 	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xFE);
-		writeH(0xD2);
-		writeS(_charName);
-		writeD(_added ? 0x01 : 0x00);
+		writeH(0xDF);
+		writeD(_points); // 72 = 1%, max 7200 = 100%
 	}
 }

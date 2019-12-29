@@ -15086,43 +15086,43 @@ public final class SystemMessageId
 	 * ID: 3214<br>
 	 * Message: $s1 was successfully added to your Contact List.
 	 */
-	public static final SystemMessageId S1_SUCCESSFULLY_ADDED_TO_CONTACT_LIST = new SystemMessageId(3214);
+	public static final SystemMessageId S1_WAS_SUCCESSFULLY_ADDED_TO_YOUR_CONTACT_LIST = new SystemMessageId(3214);
 	
 	/**
 	 * ID: 3215<br>
 	 * Message: The name $s1% doesn't exist. Please try another name.
 	 */
-	public static final SystemMessageId NAME_S1_NOT_EXIST_TRY_ANOTHER_NAME = new SystemMessageId(3215);
+	public static final SystemMessageId THE_NAME_S1_NOT_EXIST_TRY_ANOTHER_NAME = new SystemMessageId(3215);
 	
 	/**
 	 * ID: 3216<br>
 	 * Message: The name already exists on the added list.
 	 */
-	public static final SystemMessageId NAME_ALREADY_EXIST_ON_CONTACT_LIST = new SystemMessageId(3216);
+	public static final SystemMessageId THE_NAME_ALREADY_EXISTS_ON_THE_ADDED_LIST = new SystemMessageId(3216);
 	
 	/**
 	 * ID: 3217<br>
 	 * Message: The name is not currently registered.
 	 */
-	public static final SystemMessageId NAME_NOT_REGISTERED_ON_CONTACT_LIST = new SystemMessageId(3217);
+	public static final SystemMessageId THE_NAME_IS_NOT_CURRENTLY_REGISTERED = new SystemMessageId(3217);
 	
 	/**
 	 * ID: 3219<br>
 	 * Message: $s1 was successfully deleted from your Contact List.
 	 */
-	public static final SystemMessageId S1_SUCCESFULLY_DELETED_FROM_CONTACT_LIST = new SystemMessageId(3219);
+	public static final SystemMessageId S1_WAS_SUCCESSFULLY_DELETED_FROM_YOUR_CONTACT_LIST = new SystemMessageId(3219);
 	
 	/**
 	 * ID: 3221<br>
 	 * Message: You cannot add your own name.
 	 */
-	public static final SystemMessageId CANNOT_ADD_YOUR_NAME_ON_CONTACT_LIST = new SystemMessageId(3221);
+	public static final SystemMessageId YOU_CANNOT_ADD_YOUR_OWN_NAME = new SystemMessageId(3221);
 	
 	/**
 	 * ID: 3222<br>
 	 * Message: The maximum number of names (100) has been reached. You cannot register any more.
 	 */
-	public static final SystemMessageId CONTACT_LIST_LIMIT_REACHED = new SystemMessageId(3222);
+	public static final SystemMessageId THE_MAXIMUM_NUMBER_OF_NAMES_100_HAS_BEEN_REACHED = new SystemMessageId(3222);
 	
 	/**
 	 * ID: 3224<br>

@@ -32,9 +32,9 @@ import com.l2jserver.gameserver.model.events.listeners.ConsumerEventListener;
 import com.l2jserver.gameserver.model.interfaces.IUniqueId;
 import com.l2jserver.gameserver.model.skills.AbnormalVisualEffect;
 import com.l2jserver.gameserver.network.SystemMessageId;
-import com.l2jserver.gameserver.network.serverpackets.ExNevitAdventEffect;
-import com.l2jserver.gameserver.network.serverpackets.ExNevitAdventPointInfoPacket;
-import com.l2jserver.gameserver.network.serverpackets.ExNevitAdventTimeChange;
+import com.l2jserver.gameserver.network.serverpackets.ExNavitAdventEffect;
+import com.l2jserver.gameserver.network.serverpackets.ExNavitAdventPointInfo;
+import com.l2jserver.gameserver.network.serverpackets.ExNavitAdventTimeChange;
 
 /**
  * @author Janiko, IrLex
@@ -76,8 +76,8 @@ public class NevitSystem implements IUniqueId
 		}
 		
 		// Send Packets
-		_player.sendPacket(new ExNevitAdventPointInfoPacket(getAdventPoints()));
-		_player.sendPacket(new ExNevitAdventTimeChange(getAdventTime(), true));
+		_player.sendPacket(new ExNavitAdventPointInfo(getAdventPoints()));
+		_player.sendPacket(new ExNavitAdventTimeChange(getAdventTime(), true));
 		
 		startNevitEffect(_player.getVariables().getInt("nevit_b", 0));
 		
@@ -134,7 +134,7 @@ public class NevitSystem implements IUniqueId
 				break;
 			}
 		}
-		getPlayer().sendPacket(new ExNevitAdventPointInfoPacket(getAdventPoints()));
+		getPlayer().sendPacket(new ExNavitAdventPointInfo(getAdventPoints()));
 	}
 	
 	public void startAdventTask()
@@ -142,7 +142,7 @@ public class NevitSystem implements IUniqueId
 		if ((_adventTask == null) && (getAdventTime() < ADVENT_TIME))
 		{
 			_adventTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new AdventTask(), REFRESH_RATE * 1000, REFRESH_RATE * 1000);
-			getPlayer().sendPacket(new ExNevitAdventTimeChange(getAdventTime(), false));
+			getPlayer().sendPacket(new ExNavitAdventTimeChange(getAdventTime(), false));
 		}
 	}
 	
@@ -162,7 +162,7 @@ public class NevitSystem implements IUniqueId
 			addPoints(REFRESH_POINTS);
 			if ((getAdventTime() % 60) == 0)
 			{
-				getPlayer().sendPacket(new ExNevitAdventTimeChange(getAdventTime(), false));
+				getPlayer().sendPacket(new ExNavitAdventTimeChange(getAdventTime(), false));
 			}
 		}
 	}
@@ -177,7 +177,7 @@ public class NevitSystem implements IUniqueId
 		
 		if (sendPacket)
 		{
-			getPlayer().sendPacket(new ExNevitAdventTimeChange(getAdventTime(), true));
+			getPlayer().sendPacket(new ExNavitAdventTimeChange(getAdventTime(), true));
 		}
 	}
 	
@@ -192,7 +192,7 @@ public class NevitSystem implements IUniqueId
 		if ((getAdventTime() < ADVENT_TIME) && (time > 0))
 		{
 			getPlayer().getVariables().set("nevit_b", time);
-			getPlayer().sendPacket(new ExNevitAdventEffect(time));
+			getPlayer().sendPacket(new ExNavitAdventEffect(time));
 			getPlayer().sendPacket(SystemMessageId.THE_ANGEL_NEVIT_HAS_BLESSED_YOU_FROM_ABOVE);
 			getPlayer().startAbnormalVisualEffect(true, AbnormalVisualEffect.NEVIT_ADVENT);
 			_nevitEffectTask = ThreadPoolManager.getInstance().scheduleGeneral(new NevitEffectEnd(), time * 1000L);
@@ -205,8 +205,8 @@ public class NevitSystem implements IUniqueId
 		public void run()
 		{
 			getPlayer().getVariables().remove("nevit_b");
-			getPlayer().sendPacket(new ExNevitAdventEffect(0));
-			getPlayer().sendPacket(new ExNevitAdventPointInfoPacket(getAdventPoints()));
+			getPlayer().sendPacket(new ExNavitAdventEffect(0));
+			getPlayer().sendPacket(new ExNavitAdventPointInfo(getAdventPoints()));
 			getPlayer().sendPacket(SystemMessageId.NEVITS_ADVENT_BLESSING_HAS_ENDED);
 			getPlayer().stopAbnormalVisualEffect(true, AbnormalVisualEffect.NEVIT_ADVENT);
 			stopNevitEffectTask(false);

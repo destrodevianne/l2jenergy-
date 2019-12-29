@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.L2GameClient;
-import com.l2jserver.gameserver.network.serverpackets.LeaveWorld;
+import com.l2jserver.gameserver.network.serverpackets.LogOutOk;
 
 /**
  * Task dedicated to verify client's game guard.
@@ -51,7 +51,7 @@ public class GameGuardCheckTask implements Runnable
 				AdminData.getInstance().broadcastMessageToGMs("Client " + client + " failed to reply GameGuard query and is being kicked!");
 				_log.info("Client " + client + " failed to reply GameGuard query and is being kicked!");
 				
-				client.close(LeaveWorld.STATIC_PACKET);
+				client.close(LogOutOk.STATIC_PACKET);
 			}
 		}
 	}

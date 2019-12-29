@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2jEnergy Server
  * 
- * This file is part of L2J Server.
+ * This file is part of L2jEnergy Server.
  * 
- * L2J Server is free software: you can redistribute it and/or modify
+ * L2jEnergy Server is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * L2J Server is distributed in the hope that it will be useful,
+ * L2jEnergy Server is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
@@ -20,15 +20,14 @@ package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.network.serverpackets.ExShowContactList;
+import com.l2jserver.gameserver.network.serverpackets.FriendList;
 
 /**
- * Format: (ch)
  * @author mrTJO & UnAfraid
  */
-public final class RequestExShowContactList extends L2GameClientPacket
+public final class RequestExFriendListForPostBox extends L2GameClientPacket
 {
-	private static final String _C__D0_86_REQUESTEXSHOWCONTACTLIST = "[C] D0:86 RequestExShowContactList";
+	private static final String _C__D0_87_REQUESTEXFRIENDLISTFORPOSTBOX = "[C] D0:87 RequestExFriendListForPostBox";
 	
 	@Override
 	protected void readImpl()
@@ -50,12 +49,12 @@ public final class RequestExShowContactList extends L2GameClientPacket
 			return;
 		}
 		
-		activeChar.sendPacket(new ExShowContactList(activeChar));
+		activeChar.sendPacket(new FriendList(activeChar));
 	}
 	
 	@Override
 	public String getType()
 	{
-		return _C__D0_86_REQUESTEXSHOWCONTACTLIST;
+		return _C__D0_87_REQUESTEXFRIENDLISTFORPOSTBOX;
 	}
 }

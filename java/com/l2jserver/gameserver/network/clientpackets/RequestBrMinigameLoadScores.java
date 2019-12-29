@@ -20,7 +20,7 @@ package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.network.serverpackets.ExBrMiniGameLoadScores;
+import com.l2jserver.gameserver.network.serverpackets.ExBR_MinigameLoadScores;
 
 public class RequestBrMinigameLoadScores extends L2GameClientPacket
 {
@@ -39,7 +39,7 @@ public class RequestBrMinigameLoadScores extends L2GameClientPacket
 		{
 			return;
 		}
-		player.sendPacket(new ExBrMiniGameLoadScores(player));
+		player.sendPacket(new ExBR_MinigameLoadScores(player));
 	}
 	
 	@Override

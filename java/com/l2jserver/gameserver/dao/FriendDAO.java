@@ -18,6 +18,8 @@
  */
 package com.l2jserver.gameserver.dao;
 
+import java.util.List;
+
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
 /**
@@ -27,4 +29,10 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 public interface FriendDAO
 {
 	void load(L2PcInstance player);
+	
+	List<Integer> loadList(int objectId);
+	
+	void removeFromDB(L2PcInstance player, int targetId);
+	
+	void persistInDB(L2PcInstance player, int targetId);
 }

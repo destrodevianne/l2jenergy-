@@ -60,6 +60,7 @@ import com.l2jserver.gameserver.model.events.impl.character.player.clan.OnPlayer
 import com.l2jserver.gameserver.model.events.impl.character.player.clan.OnPlayerClanLeaderChange;
 import com.l2jserver.gameserver.model.events.impl.character.player.clan.OnPlayerClanLeft;
 import com.l2jserver.gameserver.model.events.impl.character.player.clan.OnPlayerClanLvlUp;
+import com.l2jserver.gameserver.model.friend.BlockList;
 import com.l2jserver.gameserver.model.interfaces.IIdentifiable;
 import com.l2jserver.gameserver.model.interfaces.INamable;
 import com.l2jserver.gameserver.model.itemcontainer.ClanWarehouse;

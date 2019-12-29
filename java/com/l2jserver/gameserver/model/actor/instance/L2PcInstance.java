@@ -36,6 +36,7 @@ import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -118,12 +119,10 @@ import com.l2jserver.gameserver.instancemanager.SiegeManager;
 import com.l2jserver.gameserver.instancemanager.TerritoryWarManager;
 import com.l2jserver.gameserver.instancemanager.ZoneManager;
 import com.l2jserver.gameserver.model.ArenaParticipantsHolder;
-import com.l2jserver.gameserver.model.BlockList;
 import com.l2jserver.gameserver.model.ClanPrivilege;
 import com.l2jserver.gameserver.model.L2AccessLevel;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2ClanMember;
-import com.l2jserver.gameserver.model.L2ContactList;
 import com.l2jserver.gameserver.model.L2EnchantSkillLearn;
 import com.l2jserver.gameserver.model.L2ManufactureItem;
 import com.l2jserver.gameserver.model.L2Object;
@@ -217,6 +216,7 @@ import com.l2jserver.gameserver.model.events.impl.character.player.OnPlayerTrans
 import com.l2jserver.gameserver.model.events.returns.TerminateReturn;
 import com.l2jserver.gameserver.model.fishing.L2Fish;
 import com.l2jserver.gameserver.model.fishing.L2Fishing;
+import com.l2jserver.gameserver.model.friend.BlockList;
 import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.holders.AdditionalSkillHolder;
 import com.l2jserver.gameserver.model.holders.ItemHolder;
@@ -275,8 +275,8 @@ import com.l2jserver.gameserver.network.serverpackets.ConfirmDlg;
 import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
 import com.l2jserver.gameserver.network.serverpackets.EtcStatusUpdate;
 import com.l2jserver.gameserver.network.serverpackets.ExAutoSoulShot;
+import com.l2jserver.gameserver.network.serverpackets.ExBR_PremiumState;
 import com.l2jserver.gameserver.network.serverpackets.ExBrExtraUserInfo;
-import com.l2jserver.gameserver.network.serverpackets.ExBrPremiumState;
 import com.l2jserver.gameserver.network.serverpackets.ExDominionWarStart;
 import com.l2jserver.gameserver.network.serverpackets.ExDuelUpdateUserInfo;
 import com.l2jserver.gameserver.network.serverpackets.ExFishingEnd;
@@ -290,14 +290,14 @@ import com.l2jserver.gameserver.network.serverpackets.ExSetCompassZoneCode;
 import com.l2jserver.gameserver.network.serverpackets.ExStartScenePlayer;
 import com.l2jserver.gameserver.network.serverpackets.ExStorageMaxCount;
 import com.l2jserver.gameserver.network.serverpackets.ExVoteSystemInfo;
-import com.l2jserver.gameserver.network.serverpackets.FriendStatusPacket;
 import com.l2jserver.gameserver.network.serverpackets.GameGuardQuery;
 import com.l2jserver.gameserver.network.serverpackets.GetOnVehicle;
 import com.l2jserver.gameserver.network.serverpackets.HennaInfo;
 import com.l2jserver.gameserver.network.serverpackets.InventoryUpdate;
 import com.l2jserver.gameserver.network.serverpackets.ItemList;
+import com.l2jserver.gameserver.network.serverpackets.L2FriendStatus;
 import com.l2jserver.gameserver.network.serverpackets.L2GameServerPacket;
-import com.l2jserver.gameserver.network.serverpackets.LeaveWorld;
+import com.l2jserver.gameserver.network.serverpackets.LogOutOk;
 import com.l2jserver.gameserver.network.serverpackets.MagicSkillUse;
 import com.l2jserver.gameserver.network.serverpackets.MyTargetSelected;
 import com.l2jserver.gameserver.network.serverpackets.NicknameChanged;
@@ -355,7 +355,7 @@ public class L2PcInstance extends L2Playable
 	private final String _accountName;
 	private final ReentrantLock _subclassLock = new ReentrantLock();
 	private final PcAppearance _appearance;
-	private final L2ContactList _contactList = new L2ContactList(this);
+	private final List<String> _postFriends = new CopyOnWriteArrayList<>();
 	private final Map<Integer, TeleportBookmark> _tpbookmarks = new ConcurrentHashMap<>();
 	/** The table containing all L2RecipeList of the L2PcInstance */
 	private final Map<Integer, L2RecipeList> _dwarvenRecipeBook = new ConcurrentHashMap<>();
@@ -829,6 +829,8 @@ public class L2PcInstance extends L2Playable
 			player.refreshExpertisePenalty();
 			
 			DAOFactory.getInstance().getFriendDAO().load(player);
+			
+			DAOFactory.getInstance().getPlayerPostFriendDAO().select(player);
 			
 			if (Config.STORE_UI_SETTINGS)
 			{
@@ -4101,7 +4103,7 @@ public class L2PcInstance extends L2Playable
 				{
 					if (closeClient)
 					{
-						client.close(LeaveWorld.STATIC_PACKET);
+						client.close(LogOutOk.STATIC_PACKET);
 					}
 					else
 					{
@@ -12387,7 +12389,7 @@ public class L2PcInstance extends L2Playable
 	{
 		if (hasFriends())
 		{
-			final FriendStatusPacket pkt = new FriendStatusPacket(getObjectId());
+			final L2FriendStatus pkt = new L2FriendStatus(getObjectId());
 			for (int id : _friends)
 			{
 				final L2PcInstance friend = L2World.getInstance().getPlayer(id);
@@ -13022,9 +13024,9 @@ public class L2PcInstance extends L2Playable
 		_lastPetitionGmName = gmName;
 	}
 	
-	public L2ContactList getContactList()
+	public List<String> getPostFriends()
 	{
-		return _contactList;
+		return _postFriends;
 	}
 	
 	public void setEventStatus()
@@ -13582,7 +13584,7 @@ public class L2PcInstance extends L2Playable
 	public void setPremium(boolean isPremium)
 	{
 		getAccountVariables().set(AccountVariables.PREMIUM_ACCOUNT, isPremium);
-		sendPacket(new ExBrPremiumState(this));
+		sendPacket(new ExBR_PremiumState(this));
 	}
 	
 	public long getPrimePoints()

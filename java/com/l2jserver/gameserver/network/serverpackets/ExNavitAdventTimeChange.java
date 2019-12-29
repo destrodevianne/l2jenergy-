@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2jEnergy Server
  * 
- * This file is part of L2J Server.
+ * This file is part of L2jEnergy Server.
  * 
- * L2J Server is free software: you can redistribute it and/or modify
+ * L2jEnergy Server is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * L2J Server is distributed in the hope that it will be useful,
+ * L2jEnergy Server is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
@@ -21,12 +21,12 @@ package com.l2jserver.gameserver.network.serverpackets;
 /**
  * @author mochitto, IrLex
  */
-public class ExNevitAdventTimeChange extends L2GameServerPacket
+public class ExNavitAdventTimeChange extends L2GameServerPacket
 {
 	private final boolean _paused;
 	private final int _time;
 	
-	public ExNevitAdventTimeChange(int time, boolean paused)
+	public ExNavitAdventTimeChange(int time, boolean paused)
 	{
 		_time = (time > 14400) ? 14400 : time;
 		_paused = paused;

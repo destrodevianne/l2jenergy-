@@ -66,7 +66,7 @@ import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.model.zone.L2ZoneType;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
-import com.l2jserver.gameserver.network.serverpackets.NpcQuestHtmlMessage;
+import com.l2jserver.gameserver.network.serverpackets.ExNpcQuestHtmlMessage;
 import com.l2jserver.gameserver.network.serverpackets.TutorialShowHtml;
 import com.l2jserver.gameserver.scripting.ScriptManager;
 
@@ -2708,7 +2708,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 		if (content != null)
 		{
 			L2Npc npc = player.getLastFolkNPC();
-			NpcQuestHtmlMessage npcReply = new NpcQuestHtmlMessage(npc != null ? npc.getObjectId() : 0, questId);
+			ExNpcQuestHtmlMessage npcReply = new ExNpcQuestHtmlMessage(npc != null ? npc.getObjectId() : 0, questId);
 			npcReply.setHtml(content);
 			player.sendPacket(npcReply);
 		}
@@ -2761,7 +2761,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 			
 			if (questwindow && (questId > 0) && (questId < 20000) && (questId != 999))
 			{
-				NpcQuestHtmlMessage npcReply = new NpcQuestHtmlMessage(npc != null ? npc.getObjectId() : 0, questId);
+				ExNpcQuestHtmlMessage npcReply = new ExNpcQuestHtmlMessage(npc != null ? npc.getObjectId() : 0, questId);
 				npcReply.setHtml(content);
 				npcReply.replace("%playername%", player.getName());
 				player.sendPacket(npcReply);

@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2jEnergy Server
  * 
- * This file is part of L2J Server.
+ * This file is part of L2jEnergy Server.
  * 
- * L2J Server is free software: you can redistribute it and/or modify
+ * L2jEnergy Server is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * L2J Server is distributed in the hope that it will be useful,
+ * L2jEnergy Server is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
@@ -18,24 +18,21 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.L2FriendSay;
+import com.l2jserver.gameserver.util.LoggingUtils;
 
-/**
- * Recieve Private (Friend) Message - 0xCC Format: c SS S: Message S: Receiving Player
- * @author Tempy
- */
-public final class RequestSendFriendMsg extends L2GameClientPacket
+public final class RequestSendL2FriendSay extends L2GameClientPacket
 {
-	private static final String _C__6B_REQUESTSENDMSG = "[C] 6B RequestSendFriendMsg";
-	private static Logger _logChat = Logger.getLogger("chat");
+	private static final String _C__6B_REQUESTSENDL2FRIENDSAY = "[C] 6B RequestSendL2FriendSay";
+	
+	private static Logger LOG_CHAT = LoggerFactory.getLogger("chat");
 	
 	private String _message;
 	private String _reciever;
@@ -70,23 +67,14 @@ public final class RequestSendFriendMsg extends L2GameClientPacket
 		
 		if (Config.LOG_CHAT)
 		{
-			LogRecord record = new LogRecord(Level.INFO, _message);
-			record.setLoggerName("chat");
-			record.setParameters(new Object[]
-			{
-				"PRIV_MSG",
-				"[" + activeChar.getName() + " to " + _reciever + "]"
-			});
-			
-			_logChat.log(record);
+			LoggingUtils.logChat(LOG_CHAT, activeChar.getName(), _reciever, _message, "PRIV_MSG");
 		}
-		
 		targetPlayer.sendPacket(new L2FriendSay(activeChar.getName(), _reciever, _message));
 	}
 	
 	@Override
 	public String getType()
 	{
-		return _C__6B_REQUESTSENDMSG;
+		return _C__6B_REQUESTSENDL2FRIENDSAY;
 	}
 }

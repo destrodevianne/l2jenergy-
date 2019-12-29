@@ -18,31 +18,17 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
-import java.util.List;
-
-import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-
-/**
- * @author UnAfraid, mrTJO
- */
-public class ExShowContactList extends L2GameServerPacket
+public final class LogOutOk extends L2GameServerPacket
 {
-	private final List<String> _contacts;
+	public static final LogOutOk STATIC_PACKET = new LogOutOk();
 	
-	public ExShowContactList(L2PcInstance player)
+	private LogOutOk()
 	{
-		_contacts = player.getContactList().getAllContacts();
 	}
 	
 	@Override
-	protected void writeImpl()
+	protected final void writeImpl()
 	{
-		writeC(0xFE);
-		writeH(0xD3);
-		writeD(_contacts.size());
-		for (String name : _contacts)
-		{
-			writeS(name);
-		}
+		writeC(0x84);
 	}
 }

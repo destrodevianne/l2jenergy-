@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2jEnergy Server
  * 
- * This file is part of L2J Server.
+ * This file is part of L2jEnergy Server.
  * 
- * L2J Server is free software: you can redistribute it and/or modify
+ * L2jEnergy Server is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * L2J Server is distributed in the hope that it will be useful,
+ * L2jEnergy Server is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
@@ -469,8 +469,11 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient>, 
 					case 0x67:
 						msg = new RequestPledgeCrest();
 						break;
-					case 0x6b: // RequestSendL2FriendSay
-						msg = new RequestSendFriendMsg();
+					case 0x6a:
+						msg = new RequestFriendInfoList();
+						break;
+					case 0x6b:
+						msg = new RequestSendL2FriendSay();
 						break;
 					case 0x6c:
 						msg = new RequestShowMiniMap();
@@ -508,11 +511,8 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient>, 
 					case 0x77:
 						msg = new RequestFriendInvite();
 						break;
-					case 0x78: // RequestFriendAddReply
-						msg = new RequestAnswerFriendInvite();
-						break;
-					case 0x79:
-						msg = new RequestFriendList();
+					case 0x78:
+						msg = new RequestFriendAddReply();
 						break;
 					case 0x7a:
 						msg = new RequestFriendDel();
@@ -1148,16 +1148,16 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient>, 
 								msg = new RequestVoteNew();
 								break;
 							case 0x84:
-								msg = new RequestExAddContactToContactList();
+								msg = new RequestExAddPostFriendForPostBox();
 								break;
 							case 0x85:
-								msg = new RequestExDeleteContactFromContactList();
+								msg = new RequestExDeletePostFriendForPostBox();
 								break;
 							case 0x86:
-								msg = new RequestExShowContactList();
+								msg = new RequestExShowPostFriendListForPostBox();
 								break;
 							case 0x87:
-								msg = new RequestExFriendListExtended();
+								msg = new RequestExFriendListForPostBox();
 								break;
 							case 0x88:
 								msg = new RequestExOlympiadMatchListRefresh();

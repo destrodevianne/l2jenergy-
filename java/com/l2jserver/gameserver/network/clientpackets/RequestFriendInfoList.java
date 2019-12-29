@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2jEnergy Server
  * 
- * This file is part of L2J Server.
+ * This file is part of L2jEnergy Server.
  * 
- * L2J Server is free software: you can redistribute it and/or modify
+ * L2jEnergy Server is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * L2J Server is distributed in the hope that it will be useful,
+ * L2jEnergy Server is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
@@ -24,12 +24,9 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
-/**
- * @since 2005/03/27
- */
-public final class RequestFriendList extends L2GameClientPacket
+public final class RequestFriendInfoList extends L2GameClientPacket
 {
-	private static final String _C__79_REQUESTFRIENDLIST = "[C] 79 RequestFriendList";
+	private static final String _C__6A_REQUESTFRIENDINFOLIST = "[C] 6A RequestFriendInfoList";
 	
 	@Override
 	protected void readImpl()
@@ -46,7 +43,6 @@ public final class RequestFriendList extends L2GameClientPacket
 			return;
 		}
 		
-		// ======<Friend List>======
 		activeChar.sendPacket(SystemMessageId.FRIEND_LIST_HEADER);
 		if (activeChar.hasFriends())
 		{
@@ -64,13 +60,12 @@ public final class RequestFriendList extends L2GameClientPacket
 				activeChar.sendPacket(sm);
 			}
 		}
-		// =========================
 		activeChar.sendPacket(SystemMessageId.FRIEND_LIST_FOOTER);
 	}
 	
 	@Override
 	public String getType()
 	{
-		return _C__79_REQUESTFRIENDLIST;
+		return _C__6A_REQUESTFRIENDINFOLIST;
 	}
 }

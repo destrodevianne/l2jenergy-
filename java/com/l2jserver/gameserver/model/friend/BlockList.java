@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2jEnergy Server
  * 
- * This file is part of L2J Server.
+ * This file is part of L2jEnergy Server.
  * 
- * L2J Server is free software: you can redistribute it and/or modify
+ * L2jEnergy Server is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * L2J Server is distributed in the hope that it will be useful,
+ * L2jEnergy Server is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
@@ -16,28 +16,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.l2jserver.gameserver.model;
+package com.l2jserver.gameserver.model.friend;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
+import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
 public class BlockList
 {
-	private static Logger _log = Logger.getLogger(BlockList.class.getName());
 	private static final Map<Integer, List<Integer>> OFFLINE_LIST = new ConcurrentHashMap<>();
 	
 	private final L2PcInstance _owner;
@@ -49,83 +43,25 @@ public class BlockList
 		_blockList = OFFLINE_LIST.get(owner.getObjectId());
 		if (_blockList == null)
 		{
-			_blockList = loadList(_owner.getObjectId());
+			_blockList = DAOFactory.getInstance().getFriendDAO().loadList(_owner.getObjectId());
 		}
 	}
 	
 	private void addToBlockList(int target)
 	{
 		_blockList.add(target);
-		persistInDB(target);
+		DAOFactory.getInstance().getFriendDAO().persistInDB(_owner, target);
 	}
 	
 	private void removeFromBlockList(int target)
 	{
 		_blockList.remove(Integer.valueOf(target));
-		removeFromDB(target);
+		DAOFactory.getInstance().getFriendDAO().removeFromDB(_owner, target);
 	}
 	
 	public void playerLogout()
 	{
 		OFFLINE_LIST.put(_owner.getObjectId(), _blockList);
-	}
-	
-	private static List<Integer> loadList(int ObjId)
-	{
-		List<Integer> list = new ArrayList<>();
-		try (Connection con = ConnectionFactory.getInstance().getConnection();
-			PreparedStatement ps = con.prepareStatement("SELECT friendId FROM character_friends WHERE charId=? AND relation=1"))
-		{
-			ps.setInt(1, ObjId);
-			try (ResultSet rs = ps.executeQuery())
-			{
-				int friendId;
-				while (rs.next())
-				{
-					friendId = rs.getInt("friendId");
-					if (friendId == ObjId)
-					{
-						continue;
-					}
-					list.add(friendId);
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			_log.log(Level.WARNING, "Error found in " + ObjId + " FriendList while loading BlockList: " + e.getMessage(), e);
-		}
-		return list;
-	}
-	
-	private void removeFromDB(int targetId)
-	{
-		try (Connection con = ConnectionFactory.getInstance().getConnection();
-			PreparedStatement ps = con.prepareStatement("DELETE FROM character_friends WHERE charId=? AND friendId=? AND relation=1"))
-		{
-			ps.setInt(1, _owner.getObjectId());
-			ps.setInt(2, targetId);
-			ps.execute();
-		}
-		catch (Exception e)
-		{
-			_log.log(Level.WARNING, "Could not remove blocked player: " + e.getMessage(), e);
-		}
-	}
-	
-	private void persistInDB(int targetId)
-	{
-		try (Connection con = ConnectionFactory.getInstance().getConnection();
-			PreparedStatement ps = con.prepareStatement("INSERT INTO character_friends (charId, friendId, relation) VALUES (?, ?, 1)"))
-		{
-			ps.setInt(1, _owner.getObjectId());
-			ps.setInt(2, targetId);
-			ps.execute();
-		}
-		catch (Exception e)
-		{
-			_log.log(Level.WARNING, "Could not add blocked player: " + e.getMessage(), e);
-		}
 	}
 	
 	public boolean isInBlockList(L2PcInstance target)
@@ -269,7 +205,7 @@ public class BlockList
 		}
 		if (!OFFLINE_LIST.containsKey(ownerId))
 		{
-			OFFLINE_LIST.put(ownerId, loadList(ownerId));
+			OFFLINE_LIST.put(ownerId, DAOFactory.getInstance().getFriendDAO().loadList(ownerId));
 		}
 		return OFFLINE_LIST.get(ownerId).contains(targetId);
 	}

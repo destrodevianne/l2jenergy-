@@ -18,25 +18,26 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
-public class L2FriendSay extends L2GameServerPacket
+import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+
+/**
+ * @author GodKratos
+ */
+public class ExBR_PremiumState extends L2GameServerPacket
 {
-	private final String _sender, _receiver, _message;
+	private final L2PcInstance _player;
 	
-	public L2FriendSay(String sender, String reciever, String message)
+	public ExBR_PremiumState(L2PcInstance player)
 	{
-		_sender = sender;
-		_receiver = reciever;
-		_message = message;
+		_player = player;
 	}
 	
 	@Override
-	protected final void writeImpl()
+	protected void writeImpl()
 	{
-		writeC(0x78);
-		
-		writeD(0); // ??
-		writeS(_receiver);
-		writeS(_sender);
-		writeS(_message);
+		writeC(0xFE);
+		writeH(0xD9);
+		writeD(_player.getObjectId());
+		writeC(_player.isPremium() ? 0x01 : 0x00);
 	}
 }

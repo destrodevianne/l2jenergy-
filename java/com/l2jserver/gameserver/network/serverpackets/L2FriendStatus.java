@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2jEnergy Server
  * 
- * This file is part of L2J Server.
+ * This file is part of L2jEnergy Server.
  * 
- * L2J Server is free software: you can redistribute it and/or modify
+ * L2jEnergy Server is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * L2J Server is distributed in the hope that it will be useful,
+ * L2jEnergy Server is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
@@ -21,24 +21,14 @@ package com.l2jserver.gameserver.network.serverpackets;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.model.L2World;
 
-/**
- * Support for "Chat with Friends" dialog. <br />
- * Add new friend or delete.
- * @author JIV
- */
-public class FriendPacket extends L2GameServerPacket
+public class L2FriendStatus extends L2GameServerPacket
 {
-	private final boolean _action, _online;
+	private final boolean _online;
 	private final int _objid;
 	private final String _name;
 	
-	/**
-	 * @param action - true for adding, false for remove
-	 * @param objId
-	 */
-	public FriendPacket(boolean action, int objId)
+	public L2FriendStatus(int objId)
 	{
-		_action = action;
 		_objid = objId;
 		_name = CharNameTable.getInstance().getNameById(objId);
 		_online = L2World.getInstance().getPlayer(objId) != null;
@@ -47,12 +37,9 @@ public class FriendPacket extends L2GameServerPacket
 	@Override
 	protected final void writeImpl()
 	{
-		writeC(0x76);
-		writeD(_action ? 1 : 3); // 1-add 3-remove
-		writeD(_objid);
-		writeS(_name);
+		writeC(0x77);
 		writeD(_online ? 1 : 0);
-		writeD(_online ? _objid : 0);
-		
+		writeS(_name);
+		writeD(_objid);
 	}
 }

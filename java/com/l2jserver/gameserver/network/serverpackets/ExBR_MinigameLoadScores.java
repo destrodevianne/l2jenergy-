@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2jEnergy Server
  * 
- * This file is part of L2J Server.
+ * This file is part of L2jEnergy Server.
  * 
- * L2J Server is free software: you can redistribute it and/or modify
+ * L2jEnergy Server is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * L2J Server is distributed in the hope that it will be useful,
+ * L2jEnergy Server is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
@@ -26,7 +26,7 @@ import com.l2jserver.gameserver.instancemanager.games.MiniGameScoreManager;
 import com.l2jserver.gameserver.model.L2MiniGameScore;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
-public class ExBrMiniGameLoadScores extends L2GameServerPacket
+public class ExBR_MinigameLoadScores extends L2GameServerPacket
 {
 	private int _place;
 	private int _score;
@@ -34,7 +34,7 @@ public class ExBrMiniGameLoadScores extends L2GameServerPacket
 	
 	private final List<L2MiniGameScore> _entries;
 	
-	public ExBrMiniGameLoadScores(final L2PcInstance player)
+	public ExBR_MinigameLoadScores(final L2PcInstance player)
 	{
 		int i = 1;
 		

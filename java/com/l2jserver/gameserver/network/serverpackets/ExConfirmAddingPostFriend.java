@@ -18,25 +18,26 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
-public class L2FriendSay extends L2GameServerPacket
+/**
+ * @author mrTJO & UnAfraid
+ */
+public class ExConfirmAddingPostFriend extends L2GameServerPacket
 {
-	private final String _sender, _receiver, _message;
+	private final String _charName;
+	private final boolean _added;
 	
-	public L2FriendSay(String sender, String reciever, String message)
+	public ExConfirmAddingPostFriend(String charName, boolean added)
 	{
-		_sender = sender;
-		_receiver = reciever;
-		_message = message;
+		_charName = charName;
+		_added = added;
 	}
 	
 	@Override
-	protected final void writeImpl()
+	protected void writeImpl()
 	{
-		writeC(0x78);
-		
-		writeD(0); // ??
-		writeS(_receiver);
-		writeS(_sender);
-		writeS(_message);
+		writeC(0xFE);
+		writeH(0xD2);
+		writeS(_charName);
+		writeD(_added ? 0x01 : 0x00);
 	}
 }

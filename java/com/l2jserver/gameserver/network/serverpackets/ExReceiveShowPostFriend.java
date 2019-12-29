@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2004-2018 L2J Server
+ * Copyright (C) 2004-2019 L2jEnergy Server
  * 
- * This file is part of L2J Server.
+ * This file is part of L2jEnergy Server.
  * 
- * L2J Server is free software: you can redistribute it and/or modify
+ * L2jEnergy Server is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * L2J Server is distributed in the hope that it will be useful,
+ * L2jEnergy Server is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
@@ -18,23 +18,31 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
+import java.util.List;
+
+import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+
 /**
- * @author mochitto
+ * @author UnAfraid, mrTJO
  */
-public class ExNevitAdventPointInfoPacket extends L2GameServerPacket
+public class ExReceiveShowPostFriend extends L2GameServerPacket
 {
-	private final int _points;
+	private final List<String> _postFriends;
 	
-	public ExNevitAdventPointInfoPacket(int points)
+	public ExReceiveShowPostFriend(L2PcInstance player)
 	{
-		_points = points;
+		_postFriends = player.getPostFriends();
 	}
 	
 	@Override
 	protected void writeImpl()
 	{
 		writeC(0xFE);
-		writeH(0xDF);
-		writeD(_points); // 72 = 1%, max 7200 = 100%
+		writeH(0xD3);
+		writeD(_postFriends.size());
+		for (String name : _postFriends)
+		{
+			writeS(name);
+		}
 	}
 }

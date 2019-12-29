@@ -75,11 +75,11 @@ import com.l2jserver.gameserver.network.serverpackets.ExGetBookMarkInfoPacket;
 import com.l2jserver.gameserver.network.serverpackets.ExNoticePostArrived;
 import com.l2jserver.gameserver.network.serverpackets.ExNotifyPremiumItem;
 import com.l2jserver.gameserver.network.serverpackets.ExPCCafePointInfo;
-import com.l2jserver.gameserver.network.serverpackets.ExShowContactList;
+import com.l2jserver.gameserver.network.serverpackets.ExReceiveShowPostFriend;
 import com.l2jserver.gameserver.network.serverpackets.ExShowScreenMessage;
 import com.l2jserver.gameserver.network.serverpackets.ExStorageMaxCount;
 import com.l2jserver.gameserver.network.serverpackets.ExVoteSystemInfo;
-import com.l2jserver.gameserver.network.serverpackets.FriendList;
+import com.l2jserver.gameserver.network.serverpackets.L2FriendList;
 import com.l2jserver.gameserver.network.serverpackets.HennaInfo;
 import com.l2jserver.gameserver.network.serverpackets.ItemList;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
@@ -427,7 +427,7 @@ public class EnterWorld extends L2GameClientPacket
 		// Expand Skill
 		activeChar.sendPacket(new ExStorageMaxCount(activeChar));
 		
-		sendPacket(new FriendList(activeChar));
+		sendPacket(new L2FriendList(activeChar));
 		
 		final SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.FRIEND_S1_HAS_LOGGED_IN);
 		sm.addCharName(activeChar);
@@ -483,7 +483,7 @@ public class EnterWorld extends L2GameClientPacket
 		sendPacket(new SkillCoolTime(activeChar));
 		sendPacket(new ExVoteSystemInfo(activeChar));
 		sendPacket(new ExPCCafePointInfo(activeChar.getPcCafePoints(), 0, 1, PcCafeType.NORMAL, 12));
-		sendPacket(new ExShowContactList(activeChar));
+		sendPacket(new ExReceiveShowPostFriend(activeChar));
 		
 		for (L2ItemInstance item : activeChar.getInventory().getItems())
 		{

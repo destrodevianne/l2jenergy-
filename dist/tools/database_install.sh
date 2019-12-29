@@ -96,7 +96,7 @@ $MYL < sql/game/castle_manor_procure.sql &> /dev/null
 $MYL < sql/game/castle_manor_production.sql &> /dev/null
 $MYL < sql/game/castle_siege_guards.sql &> /dev/null
 $MYL < sql/game/castle_trapupgrade.sql &> /dev/null
-$MYL < sql/game/character_contacts.sql &> /dev/null
+$MYL < sql/game/character_post_friends.sql &> /dev/null
 $MYL < sql/game/character_friends.sql &> /dev/null
 $MYL < sql/game/character_hennas.sql &> /dev/null
 $MYL < sql/game/character_instance_time.sql &> /dev/null

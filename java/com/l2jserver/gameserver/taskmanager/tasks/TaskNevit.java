@@ -24,7 +24,7 @@ import java.sql.PreparedStatement;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.network.serverpackets.ExNevitAdventTimeChange;
+import com.l2jserver.gameserver.network.serverpackets.ExNavitAdventTimeChange;
 import com.l2jserver.gameserver.taskmanager.Task;
 import com.l2jserver.gameserver.taskmanager.TaskManager;
 import com.l2jserver.gameserver.taskmanager.TaskManager.ExecutedTask;
@@ -62,7 +62,7 @@ public class TaskNevit extends Task
 			if ((player != null) && player.isOnline() && !player.isInOfflineMode())
 			{
 				player.getNevitSystem().setAdventTime(0); // Refuel-reset hunting bonus time
-				player.sendPacket(new ExNevitAdventTimeChange(player.getNevitSystem().getAdventTime(), true));
+				player.sendPacket(new ExNavitAdventTimeChange(player.getNevitSystem().getAdventTime(), true));
 			}
 		}
 		LOG.info("Nevit system reseted.");
