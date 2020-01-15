@@ -105,11 +105,11 @@ public final class Q00231_TestOfTheMaestro extends Quest
 					{
 						giveItems(player, DIMENSIONAL_DIAMOND, 23);
 						player.getVariables().set("2ND_CLASS_DIAMOND_REWARD", 1);
-						htmltext = "30531-04a.htm";
+						htmltext = "30531-04a.html";
 					}
 					else
 					{
-						htmltext = "30531-04.htm";
+						htmltext = "30531-04.html";
 					}
 				}
 				break;
@@ -253,7 +253,7 @@ public final class Q00231_TestOfTheMaestro extends Quest
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{
-						htmltext = "30531-03.htm";
+						htmltext = "30531-03.html";
 					}
 					else
 					{
@@ -319,6 +319,10 @@ public final class Q00231_TestOfTheMaestro extends Quest
 					else if (hasQuestItems(player, RECOMMENDATION_OF_BALANKI))
 					{
 						htmltext = "30533-05.html";
+					}
+					else
+					{
+						htmltext = "30533-01.html";
 					}
 					break;
 				}
@@ -388,6 +392,10 @@ public final class Q00231_TestOfTheMaestro extends Quest
 					else if (hasQuestItems(player, RECOMMENDATION_OF_ARIN))
 					{
 						htmltext = "30536-04.html";
+					}
+					else
+					{
+						htmltext = "30536-01.html";
 					}
 					break;
 				}
