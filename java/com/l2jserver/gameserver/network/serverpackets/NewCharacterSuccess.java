@@ -21,50 +21,65 @@ package com.l2jserver.gameserver.network.serverpackets;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.l2jserver.gameserver.data.xml.impl.PlayerTemplateData;
 import com.l2jserver.gameserver.model.actor.templates.L2PcTemplate;
+import com.l2jserver.gameserver.model.base.ClassId;
 
 public final class NewCharacterSuccess extends L2GameServerPacket
 {
-	private final List<L2PcTemplate> _chars = new ArrayList<>();
+	private final List<L2PcTemplate> _templates = new ArrayList<>();
 	
-	public void addChar(L2PcTemplate template)
+	public static final NewCharacterSuccess STATIC_PACKET = new NewCharacterSuccess();
+	
+	private NewCharacterSuccess()
 	{
-		_chars.add(template);
+		_templates.add(PlayerTemplateData.getInstance().getTemplate(0));
+		_templates.add(PlayerTemplateData.getInstance().getTemplate(ClassId.fighter)); // Human Figther
+		_templates.add(PlayerTemplateData.getInstance().getTemplate(ClassId.mage)); // Human Mystic
+		_templates.add(PlayerTemplateData.getInstance().getTemplate(ClassId.elvenFighter)); // Elven Fighter
+		_templates.add(PlayerTemplateData.getInstance().getTemplate(ClassId.elvenMage)); // Elven Mystic
+		_templates.add(PlayerTemplateData.getInstance().getTemplate(ClassId.darkFighter)); // Dark Fighter
+		_templates.add(PlayerTemplateData.getInstance().getTemplate(ClassId.darkMage)); // Dark Mystic
+		_templates.add(PlayerTemplateData.getInstance().getTemplate(ClassId.orcFighter)); // Orc Fighter
+		_templates.add(PlayerTemplateData.getInstance().getTemplate(ClassId.orcMage)); // Orc Mystic
+		_templates.add(PlayerTemplateData.getInstance().getTemplate(ClassId.dwarvenFighter)); // Dwarf Fighter
+		_templates.add(PlayerTemplateData.getInstance().getTemplate(ClassId.maleSoldier)); // Male Kamael Soldier
+		_templates.add(PlayerTemplateData.getInstance().getTemplate(ClassId.femaleSoldier)); // Female Kamael Soldier
 	}
 	
 	@Override
 	protected final void writeImpl()
 	{
 		writeC(0x0D);
-		writeD(_chars.size());
+		writeD(_templates.size());
 		
-		for (L2PcTemplate chr : _chars)
+		for (L2PcTemplate template : _templates)
 		{
-			if (chr == null)
+			if (template == null)
 			{
 				continue;
 			}
 			
 			// TODO: Unhardcode these
-			writeD(chr.getRace().ordinal());
-			writeD(chr.getClassId().getId());
+			writeD(template.getRace().ordinal());
+			writeD(template.getClassId().getId());
 			writeD(0x46);
-			writeD(chr.getBaseSTR());
+			writeD(template.getBaseSTR());
 			writeD(0x0A);
 			writeD(0x46);
-			writeD(chr.getBaseDEX());
+			writeD(template.getBaseDEX());
 			writeD(0x0A);
 			writeD(0x46);
-			writeD(chr.getBaseCON());
+			writeD(template.getBaseCON());
 			writeD(0x0A);
 			writeD(0x46);
-			writeD(chr.getBaseINT());
+			writeD(template.getBaseINT());
 			writeD(0x0A);
 			writeD(0x46);
-			writeD(chr.getBaseWIT());
+			writeD(template.getBaseWIT());
 			writeD(0x0A);
 			writeD(0x46);
-			writeD(chr.getBaseMEN());
+			writeD(template.getBaseMEN());
 			writeD(0x0A);
 		}
 	}

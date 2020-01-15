@@ -95,7 +95,7 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient>, 
 						msg = new CharacterSelect();
 						break;
 					case 0x13:
-						msg = new NewCharacter();
+						msg = new RequestNewCharacter();
 						break;
 					case 0x7b:
 						msg = new CharacterRestore();
