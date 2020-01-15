@@ -614,7 +614,7 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient>, 
 						msg = new RequestPrivateStoreSell();
 						break;
 					case 0xa0:
-						// SendTimeCheckPacket
+						msg = new SendTimeCheck();
 						break;
 					case 0xa6:
 						// RequestSkillCoolTime
