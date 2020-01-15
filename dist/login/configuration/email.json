@@ -9,8 +9,8 @@
     # Server Information
     # ---------------------------------------------------------------------------
     # Server Name
-    # Default: Unconfigured L2J Server
-    "ServerInfoName" : "Unconfigured L2J Server",
+    # Default: Unconfigured L2jEnergy Server
+    "ServerInfoName" : "Unconfigured L2jEnergy Server",
 
     # Contact Address
     # Default: info@unconfl2j.com

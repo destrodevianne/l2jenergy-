@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 L2jEnergy Server
+ * Copyright (C) 2004-2020 L2jEnergy Server
  * 
  * This file is part of L2jEnergy Server.
  * 
@@ -41,7 +41,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Useful utilities common to L2J Server.
+ * Useful utilities common to L2jEnergy Server.
  */
 public final class Util
 {

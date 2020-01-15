@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 L2jEnergy Server
+ * Copyright (C) 2004-2020 L2jEnergy Server
  * 
  * This file is part of L2jEnergy Server.
  * 
