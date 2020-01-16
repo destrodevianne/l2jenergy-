@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.UPnPService;
 import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.loginserver.configuration.config.EmailConfig;
 import com.l2jserver.loginserver.configuration.config.LoginConfig;
 import com.l2jserver.loginserver.configuration.config.MMOConfig;
@@ -73,6 +74,7 @@ public final class L2LoginServer
 		_instance = this;
 		
 		new File("./logs/").mkdir();
+		StringUtil.printSection("Config");
 		// Initialize config
 		ConfigLoader.loading();
 		// Prepare Database
@@ -86,17 +88,22 @@ public final class L2LoginServer
 			.withMaxPoolSize(LoginConfig.DATABASE_MAX_CONNECTIONS) //
 			.build();
 		
+		StringUtil.printSection("LoginController");
 		LoginController.getInstance();
 		
+		StringUtil.printSection("GameServerTable");
 		GameServerTable.getInstance();
 		
+		StringUtil.printSection("Ban List");
 		loadBanFile();
 		
 		if (EmailConfig.EMAIL_SYS_ENABLED)
 		{
+			StringUtil.printSection("Mail System");
 			MailSystem.getInstance();
 		}
 		
+		StringUtil.printSection("IP, Ports & Socket infos");
 		InetAddress bindAddress = null;
 		if (!LoginConfig.LOGIN_BIND_ADDRESS.equals("*"))
 		{
@@ -171,8 +178,10 @@ public final class L2LoginServer
 		
 		if (LoginConfig.ENABLE_UPNP)
 		{
+			StringUtil.printSection("UPnP");
 			UPnPService.getInstance().load(LoginConfig.PORT_LOGIN, "L2J Login Server");
 		}
+		StringUtil.printSection("Waiting for gameserver answer");
 	}
 	
 	public Status getStatusServer()

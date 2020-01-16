@@ -18,11 +18,23 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
-public class CharDeleteSuccess extends L2GameServerPacket
+public class CharacterDeleteFail extends L2GameServerPacket
 {
+	public static final CharacterDeleteFail REASON_DELETION_FAILED = new CharacterDeleteFail(0x01);
+	public static final CharacterDeleteFail REASON_YOU_MAY_NOT_DELETE_CLAN_MEMBER = new CharacterDeleteFail(0x02);
+	public static final CharacterDeleteFail REASON_CLAN_LEADERS_MAY_NOT_BE_DELETED = new CharacterDeleteFail(0x03);
+	
+	private final int _error;
+	
+	public CharacterDeleteFail(int errorCode)
+	{
+		_error = errorCode;
+	}
+	
 	@Override
 	protected final void writeImpl()
 	{
-		writeC(0x1d);
+		writeC(0x1e);
+		writeD(_error);
 	}
 }

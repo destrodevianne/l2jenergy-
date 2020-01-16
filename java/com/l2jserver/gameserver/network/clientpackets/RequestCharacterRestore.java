@@ -21,25 +21,20 @@ package com.l2jserver.gameserver.network.clientpackets;
 import com.l2jserver.gameserver.model.CharSelectInfoPackage;
 import com.l2jserver.gameserver.model.events.EventDispatcher;
 import com.l2jserver.gameserver.model.events.impl.character.player.OnPlayerRestore;
-import com.l2jserver.gameserver.network.serverpackets.CharSelectionInfo;
+import com.l2jserver.gameserver.network.serverpackets.CharacterSelectionInfo;
 import com.l2jserver.gameserver.util.FloodProtectors;
 import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
-/**
- * This class ...
- * @version $Revision: 1.4.2.1.2.2 $ $Date: 2005/03/27 15:29:29 $
- */
-public final class CharacterRestore extends L2GameClientPacket
+public final class RequestCharacterRestore extends L2GameClientPacket
 {
-	private static final String _C__7B_CHARACTERRESTORE = "[C] 7B CharacterRestore";
+	private static final String _C__7B_REQUESTCHARACTERRESTORE = "[C] 7B RequestCharacterRestore";
 	
-	// cd
-	private int _charSlot;
+	private int _slot;
 	
 	@Override
 	protected void readImpl()
 	{
-		_charSlot = readD();
+		_slot = readD();
 	}
 	
 	@Override
@@ -50,17 +45,17 @@ public final class CharacterRestore extends L2GameClientPacket
 			return;
 		}
 		
-		getClient().markRestoredChar(_charSlot);
-		CharSelectionInfo cl = new CharSelectionInfo(getClient().getAccountName(), getClient().getSessionId().playOkID1, 0);
+		getClient().markRestoredChar(_slot);
+		CharacterSelectionInfo cl = new CharacterSelectionInfo(getClient().getAccountName(), getClient().getSessionId().playOkID1, 0);
 		sendPacket(cl);
 		getClient().setCharSelection(cl.getCharInfo());
-		final CharSelectInfoPackage charInfo = getClient().getCharSelection(_charSlot);
+		final CharSelectInfoPackage charInfo = getClient().getCharSelection(_slot);
 		EventDispatcher.getInstance().notifyEvent(new OnPlayerRestore(charInfo.getObjectId(), charInfo.getName(), getClient()));
 	}
 	
 	@Override
 	public String getType()
 	{
-		return _C__7B_CHARACTERRESTORE;
+		return _C__7B_REQUESTCHARACTERRESTORE;
 	}
 }

@@ -56,24 +56,24 @@ public class RequestUseGoodsInventoryItem extends L2GameClientPacket
 		
 		if (activeChar.isProcessingRequest())
 		{
-			activeChar.sendPacket(new ExGoodsInventoryResult(ExGoodsInventoryResult.PREVIOS_REQUEST_IS_NOT_COMPLETE));
+			activeChar.sendPacket(ExGoodsInventoryResult.PREVIOS_REQUEST_IS_NOT_COMPLETE);
 		}
 		
 		if (activeChar.getPrivateStoreType() != PrivateStoreType.NONE)
 		{
-			activeChar.sendPacket(new ExGoodsInventoryResult(ExGoodsInventoryResult.CANT_USE_AT_TRADE_OR_PRIVATE_SHOP));
+			activeChar.sendPacket(ExGoodsInventoryResult.CANT_USE_AT_TRADE_OR_PRIVATE_SHOP);
 			return;
 		}
 		
 		if (activeChar.getPremiumItemList().isEmpty())
 		{
-			activeChar.sendPacket(new ExGoodsInventoryResult(ExGoodsInventoryResult.NOT_EXISTS));
+			activeChar.sendPacket(ExGoodsInventoryResult.NOT_EXISTS);
 			return;
 		}
 		
 		if (activeChar.getInventory().getSize(false) >= (activeChar.getInventoryLimit() * 0.8))
 		{
-			activeChar.sendPacket(new ExGoodsInventoryResult(ExGoodsInventoryResult.INVENTORY_FULL));
+			activeChar.sendPacket(ExGoodsInventoryResult.INVENTORY_FULL);
 			return;
 		}
 		

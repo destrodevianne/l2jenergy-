@@ -31,7 +31,7 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.L2GameClient;
 import com.l2jserver.gameserver.network.L2GameClient.GameClientState;
 import com.l2jserver.gameserver.network.SystemMessageId;
-import com.l2jserver.gameserver.network.serverpackets.CharSelectionInfo;
+import com.l2jserver.gameserver.network.serverpackets.CharacterSelectionInfo;
 import com.l2jserver.gameserver.network.serverpackets.RestartResponse;
 import com.l2jserver.gameserver.taskmanager.AttackStanceTaskManager;
 import com.l2jserver.gameserver.util.LoggingUtils;
@@ -141,7 +141,7 @@ public final class RequestRestart extends L2GameClientPacket
 		sendPacket(RestartResponse.valueOf(true));
 		
 		// send char list
-		final CharSelectionInfo cl = new CharSelectionInfo(client.getAccountName(), client.getSessionId().playOkID1);
+		final CharacterSelectionInfo cl = new CharacterSelectionInfo(client.getAccountName(), client.getSessionId().playOkID1);
 		sendPacket(cl);
 		client.setCharSelection(cl.getCharInfo());
 	}

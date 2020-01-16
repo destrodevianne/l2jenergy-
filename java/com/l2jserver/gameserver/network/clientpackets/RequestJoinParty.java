@@ -189,7 +189,7 @@ public final class RequestJoinParty extends L2GameClientPacket
 		}
 		else
 		{
-			SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.C1_IS_BUSY_TRY_LATER);
+			SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.S1_IS_BUSY_TRY_LATER);
 			sm.addString(target.getName());
 			requestor.sendPacket(sm);
 		}

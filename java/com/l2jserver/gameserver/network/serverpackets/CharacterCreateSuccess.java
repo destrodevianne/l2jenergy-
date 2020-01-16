@@ -18,8 +18,14 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
-public class CharCreateOk extends L2GameServerPacket
+public class CharacterCreateSuccess extends L2GameServerPacket
 {
+	public static final CharacterCreateSuccess STATIC_PACKET = new CharacterCreateSuccess();
+	
+	private CharacterCreateSuccess()
+	{
+	}
+	
 	@Override
 	protected final void writeImpl()
 	{

@@ -68,7 +68,7 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient>, 
 				switch (opcode)
 				{
 					case 0x0e:
-						msg = new ProtocolVersion();
+						msg = new SendProtocolVersion();
 						break;
 					case 0x2b:
 						msg = new AuthLogin();
@@ -86,19 +86,19 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient>, 
 						msg = new Logout();
 						break;
 					case 0x0c:
-						msg = new CharacterCreate();
+						msg = new RequestCharacterCreate();
 						break;
 					case 0x0d:
-						msg = new CharacterDelete();
+						msg = new RequestCharacterDelete();
 						break;
 					case 0x12:
-						msg = new CharacterSelect();
+						msg = new RequestGameStart();
 						break;
 					case 0x13:
 						msg = new RequestNewCharacter();
 						break;
 					case 0x7b:
-						msg = new CharacterRestore();
+						msg = new RequestCharacterRestore();
 						break;
 					case 0xd0:
 						int id2 = -1;

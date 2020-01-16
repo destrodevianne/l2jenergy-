@@ -77,7 +77,7 @@ import com.l2jserver.gameserver.network.loginserverpackets.KickPlayer;
 import com.l2jserver.gameserver.network.loginserverpackets.LoginServerFail;
 import com.l2jserver.gameserver.network.loginserverpackets.PlayerAuthResponse;
 import com.l2jserver.gameserver.network.loginserverpackets.RequestCharacters;
-import com.l2jserver.gameserver.network.serverpackets.CharSelectionInfo;
+import com.l2jserver.gameserver.network.serverpackets.CharacterSelectionInfo;
 import com.l2jserver.gameserver.network.serverpackets.LoginFail;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
@@ -314,7 +314,7 @@ public class LoginServerThread extends Thread
 									sendPacket(pig);
 									wcToRemove.gameClient.setState(GameClientState.AUTHED);
 									wcToRemove.gameClient.setSessionId(wcToRemove.session);
-									CharSelectionInfo cl = new CharSelectionInfo(wcToRemove.account, wcToRemove.gameClient.getSessionId().playOkID1);
+									CharacterSelectionInfo cl = new CharacterSelectionInfo(wcToRemove.account, wcToRemove.gameClient.getSessionId().playOkID1);
 									wcToRemove.gameClient.getConnection().sendPacket(cl);
 									wcToRemove.gameClient.setCharSelection(cl.getCharInfo());
 								}

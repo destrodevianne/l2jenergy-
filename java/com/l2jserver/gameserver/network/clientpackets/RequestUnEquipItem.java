@@ -22,7 +22,6 @@ import java.util.Arrays;
 
 import com.l2jserver.gameserver.model.PcCondOverride;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.items.L2EtcItem;
 import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
@@ -64,11 +63,11 @@ public class RequestUnEquipItem extends L2GameClientPacket
 			return;
 		}
 		
-		if (!GameEventManager.onRequestUnEquipItem(activeChar))
-		{
-			// TODO: fix
-			return;
-		}
+		// if (!GameEventManager.onRequestUnEquipItem(activeChar))
+		// {
+		// TODO: fix
+		// return;
+		// }
 		
 		// The English system message say weapon, but it's applied to any equipped item.
 		if (activeChar.isAttackingNow() || activeChar.isCastingNow() || activeChar.isCastingSimultaneouslyNow())
@@ -92,6 +91,7 @@ public class RequestUnEquipItem extends L2GameClientPacket
 		// Prevent player from unequipping items in special conditions.
 		if (activeChar.isStunned() || activeChar.isSleeping() || activeChar.isParalyzed() || activeChar.isAlikeDead())
 		{
+			activeChar.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.S1_CANNOT_BE_USED).addItemName(item));
 			return;
 		}
 		

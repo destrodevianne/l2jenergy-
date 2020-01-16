@@ -18,11 +18,16 @@
  */
 package com.l2jserver.commons.util;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public final class StringUtil
 {
-	private StringUtil()
-	{
-	}
+	private static final Logger LOG = LoggerFactory.getLogger(StringUtil.class);
 	
 	/**
 	 * Concatenates strings.
@@ -104,5 +109,42 @@ public final class StringUtil
 			sbString.append(element.toString()).append(System.lineSeparator());
 		}
 		return sbString.toString();
+	}
+	
+	/**
+	 * Verify if the given text matches with the regex pattern.
+	 * @param text : the text to test.
+	 * @param regex : the regex pattern to make test with.
+	 * @return true if matching.
+	 */
+	public static boolean isValidString(String text, String regex)
+	{
+		Pattern pattern;
+		try
+		{
+			pattern = Pattern.compile(regex);
+		}
+		catch (PatternSyntaxException e) // case of illegal pattern
+		{
+			pattern = Pattern.compile(".*");
+		}
+		
+		Matcher regexp = pattern.matcher(text);
+		return regexp.matches();
+	}
+	
+	/**
+	 * Format a given text to fit with logging "title" criterias, and send it.
+	 * @param text : the String to format.
+	 */
+	public static void printSection(String text)
+	{
+		final StringBuilder sb = new StringBuilder(60);
+		for (int i = 0; i < (54 - text.length()); i++)
+		{
+			sb.append("-");
+		}
+		StringUtil.append(sb, "=[ ", text, " ]");
+		LOG.info(sb.toString());
 	}
 }

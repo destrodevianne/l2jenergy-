@@ -934,7 +934,7 @@ public final class SystemMessageId
 	 * ID: 149<br>
 	 * Message: You cannot pick up or use items while trading.
 	 */
-	public static final SystemMessageId CANNOT_USE_ITEM_WHILE_TRADING = new SystemMessageId(149);
+	public static final SystemMessageId CANNOT_PICKUP_OR_USE_ITEM_WHILE_TRADING = new SystemMessageId(149);
 	
 	/**
 	 * ID: 150<br>
@@ -956,9 +956,9 @@ public final class SystemMessageId
 	
 	/**
 	 * ID: 153<br>
-	 * Message: $c1 is on another task. Please try again later.
+	 * Message: $s1 is on another task. Please try again later.
 	 */
-	public static final SystemMessageId C1_IS_BUSY_TRY_LATER = new SystemMessageId(153);
+	public static final SystemMessageId S1_IS_BUSY_TRY_LATER = new SystemMessageId(153);
 	
 	/**
 	 * ID: 154<br>
@@ -10289,9 +10289,9 @@ public final class SystemMessageId
 	
 	/**
 	 * ID: 1760<br>
-	 * Message: Clan member $c1's title has been changed to $s2.
+	 * Message: Clan member $s1's title has been changed to $s2.
 	 */
-	public static final SystemMessageId CLAN_MEMBER_C1_TITLE_CHANGED_TO_S2 = new SystemMessageId(1760);
+	public static final SystemMessageId CLAN_MEMBER_S1_TITLE_CHANGED_TO_S2 = new SystemMessageId(1760);
 	
 	/**
 	 * ID: 1761<br>
@@ -12060,9 +12060,9 @@ public final class SystemMessageId
 	
 	/**
 	 * ID: 2057<br>
-	 * Message: You have blocked $c1.
+	 * Message: You have blocked $s1.
 	 */
-	public static final SystemMessageId BLOCKED_C1 = new SystemMessageId(2057);
+	public static final SystemMessageId YOU_HAVE_BLOCKED_S1 = new SystemMessageId(2057);
 	
 	/**
 	 * ID: 2058<br>
@@ -14382,9 +14382,9 @@ public final class SystemMessageId
 	
 	/**
 	 * ID: 2911<br>
-	 * Message: You've requested $c1 to be on your Friends List.
+	 * Message: You've requested $s1 to be on your Friends List.
 	 */
-	public static final SystemMessageId YOU_REQUESTED_C1_TO_BE_FRIEND = new SystemMessageId(2911);
+	public static final SystemMessageId YOU_REQUESTED_S1_TO_BE_FRIEND = new SystemMessageId(2911);
 	
 	/**
 	 * ID: 2913<br>

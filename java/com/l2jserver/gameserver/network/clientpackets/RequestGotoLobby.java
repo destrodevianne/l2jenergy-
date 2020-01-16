@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.gameserver.network.L2GameClient;
-import com.l2jserver.gameserver.network.serverpackets.CharSelectionInfo;
+import com.l2jserver.gameserver.network.serverpackets.CharacterSelectionInfo;
 
 /**
  * (ch)
@@ -39,7 +39,7 @@ public class RequestGotoLobby extends L2GameClientPacket
 	protected void runImpl()
 	{
 		L2GameClient client = getClient();
-		client.sendPacket(new CharSelectionInfo(client.getAccountName(), client.getSessionId().playOkID1));
+		client.sendPacket(new CharacterSelectionInfo(client.getAccountName(), client.getSessionId().playOkID1));
 	}
 	
 	@Override

@@ -37,7 +37,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.l2jserver.gameserver.GameServer;
+import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
@@ -58,7 +58,7 @@ public class IPConfigDataParser implements IXmlReader
 	@Override
 	public void load()
 	{
-		GameServer.printSection("Network Configuration");
+		StringUtil.printSection("Network Configuration");
 		final File f = new File(IP_CONFIG_FILE);
 		if (f.exists())
 		{

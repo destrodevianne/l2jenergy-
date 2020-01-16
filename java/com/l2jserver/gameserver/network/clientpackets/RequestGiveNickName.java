@@ -18,22 +18,24 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
+import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.model.ClanPrivilege;
 import com.l2jserver.gameserver.model.L2ClanMember;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
+import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
 public class RequestGiveNickName extends L2GameClientPacket
 {
 	private static final String _C__0B_REQUESTGIVENICKNAME = "[C] 0B RequestGiveNickName";
 	
-	private String _target;
+	private String _name;
 	private String _title;
 	
 	@Override
 	protected void readImpl()
 	{
-		_target = readS();
+		_name = readS();
 		_title = readS();
 	}
 	
@@ -46,8 +48,14 @@ public class RequestGiveNickName extends L2GameClientPacket
 			return;
 		}
 		
+		if (!StringUtil.isValidString(_title, "^[a-zA-Z0-9 !@#$&()\\-`.+,/\"]*{0,16}$"))
+		{
+			activeChar.sendPacket(SystemMessageId.NOT_WORKING_PLEASE_TRY_AGAIN_LATER);
+			return;
+		}
+		
 		// Noblesse can bestow a title to themselves
-		if (activeChar.isNoble() && _target.equalsIgnoreCase(activeChar.getName()))
+		if (activeChar.isNoble() && _name.equalsIgnoreCase(activeChar.getName()))
 		{
 			activeChar.setTitle(_title);
 			activeChar.sendPacket(SystemMessageId.TITLE_CHANGED);
@@ -68,16 +76,20 @@ public class RequestGiveNickName extends L2GameClientPacket
 				return;
 			}
 			
-			L2ClanMember member1 = activeChar.getClan().getClanMember(_target);
-			if (member1 != null)
+			L2ClanMember member = activeChar.getClan().getClanMember(_name);
+			if (member != null)
 			{
-				L2PcInstance member = member1.getPlayerInstance();
-				if (member != null)
+				L2PcInstance playerMember = member.getPlayerInstance();
+				if (playerMember != null)
 				{
 					// is target from the same clan?
-					member.setTitle(_title);
-					member.sendPacket(SystemMessageId.TITLE_CHANGED);
-					member.broadcastTitleInfo();
+					playerMember.setTitle(_title);
+					playerMember.sendPacket(SystemMessageId.TITLE_CHANGED);
+					if (activeChar != playerMember)
+					{
+						activeChar.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.CLAN_MEMBER_S1_TITLE_CHANGED_TO_S2).addCharName(playerMember).addString(_title));
+					}
+					playerMember.broadcastTitleInfo();
 				}
 				else
 				{

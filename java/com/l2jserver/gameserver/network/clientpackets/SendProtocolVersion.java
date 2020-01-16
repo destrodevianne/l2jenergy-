@@ -22,13 +22,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
-import com.l2jserver.gameserver.network.serverpackets.VersionCheck;
 import com.l2jserver.gameserver.network.serverpackets.L2GameServerPacket;
 import com.l2jserver.gameserver.network.serverpackets.SendStatus;
+import com.l2jserver.gameserver.network.serverpackets.VersionCheck;
 import com.l2jserver.gameserver.util.LoggingUtils;
 
-public final class ProtocolVersion extends L2GameClientPacket
+public final class SendProtocolVersion extends L2GameClientPacket
 {
+	private static final String _C__0E_SENDPROTOCOLVERSION = "[C] 0E SendProtocolVersion";
 	private static final Logger LOG_ACCOUNTING = LoggerFactory.getLogger("accounting");
 	
 	private int _version;
@@ -65,15 +66,12 @@ public final class ProtocolVersion extends L2GameClientPacket
 				_version,
 				getClient()
 			});
-			
-			VersionCheck pk = new VersionCheck(getClient().enableCrypt(), 0);
 			getClient().setProtocolOk(false);
-			getClient().close(pk);
+			getClient().close(new VersionCheck(getClient().enableCrypt(), 0));
 		}
 		else
 		{
-			VersionCheck pk = new VersionCheck(getClient().enableCrypt(), 1);
-			getClient().sendPacket(pk);
+			getClient().sendPacket(new VersionCheck(getClient().enableCrypt(), 1));
 			getClient().setProtocolOk(true);
 		}
 	}
@@ -81,6 +79,6 @@ public final class ProtocolVersion extends L2GameClientPacket
 	@Override
 	public String getType()
 	{
-		return "[C] 0E ProtocolVersion";
+		return _C__0E_SENDPROTOCOLVERSION;
 	}
 }

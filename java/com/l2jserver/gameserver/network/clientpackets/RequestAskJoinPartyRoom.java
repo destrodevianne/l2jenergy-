@@ -58,7 +58,7 @@ public class RequestAskJoinPartyRoom extends L2GameClientPacket
 			}
 			else
 			{
-				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.C1_IS_BUSY_TRY_LATER).addPcName(target));
+				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.S1_IS_BUSY_TRY_LATER).addPcName(target));
 			}
 		}
 		else

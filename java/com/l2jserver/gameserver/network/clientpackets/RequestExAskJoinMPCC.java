@@ -176,7 +176,7 @@ public final class RequestExAskJoinMPCC extends L2GameClientPacket
 		}
 		else
 		{
-			sm = SystemMessage.getSystemMessage(SystemMessageId.C1_IS_BUSY_TRY_LATER);
+			sm = SystemMessage.getSystemMessage(SystemMessageId.S1_IS_BUSY_TRY_LATER);
 			sm.addString(targetLeader.getName());
 			requestor.sendPacket(sm);
 		}

@@ -23,8 +23,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.configuration.config.Config;
@@ -36,9 +34,8 @@ import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.itemcontainer.Inventory;
 import com.l2jserver.gameserver.network.L2GameClient;
 
-public class CharSelectionInfo extends L2GameServerPacket
+public class CharacterSelectionInfo extends L2GameServerPacket
 {
-	private static Logger _log = Logger.getLogger(CharSelectionInfo.class.getName());
 	private final String _loginName;
 	private final int _sessionId;
 	private int _activeId;
@@ -49,7 +46,7 @@ public class CharSelectionInfo extends L2GameServerPacket
 	 * @param loginName
 	 * @param sessionId
 	 */
-	public CharSelectionInfo(String loginName, int sessionId)
+	public CharacterSelectionInfo(String loginName, int sessionId)
 	{
 		_sessionId = sessionId;
 		_loginName = loginName;
@@ -57,7 +54,7 @@ public class CharSelectionInfo extends L2GameServerPacket
 		_activeId = -1;
 	}
 	
-	public CharSelectionInfo(String loginName, int sessionId, int activeId)
+	public CharacterSelectionInfo(String loginName, int sessionId, int activeId)
 	{
 		_sessionId = sessionId;
 		_loginName = loginName;
@@ -195,7 +192,7 @@ public class CharSelectionInfo extends L2GameServerPacket
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Could not restore char info: " + e.getMessage(), e);
+			LOG.warn("Could not restore char info!", e);
 		}
 		return characterList;
 	}
@@ -219,7 +216,7 @@ public class CharSelectionInfo extends L2GameServerPacket
 		}
 		catch (Exception e)
 		{
-			_log.log(Level.WARNING, "Could not restore char subclass info: " + e.getMessage(), e);
+			LOG.warn("Could not restore char subclass info!", e);
 		}
 	}
 	
@@ -316,7 +313,7 @@ public class CharSelectionInfo extends L2GameServerPacket
 			}
 			catch (Exception e)
 			{
-				_log.log(Level.WARNING, "Could not restore augmentation info: " + e.getMessage(), e);
+				LOG.warn("Could not restore augmentation info!", e);
 			}
 		}
 		

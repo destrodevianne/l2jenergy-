@@ -53,12 +53,12 @@ public class RequestGoodsInventoryInfo extends L2GameClientPacket
 		}
 		if (activeChar.getPrivateStoreType() != PrivateStoreType.NONE)
 		{
-			activeChar.sendPacket(new ExGoodsInventoryResult(ExGoodsInventoryResult.CANT_USE_AT_TRADE_OR_PRIVATE_SHOP));
+			activeChar.sendPacket(ExGoodsInventoryResult.CANT_USE_AT_TRADE_OR_PRIVATE_SHOP);
 			return;
 		}
 		if (activeChar.getPremiumItemList().isEmpty())
 		{
-			activeChar.sendPacket(new ExGoodsInventoryResult(ExGoodsInventoryResult.NOT_EXISTS));
+			activeChar.sendPacket(ExGoodsInventoryResult.NOT_EXISTS);
 			return;
 		}
 		activeChar.sendPacket(new ExGoodsInventoryInfo(activeChar.getPremiumItemList()));

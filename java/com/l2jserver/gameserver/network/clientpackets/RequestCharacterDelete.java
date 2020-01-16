@@ -18,32 +18,26 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.model.CharSelectInfoPackage;
 import com.l2jserver.gameserver.model.events.Containers;
 import com.l2jserver.gameserver.model.events.EventDispatcher;
 import com.l2jserver.gameserver.model.events.impl.character.player.OnPlayerDelete;
-import com.l2jserver.gameserver.network.serverpackets.CharDeleteFail;
-import com.l2jserver.gameserver.network.serverpackets.CharDeleteSuccess;
-import com.l2jserver.gameserver.network.serverpackets.CharSelectionInfo;
+import com.l2jserver.gameserver.network.serverpackets.CharacterDeleteFail;
+import com.l2jserver.gameserver.network.serverpackets.CharacterDeleteSuccess;
+import com.l2jserver.gameserver.network.serverpackets.CharacterSelectionInfo;
 import com.l2jserver.gameserver.util.FloodProtectors;
 import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
-/**
- * This class ...
- * @version $Revision: 1.8.2.1.2.3 $ $Date: 2005/03/27 15:29:30 $
- */
-public final class CharacterDelete extends L2GameClientPacket
+public final class RequestCharacterDelete extends L2GameClientPacket
 {
-	private static final String _C__0C_CHARACTERDELETE = "[C] 0D CharacterDelete";
+	private static final String _C__0C_REQUESTCHARACTERDELETE = "[C] 0D RequestCharacterDelete";
 	
-	// cd
-	private int _charSlot;
+	private int _slot;
 	
 	@Override
 	protected void readImpl()
 	{
-		_charSlot = readD();
+		_slot = readD();
 	}
 	
 	@Override
@@ -51,18 +45,13 @@ public final class CharacterDelete extends L2GameClientPacket
 	{
 		if (!FloodProtectors.performAction(getClient(), Action.CHARACTER_SELECT))
 		{
-			sendPacket(new CharDeleteFail(CharDeleteFail.REASON_DELETION_FAILED));
+			sendPacket(CharacterDeleteFail.REASON_DELETION_FAILED);
 			return;
-		}
-		
-		if (Config.DEBUG)
-		{
-			LOG.debug("Deleting slot: {}", _charSlot);
 		}
 		
 		try
 		{
-			byte answer = getClient().markToDeleteChar(_charSlot);
+			byte answer = getClient().markToDeleteChar(_slot);
 			
 			switch (answer)
 			{
@@ -70,15 +59,15 @@ public final class CharacterDelete extends L2GameClientPacket
 				case -1: // Error
 					break;
 				case 0: // Success!
-					sendPacket(new CharDeleteSuccess());
-					final CharSelectInfoPackage charInfo = getClient().getCharSelection(_charSlot);
+					sendPacket(CharacterDeleteSuccess.STATIC_PACKET);
+					final CharSelectInfoPackage charInfo = getClient().getCharSelection(_slot);
 					EventDispatcher.getInstance().notifyEvent(new OnPlayerDelete(charInfo.getObjectId(), charInfo.getName(), getClient()), Containers.Players());
 					break;
 				case 1:
-					sendPacket(new CharDeleteFail(CharDeleteFail.REASON_YOU_MAY_NOT_DELETE_CLAN_MEMBER));
+					sendPacket(CharacterDeleteFail.REASON_YOU_MAY_NOT_DELETE_CLAN_MEMBER);
 					break;
 				case 2:
-					sendPacket(new CharDeleteFail(CharDeleteFail.REASON_CLAN_LEADERS_MAY_NOT_BE_DELETED));
+					sendPacket(CharacterDeleteFail.REASON_CLAN_LEADERS_MAY_NOT_BE_DELETED);
 					break;
 			}
 		}
@@ -87,14 +76,14 @@ public final class CharacterDelete extends L2GameClientPacket
 			LOG.error("", e);
 		}
 		
-		CharSelectionInfo cl = new CharSelectionInfo(getClient().getAccountName(), getClient().getSessionId().playOkID1, 0);
-		sendPacket(cl);
-		getClient().setCharSelection(cl.getCharInfo());
+		CharacterSelectionInfo csi = new CharacterSelectionInfo(getClient().getAccountName(), getClient().getSessionId().playOkID1, 0);
+		sendPacket(csi);
+		getClient().setCharSelection(csi.getCharInfo());
 	}
 	
 	@Override
 	public String getType()
 	{
-		return _C__0C_CHARACTERDELETE;
+		return _C__0C_REQUESTCHARACTERDELETE;
 	}
 }

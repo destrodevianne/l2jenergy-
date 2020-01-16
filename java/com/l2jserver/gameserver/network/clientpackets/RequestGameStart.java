@@ -37,7 +37,7 @@ import com.l2jserver.gameserver.model.punishment.PunishmentAffect;
 import com.l2jserver.gameserver.model.punishment.PunishmentType;
 import com.l2jserver.gameserver.network.L2GameClient;
 import com.l2jserver.gameserver.network.L2GameClient.GameClientState;
-import com.l2jserver.gameserver.network.serverpackets.CharSelected;
+import com.l2jserver.gameserver.network.serverpackets.CharacterSelected;
 import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.network.serverpackets.SSQInfo;
 import com.l2jserver.gameserver.network.serverpackets.ServerClose;
@@ -45,31 +45,22 @@ import com.l2jserver.gameserver.util.FloodProtectors;
 import com.l2jserver.gameserver.util.FloodProtectors.Action;
 import com.l2jserver.gameserver.util.LoggingUtils;
 
-public class CharacterSelect extends L2GameClientPacket
+public class RequestGameStart extends L2GameClientPacket
 {
-	private static final String _C__12_CHARACTERSELECT = "[C] 12 CharacterSelect";
+	private static final String _C__12_REQUESTGAMESTART = "[C] 12 RequestGameStart";
+	
 	protected static final Logger LOG_ACCOUNTING = LoggerFactory.getLogger("accounting");
 	
-	// cd
-	private int _charSlot;
-	
-	@SuppressWarnings("unused")
-	private int _unk1; // new in C4
-	@SuppressWarnings("unused")
-	private int _unk2; // new in C4
-	@SuppressWarnings("unused")
-	private int _unk3; // new in C4
-	@SuppressWarnings("unused")
-	private int _unk4; // new in C4
+	private int _slot;
 	
 	@Override
 	protected void readImpl()
 	{
-		_charSlot = readD();
-		_unk1 = readH();
-		_unk2 = readD();
-		_unk3 = readD();
-		_unk4 = readD();
+		_slot = readD();
+		readH(); // Not used.
+		readD(); // Not used.
+		readD(); // Not used.
+		readD(); // Not used.
 	}
 	
 	@Override
@@ -97,7 +88,7 @@ public class CharacterSelect extends L2GameClientPacket
 				// but if not then this is repeated packet and nothing should be done here
 				if (client.getActiveChar() == null)
 				{
-					final CharSelectInfoPackage info = client.getCharSelection(_charSlot);
+					final CharSelectInfoPackage info = client.getCharSelection(_slot);
 					if (info == null)
 					{
 						return;
@@ -127,36 +118,30 @@ public class CharacterSelect extends L2GameClientPacket
 						return;
 					}
 					
-					// The L2PcInstance must be created here, so that it can be attached to the L2GameClient
-					if (Config.DEBUG)
-					{
-						LOG.debug("selected slot: {}", _charSlot);
-					}
-					
 					// load up character from disk
-					final L2PcInstance cha = client.loadCharFromDisk(_charSlot);
-					if (cha == null)
+					final L2PcInstance player = client.loadCharFromDisk(_slot);
+					if (player == null)
 					{
 						return; // handled in L2GameClient
 					}
-					L2World.getInstance().addPlayerToWorld(cha);
-					CharNameTable.getInstance().addName(cha);
+					L2World.getInstance().addPlayerToWorld(player);
+					CharNameTable.getInstance().addName(player);
 					
-					cha.setClient(client);
-					client.setActiveChar(cha);
-					cha.setOnlineStatus(true, true);
+					player.setClient(client);
+					client.setActiveChar(player);
+					player.setOnlineStatus(true, true);
 					
-					final TerminateReturn terminate = EventDispatcher.getInstance().notifyEvent(new OnPlayerSelect(cha, cha.getObjectId(), cha.getName(), getClient()), Containers.Players(), TerminateReturn.class);
+					final TerminateReturn terminate = EventDispatcher.getInstance().notifyEvent(new OnPlayerSelect(player, player.getObjectId(), player.getName(), getClient()), Containers.Players(), TerminateReturn.class);
 					if ((terminate != null) && terminate.terminate())
 					{
-						cha.deleteMe();
+						player.deleteMe();
 						return;
 					}
 					
 					sendPacket(SSQInfo.sendSky());
 					
 					client.setState(GameClientState.ENTERING);
-					CharSelected cs = new CharSelected(cha, client.getSessionId().playOkID1);
+					CharacterSelected cs = new CharacterSelected(player, client.getSessionId().playOkID1);
 					sendPacket(cs);
 				}
 			}
@@ -178,6 +163,6 @@ public class CharacterSelect extends L2GameClientPacket
 	@Override
 	public String getType()
 	{
-		return _C__12_CHARACTERSELECT;
+		return _C__12_REQUESTGAMESTART;
 	}
 }

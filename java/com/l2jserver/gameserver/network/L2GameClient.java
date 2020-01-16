@@ -703,12 +703,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 	private int getObjectIdForSlot(int charslot)
 	{
 		final CharSelectInfoPackage info = getCharSelection(charslot);
-		if (info == null)
-		{
-			LOG.warn("{} tried to delete Character in slot {} but no characters exits at that slot.", toString(), charslot);
-			return -1;
-		}
-		return info.getObjectId();
+		return (info == null) ? -1 : info.getObjectId();
 	}
 	
 	@Override

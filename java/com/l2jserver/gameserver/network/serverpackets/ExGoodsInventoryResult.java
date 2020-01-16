@@ -20,22 +20,22 @@ package com.l2jserver.gameserver.network.serverpackets;
 
 public class ExGoodsInventoryResult extends L2GameServerPacket
 {
-	public static int NOTHING = 1;
-	public static int SUCCESS = 2;
-	public static int ERROR = -1;
-	public static int TRY_AGAIN_LATER = -2;
-	public static int INVENTORY_FULL = -3;
-	public static int NOT_CONNECT_TO_PRODUCT_SERVER = -4;
-	public static int CANT_USE_AT_TRADE_OR_PRIVATE_SHOP = -5;
-	public static int NOT_EXISTS = -6;
-	public static int TO_MANY_USERS_TRY_AGAIN_INVENTORY = -101;
-	public static int TO_MANY_USERS_TRY_AGAIN = -102;
-	public static int PREVIOS_REQUEST_IS_NOT_COMPLETE = -103;
-	public static int NOTHING2 = -104;
-	public static int ALREADY_RETRACTED = -105;
-	public static int ALREADY_RECIVED = -106;
-	public static int PRODUCT_CANNOT_BE_RECEIVED_AT_CURRENT_SERVER = -107;
-	public static int PRODUCT_CANNOT_BE_RECEIVED_AT_CURRENT_PLAYER = -108;
+	public static final ExGoodsInventoryResult NOTHING = new ExGoodsInventoryResult(1);
+	public static final ExGoodsInventoryResult SUCCESS = new ExGoodsInventoryResult(2);
+	public static final ExGoodsInventoryResult ERROR = new ExGoodsInventoryResult(-1);
+	public static final ExGoodsInventoryResult TRY_AGAIN_LATER = new ExGoodsInventoryResult(-2);
+	public static final ExGoodsInventoryResult INVENTORY_FULL = new ExGoodsInventoryResult(-3);
+	public static final ExGoodsInventoryResult NOT_CONNECT_TO_PRODUCT_SERVER = new ExGoodsInventoryResult(-4);
+	public static final ExGoodsInventoryResult CANT_USE_AT_TRADE_OR_PRIVATE_SHOP = new ExGoodsInventoryResult(-5);
+	public static final ExGoodsInventoryResult NOT_EXISTS = new ExGoodsInventoryResult(-6);
+	public static final ExGoodsInventoryResult TO_MANY_USERS_TRY_AGAIN_INVENTORY = new ExGoodsInventoryResult(-101);
+	public static final ExGoodsInventoryResult TO_MANY_USERS_TRY_AGAIN = new ExGoodsInventoryResult(-102);
+	public static final ExGoodsInventoryResult PREVIOS_REQUEST_IS_NOT_COMPLETE = new ExGoodsInventoryResult(-103);
+	public static final ExGoodsInventoryResult NOTHING2 = new ExGoodsInventoryResult(-104);
+	public static final ExGoodsInventoryResult ALREADY_RETRACTED = new ExGoodsInventoryResult(-105);
+	public static final ExGoodsInventoryResult ALREADY_RECIVED = new ExGoodsInventoryResult(-106);
+	public static final ExGoodsInventoryResult PRODUCT_CANNOT_BE_RECEIVED_AT_CURRENT_SERVER = new ExGoodsInventoryResult(-107);
+	public static final ExGoodsInventoryResult PRODUCT_CANNOT_BE_RECEIVED_AT_CURRENT_PLAYER = new ExGoodsInventoryResult(-108);
 	
 	private final int _result;
 	
@@ -49,7 +49,6 @@ public class ExGoodsInventoryResult extends L2GameServerPacket
 	{
 		writeC(0xFE);
 		writeH(0xE4);
-		
 		writeD(_result);
 	}
 }

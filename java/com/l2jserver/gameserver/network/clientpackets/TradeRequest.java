@@ -157,7 +157,7 @@ public final class TradeRequest extends L2GameClientPacket
 		SystemMessage sm;
 		if (partner.isProcessingRequest() || partner.isProcessingTransaction())
 		{
-			sm = SystemMessage.getSystemMessage(SystemMessageId.C1_IS_BUSY_TRY_LATER);
+			sm = SystemMessage.getSystemMessage(SystemMessageId.S1_IS_BUSY_TRY_LATER);
 			sm.addString(partner.getName());
 			player.sendPacket(sm);
 			return;

@@ -21,9 +21,11 @@ package com.l2jserver.gameserver.network.clientpackets;
 import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
+import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PetInstance;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
+import com.l2jserver.gameserver.model.items.type.EtcItemType;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.util.FloodProtectors;
 import com.l2jserver.gameserver.util.FloodProtectors.Action;
@@ -72,6 +74,18 @@ public final class RequestGiveItemToPet extends L2GameClientPacket
 			return;
 		}
 		
+		if (player.isInStoreMode())
+		{
+			player.sendPacket(SystemMessageId.CANNOT_PICKUP_OR_USE_ITEM_WHILE_TRADING);
+			return;
+		}
+		
+		if (player.isProcessingTransaction())
+		{
+			player.sendPacket(SystemMessageId.ALREADY_TRADING);
+			return;
+		}
+		
 		if (player.getPrivateStoreType() != PrivateStoreType.NONE)
 		{
 			player.sendMessage(MessagesData.getInstance().getMessage(player, "no_exchange_items"));
@@ -79,7 +93,7 @@ public final class RequestGiveItemToPet extends L2GameClientPacket
 		}
 		
 		final L2ItemInstance item = player.getInventory().getItemByObjectId(_objectId);
-		if (item == null)
+		if ((item == null) || item.isAugmented())
 		{
 			return;
 		}
@@ -91,12 +105,7 @@ public final class RequestGiveItemToPet extends L2GameClientPacket
 			return;
 		}
 		
-		if (item.isAugmented())
-		{
-			return;
-		}
-		
-		if (item.isHeroItem() || !item.isDropable() || !item.isDestroyable() || !item.isTradeable())
+		if (item.isHeroItem() || !item.isDropable() || !item.isDestroyable() || !item.isTradeable() || (item.getItem().getItemType() == EtcItemType.ARROW) || (item.getItem().getItemType() == EtcItemType.SHOT))
 		{
 			player.sendPacket(SystemMessageId.ITEM_NOT_FOR_PETS);
 			return;
@@ -106,6 +115,12 @@ public final class RequestGiveItemToPet extends L2GameClientPacket
 		if (pet.isDead())
 		{
 			player.sendPacket(SystemMessageId.CANNOT_GIVE_ITEMS_TO_DEAD_PET);
+			return;
+		}
+		
+		if (Util.calculateDistance(player, pet, true, false) > L2Npc.INTERACTION_DISTANCE)
+		{
+			player.sendPacket(SystemMessageId.TARGET_TOO_FAR);
 			return;
 		}
 		

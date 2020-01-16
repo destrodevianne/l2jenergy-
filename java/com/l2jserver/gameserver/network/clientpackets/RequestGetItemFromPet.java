@@ -23,6 +23,7 @@ import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PetInstance;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
+import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.util.FloodProtectors;
 import com.l2jserver.gameserver.util.FloodProtectors.Action;
 import com.l2jserver.gameserver.util.Util;
@@ -66,6 +67,12 @@ public final class RequestGetItemFromPet extends L2GameClientPacket
 		final L2PetInstance pet = (L2PetInstance) player.getSummon();
 		if (player.getActiveEnchantItemId() != L2PcInstance.ID_NONE)
 		{
+			return;
+		}
+		
+		if (player.isProcessingTransaction())
+		{
+			player.sendPacket(SystemMessageId.ALREADY_TRADING);
 			return;
 		}
 		

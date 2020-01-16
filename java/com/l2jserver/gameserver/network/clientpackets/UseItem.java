@@ -83,6 +83,12 @@ public final class UseItem extends L2GameClientPacket
 			return;
 		}
 		
+		if (activeChar.isInStoreMode())
+		{
+			activeChar.sendPacket(SystemMessageId.ITEMS_UNAVAILABLE_FOR_STORE_MANUFACTURE);
+			return;
+		}
+		
 		if (activeChar.getActiveTradeList() != null)
 		{
 			activeChar.cancelActiveTrade();

@@ -34,6 +34,7 @@ import com.l2jserver.commons.UPnPService;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.IPv4Filter;
 import com.l2jserver.commons.util.MemoryWatchDog;
+import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.commons.util.Util;
 import com.l2jserver.commons.versioning.Version;
 import com.l2jserver.gameserver.cache.HtmCache;
@@ -194,10 +195,10 @@ public final class GameServer
 		new File("logs/game").mkdirs();
 		
 		// load script engines
-		printSection("Engines");
+		StringUtil.printSection("Engines");
 		L2ScriptEngineManager.getInstance();
 		
-		printSection("World");
+		StringUtil.printSection("World");
 		// start game time control early
 		GameTimeController.init();
 		InstanceManager.getInstance();
@@ -206,21 +207,21 @@ public final class GameServer
 		AnnouncementsTable.getInstance();
 		GlobalVariablesManager.getInstance();
 		
-		printSection("Data");
+		StringUtil.printSection("Data");
 		CategoryData.getInstance();
 		SecondaryAuthData.getInstance();
 		
-		printSection("Effects");
+		StringUtil.printSection("Effects");
 		EffectHandler.getInstance().executeScript();
-		printSection("Enchant Skill Groups");
+		StringUtil.printSection("Enchant Skill Groups");
 		EnchantSkillGroupsData.getInstance();
-		printSection("Skill Trees");
+		StringUtil.printSection("Skill Trees");
 		SkillTreesData.getInstance();
-		printSection("Skills");
+		StringUtil.printSection("Skills");
 		SkillData.getInstance();
 		SummonSkillsTable.getInstance();
 		
-		printSection("Items");
+		StringUtil.printSection("Items");
 		ItemTable.getInstance();
 		EnchantItemGroupsData.getInstance();
 		EnchantItemData.getInstance();
@@ -241,7 +242,7 @@ public final class GameServer
 		FishingRodsData.getInstance();
 		HennaData.getInstance();
 		
-		printSection("Characters");
+		StringUtil.printSection("Characters");
 		ClassListData.getInstance();
 		InitialEquipmentData.getInstance();
 		InitialShortcutData.getInstance();
@@ -258,16 +259,16 @@ public final class GameServer
 		CharSummonTable.getInstance().init();
 		
 		// Multi-Language System
-		printSection("Messages");
+		StringUtil.printSection("Messages");
 		MessagesData.getInstance();
 		
-		printSection("Clans");
+		StringUtil.printSection("Clans");
 		ClanTable.getInstance();
 		CHSiegeManager.getInstance();
 		ClanHallManager.getInstance();
 		AuctionManager.getInstance();
 		
-		printSection("Geodata");
+		StringUtil.printSection("Geodata");
 		GeoData.getInstance();
 		
 		if (GeoDataConfig.PATHFINDING > 0)
@@ -275,7 +276,7 @@ public final class GameServer
 			PathFinding.getInstance();
 		}
 		
-		printSection("NPCs");
+		StringUtil.printSection("NPCs");
 		SkillLearnData.getInstance();
 		NpcData.getInstance();
 		WalkingManager.getInstance();
@@ -286,18 +287,18 @@ public final class GameServer
 		NpcBufferTable.getInstance();
 		GrandBossManager.getInstance().initZones();
 		EventDroplist.getInstance();
-		printSection("Auction Manager");
+		StringUtil.printSection("Auction Manager");
 		ItemAuctionManager.getInstance();
 		
-		printSection("Olympiad");
+		StringUtil.printSection("Olympiad");
 		Olympiad.getInstance();// TODO: log
 		Hero.getInstance();// TODO: log
 		
-		printSection("Seven Signs");
+		StringUtil.printSection("Seven Signs");
 		SevenSigns.getInstance();
 		
 		// Call to load caches
-		printSection("Cache");
+		StringUtil.printSection("Cache");
 		HtmCache.getInstance();
 		CrestTable.getInstance();
 		TeleportLocationTable.getInstance();
@@ -315,11 +316,11 @@ public final class GameServer
 		TransformData.getInstance();
 		BotReportTable.getInstance();
 		
-		printSection("Bonus Tops");
+		StringUtil.printSection("Bonus Tops");
 		L2TopManager.getInstance();
 		MMOTopManager.getInstance();
 		
-		printSection("Scripts");
+		StringUtil.printSection("Scripts");
 		QuestManager.getInstance();
 		BoatManager.getInstance();
 		AirShipManager.getInstance();
@@ -344,7 +345,7 @@ public final class GameServer
 		DimensionalRiftManager.getInstance();
 		RaidBossSpawnManager.getInstance();
 		
-		printSection("Siege");
+		StringUtil.printSection("Siege");
 		SiegeManager.getInstance().getSieges();
 		CastleManager.getInstance().activateInstances();
 		FortManager.getInstance().loadInstances();
@@ -428,6 +429,25 @@ public final class GameServer
 		}
 		System.gc();
 		Toolkit.getDefaultToolkit().beep();
+		
+		StringUtil.printSection("Server Info");
+		LOG.info("{}: Maximum numbers of connected players: {}", getClass().getSimpleName(), ServerConfig.MAXIMUM_ONLINE_USERS);
+		LOG.info("{}: Started, free memory {} of {}", getClass().getSimpleName(), MemoryWatchDog.getMemFreeMb(), MemoryWatchDog.getMemMaxMb());
+		LOG.info("{}: Used memory: {}", getClass().getSimpleName(), MemoryWatchDog.getMemUsedMb());
+		LOG.info("Revision: ................ {}", getVersion().getRevisionNumber());
+		LOG.info("Builded: ................. {}", getVersion().getBuildDate());
+		LOG.info("Compiler version: ........ {}", getVersion().getBuildJdk());
+		LOG.info("Forum: ................... L2jEnergy.ru");
+		LOG.info("{}: Server loaded in {} seconds.", getClass().getSimpleName(), TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis() - serverLoadStart));
+		_upTime = System.currentTimeMillis();
+		
+		if (ServerConfig.ENABLE_UPNP)
+		{
+			StringUtil.printSection("UPnP");
+			UPnPService.getInstance().load(ServerConfig.PORT_GAME, "L2J Game Server");
+		}
+		
+		StringUtil.printSection("Login");
 		LoginServerThread.getInstance().start();
 		
 		final SelectorConfig sc = new SelectorConfig();
@@ -464,25 +484,11 @@ public final class GameServer
 			LOG.error("{}: Failed to open server socket!", getClass().getSimpleName(), e);
 			System.exit(1);
 		}
-		
-		LOG.info("{}: Maximum numbers of connected players: {}", getClass().getSimpleName(), ServerConfig.MAXIMUM_ONLINE_USERS);
-		LOG.info("{}: Started, free memory {} of {}", getClass().getSimpleName(), MemoryWatchDog.getMemFreeMb(), MemoryWatchDog.getMemMaxMb());
-		LOG.info("{}: Used memory: {}", getClass().getSimpleName(), MemoryWatchDog.getMemUsedMb());
-		LOG.info("Revision: ................ {}", getVersion().getRevisionNumber());
-		LOG.info("Builded: ................. {}", getVersion().getBuildDate());
-		LOG.info("Compiler version: ........ {}", getVersion().getBuildJdk());
-		LOG.info("Forum: ................... L2jEnergy.ru");
-		LOG.info("{}: Server loaded in {} seconds.", getClass().getSimpleName(), TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis() - serverLoadStart));
-		_upTime = System.currentTimeMillis();
-		if (ServerConfig.ENABLE_UPNP)
-		{
-			printSection("UPnP");
-			UPnPService.getInstance().load(ServerConfig.PORT_GAME, "L2J Game Server");
-		}
 	}
 	
 	public static void main(String[] args) throws Exception
 	{
+		StringUtil.printSection("Config");
 		// Initialize configurations.
 		ConfigLoader.loading();
 		Config.load();
@@ -503,7 +509,7 @@ public final class GameServer
 		File logFolder = new File(LOG_FOLDER);
 		logFolder.mkdir();
 		
-		printSection("Database");
+		StringUtil.printSection("Database");
 		DAOFactory.getInstance();
 		
 		ConnectionFactory.builder() //
@@ -546,15 +552,5 @@ public final class GameServer
 	public Version getVersion()
 	{
 		return _version;
-	}
-	
-	public static void printSection(String s)
-	{
-		s = "=[ " + s + " ]";
-		while (s.length() < 61)
-		{
-			s = "-" + s;
-		}
-		LOG.info(s);
 	}
 }
