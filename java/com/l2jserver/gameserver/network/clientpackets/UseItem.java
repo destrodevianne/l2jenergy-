@@ -33,7 +33,6 @@ import com.l2jserver.gameserver.instancemanager.FortSiegeManager;
 import com.l2jserver.gameserver.model.PcCondOverride;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.effects.L2EffectType;
-import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.itemcontainer.Inventory;
 import com.l2jserver.gameserver.model.items.L2EtcItem;
@@ -184,11 +183,11 @@ public final class UseItem extends L2GameClientPacket
 				return;
 			}
 			
-			// Equip or unEquip
-			if (!GameEventManager.onUseItem(activeChar))
-			{
-				return;
-			}
+			// TODO: need fix
+			// if (!GameEventManager.onUseItem(activeChar))
+			// {
+			// return;
+			// }
 			
 			// Equip or unEquip
 			if (FortSiegeManager.getInstance().isCombat(_itemId))
