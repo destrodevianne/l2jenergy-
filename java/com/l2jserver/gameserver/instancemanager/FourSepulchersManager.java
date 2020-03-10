@@ -1369,6 +1369,11 @@ public final class FourSepulchersManager
 	{
 		for (L2Npc mob : _allMobs)
 		{
+			if (mob == null)
+			{
+				continue;
+			}
+			
 			try
 			{
 				if (mob.getSpawn() != null)

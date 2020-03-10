@@ -112,9 +112,7 @@ public class BlockList
 		
 		if (listOwner.isFriend(targetId))
 		{
-			SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.S1_ALREADY_IN_FRIENDS_LIST);
-			sm.addString(charName);
-			listOwner.sendPacket(sm);
+			listOwner.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.S1_ALREADY_IN_FRIENDS_LIST).addString(charName));
 			return;
 		}
 		
@@ -125,18 +123,13 @@ public class BlockList
 		}
 		
 		listOwner.getBlockList().addToBlockList(targetId);
-		
-		SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.S1_WAS_ADDED_TO_YOUR_IGNORE_LIST);
-		sm.addString(charName);
-		listOwner.sendPacket(sm);
+		listOwner.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.S1_WAS_ADDED_TO_YOUR_IGNORE_LIST).addString(charName));
 		
 		L2PcInstance player = L2World.getInstance().getPlayer(targetId);
 		
 		if (player != null)
 		{
-			sm = SystemMessage.getSystemMessage(SystemMessageId.S1_HAS_ADDED_YOU_TO_IGNORE_LIST);
-			sm.addString(listOwner.getName());
-			player.sendPacket(sm);
+			player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.S1_HAS_ADDED_YOU_TO_IGNORE_LIST).addString(listOwner.getName()));
 		}
 	}
 	
@@ -147,22 +140,15 @@ public class BlockList
 			return;
 		}
 		
-		SystemMessage sm;
-		
 		String charName = CharNameTable.getInstance().getNameById(targetId);
 		
 		if (!listOwner.getBlockList().getBlockList().contains(targetId))
 		{
-			sm = SystemMessage.getSystemMessage(SystemMessageId.TARGET_IS_INCORRECT);
-			listOwner.sendPacket(sm);
+			listOwner.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.TARGET_IS_INCORRECT));
 			return;
 		}
-		
 		listOwner.getBlockList().removeFromBlockList(targetId);
-		
-		sm = SystemMessage.getSystemMessage(SystemMessageId.S1_WAS_REMOVED_FROM_YOUR_IGNORE_LIST);
-		sm.addString(charName);
-		listOwner.sendPacket(sm);
+		listOwner.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.S1_WAS_REMOVED_FROM_YOUR_IGNORE_LIST).addString(charName));
 	}
 	
 	public static boolean isInBlockList(L2PcInstance listOwner, L2PcInstance target)

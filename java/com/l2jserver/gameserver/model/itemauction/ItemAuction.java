@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.instancemanager.ItemAuctionManager;
 import com.l2jserver.gameserver.model.ItemInfo;
 import com.l2jserver.gameserver.model.L2World;
@@ -66,10 +67,6 @@ public final class ItemAuction
 	
 	private ItemAuctionBid _highestBid;
 	private int _lastBidPlayerObjId;
-	
-	// SQL
-	private static final String DELETE_ITEM_AUCTION_BID = "DELETE FROM item_auction_bid WHERE auctionId = ? AND playerObjId = ?";
-	private static final String INSERT_ITEM_AUCTION_BID = "INSERT INTO item_auction_bid (auctionId, playerObjId, playerBid) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE playerBid = ?";
 	
 	public ItemAuction(final int auctionId, final int instanceId, final long startingTime, final long endingTime, final AuctionItem auctionItem)
 	{
@@ -221,33 +218,6 @@ public final class ItemAuction
 		return lastBid;
 	}
 	
-	private final void updatePlayerBid(final ItemAuctionBid bid, final boolean delete)
-	{
-		// TODO nBd maybe move such stuff to you db updater :D
-		updatePlayerBidInternal(bid, delete);
-	}
-	
-	final void updatePlayerBidInternal(final ItemAuctionBid bid, final boolean delete)
-	{
-		final String query = delete ? DELETE_ITEM_AUCTION_BID : INSERT_ITEM_AUCTION_BID;
-		try (Connection con = ConnectionFactory.getInstance().getConnection();
-			PreparedStatement ps = con.prepareStatement(query))
-		{
-			ps.setInt(1, _auctionId);
-			ps.setInt(2, bid.getPlayerObjId());
-			if (!delete)
-			{
-				ps.setLong(3, bid.getLastBid());
-				ps.setLong(4, bid.getLastBid());
-			}
-			ps.execute();
-		}
-		catch (SQLException e)
-		{
-			LOG.warn("", e);
-		}
-	}
-	
 	public final void registerBid(final L2PcInstance player, final long newBid)
 	{
 		if (player == null)
@@ -320,11 +290,8 @@ public final class ItemAuction
 			}
 			
 			onPlayerBid(player, bid);
-			updatePlayerBid(bid, false);
-			
-			SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.SUBMITTED_A_BID_OF_S1);
-			sm.addLong(newBid);
-			player.sendPacket(sm);
+			DAOFactory.getInstance().getItemAuctionDAO().updatePlayerBidInternal(_auctionId, bid, false);
+			player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.SUBMITTED_A_BID_OF_S1).addLong(newBid));
 			return;
 		}
 	}
@@ -482,7 +449,7 @@ public final class ItemAuction
 			bid.cancelBid();
 			
 			// delete bid from database if auction already finished
-			updatePlayerBid(bid, getAuctionState() == ItemAuctionState.FINISHED);
+			DAOFactory.getInstance().getItemAuctionDAO().updatePlayerBidInternal(_auctionId, bid, getAuctionState() == ItemAuctionState.FINISHED);
 			
 			player.sendPacket(SystemMessageId.CANCELED_BID);
 		}
@@ -504,7 +471,7 @@ public final class ItemAuction
 				{
 					continue;
 				}
-				updatePlayerBid(bid, true);
+				DAOFactory.getInstance().getItemAuctionDAO().updatePlayerBidInternal(_auctionId, bid, true);
 			}
 		}
 	}

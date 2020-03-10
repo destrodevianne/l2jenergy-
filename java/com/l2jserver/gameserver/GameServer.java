@@ -24,8 +24,9 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.file.Paths;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -175,12 +176,12 @@ public final class GameServer
 	private final SelectorThread<L2GameClient> _selectorThread;
 	private final L2GamePacketHandler _gamePacketHandler;
 	private final DeadLockDetector _deadDetectThread;
-	public static GameServer gameServer;
+	private static GameServer INSTANCE;
 	public static final Calendar dateTimeServerStarted = Calendar.getInstance();
 	
 	public GameServer() throws Exception
 	{
-		long serverLoadStart = System.currentTimeMillis();
+		final Instant serverLoadStart = Instant.now();
 		_version = new Version(GameServer.class);
 		
 		if (!IdFactory.getInstance().isInitialized())
@@ -269,11 +270,19 @@ public final class GameServer
 		AuctionManager.getInstance();
 		
 		StringUtil.printSection("Geodata");
+		
+		long geodataMemory = MemoryWatchDog.getMemUsed();
 		GeoData.getInstance();
 		
 		if (GeoDataConfig.PATHFINDING > 0)
 		{
 			PathFinding.getInstance();
+		}
+		
+		geodataMemory = MemoryWatchDog.getMemUsed() - geodataMemory;
+		if (geodataMemory < 0)
+		{
+			geodataMemory = 0;
 		}
 		
 		StringUtil.printSection("NPCs");
@@ -434,11 +443,12 @@ public final class GameServer
 		LOG.info("{}: Maximum numbers of connected players: {}", getClass().getSimpleName(), ServerConfig.MAXIMUM_ONLINE_USERS);
 		LOG.info("{}: Started, free memory {} of {}", getClass().getSimpleName(), MemoryWatchDog.getMemFreeMb(), MemoryWatchDog.getMemMaxMb());
 		LOG.info("{}: Used memory: {}", getClass().getSimpleName(), MemoryWatchDog.getMemUsedMb());
+		LOG.info("Geodata use {} MB of memory", geodataMemory);
 		LOG.info("Revision: ................ {}", getVersion().getRevisionNumber());
 		LOG.info("Builded: ................. {}", getVersion().getBuildDate());
 		LOG.info("Compiler version: ........ {}", getVersion().getBuildJdk());
 		LOG.info("Forum: ................... L2jEnergy.ru");
-		LOG.info("{}: Server loaded in {} seconds.", getClass().getSimpleName(), TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis() - serverLoadStart));
+		LOG.info("{}: Server loaded in {} seconds.", getClass().getSimpleName(), serverLoadStart.until(Instant.now(), ChronoUnit.SECONDS));
 		_upTime = System.currentTimeMillis();
 		
 		if (ServerConfig.ENABLE_UPNP)
@@ -522,7 +532,7 @@ public final class GameServer
 			.withMaxPoolSize(ServerConfig.DATABASE_MAX_CONNECTIONS) //
 			.build();
 		
-		gameServer = new GameServer();
+		INSTANCE = new GameServer();
 		
 		if (TelnetConfig.IS_TELNET_ENABLED)
 		{
@@ -552,5 +562,10 @@ public final class GameServer
 	public Version getVersion()
 	{
 		return _version;
+	}
+	
+	public static GameServer getInstance()
+	{
+		return INSTANCE;
 	}
 }

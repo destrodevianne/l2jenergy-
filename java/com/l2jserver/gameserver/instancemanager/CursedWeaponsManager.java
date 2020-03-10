@@ -56,7 +56,7 @@ import com.l2jserver.gameserver.util.IXmlReader;
  */
 public final class CursedWeaponsManager implements IXmlReader
 {
-	private Map<Integer, CursedWeapon> _cursedWeapons;
+	private final Map<Integer, CursedWeapon> _cursedWeapons = new HashMap<>();
 	
 	protected CursedWeaponsManager()
 	{
@@ -65,8 +65,6 @@ public final class CursedWeaponsManager implements IXmlReader
 	
 	private void init()
 	{
-		_cursedWeapons = new HashMap<>();
-		
 		if (!Config.ALLOW_CURSED_WEAPONS)
 		{
 			return;

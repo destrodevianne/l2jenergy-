@@ -20,10 +20,12 @@
     # Color of the name in offline mode (if OfflineSetNameColor = True)
     "OfflineNameColor" : "808080",
 
+    "OfflineSetSleep" : "true",
+
     # Allow fame for characters in offline mode 
     "OfflineFame" : "true",
 
-    #Restore offline traders/crafters after restart/shutdown. Default: false.
+    #Restore offline traders/crafters after restart/shutdown.
     "RestoreOffliners" : "false",
 
     #Do not restore offline characters, after OfflineMaxDays days spent from first restore.

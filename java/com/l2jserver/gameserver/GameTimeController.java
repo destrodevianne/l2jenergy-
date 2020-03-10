@@ -18,7 +18,8 @@
  */
 package com.l2jserver.gameserver;
 
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -45,25 +46,21 @@ public final class GameTimeController extends Thread
 	private static final int TICKS_PER_IG_DAY = SECONDS_PER_IG_DAY * TICKS_PER_SECOND;
 	protected static final int TICKS_SUN_STATE_CHANGE = TICKS_PER_IG_DAY / 4;
 	
-	private static GameTimeController _instance;
-	
 	private final Set<L2Character> _movingObjects = ConcurrentHashMap.newKeySet();
 	private final long _referenceTime;
 	
-	private GameTimeController()
+	protected GameTimeController()
 	{
 		super("GameTimeController");
 		super.setDaemon(true);
 		super.setPriority(MAX_PRIORITY);
 		
-		final Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MILLISECOND, 0);
-		_referenceTime = calendar.getTimeInMillis();
-		
-		super.start();
+		_referenceTime = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+	}
+	
+	public static void init()
+	{
+		getInstance().start();
 	}
 	
 	public final int getGameHour()
@@ -133,8 +130,6 @@ public final class GameTimeController extends Thread
 	@Override
 	public final void run()
 	{
-		LOG.debug("{}: Started.", getClass().getSimpleName());
-		
 		long nextTickTime, sleepTime;
 		boolean isNight = isNight();
 		
@@ -177,13 +172,13 @@ public final class GameTimeController extends Thread
 		}
 	}
 	
-	public static final GameTimeController getInstance()
+	public static GameTimeController getInstance()
 	{
-		return _instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
-	protected static final void init()
+	private static class SingletonHolder
 	{
-		_instance = new GameTimeController();
+		protected static final GameTimeController INSTANCE = new GameTimeController();
 	}
 }

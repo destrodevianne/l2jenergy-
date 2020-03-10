@@ -44,9 +44,9 @@ import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.enums.ItemLocation;
-import com.l2jserver.gameserver.instancemanager.ItemAuctionManager;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -66,14 +66,12 @@ public final class ItemAuctionInstance
 	// SQL queries
 	private static final String SELECT_AUCTION_ID_BY_INSTANCE_ID = "SELECT auctionId FROM item_auction WHERE instanceId = ?";
 	private static final String SELECT_AUCTION_INFO = "SELECT auctionItemId, startingTime, endingTime, auctionStateId FROM item_auction WHERE auctionId = ? ";
-	private static final String DELETE_AUCTION_INFO_BY_AUCTION_ID = "DELETE FROM item_auction WHERE auctionId = ?";
-	private static final String DELETE_AUCTION_BID_INFO_BY_AUCTION_ID = "DELETE FROM item_auction_bid WHERE auctionId = ?";
 	private static final String SELECT_PLAYERS_ID_BY_AUCTION_ID = "SELECT playerObjId, playerBid FROM item_auction_bid WHERE auctionId = ?";
 	
 	private final int _instanceId;
 	private final AtomicInteger _auctionIds;
-	private final Map<Integer, ItemAuction> _auctions;
-	private final ArrayList<AuctionItem> _items;
+	private final Map<Integer, ItemAuction> _auctions = new HashMap<>();
+	private final ArrayList<AuctionItem> _items = new ArrayList<>();
 	private final AuctionDateGenerator _dateGenerator;
 	
 	private ItemAuction _currentAuction;
@@ -84,8 +82,6 @@ public final class ItemAuctionInstance
 	{
 		_instanceId = instanceId;
 		_auctionIds = auctionIds;
-		_auctions = new HashMap<>();
-		_items = new ArrayList<>();
 		
 		final NamedNodeMap nanode = node.getAttributes();
 		final StatsSet generatorConfig = new StatsSet();
@@ -183,7 +179,7 @@ public final class ItemAuctionInstance
 						}
 						else
 						{
-							ItemAuctionManager.deleteAuction(auctionId);
+							DAOFactory.getInstance().getItemAuctionDAO().deleteAuction(auctionId);
 						}
 					}
 					catch (SQLException e)
@@ -595,17 +591,7 @@ public final class ItemAuctionInstance
 			if ((auctionState == ItemAuctionState.FINISHED) && (startingTime < (System.currentTimeMillis() - TimeUnit.MILLISECONDS.convert(Config.ALT_ITEM_AUCTION_EXPIRED_AFTER, TimeUnit.DAYS))))
 			{
 				LOG.info("Clearing expired auction ID {}.", auctionId);
-				try (PreparedStatement ps = con.prepareStatement(DELETE_AUCTION_INFO_BY_AUCTION_ID))
-				{
-					ps.setInt(1, auctionId);
-					ps.execute();
-				}
-				
-				try (PreparedStatement ps = con.prepareStatement(DELETE_AUCTION_BID_INFO_BY_AUCTION_ID))
-				{
-					ps.setInt(1, auctionId);
-					ps.execute();
-				}
+				DAOFactory.getInstance().getItemAuctionDAO().deleteAuction(auctionId);
 				return null;
 			}
 			

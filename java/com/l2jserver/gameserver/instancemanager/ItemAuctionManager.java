@@ -19,77 +19,51 @@
 package com.l2jserver.gameserver.instancemanager;
 
 import java.io.File;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.configuration.config.Config;
-import com.l2jserver.gameserver.configuration.config.ServerConfig;
+import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.model.itemauction.ItemAuctionInstance;
+import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
  * @author Forsaiken
  */
-public final class ItemAuctionManager
+public final class ItemAuctionManager implements IXmlReader
 {
-	private static final Logger LOG = LoggerFactory.getLogger(ItemAuctionManager.class);
-	
 	private final Map<Integer, ItemAuctionInstance> _managerInstances = new HashMap<>();
-	private final AtomicInteger _auctionIds;
+	private final AtomicInteger _auctionIds = new AtomicInteger(1);
 	
 	protected ItemAuctionManager()
 	{
-		_auctionIds = new AtomicInteger(1);
-		
 		if (!Config.ALT_ITEM_AUCTION_ENABLED)
 		{
 			LOG.info("Auction Manager disabled by config.");
 			return;
 		}
-		
-		try (Connection con = ConnectionFactory.getInstance().getConnection();
-			Statement s = con.createStatement();
-			ResultSet rs = s.executeQuery("SELECT auctionId FROM item_auction ORDER BY auctionId DESC LIMIT 0, 1"))
-		{
-			if (rs.next())
-			{
-				_auctionIds.set(rs.getInt(1) + 1);
-			}
-		}
-		catch (SQLException e)
-		{
-			LOG.error("Failed loading auctions!", e);
-		}
-		
-		final File file = new File(ServerConfig.DATAPACK_ROOT + "/data/ItemAuctions.xml");
-		if (!file.exists())
-		{
-			LOG.warn("Missing ItemAuctions.xml!");
-			return;
-		}
-		
-		// TODO(Zoey76): Use IXmlReader.
-		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		factory.setValidating(false);
-		factory.setIgnoringComments(true);
-		
+		DAOFactory.getInstance().getItemAuctionDAO().selectAuction(_auctionIds);
+		load();
+	}
+	
+	@Override
+	public void load()
+	{
+		_managerInstances.clear();
+		parseDatapackFile("data/ItemAuctions.xml");
+		LOG.info("{}: Loaded: {} auction manager instance(s).", getClass().getSimpleName(), _managerInstances.size());
+	}
+	
+	@Override
+	public void parseDocument(Document doc, File f)
+	{
 		try
 		{
-			final Document doc = factory.newDocumentBuilder().parse(file);
 			for (Node na = doc.getFirstChild(); na != null; na = na.getNextSibling())
 			{
 				if ("list".equalsIgnoreCase(na.getNodeName()))
@@ -112,11 +86,10 @@ public final class ItemAuctionManager
 					}
 				}
 			}
-			LOG.info("Loaded " + _managerInstances.size() + " auction manager instance(s).");
 		}
 		catch (Exception e)
 		{
-			LOG.error("Failed loading auctions from xml!", e);
+			LOG.error("{}: Failed loading auctions from xml.", getClass().getSimpleName(), e);
 		}
 	}
 	
@@ -138,32 +111,6 @@ public final class ItemAuctionManager
 		return _auctionIds.getAndIncrement();
 	}
 	
-	public static final void deleteAuction(final int auctionId)
-	{
-		try (Connection con = ConnectionFactory.getInstance().getConnection())
-		{
-			try (PreparedStatement ps = con.prepareStatement("DELETE FROM item_auction WHERE auctionId=?"))
-			{
-				ps.setInt(1, auctionId);
-				ps.execute();
-			}
-			
-			try (PreparedStatement ps = con.prepareStatement("DELETE FROM item_auction_bid WHERE auctionId=?"))
-			{
-				ps.setInt(1, auctionId);
-				ps.execute();
-			}
-		}
-		catch (SQLException e)
-		{
-			LOG.error("Failed deleting auction ID {}!", auctionId, e);
-		}
-	}
-	
-	/**
-	 * Gets the single instance of {@code ItemAuctionManager}.
-	 * @return single instance of {@code ItemAuctionManager}
-	 */
 	public static final ItemAuctionManager getInstance()
 	{
 		return SingletonHolder.INSTANCE;

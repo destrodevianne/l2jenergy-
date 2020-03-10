@@ -52,6 +52,7 @@ import com.l2jserver.gameserver.model.PcCondOverride;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.L2Event;
 import com.l2jserver.gameserver.model.olympiad.OlympiadManager;
+import com.l2jserver.gameserver.model.skills.AbnormalVisualEffect;
 import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.L2GameServerPacket;
@@ -809,6 +810,12 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 						if (OfflineConfig.OFFLINE_SET_NAME_COLOR)
 						{
 							getActiveChar().getAppearance().setNameColor(OfflineConfig.OFFLINE_NAME_COLOR);
+							getActiveChar().broadcastUserInfo();
+						}
+						
+						if (OfflineConfig.OFFLINE_SET_SLEEP)
+						{
+							getActiveChar().startAbnormalVisualEffect(true, AbnormalVisualEffect.SLEEP);
 							getActiveChar().broadcastUserInfo();
 						}
 						

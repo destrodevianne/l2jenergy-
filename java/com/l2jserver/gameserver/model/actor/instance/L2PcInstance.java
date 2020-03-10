@@ -2438,7 +2438,7 @@ public class L2PcInstance extends L2Playable
 		sendPacket(new ExBrExtraUserInfo(this));
 		sendPacket(new ExVoteSystemInfo(this));
 		// Nevit Points For Level
-		getActingPlayer().getNevitSystem().addPoints(2000);
+		getNevitSystem().addPoints(2000);
 	}
 	
 	public int getActiveEnchantAttrItemId()
@@ -5705,10 +5705,9 @@ public class L2PcInstance extends L2Playable
 		long baseExp = addToExp;
 		int baseSp = addToSp;
 		
-		final L2PcInstance activeChar = getClient().getActiveChar();
-		if ((addToExp > 0) && !activeChar.isInsideZone(ZoneId.PEACE))
+		if ((addToExp > 0) && !isInsideZone(ZoneId.PEACE))
 		{
-			activeChar.getNevitSystem().startAdventTask();
+			getNevitSystem().startAdventTask();
 		}
 		
 		if (useBonuses)
@@ -5836,11 +5835,7 @@ public class L2PcInstance extends L2Playable
 		long lostExp = 0;
 		if (!L2Event.isParticipant(this))
 		{
-			if (getNevitSystem().isAdventBlessingActive())
-			{
-				lostExp = 0;
-			}
-			else if (lvl < Config.MAX_PLAYER_LEVEL)
+			if (lvl < Config.MAX_PLAYER_LEVEL)
 			{
 				lostExp = Math.round(((getStat().getExpForLevel(lvl + 1) - getStat().getExpForLevel(lvl)) * percentLost) / 100);
 			}
@@ -5856,6 +5851,11 @@ public class L2PcInstance extends L2Playable
 		}
 		
 		setExpBeforeDeath(getExp());
+		
+		if (getNevitSystem().isAdventBlessingActive())
+		{
+			lostExp = 0;
+		}
 		
 		removeExp(lostExp);
 	}

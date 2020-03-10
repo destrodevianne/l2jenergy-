@@ -56,7 +56,6 @@ public class L2PeaceZone extends L2ZoneType
 			// Turn off recommendation bonus timer and nevit
 			player.getNevitSystem().stopAdventTask(true);
 			player.setRecomTimerActive(false);
-			
 		}
 		
 		if (Config.PEACE_ZONE_MODE != 2)

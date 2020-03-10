@@ -152,18 +152,21 @@ public class NevitSystem implements IUniqueId
 		public void run()
 		{
 			setAdventTime(getAdventTime() + REFRESH_RATE);
+			
 			if (getAdventTime() >= ADVENT_TIME)
 			{
 				setAdventTime(ADVENT_TIME);
 				stopAdventTask(true);
-				return;
 			}
-			
-			addPoints(REFRESH_POINTS);
-			if ((getAdventTime() % 60) == 0)
+			else
 			{
-				getPlayer().sendPacket(new ExNavitAdventTimeChange(getAdventTime(), false));
+				addPoints(REFRESH_POINTS);
+				if ((getAdventTime() % 60) == 0)
+				{
+					getPlayer().sendPacket(new ExNavitAdventTimeChange(getAdventTime(), false));
+				}
 			}
+			stopAdventTask(false);
 		}
 	}
 	

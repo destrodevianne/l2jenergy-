@@ -45,6 +45,8 @@ public class OfflineConfig
 	public static boolean OFFLINE_SET_NAME_COLOR;
 	@Setting(name = "OfflineNameColor", method = "NameColor")
 	public static int OFFLINE_NAME_COLOR;
+	@Setting(name = "OfflineSetSleep")
+	public static boolean OFFLINE_SET_SLEEP;
 	@Setting(name = "OfflineFame")
 	public static boolean OFFLINE_FAME;
 	

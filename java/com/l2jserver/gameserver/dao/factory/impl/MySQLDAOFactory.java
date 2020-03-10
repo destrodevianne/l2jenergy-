@@ -21,6 +21,7 @@ package com.l2jserver.gameserver.dao.factory.impl;
 import com.l2jserver.gameserver.dao.ClanDAO;
 import com.l2jserver.gameserver.dao.FriendDAO;
 import com.l2jserver.gameserver.dao.HennaDAO;
+import com.l2jserver.gameserver.dao.ItemAuctionDAO;
 import com.l2jserver.gameserver.dao.ItemDAO;
 import com.l2jserver.gameserver.dao.ItemMallDAO;
 import com.l2jserver.gameserver.dao.ItemReuseDAO;
@@ -44,6 +45,7 @@ import com.l2jserver.gameserver.dao.factory.IDAOFactory;
 import com.l2jserver.gameserver.dao.impl.mysql.ClanDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.FriendDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.HennaDAOMySQLImpl;
+import com.l2jserver.gameserver.dao.impl.mysql.ItemAuctionDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.ItemDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.ItemMallDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.ItemReuseDAOMySQLImpl;
@@ -75,6 +77,7 @@ enum MySQLDAOFactory implements IDAOFactory
 	private final ClanDAO clanDAO = new ClanDAOMySQLImpl();
 	private final FriendDAO friendDAO = new FriendDAOMySQLImpl();
 	private final HennaDAO hennaDAO = new HennaDAOMySQLImpl();
+	private final ItemAuctionDAO itemAuctionDAO = new ItemAuctionDAOMySQLImpl();
 	private final ItemDAO itemDAO = new ItemDAOMySQLImpl();
 	private final ItemMallDAO itemMallDAO = new ItemMallDAOMySQLImpl();
 	private final ItemReuseDAO itemReuseDAO = new ItemReuseDAOMySQLImpl();
@@ -111,6 +114,12 @@ enum MySQLDAOFactory implements IDAOFactory
 	public HennaDAO getHennaDAO()
 	{
 		return hennaDAO;
+	}
+	
+	@Override
+	public ItemAuctionDAO getItemAuctionDAO()
+	{
+		return itemAuctionDAO;
 	}
 	
 	@Override
