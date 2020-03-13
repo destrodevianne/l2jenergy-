@@ -18,6 +18,9 @@
  */
 package com.l2jserver.gameserver.configuration.config.custom;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.l2jserver.commons.configuration.annotations.Configuration;
 import com.l2jserver.commons.configuration.annotations.Setting;
 
@@ -32,6 +35,30 @@ public class CustomConfig
 	
 	@Setting(name = "EnableWarehouseSortingPrivate")
 	public static boolean ENABLE_WAREHOUSESORTING_PRIVATE;
+	
+	@Setting(name = "MultiLangEnable")
+	public static boolean ENABLE_MULTILANG;
+	
+	@Setting(name = "MultiLangDefault")
+	public static String MULTILANG_DEFAULT;
+	
+	@Setting(name = "MultiLangAllowed", method = "listlang")
+	public static List<String> MULTILANG_ALLOWED;
+	
+	@Setting(name = "MultiLangVoiceCommand")
+	public static boolean MULTILANG_VOICED_ALLOW;
+	
+	@Setting(name = "MultiLangSystemMessageEnable")
+	public static boolean MULTILANG_SM_ENABLE;
+	
+	@Setting(name = "MultiLangSystemMessageAllowed", method = "listlangSM", ignore = true)
+	public static List<String> MULTILANG_SM_ALLOWED;
+	
+	@Setting(name = "MultiLangNpcStringEnable")
+	public static boolean MULTILANG_NS_ENABLE;
+	
+	@Setting(name = "MultiLangNpcStringAllowed", method = "listlangNS", ignore = true)
+	public static List<String> MULTILANG_NS_ALLOWED;
 	
 	@Setting(name = "BankingEnabled")
 	public static boolean BANKING_SYSTEM_ENABLED;
@@ -83,4 +110,42 @@ public class CustomConfig
 	
 	@Setting(name = "AnnouncePkPvPNormalMessage")
 	public static boolean ANNOUNCE_PK_PVP_NORMAL_MESSAGE;
+	
+	public void listlang(final String value)
+	{
+		final String[] listlan = value.split(";");
+		MULTILANG_ALLOWED = new ArrayList<>(listlan.length);
+		
+		for (final String type : listlan)
+		{
+			MULTILANG_ALLOWED.add(type);
+		}
+		MULTILANG_ALLOWED.contains(MULTILANG_DEFAULT);
+	}
+	
+	public void listlangSM(final String value)
+	{
+		final String[] listlan = value.split(";");
+		MULTILANG_SM_ALLOWED = new ArrayList<>(listlan.length);
+		for (String type : listlan)
+		{
+			if (!type.isEmpty())
+			{
+				MULTILANG_SM_ALLOWED.add(type);
+			}
+		}
+	}
+	
+	public void listlangNS(final String value)
+	{
+		final String[] listlan = value.split(";");
+		MULTILANG_NS_ALLOWED = new ArrayList<>(listlan.length);
+		for (String type : listlan)
+		{
+			if (!type.isEmpty())
+			{
+				MULTILANG_NS_ALLOWED.add(type);
+			}
+		}
+	}
 }

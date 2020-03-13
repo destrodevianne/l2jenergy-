@@ -45,7 +45,14 @@ public class DimensionalMerchant extends AbstractNpcAI
 	private static final int SUP_MINION_COUPON = 14065; // Superior Minion Coupon - 5-hour
 	private static final int SUP_MINION_COUPON_EV = 14074; // Superior Minion Coupon (Event) - 5-hour
 	private static final int FRIEND_RECOMMENDATION_PROOF = 15279; // Friend Recommendation Proof
-	private static final int DIMENSIONAL_MERCHANT_CIFT = 15278; // Dimensional Merchant's Gift
+	
+	private static final int[] GIFTS =
+	{
+		15213, // Friend Recommend Round 1 Reward Pack
+		15215, // Friend Recommend Round 2 Reward Pack
+		15217, // Friend Recommend Round 1 Reward Pack
+		15219 // Friend Recommend Round 1 Reward Pack
+	};
 	
 	// Misc
 	private static final HashMap<String, Integer> MINION_EXCHANGE = new HashMap<>();
@@ -152,7 +159,7 @@ public class DimensionalMerchant extends AbstractNpcAI
 		
 		if (takeItems(player, itemId, 1))
 		{
-			giveItems(player, DIMENSIONAL_MERCHANT_CIFT, 1);
+			rewardItems(player, GIFTS[getRandom(GIFTS.length)], 1);
 			return "32478-07.html";
 		}
 		return "32478-13.html";

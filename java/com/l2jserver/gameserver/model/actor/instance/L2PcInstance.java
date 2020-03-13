@@ -67,6 +67,7 @@ import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.configuration.config.PvPConfig;
 import com.l2jserver.gameserver.configuration.config.RatesConfig;
+import com.l2jserver.gameserver.configuration.config.custom.CustomConfig;
 import com.l2jserver.gameserver.configuration.config.custom.OfflineConfig;
 import com.l2jserver.gameserver.configuration.config.custom.PremiumConfig;
 import com.l2jserver.gameserver.configuration.config.events.PcCafeConfig;
@@ -12628,7 +12629,7 @@ public class L2PcInstance extends L2Playable
 	
 	public String getHtmlPrefix()
 	{
-		if (!Config.L2JMOD_MULTILANG_ENABLE)
+		if (!CustomConfig.ENABLE_MULTILANG)
 		{
 			return null;
 		}
@@ -12643,16 +12644,16 @@ public class L2PcInstance extends L2Playable
 	public boolean setLang(String lang)
 	{
 		boolean result = false;
-		if (Config.L2JMOD_MULTILANG_ENABLE)
+		if (CustomConfig.ENABLE_MULTILANG)
 		{
-			if (Config.L2JMOD_MULTILANG_ALLOWED.contains(lang))
+			if (CustomConfig.MULTILANG_ALLOWED.contains(lang))
 			{
 				_lang = lang;
 				result = true;
 			}
 			else
 			{
-				_lang = Config.L2JMOD_MULTILANG_DEFAULT;
+				_lang = CustomConfig.MULTILANG_DEFAULT;
 			}
 			
 			_htmlPrefix = "data/lang/" + _lang + "/";

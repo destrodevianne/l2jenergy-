@@ -21,7 +21,7 @@ package com.l2jserver.gameserver.network.serverpackets;
 import java.io.PrintStream;
 import java.util.Arrays;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.custom.CustomConfig;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.datatables.ItemTable;
@@ -474,7 +474,7 @@ public abstract class AbstractMessagePacket<T extends AbstractMessagePacket<?>> 
 	
 	public final T getLocalizedMessage(final String lang)
 	{
-		if (!Config.L2JMOD_MULTILANG_SM_ENABLE || (getSystemMessageId() == SystemMessageId.S1))
+		if (!CustomConfig.MULTILANG_SM_ENABLE || (getSystemMessageId() == SystemMessageId.S1))
 		{
 			return (T) this;
 		}

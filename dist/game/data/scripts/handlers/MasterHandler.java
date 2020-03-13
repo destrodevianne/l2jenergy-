@@ -26,7 +26,6 @@ import java.util.Map.Entry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.custom.CustomConfig;
 import com.l2jserver.gameserver.configuration.config.custom.PremiumConfig;
 import com.l2jserver.gameserver.configuration.config.events.WeddingConfig;
@@ -558,7 +557,7 @@ public class MasterHandler
 			(WeddingConfig.ALLOW_WEDDING ? Wedding.class : null),
 			(CustomConfig.BANKING_SYSTEM_ENABLED ? Banking.class : null),
 			(CustomConfig.CHAT_ADMIN ? ChatAdmin.class : null),
-			(Config.L2JMOD_MULTILANG_ENABLE && Config.L2JMOD_MULTILANG_VOICED_ALLOW ? Lang.class : null),
+			(CustomConfig.ENABLE_MULTILANG && CustomConfig.MULTILANG_VOICED_ALLOW ? Lang.class : null),
 			(CustomConfig.DEBUG_VOICE_COMMAND ? Debug.class : null),
 			(CustomConfig.ALLOW_CHANGE_PASSWORD ? ChangePassword.class : null),
 			(PremiumConfig.PREMIUM_ALLOW_VOICED ? Premium.class : null),

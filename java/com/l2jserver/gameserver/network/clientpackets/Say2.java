@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.protection.BaseProtectionConfig;
 import com.l2jserver.gameserver.configuration.parser.chatFilter.ChatFilterConfigParser;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.ChatHandler;
@@ -184,7 +185,7 @@ public final class Say2 extends L2GameClientPacket
 			return;
 		}
 		
-		if (Config.L2WALKER_PROTECTION && (_type == TELL) && checkBot(_text))
+		if (BaseProtectionConfig.L2WALKER_PROTECTION && (_type == TELL) && checkBot(_text))
 		{
 			Util.handleIllegalPlayerAction(activeChar, "Client Emulator Detect: Player " + activeChar.getName() + " using l2walker.", Config.DEFAULT_PUNISH);
 			return;

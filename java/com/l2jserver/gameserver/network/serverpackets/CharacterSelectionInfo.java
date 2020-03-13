@@ -25,8 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.l2jserver.commons.database.ConnectionFactory;
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
+import com.l2jserver.gameserver.configuration.config.custom.CustomConfig;
 import com.l2jserver.gameserver.data.json.ExperienceData;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.model.CharSelectInfoPackage;
@@ -271,12 +271,12 @@ public class CharacterSelectionInfo extends L2GameServerPacket
 		charInfopackage.setY(chardata.getInt("y"));
 		charInfopackage.setZ(chardata.getInt("z"));
 		
-		if (Config.L2JMOD_MULTILANG_ENABLE)
+		if (CustomConfig.ENABLE_MULTILANG)
 		{
 			String lang = chardata.getString("language");
-			if (!Config.L2JMOD_MULTILANG_ALLOWED.contains(lang))
+			if (!CustomConfig.MULTILANG_ALLOWED.contains(lang))
 			{
-				lang = Config.L2JMOD_MULTILANG_DEFAULT;
+				lang = CustomConfig.MULTILANG_DEFAULT;
 			}
 			charInfopackage.setHtmlPrefix("data/lang/" + lang + "/");
 		}

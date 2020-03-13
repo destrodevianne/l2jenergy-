@@ -20,8 +20,6 @@ package com.l2jserver.gameserver.configuration.config;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -480,24 +478,6 @@ public final class Config
 	public static Map<Integer, Integer> TVT_EVENT_MAGE_BUFFS;
 	public static int TVT_EVENT_MAX_PARTICIPANTS_PER_IP;
 	public static boolean TVT_ALLOW_VOICED_COMMAND;
-	
-	public static boolean L2JMOD_ANTIFEED_ENABLE;
-	public static boolean L2JMOD_ANTIFEED_DUALBOX;
-	public static boolean L2JMOD_ANTIFEED_DISCONNECTED_AS_DUALBOX;
-	public static int L2JMOD_ANTIFEED_INTERVAL;
-	public static boolean L2JMOD_MULTILANG_ENABLE;
-	public static List<String> L2JMOD_MULTILANG_ALLOWED = new ArrayList<>();
-	public static String L2JMOD_MULTILANG_DEFAULT;
-	public static boolean L2JMOD_MULTILANG_VOICED_ALLOW;
-	public static boolean L2JMOD_MULTILANG_SM_ENABLE;
-	public static List<String> L2JMOD_MULTILANG_SM_ALLOWED = new ArrayList<>();
-	public static boolean L2JMOD_MULTILANG_NS_ENABLE;
-	public static List<String> L2JMOD_MULTILANG_NS_ALLOWED = new ArrayList<>();
-	public static boolean L2WALKER_PROTECTION;
-	public static int L2JMOD_DUALBOX_CHECK_MAX_PLAYERS_PER_IP;
-	public static int L2JMOD_DUALBOX_CHECK_MAX_OLYMPIAD_PARTICIPANTS_PER_IP;
-	public static int L2JMOD_DUALBOX_CHECK_MAX_L2EVENT_PARTICIPANTS_PER_IP;
-	public static Map<Integer, Integer> L2JMOD_DUALBOX_CHECK_WHITELIST;
 	
 	// RWHO system (off emulation)
 	public static boolean SENDSTATUS_TRADE_JUST_OFFLINE;
@@ -1464,80 +1444,6 @@ public final class Config
 			}
 		}
 		
-		L2JMOD_ANTIFEED_ENABLE = L2JModSettings.getBoolean("AntiFeedEnable", false);
-		L2JMOD_ANTIFEED_DUALBOX = L2JModSettings.getBoolean("AntiFeedDualbox", true);
-		L2JMOD_ANTIFEED_DISCONNECTED_AS_DUALBOX = L2JModSettings.getBoolean("AntiFeedDisconnectedAsDualbox", true);
-		L2JMOD_ANTIFEED_INTERVAL = L2JModSettings.getInt("AntiFeedInterval", 120) * 1000;
-		
-		L2JMOD_MULTILANG_DEFAULT = L2JModSettings.getString("MultiLangDefault", "en");
-		L2JMOD_MULTILANG_ENABLE = L2JModSettings.getBoolean("MultiLangEnable", false);
-		String[] allowed = L2JModSettings.getString("MultiLangAllowed", L2JMOD_MULTILANG_DEFAULT).split(";");
-		L2JMOD_MULTILANG_ALLOWED = new ArrayList<>(allowed.length);
-		for (String lang : allowed)
-		{
-			L2JMOD_MULTILANG_ALLOWED.add(lang);
-		}
-		
-		if (!L2JMOD_MULTILANG_ALLOWED.contains(L2JMOD_MULTILANG_DEFAULT))
-		{
-			LOG.warn("MultiLang[Config.load()]: default language: {} is not in allowed list !", L2JMOD_MULTILANG_DEFAULT);
-		}
-		
-		L2JMOD_MULTILANG_VOICED_ALLOW = L2JModSettings.getBoolean("MultiLangVoiceCommand", true);
-		L2JMOD_MULTILANG_SM_ENABLE = L2JModSettings.getBoolean("MultiLangSystemMessageEnable", false);
-		allowed = L2JModSettings.getString("MultiLangSystemMessageAllowed", "").split(";");
-		L2JMOD_MULTILANG_SM_ALLOWED = new ArrayList<>(allowed.length);
-		for (String lang : allowed)
-		{
-			if (!lang.isEmpty())
-			{
-				L2JMOD_MULTILANG_SM_ALLOWED.add(lang);
-			}
-		}
-		L2JMOD_MULTILANG_NS_ENABLE = L2JModSettings.getBoolean("MultiLangNpcStringEnable", false);
-		allowed = L2JModSettings.getString("MultiLangNpcStringAllowed", "").split(";");
-		L2JMOD_MULTILANG_NS_ALLOWED = new ArrayList<>(allowed.length);
-		for (String lang : allowed)
-		{
-			if (!lang.isEmpty())
-			{
-				L2JMOD_MULTILANG_NS_ALLOWED.add(lang);
-			}
-		}
-		
-		L2WALKER_PROTECTION = L2JModSettings.getBoolean("L2WalkerProtection", false);
-		
-		L2JMOD_DUALBOX_CHECK_MAX_PLAYERS_PER_IP = L2JModSettings.getInt("DualboxCheckMaxPlayersPerIP", 0);
-		L2JMOD_DUALBOX_CHECK_MAX_OLYMPIAD_PARTICIPANTS_PER_IP = L2JModSettings.getInt("DualboxCheckMaxOlympiadParticipantsPerIP", 0);
-		L2JMOD_DUALBOX_CHECK_MAX_L2EVENT_PARTICIPANTS_PER_IP = L2JModSettings.getInt("DualboxCheckMaxL2EventParticipantsPerIP", 0);
-		String[] dualboxCheckWhiteList = L2JModSettings.getString("DualboxCheckWhitelist", "127.0.0.1,0").split(";");
-		L2JMOD_DUALBOX_CHECK_WHITELIST = new HashMap<>(dualboxCheckWhiteList.length);
-		for (String entry : dualboxCheckWhiteList)
-		{
-			String[] entrySplit = entry.split(",");
-			if (entrySplit.length != 2)
-			{
-				LOG.warn("DualboxCheck[Config.load()]: invalid config property -> DualboxCheckWhitelist {}", entry);
-			}
-			else
-			{
-				try
-				{
-					int num = Integer.parseInt(entrySplit[1]);
-					num = (num == 0) ? -1 : num;
-					L2JMOD_DUALBOX_CHECK_WHITELIST.put(InetAddress.getByName(entrySplit[0]).hashCode(), num);
-				}
-				catch (UnknownHostException e)
-				{
-					LOG.warn("DualboxCheck[Config.load()]: invalid address -> DualboxCheckWhitelist {}", entrySplit[0]);
-				}
-				catch (NumberFormatException e)
-				{
-					LOG.warn("DualboxCheck[Config.load()]: invalid number -> DualboxCheckWhitelist {}", entrySplit[1]);
-				}
-			}
-		}
-		
 		SENDSTATUS_TRADE_JUST_OFFLINE = L2JModSettings.getBoolean("SendStatusTradeJustOffline", false);
 		SENDSTATUS_TRADE_MOD = L2JModSettings.getDouble("SendStatusTradeMod", 1);
 		SHOW_OFFLINE_MODE_IN_ONLINE = L2JModSettings.getBoolean("ShowOfflineTradeInOnline", false);
@@ -1919,18 +1825,6 @@ public final class Config
 				break;
 			case "tvteventparticipationnpcid":
 				TVT_EVENT_PARTICIPATION_NPC_ID = Integer.parseInt(pValue);
-				break;
-			case "antifeedenable":
-				L2JMOD_ANTIFEED_ENABLE = Boolean.parseBoolean(pValue);
-				break;
-			case "antifeeddualbox":
-				L2JMOD_ANTIFEED_DUALBOX = Boolean.parseBoolean(pValue);
-				break;
-			case "antifeeddisconnectedasdualbox":
-				L2JMOD_ANTIFEED_DISCONNECTED_AS_DUALBOX = Boolean.parseBoolean(pValue);
-				break;
-			case "antifeedinterval":
-				L2JMOD_ANTIFEED_INTERVAL = 1000 * Integer.parseInt(pValue);
 				break;
 			default:
 				try

@@ -47,6 +47,8 @@ public class AdventureGuildsman extends AbstractNpcAI
 	private static final Map<String, int[]> POINTSSKILL = new HashMap<>();
 	private static final Map<String, int[]> TELEPORTERS = new HashMap<>();
 	
+	private boolean WYVERN_ACTIVE = false;
+	
 	// Items
 	private static final int PCCAFE_LOTTERY_TICKET_30DAYS = 15358;
 	private static final int PCCAFE_1ST_LOTTERY_TICKET_30DAYS = 15359; // билет на выдачу 100000 очков РС-клуба
@@ -688,28 +690,33 @@ public class AdventureGuildsman extends AbstractNpcAI
 		}
 		else if (event.equalsIgnoreCase("wyvern"))
 		{
-			// TODO: Реализовать проверку если кто-то уже взял на прокат pccafe_no_wyvern001.htm
-			if (player.hasSummon())
+			if (!(player.getSummon() == null) || (player.getSummon() instanceof L2ServitorInstance))
 			{
-				player.getSummon().unSummon(player);
-			}
-			
-			if (player.isTransformed())
-			{
-				player.untransform();
-			}
-			
-			if (player.getPcCafePoints() >= PcCafeConfig.ALT_PC_BANG_WIVERN_PRICE)
-			{
-				player.setPcCafePoints(player.getPcCafePoints() - PcCafeConfig.ALT_PC_BANG_WIVERN_PRICE);
-				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(PcCafeConfig.ALT_PC_BANG_WIVERN_PRICE));
-				player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -PcCafeConfig.ALT_PC_BANG_WIVERN_PRICE, 1, PcCafeType.CONSUME, 12));
-				player.dismount();
-				player.mount(12621, 0, true);
-				player.addSkill(CommonSkill.WYVERN_BREATH.getSkill());
+				player.sendPacket(SystemMessageId.SUMMON_ONLY_ONE);
 				return null;
 			}
-			htmtext = "pccafe_notpoint001.htm";
+			else if (player.getPcCafePoints() >= PcCafeConfig.ALT_PC_BANG_WIVERN_PRICE)
+			{
+				if (WYVERN_ACTIVE)
+				{
+					htmtext = "pccafe_no_wyvern001.htm";
+				}
+				else
+				{
+					player.setPcCafePoints(player.getPcCafePoints() - PcCafeConfig.ALT_PC_BANG_WIVERN_PRICE);
+					player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_ARE_USING_S1_POINT).addLong(PcCafeConfig.ALT_PC_BANG_WIVERN_PRICE));
+					player.sendPacket(new ExPCCafePointInfo(player.getPcCafePoints(), -PcCafeConfig.ALT_PC_BANG_WIVERN_PRICE, 1, PcCafeType.CONSUME, 12));
+					player.dismount();
+					player.mount(12621, 0, true);
+					player.addSkill(CommonSkill.WYVERN_BREATH.getSkill());
+					WYVERN_ACTIVE = true;
+					return null;
+				}
+			}
+			else
+			{
+				htmtext = "pccafe_notpoint001.htm";
+			}
 		}
 		return htmtext;
 	}

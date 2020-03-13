@@ -22,6 +22,7 @@ import java.nio.BufferUnderflowException;
 
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.protection.BaseProtectionConfig;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -63,7 +64,7 @@ public class MoveBackwardToLocation extends L2GameClientPacket
 		}
 		catch (BufferUnderflowException e)
 		{
-			if (Config.L2WALKER_PROTECTION)
+			if (BaseProtectionConfig.L2WALKER_PROTECTION)
 			{
 				L2PcInstance activeChar = getClient().getActiveChar();
 				Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " is trying to use L2Walker and got kicked.", Config.DEFAULT_PUNISH);

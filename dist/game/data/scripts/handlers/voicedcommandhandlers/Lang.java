@@ -21,7 +21,7 @@ package handlers.voicedcommandhandlers;
 import java.util.StringTokenizer;
 
 import com.l2jserver.commons.util.StringUtil;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.custom.CustomConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IVoicedCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -37,7 +37,7 @@ public class Lang implements IVoicedCommandHandler
 	@Override
 	public boolean useVoicedCommand(String command, L2PcInstance activeChar, String params)
 	{
-		if (!Config.L2JMOD_MULTILANG_ENABLE || !Config.L2JMOD_MULTILANG_VOICED_ALLOW)
+		if (!CustomConfig.ENABLE_MULTILANG || !CustomConfig.MULTILANG_VOICED_ALLOW)
 		{
 			return false;
 		}
@@ -46,7 +46,7 @@ public class Lang implements IVoicedCommandHandler
 		if (params == null)
 		{
 			final StringBuilder html = StringUtil.startAppend(100);
-			for (String lang : Config.L2JMOD_MULTILANG_ALLOWED)
+			for (String lang : CustomConfig.MULTILANG_ALLOWED)
 			{
 				StringUtil.append(html, "<button value=\"", lang.toUpperCase(), "\" action=\"bypass -h voice .lang ", lang, "\" width=60 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"><br>");
 			}

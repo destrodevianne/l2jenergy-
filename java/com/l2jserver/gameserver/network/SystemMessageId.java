@@ -34,8 +34,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
+import com.l2jserver.gameserver.configuration.config.custom.CustomConfig;
 import com.l2jserver.gameserver.model.clientstrings.Builder;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
@@ -15322,13 +15322,13 @@ public final class SystemMessageId
 			}
 		}
 		
-		if (!Config.L2JMOD_MULTILANG_SM_ENABLE)
+		if (!CustomConfig.MULTILANG_SM_ENABLE)
 		{
 			LOG.info("SystemMessageId: MultiLanguage disabled.");
 			return;
 		}
 		
-		final List<String> languages = Config.L2JMOD_MULTILANG_SM_ALLOWED;
+		final List<String> languages = CustomConfig.MULTILANG_SM_ALLOWED;
 		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		factory.setValidating(false);
 		factory.setIgnoringComments(true);
