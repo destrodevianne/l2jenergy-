@@ -18,7 +18,8 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.instancemanager.MailManager;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.Message;
@@ -42,7 +43,7 @@ public final class RequestDeleteSentPost extends L2GameClientPacket
 	protected void readImpl()
 	{
 		int count = readD();
-		if ((count <= 0) || (count > Config.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != _buf.remaining()))
+		if ((count <= 0) || (count > CharacterConfig.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != _buf.remaining()))
 		{
 			return;
 		}
@@ -58,7 +59,7 @@ public final class RequestDeleteSentPost extends L2GameClientPacket
 	public void runImpl()
 	{
 		final L2PcInstance activeChar = getClient().getActiveChar();
-		if ((activeChar == null) || (_msgIds == null) || !Config.ALLOW_MAIL)
+		if ((activeChar == null) || (_msgIds == null) || !GeneralConfig.ALLOW_MAIL)
 		{
 			return;
 		}
@@ -78,7 +79,7 @@ public final class RequestDeleteSentPost extends L2GameClientPacket
 			}
 			if (msg.getSenderId() != activeChar.getObjectId())
 			{
-				Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " tried to delete not own post!", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " tried to delete not own post!", GeneralConfig.DEFAULT_PUNISH);
 				return;
 			}
 			

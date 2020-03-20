@@ -20,7 +20,8 @@ package com.l2jserver.gameserver.model.actor.stat;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.data.xml.impl.PetDataTable;
 import com.l2jserver.gameserver.model.L2PetLevelData;
@@ -65,7 +66,7 @@ public class PcStat extends PlayableStat
 	
 	public void setStartingExp(long value)
 	{
-		if (Config.BOTREPORT_ENABLE)
+		if (GeneralConfig.BOTREPORT_ENABLE)
 		{
 			_startingXp = value;
 		}
@@ -205,12 +206,12 @@ public class PcStat extends PlayableStat
 	@Override
 	public double getRunSpeed()
 	{
-		double val = super.getRunSpeed() + Config.RUN_SPD_BOOST;
+		double val = super.getRunSpeed() + CharacterConfig.RUN_SPD_BOOST;
 		
 		// Apply max run speed cap.
-		if ((val > Config.MAX_RUN_SPEED) && !getActiveChar().canOverrideCond(PcCondOverride.MAX_STATS_VALUE))
+		if ((val > CharacterConfig.MAX_RUN_SPEED) && !getActiveChar().canOverrideCond(PcCondOverride.MAX_STATS_VALUE))
 		{
-			return Config.MAX_RUN_SPEED;
+			return CharacterConfig.MAX_RUN_SPEED;
 		}
 		
 		// Check for mount penalties
@@ -234,12 +235,12 @@ public class PcStat extends PlayableStat
 	@Override
 	public double getWalkSpeed()
 	{
-		double val = super.getWalkSpeed() + Config.RUN_SPD_BOOST;
+		double val = super.getWalkSpeed() + CharacterConfig.RUN_SPD_BOOST;
 		
 		// Apply max run speed cap.
-		if ((val > Config.MAX_RUN_SPEED) && !getActiveChar().canOverrideCond(PcCondOverride.MAX_STATS_VALUE))
+		if ((val > CharacterConfig.MAX_RUN_SPEED) && !getActiveChar().canOverrideCond(PcCondOverride.MAX_STATS_VALUE))
 		{
-			return Config.MAX_RUN_SPEED;
+			return CharacterConfig.MAX_RUN_SPEED;
 		}
 		
 		if (getActiveChar().isMounted())
@@ -264,9 +265,9 @@ public class PcStat extends PlayableStat
 	{
 		double val = super.getPAtkSpd();
 		
-		if ((val > Config.MAX_PATK_SPEED) && !getActiveChar().canOverrideCond(PcCondOverride.MAX_STATS_VALUE))
+		if ((val > CharacterConfig.MAX_PATK_SPEED) && !getActiveChar().canOverrideCond(PcCondOverride.MAX_STATS_VALUE))
 		{
-			return Config.MAX_PATK_SPEED;
+			return CharacterConfig.MAX_PATK_SPEED;
 		}
 		
 		return val;
@@ -346,7 +347,7 @@ public class PcStat extends PlayableStat
 	
 	public synchronized void updateVitalityPoints(float points, boolean useRates, boolean quiet)
 	{
-		if ((points == 0) || !Config.ENABLE_VITALITY)
+		if ((points == 0) || !CharacterConfig.ENABLE_VITALITY)
 		{
 			return;
 		}
@@ -411,7 +412,7 @@ public class PcStat extends PlayableStat
 	{
 		double vitality = 1.0;
 		
-		if (Config.ENABLE_VITALITY)
+		if (CharacterConfig.ENABLE_VITALITY)
 		{
 			switch (getVitalityLevel())
 			{
@@ -481,7 +482,7 @@ public class PcStat extends PlayableStat
 		
 		// Check for abnormal bonuses
 		bonus = Math.max(bonus, 1);
-		bonus = Math.min(bonus, Config.MAX_BONUS_EXP);
+		bonus = Math.min(bonus, CharacterConfig.MAX_BONUS_EXP);
 		
 		return bonus;
 	}
@@ -522,7 +523,7 @@ public class PcStat extends PlayableStat
 		
 		// Check for abnormal bonuses
 		bonus = Math.max(bonus, 1);
-		bonus = Math.min(bonus, Config.MAX_BONUS_SP);
+		bonus = Math.min(bonus, CharacterConfig.MAX_BONUS_SP);
 		
 		return bonus;
 	}
@@ -530,13 +531,13 @@ public class PcStat extends PlayableStat
 	@Override
 	public int getMaxLevel()
 	{
-		return getActiveChar().isSubClassActive() ? Config.MAX_SUBCLASS_LEVEL : Config.MAX_PLAYER_LEVEL;
+		return getActiveChar().isSubClassActive() ? CharacterConfig.MAX_SUBCLASS_LEVEL : CharacterConfig.MAX_PLAYER_LEVEL;
 	}
 	
 	@Override
 	public int getMaxExpLevel()
 	{
-		return getActiveChar().isSubClassActive() ? Config.MAX_SUBCLASS_LEVEL + 1 : Config.MAX_PLAYER_LEVEL + 1;
+		return getActiveChar().isSubClassActive() ? CharacterConfig.MAX_SUBCLASS_LEVEL + 1 : CharacterConfig.MAX_PLAYER_LEVEL + 1;
 	}
 	
 	@Override

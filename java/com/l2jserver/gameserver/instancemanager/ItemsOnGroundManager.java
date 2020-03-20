@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ItemsAutoDestroy;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 
@@ -47,9 +47,9 @@ public final class ItemsOnGroundManager implements Runnable
 	
 	protected ItemsOnGroundManager()
 	{
-		if (Config.SAVE_DROPPED_ITEM_INTERVAL > 0)
+		if (GeneralConfig.SAVE_DROPPED_ITEM_INTERVAL > 0)
 		{
-			ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(this, Config.SAVE_DROPPED_ITEM_INTERVAL, Config.SAVE_DROPPED_ITEM_INTERVAL);
+			ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(this, GeneralConfig.SAVE_DROPPED_ITEM_INTERVAL, GeneralConfig.SAVE_DROPPED_ITEM_INTERVAL);
 		}
 		load();
 	}
@@ -57,26 +57,26 @@ public final class ItemsOnGroundManager implements Runnable
 	private void load()
 	{
 		// If SaveDroppedItem is false, may want to delete all items previously stored to avoid add old items on reactivate
-		if (!Config.SAVE_DROPPED_ITEM && Config.CLEAR_DROPPED_ITEM_TABLE)
+		if (!GeneralConfig.SAVE_DROPPED_ITEM && GeneralConfig.CLEAR_DROPPED_ITEM_TABLE)
 		{
 			emptyTable();
 		}
 		
-		if (!Config.SAVE_DROPPED_ITEM)
+		if (!GeneralConfig.SAVE_DROPPED_ITEM)
 		{
 			return;
 		}
 		
 		// if DestroyPlayerDroppedItem was previously false, items currently protected will be added to ItemsAutoDestroy
-		if (Config.DESTROY_DROPPED_PLAYER_ITEM)
+		if (GeneralConfig.DESTROY_DROPPED_PLAYER_ITEM)
 		{
 			String str = null;
-			if (!Config.DESTROY_EQUIPABLE_PLAYER_ITEM)
+			if (!GeneralConfig.DESTROY_EQUIPABLE_PLAYER_ITEM)
 			{
 				// Recycle misc. items only
 				str = "UPDATE itemsonground SET drop_time = ? WHERE drop_time = -1 AND equipable = 0";
 			}
-			else if (Config.DESTROY_EQUIPABLE_PLAYER_ITEM)
+			else if (GeneralConfig.DESTROY_EQUIPABLE_PLAYER_ITEM)
 			{
 				// Recycle all items including equip-able
 				str = "UPDATE itemsonground SET drop_time = ? WHERE drop_time = -1";
@@ -127,11 +127,11 @@ public final class ItemsOnGroundManager implements Runnable
 					_items.add(item);
 					count++;
 					// add to ItemsAutoDestroy only items not protected
-					if (!Config.LIST_PROTECTED_ITEMS.contains(item.getId()))
+					if (!GeneralConfig.LIST_PROTECTED_ITEMS.contains(item.getId()))
 					{
 						if (dropTime > -1)
 						{
-							if (((Config.AUTODESTROY_ITEM_AFTER > 0) && !item.getItem().hasExImmediateEffect()) || ((Config.HERB_AUTO_DESTROY_TIME > 0) && item.getItem().hasExImmediateEffect()))
+							if (((GeneralConfig.AUTODESTROY_ITEM_AFTER > 0) && !item.getItem().hasExImmediateEffect()) || ((GeneralConfig.HERB_AUTO_DESTROY_TIME > 0) && item.getItem().hasExImmediateEffect()))
 							{
 								ItemsAutoDestroy.getInstance().addItem(item);
 							}
@@ -146,7 +146,7 @@ public final class ItemsOnGroundManager implements Runnable
 			_log.log(Level.SEVERE, getClass().getSimpleName() + ": Error while loading ItemsOnGround " + e.getMessage(), e);
 		}
 		
-		if (Config.EMPTY_DROPPED_ITEM_TABLE_AFTER_LOAD)
+		if (GeneralConfig.EMPTY_DROPPED_ITEM_TABLE_AFTER_LOAD)
 		{
 			emptyTable();
 		}
@@ -154,7 +154,7 @@ public final class ItemsOnGroundManager implements Runnable
 	
 	public void save(L2ItemInstance item)
 	{
-		if (!Config.SAVE_DROPPED_ITEM)
+		if (!GeneralConfig.SAVE_DROPPED_ITEM)
 		{
 			return;
 		}
@@ -163,7 +163,7 @@ public final class ItemsOnGroundManager implements Runnable
 	
 	public void removeObject(L2ItemInstance item)
 	{
-		if (Config.SAVE_DROPPED_ITEM)
+		if (GeneralConfig.SAVE_DROPPED_ITEM)
 		{
 			_items.remove(item);
 		}
@@ -195,7 +195,7 @@ public final class ItemsOnGroundManager implements Runnable
 	@Override
 	public synchronized void run()
 	{
-		if (!Config.SAVE_DROPPED_ITEM)
+		if (!GeneralConfig.SAVE_DROPPED_ITEM)
 		{
 			return;
 		}

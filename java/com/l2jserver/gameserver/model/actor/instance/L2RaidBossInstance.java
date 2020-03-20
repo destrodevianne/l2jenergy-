@@ -20,7 +20,7 @@ package com.l2jserver.gameserver.model.actor.instance;
 
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.instancemanager.RaidBossPointsManager;
 import com.l2jserver.gameserver.instancemanager.RaidBossSpawnManager;
@@ -132,7 +132,7 @@ public class L2RaidBossInstance extends L2MonsterInstance
 		
 		if (!isInCombat() && !isMovementDisabled())
 		{
-			if (!isInsideRadius(spawnX, spawnY, spawnZ, Math.max(Config.MAX_DRIFT_RANGE, 200), true, false))
+			if (!isInsideRadius(spawnX, spawnY, spawnZ, Math.max(NpcConfig.MAX_DRIFT_RANGE, 200), true, false))
 			{
 				teleToLocation(spawnX, spawnY, spawnZ, false);
 			}

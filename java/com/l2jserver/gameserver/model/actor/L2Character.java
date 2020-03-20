@@ -45,8 +45,10 @@ import com.l2jserver.gameserver.ai.CtrlEvent;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.ai.L2AttackableAI;
 import com.l2jserver.gameserver.ai.L2CharacterAI;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.configuration.config.TerritoryWarConfig;
 import com.l2jserver.gameserver.data.xml.impl.CategoryData;
 import com.l2jserver.gameserver.data.xml.impl.ChampionData;
@@ -705,7 +707,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 		
 		getAI().setIntention(CtrlIntention.AI_INTENTION_ACTIVE);
 		
-		if (Config.OFFSET_ON_TELEPORT_ENABLED && (randomOffset > 0))
+		if (CharacterConfig.OFFSET_ON_TELEPORT_ENABLED && (randomOffset > 0))
 		{
 			x += Rnd.get(-randomOffset, randomOffset);
 			y += Rnd.get(-randomOffset, randomOffset);
@@ -739,7 +741,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 	
 	public void teleToLocation(int x, int y, int z, int heading, int instanceId, boolean randomOffset)
 	{
-		teleToLocation(x, y, z, heading, instanceId, (randomOffset) ? Config.MAX_OFFSET_ON_TELEPORT : 0);
+		teleToLocation(x, y, z, heading, instanceId, (randomOffset) ? CharacterConfig.MAX_OFFSET_ON_TELEPORT : 0);
 	}
 	
 	public void teleToLocation(int x, int y, int z, int heading, int instanceId)
@@ -749,7 +751,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 	
 	public void teleToLocation(int x, int y, int z, int heading, boolean randomOffset)
 	{
-		teleToLocation(x, y, z, heading, -1, (randomOffset) ? Config.MAX_OFFSET_ON_TELEPORT : 0);
+		teleToLocation(x, y, z, heading, -1, (randomOffset) ? CharacterConfig.MAX_OFFSET_ON_TELEPORT : 0);
 	}
 	
 	public void teleToLocation(int x, int y, int z, int heading)
@@ -759,7 +761,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 	
 	public void teleToLocation(int x, int y, int z, boolean randomOffset)
 	{
-		teleToLocation(x, y, z, 0, -1, (randomOffset) ? Config.MAX_OFFSET_ON_TELEPORT : 0);
+		teleToLocation(x, y, z, 0, -1, (randomOffset) ? CharacterConfig.MAX_OFFSET_ON_TELEPORT : 0);
 	}
 	
 	public void teleToLocation(int x, int y, int z)
@@ -779,7 +781,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 	
 	public void teleToLocation(ILocational loc, boolean randomOffset)
 	{
-		teleToLocation(loc.getX(), loc.getY(), loc.getZ(), loc.getHeading(), loc.getInstanceId(), (randomOffset) ? Config.MAX_OFFSET_ON_TELEPORT : 0);
+		teleToLocation(loc.getX(), loc.getY(), loc.getZ(), loc.getHeading(), loc.getInstanceId(), (randomOffset) ? CharacterConfig.MAX_OFFSET_ON_TELEPORT : 0);
 	}
 	
 	public void teleToLocation(ILocational loc)
@@ -2500,17 +2502,17 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 			setIsPendingRevive(false);
 			setIsDead(false);
 			
-			if ((Config.RESPAWN_RESTORE_CP > 0) && (getCurrentCp() < (getMaxCp() * Config.RESPAWN_RESTORE_CP)))
+			if ((CharacterConfig.RESPAWN_RESTORE_CP > 0) && (getCurrentCp() < (getMaxCp() * CharacterConfig.RESPAWN_RESTORE_CP)))
 			{
-				_status.setCurrentCp(getMaxCp() * Config.RESPAWN_RESTORE_CP);
+				_status.setCurrentCp(getMaxCp() * CharacterConfig.RESPAWN_RESTORE_CP);
 			}
-			if ((Config.RESPAWN_RESTORE_HP > 0) && (getCurrentHp() < (getMaxHp() * Config.RESPAWN_RESTORE_HP)))
+			if ((CharacterConfig.RESPAWN_RESTORE_HP > 0) && (getCurrentHp() < (getMaxHp() * CharacterConfig.RESPAWN_RESTORE_HP)))
 			{
-				_status.setCurrentHp(getMaxHp() * Config.RESPAWN_RESTORE_HP);
+				_status.setCurrentHp(getMaxHp() * CharacterConfig.RESPAWN_RESTORE_HP);
 			}
-			if ((Config.RESPAWN_RESTORE_MP > 0) && (getCurrentMp() < (getMaxMp() * Config.RESPAWN_RESTORE_MP)))
+			if ((CharacterConfig.RESPAWN_RESTORE_MP > 0) && (getCurrentMp() < (getMaxMp() * CharacterConfig.RESPAWN_RESTORE_MP)))
 			{
-				_status.setCurrentMp(getMaxMp() * Config.RESPAWN_RESTORE_MP);
+				_status.setCurrentMp(getMaxMp() * CharacterConfig.RESPAWN_RESTORE_MP);
 			}
 			
 			// Start broadcast status
@@ -4086,7 +4088,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 			{
 				try
 				{
-					if (Config.MOVE_BASED_KNOWNLIST)
+					if (GeneralConfig.MOVE_BASED_KNOWNLIST)
 					{
 						getKnownList().findObjects();
 					}
@@ -4167,7 +4169,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 			revalidateZone(true);
 		}
 		broadcastPacket(new StopMove(this));
-		if (Config.MOVE_BASED_KNOWNLIST && updateKnownObjects)
+		if (GeneralConfig.MOVE_BASED_KNOWNLIST && updateKnownObjects)
 		{
 			getKnownList().findObjects();
 		}
@@ -4799,7 +4801,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 		// Check Raidboss attack
 		// Character will be petrified if attacking a raid that's more
 		// than 8 levels lower
-		if (target.isRaid() && target.giveRaidCurse() && !Config.RAID_DISABLE_CURSE)
+		if (target.isRaid() && target.giveRaidCurse() && !NpcConfig.RAID_DISABLE_CURSE)
 		{
 			if (getLevel() > (target.getLevel() + 8))
 			{
@@ -5114,7 +5116,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 			}
 		}
 		
-		if (Config.ALT_GAME_KARMA_PLAYER_CAN_BE_KILLED_IN_PEACEZONE)
+		if (CharacterConfig.ALT_GAME_KARMA_PLAYER_CAN_BE_KILLED_IN_PEACEZONE)
 		{
 			// allows red to be attacked and red to attack flagged players
 			if ((target.getActingPlayer() != null) && (target.getActingPlayer().getKarma() > 0))
@@ -5719,7 +5721,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 					targetsCastTarget = target.getAI().getCastTarget();
 				}
 				
-				if (!Config.RAID_DISABLE_CURSE && ((target.isRaid() && target.giveRaidCurse() && (getLevel() > (target.getLevel() + 8)))
+				if (!NpcConfig.RAID_DISABLE_CURSE && ((target.isRaid() && target.giveRaidCurse() && (getLevel() > (target.getLevel() + 8)))
 					|| (!skill.isBad() && (targetsAttackTarget != null) && targetsAttackTarget.isRaid() && targetsAttackTarget.giveRaidCurse() && targetsAttackTarget.getAttackByList().contains(target) && (getLevel() > (targetsAttackTarget.getLevel() + 8)))
 					|| (!skill.isBad() && (targetsCastTarget != null) && targetsCastTarget.isRaid() && targetsCastTarget.giveRaidCurse() && targetsCastTarget.getAttackByList().contains(target) && (getLevel() > (targetsCastTarget.getLevel() + 8)))))
 				{
@@ -6576,7 +6578,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 					}
 				}
 				
-				if (Config.ALT_VALIDATE_TRIGGER_SKILLS && isPlayable() && (target != null) && target.isPlayable())
+				if (CharacterConfig.ALT_VALIDATE_TRIGGER_SKILLS && isPlayable() && (target != null) && target.isPlayable())
 				{
 					final L2PcInstance player = getActingPlayer();
 					if (!player.checkPvpSkill(target, skill))

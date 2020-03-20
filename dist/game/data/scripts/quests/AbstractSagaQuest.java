@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2Party;
 import com.l2jserver.gameserver.model.L2World;
@@ -570,7 +570,7 @@ public abstract class AbstractSagaQuest extends Quest
 					for (L2PcInstance player1 : party.getMembers())
 					{
 						QuestState st1 = findQuest(player1);
-						if ((st1 != null) && player1.isInsideRadius(player, Config.ALT_PARTY_RANGE2, false, false))
+						if ((st1 != null) && player1.isInsideRadius(player, CharacterConfig.ALT_PARTY_RANGE2, false, false))
 						{
 							if (st1.isCond(15))
 							{

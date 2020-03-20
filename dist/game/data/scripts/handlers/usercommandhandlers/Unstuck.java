@@ -28,7 +28,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IUserCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -85,7 +85,7 @@ public class Unstuck implements IUserCommandHandler
 			return false;
 		}
 		
-		final int unstuckTimer = (activeChar.isGM() ? 1000 : Config.UNSTUCK_INTERVAL * 1000);
+		final int unstuckTimer = (activeChar.isGM() ? 1000 : CharacterConfig.UNSTUCK_INTERVAL * 1000);
 		activeChar.forceIsCasting(GameTimeController.getInstance().getGameTicks() + (unstuckTimer / MILLIS_IN_TICK));
 		
 		if (activeChar.isGM())
@@ -94,19 +94,19 @@ public class Unstuck implements IUserCommandHandler
 			return true;
 		}
 		
-		if (Config.UNSTUCK_INTERVAL == FIVE_MINUTES)
+		if (CharacterConfig.UNSTUCK_INTERVAL == FIVE_MINUTES)
 		{
 			activeChar.doCast(ESCAPE_5_MINUTES);
 			return true;
 		}
 		
-		if (Config.UNSTUCK_INTERVAL > 100)
+		if (CharacterConfig.UNSTUCK_INTERVAL > 100)
 		{
-			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "unstuck_time_minutes").replace("%s%", SECONDS.toMinutes(Config.UNSTUCK_INTERVAL) + ""));
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "unstuck_time_minutes").replace("%s%", SECONDS.toMinutes(CharacterConfig.UNSTUCK_INTERVAL) + ""));
 		}
 		else
 		{
-			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "unstuck_time_seconds").replace("%s%", Config.UNSTUCK_INTERVAL + ""));
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "unstuck_time_seconds").replace("%s%", CharacterConfig.UNSTUCK_INTERVAL + ""));
 		}
 		
 		activeChar.getAI().setIntention(AI_INTENTION_IDLE);

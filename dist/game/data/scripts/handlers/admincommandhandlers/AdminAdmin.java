@@ -23,6 +23,7 @@ import java.util.StringTokenizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
@@ -351,13 +352,13 @@ public class AdminAdmin implements IAdminCommandHandler
 			+ "\" action=\"bypass -h admin_setconfig RateDropSpoil $param4\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
 		replyMSG.append("<tr><td width=140></td><td width=40></td><td width=40></td></tr>");
 		replyMSG.append("<tr><td><font color=\"00AA00\">Enchant:</font></td><td></td><td></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Enchant Element Stone</font> = " + Config.ENCHANT_CHANCE_ELEMENT_STONE + "</td><td><edit var=\"param8\" width=40 height=15></td><td><button value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_button_set")
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Enchant Element Stone</font> = " + CharacterConfig.ENCHANT_CHANCE_ELEMENT_STONE + "</td><td><edit var=\"param8\" width=40 height=15></td><td><button value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_button_set")
 			+ "\" action=\"bypass -h admin_setconfig EnchantChanceElementStone $param8\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Enchant Element Crystal</font> = " + Config.ENCHANT_CHANCE_ELEMENT_CRYSTAL + "</td><td><edit var=\"param9\" width=40 height=15></td><td><button value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_button_set")
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Enchant Element Crystal</font> = " + CharacterConfig.ENCHANT_CHANCE_ELEMENT_CRYSTAL + "</td><td><edit var=\"param9\" width=40 height=15></td><td><button value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_button_set")
 			+ "\" action=\"bypass -h admin_setconfig EnchantChanceElementCrystal $param9\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Enchant Element Jewel</font> = " + Config.ENCHANT_CHANCE_ELEMENT_JEWEL + "</td><td><edit var=\"param10\" width=40 height=15></td><td><button value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_button_set")
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Enchant Element Jewel</font> = " + CharacterConfig.ENCHANT_CHANCE_ELEMENT_JEWEL + "</td><td><edit var=\"param10\" width=40 height=15></td><td><button value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_button_set")
 			+ "\" action=\"bypass -h admin_setconfig EnchantChanceElementJewel $param10\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		replyMSG.append("<tr><td><font color=\"LEVEL\">Enchant Element Energy</font> = " + Config.ENCHANT_CHANCE_ELEMENT_ENERGY + "</td><td><edit var=\"param11\" width=40 height=15></td><td><button value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_button_set")
+		replyMSG.append("<tr><td><font color=\"LEVEL\">Enchant Element Energy</font> = " + CharacterConfig.ENCHANT_CHANCE_ELEMENT_ENERGY + "</td><td><edit var=\"param11\" width=40 height=15></td><td><button value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_button_set")
 			+ "\" action=\"bypass -h admin_setconfig EnchantChanceElementEnergy $param11\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
 		
 		replyMSG.append("</table></body></html>");

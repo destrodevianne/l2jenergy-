@@ -20,7 +20,7 @@ package handlers.actionshifthandlers;
 
 import java.util.Set;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.handler.IActionShiftHandler;
 import com.l2jserver.gameserver.instancemanager.WalkingManager;
@@ -48,7 +48,12 @@ public class L2NpcActionShift implements IActionShiftHandler
 	 * <li>If L2NpcInstance is autoAttackable, send a Server->Client packet StatusUpdate to the L2PcInstance in order to update L2NpcInstance HP bar</li>
 	 * <li>Send a Server->Client NpcHtmlMessage() containing the GM console about this L2NpcInstance</li><BR>
 	 * <BR>
-	 * <FONT COLOR=#FF0000><B> <U>Caution</U> : Each group of Server->Client packet must be terminated by a ActionFailed packet in order to avoid that client wait an other packet</B></FONT><BR> <BR> <B><U> Example of use </U> :</B><BR> <BR> <li>Client packet : Action</li><BR> <BR>
+	 * <FONT COLOR=#FF0000><B> <U>Caution</U> : Each group of Server->Client packet must be terminated by a ActionFailed packet in order to avoid that client wait an other packet</B></FONT><BR>
+	 * <BR>
+	 * <B><U> Example of use </U> :</B><BR>
+	 * <BR>
+	 * <li>Client packet : Action</li><BR>
+	 * <BR>
 	 */
 	@Override
 	public boolean action(L2PcInstance activeChar, L2Object target, boolean interact)
@@ -159,7 +164,8 @@ public class L2NpcActionShift implements IActionShiftHandler
 				html.replace("%ai%", "<tr><td><table width=270 border=0><tr><td width=100><font color=FFAA00>AI</font></td><td align=right width=170>" + ((L2Npc) target).getAI().getClass().getSimpleName() + "</td></tr></table></td></tr>");
 				html.replace("%ai_type%", "<tr><td><table width=270 border=0 bgcolor=131210><tr><td width=100><font color=FFAA00>AIType</font></td><td align=right width=170>" + String.valueOf(((L2Npc) target).getAiType()) + "</td></tr></table></td></tr>");
 				html.replace("%ai_clan%", "<tr><td><table width=270 border=0><tr><td width=100><font color=FFAA00>Clan & Range:</font></td><td align=right width=170>" + clansString + " " + String.valueOf(((L2Npc) target).getTemplate().getClanHelpRange()) + "</td></tr></table></td></tr>");
-				html.replace("%ai_enemy_clan%", "<tr><td><table width=270 border=0 bgcolor=131210><tr><td width=100><font color=FFAA00>Ignore & Range:</font></td><td align=right width=170>" + ignoreClanNpcIdsString + " " + String.valueOf(((L2Npc) target).getTemplate().getAggroRange()) + "</td></tr></table></td></tr>");
+				html.replace("%ai_enemy_clan%", "<tr><td><table width=270 border=0 bgcolor=131210><tr><td width=100><font color=FFAA00>Ignore & Range:</font></td><td align=right width=170>" + ignoreClanNpcIdsString + " " + String.valueOf(((L2Npc) target).getTemplate().getAggroRange())
+					+ "</td></tr></table></td></tr>");
 			}
 			else
 			{
@@ -181,7 +187,7 @@ public class L2NpcActionShift implements IActionShiftHandler
 			}
 			activeChar.sendPacket(html);
 		}
-		else if (Config.ALT_GAME_VIEWNPC)
+		else if (NpcConfig.ALT_GAME_VIEWNPC)
 		{
 			if (!target.isNpc())
 			{

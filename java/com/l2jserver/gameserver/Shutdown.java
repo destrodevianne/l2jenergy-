@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.UPnPService;
 import com.l2jserver.commons.database.ConnectionFactory;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.ManorConfig;
 import com.l2jserver.gameserver.configuration.config.custom.OfflineConfig;
 import com.l2jserver.gameserver.configuration.config.events.FishingConfig;
@@ -564,7 +564,7 @@ public class Shutdown extends Thread
 		}
 		
 		// Save items on ground before closing
-		if (Config.SAVE_DROPPED_ITEM)
+		if (GeneralConfig.SAVE_DROPPED_ITEM)
 		{
 			ItemsOnGroundManager.getInstance().saveInDb();
 			LOG.info("Items On Ground Manager: Data saved({}ms).", tc.getEstimatedTimeAndRestartCounter());
@@ -573,7 +573,7 @@ public class Shutdown extends Thread
 		}
 		
 		// Save bot reports to database
-		if (Config.BOTREPORT_ENABLE)
+		if (GeneralConfig.BOTREPORT_ENABLE)
 		{
 			BotReportTable.getInstance().saveReportedCharData();
 			LOG.info("Bot Report Table: Successfully saved reports to database!");

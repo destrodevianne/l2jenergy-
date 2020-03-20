@@ -27,7 +27,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.model.itemauction.ItemAuctionInstance;
 import com.l2jserver.gameserver.util.IXmlReader;
@@ -42,7 +42,7 @@ public final class ItemAuctionManager implements IXmlReader
 	
 	protected ItemAuctionManager()
 	{
-		if (!Config.ALT_ITEM_AUCTION_ENABLED)
+		if (!GeneralConfig.ALT_ITEM_AUCTION_ENABLED)
 		{
 			LOG.info("Auction Manager disabled by config.");
 			return;

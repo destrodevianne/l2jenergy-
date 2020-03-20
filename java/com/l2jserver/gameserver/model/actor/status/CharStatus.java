@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.stats.Formulas;
@@ -173,7 +173,7 @@ public class CharStatus
 			getActiveChar().abortAttack();
 			getActiveChar().abortCast();
 			
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				_log.fine("char is dead.");
 			}
@@ -199,7 +199,7 @@ public class CharStatus
 	{
 		if ((_regTask == null) && !getActiveChar().isDead())
 		{
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				_log.fine("HP/MP regen started");
 			}
@@ -224,7 +224,7 @@ public class CharStatus
 	{
 		if (_regTask != null)
 		{
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				_log.fine("HP/MP regen stop");
 			}

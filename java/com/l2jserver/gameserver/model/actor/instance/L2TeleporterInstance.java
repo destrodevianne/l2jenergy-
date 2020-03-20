@@ -25,7 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.cache.HtmCache;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.data.sql.impl.TeleportLocationTable;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.InstanceType;
@@ -266,7 +266,7 @@ public final class L2TeleporterInstance extends L2Npc
 				player.sendPacket(SystemMessageId.NO_PORT_THAT_IS_IN_SIGE);
 				return;
 			}
-			else if (!Config.ALT_GAME_KARMA_PLAYER_CAN_USE_GK && (player.getKarma() > 0)) // karma
+			else if (!CharacterConfig.ALT_GAME_KARMA_PLAYER_CAN_USE_GK && (player.getKarma() > 0)) // karma
 			{
 				player.sendMessage(MessagesData.getInstance().getMessage(player, "teleport_go_away"));
 				return;
@@ -305,7 +305,7 @@ public final class L2TeleporterInstance extends L2Npc
 				}
 			}
 			
-			if (Config.ALT_GAME_FREE_TELEPORT || player.destroyItemByItemId("Teleport " + (list.getIsForNoble() ? " nobless" : ""), list.getItemId(), price, this, true))
+			if (CharacterConfig.ALT_GAME_FREE_TELEPORT || player.destroyItemByItemId("Teleport " + (list.getIsForNoble() ? " nobless" : ""), list.getItemId(), price, this, true))
 			{
 				LOG.debug("Teleporting {} to new location: {}, {}, {}", player, list.getLocX(), list.getLocY(), list.getLocZ());
 				

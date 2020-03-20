@@ -23,7 +23,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.xml.impl.InitialEquipmentData;
@@ -101,7 +101,7 @@ public final class RequestCharacterCreate extends L2GameClientPacket
 			return;
 		}
 		
-		if (Config.FORBIDDEN_NAMES.contains(_name.toLowerCase()))
+		if (CharacterConfig.FORBIDDEN_NAMES.contains(_name.toLowerCase()))
 		{
 			sendPacket(CharacterCreateFail.REASON_INCORRECT_NAME);
 			return;
@@ -199,9 +199,9 @@ public final class RequestCharacterCreate extends L2GameClientPacket
 	{
 		L2World.getInstance().storeObject(player);
 		
-		if (Config.STARTING_ADENA > 0)
+		if (CharacterConfig.STARTING_ADENA > 0)
 		{
-			player.addAdena("Init", Config.STARTING_ADENA, null, false);
+			player.addAdena("Init", CharacterConfig.STARTING_ADENA, null, false);
 		}
 		
 		final L2PcTemplate template = player.getTemplate();
@@ -209,17 +209,17 @@ public final class RequestCharacterCreate extends L2GameClientPacket
 		player.setXYZInvisible(createLoc.getX(), createLoc.getY(), createLoc.getZ());
 		player.setTitle("");
 		
-		if (Config.ENABLE_VITALITY)
+		if (CharacterConfig.ENABLE_VITALITY)
 		{
-			player.setVitalityPoints(Math.min(Config.STARTING_VITALITY_POINTS, PcStat.MAX_VITALITY_POINTS), true);
+			player.setVitalityPoints(Math.min(CharacterConfig.STARTING_VITALITY_POINTS, PcStat.MAX_VITALITY_POINTS), true);
 		}
-		if (Config.STARTING_LEVEL > 1)
+		if (CharacterConfig.STARTING_LEVEL > 1)
 		{
-			player.addLevel(Config.STARTING_LEVEL - 1);
+			player.addLevel(CharacterConfig.STARTING_LEVEL - 1);
 		}
-		if (Config.STARTING_SP > 0)
+		if (CharacterConfig.STARTING_SP > 0)
 		{
-			player.addSp(Config.STARTING_SP);
+			player.addSp(CharacterConfig.STARTING_SP);
 		}
 		
 		final List<PcItemTemplate> initialItems = InitialEquipmentData.getInstance().getEquipmentList(player.getClassId());

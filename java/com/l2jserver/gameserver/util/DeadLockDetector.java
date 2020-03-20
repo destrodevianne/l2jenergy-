@@ -28,6 +28,7 @@ import java.util.logging.Logger;
 
 import com.l2jserver.gameserver.Shutdown;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 
 /**
  * Thread to check for deadlocked threads.
@@ -36,9 +37,6 @@ import com.l2jserver.gameserver.configuration.config.Config;
 public class DeadLockDetector extends Thread
 {
 	private static Logger _log = Logger.getLogger(DeadLockDetector.class.getName());
-	
-	/** Interval to check for deadlocked threads */
-	private static final int _sleepTime = Config.DEADLOCK_CHECK_INTERVAL * 1000;
 	
 	private final ThreadMXBean tmx;
 	
@@ -105,14 +103,14 @@ public class DeadLockDetector extends Thread
 					}
 					_log.warning(info.toString());
 					
-					if (Config.RESTART_ON_DEADLOCK)
+					if (GeneralConfig.RESTART_ON_DEADLOCK)
 					{
 						Broadcast.toAllOnlinePlayers("Server has stability issues - restarting now.");
 						Shutdown.getInstance().startTelnetShutdown("DeadLockDetector - Auto Restart", 60, true);
 					}
 					
 				}
-				Thread.sleep(_sleepTime);
+				Thread.sleep(GeneralConfig.DEADLOCK_CHECK_INTERVAL);
 			}
 			catch (Exception e)
 			{

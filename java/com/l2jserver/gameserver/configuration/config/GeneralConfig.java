@@ -18,6 +18,7 @@
  */
 package com.l2jserver.gameserver.configuration.config;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -26,7 +27,6 @@ import org.slf4j.LoggerFactory;
 import com.l2jserver.commons.configuration.annotations.Configuration;
 import com.l2jserver.commons.configuration.annotations.Setting;
 import com.l2jserver.gameserver.enums.IllegalActionPunishmentType;
-import com.l2jserver.gameserver.util.Util;
 
 /**
  * @author Мо3олЬ
@@ -43,7 +43,7 @@ public class GeneralConfig
 	@Setting(name = "ServerListBrackets")
 	public static boolean SERVER_LIST_BRACKET;
 	
-	@Setting(name = "ServerListType", method = "getServerTypeId")
+	@Setting(name = "ServerListType", method = "serverTypeId")
 	public static int SERVER_LIST_TYPE;
 	
 	@Setting(name = "ServerListAge")
@@ -214,7 +214,7 @@ public class GeneralConfig
 	@Setting(name = "DeadLockDetector")
 	public static boolean DEADLOCK_DETECTOR;
 	
-	@Setting(name = "DeadLockCheckInterval")
+	@Setting(name = "DeadLockCheckInterval", increase = 1000)
 	public static int DEADLOCK_CHECK_INTERVAL;
 	
 	@Setting(name = "RestartOnDeadlock")
@@ -400,7 +400,7 @@ public class GeneralConfig
 	@Setting(name = "ChatFilterChars")
 	public static String CHAT_FILTER_CHARS;
 	
-	@Setting(name = "BanChatChannels", method = "banChat", splitter = ";")
+	@Setting(name = "BanChatChannels", method = "banChat")
 	public static int[] BAN_CHAT_CHANNELS;
 	
 	@Setting(name = "AltItemAuctionEnabled")
@@ -421,10 +421,10 @@ public class GeneralConfig
 	@Setting(name = "TimeOfEntry", minValue = 0, maxValue = 3)
 	public static int FS_TIME_ENTRY;
 	
-	@Setting(name = "TimeOfWarmUp", minValue = 0, maxValue = 3)
+	@Setting(name = "TimeOfWarmUp")
 	public static int FS_TIME_WARMUP;
 	
-	@Setting(name = "NumberOfNecessaryPartyMembers", minValue = 0, maxValue = 3)
+	@Setting(name = "NumberOfNecessaryPartyMembers")
 	public static int FS_PARTY_MEMBER_COUNT;
 	
 	@Setting(name = "RiftMinPartySize")
@@ -551,7 +551,7 @@ public class GeneralConfig
 		CLIENT_PACKET_QUEUE_SIZE = Integer.parseInt(value);
 		if (CLIENT_PACKET_QUEUE_SIZE == 0)
 		{
-			CLIENT_PACKET_QUEUE_SIZE = MMOConfig.MMO_MAX_READ_PER_PASS + 1;
+			CLIENT_PACKET_QUEUE_SIZE = MMOConfig.MMO_MAX_READ_PER_PASS + 2;
 		}
 	}
 	
@@ -560,17 +560,18 @@ public class GeneralConfig
 		CLIENT_PACKET_QUEUE_MAX_BURST_SIZE = Integer.parseInt(value);
 		if (CLIENT_PACKET_QUEUE_MAX_BURST_SIZE == 0)
 		{
-			CLIENT_PACKET_QUEUE_MAX_BURST_SIZE = MMOConfig.MMO_MAX_READ_PER_PASS;
+			CLIENT_PACKET_QUEUE_MAX_BURST_SIZE = MMOConfig.MMO_MAX_READ_PER_PASS + 1;
 		}
 	}
 	
-	public void banChat(String[] value)
+	public void banChat(String value)
 	{
-		BAN_CHAT_CHANNELS = new int[value.length];
+		String[] propertySplit4 = value.split(";");
+		BAN_CHAT_CHANNELS = new int[propertySplit4.length];
 		try
 		{
 			int i = 0;
-			for (String chatId : value)
+			for (String chatId : propertySplit4)
 			{
 				BAN_CHAT_CHANNELS[i++] = Integer.parseInt(chatId);
 			}
@@ -583,17 +584,15 @@ public class GeneralConfig
 	
 	public void listOfprotected(final String value)
 	{
-		try
+		String[] split = value.split(",");
+		LIST_PROTECTED_ITEMS = new ArrayList<>(split.length);
+		for (String id : split)
 		{
-			LIST_PROTECTED_ITEMS = Util.parseTemplateConfig(value, Integer.class);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
+			LIST_PROTECTED_ITEMS.add(Integer.parseInt(id));
 		}
 	}
 	
-	public static int getServerTypeId(String[] value)
+	public static int serverTypeId(String[] value)
 	{
 		int tType = 0;
 		for (String cType : value)

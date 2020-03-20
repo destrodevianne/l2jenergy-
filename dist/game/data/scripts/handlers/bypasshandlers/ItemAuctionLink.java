@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringTokenizer;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IBypassHandler;
 import com.l2jserver.gameserver.instancemanager.ItemAuctionManager;
@@ -52,7 +52,7 @@ public class ItemAuctionLink implements IBypassHandler
 			return false;
 		}
 		
-		if (!Config.ALT_ITEM_AUCTION_ENABLED)
+		if (!GeneralConfig.ALT_ITEM_AUCTION_ENABLED)
 		{
 			activeChar.sendPacket(SystemMessageId.NO_AUCTION_PERIOD);
 			return true;

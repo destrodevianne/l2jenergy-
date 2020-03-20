@@ -24,7 +24,8 @@ import static com.l2jserver.gameserver.model.itemcontainer.Inventory.MAX_ADENA;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.BuyListData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.L2Object;
@@ -59,7 +60,7 @@ public final class RequestSellItem extends L2GameClientPacket
 	{
 		_listId = readD();
 		int size = readD();
-		if ((size <= 0) || (size > Config.MAX_ITEM_IN_PACKET) || ((size * BATCH_LENGTH) != _buf.remaining()))
+		if ((size <= 0) || (size > CharacterConfig.MAX_ITEM_IN_PACKET) || ((size * BATCH_LENGTH) != _buf.remaining()))
 		{
 			return;
 		}
@@ -107,7 +108,7 @@ public final class RequestSellItem extends L2GameClientPacket
 		}
 		
 		// Alt game - Karma punishment
-		if (!Config.ALT_GAME_KARMA_PLAYER_CAN_SHOP && (player.getKarma() > 0))
+		if (!CharacterConfig.ALT_GAME_KARMA_PLAYER_CAN_SHOP && (player.getKarma() > 0))
 		{
 			sendPacket(ActionFailed.STATIC_PACKET);
 			return;
@@ -142,7 +143,7 @@ public final class RequestSellItem extends L2GameClientPacket
 		final L2BuyList buyList = BuyListData.getInstance().getBuyList(_listId);
 		if (buyList == null)
 		{
-			Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " sent a false BuyList list_id " + _listId, Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " sent a false BuyList list_id " + _listId, GeneralConfig.DEFAULT_PUNISH);
 			return;
 		}
 		
@@ -169,11 +170,11 @@ public final class RequestSellItem extends L2GameClientPacket
 			totalPrice += price * i.getCount();
 			if (((MAX_ADENA / i.getCount()) < price) || (totalPrice > MAX_ADENA))
 			{
-				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to purchase over " + MAX_ADENA + " adena worth of goods.", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to purchase over " + MAX_ADENA + " adena worth of goods.", GeneralConfig.DEFAULT_PUNISH);
 				return;
 			}
 			
-			if (Config.ALLOW_REFUND)
+			if (GeneralConfig.ALLOW_REFUND)
 			{
 				item = player.getInventory().transferItem("Sell", i.getObjectId(), i.getCount(), player.getRefund(), player, merchant);
 			}

@@ -25,7 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.util.StringUtil;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.enums.InstanceType;
@@ -81,7 +81,7 @@ public class L2NpcInstance extends L2Npc
 	 */
 	public static void showSkillList(L2PcInstance player, L2Npc npc, ClassId classId)
 	{
-		if (Config.DEBUG)
+		if (GeneralConfig.DEBUG)
 		{
 			LOG.debug("SkillList activated on: {}", npc.getObjectId());
 		}

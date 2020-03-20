@@ -21,7 +21,8 @@ package com.l2jserver.gameserver.network.clientpackets;
 import java.nio.BufferUnderflowException;
 
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.protection.BaseProtectionConfig;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -67,7 +68,7 @@ public class MoveBackwardToLocation extends L2GameClientPacket
 			if (BaseProtectionConfig.L2WALKER_PROTECTION)
 			{
 				L2PcInstance activeChar = getClient().getActiveChar();
-				Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " is trying to use L2Walker and got kicked.", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " is trying to use L2Walker and got kicked.", GeneralConfig.DEFAULT_PUNISH);
 			}
 		}
 	}
@@ -81,7 +82,7 @@ public class MoveBackwardToLocation extends L2GameClientPacket
 			return;
 		}
 		
-		if ((Config.PLAYER_MOVEMENT_BLOCK_TIME > 0) && !activeChar.isGM() && (activeChar.getNotMoveUntil() > System.currentTimeMillis()))
+		if ((CharacterConfig.PLAYER_MOVEMENT_BLOCK_TIME > 0) && !activeChar.isGM() && (activeChar.getNotMoveUntil() > System.currentTimeMillis()))
 		{
 			activeChar.sendPacket(SystemMessageId.CANNOT_MOVE_WHILE_SPEAKING_TO_AN_NPC);
 			activeChar.sendPacket(ActionFailed.STATIC_PACKET);

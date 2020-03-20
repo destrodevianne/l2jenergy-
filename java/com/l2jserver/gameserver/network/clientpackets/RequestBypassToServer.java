@@ -21,7 +21,7 @@ package com.l2jserver.gameserver.network.clientpackets;
 import java.util.StringTokenizer;
 
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.ManorConfig;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
@@ -166,7 +166,7 @@ public final class RequestBypassToServer extends L2GameClientPacket
 				}
 				else
 				{
-					if (Config.GMAUDIT)
+					if (GeneralConfig.GMAUDIT)
 					{
 						GMAudit.auditGMAction(activeChar.getName() + " [" + activeChar.getObjectId() + "]", _command, (activeChar.getTarget() != null ? activeChar.getTarget().getName() : "no-target"));
 					}

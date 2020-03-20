@@ -18,7 +18,8 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -53,7 +54,7 @@ public class RequestPackageSend extends L2GameClientPacket
 		_objectId = readD();
 		
 		int count = readD();
-		if ((count <= 0) || (count > Config.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != _buf.remaining()))
+		if ((count <= 0) || (count > CharacterConfig.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != _buf.remaining()))
 		{
 			return;
 		}
@@ -96,7 +97,7 @@ public class RequestPackageSend extends L2GameClientPacket
 		
 		if (player.getActiveEnchantItemId() != L2PcInstance.ID_NONE)
 		{
-			Util.handleIllegalPlayerAction(player, "Player " + player.getName() + " tried to use enchant Exploit!", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(player, "Player " + player.getName() + " tried to use enchant Exploit!", GeneralConfig.DEFAULT_PUNISH);
 			return;
 		}
 		
@@ -107,13 +108,13 @@ public class RequestPackageSend extends L2GameClientPacket
 		}
 		
 		// Alt game - Karma punishment
-		if (!Config.ALT_GAME_KARMA_PLAYER_CAN_USE_WAREHOUSE && (player.getKarma() > 0))
+		if (!CharacterConfig.ALT_GAME_KARMA_PLAYER_CAN_USE_WAREHOUSE && (player.getKarma() > 0))
 		{
 			return;
 		}
 		
 		// Freight price from config per item slot.
-		final int fee = _items.length * Config.ALT_FREIGHT_PRICE;
+		final int fee = _items.length * CharacterConfig.ALT_FREIGHT_PRICE;
 		long currentAdena = player.getAdena();
 		int slots = 0;
 		
@@ -166,7 +167,7 @@ public class RequestPackageSend extends L2GameClientPacket
 		}
 		
 		// Proceed to the transfer
-		final InventoryUpdate playerIU = Config.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
+		final InventoryUpdate playerIU = GeneralConfig.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
 		for (ItemHolder i : _items)
 		{
 			// Check validity of requested item

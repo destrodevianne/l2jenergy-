@@ -18,7 +18,8 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -56,7 +57,7 @@ public final class RequestConfirmCancelItem extends L2GameClientPacket
 		
 		if (item.getOwnerId() != activeChar.getObjectId())
 		{
-			Util.handleIllegalPlayerAction(getClient().getActiveChar(), "Warning!! Character " + getClient().getActiveChar().getName() + " of account " + getClient().getActiveChar().getAccountName() + " tryied to destroy augment on item that doesn't own.", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(getClient().getActiveChar(), "Warning!! Character " + getClient().getActiveChar().getName() + " of account " + getClient().getActiveChar().getAccountName() + " tryied to destroy augment on item that doesn't own.", GeneralConfig.DEFAULT_PUNISH);
 			return;
 		}
 		
@@ -66,7 +67,7 @@ public final class RequestConfirmCancelItem extends L2GameClientPacket
 			return;
 		}
 		
-		if (item.isPvp() && !Config.ALT_ALLOW_AUGMENT_PVP_ITEMS)
+		if (item.isPvp() && !CharacterConfig.ALT_ALLOW_AUGMENT_PVP_ITEMS)
 		{
 			activeChar.sendPacket(SystemMessageId.THIS_IS_NOT_A_SUITABLE_ITEM);
 			return;

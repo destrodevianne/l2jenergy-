@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.serverpackets.ExBR_MinigameLoadScores;
 
@@ -35,7 +35,7 @@ public class RequestBrMinigameLoadScores extends L2GameClientPacket
 	public void runImpl()
 	{
 		final L2PcInstance player = getClient().getActiveChar();
-		if ((player == null) || !Config.EX_JAPAN_MINIGAME)
+		if ((player == null) || !GeneralConfig.EX_JAPAN_MINIGAME)
 		{
 			return;
 		}

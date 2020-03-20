@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model.itemcontainer;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.enums.ItemLocation;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -78,7 +78,7 @@ public final class ClanWarehouse extends Warehouse
 	@Override
 	public boolean validateCapacity(long slots)
 	{
-		return ((_items.size() + slots) <= Config.WAREHOUSE_SLOTS_CLAN);
+		return ((_items.size() + slots) <= CharacterConfig.WAREHOUSE_SLOTS_CLAN);
 	}
 	
 	@Override

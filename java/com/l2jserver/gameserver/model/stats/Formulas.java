@@ -27,7 +27,9 @@ import org.slf4j.LoggerFactory;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.SevenSigns;
 import com.l2jserver.gameserver.SevenSignsFestival;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.data.xml.impl.HitConditionBonusData;
@@ -257,7 +259,7 @@ public final class Formulas
 	public static final double calcHpRegen(L2Character cha)
 	{
 		double init = cha.isPlayer() ? cha.getActingPlayer().getTemplate().getBaseHpRegen(cha.getLevel()) : cha.getTemplate().getBaseHpReg();
-		double hpRegenMultiplier = cha.isRaid() ? Config.RAID_HP_REGEN_MULTIPLIER : Config.HP_REGEN_MULTIPLIER;
+		double hpRegenMultiplier = cha.isRaid() ? NpcConfig.RAID_HP_REGEN_MULTIPLIER : CharacterConfig.HP_REGEN_MULTIPLIER;
 		double hpRegenBonus = 0;
 		
 		if (ChampionData.getInstance().isEnabled() && cha.isChampion())
@@ -364,7 +366,7 @@ public final class Formulas
 		}
 		else if (cha.isPet())
 		{
-			init = ((L2PetInstance) cha).getPetLevelData().getPetRegenHP() * Config.PET_HP_REGEN_MULTIPLIER;
+			init = ((L2PetInstance) cha).getPetLevelData().getPetRegenHP() * NpcConfig.PET_HP_REGEN_MULTIPLIER;
 		}
 		
 		return (cha.calcStat(Stats.REGENERATE_HP_RATE, Math.max(1, init), null, null) * hpRegenMultiplier) + hpRegenBonus;
@@ -378,7 +380,7 @@ public final class Formulas
 	public static final double calcMpRegen(L2Character cha)
 	{
 		double init = cha.isPlayer() ? cha.getActingPlayer().getTemplate().getBaseMpRegen(cha.getLevel()) : cha.getTemplate().getBaseMpReg();
-		double mpRegenMultiplier = cha.isRaid() ? Config.RAID_MP_REGEN_MULTIPLIER : Config.MP_REGEN_MULTIPLIER;
+		double mpRegenMultiplier = cha.isRaid() ? NpcConfig.RAID_MP_REGEN_MULTIPLIER : CharacterConfig.MP_REGEN_MULTIPLIER;
 		double mpRegenBonus = 0;
 		
 		if (cha.isPlayer())
@@ -472,7 +474,7 @@ public final class Formulas
 		}
 		else if (cha.isPet())
 		{
-			init = ((L2PetInstance) cha).getPetLevelData().getPetRegenMP() * Config.PET_MP_REGEN_MULTIPLIER;
+			init = ((L2PetInstance) cha).getPetLevelData().getPetRegenMP() * NpcConfig.PET_MP_REGEN_MULTIPLIER;
 		}
 		
 		return (cha.calcStat(Stats.REGENERATE_MP_RATE, Math.max(1, init), null, null) * mpRegenMultiplier) + mpRegenBonus;
@@ -487,7 +489,7 @@ public final class Formulas
 	{
 		// With CON bonus
 		final double init = player.getActingPlayer().getTemplate().getBaseCpRegen(player.getLevel()) * player.getLevelMod() * BaseStats.CON.calcBonus(player);
-		double cpRegenMultiplier = Config.CP_REGEN_MULTIPLIER;
+		double cpRegenMultiplier = CharacterConfig.CP_REGEN_MULTIPLIER;
 		if (player.isSitting())
 		{
 			cpRegenMultiplier *= 1.5; // Sitting
@@ -529,7 +531,7 @@ public final class Formulas
 		// Check the distance between the player and the player spawn point, in the center of the arena.
 		double distToCenter = activeChar.calculateDistance(festivalCenter[0], festivalCenter[1], 0, false, false);
 		
-		if (Config.DEBUG)
+		if (GeneralConfig.DEBUG)
 		{
 			LOG.debug("Distance: {}, RegenMulti: {}", distToCenter, ((distToCenter * 2.5) / 50));
 		}
@@ -605,16 +607,16 @@ public final class Formulas
 		double weaponMod = attacker.getRandomDamageMultiplier();
 		
 		double penaltyMod = 1;
-		if ((target instanceof L2Attackable) && !target.isRaid() && !target.isRaidMinion() && (target.getLevel() >= Config.MIN_NPC_LVL_DMG_PENALTY) && (attacker.getActingPlayer() != null) && ((target.getLevel() - attacker.getActingPlayer().getLevel()) >= 2))
+		if ((target instanceof L2Attackable) && !target.isRaid() && !target.isRaidMinion() && (target.getLevel() >= NpcConfig.MIN_NPC_LVL_DMG_PENALTY) && (attacker.getActingPlayer() != null) && ((target.getLevel() - attacker.getActingPlayer().getLevel()) >= 2))
 		{
 			int lvlDiff = target.getLevel() - attacker.getActingPlayer().getLevel() - 1;
-			if (lvlDiff >= Config.NPC_SKILL_DMG_PENALTY.size())
+			if (lvlDiff >= NpcConfig.NPC_SKILL_DMG_PENALTY.size())
 			{
-				penaltyMod *= Config.NPC_SKILL_DMG_PENALTY.get(Config.NPC_SKILL_DMG_PENALTY.size() - 1);
+				penaltyMod *= NpcConfig.NPC_SKILL_DMG_PENALTY.get(NpcConfig.NPC_SKILL_DMG_PENALTY.size() - 1);
 			}
 			else
 			{
-				penaltyMod *= Config.NPC_SKILL_DMG_PENALTY.get(lvlDiff);
+				penaltyMod *= NpcConfig.NPC_SKILL_DMG_PENALTY.get(lvlDiff);
 			}
 		}
 		damage = (baseMod * criticalMod * criticalModPos * criticalVulnMod * proximityBonus * pvpBonus) + criticalAddMod + criticalAddVuln;
@@ -694,16 +696,16 @@ public final class Formulas
 		double weaponMod = attacker.getRandomDamageMultiplier();
 		
 		double penaltyMod = 1;
-		if (target.isAttackable() && !target.isRaid() && !target.isRaidMinion() && (target.getLevel() >= Config.MIN_NPC_LVL_DMG_PENALTY) && (attacker.getActingPlayer() != null) && ((target.getLevel() - attacker.getActingPlayer().getLevel()) >= 2))
+		if (target.isAttackable() && !target.isRaid() && !target.isRaidMinion() && (target.getLevel() >= NpcConfig.MIN_NPC_LVL_DMG_PENALTY) && (attacker.getActingPlayer() != null) && ((target.getLevel() - attacker.getActingPlayer().getLevel()) >= 2))
 		{
 			int lvlDiff = target.getLevel() - attacker.getActingPlayer().getLevel() - 1;
-			if (lvlDiff >= Config.NPC_SKILL_DMG_PENALTY.size())
+			if (lvlDiff >= NpcConfig.NPC_SKILL_DMG_PENALTY.size())
 			{
-				penaltyMod *= Config.NPC_SKILL_DMG_PENALTY.get(Config.NPC_SKILL_DMG_PENALTY.size() - 1);
+				penaltyMod *= NpcConfig.NPC_SKILL_DMG_PENALTY.get(NpcConfig.NPC_SKILL_DMG_PENALTY.size() - 1);
 			}
 			else
 			{
-				penaltyMod *= Config.NPC_SKILL_DMG_PENALTY.get(lvlDiff);
+				penaltyMod *= NpcConfig.NPC_SKILL_DMG_PENALTY.get(lvlDiff);
 			}
 			
 		}
@@ -754,7 +756,7 @@ public final class Formulas
 		{
 			case SHIELD_DEFENSE_SUCCEED:
 			{
-				if (!Config.ALT_GAME_SHIELD_BLOCKS)
+				if (!CharacterConfig.ALT_GAME_SHIELD_BLOCKS)
 				{
 					defence += target.getShldDef();
 				}
@@ -805,30 +807,30 @@ public final class Formulas
 		damage *= calcAttributeBonus(attacker, target, null);
 		if (target.isAttackable())
 		{
-			if (!target.isRaid() && !target.isRaidMinion() && (target.getLevel() >= Config.MIN_NPC_LVL_DMG_PENALTY) && (attacker.getActingPlayer() != null) && ((target.getLevel() - attacker.getActingPlayer().getLevel()) >= 2))
+			if (!target.isRaid() && !target.isRaidMinion() && (target.getLevel() >= NpcConfig.MIN_NPC_LVL_DMG_PENALTY) && (attacker.getActingPlayer() != null) && ((target.getLevel() - attacker.getActingPlayer().getLevel()) >= 2))
 			{
 				int lvlDiff = target.getLevel() - attacker.getActingPlayer().getLevel() - 1;
 				
 				if (crit)
 				{
-					if (lvlDiff >= Config.NPC_CRIT_DMG_PENALTY.size())
+					if (lvlDiff >= NpcConfig.NPC_CRIT_DMG_PENALTY.size())
 					{
-						damage *= Config.NPC_CRIT_DMG_PENALTY.get(Config.NPC_CRIT_DMG_PENALTY.size() - 1);
+						damage *= NpcConfig.NPC_CRIT_DMG_PENALTY.get(NpcConfig.NPC_CRIT_DMG_PENALTY.size() - 1);
 					}
 					else
 					{
-						damage *= Config.NPC_CRIT_DMG_PENALTY.get(lvlDiff);
+						damage *= NpcConfig.NPC_CRIT_DMG_PENALTY.get(lvlDiff);
 					}
 				}
 				else
 				{
-					if (lvlDiff >= Config.NPC_DMG_PENALTY.size())
+					if (lvlDiff >= NpcConfig.NPC_DMG_PENALTY.size())
 					{
-						damage *= Config.NPC_DMG_PENALTY.get(Config.NPC_DMG_PENALTY.size() - 1);
+						damage *= NpcConfig.NPC_DMG_PENALTY.get(NpcConfig.NPC_DMG_PENALTY.size() - 1);
 					}
 					else
 					{
-						damage *= Config.NPC_DMG_PENALTY.get(lvlDiff);
+						damage *= NpcConfig.NPC_DMG_PENALTY.get(lvlDiff);
 					}
 				}
 			}
@@ -855,7 +857,7 @@ public final class Formulas
 		{
 			case SHIELD_DEFENSE_SUCCEED:
 			{
-				if (!Config.ALT_GAME_SHIELD_BLOCKS)
+				if (!CharacterConfig.ALT_GAME_SHIELD_BLOCKS)
 				{
 					defence += target.getShldDef();
 				}
@@ -885,39 +887,39 @@ public final class Formulas
 		double baseMod = ((77 * (power + (attacker.getPAtk(target) * ssBoost))) / defence);
 		
 		double penaltyMod = 1;
-		if ((target instanceof L2Attackable) && !target.isRaid() && !target.isRaidMinion() && (target.getLevel() >= Config.MIN_NPC_LVL_DMG_PENALTY) && (attacker.getActingPlayer() != null) && ((target.getLevel() - attacker.getActingPlayer().getLevel()) >= 2))
+		if ((target instanceof L2Attackable) && !target.isRaid() && !target.isRaidMinion() && (target.getLevel() >= NpcConfig.MIN_NPC_LVL_DMG_PENALTY) && (attacker.getActingPlayer() != null) && ((target.getLevel() - attacker.getActingPlayer().getLevel()) >= 2))
 		{
 			int lvlDiff = target.getLevel() - attacker.getActingPlayer().getLevel() - 1;
 			
-			if (lvlDiff >= Config.NPC_SKILL_DMG_PENALTY.size())
+			if (lvlDiff >= NpcConfig.NPC_SKILL_DMG_PENALTY.size())
 			{
-				penaltyMod *= Config.NPC_SKILL_DMG_PENALTY.get(Config.NPC_SKILL_DMG_PENALTY.size() - 1);
+				penaltyMod *= NpcConfig.NPC_SKILL_DMG_PENALTY.get(NpcConfig.NPC_SKILL_DMG_PENALTY.size() - 1);
 			}
 			else
 			{
-				penaltyMod *= Config.NPC_SKILL_DMG_PENALTY.get(lvlDiff);
+				penaltyMod *= NpcConfig.NPC_SKILL_DMG_PENALTY.get(lvlDiff);
 			}
 			
 			if (crit)
 			{
-				if (lvlDiff >= Config.NPC_CRIT_DMG_PENALTY.size())
+				if (lvlDiff >= NpcConfig.NPC_CRIT_DMG_PENALTY.size())
 				{
-					penaltyMod *= Config.NPC_CRIT_DMG_PENALTY.get(Config.NPC_CRIT_DMG_PENALTY.size() - 1);
+					penaltyMod *= NpcConfig.NPC_CRIT_DMG_PENALTY.get(NpcConfig.NPC_CRIT_DMG_PENALTY.size() - 1);
 				}
 				else
 				{
-					penaltyMod *= Config.NPC_CRIT_DMG_PENALTY.get(lvlDiff);
+					penaltyMod *= NpcConfig.NPC_CRIT_DMG_PENALTY.get(lvlDiff);
 				}
 			}
 			else
 			{
-				if (lvlDiff >= Config.NPC_DMG_PENALTY.size())
+				if (lvlDiff >= NpcConfig.NPC_DMG_PENALTY.size())
 				{
-					penaltyMod *= Config.NPC_DMG_PENALTY.get(Config.NPC_DMG_PENALTY.size() - 1);
+					penaltyMod *= NpcConfig.NPC_DMG_PENALTY.get(NpcConfig.NPC_DMG_PENALTY.size() - 1);
 				}
 				else
 				{
-					penaltyMod *= Config.NPC_DMG_PENALTY.get(lvlDiff);
+					penaltyMod *= NpcConfig.NPC_DMG_PENALTY.get(lvlDiff);
 				}
 			}
 		}
@@ -970,7 +972,7 @@ public final class Formulas
 		double damage = ((91 * Math.sqrt(mAtk)) / mDef) * power;
 		
 		// Failure calculation
-		if (Config.ALT_GAME_MAGICFAILURES && !calcMagicSuccess(attacker, target, skill))
+		if (CharacterConfig.ALT_GAME_MAGICFAILURES && !calcMagicSuccess(attacker, target, skill))
 		{
 			if (attacker.isPlayer())
 			{
@@ -1023,16 +1025,16 @@ public final class Formulas
 		
 		if (target.isAttackable())
 		{
-			if (!target.isRaid() && !target.isRaidMinion() && (target.getLevel() >= Config.MIN_NPC_LVL_DMG_PENALTY) && (attacker.getActingPlayer() != null) && ((target.getLevel() - attacker.getActingPlayer().getLevel()) >= 2))
+			if (!target.isRaid() && !target.isRaidMinion() && (target.getLevel() >= NpcConfig.MIN_NPC_LVL_DMG_PENALTY) && (attacker.getActingPlayer() != null) && ((target.getLevel() - attacker.getActingPlayer().getLevel()) >= 2))
 			{
 				int lvlDiff = target.getLevel() - attacker.getActingPlayer().getLevel() - 1;
-				if (lvlDiff >= Config.NPC_SKILL_DMG_PENALTY.size())
+				if (lvlDiff >= NpcConfig.NPC_SKILL_DMG_PENALTY.size())
 				{
-					damage *= Config.NPC_SKILL_DMG_PENALTY.get(Config.NPC_SKILL_DMG_PENALTY.size() - 1);
+					damage *= NpcConfig.NPC_SKILL_DMG_PENALTY.get(NpcConfig.NPC_SKILL_DMG_PENALTY.size() - 1);
 				}
 				else
 				{
-					damage *= Config.NPC_SKILL_DMG_PENALTY.get(lvlDiff);
+					damage *= NpcConfig.NPC_SKILL_DMG_PENALTY.get(lvlDiff);
 				}
 			}
 		}
@@ -1056,7 +1058,7 @@ public final class Formulas
 		
 		// Failure calculation
 		L2PcInstance owner = attacker.getOwner();
-		if (Config.ALT_GAME_MAGICFAILURES && !calcMagicSuccess(owner, target, skill))
+		if (CharacterConfig.ALT_GAME_MAGICFAILURES && !calcMagicSuccess(owner, target, skill))
 		{
 			if (calcMagicSuccess(owner, target, skill) && ((target.getLevel() - skill.getMagicLevel()) <= 9))
 			{
@@ -1104,16 +1106,16 @@ public final class Formulas
 		
 		if (target.isAttackable())
 		{
-			if (!target.isRaid() && !target.isRaidMinion() && (target.getLevel() >= Config.MIN_NPC_LVL_DMG_PENALTY) && (attacker.getOwner() != null) && ((target.getLevel() - attacker.getOwner().getLevel()) >= 2))
+			if (!target.isRaid() && !target.isRaidMinion() && (target.getLevel() >= NpcConfig.MIN_NPC_LVL_DMG_PENALTY) && (attacker.getOwner() != null) && ((target.getLevel() - attacker.getOwner().getLevel()) >= 2))
 			{
 				int lvlDiff = target.getLevel() - attacker.getOwner().getLevel() - 1;
-				if (lvlDiff >= Config.NPC_SKILL_DMG_PENALTY.size())
+				if (lvlDiff >= NpcConfig.NPC_SKILL_DMG_PENALTY.size())
 				{
-					damage *= Config.NPC_SKILL_DMG_PENALTY.get(Config.NPC_SKILL_DMG_PENALTY.size() - 1);
+					damage *= NpcConfig.NPC_SKILL_DMG_PENALTY.get(NpcConfig.NPC_SKILL_DMG_PENALTY.size() - 1);
 				}
 				else
 				{
-					damage *= Config.NPC_SKILL_DMG_PENALTY.get(lvlDiff);
+					damage *= NpcConfig.NPC_SKILL_DMG_PENALTY.get(lvlDiff);
 				}
 			}
 		}
@@ -1163,11 +1165,11 @@ public final class Formulas
 		
 		double init = 0;
 		
-		if (Config.ALT_GAME_CANCEL_CAST && target.isCastingNow())
+		if (CharacterConfig.ALT_GAME_CANCEL_CAST && target.isCastingNow())
 		{
 			init = 15;
 		}
-		if (Config.ALT_GAME_CANCEL_BOW && target.isAttackingNow())
+		if (CharacterConfig.ALT_GAME_CANCEL_BOW && target.isAttackingNow())
 		{
 			L2Weapon wpn = target.getActiveWeaponItem();
 			if ((wpn != null) && (wpn.getItemType() == WeaponType.BOW))
@@ -1281,7 +1283,7 @@ public final class Formulas
 			shldRate *= 1.3;
 		}
 		
-		if ((shldRate > 0) && ((100 - Config.ALT_PERFECT_SHLD_BLOCK) < Rnd.get(100)))
+		if ((shldRate > 0) && ((100 - CharacterConfig.ALT_PERFECT_SHLD_BLOCK) < Rnd.get(100)))
 		{
 			shldSuccess = SHIELD_DEFENSE_PERFECT_BLOCK;
 		}
@@ -1514,16 +1516,16 @@ public final class Formulas
 		int lvlDifference = (target.getLevel() - (skill.getMagicLevel() > 0 ? skill.getMagicLevel() : attacker.getLevel()));
 		double lvlModifier = Math.pow(1.3, lvlDifference);
 		float targetModifier = 1;
-		if (target.isAttackable() && !target.isRaid() && !target.isRaidMinion() && (target.getLevel() >= Config.MIN_NPC_LVL_MAGIC_PENALTY) && (attacker.getActingPlayer() != null) && ((target.getLevel() - attacker.getActingPlayer().getLevel()) >= 3))
+		if (target.isAttackable() && !target.isRaid() && !target.isRaidMinion() && (target.getLevel() >= NpcConfig.MIN_NPC_LVL_MAGIC_PENALTY) && (attacker.getActingPlayer() != null) && ((target.getLevel() - attacker.getActingPlayer().getLevel()) >= 3))
 		{
 			int lvlDiff = target.getLevel() - attacker.getActingPlayer().getLevel() - 2;
-			if (lvlDiff >= Config.NPC_SKILL_CHANCE_PENALTY.size())
+			if (lvlDiff >= NpcConfig.NPC_SKILL_CHANCE_PENALTY.size())
 			{
-				targetModifier = Config.NPC_SKILL_CHANCE_PENALTY.get(Config.NPC_SKILL_CHANCE_PENALTY.size() - 1);
+				targetModifier = NpcConfig.NPC_SKILL_CHANCE_PENALTY.get(NpcConfig.NPC_SKILL_CHANCE_PENALTY.size() - 1);
 			}
 			else
 			{
-				targetModifier = Config.NPC_SKILL_CHANCE_PENALTY.get(lvlDiff);
+				targetModifier = NpcConfig.NPC_SKILL_CHANCE_PENALTY.get(lvlDiff);
 			}
 		}
 		// general magic resist
@@ -1568,22 +1570,22 @@ public final class Formulas
 		
 		if (target.isAttackable())
 		{
-			if (!target.isRaid() && !target.isRaidMinion() && (target.getLevel() >= Config.MIN_NPC_LVL_DMG_PENALTY) && (attacker.getActingPlayer() != null) && ((target.getLevel() - attacker.getActingPlayer().getLevel()) >= 2))
+			if (!target.isRaid() && !target.isRaidMinion() && (target.getLevel() >= NpcConfig.MIN_NPC_LVL_DMG_PENALTY) && (attacker.getActingPlayer() != null) && ((target.getLevel() - attacker.getActingPlayer().getLevel()) >= 2))
 			{
 				int lvlDiff = target.getLevel() - attacker.getActingPlayer().getLevel() - 1;
-				if (lvlDiff >= Config.NPC_SKILL_DMG_PENALTY.size())
+				if (lvlDiff >= NpcConfig.NPC_SKILL_DMG_PENALTY.size())
 				{
-					damage *= Config.NPC_SKILL_DMG_PENALTY.get(Config.NPC_SKILL_DMG_PENALTY.size() - 1);
+					damage *= NpcConfig.NPC_SKILL_DMG_PENALTY.get(NpcConfig.NPC_SKILL_DMG_PENALTY.size() - 1);
 				}
 				else
 				{
-					damage *= Config.NPC_SKILL_DMG_PENALTY.get(lvlDiff);
+					damage *= NpcConfig.NPC_SKILL_DMG_PENALTY.get(lvlDiff);
 				}
 			}
 		}
 		
 		// Failure calculation
-		if (Config.ALT_GAME_MAGICFAILURES && !calcMagicSuccess(attacker, target, skill))
+		if (CharacterConfig.ALT_GAME_MAGICFAILURES && !calcMagicSuccess(attacker, target, skill))
 		{
 			if (attacker.isPlayer())
 			{
@@ -1931,7 +1933,7 @@ public final class Formulas
 	 */
 	public static double calcFallDam(L2Character cha, int fallHeight)
 	{
-		if (!Config.ENABLE_FALLING_DAMAGE || (fallHeight < 0))
+		if (!GeneralConfig.ENABLE_FALLING_DAMAGE || (fallHeight < 0))
 		{
 			return 0;
 		}

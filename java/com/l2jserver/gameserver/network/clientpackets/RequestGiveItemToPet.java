@@ -18,7 +18,8 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -69,7 +70,7 @@ public final class RequestGiveItemToPet extends L2GameClientPacket
 			return;
 		}
 		// Alt game - Karma punishment
-		if (!Config.ALT_GAME_KARMA_PLAYER_CAN_TRADE && (player.getKarma() > 0))
+		if (!CharacterConfig.ALT_GAME_KARMA_PLAYER_CAN_TRADE && (player.getKarma() > 0))
 		{
 			return;
 		}
@@ -101,7 +102,7 @@ public final class RequestGiveItemToPet extends L2GameClientPacket
 		if (_amount > item.getCount())
 		{
 			Util.handleIllegalPlayerAction(player, getClass().getSimpleName() + ": Character " + player.getName() + " of account " + player.getAccountName() + " tried to get item with oid " + _objectId + " from pet but has invalid count " + _amount + " item count: "
-				+ item.getCount(), Config.DEFAULT_PUNISH);
+				+ item.getCount(), GeneralConfig.DEFAULT_PUNISH);
 			return;
 		}
 		

@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.util.Util;
 
@@ -51,7 +51,7 @@ public class RequestRecipeShopMessageSet extends L2GameClientPacket
 		
 		if ((_name != null) && (_name.length() > MAX_MSG_LENGTH))
 		{
-			Util.handleIllegalPlayerAction(player, "Player " + player.getName() + " tried to overflow recipe shop message", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(player, "Player " + player.getName() + " tried to overflow recipe shop message", GeneralConfig.DEFAULT_PUNISH);
 			return;
 		}
 		

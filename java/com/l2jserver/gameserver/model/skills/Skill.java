@@ -32,7 +32,8 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.GeoData;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.datatables.SkillData;
@@ -222,15 +223,15 @@ public class Skill implements IIdentifiable
 		_abnormalType = set.getEnum("abnormalType", AbnormalType.class, AbnormalType.NONE);
 		
 		int abnormalTime = set.getInt("abnormalTime", 0);
-		if (Config.ENABLE_MODIFY_SKILL_DURATION && Config.SKILL_DURATION_LIST.containsKey(getId()))
+		if (CharacterConfig.ENABLE_MODIFY_SKILL_DURATION && CharacterConfig.SKILL_DURATION_LIST.containsKey(getId()))
 		{
 			if ((getLevel() < 100) || (getLevel() > 140))
 			{
-				abnormalTime = Config.SKILL_DURATION_LIST.get(getId());
+				abnormalTime = CharacterConfig.SKILL_DURATION_LIST.get(getId());
 			}
 			else if ((getLevel() >= 100) && (getLevel() < 140))
 			{
-				abnormalTime += Config.SKILL_DURATION_LIST.get(getId());
+				abnormalTime += CharacterConfig.SKILL_DURATION_LIST.get(getId());
 			}
 		}
 		
@@ -247,9 +248,9 @@ public class Skill implements IIdentifiable
 		_isRecoveryHerb = set.getBoolean("isRecoveryHerb", false);
 		_reuseHashCode = SkillData.getSkillHashCode(_id, _level);
 		
-		if (Config.ENABLE_MODIFY_SKILL_REUSE && Config.SKILL_REUSE_LIST.containsKey(_id))
+		if (CharacterConfig.ENABLE_MODIFY_SKILL_REUSE && CharacterConfig.SKILL_REUSE_LIST.containsKey(_id))
 		{
-			_reuseDelay = Config.SKILL_REUSE_LIST.get(_id);
+			_reuseDelay = CharacterConfig.SKILL_REUSE_LIST.get(_id);
 		}
 		else
 		{
@@ -298,8 +299,8 @@ public class Skill implements IIdentifiable
 		_magicLevel = set.getInt("magicLvl", 0);
 		_lvlBonusRate = set.getInt("lvlBonusRate", 0);
 		_activateRate = set.getInt("activateRate", -1);
-		_minChance = set.getInt("minChance", Config.MIN_ABNORMAL_STATE_SUCCESS_RATE);
-		_maxChance = set.getInt("maxChance", Config.MAX_ABNORMAL_STATE_SUCCESS_RATE);
+		_minChance = set.getInt("minChance", CharacterConfig.MIN_ABNORMAL_STATE_SUCCESS_RATE);
+		_maxChance = set.getInt("maxChance", CharacterConfig.MAX_ABNORMAL_STATE_SUCCESS_RATE);
 		
 		_nextActionIsAttack = set.getBoolean("nextActionAttack", false);
 		
@@ -916,7 +917,7 @@ public class Skill implements IIdentifiable
 	
 	public boolean checkCondition(L2Character activeChar, L2Object object, boolean itemOrWeapon)
 	{
-		if (activeChar.canOverrideCond(PcCondOverride.SKILL_CONDITIONS) && !Config.GM_SKILL_RESTRICTION)
+		if (activeChar.canOverrideCond(PcCondOverride.SKILL_CONDITIONS) && !GeneralConfig.GM_SKILL_RESTRICTION)
 		{
 			return true;
 		}

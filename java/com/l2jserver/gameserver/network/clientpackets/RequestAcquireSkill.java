@@ -20,7 +20,8 @@ package com.l2jserver.gameserver.network.clientpackets;
 
 import java.util.List;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.enums.IllegalActionPunishmentType;
@@ -94,7 +95,7 @@ public final class RequestAcquireSkill extends L2GameClientPacket
 		
 		if ((_level < 1) || (_level > 1000) || (_id < 1) || (_id > 32000))
 		{
-			Util.handleIllegalPlayerAction(activeChar, "Wrong Packet Data in Aquired Skill", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(activeChar, "Wrong Packet Data in Aquired Skill", GeneralConfig.DEFAULT_PUNISH);
 			LOG.warn("Recived Wrong Packet Data in Aquired Skill - id: {} level: {} for {}", _id, _level, activeChar);
 			return;
 		}
@@ -169,7 +170,7 @@ public final class RequestAcquireSkill extends L2GameClientPacket
 				int repCost = s.getLevelUpSp();
 				if (clan.getReputationScore() >= repCost)
 				{
-					if (Config.LIFE_CRYSTAL_NEEDED)
+					if (CharacterConfig.LIFE_CRYSTAL_NEEDED)
 					{
 						for (ItemHolder item : s.getRequiredItems())
 						{
@@ -275,7 +276,7 @@ public final class RequestAcquireSkill extends L2GameClientPacket
 				
 				for (String varName : QUEST_VAR_NAMES)
 				{
-					for (int i = 1; i <= Config.MAX_SUBCLASS; i++)
+					for (int i = 1; i <= CharacterConfig.MAX_SUBCLASS; i++)
 					{
 						final String itemOID = st.getGlobalQuestVar(varName + i);
 						if (!itemOID.isEmpty() && !itemOID.endsWith(";") && !itemOID.equals("0"))
@@ -369,7 +370,7 @@ public final class RequestAcquireSkill extends L2GameClientPacket
 				if (!clan.isLearnableSubPledgeSkill(skill, _subType))
 				{
 					activeChar.sendPacket(SystemMessageId.SQUAD_SKILL_ALREADY_ACQUIRED);
-					Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " is requesting skill Id: " + _id + " level " + _level + " without knowing it's previous level!", Config.DEFAULT_PUNISH);
+					Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " is requesting skill Id: " + _id + " level " + _level + " without knowing it's previous level!", GeneralConfig.DEFAULT_PUNISH);
 					return false;
 				}
 				break;
@@ -378,7 +379,7 @@ public final class RequestAcquireSkill extends L2GameClientPacket
 			{
 				if (skl == null)
 				{
-					Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " is requesting transfer skill Id: " + _id + " level " + _level + " what is not included in transfer skills!", Config.DEFAULT_PUNISH);
+					Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " is requesting transfer skill Id: " + _id + " level " + _level + " what is not included in transfer skills!", GeneralConfig.DEFAULT_PUNISH);
 				}
 				break;
 			}
@@ -387,7 +388,7 @@ public final class RequestAcquireSkill extends L2GameClientPacket
 				if (activeChar.isSubClassActive())
 				{
 					activeChar.sendPacket(SystemMessageId.SKILL_NOT_FOR_SUBCLASS);
-					Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " is requesting skill Id: " + _id + " level " + _level + " while Sub-Class is active!", Config.DEFAULT_PUNISH);
+					Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " is requesting skill Id: " + _id + " level " + _level + " while Sub-Class is active!", GeneralConfig.DEFAULT_PUNISH);
 					return false;
 				}
 			}
@@ -401,7 +402,7 @@ public final class RequestAcquireSkill extends L2GameClientPacket
 				if ((_level != 1) && (prevSkillLevel != (_level - 1)))
 				{
 					activeChar.sendPacket(SystemMessageId.PREVIOUS_LEVEL_SKILL_NOT_LEARNED);
-					Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " is requesting skill Id: " + _id + " level " + _level + " without knowing it's previous level!", Config.DEFAULT_PUNISH);
+					Util.handleIllegalPlayerAction(activeChar, "Player " + activeChar.getName() + " is requesting skill Id: " + _id + " level " + _level + " without knowing it's previous level!", GeneralConfig.DEFAULT_PUNISH);
 					return false;
 				}
 			}
@@ -467,7 +468,7 @@ public final class RequestAcquireSkill extends L2GameClientPacket
 					return false;
 				}
 				
-				if (!Config.DIVINE_SP_BOOK_NEEDED && (_id == CommonSkill.DIVINE_INSPIRATION.getId()))
+				if (!CharacterConfig.DIVINE_SP_BOOK_NEEDED && (_id == CommonSkill.DIVINE_INSPIRATION.getId()))
 				{
 					return true;
 				}
@@ -586,7 +587,7 @@ public final class RequestAcquireSkill extends L2GameClientPacket
 	 */
 	public static boolean canTransform(L2PcInstance player)
 	{
-		if (Config.ALLOW_TRANSFORM_WITHOUT_QUEST)
+		if (CharacterConfig.ALLOW_TRANSFORM_WITHOUT_QUEST)
 		{
 			return true;
 		}

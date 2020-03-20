@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Function;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -200,7 +200,7 @@ public class L2CommandChannel extends AbstractPlayerGroup
 		{
 			return false;
 		}
-		return (getMemberCount() >= Config.LOOT_RAIDS_PRIVILEGE_CC_SIZE);
+		return (getMemberCount() >= CharacterConfig.LOOT_RAIDS_PRIVILEGE_CC_SIZE);
 	}
 	
 	/**

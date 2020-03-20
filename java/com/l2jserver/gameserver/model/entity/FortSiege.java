@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.enums.FortTeleportWhoType;
 import com.l2jserver.gameserver.instancemanager.FortManager;
@@ -410,7 +410,7 @@ public class FortSiege implements Siegable
 					if (checkIfInZone(member))
 					{
 						member.setIsInSiege(true);
-						member.startFameTask(Config.FORTRESS_ZONE_FAME_TASK_FREQUENCY * 1000, Config.FORTRESS_ZONE_FAME_AQUIRE_POINTS);
+						member.startFameTask(CharacterConfig.FORTRESS_ZONE_FAME_TASK_FREQUENCY * 1000, CharacterConfig.FORTRESS_ZONE_FAME_AQUIRE_POINTS);
 					}
 				}
 				member.broadcastUserInfo();
@@ -440,7 +440,7 @@ public class FortSiege implements Siegable
 					if (checkIfInZone(member))
 					{
 						member.setIsInSiege(true);
-						member.startFameTask(Config.FORTRESS_ZONE_FAME_TASK_FREQUENCY * 1000, Config.FORTRESS_ZONE_FAME_AQUIRE_POINTS);
+						member.startFameTask(CharacterConfig.FORTRESS_ZONE_FAME_TASK_FREQUENCY * 1000, CharacterConfig.FORTRESS_ZONE_FAME_AQUIRE_POINTS);
 					}
 				}
 				member.broadcastUserInfo();
@@ -1250,13 +1250,13 @@ public class FortSiege implements Siegable
 	@Override
 	public int getFameFrequency()
 	{
-		return Config.FORTRESS_ZONE_FAME_TASK_FREQUENCY;
+		return CharacterConfig.FORTRESS_ZONE_FAME_TASK_FREQUENCY;
 	}
 	
 	@Override
 	public int getFameAmount()
 	{
-		return Config.FORTRESS_ZONE_FAME_AQUIRE_POINTS;
+		return CharacterConfig.FORTRESS_ZONE_FAME_AQUIRE_POINTS;
 	}
 	
 	@Override

@@ -30,7 +30,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.model.actor.L2Playable;
@@ -262,7 +262,7 @@ public final class L2World
 		// Get all visible objects contained in the _visibleObjects of L2WorldRegions
 		// in a circular area of 2000 units
 		List<L2Object> visibles = getVisibleObjects(object, 2000);
-		if (Config.DEBUG)
+		if (GeneralConfig.DEBUG)
 		{
 			LOG.debug("objects in range: {}", visibles.size());
 		}

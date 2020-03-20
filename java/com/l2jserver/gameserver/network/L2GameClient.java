@@ -38,7 +38,8 @@ import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.LoginServerThread;
 import com.l2jserver.gameserver.LoginServerThread.SessionKey;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.custom.OfflineConfig;
 import com.l2jserver.gameserver.configuration.config.events.WeddingConfig;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
@@ -130,11 +131,11 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 		_crypt = new GameCrypt();
 		_stats = new ClientStats();
 		
-		_packetQueue = new ArrayBlockingQueue<>(Config.CLIENT_PACKET_QUEUE_SIZE);
+		_packetQueue = new ArrayBlockingQueue<>(GeneralConfig.CLIENT_PACKET_QUEUE_SIZE);
 		
-		if (Config.CHAR_STORE_INTERVAL > 0)
+		if (GeneralConfig.CHAR_STORE_INTERVAL > 0)
 		{
-			_autoSaveInDB = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new AutoSaveTask(), 300000L, (Config.CHAR_STORE_INTERVAL * 60000L));
+			_autoSaveInDB = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new AutoSaveTask(), 300000L, (GeneralConfig.CHAR_STORE_INTERVAL * 60000L));
 		}
 		else
 		{
@@ -339,7 +340,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 				// Setting delete time
 				if (answer == 0)
 				{
-					if (Config.DELETE_DAYS == 0)
+					if (CharacterConfig.DELETE_DAYS == 0)
 					{
 						deleteCharByObjId(objid);
 					}
@@ -347,7 +348,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 					{
 						try (PreparedStatement ps2 = con.prepareStatement("UPDATE characters SET deletetime=? WHERE charId=?"))
 						{
-							ps2.setLong(1, System.currentTimeMillis() + (Config.DELETE_DAYS * 86400000L)); // 24*60*60*1000 = 86400000
+							ps2.setLong(1, System.currentTimeMillis() + (CharacterConfig.DELETE_DAYS * 86400000L)); // 24*60*60*1000 = 86400000
 							ps2.setInt(2, objid);
 							ps2.execute();
 						}
@@ -383,7 +384,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 			{
 				getActiveChar().storeMe();
 				getActiveChar().storeRecommendations();
-				if (Config.UPDATE_ITEMS_ON_CHAR_STORE)
+				if (GeneralConfig.UPDATE_ITEMS_ON_CHAR_STORE)
 				{
 					getActiveChar().getInventory().updateDatabase();
 					getActiveChar().getWarehouse().updateDatabase();
@@ -989,7 +990,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 	{
 		if (_activeChar != null)
 		{
-			Util.handleIllegalPlayerAction(_activeChar, toString() + ": " + punishment, Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(_activeChar, toString() + ": " + punishment, GeneralConfig.DEFAULT_PUNISH);
 			return true;
 		}
 		
@@ -1033,7 +1034,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 		}
 		if (_state == GameClientState.CONNECTED) // in CONNECTED state kick client immediately
 		{
-			if (Config.PACKET_HANDLER_DEBUG)
+			if (GeneralConfig.PACKET_HANDLER_DEBUG)
 			{
 				LOG.debug("Client {} - Disconnected, too many buffer underflows in non-authed state.", toString());
 			}
@@ -1054,7 +1055,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 		}
 		if (_state == GameClientState.CONNECTED) // in CONNECTED state kick client immediately
 		{
-			if (Config.PACKET_HANDLER_DEBUG)
+			if (GeneralConfig.PACKET_HANDLER_DEBUG)
 			{
 				LOG.debug("Client {} - Disconnected, too many unknown packets in non-authed state.", toString());
 			}
@@ -1100,7 +1101,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 			{
 				if (getStats().processedPackets > 3)
 				{
-					if (Config.PACKET_HANDLER_DEBUG)
+					if (GeneralConfig.PACKET_HANDLER_DEBUG)
 					{
 						LOG.debug("Client {} - Disconnected, too many packets in non-authed state.", toString());
 					}

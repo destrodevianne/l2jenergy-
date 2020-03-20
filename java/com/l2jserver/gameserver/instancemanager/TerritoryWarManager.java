@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.TerritoryWarConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
@@ -1751,13 +1751,13 @@ public final class TerritoryWarManager implements Siegable
 	@Override
 	public int getFameFrequency()
 	{
-		return Config.CASTLE_ZONE_FAME_TASK_FREQUENCY;
+		return CharacterConfig.CASTLE_ZONE_FAME_TASK_FREQUENCY;
 	}
 	
 	@Override
 	public int getFameAmount()
 	{
-		return Config.CASTLE_ZONE_FAME_AQUIRE_POINTS;
+		return CharacterConfig.CASTLE_ZONE_FAME_AQUIRE_POINTS;
 	}
 	
 	@Override

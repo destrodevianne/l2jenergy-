@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.ConnectionFactory;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.dao.PlayerSkillSaveDAO;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.model.TimeStamp;
@@ -106,7 +106,7 @@ public class PlayerSkillSaveDAOMySQLImpl implements PlayerSkillSaveDAO
 					}
 					
 					// Dances and songs are not kept in retail.
-					if (skill.isDance() && !Config.ALT_STORE_DANCES)
+					if (skill.isDance() && !CharacterConfig.ALT_STORE_DANCES)
 					{
 						continue;
 					}

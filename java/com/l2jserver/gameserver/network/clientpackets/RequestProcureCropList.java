@@ -21,7 +21,7 @@ package com.l2jserver.gameserver.network.clientpackets;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.ManorConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.ItemTable;
@@ -49,7 +49,7 @@ public class RequestProcureCropList extends L2GameClientPacket
 	protected final void readImpl()
 	{
 		final int count = readD();
-		if ((count <= 0) || (count > Config.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != _buf.remaining()))
+		if ((count <= 0) || (count > CharacterConfig.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != _buf.remaining()))
 		{
 			return;
 		}

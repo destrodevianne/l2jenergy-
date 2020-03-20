@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.data.xml.impl.EnchantSkillGroupsData;
 import com.l2jserver.gameserver.model.L2EnchantSkillGroup.EnchantSkillHolder;
 import com.l2jserver.gameserver.model.L2EnchantSkillLearn;
@@ -109,7 +109,7 @@ public class ExEnchantSkillInfoDetail extends L2GameServerPacket
 				return;
 		}
 		
-		if ((type != TYPE_SAFE_ENCHANT) && !Config.ES_SP_BOOK_NEEDED)
+		if ((type != TYPE_SAFE_ENCHANT) && !CharacterConfig.ES_SP_BOOK_NEEDED)
 		{
 			reqCount = 0;
 		}

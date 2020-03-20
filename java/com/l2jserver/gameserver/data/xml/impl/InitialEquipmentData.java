@@ -27,7 +27,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.items.PcItemTemplate;
@@ -56,7 +56,7 @@ public final class InitialEquipmentData implements IXmlReader
 	public void load()
 	{
 		_initialEquipmentList.clear();
-		parseDatapackFile(Config.INITIAL_EQUIPMENT_EVENT ? EVENT : NORMAL);
+		parseDatapackFile(CharacterConfig.INITIAL_EQUIPMENT_EVENT ? EVENT : NORMAL);
 		LOG.info("{}: Loaded {} Initial Equipment data.", getClass().getSimpleName(), _initialEquipmentList.size());
 	}
 	

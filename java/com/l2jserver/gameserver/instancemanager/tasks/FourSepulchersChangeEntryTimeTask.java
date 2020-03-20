@@ -22,7 +22,7 @@ import java.util.Calendar;
 import java.util.concurrent.ScheduledFuture;
 
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.instancemanager.FourSepulchersManager;
 
 /**
@@ -52,7 +52,7 @@ public final class FourSepulchersChangeEntryTimeTask implements Runnable
 		}
 		else
 		{
-			interval = Config.FS_TIME_ENTRY * 60000L; // else use stupid
+			interval = GeneralConfig.FS_TIME_ENTRY * 60000L; // else use stupid
 			// method
 		}
 		

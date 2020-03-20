@@ -23,7 +23,8 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import com.l2jserver.commons.util.Rnd;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.EnchantSkillGroupsData;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.model.L2EnchantSkillGroup.EnchantSkillHolder;
@@ -118,7 +119,7 @@ public final class RequestExEnchantSkill extends L2GameClientPacket
 			final int reqItemId = EnchantSkillGroupsData.NORMAL_ENCHANT_BOOK;
 			final L2ItemInstance spb = player.getInventory().getItemByItemId(reqItemId);
 			
-			if (Config.ES_SP_BOOK_NEEDED && usesBook && (spb == null)) // Haven't spellbook
+			if (CharacterConfig.ES_SP_BOOK_NEEDED && usesBook && (spb == null)) // Haven't spellbook
 			{
 				player.sendPacket(SystemMessageId.YOU_DONT_HAVE_ALL_OF_THE_ITEMS_NEEDED_TO_ENCHANT_THAT_SKILL);
 				return;
@@ -132,7 +133,7 @@ public final class RequestExEnchantSkill extends L2GameClientPacket
 			}
 			
 			boolean check = player.removeSp(requiredSp);
-			if (Config.ES_SP_BOOK_NEEDED && usesBook)
+			if (CharacterConfig.ES_SP_BOOK_NEEDED && usesBook)
 			{
 				check &= player.destroyItem("Consume", spb.getObjectId(), 1, player, true);
 			}
@@ -148,7 +149,7 @@ public final class RequestExEnchantSkill extends L2GameClientPacket
 			final int rate = esd.getRate(player);
 			if (Rnd.get(100) <= rate)
 			{
-				if (Config.LOG_SKILL_ENCHANTS)
+				if (GeneralConfig.LOG_SKILL_ENCHANTS)
 				{
 					final LogRecord record = new LogRecord(Level.INFO, "Success");
 					record.setParameters(new Object[]
@@ -175,7 +176,7 @@ public final class RequestExEnchantSkill extends L2GameClientPacket
 				player.sendPacket(SystemMessageId.YOU_HAVE_FAILED_TO_ENCHANT_THE_SKILL_S1);
 				player.sendPacket(ExEnchantSkillResult.valueOf(false));
 				
-				if (Config.LOG_SKILL_ENCHANTS)
+				if (GeneralConfig.LOG_SKILL_ENCHANTS)
 				{
 					final LogRecord record = new LogRecord(Level.INFO, "Fail");
 					record.setParameters(new Object[]

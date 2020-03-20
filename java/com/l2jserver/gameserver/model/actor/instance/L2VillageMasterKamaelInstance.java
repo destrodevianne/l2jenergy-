@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model.actor.instance;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.model.actor.templates.L2NpcTemplate;
 import com.l2jserver.gameserver.model.base.PlayerClass;
@@ -37,7 +37,7 @@ public final class L2VillageMasterKamaelInstance extends L2VillageMasterInstance
 	@Override
 	protected final String getSubClassMenu(Race race)
 	{
-		if (Config.ALT_GAME_SUBCLASS_EVERYWHERE || (race == Race.KAMAEL))
+		if (CharacterConfig.ALT_GAME_SUBCLASS_EVERYWHERE || (race == Race.KAMAEL))
 		{
 			return "data/html/villagemaster/SubClass.htm";
 		}

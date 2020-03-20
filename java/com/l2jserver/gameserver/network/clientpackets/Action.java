@@ -18,7 +18,8 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.enums.DuelState;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2World;
@@ -54,7 +55,7 @@ public final class Action extends L2GameClientPacket
 	@Override
 	protected void runImpl()
 	{
-		if (Config.DEBUG)
+		if (GeneralConfig.DEBUG)
 		{
 			LOG.debug("{}: {} Target object ID: {} orignX: {} orignY: {} orignZ: {}", getType(), (_actionId == 0 ? "Simple-click" : "Shift-click"), _objectId, _originX, _originY, _originZ);
 		}
@@ -152,7 +153,7 @@ public final class Action extends L2GameClientPacket
 			}
 			case 1:
 			{
-				if (!activeChar.isGM() && !(obj.isNpc() && Config.ALT_GAME_VIEWNPC))
+				if (!activeChar.isGM() && !(obj.isNpc() && NpcConfig.ALT_GAME_VIEWNPC))
 				{
 					obj.onAction(activeChar, false);
 				}

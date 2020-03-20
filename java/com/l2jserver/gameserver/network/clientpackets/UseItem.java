@@ -24,7 +24,8 @@ import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.ai.CtrlEvent;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.ai.NextAction;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.handler.IItemHandler;
@@ -142,7 +143,7 @@ public final class UseItem extends L2GameClientPacket
 			return;
 		}
 		
-		if (!Config.ALT_GAME_KARMA_PLAYER_CAN_TELEPORT && (activeChar.getKarma() > 0))
+		if (!CharacterConfig.ALT_GAME_KARMA_PLAYER_CAN_TELEPORT && (activeChar.getKarma() > 0))
 		{
 			SkillHolder[] skills = item.getItem().getSkills();
 			if (skills != null)
@@ -336,7 +337,7 @@ public final class UseItem extends L2GameClientPacket
 				{
 					LOG.warn("Unmanaged Item handler: {} for Item Id: {}!", etcItem.getHandlerName(), _itemId);
 				}
-				else if (Config.DEBUG)
+				else if (GeneralConfig.DEBUG)
 				{
 					LOG.warn("No Item handler registered for Item Id: {}!", _itemId);
 				}
@@ -401,6 +402,6 @@ public final class UseItem extends L2GameClientPacket
 	@Override
 	protected boolean triggersOnActionRequest()
 	{
-		return !Config.SPAWN_PROTECTION_ALLOWED_ITEMS.contains(_itemId);
+		return !CharacterConfig.SPAWN_PROTECTION_ALLOWED_ITEMS.contains(_itemId);
 	}
 }

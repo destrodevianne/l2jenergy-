@@ -35,7 +35,7 @@ import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.EnumIntBitmask;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.communitybbs.Manager.ForumsBBSManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.community.CBasicConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.idfactory.IdFactory;
@@ -163,7 +163,7 @@ public class ClanTable
 			return null;
 		}
 		
-		if (Config.DEBUG)
+		if (GeneralConfig.DEBUG)
 		{
 			LOG.debug("{}: {}({}) requested a clan creation.", getClass().getSimpleName(), player.getObjectId(), player.getName());
 		}

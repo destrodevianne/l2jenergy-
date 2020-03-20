@@ -18,7 +18,7 @@
  */
 package handlers.chathandlers;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.handler.IChatHandler;
 import com.l2jserver.gameserver.model.PartyMatchRoom;
 import com.l2jserver.gameserver.model.PartyMatchRoomList;
@@ -49,7 +49,7 @@ public class ChatPartyMatchRoom implements IChatHandler
 			PartyMatchRoom _room = PartyMatchRoomList.getInstance().getPlayerRoom(activeChar);
 			if (_room != null)
 			{
-				if (activeChar.isChatBanned() && Util.contains(Config.BAN_CHAT_CHANNELS, type))
+				if (activeChar.isChatBanned() && Util.contains(GeneralConfig.BAN_CHAT_CHANNELS, type))
 				{
 					activeChar.sendPacket(SystemMessageId.CHATTING_IS_CURRENTLY_PROHIBITED);
 					return;

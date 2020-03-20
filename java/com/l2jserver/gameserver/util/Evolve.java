@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.data.xml.impl.PetDataTable;
 import com.l2jserver.gameserver.model.L2PetData;
@@ -64,7 +64,7 @@ public final class Evolve
 		final L2PetInstance currentPet = (L2PetInstance) player.getSummon();
 		if (currentPet.isAlikeDead())
 		{
-			Util.handleIllegalPlayerAction(player, "Player " + player.getName() + " tried to use death pet exploit!", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(player, "Player " + player.getName() + " tried to use death pet exploit!", GeneralConfig.DEFAULT_PUNISH);
 			return false;
 		}
 		

@@ -21,7 +21,7 @@ package com.l2jserver.gameserver.network.clientpackets;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.data.xml.impl.MultisellData;
 import com.l2jserver.gameserver.model.Elementals;
 import com.l2jserver.gameserver.model.L2Augmentation;
@@ -227,7 +227,7 @@ public class MultiSellChoose extends L2GameClientPacket
 					{
 						// if this is not a list that maintains enchantment, check the count of all items that have the given id.
 						// otherwise, check only the count of items with exactly the needed enchantment level
-						final long required = ((Config.ALT_BLACKSMITH_USE_RECIPES || !e.getMaintainIngredient()) ? (e.getItemCount() * _amount) : e.getItemCount());
+						final long required = ((CharacterConfig.ALT_BLACKSMITH_USE_RECIPES || !e.getMaintainIngredient()) ? (e.getItemCount() * _amount) : e.getItemCount());
 						if (inv.getInventoryItemCount(e.getItemId(), list.getMaintainEnchantment() ? e.getEnchantLevel() : -1, false) < required)
 						{
 							SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.S2_UNIT_OF_THE_ITEM_S1_REQUIRED);
@@ -269,7 +269,7 @@ public class MultiSellChoose extends L2GameClientPacket
 						// return;
 						// }
 						
-						if (Config.ALT_BLACKSMITH_USE_RECIPES || !e.getMaintainIngredient())
+						if (CharacterConfig.ALT_BLACKSMITH_USE_RECIPES || !e.getMaintainIngredient())
 						{
 							// if it's a stackable item, just reduce the amount from the first (only) instance that is found in the inventory
 							if (itemToTake.isStackable())

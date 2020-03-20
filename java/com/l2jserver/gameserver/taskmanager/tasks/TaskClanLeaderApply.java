@@ -20,7 +20,7 @@ package com.l2jserver.gameserver.taskmanager.tasks;
 
 import java.util.Calendar;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2ClanMember;
@@ -46,7 +46,7 @@ public class TaskClanLeaderApply extends Task
 	public void onTimeElapsed(ExecutedTask task)
 	{
 		Calendar cal = Calendar.getInstance();
-		if (cal.get(Calendar.DAY_OF_WEEK) == Config.ALT_CLAN_LEADER_DATE_CHANGE)
+		if (cal.get(Calendar.DAY_OF_WEEK) == CharacterConfig.ALT_CLAN_LEADER_DATE_CHANGE)
 		{
 			for (L2Clan clan : ClanTable.getInstance().getClans())
 			{
@@ -68,6 +68,6 @@ public class TaskClanLeaderApply extends Task
 	@Override
 	public void initializate()
 	{
-		TaskManager.addUniqueTask(NAME, TaskTypes.TYPE_GLOBAL_TASK, "1", Config.ALT_CLAN_LEADER_HOUR_CHANGE, "");
+		TaskManager.addUniqueTask(NAME, TaskTypes.TYPE_GLOBAL_TASK, "1", CharacterConfig.ALT_CLAN_LEADER_HOUR_CHANGE, "");
 	}
 }

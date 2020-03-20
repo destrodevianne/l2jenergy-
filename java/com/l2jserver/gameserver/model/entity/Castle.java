@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
@@ -490,7 +490,7 @@ public final class Castle extends AbstractResidence
 				if (_formerOwner == null)
 				{
 					_formerOwner = oldOwner;
-					if (Config.REMOVE_CASTLE_CIRCLETS)
+					if (CharacterConfig.REMOVE_CASTLE_CIRCLETS)
 					{
 						CastleManager.getInstance().removeCirclet(_formerOwner, getResidenceId());
 					}
@@ -550,7 +550,7 @@ public final class Castle extends AbstractResidence
 		if (clan != null)
 		{
 			_formerOwner = clan;
-			if (Config.REMOVE_CASTLE_CIRCLETS)
+			if (CharacterConfig.REMOVE_CASTLE_CIRCLETS)
 			{
 				CastleManager.getInstance().removeCirclet(_formerOwner, getResidenceId());
 			}

@@ -30,7 +30,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.instancemanager.AuctionManager;
@@ -161,7 +161,7 @@ public final class L2AuctioneerInstance extends L2Npc
 					return;
 				}
 				
-				if (Config.DEBUG)
+				if (GeneralConfig.DEBUG)
 				{
 					LOG.debug("bidding show successful");
 				}
@@ -171,7 +171,7 @@ public final class L2AuctioneerInstance extends L2Npc
 					SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 					int auctionId = Integer.parseInt(val);
 					
-					if (Config.DEBUG)
+					if (GeneralConfig.DEBUG)
 					{
 						LOG.debug("auction test started");
 					}
@@ -306,7 +306,7 @@ public final class L2AuctioneerInstance extends L2Npc
 					limit *= Integer.parseInt(val);
 				}
 				
-				if (Config.DEBUG)
+				if (GeneralConfig.DEBUG)
 				{
 					LOG.debug("cmd list: auction test started");
 				}
@@ -393,7 +393,7 @@ public final class L2AuctioneerInstance extends L2Npc
 					auctionId = Integer.parseInt(val);
 				}
 				
-				if (Config.DEBUG)
+				if (GeneralConfig.DEBUG)
 				{
 					LOG.debug("cmd bidlist: auction test started");
 				}

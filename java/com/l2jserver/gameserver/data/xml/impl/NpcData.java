@@ -35,7 +35,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.enums.AISkillScope;
 import com.l2jserver.gameserver.model.StatsSet;
@@ -75,7 +75,7 @@ public class NpcData implements IXmlReader
 		parseDatapackDirectory("data/stats/npcs", false);
 		LOG.info("{}: Loaded {} NPCs.", getClass().getSimpleName(), _npcs.size());
 		
-		if (Config.CUSTOM_NPC_DATA)
+		if (GeneralConfig.CUSTOM_NPC_DATA)
 		{
 			final int npcCount = _npcs.size();
 			parseDatapackDirectory("data/stats/npcs/custom", true);

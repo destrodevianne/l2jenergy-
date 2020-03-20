@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.EnumIntBitmask;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.dao.ClanDAO;
 import com.l2jserver.gameserver.model.ClanPrivilege;
 import com.l2jserver.gameserver.model.L2Clan;
@@ -141,7 +141,7 @@ public class ClanDAOMySQLImpl implements ClanDAO
 					}
 					clan.setCharPenaltyExpiryTime(clanData.getLong("char_penalty_expiry_time"));
 					
-					if ((clan.getCharPenaltyExpiryTime() + (Config.ALT_CLAN_JOIN_DAYS * 86400000L)) < System.currentTimeMillis()) // 24*60*60*1000 = 86400000
+					if ((clan.getCharPenaltyExpiryTime() + (CharacterConfig.ALT_CLAN_JOIN_DAYS * 86400000L)) < System.currentTimeMillis()) // 24*60*60*1000 = 86400000
 					{
 						clan.setCharPenaltyExpiryTime(0);
 					}

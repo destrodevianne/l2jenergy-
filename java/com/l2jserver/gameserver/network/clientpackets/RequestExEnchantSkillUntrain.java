@@ -22,7 +22,8 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.EnchantSkillGroupsData;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.model.L2EnchantSkillGroup.EnchantSkillHolder;
@@ -121,7 +122,7 @@ public final class RequestExEnchantSkillUntrain extends L2GameClientPacket
 		int requireditems = esd.getAdenaCost();
 		
 		L2ItemInstance spb = player.getInventory().getItemByItemId(reqItemId);
-		if (Config.ES_SP_BOOK_NEEDED)
+		if (CharacterConfig.ES_SP_BOOK_NEEDED)
 		{
 			if (spb == null) // Haven't spellbook
 			{
@@ -137,7 +138,7 @@ public final class RequestExEnchantSkillUntrain extends L2GameClientPacket
 		}
 		
 		boolean check = true;
-		if (Config.ES_SP_BOOK_NEEDED)
+		if (CharacterConfig.ES_SP_BOOK_NEEDED)
 		{
 			check &= player.destroyItem("Consume", spb.getObjectId(), 1, player, true);
 		}
@@ -152,7 +153,7 @@ public final class RequestExEnchantSkillUntrain extends L2GameClientPacket
 		
 		player.addSp((int) (requiredSp * 0.8));
 		
-		if (Config.LOG_SKILL_ENCHANTS)
+		if (GeneralConfig.LOG_SKILL_ENCHANTS)
 		{
 			LogRecord record = new LogRecord(Level.INFO, "Untrain");
 			record.setParameters(new Object[]

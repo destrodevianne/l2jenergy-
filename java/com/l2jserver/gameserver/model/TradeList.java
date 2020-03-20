@@ -26,7 +26,7 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Logger;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.itemcontainer.Inventory;
@@ -217,7 +217,7 @@ public class TradeList
 		}
 		
 		L2ItemInstance item = (L2ItemInstance) o;
-		if (!(item.isTradeable() || (getOwner().isGM() && Config.GM_TRADE_RESTRICTED_ITEMS)) || item.isQuestItem())
+		if (!(item.isTradeable() || (getOwner().isGM() && GeneralConfig.GM_TRADE_RESTRICTED_ITEMS)) || item.isQuestItem())
 		{
 			_log.warning(_owner.getName() + ": Attempt to add a restricted item!");
 			return null;
@@ -626,8 +626,8 @@ public class TradeList
 		else
 		{
 			// Prepare inventory update packet
-			InventoryUpdate ownerIU = Config.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
-			InventoryUpdate partnerIU = Config.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
+			InventoryUpdate ownerIU = GeneralConfig.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
+			InventoryUpdate partnerIU = GeneralConfig.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
 			
 			// Transfer items
 			partnerList.TransferItems(getOwner(), partnerIU, ownerIU);
@@ -722,7 +722,7 @@ public class TradeList
 			{
 				if (isPackaged())
 				{
-					Util.handleIllegalPlayerAction(player, "[TradeList.privateStoreBuy()] Player " + player.getName() + " tried to cheat the package sell and buy only a part of the package! Ban this player for bot usage!", Config.DEFAULT_PUNISH);
+					Util.handleIllegalPlayerAction(player, "[TradeList.privateStoreBuy()] Player " + player.getName() + " tried to cheat the package sell and buy only a part of the package! Ban this player for bot usage!", GeneralConfig.DEFAULT_PUNISH);
 					return 2;
 				}
 				
@@ -989,7 +989,7 @@ public class TradeList
 			}
 			if (oldItem.getId() != item.getItemId())
 			{
-				Util.handleIllegalPlayerAction(player, player + " is cheating with sell items", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, player + " is cheating with sell items", GeneralConfig.DEFAULT_PUNISH);
 				return false;
 			}
 			

@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model.actor.stat;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.data.xml.impl.PetDataTable;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2PetInstance;
@@ -98,13 +98,13 @@ public class PetStat extends SummonStat
 	@Override
 	public int getMaxLevel()
 	{
-		return Config.MAX_PET_LEVEL;
+		return CharacterConfig.MAX_PET_LEVEL;
 	}
 	
 	@Override
 	public int getMaxExpLevel()
 	{
-		return Config.MAX_PET_LEVEL + 1;
+		return CharacterConfig.MAX_PET_LEVEL + 1;
 	}
 	
 	@Override

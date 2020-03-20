@@ -32,7 +32,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.logging.Logger;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Summon;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -1326,11 +1326,11 @@ public final class CharEffectList
 			int buffsToRemove = -1;
 			if (skill.isDance())
 			{
-				buffsToRemove = getDanceCount() - Config.DANCES_MAX_AMOUNT;
+				buffsToRemove = getDanceCount() - CharacterConfig.DANCES_MAX_AMOUNT;
 			}
 			else if (skill.isTrigger())
 			{
-				buffsToRemove = getTriggeredBuffCount() - Config.TRIGGERED_BUFFS_MAX_AMOUNT;
+				buffsToRemove = getTriggeredBuffCount() - CharacterConfig.TRIGGERED_BUFFS_MAX_AMOUNT;
 			}
 			else if (!skill.isHealingPotionSkill())
 			{

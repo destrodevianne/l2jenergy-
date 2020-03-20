@@ -23,7 +23,8 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import com.l2jserver.commons.util.Rnd;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.EnchantSkillGroupsData;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.model.L2EnchantSkillGroup.EnchantSkillHolder;
@@ -127,7 +128,7 @@ public final class RequestExEnchantSkillRouteChange extends L2GameClientPacket
 		{
 			// only first lvl requires book
 			L2ItemInstance spb = player.getInventory().getItemByItemId(reqItemId);
-			if (Config.ES_SP_BOOK_NEEDED)
+			if (CharacterConfig.ES_SP_BOOK_NEEDED)
 			{
 				if (spb == null)// Haven't spellbook
 				{
@@ -144,7 +145,7 @@ public final class RequestExEnchantSkillRouteChange extends L2GameClientPacket
 			
 			boolean check;
 			check = player.removeSp(requiredSp);
-			if (Config.ES_SP_BOOK_NEEDED)
+			if (CharacterConfig.ES_SP_BOOK_NEEDED)
 			{
 				check &= player.destroyItem("Consume", spb.getObjectId(), 1, player, true);
 			}
@@ -168,7 +169,7 @@ public final class RequestExEnchantSkillRouteChange extends L2GameClientPacket
 			
 			if (skill != null)
 			{
-				if (Config.LOG_SKILL_ENCHANTS)
+				if (GeneralConfig.LOG_SKILL_ENCHANTS)
 				{
 					LogRecord record = new LogRecord(Level.INFO, "Route Change");
 					record.setParameters(new Object[]

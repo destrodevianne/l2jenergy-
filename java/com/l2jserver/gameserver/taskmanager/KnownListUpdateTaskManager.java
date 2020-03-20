@@ -26,7 +26,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.L2WorldRegion;
@@ -48,7 +49,7 @@ public class KnownListUpdateTaskManager
 	
 	protected KnownListUpdateTaskManager()
 	{
-		ThreadPoolManager.getInstance().scheduleAiAtFixedRate(new KnownListUpdate(), 1000, Config.KNOWNLIST_UPDATE_INTERVAL);
+		ThreadPoolManager.getInstance().scheduleAiAtFixedRate(new KnownListUpdate(), 1000, GeneralConfig.KNOWNLIST_UPDATE_INTERVAL);
 	}
 	
 	private class KnownListUpdate implements Runnable
@@ -116,7 +117,7 @@ public class KnownListUpdateTaskManager
 			}
 			
 			// Some mobs need faster knownlist update
-			final boolean aggro = (Config.GUARD_ATTACK_AGGRO_MOB && (object instanceof L2GuardInstance));
+			final boolean aggro = (NpcConfig.GUARD_ATTACK_AGGRO_MOB && (object instanceof L2GuardInstance));
 			
 			if (forgetObjects)
 			{

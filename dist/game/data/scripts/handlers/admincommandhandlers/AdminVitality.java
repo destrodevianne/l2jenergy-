@@ -20,7 +20,7 @@ package handlers.admincommandhandlers;
 
 import java.util.StringTokenizer;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -48,7 +48,7 @@ public class AdminVitality implements IAdminCommandHandler
 			return false;
 		}
 		
-		if (!Config.ENABLE_VITALITY)
+		if (!CharacterConfig.ENABLE_VITALITY)
 		{
 			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_vitality_not_enabled_server"));
 			return false;

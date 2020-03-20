@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.instancemanager.PetitionManager;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -76,7 +76,7 @@ public final class RequestPetition extends L2GameClientPacket
 			return;
 		}
 		
-		if (PetitionManager.getInstance().getPendingPetitionCount() == Config.MAX_PETITIONS_PENDING)
+		if (PetitionManager.getInstance().getPendingPetitionCount() == CharacterConfig.MAX_PETITIONS_PENDING)
 		{
 			activeChar.sendPacket(SystemMessageId.PETITION_SYSTEM_CURRENT_UNAVAILABLE);
 			return;
@@ -84,7 +84,7 @@ public final class RequestPetition extends L2GameClientPacket
 		
 		int totalPetitions = PetitionManager.getInstance().getPlayerTotalPetitionCount(activeChar) + 1;
 		
-		if (totalPetitions > Config.MAX_PETITIONS_PER_PLAYER)
+		if (totalPetitions > CharacterConfig.MAX_PETITIONS_PER_PLAYER)
 		{
 			SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.WE_HAVE_RECEIVED_S1_PETITIONS_TODAY);
 			sm.addInt(totalPetitions);
@@ -106,7 +106,7 @@ public final class RequestPetition extends L2GameClientPacket
 		
 		sm = SystemMessage.getSystemMessage(SystemMessageId.SUBMITTED_YOU_S1_TH_PETITION_S2_LEFT);
 		sm.addInt(totalPetitions);
-		sm.addInt(Config.MAX_PETITIONS_PER_PLAYER - totalPetitions);
+		sm.addInt(CharacterConfig.MAX_PETITIONS_PER_PLAYER - totalPetitions);
 		activeChar.sendPacket(sm);
 		
 		sm = SystemMessage.getSystemMessage(SystemMessageId.S1_PETITION_ON_WAITING_LIST);

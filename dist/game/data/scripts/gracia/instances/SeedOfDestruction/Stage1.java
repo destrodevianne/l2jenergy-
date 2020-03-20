@@ -34,7 +34,7 @@ import org.w3c.dom.Node;
 
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.enums.TrapAction;
@@ -445,7 +445,7 @@ public final class Stage1 extends AbstractInstance
 		{
 			LOG.warn("[Seed of Destruction] Could not parse data.xml file!", e);
 		}
-		if (Config.DEBUG)
+		if (GeneralConfig.DEBUG)
 		{
 			LOG.info("[Seed of Destruction] Loaded {} spawns data.", spawnCount);
 			LOG.info("[Seed of Destruction] Loaded {} spawn zones data.", _spawnZoneList.size());

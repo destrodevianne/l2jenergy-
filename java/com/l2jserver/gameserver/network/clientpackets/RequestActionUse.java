@@ -25,7 +25,7 @@ import com.l2jserver.gameserver.ai.CtrlEvent;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.ai.L2SummonAI;
 import com.l2jserver.gameserver.ai.NextAction;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.sql.impl.SummonSkillsTable;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.PetDataTable;
@@ -359,7 +359,7 @@ public final class RequestActionUse extends L2GameClientPacket
 				activeChar.tryOpenPrivateSellStore(true);
 				break;
 			case 65: // Bot Report Button
-				if (Config.BOTREPORT_ENABLE)
+				if (GeneralConfig.BOTREPORT_ENABLE)
 				{
 					BotReportTable.getInstance().reportBot(activeChar);
 				}

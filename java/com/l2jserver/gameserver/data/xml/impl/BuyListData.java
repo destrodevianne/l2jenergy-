@@ -32,7 +32,7 @@ import org.w3c.dom.Node;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.filter.NumericNameFilter;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.model.buylist.L2BuyList;
 import com.l2jserver.gameserver.model.buylist.Product;
@@ -58,7 +58,7 @@ public final class BuyListData implements IXmlReader
 	{
 		_buyLists.clear();
 		parseDatapackDirectory("data/buylists", false);
-		if (Config.CUSTOM_BUYLIST_LOAD)
+		if (GeneralConfig.CUSTOM_BUYLIST_LOAD)
 		{
 			parseDatapackDirectory("data/buylists/custom", false);
 		}

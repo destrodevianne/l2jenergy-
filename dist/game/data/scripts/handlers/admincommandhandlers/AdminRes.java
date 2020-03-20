@@ -20,7 +20,7 @@ package handlers.admincommandhandlers;
 
 import java.util.logging.Logger;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2World;
@@ -126,7 +126,7 @@ public class AdminRes implements IAdminCommandHandler
 		
 		doResurrect((L2Character) obj);
 		
-		if (Config.DEBUG)
+		if (GeneralConfig.DEBUG)
 		{
 			_log.fine("GM: " + activeChar.getName() + "(" + activeChar.getObjectId() + ") resurrected character " + obj.getObjectId());
 		}

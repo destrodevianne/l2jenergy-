@@ -18,7 +18,8 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.model.ClanPrivilege;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -52,7 +53,7 @@ public final class SendWareHouseWithDrawList extends L2GameClientPacket
 	protected void readImpl()
 	{
 		final int count = readD();
-		if ((count <= 0) || (count > Config.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != _buf.remaining()))
+		if ((count <= 0) || (count > CharacterConfig.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != _buf.remaining()))
 		{
 			return;
 		}
@@ -110,12 +111,12 @@ public final class SendWareHouseWithDrawList extends L2GameClientPacket
 		}
 		
 		// Alt game - Karma punishment
-		if (!Config.ALT_GAME_KARMA_PLAYER_CAN_USE_WAREHOUSE && (player.getKarma() > 0))
+		if (!CharacterConfig.ALT_GAME_KARMA_PLAYER_CAN_USE_WAREHOUSE && (player.getKarma() > 0))
 		{
 			return;
 		}
 		
-		if (Config.ALT_MEMBERS_CAN_WITHDRAW_FROM_CLANWH)
+		if (CharacterConfig.ALT_MEMBERS_CAN_WITHDRAW_FROM_CLANWH)
 		{
 			if ((warehouse instanceof ClanWarehouse) && !player.hasClanPrivilege(ClanPrivilege.CL_VIEW_WAREHOUSE))
 			{
@@ -140,7 +141,7 @@ public final class SendWareHouseWithDrawList extends L2GameClientPacket
 			L2ItemInstance item = warehouse.getItemByObjectId(i.getId());
 			if ((item == null) || (item.getCount() < i.getCount()))
 			{
-				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to withdraw non-existent item from warehouse.", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to withdraw non-existent item from warehouse.", GeneralConfig.DEFAULT_PUNISH);
 				return;
 			}
 			
@@ -170,7 +171,7 @@ public final class SendWareHouseWithDrawList extends L2GameClientPacket
 		}
 		
 		// Proceed to the transfer
-		InventoryUpdate playerIU = Config.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
+		InventoryUpdate playerIU = GeneralConfig.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
 		for (ItemHolder i : _items)
 		{
 			L2ItemInstance oldItem = warehouse.getItemByObjectId(i.getId());

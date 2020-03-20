@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model.actor.tasks.player;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.custom.OfflineConfig;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -43,7 +43,7 @@ public class FameTask implements Runnable
 	@Override
 	public void run()
 	{
-		if ((_player == null) || (_player.isDead() && !Config.FAME_FOR_DEAD_PLAYERS))
+		if ((_player == null) || (_player.isDead() && !CharacterConfig.FAME_FOR_DEAD_PLAYERS))
 		{
 			return;
 		}

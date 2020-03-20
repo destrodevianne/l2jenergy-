@@ -33,8 +33,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.ConnectionFactory;
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.FeatureConfig;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.model.AutoSpawnHandler;
@@ -264,7 +264,7 @@ public class SevenSigns
 			
 			if ((getSealOwner(SEAL_GNOSIS) == getCabalHighestScore()) && (getSealOwner(SEAL_GNOSIS) != CABAL_NULL))
 			{
-				if (!Config.ANNOUNCE_MAMMON_SPAWN)
+				if (!NpcConfig.ANNOUNCE_MAMMON_SPAWN)
 				{
 					blacksmithSpawn.setBroadcast(false);
 				}
@@ -307,7 +307,7 @@ public class SevenSigns
 			
 			if ((getSealOwner(SEAL_AVARICE) == getCabalHighestScore()) && (getSealOwner(SEAL_AVARICE) != CABAL_NULL))
 			{
-				if (!Config.ANNOUNCE_MAMMON_SPAWN)
+				if (!NpcConfig.ANNOUNCE_MAMMON_SPAWN)
 				{
 					merchantSpawn.setBroadcast(false);
 				}

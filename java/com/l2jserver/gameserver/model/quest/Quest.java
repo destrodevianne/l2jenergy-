@@ -37,7 +37,7 @@ import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.commons.util.Util;
 import com.l2jserver.gameserver.cache.HtmCache;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.enums.CategoryType;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.enums.TrapAction;
@@ -65,8 +65,8 @@ import com.l2jserver.gameserver.model.olympiad.Participant;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.model.zone.L2ZoneType;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
-import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.network.serverpackets.ExNpcQuestHtmlMessage;
+import com.l2jserver.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.l2jserver.gameserver.network.serverpackets.TutorialShowHtml;
 import com.l2jserver.gameserver.scripting.ScriptManager;
 
@@ -1575,7 +1575,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 					if (q == null)
 					{
 						LOG.warn("Unknown quest {} for player {}", questId, player.getName());
-						if (Config.AUTODELETE_INVALID_QUEST_DATA)
+						if (GeneralConfig.AUTODELETE_INVALID_QUEST_DATA)
 						{
 							invalidQuestData.setInt(1, player.getObjectId());
 							invalidQuestData.setString(2, questId);
@@ -1606,7 +1606,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 						if (qs == null)
 						{
 							LOG.info("Lost variable {} in quest {} for player {}", var, questId, player.getName());
-							if (Config.AUTODELETE_INVALID_QUEST_DATA)
+							if (GeneralConfig.AUTODELETE_INVALID_QUEST_DATA)
 							{
 								invalidQuestDataVar.setInt(1, player.getObjectId());
 								invalidQuestDataVar.setString(2, questId);

@@ -72,6 +72,9 @@ public @interface Setting
 	 */
 	double increase() default 1;
 	
+	// TODO: Test
+	double decrease() default 1 / 1;
+	
 	/**
 	 * Указывает рефлекшену что переменная будет заполняться через метод, передавая ему значение. Пример :
 	 * @Setting(name = "GMNameColour", method = "gmNameColour") public static int GM_NAME_COLOUR;

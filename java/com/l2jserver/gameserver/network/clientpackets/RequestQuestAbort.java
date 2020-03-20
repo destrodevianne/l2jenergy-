@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.instancemanager.QuestManager;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
@@ -61,7 +61,7 @@ public final class RequestQuestAbort extends L2GameClientPacket
 			}
 			else
 			{
-				if (Config.DEBUG)
+				if (GeneralConfig.DEBUG)
 				{
 					LOG.info("Player '{}' try to abort quest {} but he didn't have it started.", activeChar.getName(), qe.getName());
 				}
@@ -69,7 +69,7 @@ public final class RequestQuestAbort extends L2GameClientPacket
 		}
 		else
 		{
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				LOG.warn("Quest (id='{}') not found.", _questId);
 			}

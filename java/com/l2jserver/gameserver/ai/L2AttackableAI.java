@@ -35,7 +35,7 @@ import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.data.sql.impl.TerritoryTable;
 import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.enums.AISkillScope;
@@ -254,7 +254,7 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
 				return GeoData.getInstance().canSeeTarget(me, player); // Los Check
 			}
 			// Check if the L2MonsterInstance target is aggressive
-			if ((target instanceof L2MonsterInstance) && Config.GUARD_ATTACK_AGGRO_MOB)
+			if ((target instanceof L2MonsterInstance) && NpcConfig.GUARD_ATTACK_AGGRO_MOB)
 			{
 				return (((L2MonsterInstance) target).isAggressive() && GeoData.getInstance().canSeeTarget(me, target));
 			}
@@ -303,7 +303,7 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
 			
 			// depending on config, do not allow mobs to attack _new_ players in peacezones,
 			// unless they are already following those players from outside the peacezone.
-			if (!Config.ALT_MOB_AGRO_IN_PEACEZONE && target.isInsideZone(ZoneId.PEACE))
+			if (!NpcConfig.ALT_MOB_AGRO_IN_PEACEZONE && target.isInsideZone(ZoneId.PEACE))
 			{
 				return false;
 			}
@@ -364,7 +364,7 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
 					if (npc.getSpawn() != null)
 					{
 						final Location loc = npc.getSpawn().getLocation(npc);
-						final int range = Config.MAX_DRIFT_RANGE;
+						final int range = NpcConfig.MAX_DRIFT_RANGE;
 						
 						if (!npc.isInsideRadius(loc, range + range, true, false))
 						{
@@ -680,7 +680,7 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
 			int x1 = 0;
 			int y1 = 0;
 			int z1 = 0;
-			final int range = Config.MAX_DRIFT_RANGE;
+			final int range = NpcConfig.MAX_DRIFT_RANGE;
 			
 			for (Skill sk : npc.getTemplate().getAISkills(AISkillScope.BUFF))
 			{
@@ -969,7 +969,7 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
 			{
 				if (!((L2MonsterInstance) npc).hasMinions())
 				{
-					if (_chaosTime > Config.RAID_CHAOS_TIME)
+					if (_chaosTime > NpcConfig.RAID_CHAOS_TIME)
 					{
 						if (Rnd.get(100) <= (100 - ((npc.getCurrentHp() * 100) / npc.getMaxHp())))
 						{
@@ -981,7 +981,7 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
 				}
 				else
 				{
-					if (_chaosTime > Config.RAID_CHAOS_TIME)
+					if (_chaosTime > NpcConfig.RAID_CHAOS_TIME)
 					{
 						if (Rnd.get(100) <= (100 - ((npc.getCurrentHp() * 200) / npc.getMaxHp())))
 						{
@@ -994,7 +994,7 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
 			}
 			else if (npc instanceof L2GrandBossInstance)
 			{
-				if (_chaosTime > Config.GRAND_CHAOS_TIME)
+				if (_chaosTime > NpcConfig.GRAND_CHAOS_TIME)
 				{
 					double chaosRate = 100 - ((npc.getCurrentHp() * 300) / npc.getMaxHp());
 					if (((chaosRate <= 10) && (Rnd.get(100) <= 10)) || ((chaosRate > 10) && (Rnd.get(100) <= chaosRate)))
@@ -1007,7 +1007,7 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
 			}
 			else
 			{
-				if (_chaosTime > Config.MINION_CHAOS_TIME)
+				if (_chaosTime > NpcConfig.MINION_CHAOS_TIME)
 				{
 					if (Rnd.get(100) <= (100 - ((npc.getCurrentHp() * 200) / npc.getMaxHp())))
 					{

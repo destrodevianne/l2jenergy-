@@ -25,7 +25,7 @@ import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
 import com.l2jserver.commons.database.ConnectionFactory;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.instancemanager.MailManager;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -77,7 +77,7 @@ public class TaskBirthday extends Task
 					String text = MessagesData.getInstance().getMessage(player, "alt_birthday_mail_text").replace("%s%", rs.getString("char_name") + "").replace("%i%", Integer.toString(rs.getInt("age")) + "");
 					
 					final Message msg = new Message(rs.getInt("charId"), MessagesData.getInstance().getMessage(player, "alt_birthday_mail_subject"), text, Message.SendBySystem.ALEGRIA);
-					msg.createAttachments().addItem("Birthday", Config.ALT_BIRTHDAY_GIFT, 1, null, null);
+					msg.createAttachments().addItem("Birthday", GeneralConfig.ALT_BIRTHDAY_GIFT, 1, null, null);
 					MailManager.getInstance().sendMessage(msg);
 					birthdayGiftCount++;
 				}

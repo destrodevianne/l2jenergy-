@@ -35,6 +35,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 
 /**
  * @author -Wooden-, Sacrifice
@@ -57,20 +58,20 @@ public final class ThreadPoolManager
 	
 	public ThreadPoolManager()
 	{
-		_aiScheduledThreadPool = new ScheduledThreadPoolExecutor(Config.SCHEDULED_THREAD_CORE_POOL_SIZE_AI <= 0 ? Runtime.getRuntime().availableProcessors() : Config.SCHEDULED_THREAD_CORE_POOL_SIZE_AI, new PriorityThreadFactory("AI ST Pool", Thread.NORM_PRIORITY));
+		_aiScheduledThreadPool = new ScheduledThreadPoolExecutor(GeneralConfig.SCHEDULED_THREAD_CORE_POOL_SIZE_AI <= 0 ? Runtime.getRuntime().availableProcessors() : GeneralConfig.SCHEDULED_THREAD_CORE_POOL_SIZE_AI, new PriorityThreadFactory("AI ST Pool", Thread.NORM_PRIORITY));
 		_aiScheduledThreadPool.setRemoveOnCancelPolicy(true); // Since Java7, Explicitly call setRemoveOnCancelPolicy on the instance. This prevents from memory leaks when using ScheduledExecutorService
-		_effectsScheduledThreadPool = new ScheduledThreadPoolExecutor(Config.SCHEDULED_THREAD_CORE_POOL_SIZE_EFFECTS <= 0 ? Runtime.getRuntime().availableProcessors() : Config.SCHEDULED_THREAD_CORE_POOL_SIZE_EFFECTS, new PriorityThreadFactory("Effects ST Pool", Thread.NORM_PRIORITY));
+		_effectsScheduledThreadPool = new ScheduledThreadPoolExecutor(GeneralConfig.SCHEDULED_THREAD_CORE_POOL_SIZE_EFFECTS <= 0 ? Runtime.getRuntime().availableProcessors() : GeneralConfig.SCHEDULED_THREAD_CORE_POOL_SIZE_EFFECTS, new PriorityThreadFactory("Effects ST Pool", Thread.NORM_PRIORITY));
 		_effectsScheduledThreadPool.setRemoveOnCancelPolicy(true); // Since Java7, Explicitly call setRemoveOnCancelPolicy on the instance. This prevents from memory leaks when using ScheduledExecutorService
-		_eventsScheduledThreadPool = new ScheduledThreadPoolExecutor(Config.SCHEDULED_THREAD_CORE_POOL_SIZE_EVENTS <= 0 ? Runtime.getRuntime().availableProcessors() : Config.SCHEDULED_THREAD_CORE_POOL_SIZE_EVENTS, new PriorityThreadFactory("Event ST Pool", Thread.NORM_PRIORITY));
+		_eventsScheduledThreadPool = new ScheduledThreadPoolExecutor(GeneralConfig.SCHEDULED_THREAD_CORE_POOL_SIZE_EVENTS <= 0 ? Runtime.getRuntime().availableProcessors() : GeneralConfig.SCHEDULED_THREAD_CORE_POOL_SIZE_EVENTS, new PriorityThreadFactory("Event ST Pool", Thread.NORM_PRIORITY));
 		_eventsScheduledThreadPool.setRemoveOnCancelPolicy(true); // Since Java7, Explicitly call setRemoveOnCancelPolicy on the instance. This prevents from memory leaks when using ScheduledExecutorService
-		_generalScheduledThreadPool = new ScheduledThreadPoolExecutor(Config.SCHEDULED_THREAD_CORE_POOL_SIZE_GENERAL <= 0 ? Runtime.getRuntime().availableProcessors() : Config.SCHEDULED_THREAD_CORE_POOL_SIZE_GENERAL, new PriorityThreadFactory("General ST Pool", Thread.NORM_PRIORITY));
+		_generalScheduledThreadPool = new ScheduledThreadPoolExecutor(GeneralConfig.SCHEDULED_THREAD_CORE_POOL_SIZE_GENERAL <= 0 ? Runtime.getRuntime().availableProcessors() : GeneralConfig.SCHEDULED_THREAD_CORE_POOL_SIZE_GENERAL, new PriorityThreadFactory("General ST Pool", Thread.NORM_PRIORITY));
 		_generalScheduledThreadPool.setRemoveOnCancelPolicy(true); // Since Java7, Explicitly call setRemoveOnCancelPolicy on the instance. This prevents from memory leaks when using ScheduledExecutorService
 		
 		//@formatter:off
-		_eventsThreadPool = new ThreadPoolExecutor(Config.THREAD_CORE_POOL_SIZE_EVENT <= 0 ? Runtime.getRuntime().availableProcessors() : Config.THREAD_CORE_POOL_SIZE_EVENT, Config.THREAD_CORE_POOL_SIZE_EVENT <= 0 ? Runtime.getRuntime().availableProcessors() : Config.THREAD_CORE_POOL_SIZE_EVENT, 5L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), new PriorityThreadFactory("Event Pool", Thread.NORM_PRIORITY));
-		_generalPacketsThreadPool = new ThreadPoolExecutor(Config.THREAD_CORE_POOL_SIZE_GENERAL_PACKETS <= 0 ? Runtime.getRuntime().availableProcessors() : Config.THREAD_CORE_POOL_SIZE_GENERAL_PACKETS, Config.THREAD_CORE_POOL_SIZE_GENERAL_PACKETS <= 0 ? Runtime.getRuntime().availableProcessors() : Config.THREAD_CORE_POOL_SIZE_GENERAL_PACKETS, 15L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), new PriorityThreadFactory("Normal Packet Pool", Thread.NORM_PRIORITY + 1));
-		_generalThreadPool = new ThreadPoolExecutor(Config.THREAD_CORE_POOL_SIZE_GENERAL <= 0 ? Runtime.getRuntime().availableProcessors() : Config.THREAD_CORE_POOL_SIZE_GENERAL, Config.THREAD_CORE_POOL_SIZE_GENERAL <= 0 ? Runtime.getRuntime().availableProcessors() : Config.THREAD_CORE_POOL_SIZE_GENERAL, 5L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), new PriorityThreadFactory("General Pool", Thread.NORM_PRIORITY));
-		_ioPacketsThreadPool = new ThreadPoolExecutor(Config.THREAD_CORE_POOL_SIZE_IO_PACKETS <= 0 ? Runtime.getRuntime().availableProcessors() : Config.THREAD_CORE_POOL_SIZE_IO_PACKETS, Integer.MAX_VALUE, 5L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), new PriorityThreadFactory("I/O Packet Pool", Thread.NORM_PRIORITY + 1));
+		_eventsThreadPool = new ThreadPoolExecutor(GeneralConfig.THREAD_CORE_POOL_SIZE_EVENT <= 0 ? Runtime.getRuntime().availableProcessors() : GeneralConfig.THREAD_CORE_POOL_SIZE_EVENT, GeneralConfig.THREAD_CORE_POOL_SIZE_EVENT <= 0 ? Runtime.getRuntime().availableProcessors() : GeneralConfig.THREAD_CORE_POOL_SIZE_EVENT, 5L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), new PriorityThreadFactory("Event Pool", Thread.NORM_PRIORITY));
+		_generalPacketsThreadPool = new ThreadPoolExecutor(GeneralConfig.THREAD_CORE_POOL_SIZE_GENERAL_PACKETS <= 0 ? Runtime.getRuntime().availableProcessors() : GeneralConfig.THREAD_CORE_POOL_SIZE_GENERAL_PACKETS, GeneralConfig.THREAD_CORE_POOL_SIZE_GENERAL_PACKETS <= 0 ? Runtime.getRuntime().availableProcessors() : GeneralConfig.THREAD_CORE_POOL_SIZE_GENERAL_PACKETS, 15L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), new PriorityThreadFactory("Normal Packet Pool", Thread.NORM_PRIORITY + 1));
+		_generalThreadPool = new ThreadPoolExecutor(GeneralConfig.THREAD_CORE_POOL_SIZE_GENERAL <= 0 ? Runtime.getRuntime().availableProcessors() : GeneralConfig.THREAD_CORE_POOL_SIZE_GENERAL, GeneralConfig.THREAD_CORE_POOL_SIZE_GENERAL <= 0 ? Runtime.getRuntime().availableProcessors() : GeneralConfig.THREAD_CORE_POOL_SIZE_GENERAL, 5L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), new PriorityThreadFactory("General Pool", Thread.NORM_PRIORITY));
+		_ioPacketsThreadPool = new ThreadPoolExecutor(GeneralConfig.THREAD_CORE_POOL_SIZE_IO_PACKETS <= 0 ? Runtime.getRuntime().availableProcessors() : GeneralConfig.THREAD_CORE_POOL_SIZE_IO_PACKETS, Integer.MAX_VALUE, 5L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), new PriorityThreadFactory("I/O Packet Pool", Thread.NORM_PRIORITY + 1));
 		//@formatter:on
 		
 		scheduleGeneralAtFixedRate(new PurgeTask(_aiScheduledThreadPool, _effectsScheduledThreadPool, _eventsScheduledThreadPool, _generalScheduledThreadPool, //

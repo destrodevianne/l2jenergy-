@@ -20,7 +20,8 @@ package com.l2jserver.gameserver.model.actor.stat;
 
 import java.util.Arrays;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.model.Elementals;
 import com.l2jserver.gameserver.model.PcCondOverride;
@@ -179,7 +180,7 @@ public class CharStat
 		double val = (int) calcStat(Stats.CRITICAL_RATE, _activeChar.getTemplate().getBaseCritRate(), target, skill);
 		if (!_activeChar.canOverrideCond(PcCondOverride.MAX_STATS_VALUE))
 		{
-			val = Math.min(val, Config.MAX_PCRIT_RATE);
+			val = Math.min(val, CharacterConfig.MAX_PCRIT_RATE);
 		}
 		return (int) (val + .5);
 	}
@@ -211,7 +212,7 @@ public class CharStat
 		
 		if (!_activeChar.canOverrideCond(PcCondOverride.MAX_STATS_VALUE))
 		{
-			val = Math.min(val, Config.MAX_EVASION);
+			val = Math.min(val, CharacterConfig.MAX_EVASION);
 		}
 		
 		return val;
@@ -295,7 +296,7 @@ public class CharStat
 		}
 		if (_activeChar.isRaid())
 		{
-			bonusAtk *= Config.RAID_MATTACK_MULTIPLIER;
+			bonusAtk *= NpcConfig.RAID_MATTACK_MULTIPLIER;
 		}
 		
 		// Calculate modifiers Magic Attack
@@ -317,7 +318,7 @@ public class CharStat
 		
 		if (!_activeChar.canOverrideCond(PcCondOverride.MAX_STATS_VALUE))
 		{
-			val = Math.min(val, Config.MAX_MATK_SPEED);
+			val = Math.min(val, CharacterConfig.MAX_MATK_SPEED);
 		}
 		
 		return (int) val;
@@ -334,7 +335,7 @@ public class CharStat
 		
 		if (!_activeChar.canOverrideCond(PcCondOverride.MAX_STATS_VALUE))
 		{
-			val = Math.min(val, Config.MAX_MCRIT_RATE);
+			val = Math.min(val, CharacterConfig.MAX_MCRIT_RATE);
 		}
 		
 		return val;
@@ -354,7 +355,7 @@ public class CharStat
 		// Calculate modifier for Raid Bosses
 		if (_activeChar.isRaid())
 		{
-			defence *= Config.RAID_MDEFENCE_MULTIPLIER;
+			defence *= NpcConfig.RAID_MDEFENCE_MULTIPLIER;
 		}
 		
 		// Calculate modifiers Magic Attack
@@ -482,7 +483,7 @@ public class CharStat
 		}
 		if (_activeChar.isRaid())
 		{
-			bonusAtk *= Config.RAID_PATTACK_MULTIPLIER;
+			bonusAtk *= NpcConfig.RAID_PATTACK_MULTIPLIER;
 		}
 		return calcStat(Stats.POWER_ATTACK, _activeChar.getTemplate().getBasePAtk() * bonusAtk, target, null);
 	}
@@ -506,7 +507,7 @@ public class CharStat
 	 */
 	public double getPDef(L2Character target)
 	{
-		return calcStat(Stats.POWER_DEFENCE, (_activeChar.isRaid()) ? _activeChar.getTemplate().getBasePDef() * Config.RAID_PDEFENCE_MULTIPLIER : _activeChar.getTemplate().getBasePDef(), target, null);
+		return calcStat(Stats.POWER_DEFENCE, (_activeChar.isRaid()) ? _activeChar.getTemplate().getBasePDef() * NpcConfig.RAID_PDEFENCE_MULTIPLIER : _activeChar.getTemplate().getBasePDef(), target, null);
 	}
 	
 	/**
@@ -594,7 +595,7 @@ public class CharStat
 		double nextDanceMpCost = Math.ceil(skill.getMpConsume2() / 2.);
 		if (skill.isDance())
 		{
-			if (Config.DANCE_CONSUME_ADDITIONAL_MP && (_activeChar != null) && (_activeChar.getDanceCount() > 0))
+			if (CharacterConfig.DANCE_CONSUME_ADDITIONAL_MP && (_activeChar != null) && (_activeChar.getDanceCount() > 0))
 			{
 				mpConsume2 += _activeChar.getDanceCount() * nextDanceMpCost;
 			}
@@ -773,6 +774,6 @@ public class CharStat
 	 */
 	public int getMaxBuffCount()
 	{
-		return (int) calcStat(Stats.ENLARGE_ABNORMAL_SLOT, Config.BUFFS_MAX_AMOUNT);
+		return (int) calcStat(Stats.ENLARGE_ABNORMAL_SLOT, CharacterConfig.BUFFS_MAX_AMOUNT);
 	}
 }

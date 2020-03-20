@@ -20,7 +20,8 @@ package handlers.bypasshandlers;
 
 import java.util.StringTokenizer;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.handler.IBypassHandler;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -44,12 +45,12 @@ public class RentPet implements IBypassHandler
 			return false;
 		}
 		
-		if (!Config.ALLOW_RENTPET)
+		if (!GeneralConfig.ALLOW_RENTPET)
 		{
 			return false;
 		}
 		
-		if (!Config.LIST_PET_RENT_NPC.contains(target.getId()))
+		if (!NpcConfig.LIST_PET_RENT_NPC.contains(target.getId()))
 		{
 			return false;
 		}

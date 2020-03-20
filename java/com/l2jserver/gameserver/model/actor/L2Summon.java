@@ -22,7 +22,7 @@ import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.ai.L2CharacterAI;
 import com.l2jserver.gameserver.ai.L2SummonAI;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.data.json.ExperienceData;
 import com.l2jserver.gameserver.datatables.ItemTable;
@@ -122,7 +122,7 @@ public abstract class L2Summon extends L2Playable
 	{
 		super.onSpawn();
 		
-		if (Config.SUMMON_STORE_SKILL_COOLTIME && !isTeleporting())
+		if (CharacterConfig.SUMMON_STORE_SKILL_COOLTIME && !isTeleporting())
 		{
 			restoreEffects();
 		}
@@ -231,7 +231,7 @@ public abstract class L2Summon extends L2Playable
 	
 	public long getExpForThisLevel()
 	{
-		if (getLevel() >= (Config.MAX_PET_LEVEL + 1))
+		if (getLevel() >= (CharacterConfig.MAX_PET_LEVEL + 1))
 		{
 			return 0;
 		}
@@ -240,7 +240,7 @@ public abstract class L2Summon extends L2Playable
 	
 	public long getExpForNextLevel()
 	{
-		if (getLevel() >= (Config.MAX_PET_LEVEL))
+		if (getLevel() >= (CharacterConfig.MAX_PET_LEVEL))
 		{
 			return 0;
 		}

@@ -18,7 +18,7 @@
  */
 package hellbound.AI.NPC.Warpgate;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.PcCondOverride;
 import com.l2jserver.gameserver.model.actor.L2Character;
@@ -117,7 +117,7 @@ public final class Warpgate extends AbstractNpcAI
 			return false;
 		}
 		
-		if (Config.HELLBOUND_WITHOUT_QUEST)
+		if (GeneralConfig.HELLBOUND_WITHOUT_QUEST)
 		{
 			return true;
 		}

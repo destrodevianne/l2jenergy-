@@ -20,7 +20,7 @@ package com.l2jserver.gameserver.network.serverpackets;
 
 import java.util.Random;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.custom.CustomConfig;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
@@ -31,6 +31,8 @@ public class SendStatus extends L2GameServerPacket
 	private static int MAX_ONLINE_PLAYERS = 0;
 	private static int ONLINE_PRIVS_STORE = 0;
 	private static long LAST_UPDATE = 0;
+	
+	public static int RWHO_ARRAY[] = new int[13];
 	
 	public SendStatus()
 	{
@@ -44,13 +46,13 @@ public class SendStatus extends L2GameServerPacket
 		for (L2PcInstance player : L2World.getInstance().getPlayers())
 		{
 			i++;
-			if (player.isInStoreMode() && (!Config.SENDSTATUS_TRADE_JUST_OFFLINE || player.isInOfflineMode()))
+			if (player.isInStoreMode() && (!CustomConfig.SENDSTATUS_TRADE_JUST_OFFLINE || player.isInOfflineMode()))
 			{
 				j++;
 			}
 		}
 		ONLINE_PLAYERS = i;
-		ONLINE_PRIVS_STORE = (int) Math.floor(j * Config.SENDSTATUS_TRADE_MOD);
+		ONLINE_PRIVS_STORE = (int) Math.floor(j * CustomConfig.SENDSTATUS_TRADE_MOD);
 		MAX_ONLINE_PLAYERS = Math.max(MAX_ONLINE_PLAYERS, ONLINE_PLAYERS);
 	}
 	
@@ -65,14 +67,14 @@ public class SendStatus extends L2GameServerPacket
 		writeD(ONLINE_PLAYERS); // Current Online
 		writeD(ONLINE_PLAYERS); // Current Online
 		writeD(ONLINE_PRIVS_STORE); // Priv.Store Chars
-		if (Config.RWHO_SEND_TRASH)
+		if (CustomConfig.RWHO_SEND_TRASH)
 		{
 			writeH(0x30);
 			writeH(0x2C);
 			writeH(0x36);
 			writeH(0x2C);
 			
-			if (Config.RWHO_ARRAY[12] == Config.RWHO_KEEP_STAT)
+			if (RWHO_ARRAY[12] == CustomConfig.RWHO_KEEP_STAT)
 			{
 				int z;
 				z = ppc.nextInt(6);
@@ -84,34 +86,34 @@ public class SendStatus extends L2GameServerPacket
 				{
 					if (x == 4)
 					{
-						Config.RWHO_ARRAY[x] = 44;
+						RWHO_ARRAY[x] = 44;
 					}
 					else
 					{
-						Config.RWHO_ARRAY[x] = 51 + ppc.nextInt(z);
+						RWHO_ARRAY[x] = 51 + ppc.nextInt(z);
 					}
 				}
-				Config.RWHO_ARRAY[11] = 37265 + ppc.nextInt((z * 2) + 3);
-				Config.RWHO_ARRAY[8] = 51 + ppc.nextInt(z);
+				RWHO_ARRAY[11] = 37265 + ppc.nextInt((z * 2) + 3);
+				RWHO_ARRAY[8] = 51 + ppc.nextInt(z);
 				z = 36224 + ppc.nextInt(z * 2);
-				Config.RWHO_ARRAY[9] = z;
-				Config.RWHO_ARRAY[10] = z;
-				Config.RWHO_ARRAY[12] = 1;
+				RWHO_ARRAY[9] = z;
+				RWHO_ARRAY[10] = z;
+				RWHO_ARRAY[12] = 1;
 			}
 			
 			for (int z = 0; z < 8; z++)
 			{
 				if (z == 3)
 				{
-					Config.RWHO_ARRAY[z] -= 1;
+					RWHO_ARRAY[z] -= 1;
 				}
-				writeH(Config.RWHO_ARRAY[z]);
+				writeH(RWHO_ARRAY[z]);
 			}
-			writeD(Config.RWHO_ARRAY[8]);
-			writeD(Config.RWHO_ARRAY[9]);
-			writeD(Config.RWHO_ARRAY[10]);
-			writeD(Config.RWHO_ARRAY[11]);
-			Config.RWHO_ARRAY[12]++;
+			writeD(RWHO_ARRAY[8]);
+			writeD(RWHO_ARRAY[9]);
+			writeD(RWHO_ARRAY[10]);
+			writeD(RWHO_ARRAY[11]);
+			RWHO_ARRAY[12]++;
 			writeD(0x00);
 			writeD(0x02);
 		}

@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
@@ -849,7 +849,7 @@ public class SevenSignsFestival implements SpawnListener
 	 */
 	public static final int getMaxLevelForFestival(int festivalId)
 	{
-		int maxLevel = Config.MAX_PLAYER_LEVEL;
+		int maxLevel = CharacterConfig.MAX_PLAYER_LEVEL;
 		
 		switch (festivalId)
 		{

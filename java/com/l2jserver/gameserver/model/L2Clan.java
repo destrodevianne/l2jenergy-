@@ -40,7 +40,7 @@ import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.EnumIntBitmask;
 import com.l2jserver.gameserver.communitybbs.BB.Forum;
 import com.l2jserver.gameserver.communitybbs.Manager.ForumsBBSManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.configuration.config.community.CBasicConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
@@ -450,7 +450,7 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 		exMember.saveApprenticeAndSponsor(0, 0);
 		
-		if (Config.REMOVE_CASTLE_CIRCLETS)
+		if (CharacterConfig.REMOVE_CASTLE_CIRCLETS)
 		{
 			CastleManager.getInstance().removeCirclet(exMember, getCastleId());
 		}
@@ -468,7 +468,7 @@ public class L2Clan implements IIdentifiable, INamable
 			if (player.isClanLeader())
 			{
 				SiegeManager.getInstance().removeSiegeSkills(player);
-				player.setClanCreateExpiryTime(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(Config.ALT_CLAN_CREATE_DAYS));
+				player.setClanCreateExpiryTime(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(CharacterConfig.ALT_CLAN_CREATE_DAYS));
 			}
 			// remove Clan skills from Player
 			removeSkillEffects(player);
@@ -500,7 +500,7 @@ public class L2Clan implements IIdentifiable, INamable
 		}
 		else
 		{
-			DAOFactory.getInstance().getClanDAO().removeMember(exMember.getObjectId(), clanJoinExpiryTime, getLeaderId() == objectId ? System.currentTimeMillis() + TimeUnit.DAYS.toMillis(Config.ALT_CLAN_CREATE_DAYS) : 0);
+			DAOFactory.getInstance().getClanDAO().removeMember(exMember.getObjectId(), clanJoinExpiryTime, getLeaderId() == objectId ? System.currentTimeMillis() + TimeUnit.DAYS.toMillis(CharacterConfig.ALT_CLAN_CREATE_DAYS) : 0);
 		}
 		// Notify to scripts
 		EventDispatcher.getInstance().notifyEventAsync(new OnPlayerClanLeft(exMember, this));
@@ -1977,7 +1977,7 @@ public class L2Clan implements IIdentifiable, INamable
 			return false;
 		}
 		
-		if (ClanTable.getInstance().getClanAllies(activeChar.getAllyId()).size() >= Config.ALT_MAX_NUM_OF_CLANS_IN_ALLY)
+		if (ClanTable.getInstance().getClanAllies(activeChar.getAllyId()).size() >= CharacterConfig.ALT_MAX_NUM_OF_CLANS_IN_ALLY)
 		{
 			activeChar.sendPacket(SystemMessageId.YOU_HAVE_EXCEEDED_THE_LIMIT);
 			return false;
@@ -2123,7 +2123,7 @@ public class L2Clan implements IIdentifiable, INamable
 		setAllyId(0);
 		setAllyName(null);
 		changeAllyCrest(0, false);
-		setAllyPenaltyExpiryTime(currentTime + (Config.ALT_CREATE_ALLY_DAYS_WHEN_DISSOLVED * 86400000L), L2Clan.PENALTY_TYPE_DISSOLVE_ALLY); // 24*60*60*1000 = 86400000
+		setAllyPenaltyExpiryTime(currentTime + (CharacterConfig.ALT_CREATE_ALLY_DAYS_WHEN_DISSOLVED * 86400000L), L2Clan.PENALTY_TYPE_DISSOLVE_ALLY); // 24*60*60*1000 = 86400000
 		DAOFactory.getInstance().getClanDAO().updateClan(this);
 	}
 	

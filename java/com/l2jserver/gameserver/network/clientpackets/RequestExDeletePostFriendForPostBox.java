@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -43,7 +43,7 @@ public class RequestExDeletePostFriendForPostBox extends L2GameClientPacket
 	@Override
 	protected void runImpl()
 	{
-		if (!Config.ALLOW_MAIL)
+		if (!GeneralConfig.ALLOW_MAIL)
 		{
 			return;
 		}

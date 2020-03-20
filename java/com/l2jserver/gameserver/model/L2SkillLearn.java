@@ -21,7 +21,7 @@ package com.l2jserver.gameserver.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.base.SocialClass;
@@ -289,7 +289,7 @@ public final class L2SkillLearn
 		
 		int levelUpSp = _levelUpSp;
 		// If the alternative skill learn system is enabled and the player is learning a skill from a different class apply a fee.
-		if (Config.ALT_GAME_SKILL_LEARN && (playerClass != learningClass))
+		if (CharacterConfig.ALT_GAME_SKILL_LEARN && (playerClass != learningClass))
 		{
 			// If the player is learning a skill from other class type (mage learning warrior skills or vice versa) the fee is higher.
 			if (playerClass.isMage() != learningClass.isMage())

@@ -30,7 +30,7 @@ import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.Set;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
@@ -281,7 +281,7 @@ public enum PlayerClass
 				// Check sex, male subclasses female and vice versa
 				// If server owner set MaxSubclass > 3 some kamael's cannot take 4 sub
 				// So, in that situation we must skip sex check
-				if (Config.MAX_SUBCLASS <= 3)
+				if (CharacterConfig.MAX_SUBCLASS <= 3)
 				{
 					if (player.getAppearance().getSex() != null)
 					{

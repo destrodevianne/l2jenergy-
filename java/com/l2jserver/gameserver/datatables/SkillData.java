@@ -26,7 +26,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.engines.DocumentEngine;
 import com.l2jserver.gameserver.model.skills.Skill;
@@ -120,7 +120,7 @@ public final class SkillData
 		// requested level too high
 		if ((maxLvl > 0) && (level > maxLvl))
 		{
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				LOG.warn("{}: call to unexisting skill level id: {} requested level: {} max level: {}", getClass().getSimpleName(), skillId, level, maxLvl, new Throwable());
 			}

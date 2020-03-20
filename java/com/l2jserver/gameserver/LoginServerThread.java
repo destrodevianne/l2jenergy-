@@ -49,7 +49,7 @@ import com.l2jserver.commons.network.BaseSendablePacket;
 import com.l2jserver.commons.security.crypt.NewCrypt;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.commons.util.Util;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.configuration.parser.IPConfigDataParser;
 import com.l2jserver.gameserver.configuration.parser.hexid.HexidConfigParser;
@@ -252,7 +252,7 @@ public class LoginServerThread extends Thread
 							Util.saveHexid(serverID, hexToString(_hexID));
 							LOG.info("Registered on login as Server {}: {}", serverID, _serverName);
 							ServerStatus st = new ServerStatus();
-							if (Config.SERVER_LIST_BRACKET)
+							if (GeneralConfig.SERVER_LIST_BRACKET)
 							{
 								st.addAttribute(ServerStatus.SERVER_LIST_SQUARE_BRACKET, ServerStatus.ON);
 							}
@@ -260,8 +260,8 @@ public class LoginServerThread extends Thread
 							{
 								st.addAttribute(ServerStatus.SERVER_LIST_SQUARE_BRACKET, ServerStatus.OFF);
 							}
-							st.addAttribute(ServerStatus.SERVER_TYPE, Config.SERVER_LIST_TYPE);
-							if (Config.SERVER_GMONLY)
+							st.addAttribute(ServerStatus.SERVER_TYPE, GeneralConfig.SERVER_LIST_TYPE);
+							if (GeneralConfig.SERVER_GMONLY)
 							{
 								st.addAttribute(ServerStatus.SERVER_LIST_STATUS, ServerStatus.STATUS_GM_ONLY);
 							}
@@ -269,11 +269,11 @@ public class LoginServerThread extends Thread
 							{
 								st.addAttribute(ServerStatus.SERVER_LIST_STATUS, ServerStatus.STATUS_AUTO);
 							}
-							if (Config.SERVER_LIST_AGE == 15)
+							if (GeneralConfig.SERVER_LIST_AGE == 15)
 							{
 								st.addAttribute(ServerStatus.SERVER_AGE, ServerStatus.SERVER_AGE_15);
 							}
-							else if (Config.SERVER_LIST_AGE == 18)
+							else if (GeneralConfig.SERVER_LIST_AGE == 18)
 							{
 								st.addAttribute(ServerStatus.SERVER_AGE, ServerStatus.SERVER_AGE_18);
 							}
@@ -663,7 +663,7 @@ public class LoginServerThread extends Thread
 	public void sendServerType()
 	{
 		ServerStatus ss = new ServerStatus();
-		ss.addAttribute(ServerStatus.SERVER_TYPE, Config.SERVER_LIST_TYPE);
+		ss.addAttribute(ServerStatus.SERVER_TYPE, GeneralConfig.SERVER_LIST_TYPE);
 		try
 		{
 			sendPacket(ss);

@@ -35,8 +35,11 @@ import com.l2jserver.gameserver.SevenSigns;
 import com.l2jserver.gameserver.SevenSignsFestival;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.cache.HtmCache;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.FeatureConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.configuration.config.events.OlympiadConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
@@ -168,7 +171,7 @@ public class L2Npc extends L2Character
 		// initialize the "current" equipment
 		_currentLHandId = getTemplate().getLHandId();
 		_currentRHandId = getTemplate().getRHandId();
-		_currentEnchant = Config.ENABLE_RANDOM_ENCHANT_EFFECT ? Rnd.get(4, 21) : getTemplate().getWeaponEnchant();
+		_currentEnchant = NpcConfig.ENABLE_RANDOM_ENCHANT_EFFECT ? Rnd.get(4, 21) : getTemplate().getWeaponEnchant();
 		
 		// initialize the "current" collisions
 		_currentCollisionHeight = getTemplate().getfCollisionHeight();
@@ -307,8 +310,8 @@ public class L2Npc extends L2Character
 			return;
 		}
 		
-		int minWait = isMob() ? Config.MIN_MONSTER_ANIMATION : Config.MIN_NPC_ANIMATION;
-		int maxWait = isMob() ? Config.MAX_MONSTER_ANIMATION : Config.MAX_NPC_ANIMATION;
+		int minWait = isMob() ? GeneralConfig.MIN_MONSTER_ANIMATION : GeneralConfig.MIN_NPC_ANIMATION;
+		int maxWait = isMob() ? GeneralConfig.MAX_MONSTER_ANIMATION : GeneralConfig.MAX_NPC_ANIMATION;
 		
 		// Calculate the delay before the next animation
 		int interval = Rnd.get(minWait, maxWait) * 1000;
@@ -323,7 +326,7 @@ public class L2Npc extends L2Character
 	 */
 	public boolean hasRandomAnimation()
 	{
-		return ((Config.MAX_NPC_ANIMATION > 0) && _isRandomAnimationEnabled && !getAiType().equals(AIType.CORPSE));
+		return ((GeneralConfig.MAX_NPC_ANIMATION > 0) && _isRandomAnimationEnabled && !getAiType().equals(AIType.CORPSE));
 	}
 	
 	/**
@@ -399,7 +402,7 @@ public class L2Npc extends L2Character
 	@Override
 	public boolean canBeAttacked()
 	{
-		return Config.ALT_ATTACKABLE_NPCS;
+		return NpcConfig.ALT_ATTACKABLE_NPCS;
 	}
 	
 	/**
@@ -870,7 +873,7 @@ public class L2Npc extends L2Character
 		
 		String temp = "data/html/default/" + pom + ".htm";
 		
-		if (!Config.LAZY_CACHE)
+		if (!GeneralConfig.LAZY_CACHE)
 		{
 			// If not running lazy cache the file must be in the cache or it doesnt exist
 			if (HtmCache.getInstance().contains(temp))
@@ -938,21 +941,21 @@ public class L2Npc extends L2Character
 		}
 		if (player.getKarma() > 0)
 		{
-			if (!Config.ALT_GAME_KARMA_PLAYER_CAN_SHOP && (this instanceof L2MerchantInstance))
+			if (!CharacterConfig.ALT_GAME_KARMA_PLAYER_CAN_SHOP && (this instanceof L2MerchantInstance))
 			{
 				if (showPkDenyChatWindow(player, "merchant"))
 				{
 					return;
 				}
 			}
-			else if (!Config.ALT_GAME_KARMA_PLAYER_CAN_USE_GK && (this instanceof L2TeleporterInstance))
+			else if (!CharacterConfig.ALT_GAME_KARMA_PLAYER_CAN_USE_GK && (this instanceof L2TeleporterInstance))
 			{
 				if (showPkDenyChatWindow(player, "teleporter"))
 				{
 					return;
 				}
 			}
-			else if (!Config.ALT_GAME_KARMA_PLAYER_CAN_USE_WAREHOUSE && (this instanceof L2WarehouseInstance))
+			else if (!CharacterConfig.ALT_GAME_KARMA_PLAYER_CAN_USE_WAREHOUSE && (this instanceof L2WarehouseInstance))
 			{
 				if (showPkDenyChatWindow(player, "warehouse"))
 				{
@@ -1134,7 +1137,7 @@ public class L2Npc extends L2Character
 		
 		if (this instanceof L2MerchantInstance)
 		{
-			if (Config.LIST_PET_RENT_NPC.contains(npcId))
+			if (NpcConfig.LIST_PET_RENT_NPC.contains(npcId))
 			{
 				html.replace("_Quest", "_RentPet\">Rent Pet</a><br><a action=\"bypass -h npc_%objectId%_Quest");
 			}
@@ -1783,9 +1786,9 @@ public class L2Npc extends L2Character
 			item.dropMe(this, newX, newY, newZ);
 			
 			// Add drop to auto destroy item task.
-			if (!Config.LIST_PROTECTED_ITEMS.contains(itemId))
+			if (!GeneralConfig.LIST_PROTECTED_ITEMS.contains(itemId))
 			{
-				if (((Config.AUTODESTROY_ITEM_AFTER > 0) && !item.getItem().hasExImmediateEffect()) || ((Config.HERB_AUTO_DESTROY_TIME > 0) && item.getItem().hasExImmediateEffect()))
+				if (((GeneralConfig.AUTODESTROY_ITEM_AFTER > 0) && !item.getItem().hasExImmediateEffect()) || ((GeneralConfig.HERB_AUTO_DESTROY_TIME > 0) && item.getItem().hasExImmediateEffect()))
 				{
 					ItemsAutoDestroy.getInstance().addItem(item);
 				}
@@ -1793,7 +1796,7 @@ public class L2Npc extends L2Character
 			item.setProtected(false);
 			
 			// If stackable, end loop as entire count is included in 1 instance of item.
-			if (item.isStackable() || !Config.MULTIPLE_ITEM_DROP)
+			if (item.isStackable() || !GeneralConfig.MULTIPLE_ITEM_DROP)
 			{
 				break;
 			}

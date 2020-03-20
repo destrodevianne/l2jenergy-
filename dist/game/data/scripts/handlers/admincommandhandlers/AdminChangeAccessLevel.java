@@ -23,7 +23,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import com.l2jserver.commons.database.ConnectionFactory;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
@@ -95,7 +95,7 @@ public final class AdminChangeAccessLevel implements IAdminCommandHandler
 				catch (SQLException se)
 				{
 					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_changing_sqlexception_character_access_level"));
-					if (Config.DEBUG)
+					if (GeneralConfig.DEBUG)
 					{
 						se.printStackTrace();
 					}

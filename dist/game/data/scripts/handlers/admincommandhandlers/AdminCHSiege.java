@@ -20,7 +20,7 @@ package handlers.admincommandhandlers;
 
 import java.util.Calendar;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
@@ -62,7 +62,7 @@ public final class AdminCHSiege implements IAdminCommandHandler
 	{
 		final String[] split = command.split(" ");
 		SiegableHall hall = null;
-		if (Config.ALT_DEV_NO_QUESTS)
+		if (GeneralConfig.ALT_DEV_NO_QUESTS)
 		{
 			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_clan_hall_sieges_disabled"));
 			return false;

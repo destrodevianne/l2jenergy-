@@ -27,7 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.util.filter.XMLFilter;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.engines.items.DocumentItem;
@@ -53,12 +53,12 @@ public class DocumentEngine
 	protected DocumentEngine()
 	{
 		hashFiles("data/stats/items", _itemFiles);
-		if (Config.CUSTOM_ITEMS_LOAD)
+		if (GeneralConfig.CUSTOM_ITEMS_LOAD)
 		{
 			hashFiles("data/stats/items/custom", _itemFiles);
 		}
 		hashFiles("data/stats/skills", _skillFiles);
-		if (Config.CUSTOM_SKILLS_LOAD)
+		if (GeneralConfig.CUSTOM_SKILLS_LOAD)
 		{
 			hashFiles("data/stats/skills/custom", _skillFiles);
 		}

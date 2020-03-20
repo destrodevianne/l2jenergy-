@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.SiegeScheduleData;
@@ -589,7 +589,7 @@ public class Siege implements Siegable
 					if (checkIfInZone(member))
 					{
 						member.setIsInSiege(true);
-						member.startFameTask(Config.CASTLE_ZONE_FAME_TASK_FREQUENCY * 1000, Config.CASTLE_ZONE_FAME_AQUIRE_POINTS);
+						member.startFameTask(CharacterConfig.CASTLE_ZONE_FAME_TASK_FREQUENCY * 1000, CharacterConfig.CASTLE_ZONE_FAME_AQUIRE_POINTS);
 					}
 				}
 				member.sendPacket(new UserInfo(member));
@@ -638,7 +638,7 @@ public class Siege implements Siegable
 					if (checkIfInZone(member))
 					{
 						member.setIsInSiege(true);
-						member.startFameTask(Config.CASTLE_ZONE_FAME_TASK_FREQUENCY * 1000, Config.CASTLE_ZONE_FAME_AQUIRE_POINTS);
+						member.startFameTask(CharacterConfig.CASTLE_ZONE_FAME_TASK_FREQUENCY * 1000, CharacterConfig.CASTLE_ZONE_FAME_AQUIRE_POINTS);
 					}
 				}
 				member.sendPacket(new UserInfo(member));
@@ -1745,13 +1745,13 @@ public class Siege implements Siegable
 	@Override
 	public int getFameFrequency()
 	{
-		return Config.CASTLE_ZONE_FAME_TASK_FREQUENCY;
+		return CharacterConfig.CASTLE_ZONE_FAME_TASK_FREQUENCY;
 	}
 	
 	@Override
 	public int getFameAmount()
 	{
-		return Config.CASTLE_ZONE_FAME_AQUIRE_POINTS;
+		return CharacterConfig.CASTLE_ZONE_FAME_AQUIRE_POINTS;
 	}
 	
 	@Override

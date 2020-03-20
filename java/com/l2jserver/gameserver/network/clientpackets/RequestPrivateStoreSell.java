@@ -20,7 +20,7 @@ package com.l2jserver.gameserver.network.clientpackets;
 
 import static com.l2jserver.gameserver.model.actor.L2Npc.INTERACTION_DISTANCE;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.model.ItemRequest;
@@ -49,7 +49,7 @@ public final class RequestPrivateStoreSell extends L2GameClientPacket
 	{
 		_storePlayerId = readD();
 		int count = readD();
-		if ((count <= 0) || (count > Config.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != _buf.remaining()))
+		if ((count <= 0) || (count > CharacterConfig.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != _buf.remaining()))
 		{
 			return;
 		}

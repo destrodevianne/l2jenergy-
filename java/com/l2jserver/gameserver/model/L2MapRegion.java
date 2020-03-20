@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.l2jserver.commons.util.Rnd;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.enums.Race;
 
 /**
@@ -164,7 +164,7 @@ public class L2MapRegion
 	
 	public final Location getSpawnLoc()
 	{
-		if (Config.RANDOM_RESPAWN_IN_TOWN_ENABLED)
+		if (CharacterConfig.RANDOM_RESPAWN_IN_TOWN_ENABLED)
 		{
 			return _spawnLocs.get(Rnd.get(_spawnLocs.size()));
 		}
@@ -175,7 +175,7 @@ public class L2MapRegion
 	{
 		if (_otherSpawnLocs != null)
 		{
-			if (Config.RANDOM_RESPAWN_IN_TOWN_ENABLED)
+			if (CharacterConfig.RANDOM_RESPAWN_IN_TOWN_ENABLED)
 			{
 				return _otherSpawnLocs.get(Rnd.get(_otherSpawnLocs.size()));
 			}
@@ -188,7 +188,7 @@ public class L2MapRegion
 	{
 		if (_chaoticSpawnLocs != null)
 		{
-			if (Config.RANDOM_RESPAWN_IN_TOWN_ENABLED)
+			if (CharacterConfig.RANDOM_RESPAWN_IN_TOWN_ENABLED)
 			{
 				return _chaoticSpawnLocs.get(Rnd.get(_chaoticSpawnLocs.size()));
 			}
@@ -201,7 +201,7 @@ public class L2MapRegion
 	{
 		if (_banishSpawnLocs != null)
 		{
-			if (Config.RANDOM_RESPAWN_IN_TOWN_ENABLED)
+			if (CharacterConfig.RANDOM_RESPAWN_IN_TOWN_ENABLED)
 			{
 				return _banishSpawnLocs.get(Rnd.get(_banishSpawnLocs.size()));
 			}

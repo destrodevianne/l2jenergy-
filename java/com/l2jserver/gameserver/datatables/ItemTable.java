@@ -32,7 +32,8 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.EnchantItemHPBonusData;
 import com.l2jserver.gameserver.engines.DocumentEngine;
 import com.l2jserver.gameserver.enums.ItemLocation;
@@ -212,14 +213,14 @@ public class ItemTable
 			{
 				L2Attackable raid = (L2Attackable) reference;
 				// if in CommandChannel and was killing a World/RaidBoss
-				if ((raid.getFirstCommandChannelAttacked() != null) && !Config.AUTO_LOOT_RAIDS)
+				if ((raid.getFirstCommandChannelAttacked() != null) && !CharacterConfig.AUTO_LOOT_RAIDS)
 				{
 					item.setOwnerId(raid.getFirstCommandChannelAttacked().getLeaderObjectId());
-					itemLootShedule = ThreadPoolManager.getInstance().scheduleGeneral(new ResetOwner(item), Config.LOOT_RAIDS_PRIVILEGE_INTERVAL);
+					itemLootShedule = ThreadPoolManager.getInstance().scheduleGeneral(new ResetOwner(item), CharacterConfig.LOOT_RAIDS_PRIVILEGE_INTERVAL);
 					item.setItemLootShedule(itemLootShedule);
 				}
 			}
-			else if (!Config.AUTO_LOOT || ((reference instanceof L2EventMonsterInstance) && ((L2EventMonsterInstance) reference).eventDropOnGround()))
+			else if (!CharacterConfig.AUTO_LOOT || ((reference instanceof L2EventMonsterInstance) && ((L2EventMonsterInstance) reference).eventDropOnGround()))
 			{
 				item.setOwnerId(actor.getObjectId());
 				itemLootShedule = ThreadPoolManager.getInstance().scheduleGeneral(new ResetOwner(item), 15000);
@@ -236,9 +237,9 @@ public class ItemTable
 			item.setCount(count);
 		}
 		
-		if (Config.LOG_ITEMS && !process.equals("Reset"))
+		if (GeneralConfig.LOG_ITEMS && !process.equals("Reset"))
 		{
-			if (!Config.LOG_ITEMS_SMALL_LOG || (Config.LOG_ITEMS_SMALL_LOG && (item.isEquipable() || (item.getId() == ADENA_ID))))
+			if (!GeneralConfig.LOG_ITEMS_SMALL_LOG || (GeneralConfig.LOG_ITEMS_SMALL_LOG && (item.isEquipable() || (item.getId() == ADENA_ID))))
 			{
 				LoggingUtils.logItem(LOG_ITEMS, "CREATE: ", process, item, actor.getName(), reference);
 			}
@@ -258,7 +259,7 @@ public class ItemTable
 					referenceName = (String) reference;
 				}
 				String targetName = (actor.getTarget() != null ? actor.getTarget().getName() : "no-target");
-				if (Config.GMAUDIT)
+				if (GeneralConfig.GMAUDIT)
 				{
 					GMAudit.auditGMAction(actor.getName() + " [" + actor.getObjectId() + "]", process + "(id: " + itemId + " count: " + count + " name: " + item.getItemName() + " objId: " + item.getObjectId() + ")", targetName, "L2Object referencing this action is: " + referenceName);
 				}
@@ -300,9 +301,9 @@ public class ItemTable
 			L2World.getInstance().removeObject(item);
 			IdFactory.getInstance().releaseId(item.getObjectId());
 			
-			if (Config.LOG_ITEMS)
+			if (GeneralConfig.LOG_ITEMS)
 			{
-				if (!Config.LOG_ITEMS_SMALL_LOG || (Config.LOG_ITEMS_SMALL_LOG && (item.isEquipable() || (item.getId() == ADENA_ID))))
+				if (!GeneralConfig.LOG_ITEMS_SMALL_LOG || (GeneralConfig.LOG_ITEMS_SMALL_LOG && (item.isEquipable() || (item.getId() == ADENA_ID))))
 				{
 					LoggingUtils.logItem(LOG_ITEMS, "DELETE: ", process, item, actor.getName(), reference);
 				}
@@ -322,7 +323,7 @@ public class ItemTable
 						referenceName = (String) reference;
 					}
 					String targetName = (actor.getTarget() != null ? actor.getTarget().getName() : "no-target");
-					if (Config.GMAUDIT)
+					if (GeneralConfig.GMAUDIT)
 					{
 						GMAudit.auditGMAction(actor.getName() + " [" + actor.getObjectId() + "]", process + "(id: " + item.getId() + " count: " + item.getCount() + " itemObjId: " + item.getObjectId() + ")", targetName, "L2Object referencing this action is: " + referenceName);
 					}

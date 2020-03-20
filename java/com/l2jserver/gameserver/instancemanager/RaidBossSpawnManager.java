@@ -35,6 +35,7 @@ import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.datatables.SpawnTable;
 import com.l2jserver.gameserver.model.L2Spawn;
 import com.l2jserver.gameserver.model.StatsSet;
@@ -168,8 +169,8 @@ public class RaidBossSpawnManager
 		{
 			boss.setRaidStatus(StatusEnum.DEAD);
 			
-			final int respawnMinDelay = (int) (boss.getSpawn().getRespawnMinDelay() * Config.RAID_MIN_RESPAWN_MULTIPLIER);
-			final int respawnMaxDelay = (int) (boss.getSpawn().getRespawnMaxDelay() * Config.RAID_MAX_RESPAWN_MULTIPLIER);
+			final int respawnMinDelay = (int) (boss.getSpawn().getRespawnMinDelay() * NpcConfig.RAID_MIN_RESPAWN_MULTIPLIER);
+			final int respawnMaxDelay = (int) (boss.getSpawn().getRespawnMaxDelay() * NpcConfig.RAID_MAX_RESPAWN_MULTIPLIER);
 			final int respawnDelay = Rnd.get(respawnMinDelay, respawnMaxDelay);
 			final long respawnTime = Calendar.getInstance().getTimeInMillis() + respawnDelay;
 			

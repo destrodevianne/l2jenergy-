@@ -24,8 +24,8 @@ import java.util.concurrent.ScheduledFuture;
 
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.GrandBossConfig;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.enums.audio.Music;
 import com.l2jserver.gameserver.instancemanager.GrandBossManager;
 import com.l2jserver.gameserver.model.Location;
@@ -296,7 +296,7 @@ public final class QueenAnt extends AbstractNpcAI
 			return null;
 		}
 		
-		if (!Config.RAID_DISABLE_CURSE && ((character.getLevel() - npc.getLevel()) > 8))
+		if (!NpcConfig.RAID_DISABLE_CURSE && ((character.getLevel() - npc.getLevel()) > 8))
 		{
 			Skill curse = null;
 			if (isMage)

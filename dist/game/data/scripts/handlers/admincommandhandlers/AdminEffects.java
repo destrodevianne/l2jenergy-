@@ -21,7 +21,7 @@ package handlers.admincommandhandlers;
 import java.util.Collection;
 import java.util.StringTokenizer;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.enums.Team;
@@ -517,7 +517,7 @@ public class AdminEffects implements IAdminCommandHandler
 			}
 			catch (Exception e)
 			{
-				if (Config.DEBUG)
+				if (GeneralConfig.DEBUG)
 				{
 					e.printStackTrace();
 				}

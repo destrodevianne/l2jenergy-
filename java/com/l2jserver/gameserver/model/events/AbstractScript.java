@@ -46,7 +46,7 @@ import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.commons.util.Util;
 import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
@@ -3188,7 +3188,7 @@ public abstract class AbstractScript implements INamable
 	 */
 	public void teleportPlayer(L2PcInstance player, Location loc, int instanceId, boolean allowRandomOffset)
 	{
-		player.teleToLocation(loc, instanceId, allowRandomOffset ? Config.MAX_OFFSET_ON_TELEPORT : 0);
+		player.teleToLocation(loc, instanceId, allowRandomOffset ? CharacterConfig.MAX_OFFSET_ON_TELEPORT : 0);
 	}
 	
 	/**

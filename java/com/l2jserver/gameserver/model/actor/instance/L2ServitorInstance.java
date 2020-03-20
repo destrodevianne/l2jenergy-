@@ -21,7 +21,7 @@ package com.l2jserver.gameserver.model.actor.instance;
 import java.util.concurrent.Future;
 
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.CharSummonTable;
 import com.l2jserver.gameserver.data.sql.impl.SummonEffectsTable;
@@ -188,7 +188,7 @@ public class L2ServitorInstance extends L2Summon implements Runnable
 			return;
 		}
 		
-		if (Config.RESTORE_SERVITOR_ON_RECONNECT)
+		if (CharacterConfig.RESTORE_SERVITOR_ON_RECONNECT)
 		{
 			CharSummonTable.getInstance().saveSummon(this);
 		}
@@ -197,7 +197,7 @@ public class L2ServitorInstance extends L2Summon implements Runnable
 	@Override
 	public void storeEffect(boolean storeEffects)
 	{
-		if (!Config.SUMMON_STORE_SKILL_COOLTIME)
+		if (!CharacterConfig.SUMMON_STORE_SKILL_COOLTIME)
 		{
 			return;
 		}

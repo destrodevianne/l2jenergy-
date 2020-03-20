@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.l2jserver.commons.util.Rnd;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.enums.AISkillScope;
@@ -146,7 +146,7 @@ public final class L2NpcTemplate extends L2CharTemplate implements IIdentifiable
 		_hasSummoner = set.getBoolean("hasSummoner", false);
 		_canBeSown = set.getBoolean("canBeSown", false);
 		
-		_corpseTime = set.getInt("corpseTime", Config.DEFAULT_CORPSE_TIME);
+		_corpseTime = set.getInt("corpseTime", NpcConfig.DEFAULT_CORPSE_TIME);
 		
 		_aiType = set.getEnum("aiType", AIType.class, AIType.FIGHTER);
 		_aggroRange = set.getInt("aggroRange", 0);

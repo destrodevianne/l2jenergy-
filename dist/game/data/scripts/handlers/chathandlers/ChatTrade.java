@@ -18,7 +18,7 @@
  */
 package handlers.chathandlers;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IChatHandler;
 import com.l2jserver.gameserver.instancemanager.MapRegionManager;
@@ -46,14 +46,14 @@ public class ChatTrade implements IChatHandler
 	@Override
 	public void handleChat(int type, L2PcInstance activeChar, String target, String text)
 	{
-		if (activeChar.isChatBanned() && Util.contains(Config.BAN_CHAT_CHANNELS, type))
+		if (activeChar.isChatBanned() && Util.contains(GeneralConfig.BAN_CHAT_CHANNELS, type))
 		{
 			activeChar.sendPacket(SystemMessageId.CHATTING_IS_CURRENTLY_PROHIBITED);
 			return;
 		}
 		
 		final CreatureSay cs = new CreatureSay(activeChar.getObjectId(), type, activeChar.getName(), text);
-		if (Config.DEFAULT_TRADE_CHAT.equalsIgnoreCase("on") || (Config.DEFAULT_TRADE_CHAT.equalsIgnoreCase("gm") && activeChar.canOverrideCond(PcCondOverride.CHAT_CONDITIONS)))
+		if (GeneralConfig.DEFAULT_TRADE_CHAT.equalsIgnoreCase("on") || (GeneralConfig.DEFAULT_TRADE_CHAT.equalsIgnoreCase("gm") && activeChar.canOverrideCond(PcCondOverride.CHAT_CONDITIONS)))
 		{
 			int region = MapRegionManager.getInstance().getMapRegionLocId(activeChar);
 			for (L2PcInstance player : L2World.getInstance().getPlayers())
@@ -64,7 +64,7 @@ public class ChatTrade implements IChatHandler
 				}
 			}
 		}
-		else if (Config.DEFAULT_TRADE_CHAT.equalsIgnoreCase("global"))
+		else if (GeneralConfig.DEFAULT_TRADE_CHAT.equalsIgnoreCase("global"))
 		{
 			if (!activeChar.canOverrideCond(PcCondOverride.CHAT_CONDITIONS) && !FloodProtectors.performAction(activeChar.getClient(), Action.TRADE_CHAT))
 			{

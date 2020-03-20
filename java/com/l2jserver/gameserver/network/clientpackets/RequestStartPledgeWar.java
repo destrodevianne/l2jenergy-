@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.model.ClanPrivilege;
 import com.l2jserver.gameserver.model.L2Clan;
@@ -54,7 +54,7 @@ public final class RequestStartPledgeWar extends L2GameClientPacket
 			return;
 		}
 		
-		if ((_clan.getLevel() < 3) || (_clan.getMembersCount() < Config.ALT_CLAN_MEMBERS_FOR_WAR))
+		if ((_clan.getLevel() < 3) || (_clan.getMembersCount() < CharacterConfig.ALT_CLAN_MEMBERS_FOR_WAR))
 		{
 			player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.CLAN_WAR_DECLARED_IF_CLAN_LVL3_OR_15_MEMBER));
 			player.sendPacket(ActionFailed.STATIC_PACKET);
@@ -80,7 +80,7 @@ public final class RequestStartPledgeWar extends L2GameClientPacket
 			player.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-		else if ((clan.getLevel() < 3) || (clan.getMembersCount() < Config.ALT_CLAN_MEMBERS_FOR_WAR))
+		else if ((clan.getLevel() < 3) || (clan.getMembersCount() < CharacterConfig.ALT_CLAN_MEMBERS_FOR_WAR))
 		{
 			player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.CLAN_WAR_DECLARED_IF_CLAN_LVL3_OR_15_MEMBER));
 			player.sendPacket(ActionFailed.STATIC_PACKET);

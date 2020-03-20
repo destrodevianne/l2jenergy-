@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model.drops.strategy;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.drops.GeneralDropItem;
 import com.l2jserver.gameserver.model.drops.IDropItem;
@@ -33,29 +33,29 @@ public interface IKillerChanceModifierStrategy extends INonGroupedKillerChanceMo
 	public static final IKillerChanceModifierStrategy DEFAULT_STRATEGY = (item, victim, killer) ->
 	{
 		int levelDifference = victim.getLevel() - killer.getLevel();
-		if ((victim.isRaid()) && Config.DEEPBLUE_DROP_RULES_RAID)
+		if ((victim.isRaid()) && NpcConfig.DEEPBLUE_DROP_RULES_RAID)
 		{
 			// FIXME: Config?
 			return Math.max(0, Math.min(1, (levelDifference * 0.15) + 1));
 		}
-		else if (Config.DEEPBLUE_DROP_RULES)
+		else if (NpcConfig.DEEPBLUE_DROP_RULES)
 		{
 			
-			return Util.map(levelDifference, -Config.DROP_ITEM_MAX_LEVEL_DIFFERENCE, -Config.DROP_ITEM_MIN_LEVEL_DIFFERENCE, Config.DROP_ITEM_MIN_LEVEL_GAP_CHANCE, 100.0) / 100;
+			return Util.map(levelDifference, -NpcConfig.DROP_ITEM_MAX_LEVEL_DIFFERENCE, -NpcConfig.DROP_ITEM_MIN_LEVEL_DIFFERENCE, NpcConfig.DROP_ITEM_MIN_LEVEL_GAP_CHANCE, 100.0) / 100;
 		}
 		return 1;
 	};
 	public static final INonGroupedKillerChanceModifierStrategy DEFAULT_NONGROUP_STRATEGY = (item, victim, killer) ->
 	{
-		if (((!(victim.isRaid())) && Config.DEEPBLUE_DROP_RULES) || ((victim.isRaid()) && Config.DEEPBLUE_DROP_RULES_RAID))
+		if (((!(victim.isRaid())) && NpcConfig.DEEPBLUE_DROP_RULES) || ((victim.isRaid()) && NpcConfig.DEEPBLUE_DROP_RULES_RAID))
 		{
 			int levelDifference = victim.getLevel() - killer.getLevel();
 			if (item.getItemId() == Inventory.ADENA_ID)
 			{
 				
-				return Util.map(levelDifference, -Config.DROP_ADENA_MAX_LEVEL_DIFFERENCE, -Config.DROP_ADENA_MIN_LEVEL_DIFFERENCE, Config.DROP_ADENA_MIN_LEVEL_GAP_CHANCE, 100.0) / 100;
+				return Util.map(levelDifference, -NpcConfig.DROP_ADENA_MAX_LEVEL_DIFFERENCE, -NpcConfig.DROP_ADENA_MIN_LEVEL_DIFFERENCE, NpcConfig.DROP_ADENA_MIN_LEVEL_GAP_CHANCE, 100.0) / 100;
 			}
-			return Util.map(levelDifference, -Config.DROP_ITEM_MAX_LEVEL_DIFFERENCE, -Config.DROP_ITEM_MIN_LEVEL_DIFFERENCE, Config.DROP_ITEM_MIN_LEVEL_GAP_CHANCE, 100.0) / 100;
+			return Util.map(levelDifference, -NpcConfig.DROP_ITEM_MAX_LEVEL_DIFFERENCE, -NpcConfig.DROP_ITEM_MIN_LEVEL_DIFFERENCE, NpcConfig.DROP_ITEM_MIN_LEVEL_GAP_CHANCE, 100.0) / 100;
 		}
 		return 1;
 	};

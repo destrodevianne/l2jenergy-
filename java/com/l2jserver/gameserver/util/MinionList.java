@@ -24,7 +24,8 @@ import java.util.logging.Logger;
 
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Character;
@@ -190,7 +191,7 @@ public class MinionList
 			_reusedMinionReferences.add(minion);
 		}
 		
-		final int time = respawnTime < 0 ? _master.isRaid() ? (int) Config.RAID_MINION_RESPAWN_TIMER : 0 : respawnTime;
+		final int time = respawnTime < 0 ? _master.isRaid() ? (int) NpcConfig.RAID_MINION_RESPAWN_TIMER : 0 : respawnTime;
 		if ((time > 0) && !_master.isAlikeDead())
 		{
 			ThreadPoolManager.getInstance().scheduleGeneral(new MinionRespawnTask(minion), time);
@@ -386,7 +387,7 @@ public class MinionList
 		
 		minion.spawnMe(newX, newY, master.getZ());
 		
-		if (Config.DEBUG)
+		if (GeneralConfig.DEBUG)
 		{
 			_log.info("Spawned minion template " + minion.getId() + " with objid: " + minion.getObjectId() + " to boss " + master.getObjectId() + " ,at: " + minion.getX() + " x, " + minion.getY() + " y, " + minion.getZ() + " z");
 		}

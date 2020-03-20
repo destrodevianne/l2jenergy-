@@ -28,7 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.ConnectionFactory;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.dao.SkillDAO;
 import com.l2jserver.gameserver.data.xml.impl.ClassListData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
@@ -81,13 +81,13 @@ public class SkillDAOMySQLImpl implements SkillDAO
 					// Add the L2Skill object to the L2Character _skills and its Func objects to the calculator set of the L2Character
 					player.addSkill(skill);
 					
-					if (Config.SKILL_CHECK_ENABLE && (!player.canOverrideCond(PcCondOverride.SKILL_CONDITIONS) || Config.SKILL_CHECK_GM))
+					if (GeneralConfig.SKILL_CHECK_ENABLE && (!player.canOverrideCond(PcCondOverride.SKILL_CONDITIONS) || GeneralConfig.SKILL_CHECK_GM))
 					{
 						if (!SkillTreesData.getInstance().isSkillAllowed(player, skill))
 						{
 							Util.handleIllegalPlayerAction(player, "Player " + player.getName() + " has invalid skill " + skill.getName() + " (" + skill.getId() + "/" + skill.getLevel() + "), class:"
 								+ ClassListData.getInstance().getClass(player.getClassId()).getClassName(), IllegalActionPunishmentType.BROADCAST);
-							if (Config.SKILL_CHECK_REMOVE)
+							if (GeneralConfig.SKILL_CHECK_REMOVE)
 							{
 								player.removeSkill(skill);
 							}

@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.gameserver.ai.CtrlEvent;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
@@ -54,7 +54,7 @@ public final class CannotMoveAnymore extends L2GameClientPacket
 			return;
 		}
 		
-		if (Config.DEBUG)
+		if (GeneralConfig.DEBUG)
 		{
 			LOG.debug("client: x:{} y:{} z:{} server x:{} y:{} z:{}", _x, _y, _z, player.getX(), player.getY(), player.getZ());
 		}

@@ -26,7 +26,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.events.OlympiadConfig;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.model.Elementals;
@@ -611,7 +612,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	 */
 	public final int isEnchantable()
 	{
-		return Arrays.binarySearch(Config.ENCHANT_BLACKLIST, getId()) < 0 ? _enchantable : 0;
+		return Arrays.binarySearch(CharacterConfig.ENCHANT_BLACKLIST, getId()) < 0 ? _enchantable : 0;
 	}
 	
 	/**
@@ -766,7 +767,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	
 	public boolean checkCondition(L2Character activeChar, L2Object object, boolean sendMessage)
 	{
-		if (activeChar.canOverrideCond(PcCondOverride.ITEM_CONDITIONS) && !Config.GM_ITEM_RESTRICTION)
+		if (activeChar.canOverrideCond(PcCondOverride.ITEM_CONDITIONS) && !GeneralConfig.GM_ITEM_RESTRICTION)
 		{
 			return true;
 		}

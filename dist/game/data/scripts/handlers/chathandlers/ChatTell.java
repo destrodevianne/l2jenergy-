@@ -18,7 +18,8 @@
  */
 package handlers.chathandlers;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IChatHandler;
 import com.l2jserver.gameserver.model.L2World;
@@ -43,13 +44,13 @@ public class ChatTell implements IChatHandler
 	@Override
 	public void handleChat(int type, L2PcInstance activeChar, String target, String text)
 	{
-		if (activeChar.isChatBanned() && Util.contains(Config.BAN_CHAT_CHANNELS, type))
+		if (activeChar.isChatBanned() && Util.contains(GeneralConfig.BAN_CHAT_CHANNELS, type))
 		{
 			activeChar.sendPacket(SystemMessageId.CHATTING_IS_CURRENTLY_PROHIBITED);
 			return;
 		}
 		
-		if (Config.JAIL_DISABLE_CHAT && activeChar.isJailed() && !activeChar.canOverrideCond(PcCondOverride.CHAT_CONDITIONS))
+		if (GeneralConfig.JAIL_DISABLE_CHAT && activeChar.isJailed() && !activeChar.canOverrideCond(PcCondOverride.CHAT_CONDITIONS))
 		{
 			activeChar.sendPacket(SystemMessageId.CHATTING_PROHIBITED);
 			return;
@@ -68,7 +69,7 @@ public class ChatTell implements IChatHandler
 		
 		if ((receiver != null) && !receiver.isSilenceMode(activeChar.getObjectId()))
 		{
-			if (Config.JAIL_DISABLE_CHAT && receiver.isJailed() && !activeChar.canOverrideCond(PcCondOverride.CHAT_CONDITIONS))
+			if (GeneralConfig.JAIL_DISABLE_CHAT && receiver.isJailed() && !activeChar.canOverrideCond(PcCondOverride.CHAT_CONDITIONS))
 			{
 				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "player_jailed"));
 				return;
@@ -86,7 +87,7 @@ public class ChatTell implements IChatHandler
 			if (!BlockList.isBlocked(receiver, activeChar))
 			{
 				// Allow reciever to send PMs to this char, which is in silence mode.
-				if (Config.SILENCE_MODE_EXCLUDE && activeChar.isSilenceMode())
+				if (CharacterConfig.SILENCE_MODE_EXCLUDE && activeChar.isSilenceMode())
 				{
 					activeChar.addSilenceModeExcluded(receiver.getObjectId());
 				}

@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model.itemcontainer;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.enums.ItemLocation;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.stats.Stats;
@@ -71,7 +71,7 @@ public class PcFreight extends ItemContainer
 	@Override
 	public boolean validateCapacity(long slots)
 	{
-		int curSlots = _owner == null ? Config.ALT_FREIGHT_SLOTS : Config.ALT_FREIGHT_SLOTS + (int) _owner.getStat().calcStat(Stats.FREIGHT_LIM, 0, null, null);
+		int curSlots = _owner == null ? CharacterConfig.ALT_FREIGHT_SLOTS : CharacterConfig.ALT_FREIGHT_SLOTS + (int) _owner.getStat().calcStat(Stats.FREIGHT_LIM, 0, null, null);
 		return ((getSize() + slots) <= curSlots);
 	}
 	

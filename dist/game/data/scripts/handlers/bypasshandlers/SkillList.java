@@ -20,7 +20,7 @@ package handlers.bypasshandlers;
 
 import java.util.List;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.handler.IBypassHandler;
 import com.l2jserver.gameserver.model.actor.L2Character;
@@ -46,7 +46,7 @@ public class SkillList implements IBypassHandler
 			return false;
 		}
 		
-		if (Config.ALT_GAME_SKILL_LEARN)
+		if (CharacterConfig.ALT_GAME_SKILL_LEARN)
 		{
 			try
 			{

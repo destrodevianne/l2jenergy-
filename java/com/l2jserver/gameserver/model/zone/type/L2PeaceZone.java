@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model.zone.type;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.instancemanager.TerritoryWarManager;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -49,7 +49,7 @@ public class L2PeaceZone extends L2ZoneType
 			
 			// PVP possible during siege, now for siege participants only
 			// Could also check if this town is in siege, or if any siege is going on
-			if ((player.getSiegeState() != 0) && (Config.PEACE_ZONE_MODE == 1))
+			if ((player.getSiegeState() != 0) && (GeneralConfig.PEACE_ZONE_MODE == 1))
 			{
 				return;
 			}
@@ -58,7 +58,7 @@ public class L2PeaceZone extends L2ZoneType
 			player.setRecomTimerActive(false);
 		}
 		
-		if (Config.PEACE_ZONE_MODE != 2)
+		if (GeneralConfig.PEACE_ZONE_MODE != 2)
 		{
 			character.setInsideZone(ZoneId.PEACE, true);
 		}
@@ -72,7 +72,7 @@ public class L2PeaceZone extends L2ZoneType
 	@Override
 	protected void onExit(L2Character character)
 	{
-		if (Config.PEACE_ZONE_MODE != 2)
+		if (GeneralConfig.PEACE_ZONE_MODE != 2)
 		{
 			character.setInsideZone(ZoneId.PEACE, false);
 		}

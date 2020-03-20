@@ -22,7 +22,8 @@ import static com.l2jserver.gameserver.model.itemcontainer.Inventory.ADENA_ID;
 import static com.l2jserver.gameserver.model.itemcontainer.Inventory.MAX_ADENA;
 
 import com.l2jserver.commons.util.StringUtil;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
@@ -83,7 +84,7 @@ public final class RequestSendPost extends L2GameClientPacket
 		_text = readS();
 		
 		int attachCount = readD();
-		if ((attachCount < 0) || (attachCount > Config.MAX_ITEM_IN_PACKET) || (((attachCount * BATCH_LENGTH) + 8) != _buf.remaining()))
+		if ((attachCount < 0) || (attachCount > CharacterConfig.MAX_ITEM_IN_PACKET) || (((attachCount * BATCH_LENGTH) + 8) != _buf.remaining()))
 		{
 			return;
 		}
@@ -110,7 +111,7 @@ public final class RequestSendPost extends L2GameClientPacket
 	@Override
 	public void runImpl()
 	{
-		if (!Config.ALLOW_MAIL)
+		if (!GeneralConfig.ALLOW_MAIL)
 		{
 			return;
 		}
@@ -121,7 +122,7 @@ public final class RequestSendPost extends L2GameClientPacket
 			return;
 		}
 		
-		if (!Config.ALLOW_ATTACHMENTS)
+		if (!GeneralConfig.ALLOW_ATTACHMENTS)
 		{
 			_items = null;
 			_isCod = false;
@@ -226,7 +227,7 @@ public final class RequestSendPost extends L2GameClientPacket
 			return;
 		}
 		
-		if (activeChar.isJailed() && ((Config.JAIL_DISABLE_TRANSACTION && (_items != null)) || Config.JAIL_DISABLE_CHAT))
+		if (activeChar.isJailed() && ((GeneralConfig.JAIL_DISABLE_TRANSACTION && (_items != null)) || GeneralConfig.JAIL_DISABLE_CHAT))
 		{
 			activeChar.sendPacket(SystemMessageId.CANT_FORWARD_NOT_IN_PEACE_ZONE);
 			return;
@@ -318,7 +319,7 @@ public final class RequestSendPost extends L2GameClientPacket
 		final String receiver = recv.toString();
 		
 		// Proceed to the transfer
-		InventoryUpdate playerIU = Config.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
+		InventoryUpdate playerIU = GeneralConfig.FORCE_INVENTORY_UPDATE ? null : new InventoryUpdate();
 		for (AttachmentItem i : _items)
 		{
 			// Check validity of requested item

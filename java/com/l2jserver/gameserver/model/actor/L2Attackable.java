@@ -37,7 +37,9 @@ import com.l2jserver.gameserver.ai.L2AttackableAI;
 import com.l2jserver.gameserver.ai.L2CharacterAI;
 import com.l2jserver.gameserver.ai.L2FortSiegeGuardAI;
 import com.l2jserver.gameserver.ai.L2SiegeGuardAI;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.configuration.config.custom.PremiumConfig;
 import com.l2jserver.gameserver.data.xml.impl.ChampionData;
@@ -350,7 +352,7 @@ public class L2Attackable extends L2Npc
 			final L2MonsterInstance mob = (L2MonsterInstance) this;
 			if ((mob.getLeader() != null) && mob.getLeader().hasMinions())
 			{
-				final int respawnTime = Config.MINIONS_RESPAWN_TIME.containsKey(getId()) ? Config.MINIONS_RESPAWN_TIME.get(getId()) * 1000 : -1;
+				final int respawnTime = NpcConfig.MINIONS_RESPAWN_TIME.containsKey(getId()) ? NpcConfig.MINIONS_RESPAWN_TIME.get(getId()) * 1000 : -1;
 				mob.getLeader().getMinionList().onMinionDie(mob, respawnTime);
 			}
 			
@@ -407,7 +409,7 @@ public class L2Attackable extends L2Npc
 					if (damage > 1)
 					{
 						// Check if damage dealer isn't too far from this (killed monster)
-						if (!Util.checkIfInRange(Config.ALT_PARTY_RANGE, this, attacker, true))
+						if (!Util.checkIfInRange(CharacterConfig.ALT_PARTY_RANGE, this, attacker, true))
 						{
 							continue;
 						}
@@ -533,7 +535,7 @@ public class L2Attackable extends L2Npc
 							// If the L2PcInstance is in the L2Attackable rewards add its damages to party damages
 							if (reward2 != null)
 							{
-								if (Util.checkIfInRange(Config.ALT_PARTY_RANGE, this, partyPlayer, true))
+								if (Util.checkIfInRange(CharacterConfig.ALT_PARTY_RANGE, this, partyPlayer, true))
 								{
 									partyDmg += reward2.getDamage(); // Add L2PcInstance damages to party damages
 									rewardedMembers.add(partyPlayer);
@@ -556,7 +558,7 @@ public class L2Attackable extends L2Npc
 							{
 								// Add L2PcInstance of the party (that have attacked or not) to members that can be rewarded
 								// and in range of the monster.
-								if (Util.checkIfInRange(Config.ALT_PARTY_RANGE, this, partyPlayer, true))
+								if (Util.checkIfInRange(CharacterConfig.ALT_PARTY_RANGE, this, partyPlayer, true))
 								{
 									rewardedMembers.add(partyPlayer);
 									if (partyPlayer.getLevel() > partyLvl)
@@ -762,7 +764,7 @@ public class L2Attackable extends L2Npc
 		AggroInfo ai = _aggroList.get(target);
 		if (ai == null)
 		{
-			if (Config.DEBUG)
+			if (GeneralConfig.DEBUG)
 			{
 				LOG.info("Target {} not present in aggro list of {}.", target, this);
 			}
@@ -987,7 +989,7 @@ public class L2Attackable extends L2Npc
 			{
 				L2Item item = ItemTable.getInstance().getTemplate(drop.getId());
 				// Check if the autoLoot mode is active
-				if (isFlying() || (!item.hasExImmediateEffect() && ((!isRaid() && Config.AUTO_LOOT) || (isRaid() && Config.AUTO_LOOT_RAIDS))) || (item.hasExImmediateEffect() && Config.AUTO_LOOT_HERBS))
+				if (isFlying() || (!item.hasExImmediateEffect() && ((!isRaid() && CharacterConfig.AUTO_LOOT) || (isRaid() && CharacterConfig.AUTO_LOOT_RAIDS))) || (item.hasExImmediateEffect() && CharacterConfig.AUTO_LOOT_HERBS))
 				{
 					player.doAutoLoot(this, drop); // Give the item(s) to the L2PcInstance that has killed the L2Attackable
 				}
@@ -1050,7 +1052,7 @@ public class L2Attackable extends L2Npc
 			{
 				final int itemId = drop.getEventDrop().getItemIdList()[Rnd.get(drop.getEventDrop().getItemIdList().length)];
 				final long itemCount = Rnd.get(drop.getEventDrop().getMinCount(), drop.getEventDrop().getMaxCount());
-				if (Config.AUTO_LOOT || isFlying())
+				if (CharacterConfig.AUTO_LOOT || isFlying())
 				{
 					player.doAutoLoot(this, itemId, itemCount); // Give the item(s) to the L2PcInstance that has killed the L2Attackable
 				}
@@ -1300,18 +1302,18 @@ public class L2Attackable extends L2Npc
 		}
 		
 		xp = ((double) getExpReward() * damage) / totalDamage;
-		if (Config.ALT_GAME_EXPONENT_XP != 0)
+		if (CharacterConfig.ALT_GAME_EXPONENT_XP != 0)
 		{
-			xp *= Math.pow(2., -diff / Config.ALT_GAME_EXPONENT_XP);
+			xp *= Math.pow(2., -diff / CharacterConfig.ALT_GAME_EXPONENT_XP);
 		}
 		
 		sp = ((double) getSpReward() * damage) / totalDamage;
-		if (Config.ALT_GAME_EXPONENT_SP != 0)
+		if (CharacterConfig.ALT_GAME_EXPONENT_SP != 0)
 		{
-			sp *= Math.pow(2., -diff / Config.ALT_GAME_EXPONENT_SP);
+			sp *= Math.pow(2., -diff / CharacterConfig.ALT_GAME_EXPONENT_SP);
 		}
 		
-		if ((Config.ALT_GAME_EXPONENT_XP == 0) && (Config.ALT_GAME_EXPONENT_SP == 0))
+		if ((CharacterConfig.ALT_GAME_EXPONENT_XP == 0) && (CharacterConfig.ALT_GAME_EXPONENT_SP == 0))
 		{
 			if (diff > 5) // formula revised May 07
 			{
@@ -1528,7 +1530,7 @@ public class L2Attackable extends L2Npc
 	@Override
 	public boolean hasRandomAnimation()
 	{
-		return ((Config.MAX_MONSTER_ANIMATION > 0) && isRandomAnimationEnabled() && !(this instanceof L2GrandBossInstance));
+		return ((GeneralConfig.MAX_MONSTER_ANIMATION > 0) && isRandomAnimationEnabled() && !(this instanceof L2GrandBossInstance));
 	}
 	
 	@Override

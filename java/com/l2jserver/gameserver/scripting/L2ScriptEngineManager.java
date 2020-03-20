@@ -43,6 +43,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 
 /**
@@ -147,9 +148,9 @@ public final class L2ScriptEngineManager
 	
 	public void executeScriptList(File list) throws IOException
 	{
-		if (Config.ALT_DEV_NO_QUESTS)
+		if (GeneralConfig.ALT_DEV_NO_QUESTS)
 		{
-			if (!Config.ALT_DEV_NO_HANDLERS)
+			if (!GeneralConfig.ALT_DEV_NO_HANDLERS)
 			{
 				try
 				{
@@ -173,7 +174,7 @@ public final class L2ScriptEngineManager
 				String line;
 				while ((line = lnr.readLine()) != null)
 				{
-					if (Config.ALT_DEV_NO_HANDLERS && line.contains("MasterHandler.java"))
+					if (GeneralConfig.ALT_DEV_NO_HANDLERS && line.contains("MasterHandler.java"))
 					{
 						continue;
 					}

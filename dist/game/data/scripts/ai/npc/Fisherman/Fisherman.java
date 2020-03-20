@@ -20,7 +20,7 @@ package ai.npc.Fisherman;
 
 import java.util.List;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.events.FishingConfig;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.datatables.SkillData;
@@ -117,7 +117,7 @@ public class Fisherman extends AbstractNpcAI
 	@Override
 	public String onFirstTalk(L2Npc npc, L2PcInstance player)
 	{
-		if ((player.getKarma() > 0) && !Config.ALT_GAME_KARMA_PLAYER_CAN_SHOP)
+		if ((player.getKarma() > 0) && !CharacterConfig.ALT_GAME_KARMA_PLAYER_CAN_SHOP)
 		{
 			return npc.getId() + "-pk.htm";
 		}

@@ -21,7 +21,8 @@ package com.l2jserver.gameserver.model.actor.knownlist;
 import java.util.logging.Logger;
 
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.instance.L2GuardInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2MonsterInstance;
@@ -48,7 +49,7 @@ public class GuardKnownList extends AttackableKnownList
 			// Check if the object added is a L2PcInstance that owns Karma
 			if (object.getActingPlayer().getKarma() > 0)
 			{
-				if (Config.DEBUG)
+				if (GeneralConfig.DEBUG)
 				{
 					_log.fine(getActiveChar().getObjectId() + ": PK " + object.getObjectId() + " entered scan range");
 				}
@@ -60,12 +61,12 @@ public class GuardKnownList extends AttackableKnownList
 				}
 			}
 		}
-		else if ((Config.GUARD_ATTACK_AGGRO_MOB && getActiveChar().isInActiveRegion()) && object.isMonster())
+		else if ((NpcConfig.GUARD_ATTACK_AGGRO_MOB && getActiveChar().isInActiveRegion()) && object.isMonster())
 		{
 			// Check if the object added is an aggressive L2MonsterInstance
 			if (((L2MonsterInstance) object).isAggressive())
 			{
-				if (Config.DEBUG)
+				if (GeneralConfig.DEBUG)
 				{
 					_log.fine(getActiveChar().getObjectId() + ": Aggressive mob " + object.getObjectId() + " entered scan range");
 				}

@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.enums.ItemLocation;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -335,7 +335,7 @@ public abstract class AbstractRefinePacket extends L2GameClientPacket
 		{
 			return false;
 		}
-		if (item.isPvp() && !Config.ALT_ALLOW_AUGMENT_PVP_ITEMS)
+		if (item.isPvp() && !CharacterConfig.ALT_ALLOW_AUGMENT_PVP_ITEMS)
 		{
 			return false;
 		}
@@ -384,7 +384,7 @@ public abstract class AbstractRefinePacket extends L2GameClientPacket
 		}
 		
 		// blacklist check
-		if (Arrays.binarySearch(Config.AUGMENTATION_BLACKLIST, item.getId()) >= 0)
+		if (Arrays.binarySearch(CharacterConfig.AUGMENTATION_BLACKLIST, item.getId()) >= 0)
 		{
 			return false;
 		}

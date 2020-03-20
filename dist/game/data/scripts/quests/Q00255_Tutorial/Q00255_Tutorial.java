@@ -18,7 +18,7 @@
  */
 package quests.Q00255_Tutorial;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.enums.audio.Voice;
@@ -130,7 +130,7 @@ public class Q00255_Tutorial extends Quest
 	public Q00255_Tutorial()
 	{
 		super(255, Q00255_Tutorial.class.getSimpleName(), "Tutorial");
-		if (!Config.DISABLE_TUTORIAL)
+		if (!CharacterConfig.DISABLE_TUTORIAL)
 		{
 			setOnEnterWorld(true);
 			registerTutorialEvent();

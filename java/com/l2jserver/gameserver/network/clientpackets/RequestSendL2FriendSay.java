@@ -21,7 +21,7 @@ package com.l2jserver.gameserver.network.clientpackets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -65,7 +65,7 @@ public final class RequestSendL2FriendSay extends L2GameClientPacket
 			return;
 		}
 		
-		if (Config.LOG_CHAT)
+		if (GeneralConfig.LOG_CHAT)
 		{
 			LoggingUtils.logChat(LOG_CHAT, activeChar.getName(), _reciever, _message, "PRIV_MSG");
 		}

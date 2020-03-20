@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.network.clientpackets;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.skills.AbnormalType;
@@ -68,7 +68,7 @@ public class RequestDispel extends L2GameClientPacket
 		{
 			return;
 		}
-		if (skill.isDance() && !Config.DANCE_CANCEL_BUFF)
+		if (skill.isDance() && !CharacterConfig.DANCE_CANCEL_BUFF)
 		{
 			return;
 		}

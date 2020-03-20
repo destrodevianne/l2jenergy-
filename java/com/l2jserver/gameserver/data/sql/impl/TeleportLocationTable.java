@@ -28,7 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.ConnectionFactory;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.L2TeleportLocation;
 
 public class TeleportLocationTable
@@ -71,7 +71,7 @@ public class TeleportLocationTable
 			LOG.error("{}: Error loading Teleport Table.", getClass().getSimpleName(), e);
 		}
 		
-		if (Config.CUSTOM_TELEPORT_TABLE)
+		if (GeneralConfig.CUSTOM_TELEPORT_TABLE)
 		{
 			int _cTeleCount = _teleports.size();
 			try (Connection con = ConnectionFactory.getInstance().getConnection();

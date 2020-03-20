@@ -27,7 +27,9 @@ import org.slf4j.LoggerFactory;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.ai.CtrlIntention;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.CharSummonTable;
@@ -567,7 +569,7 @@ public class L2PetInstance extends L2Summon
 			// Remove from the ground!
 			target.pickupMe(this);
 			
-			if (Config.SAVE_DROPPED_ITEM)
+			if (GeneralConfig.SAVE_DROPPED_ITEM)
 			{
 				ItemsOnGroundManager.getInstance().removeObject(target);
 			}
@@ -861,7 +863,7 @@ public class L2PetInstance extends L2Summon
 			return;
 		}
 		
-		if (!Config.RESTORE_PET_ON_RECONNECT)
+		if (!CharacterConfig.RESTORE_PET_ON_RECONNECT)
 		{
 			setRestoreSummon(false);
 		}
@@ -897,7 +899,7 @@ public class L2PetInstance extends L2Summon
 	@Override
 	public void storeEffect(boolean storeEffects)
 	{
-		if (!Config.SUMMON_STORE_SKILL_COOLTIME)
+		if (!CharacterConfig.SUMMON_STORE_SKILL_COOLTIME)
 		{
 			return;
 		}
@@ -937,7 +939,7 @@ public class L2PetInstance extends L2Summon
 	@Override
 	public int getMaxLoad()
 	{
-		return (int) calcStat(Stats.WEIGHT_LIMIT, Math.floor(BaseStats.CON.calcBonus(this) * 34500 * Config.ALT_WEIGHT_LIMIT), this, null);
+		return (int) calcStat(Stats.WEIGHT_LIMIT, Math.floor(BaseStats.CON.calcBonus(this) * 34500 * CharacterConfig.ALT_WEIGHT_LIMIT), this, null);
 	}
 	
 	@Override
@@ -1118,7 +1120,7 @@ public class L2PetInstance extends L2Summon
 	
 	public int getInventoryLimit()
 	{
-		return Config.INVENTORY_MAXIMUM_PET;
+		return NpcConfig.INVENTORY_MAXIMUM_PET;
 	}
 	
 	public void refreshOverloaded()

@@ -51,13 +51,13 @@ public class CustomConfig
 	@Setting(name = "MultiLangSystemMessageEnable")
 	public static boolean MULTILANG_SM_ENABLE;
 	
-	@Setting(name = "MultiLangSystemMessageAllowed", method = "listlangSM", ignore = true)
+	@Setting(name = "MultiLangSystemMessageAllowed", method = "listlangSM", canNull = true)
 	public static List<String> MULTILANG_SM_ALLOWED;
 	
 	@Setting(name = "MultiLangNpcStringEnable")
 	public static boolean MULTILANG_NS_ENABLE;
 	
-	@Setting(name = "MultiLangNpcStringAllowed", method = "listlangNS", ignore = true)
+	@Setting(name = "MultiLangNpcStringAllowed", method = "listlangNS", canNull = true)
 	public static List<String> MULTILANG_NS_ALLOWED;
 	
 	@Setting(name = "BankingEnabled")
@@ -110,6 +110,36 @@ public class CustomConfig
 	
 	@Setting(name = "AnnouncePkPvPNormalMessage")
 	public static boolean ANNOUNCE_PK_PVP_NORMAL_MESSAGE;
+	
+	@Setting(name = "SendStatusTradeJustOffline")
+	public static boolean SENDSTATUS_TRADE_JUST_OFFLINE;
+	
+	@Setting(name = "SendStatusTradeMod")
+	public static double SENDSTATUS_TRADE_MOD;
+	
+	@Setting(name = "ShowOfflineTradeInOnline")
+	public static boolean SHOW_OFFLINE_MODE_IN_ONLINE;
+	
+	@Setting(name = "RemoteWhoLog")
+	public static boolean RWHO_LOG;
+	
+	@Setting(name = "RemoteWhoForceInc")
+	public static int RWHO_FORCE_INC;
+	
+	@Setting(name = "RemoteOnlineKeepStat")
+	public static int RWHO_KEEP_STAT;
+	
+	@Setting(name = "RemoteWhoMaxOnline")
+	public static int RWHO_MAX_ONLINE;
+	
+	@Setting(name = "RemoteWhoSendTrash")
+	public static boolean RWHO_SEND_TRASH;
+	
+	@Setting(name = "RemoteOnlineIncrement")
+	public static int RWHO_ONLINE_INCREMENT;
+	
+	@Setting(name = "RemotePrivStoreFactor")
+	public static float RWHO_PRIV_STORE_FACTOR;
 	
 	public void listlang(final String value)
 	{

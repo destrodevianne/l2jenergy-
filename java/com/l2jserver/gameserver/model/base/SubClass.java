@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model.base;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.data.json.ExperienceData;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.actor.stat.PcStat;
@@ -37,8 +37,8 @@ public final class SubClass
 	public SubClass(L2PcInstance activeChar)
 	{
 		_stats = new PcStat(activeChar);
-		_stats.setExp(ExperienceData.getInstance().getExpForLevel(Config.BASE_SUBCLASS_LEVEL));
-		_stats.setLevel(Config.BASE_SUBCLASS_LEVEL);
+		_stats.setExp(ExperienceData.getInstance().getExpForLevel(CharacterConfig.BASE_SUBCLASS_LEVEL));
+		_stats.setLevel(CharacterConfig.BASE_SUBCLASS_LEVEL);
 	}
 	
 	public PlayerClass getClassDefinition()

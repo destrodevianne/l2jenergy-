@@ -33,7 +33,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import com.l2jserver.commons.util.Rnd;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.data.xml.impl.OptionData;
 import com.l2jserver.gameserver.model.L2Augmentation;
@@ -103,7 +103,7 @@ public class AugmentationData
 		}
 		
 		load();
-		if (!Config.RETAIL_LIKE_AUGMENTATION)
+		if (!CharacterConfig.RETAIL_LIKE_AUGMENTATION)
 		{
 			for (int i = 0; i < 10; i++)
 			{
@@ -228,7 +228,7 @@ public class AugmentationData
 		// Note: the skillmap data is only used when generating new augmentations
 		// the client expects a different id in order to display the skill in the
 		// items description...
-		if (!Config.RETAIL_LIKE_AUGMENTATION)
+		if (!CharacterConfig.RETAIL_LIKE_AUGMENTATION)
 		{
 			try
 			{
@@ -412,7 +412,7 @@ public class AugmentationData
 				return;
 			}
 		}
-		if (Config.RETAIL_LIKE_AUGMENTATION_ACCESSORY)
+		if (CharacterConfig.RETAIL_LIKE_AUGMENTATION_ACCESSORY)
 		{
 			DocumentBuilderFactory factory3 = DocumentBuilderFactory.newInstance();
 			factory3.setValidating(false);
@@ -533,7 +533,7 @@ public class AugmentationData
 	{
 		int stat12 = 0;
 		int stat34 = 0;
-		if (Config.RETAIL_LIKE_AUGMENTATION)
+		if (CharacterConfig.RETAIL_LIKE_AUGMENTATION)
 		{
 			if (item.getItem().isMagicWeapon())
 			{
@@ -567,19 +567,19 @@ public class AugmentationData
 				switch (lifeStoneGrade)
 				{
 					case AbstractRefinePacket.GRADE_NONE:
-						gradeChance = Config.RETAIL_LIKE_AUGMENTATION_NG_CHANCE;
+						gradeChance = CharacterConfig.RETAIL_LIKE_AUGMENTATION_NG_CHANCE;
 						break;
 					case AbstractRefinePacket.GRADE_MID:
-						gradeChance = Config.RETAIL_LIKE_AUGMENTATION_MID_CHANCE;
+						gradeChance = CharacterConfig.RETAIL_LIKE_AUGMENTATION_MID_CHANCE;
 						break;
 					case AbstractRefinePacket.GRADE_HIGH:
-						gradeChance = Config.RETAIL_LIKE_AUGMENTATION_HIGH_CHANCE;
+						gradeChance = CharacterConfig.RETAIL_LIKE_AUGMENTATION_HIGH_CHANCE;
 						break;
 					case AbstractRefinePacket.GRADE_TOP:
-						gradeChance = Config.RETAIL_LIKE_AUGMENTATION_TOP_CHANCE;
+						gradeChance = CharacterConfig.RETAIL_LIKE_AUGMENTATION_TOP_CHANCE;
 						break;
 					default:
-						gradeChance = Config.RETAIL_LIKE_AUGMENTATION_NG_CHANCE;
+						gradeChance = CharacterConfig.RETAIL_LIKE_AUGMENTATION_NG_CHANCE;
 				}
 				
 				int c = Rnd.get(100);
@@ -652,19 +652,19 @@ public class AugmentationData
 				switch (lifeStoneGrade)
 				{
 					case AbstractRefinePacket.GRADE_NONE:
-						gradeChance = Config.RETAIL_LIKE_AUGMENTATION_NG_CHANCE;
+						gradeChance = CharacterConfig.RETAIL_LIKE_AUGMENTATION_NG_CHANCE;
 						break;
 					case AbstractRefinePacket.GRADE_MID:
-						gradeChance = Config.RETAIL_LIKE_AUGMENTATION_MID_CHANCE;
+						gradeChance = CharacterConfig.RETAIL_LIKE_AUGMENTATION_MID_CHANCE;
 						break;
 					case AbstractRefinePacket.GRADE_HIGH:
-						gradeChance = Config.RETAIL_LIKE_AUGMENTATION_HIGH_CHANCE;
+						gradeChance = CharacterConfig.RETAIL_LIKE_AUGMENTATION_HIGH_CHANCE;
 						break;
 					case AbstractRefinePacket.GRADE_TOP:
-						gradeChance = Config.RETAIL_LIKE_AUGMENTATION_TOP_CHANCE;
+						gradeChance = CharacterConfig.RETAIL_LIKE_AUGMENTATION_TOP_CHANCE;
 						break;
 					default:
-						gradeChance = Config.RETAIL_LIKE_AUGMENTATION_NG_CHANCE;
+						gradeChance = CharacterConfig.RETAIL_LIKE_AUGMENTATION_NG_CHANCE;
 				}
 				
 				int c = Rnd.get(100);
@@ -714,53 +714,53 @@ public class AugmentationData
 		switch (lifeStoneGrade)
 		{
 			case AbstractRefinePacket.GRADE_NONE:
-				if (Rnd.get(1, 100) <= Config.AUGMENTATION_NG_SKILL_CHANCE)
+				if (Rnd.get(1, 100) <= CharacterConfig.AUGMENTATION_NG_SKILL_CHANCE)
 				{
 					generateSkill = true;
 				}
-				if (Rnd.get(1, 100) <= Config.AUGMENTATION_NG_GLOW_CHANCE)
+				if (Rnd.get(1, 100) <= CharacterConfig.AUGMENTATION_NG_GLOW_CHANCE)
 				{
 					generateGlow = true;
 				}
 				break;
 			case AbstractRefinePacket.GRADE_MID:
-				if (Rnd.get(1, 100) <= Config.AUGMENTATION_MID_SKILL_CHANCE)
+				if (Rnd.get(1, 100) <= CharacterConfig.AUGMENTATION_MID_SKILL_CHANCE)
 				{
 					generateSkill = true;
 				}
-				if (Rnd.get(1, 100) <= Config.AUGMENTATION_MID_GLOW_CHANCE)
+				if (Rnd.get(1, 100) <= CharacterConfig.AUGMENTATION_MID_GLOW_CHANCE)
 				{
 					generateGlow = true;
 				}
 				break;
 			case AbstractRefinePacket.GRADE_HIGH:
-				if (Rnd.get(1, 100) <= Config.AUGMENTATION_HIGH_SKILL_CHANCE)
+				if (Rnd.get(1, 100) <= CharacterConfig.AUGMENTATION_HIGH_SKILL_CHANCE)
 				{
 					generateSkill = true;
 				}
-				if (Rnd.get(1, 100) <= Config.AUGMENTATION_HIGH_GLOW_CHANCE)
+				if (Rnd.get(1, 100) <= CharacterConfig.AUGMENTATION_HIGH_GLOW_CHANCE)
 				{
 					generateGlow = true;
 				}
 				break;
 			case AbstractRefinePacket.GRADE_TOP:
-				if (Rnd.get(1, 100) <= Config.AUGMENTATION_TOP_SKILL_CHANCE)
+				if (Rnd.get(1, 100) <= CharacterConfig.AUGMENTATION_TOP_SKILL_CHANCE)
 				{
 					generateSkill = true;
 				}
-				if (Rnd.get(1, 100) <= Config.AUGMENTATION_TOP_GLOW_CHANCE)
+				if (Rnd.get(1, 100) <= CharacterConfig.AUGMENTATION_TOP_GLOW_CHANCE)
 				{
 					generateGlow = true;
 				}
 				break;
 			case AbstractRefinePacket.GRADE_ACC:
-				if (Rnd.get(1, 100) <= Config.AUGMENTATION_ACC_SKILL_CHANCE)
+				if (Rnd.get(1, 100) <= CharacterConfig.AUGMENTATION_ACC_SKILL_CHANCE)
 				{
 					generateSkill = true;
 				}
 		}
 		
-		if (!generateSkill && (Rnd.get(1, 100) <= Config.AUGMENTATION_BASESTAT_CHANCE))
+		if (!generateSkill && (Rnd.get(1, 100) <= CharacterConfig.AUGMENTATION_BASESTAT_CHANCE))
 		{
 			stat34 = Rnd.get(BASESTAT_STR, BASESTAT_MEN);
 		}
@@ -872,7 +872,7 @@ public class AugmentationData
 	{
 		int stat12 = 0;
 		int stat34 = 0;
-		if (Config.RETAIL_LIKE_AUGMENTATION_ACCESSORY)
+		if (CharacterConfig.RETAIL_LIKE_AUGMENTATION_ACCESSORY)
 		{
 			List<augmentationChanceAcc> _selectedChances12 = new ArrayList<>();
 			List<augmentationChanceAcc> _selectedChances34 = new ArrayList<>();
@@ -965,7 +965,7 @@ public class AugmentationData
 		// first augmentation (stats only)
 		stat12 = Rnd.get(ACC_STAT_SUBBLOCKSIZE);
 		Options op = null;
-		if (Rnd.get(1, 100) <= Config.AUGMENTATION_ACC_SKILL_CHANCE)
+		if (Rnd.get(1, 100) <= CharacterConfig.AUGMENTATION_ACC_SKILL_CHANCE)
 		{
 			// second augmentation (skill)
 			stat34 = base + Rnd.get(skillsLength);

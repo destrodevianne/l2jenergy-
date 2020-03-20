@@ -39,7 +39,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
 import com.l2jserver.gameserver.enums.InstanceReenterType;
@@ -75,7 +75,7 @@ public final class Instance
 	
 	private final int _id;
 	private String _name;
-	private int _ejectTime = Config.EJECT_DEAD_PLAYER_TIME;
+	private int _ejectTime = GeneralConfig.EJECT_DEAD_PLAYER_TIME;
 	/** Allow random walk for NPCs, global parameter. */
 	private boolean _allowRandomWalk = true;
 	private final List<Integer> _players = new CopyOnWriteArrayList<>();

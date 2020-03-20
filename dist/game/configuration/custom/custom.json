@@ -13,7 +13,7 @@
 	"EnableWarehouseSortingPrivate" : "false",
 	
 	# =====================================================================
-    # Multilingual support
+    #                        Multilingual support
     # =====================================================================
     # Enable or disable multilingual support.
     # Default: True
@@ -48,7 +48,7 @@
     "MultiLangNpcStringAllowed" : "",
 	
     # =====================================================================
-    # Banking System
+    #                        Banking System
     # =====================================================================
     # Enable/Disable Banking System
     # Default: false
@@ -70,7 +70,7 @@
     "AutoBankingAdenaMinCount" : "510000000",
 	
     # =====================================================================
-    # Hellbound Status voice command
+    #                Hellbound Status voice command
     # =====================================================================
     # This option will enable using of the voice commands .hellbound
     # for retrieving information about current Hellbound level and trust.
@@ -78,28 +78,28 @@
     "HellboundStatus" : "false",
 	
 	# =====================================================================
-    # Password Change voice command
+    #                Password Change voice command
     # =====================================================================
     # Enables .changepassword voiced command which allows the players to change their account's password ingame.
     # Default: false
     "AllowChangePassword" : "false",
 
     # =====================================================================
-    # Repair voice command
+    #                    Repair voice command
     # =====================================================================
     # Enables .repair
     # Default: false
     "AllowRepairVoiceCommand" : "false",
 
     # =====================================================================
-    # Help voice command
+    #                         Help voice command
     # =====================================================================
     # Enables .help
     # Default: false
     "AllowHelpVoiceCommand" : "false",
 
 	# =====================================================================
-    # Debug enable/disable voice command
+    #                   Debug enable/disable voice command
     # =====================================================================
     # This option will enable voice command .debug allowing players
     # to turn on/off debugging on self only.
@@ -109,7 +109,7 @@
     "DebugVoiceCommand" : "false",
 
     # =====================================================================
-    # Mana Drugs/Potions
+    #                      Mana Drugs/Potions
     # =====================================================================
     # This option will enable core support for:
     # Mana Drug (item ID 726), using skill ID 10000.
@@ -118,14 +118,14 @@
     "EnableManaPotionSupport" : "false",
 
     # =====================================================================
-    # Display Server Time 
+    #                     Display Server Time 
     # =====================================================================
     # This option will enable displaying of the local server time for /time command.
 	# Default: false
     "DisplayServerTime" : "false",
 
     # =====================================================================
-    # Chat Moderation
+    #                         Chat Moderation
     # =====================================================================
     # This option will enable using of the voice commands .banchat and .unbanchat
     # for players with corresponding access level (default: 7).
@@ -134,7 +134,7 @@
     "ChatAdmin" : "false",
 	
     # =====================================================================
-    # Welcome message
+    #                        Welcome message
     # =====================================================================
     # Show screen welcome message on character login
     # Default: False
@@ -144,12 +144,32 @@
     "ScreenWelcomeMessageTime" : "10",
 
     # =====================================================================
-    # Pvp/pk Announce
+    #                         Pvp/pk Announce
     # =====================================================================
     # Default: False
     "AnnouncePkPvP" : "false",
 
     # Announce this as normal system message
     # Default: True
-    "AnnouncePkPvPNormalMessage" : "true"
+    "AnnouncePkPvPNormalMessage" : "true",
+
+    # =====================================================================
+    #                      Simulation Off Kernels
+    # =====================================================================
+    # Package SendStatus in the "Priv. Store Chars" send all merchants or only offline
+    "SendStatusTradeJustOffline" : "true",
+
+    # Multiplier of traders in the package SendStatus
+    "SendStatusTradeMod" : "1.",
+
+    # Traders off to the general online?
+    "ShowOfflineTradeInOnline" : "true",
+
+    "RemoteWhoLog" : "true",
+    "RemoteWhoSendTrash" : "true",
+    "RemoteWhoMaxOnline" : "2000",
+    "RemoteOnlineKeepStat" : "5",
+    "RemoteOnlineIncrement" : "50",
+    "RemoteWhoForceInc" : "50",
+    "RemotePrivStoreFactor" : "12"
 }

@@ -21,7 +21,7 @@ package com.l2jserver.gameserver.network.serverpackets;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.model.L2SkillLearn;
 import com.l2jserver.gameserver.model.base.AcquireSkillType;
 import com.l2jserver.gameserver.model.holders.ItemHolder;
@@ -76,11 +76,11 @@ public class AcquireSkillInfo extends L2GameServerPacket
 		_spCost = skillLearn.getLevelUpSp();
 		_type = skillType;
 		_reqs = new ArrayList<>();
-		if ((skillType != AcquireSkillType.PLEDGE) || Config.LIFE_CRYSTAL_NEEDED)
+		if ((skillType != AcquireSkillType.PLEDGE) || CharacterConfig.LIFE_CRYSTAL_NEEDED)
 		{
 			for (ItemHolder item : skillLearn.getRequiredItems())
 			{
-				if (!Config.DIVINE_SP_BOOK_NEEDED && (_id == CommonSkill.DIVINE_INSPIRATION.getId()))
+				if (!CharacterConfig.DIVINE_SP_BOOK_NEEDED && (_id == CommonSkill.DIVINE_INSPIRATION.getId()))
 				{
 					continue;
 				}

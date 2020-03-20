@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.model.actor.tasks.attackable;
 
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
 
 /**
@@ -42,7 +42,7 @@ public final class CommandChannelTimer implements Runnable
 			return;
 		}
 		
-		if ((System.currentTimeMillis() - _attackable.getCommandChannelLastAttack()) > Config.LOOT_RAIDS_PRIVILEGE_INTERVAL)
+		if ((System.currentTimeMillis() - _attackable.getCommandChannelLastAttack()) > CharacterConfig.LOOT_RAIDS_PRIVILEGE_INTERVAL)
 		{
 			_attackable.setCommandChannelTimer(null);
 			_attackable.setFirstCommandChannelAttacked(null);
