@@ -212,7 +212,6 @@ public class NpcConfig
 		}
 	}
 	
-	// public void listlang(final String value)
 	public Map<Integer, Float> parseConfigLine(String line)
 	{
 		String[] propertySplit = line.split(",");

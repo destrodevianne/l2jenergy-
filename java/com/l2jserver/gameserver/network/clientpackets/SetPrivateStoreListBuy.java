@@ -20,7 +20,6 @@ package com.l2jserver.gameserver.network.clientpackets;
 
 import static com.l2jserver.gameserver.model.itemcontainer.Inventory.MAX_ADENA;
 
-import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.model.TradeList;
@@ -49,7 +48,7 @@ public final class SetPrivateStoreListBuy extends L2GameClientPacket
 	protected void readImpl()
 	{
 		int count = readD();
-		if ((count < 1) || (count > CharacterConfig.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != _buf.remaining()))
+		if ((count < 1) || (count > MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != _buf.remaining()))
 		{
 			return;
 		}

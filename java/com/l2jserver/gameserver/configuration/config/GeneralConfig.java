@@ -551,7 +551,7 @@ public class GeneralConfig
 		CLIENT_PACKET_QUEUE_SIZE = Integer.parseInt(value);
 		if (CLIENT_PACKET_QUEUE_SIZE == 0)
 		{
-			CLIENT_PACKET_QUEUE_SIZE = MMOConfig.MMO_MAX_READ_PER_PASS + 2;
+			CLIENT_PACKET_QUEUE_SIZE = 12 + 2;
 		}
 	}
 	
@@ -560,7 +560,7 @@ public class GeneralConfig
 		CLIENT_PACKET_QUEUE_MAX_BURST_SIZE = Integer.parseInt(value);
 		if (CLIENT_PACKET_QUEUE_MAX_BURST_SIZE == 0)
 		{
-			CLIENT_PACKET_QUEUE_MAX_BURST_SIZE = MMOConfig.MMO_MAX_READ_PER_PASS + 1;
+			CLIENT_PACKET_QUEUE_MAX_BURST_SIZE = 12 + 1;
 		}
 	}
 	

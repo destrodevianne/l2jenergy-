@@ -53,7 +53,7 @@ public final class SendWareHouseWithDrawList extends L2GameClientPacket
 	protected void readImpl()
 	{
 		final int count = readD();
-		if ((count <= 0) || (count > CharacterConfig.MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != _buf.remaining()))
+		if ((count <= 0) || (count > MAX_ITEM_IN_PACKET) || ((count * BATCH_LENGTH) != _buf.remaining()))
 		{
 			return;
 		}

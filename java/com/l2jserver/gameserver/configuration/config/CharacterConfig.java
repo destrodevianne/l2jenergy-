@@ -20,19 +20,17 @@ package com.l2jserver.gameserver.configuration.config;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.StringTokenizer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.configuration.annotations.Configuration;
 import com.l2jserver.commons.configuration.annotations.Setting;
-import com.l2jserver.gameserver.model.holders.ItemHolder;
+import com.l2jserver.gameserver.util.ClassMasterSettings;
 import com.l2jserver.gameserver.util.Util;
 
 /**
@@ -269,9 +267,6 @@ public class CharacterConfig
 	@Setting(name = "MaximumSlotsForGMPlayer")
 	public static int INVENTORY_MAXIMUM_GM;
 	
-	@Setting(ignore = true)
-	public static int MAX_ITEM_IN_PACKET = Math.max(INVENTORY_MAXIMUM_NO_DWARF, Math.max(INVENTORY_MAXIMUM_DWARF, INVENTORY_MAXIMUM_GM));
-	
 	@Setting(name = "MaximumSlotsForQuestItems")
 	public static int INVENTORY_MAXIMUM_QUEST_ITEMS;
 	
@@ -494,7 +489,7 @@ public class CharacterConfig
 	@Setting(name = "StartingSP")
 	public static int STARTING_SP;
 	
-	@Setting(name = "MaxAdena", method = "maxAdena")
+	@Setting(name = "MaxAdena")
 	public static long MAX_ADENA;
 	
 	@Setting(name = "AutoLoot")
@@ -714,96 +709,5 @@ public class CharacterConfig
 			AUGMENTATION_BLACKLIST[i] = Integer.parseInt(array[i]);
 		}
 		Arrays.sort(AUGMENTATION_BLACKLIST);
-	}
-	
-	public void maxAdena(long value)
-	{
-		if (value < 0)
-		{
-			value = Long.MAX_VALUE;
-		}
-	}
-	
-	public static final class ClassMasterSettings
-	{
-		private final Map<Integer, List<ItemHolder>> _claimItems = new HashMap<>(3);
-		private final Map<Integer, List<ItemHolder>> _rewardItems = new HashMap<>(3);
-		private final Map<Integer, Boolean> _allowedClassChange = new HashMap<>(3);
-		
-		public ClassMasterSettings(String configLine)
-		{
-			parseConfigLine(configLine.trim());
-		}
-		
-		private void parseConfigLine(String configLine)
-		{
-			if (configLine.isEmpty())
-			{
-				return;
-			}
-			
-			final StringTokenizer st = new StringTokenizer(configLine, ";");
-			
-			while (st.hasMoreTokens())
-			{
-				// get allowed class change
-				final int job = Integer.parseInt(st.nextToken());
-				
-				_allowedClassChange.put(job, true);
-				
-				final List<ItemHolder> requiredItems = new ArrayList<>();
-				// parse items needed for class change
-				if (st.hasMoreTokens())
-				{
-					final StringTokenizer st2 = new StringTokenizer(st.nextToken(), "[],");
-					
-					while (st2.hasMoreTokens())
-					{
-						final StringTokenizer st3 = new StringTokenizer(st2.nextToken(), "()");
-						final int itemId = Integer.parseInt(st3.nextToken());
-						final int quantity = Integer.parseInt(st3.nextToken());
-						requiredItems.add(new ItemHolder(itemId, quantity));
-					}
-				}
-				
-				_claimItems.put(job, requiredItems);
-				
-				final List<ItemHolder> rewardItems = new ArrayList<>();
-				// parse gifts after class change
-				if (st.hasMoreTokens())
-				{
-					final StringTokenizer st2 = new StringTokenizer(st.nextToken(), "[],");
-					
-					while (st2.hasMoreTokens())
-					{
-						final StringTokenizer st3 = new StringTokenizer(st2.nextToken(), "()");
-						final int itemId = Integer.parseInt(st3.nextToken());
-						final int quantity = Integer.parseInt(st3.nextToken());
-						rewardItems.add(new ItemHolder(itemId, quantity));
-					}
-				}
-				
-				_rewardItems.put(job, rewardItems);
-			}
-		}
-		
-		public boolean isAllowed(int job)
-		{
-			if ((_allowedClassChange == null) || !_allowedClassChange.containsKey(job))
-			{
-				return false;
-			}
-			return _allowedClassChange.get(job);
-		}
-		
-		public List<ItemHolder> getRewardItems(int job)
-		{
-			return _rewardItems.get(job);
-		}
-		
-		public List<ItemHolder> getRequireItems(int job)
-		{
-			return _claimItems.get(job);
-		}
 	}
 }

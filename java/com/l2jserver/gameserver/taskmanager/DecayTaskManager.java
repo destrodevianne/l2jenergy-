@@ -26,7 +26,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.actor.L2Character;
@@ -151,12 +150,12 @@ public final class DecayTaskManager
 	{
 		StringBuilder ret = new StringBuilder();
 		ret.append("============= DecayTask Manager Report ============");
-		ret.append(Config.EOL);
+		ret.append(System.lineSeparator());
 		ret.append("Tasks count: ");
 		ret.append(_decayTasks.size());
-		ret.append(Config.EOL);
+		ret.append(System.lineSeparator());
 		ret.append("Tasks dump:");
-		ret.append(Config.EOL);
+		ret.append(System.lineSeparator());
 		
 		for (Entry<L2Character, ScheduledFuture<?>> entry : _decayTasks.entrySet())
 		{
@@ -166,7 +165,7 @@ public final class DecayTaskManager
 			ret.append(entry.getKey().getName());
 			ret.append(" decay timer: ");
 			ret.append(entry.getValue().getDelay(TimeUnit.MILLISECONDS));
-			ret.append(Config.EOL);
+			ret.append(System.lineSeparator());
 		}
 		
 		return ret.toString();

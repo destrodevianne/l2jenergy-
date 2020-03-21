@@ -28,7 +28,6 @@ import java.util.logging.Level;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.util.Broadcast;
 
 /**
@@ -170,7 +169,7 @@ public final class AutoAnnouncement extends Announcement implements Runnable
 	{
 		if ((_currentState == -1) || (_currentState > 0))
 		{
-			for (String content : getContent().split(Config.EOL))
+			for (String content : getContent().split(System.lineSeparator()))
 			{
 				Broadcast.toAllOnlinePlayers(content, (getType() == AnnouncementType.AUTO_CRITICAL));
 			}

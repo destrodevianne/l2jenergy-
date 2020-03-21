@@ -34,7 +34,6 @@ import org.slf4j.LoggerFactory;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.datatables.SpawnTable;
 import com.l2jserver.gameserver.model.L2Spawn;
@@ -425,7 +424,7 @@ public class RaidBossSpawnManager
 	 */
 	public String getRaidBossStatus(int bossId)
 	{
-		String msg = "RaidBoss Status..." + Config.EOL;
+		String msg = "RaidBoss Status..." + System.lineSeparator();
 		
 		if (_bosses == null)
 		{

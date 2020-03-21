@@ -34,7 +34,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.util.StringUtil;
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 
 /**
@@ -168,22 +167,23 @@ public final class ThreadPoolManager
 			final int count = ptf.getGroup().activeCount();
 			final Thread[] threads = new Thread[count + 2];
 			ptf.getGroup().enumerate(threads);
-			StringUtil.append(sb, "General Thread Pool:" + Config.EOL + "Tasks in the queue: ", String.valueOf(_generalThreadPool.getQueue().size()), Config.EOL + "Showing threads stack trace:" + Config.EOL + "There should be ", String.valueOf(count), " Threads" + Config.EOL);
+			StringUtil.append(sb, "General Thread Pool:" + System.lineSeparator() + "Tasks in the queue: ", String.valueOf(_generalThreadPool.getQueue().size()), System.lineSeparator() + "Showing threads stack trace:" + System.lineSeparator() + "There should be ", String.valueOf(count), " Threads"
+				+ System.lineSeparator());
 			for (Thread t : threads)
 			{
 				if (t == null)
 				{
 					continue;
 				}
-				StringUtil.append(sb, t.getName(), Config.EOL);
+				StringUtil.append(sb, t.getName(), System.lineSeparator());
 				for (StackTraceElement ste : t.getStackTrace())
 				{
-					StringUtil.append(sb, ste.toString(), Config.EOL);
+					StringUtil.append(sb, ste.toString(), System.lineSeparator());
 				}
 			}
 		}
 		sb.append("Packet Tp stack traces printed.");
-		sb.append(Config.EOL);
+		sb.append(System.lineSeparator());
 		return sb.toString();
 	}
 	
@@ -197,22 +197,23 @@ public final class ThreadPoolManager
 			final int count = ptf.getGroup().activeCount();
 			final Thread[] threads = new Thread[count + 2];
 			ptf.getGroup().enumerate(threads);
-			StringUtil.append(sb, "I/O Packet Thread Pool:" + Config.EOL + "Tasks in the queue: ", String.valueOf(_ioPacketsThreadPool.getQueue().size()), Config.EOL + "Showing threads stack trace:" + Config.EOL + "There should be ", String.valueOf(count), " Threads" + Config.EOL);
+			StringUtil.append(sb, "I/O Packet Thread Pool:" + System.lineSeparator() + "Tasks in the queue: ", String.valueOf(_ioPacketsThreadPool.getQueue().size()), System.lineSeparator() + "Showing threads stack trace:" + System.lineSeparator()
+				+ "There should be ", String.valueOf(count), " Threads" + System.lineSeparator());
 			for (Thread t : threads)
 			{
 				if (t == null)
 				{
 					continue;
 				}
-				StringUtil.append(sb, t.getName(), Config.EOL);
+				StringUtil.append(sb, t.getName(), System.lineSeparator());
 				for (StackTraceElement ste : t.getStackTrace())
 				{
-					StringUtil.append(sb, ste.toString(), Config.EOL);
+					StringUtil.append(sb, ste.toString(), System.lineSeparator());
 				}
 			}
 		}
 		sb.append("Packet Tp stack traces printed.");
-		sb.append(Config.EOL);
+		sb.append(System.lineSeparator());
 		return sb.toString();
 	}
 	
@@ -226,22 +227,23 @@ public final class ThreadPoolManager
 			final int count = ptf.getGroup().activeCount();
 			final Thread[] threads = new Thread[count + 2];
 			ptf.getGroup().enumerate(threads);
-			StringUtil.append(sb, "General Packet Thread Pool:" + Config.EOL + "Tasks in the queue: ", String.valueOf(_generalPacketsThreadPool.getQueue().size()), Config.EOL + "Showing threads stack trace:" + Config.EOL + "There should be ", String.valueOf(count), " Threads" + Config.EOL);
+			StringUtil.append(sb, "General Packet Thread Pool:" + System.lineSeparator() + "Tasks in the queue: ", String.valueOf(_generalPacketsThreadPool.getQueue().size()), System.lineSeparator() + "Showing threads stack trace:" + System.lineSeparator()
+				+ "There should be ", String.valueOf(count), " Threads" + System.lineSeparator());
 			for (Thread t : threads)
 			{
 				if (t == null)
 				{
 					continue;
 				}
-				StringUtil.append(sb, t.getName(), Config.EOL);
+				StringUtil.append(sb, t.getName(), System.lineSeparator());
 				for (StackTraceElement ste : t.getStackTrace())
 				{
-					StringUtil.append(sb, ste.toString(), Config.EOL);
+					StringUtil.append(sb, ste.toString(), System.lineSeparator());
 				}
 			}
 		}
 		sb.append("Packet Tp stack traces printed.");
-		sb.append(Config.EOL);
+		sb.append(System.lineSeparator());
 		return sb.toString();
 	}
 	

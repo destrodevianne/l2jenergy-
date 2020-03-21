@@ -27,7 +27,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.l2jserver.gameserver.Shutdown;
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 
 /**
@@ -62,7 +61,7 @@ public class DeadLockDetector extends Thread
 					ThreadInfo[] tis = tmx.getThreadInfo(ids, true, true);
 					StringBuilder info = new StringBuilder();
 					info.append("DeadLock Found!");
-					info.append(Config.EOL);
+					info.append(System.lineSeparator());
 					for (ThreadInfo ti : tis)
 					{
 						info.append(ti.toString());
@@ -79,14 +78,14 @@ public class DeadLockDetector extends Thread
 						
 						ThreadInfo dl = ti;
 						info.append("Java-level deadlock:");
-						info.append(Config.EOL);
+						info.append(System.lineSeparator());
 						info.append('\t');
 						info.append(dl.getThreadName());
 						info.append(" is waiting to lock ");
 						info.append(dl.getLockInfo().toString());
 						info.append(" which is held by ");
 						info.append(dl.getLockOwnerName());
-						info.append(Config.EOL);
+						info.append(System.lineSeparator());
 						while ((dl = tmx.getThreadInfo(new long[]
 						{
 							dl.getLockOwnerId()
@@ -98,7 +97,7 @@ public class DeadLockDetector extends Thread
 							info.append(dl.getLockInfo().toString());
 							info.append(" which is held by ");
 							info.append(dl.getLockOwnerName());
-							info.append(Config.EOL);
+							info.append(System.lineSeparator());
 						}
 					}
 					_log.warning(info.toString());

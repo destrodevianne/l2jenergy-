@@ -58,7 +58,7 @@ public final class RequestBuyItem extends L2GameClientPacket
 	{
 		_listId = readD();
 		int size = readD();
-		if ((size <= 0) || (size > CharacterConfig.MAX_ITEM_IN_PACKET) || ((size * BATCH_LENGTH) != _buf.remaining()))
+		if ((size <= 0) || (size > MAX_ITEM_IN_PACKET) || ((size * BATCH_LENGTH) != _buf.remaining()))
 		{
 			return;
 		}

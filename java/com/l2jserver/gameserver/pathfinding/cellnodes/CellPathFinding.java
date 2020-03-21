@@ -28,7 +28,6 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.GeoData;
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.idfactory.IdFactory;
 import com.l2jserver.gameserver.model.itemcontainer.Inventory;
@@ -391,7 +390,7 @@ public class CellPathFinding extends PathFinding
 		if (_postFilterUses > 0)
 		{
 			StringUtil.append(stat, " total/avg(ms):", String.valueOf(_postFilterElapsed), "/", String.format("%1.2f", (double) _postFilterElapsed / _postFilterUses), " passes total/avg:", String.valueOf(_postFilterPasses), "/", String.format("%1.1f", (double) _postFilterPasses
-				/ _postFilterUses), Config.EOL);
+				/ _postFilterUses), System.lineSeparator());
 		}
 		StringUtil.append(stat, "Pathfind success/fail:", String.valueOf(_findSuccess), "/", String.valueOf(_findFails));
 		result[result.length - 1] = stat.toString();

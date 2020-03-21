@@ -28,8 +28,6 @@ import java.util.zip.ZipFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.gameserver.configuration.config.Config;
-
 /**
  * @author Luis Arias
  */
@@ -108,25 +106,25 @@ public class ScriptPackage
 		StringBuilder out = new StringBuilder();
 		out.append("Package Name: ");
 		out.append(getName());
-		out.append(Config.EOL);
+		out.append(System.lineSeparator());
 		
 		if (!getScriptFiles().isEmpty())
 		{
-			out.append("Xml Script Files..." + Config.EOL);
+			out.append("Xml Script Files..." + System.lineSeparator());
 			for (ScriptDocument script : getScriptFiles())
 			{
 				out.append(script.getName());
-				out.append(Config.EOL);
+				out.append(System.lineSeparator());
 			}
 		}
 		
 		if (!getOtherFiles().isEmpty())
 		{
-			out.append("Other Files..." + Config.EOL);
+			out.append("Other Files..." + System.lineSeparator());
 			for (String fileName : getOtherFiles())
 			{
 				out.append(fileName);
-				out.append(Config.EOL);
+				out.append(System.lineSeparator());
 			}
 		}
 		return out.toString();

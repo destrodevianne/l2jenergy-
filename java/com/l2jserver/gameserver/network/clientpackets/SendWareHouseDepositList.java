@@ -55,7 +55,7 @@ public final class SendWareHouseDepositList extends L2GameClientPacket
 	protected void readImpl()
 	{
 		final int size = readD();
-		if ((size <= 0) || (size > CharacterConfig.MAX_ITEM_IN_PACKET) || ((size * BATCH_LENGTH) != _buf.remaining()))
+		if ((size <= 0) || (size > MAX_ITEM_IN_PACKET) || ((size * BATCH_LENGTH) != _buf.remaining()))
 		{
 			return;
 		}

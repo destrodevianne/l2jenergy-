@@ -39,7 +39,7 @@ public final class Config
 {
 	private static final Logger LOG = LoggerFactory.getLogger(Config.class);
 	
-	public static final String EOL = System.lineSeparator();
+	// public static final String EOL = System.lineSeparator();
 	
 	public static final String FORTSIEGE_CONFIGURATION_FILE = "./config/FortSiege.properties";
 	public static final String L2JMOD_CONFIG_FILE = "./config/L2JMods.properties";

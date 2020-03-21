@@ -28,7 +28,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.util.Util;
-import com.l2jserver.gameserver.configuration.config.Config;
 
 /**
  * Audits Game Master's actions.
@@ -62,7 +61,7 @@ public class GMAudit
 		final File file = new File("logs/GMAudit/" + name + ".txt");
 		try (FileWriter save = new FileWriter(file, true))
 		{
-			save.write(date + ">" + gmName + ">" + action + ">" + target + ">" + params + Config.EOL);
+			save.write(date + ">" + gmName + ">" + action + ">" + target + ">" + params + System.lineSeparator());
 		}
 		catch (IOException e)
 		{

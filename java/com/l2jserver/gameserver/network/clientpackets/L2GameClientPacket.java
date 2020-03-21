@@ -23,6 +23,7 @@ import java.nio.BufferUnderflowException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.L2GameClient;
@@ -39,6 +40,9 @@ import com.l2jserver.mmocore.ReceivablePacket;
 public abstract class L2GameClientPacket extends ReceivablePacket<L2GameClient>
 {
 	protected static final Logger LOG = LoggerFactory.getLogger(L2GameClientPacket.class);
+	
+	// TODO: fix
+	public static int MAX_ITEM_IN_PACKET = Math.max(CharacterConfig.INVENTORY_MAXIMUM_NO_DWARF, Math.max(CharacterConfig.INVENTORY_MAXIMUM_DWARF, CharacterConfig.INVENTORY_MAXIMUM_GM));
 	
 	@Override
 	public boolean read()

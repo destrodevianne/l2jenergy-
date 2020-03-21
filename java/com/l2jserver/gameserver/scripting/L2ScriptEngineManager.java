@@ -42,7 +42,6 @@ import javax.script.SimpleScriptContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 
@@ -462,19 +461,19 @@ public final class L2ScriptEngineManager
 			final File file = new File(dir + "/" + name);
 			try (FileOutputStream fos = new FileOutputStream(file))
 			{
-				String errorHeader = "Error on: " + file.getCanonicalPath() + Config.EOL + "Line: " + e.getLineNumber() + " - Column: " + e.getColumnNumber() + Config.EOL + Config.EOL;
+				String errorHeader = "Error on: " + file.getCanonicalPath() + System.lineSeparator() + "Line: " + e.getLineNumber() + " - Column: " + e.getColumnNumber() + System.lineSeparator() + System.lineSeparator();
 				fos.write(errorHeader.getBytes());
 				fos.write(e.getMessage().getBytes());
 				LOG.warn("Failed executing script: {}. See {} for details.", script.getAbsolutePath(), file.getName());
 			}
 			catch (IOException ioe)
 			{
-				LOG.warn("Failed executing script: {} {} Additionally failed when trying to write an error report on script directory. Reason: {}", script.getAbsolutePath(), Config.EOL, ioe.getMessage(), ioe);
+				LOG.warn("Failed executing script: {} {} Additionally failed when trying to write an error report on script directory. Reason: {}", script.getAbsolutePath(), System.lineSeparator(), ioe.getMessage(), ioe);
 			}
 		}
 		else
 		{
-			LOG.warn("Failed executing script: {} {} Additionally failed when trying to write an error report on script directory.", script.getAbsolutePath(), Config.EOL, e);
+			LOG.warn("Failed executing script: {} {} Additionally failed when trying to write an error report on script directory.", script.getAbsolutePath(), System.lineSeparator(), e);
 		}
 	}
 	

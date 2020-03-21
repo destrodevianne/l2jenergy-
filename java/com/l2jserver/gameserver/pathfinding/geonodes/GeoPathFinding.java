@@ -38,7 +38,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.GeoData;
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.Location;
@@ -428,7 +427,7 @@ public class GeoPathFinding extends PathFinding
 	{
 		if ((rx < L2World.TILE_X_MIN) || (rx > L2World.TILE_X_MAX) || (ry < L2World.TILE_Y_MIN) || (ry > L2World.TILE_Y_MAX))
 		{
-			LOG.warn("Failed to Load PathNode File: invalid region {}, {}", rx, ry + Config.EOL);
+			LOG.warn("Failed to Load PathNode File: invalid region {}, {}", rx, ry + System.lineSeparator());
 			return;
 		}
 		short regionoffset = getRegionOffset(rx, ry);
