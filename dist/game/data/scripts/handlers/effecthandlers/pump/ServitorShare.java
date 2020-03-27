@@ -21,13 +21,13 @@ package handlers.effecthandlers.pump;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.l2jserver.gameserver.enums.actors.Stats;
+import com.l2jserver.gameserver.enums.skills.EffectFlag;
+import com.l2jserver.gameserver.enums.skills.L2EffectType;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.conditions.Condition;
 import com.l2jserver.gameserver.model.effects.AbstractEffect;
-import com.l2jserver.gameserver.model.effects.EffectFlag;
-import com.l2jserver.gameserver.model.effects.L2EffectType;
 import com.l2jserver.gameserver.model.skills.BuffInfo;
-import com.l2jserver.gameserver.model.stats.Stats;
 
 /**
  * Servitor Share effect implementation. Have effect only on servitor's but not on pets Important: Only one effect can be used on char per time.

@@ -28,7 +28,7 @@ public class ExBR_ProductInfo extends L2GameServerPacket
 	
 	public ExBR_ProductInfo(final int productId)
 	{
-		_productId = ProductItemData.getInstance().getItem(productId);
+		_productId = ProductItemData.getInstance().getProduct(productId);
 	}
 	
 	@Override

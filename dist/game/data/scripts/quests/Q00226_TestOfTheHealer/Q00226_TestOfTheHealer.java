@@ -19,10 +19,10 @@
 package quests.Q00226_TestOfTheHealer;
 
 import com.l2jserver.gameserver.enums.CategoryType;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
@@ -105,15 +105,15 @@ public final class Q00226_TestOfTheHealer extends Quest
 					giveItems(player, REPORT_OF_PERRIN, 1);
 					if (player.getVariables().getInt("2ND_CLASS_DIAMOND_REWARD", 0) == 0)
 					{
-						if (player.getClassId() == ClassId.cleric)
+						if (player.getClassId() == ClassId.CLERIC)
 						{
 							giveItems(player, DIMENSIONAL_DIAMOND, 60);
 						}
-						else if (player.getClassId() == ClassId.knight)
+						else if (player.getClassId() == ClassId.KNIGHT)
 						{
 							giveItems(player, DIMENSIONAL_DIAMOND, 104);
 						}
-						else if (player.getClassId() == ClassId.oracle)
+						else if (player.getClassId() == ClassId.ELVEN_ORACLE)
 						{
 							giveItems(player, DIMENSIONAL_DIAMOND, 45);
 						}

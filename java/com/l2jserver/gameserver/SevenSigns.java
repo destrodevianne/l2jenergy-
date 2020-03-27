@@ -36,15 +36,15 @@ import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
+import com.l2jserver.gameserver.enums.TeleportWhereType;
+import com.l2jserver.gameserver.enums.skills.CommonSkill;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.model.AutoSpawnHandler;
 import com.l2jserver.gameserver.model.AutoSpawnHandler.AutoSpawnInstance;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.StatsSet;
-import com.l2jserver.gameserver.model.TeleportWhereType;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.Castle;
-import com.l2jserver.gameserver.model.skills.CommonSkill;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SSQInfo;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
@@ -408,11 +408,6 @@ public class SevenSigns
 				AutoSpawnHandler.getInstance().setSpawnActive(spawnInst, false);
 			}
 		}
-	}
-	
-	public static SevenSigns getInstance()
-	{
-		return SingletonHolder._instance;
 	}
 	
 	public static long calcContributionScore(long blueCount, long greenCount, long redCount)
@@ -1661,8 +1656,13 @@ public class SevenSigns
 		return false;
 	}
 	
+	public static SevenSigns getInstance()
+	{
+		return SingletonHolder.INSTANCE;
+	}
+	
 	private static class SingletonHolder
 	{
-		protected static final SevenSigns _instance = new SevenSigns();
+		protected static final SevenSigns INSTANCE = new SevenSigns();
 	}
 }

@@ -21,8 +21,8 @@ package com.l2jserver.gameserver.handler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.l2jserver.gameserver.enums.PunishmentType;
 import com.l2jserver.gameserver.model.punishment.PunishmentTask;
-import com.l2jserver.gameserver.model.punishment.PunishmentType;
 
 /**
  * @author UnAfraid

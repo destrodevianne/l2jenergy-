@@ -63,7 +63,7 @@ public class ProductItemData implements IXmlReader
 	public void load()
 	{
 		_itemsList.clear();
-		parseDatapackDirectory("data/itemMall", false);
+		parseDatapackDirectory("data/xml/itemMall", false);
 		LOG.info("{}: Loaded {} products", getClass().getSimpleName(), _itemsList.size());
 	}
 	
@@ -135,7 +135,7 @@ public class ProductItemData implements IXmlReader
 		}
 	}
 	
-	public void buyItem(L2PcInstance activeChar, int productId, int count)
+	public void giveProduct(L2PcInstance activeChar, int productId, int count)
 	{
 		if (activeChar.isOutOfControl())
 		{
@@ -152,7 +152,7 @@ public class ProductItemData implements IXmlReader
 		
 		if (_itemsList.containsKey(Integer.valueOf(productId)))
 		{
-			L2ProductItem product = ProductItemData.getInstance().getItem(productId);
+			L2ProductItem product = ProductItemData.getInstance().getProduct(productId);
 			
 			if (product == null)
 			{
@@ -223,6 +223,11 @@ public class ProductItemData implements IXmlReader
 			
 			activeChar.setPrimePoints(activeChar.getPrimePoints() - totalPoints);
 			
+			if (product.isLimited())
+			{
+				DAOFactory.getInstance().getItemMallDAO().setCurrentStock(count);
+			}
+			
 			if (_recentList.get(activeChar.getObjectId()) == null)
 			{
 				List<L2ProductItem> charList = new ArrayList<>();
@@ -241,7 +246,7 @@ public class ProductItemData implements IXmlReader
 			activeChar.sendPacket(new ExBR_GamePoint(activeChar));
 			activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_OK));
 			activeChar.broadcastUserInfo();
-			DAOFactory.getInstance().getItemMallDAO().requestBuyItem(activeChar, productId, (byte) count);
+			DAOFactory.getInstance().getItemMallDAO().addPoduct(activeChar.getObjectId(), product.getProductId(), count, product.getMaxStock());
 		}
 		else
 		{
@@ -281,28 +286,29 @@ public class ProductItemData implements IXmlReader
 		return true;
 	}
 	
-	public Collection<L2ProductItem> getProducts()
+	public Collection<L2ProductItem> getProductValues()
 	{
 		return _itemsList.values();
 	}
 	
-	public L2ProductItem getItem(int id)
+	public L2ProductItem getProduct(int id)
 	{
 		return _itemsList.get(id);
 	}
 	
-	public List<L2ProductItem> getRecentListByOID(int objId)
+	public List<L2ProductItem> getPoducts(int objId)
 	{
+		DAOFactory.getInstance().getItemMallDAO().loadPoducts(objId);
 		return _recentList.get(objId) == null ? new ArrayList<>() : _recentList.get(objId);
 	}
 	
 	public static ProductItemData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final ProductItemData _instance = new ProductItemData();
+		protected static final ProductItemData INSTANCE = new ProductItemData();
 	}
 }

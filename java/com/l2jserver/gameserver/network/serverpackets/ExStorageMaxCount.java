@@ -19,8 +19,8 @@
 package com.l2jserver.gameserver.network.serverpackets;
 
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.enums.actors.Stats;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.stats.Stats;
 
 /**
  * @author -Wooden-, KenM

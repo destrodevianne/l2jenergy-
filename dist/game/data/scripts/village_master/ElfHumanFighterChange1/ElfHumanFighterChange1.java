@@ -20,9 +20,9 @@ package village_master.ElfHumanFighterChange1;
 
 import com.l2jserver.gameserver.enums.CategoryType;
 import com.l2jserver.gameserver.enums.Race;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 
 import ai.npc.AbstractNpcAI;
 
@@ -168,7 +168,7 @@ public final class ElfHumanFighterChange1 extends AbstractNpcAI
 		{
 			htmltext = "30066-41.htm"; // fnYouAreFourthClass
 		}
-		else if ((classId == WARRIOR) && (player.getClassId() == ClassId.fighter))
+		else if ((classId == WARRIOR) && (player.getClassId() == ClassId.HUMAN_FIGHTER))
 		{
 			if (player.getLevel() < 20)
 			{
@@ -196,7 +196,7 @@ public final class ElfHumanFighterChange1 extends AbstractNpcAI
 				htmltext = npc.getId() + "-24.htm"; // fnNoProof11
 			}
 		}
-		else if ((classId == KNIGHT) && (player.getClassId() == ClassId.fighter))
+		else if ((classId == KNIGHT) && (player.getClassId() == ClassId.HUMAN_FIGHTER))
 		{
 			if (player.getLevel() < 20)
 			{
@@ -224,7 +224,7 @@ public final class ElfHumanFighterChange1 extends AbstractNpcAI
 				htmltext = npc.getId() + "-28.htm"; // fnNoProof12
 			}
 		}
-		else if ((classId == ROGUE) && (player.getClassId() == ClassId.fighter))
+		else if ((classId == ROGUE) && (player.getClassId() == ClassId.HUMAN_FIGHTER))
 		{
 			if (player.getLevel() < 20)
 			{
@@ -252,7 +252,7 @@ public final class ElfHumanFighterChange1 extends AbstractNpcAI
 				htmltext = npc.getId() + "-32.htm"; // fnNoProof13
 			}
 		}
-		else if ((classId == ELVEN_KNIGHT) && (player.getClassId() == ClassId.elvenFighter))
+		else if ((classId == ELVEN_KNIGHT) && (player.getClassId() == ClassId.ELVEN_FIGHTER))
 		{
 			if (player.getLevel() < 20)
 			{
@@ -280,7 +280,7 @@ public final class ElfHumanFighterChange1 extends AbstractNpcAI
 				htmltext = npc.getId() + "-36.htm"; // fnNoProof21
 			}
 		}
-		else if ((classId == ELVEN_SCOUT) && (player.getClassId() == ClassId.elvenFighter))
+		else if ((classId == ELVEN_SCOUT) && (player.getClassId() == ClassId.ELVEN_FIGHTER))
 		{
 			if (player.getLevel() < 20)
 			{

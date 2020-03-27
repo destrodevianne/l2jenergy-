@@ -18,9 +18,9 @@
  */
 package com.l2jserver.gameserver.model.zone.type;
 
+import com.l2jserver.gameserver.enums.ZoneId;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.zone.L2ZoneType;
-import com.l2jserver.gameserver.model.zone.ZoneId;
 
 /**
  * A scripted zone... Creation of such a zone should require somekind of jython script reference which can handle onEnter() / onExit()

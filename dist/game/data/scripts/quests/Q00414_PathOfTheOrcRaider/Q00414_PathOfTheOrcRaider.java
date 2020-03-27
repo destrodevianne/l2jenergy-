@@ -18,10 +18,10 @@
  */
 package quests.Q00414_PathOfTheOrcRaider;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
@@ -79,7 +79,7 @@ public final class Q00414_PathOfTheOrcRaider extends Quest
 		{
 			case "ACCEPT":
 			{
-				if (player.getClassId() == ClassId.orcFighter)
+				if (player.getClassId() == ClassId.ORC_FIGHTER)
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{
@@ -102,7 +102,7 @@ public final class Q00414_PathOfTheOrcRaider extends Quest
 						htmltext = "30570-02.htm";
 					}
 				}
-				else if (player.getClassId() == ClassId.orcRaider)
+				else if (player.getClassId() == ClassId.ORC_RAIDER)
 				{
 					htmltext = "30570-02a.htm";
 				}

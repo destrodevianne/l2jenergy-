@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.model.pledge;
 
 import com.l2jserver.commons.util.EnumIntBitmask;
-import com.l2jserver.gameserver.model.ClanPrivilege;
+import com.l2jserver.gameserver.enums.ClanPrivilege;
 
 /**
  * @author Мо3олЬ

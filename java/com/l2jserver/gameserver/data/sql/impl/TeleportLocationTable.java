@@ -116,11 +116,11 @@ public class TeleportLocationTable
 	
 	public static TeleportLocationTable getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final TeleportLocationTable _instance = new TeleportLocationTable();
+		protected static final TeleportLocationTable INSTANCE = new TeleportLocationTable();
 	}
 }

@@ -18,6 +18,7 @@
  */
 package com.l2jserver.gameserver.model.announce;
 
+import com.l2jserver.gameserver.enums.AnnouncementType;
 import com.l2jserver.gameserver.model.interfaces.IDeletable;
 import com.l2jserver.gameserver.model.interfaces.IStorable;
 import com.l2jserver.gameserver.model.interfaces.IUpdatable;

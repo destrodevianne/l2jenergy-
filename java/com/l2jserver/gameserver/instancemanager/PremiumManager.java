@@ -33,11 +33,11 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.enums.events.EventType;
 import com.l2jserver.gameserver.instancemanager.tasks.PremiumExpireTask;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.events.Containers;
-import com.l2jserver.gameserver.model.events.EventType;
 import com.l2jserver.gameserver.model.events.ListenersContainer;
 import com.l2jserver.gameserver.model.events.impl.character.player.OnPlayerLogin;
 import com.l2jserver.gameserver.model.events.impl.character.player.OnPlayerLogout;
@@ -220,11 +220,11 @@ public class PremiumManager
 	
 	public static final PremiumManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final PremiumManager _instance = new PremiumManager();
+		protected static final PremiumManager INSTANCE = new PremiumManager();
 	}
 }

@@ -19,9 +19,9 @@
 package com.l2jserver.gameserver.model.actor.tasks.player;
 
 import com.l2jserver.gameserver.configuration.config.RatesConfig;
+import com.l2jserver.gameserver.enums.ZoneId;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.actor.stat.PcStat;
-import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.network.serverpackets.ExVitalityPointInfo;
 
 /**

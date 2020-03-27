@@ -18,9 +18,9 @@
  */
 package com.l2jserver.gameserver.model.events.impl.character.player;
 
-import com.l2jserver.gameserver.model.L2Augmentation;
+import com.l2jserver.gameserver.enums.events.EventType;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.events.EventType;
+import com.l2jserver.gameserver.model.augmentation.L2Augmentation;
 import com.l2jserver.gameserver.model.events.impl.IBaseEvent;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 

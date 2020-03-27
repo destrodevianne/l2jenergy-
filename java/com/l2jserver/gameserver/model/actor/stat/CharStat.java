@@ -23,6 +23,10 @@ import java.util.Arrays;
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.NpcConfig;
 import com.l2jserver.gameserver.data.xml.impl.ChampionData;
+import com.l2jserver.gameserver.enums.ZoneId;
+import com.l2jserver.gameserver.enums.actors.MoveType;
+import com.l2jserver.gameserver.enums.actors.Stats;
+import com.l2jserver.gameserver.enums.actors.TraitType;
 import com.l2jserver.gameserver.model.Elementals;
 import com.l2jserver.gameserver.model.PcCondOverride;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
@@ -31,10 +35,6 @@ import com.l2jserver.gameserver.model.items.L2Weapon;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.model.stats.Calculator;
-import com.l2jserver.gameserver.model.stats.MoveType;
-import com.l2jserver.gameserver.model.stats.Stats;
-import com.l2jserver.gameserver.model.stats.TraitType;
-import com.l2jserver.gameserver.model.zone.ZoneId;
 
 public class CharStat
 {

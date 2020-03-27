@@ -40,6 +40,7 @@ import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.enums.InstanceType;
+import com.l2jserver.gameserver.enums.skills.L2EffectType;
 import com.l2jserver.gameserver.instancemanager.InstanceManager;
 import com.l2jserver.gameserver.model.L2CommandChannel;
 import com.l2jserver.gameserver.model.L2Party;
@@ -53,7 +54,6 @@ import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2GrandBossInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2MonsterInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.effects.L2EffectType;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.instancezone.InstanceWorld;
 import com.l2jserver.gameserver.model.skills.Skill;
@@ -260,7 +260,7 @@ public final class FinalEmperialTomb extends AbstractInstance
 			factory.setValidating(false);
 			factory.setIgnoringComments(true);
 			
-			File file = new File(ServerConfig.DATAPACK_ROOT + "/data/spawnZones/final_emperial_tomb.xml");
+			File file = new File(ServerConfig.DATAPACK_ROOT + "/data/xml/spawnZones/final_emperial_tomb.xml");
 			if (!file.exists())
 			{
 				LOG.error("[Final Emperial Tomb] Missing final_emperial_tomb.xml. The quest wont work without it!");

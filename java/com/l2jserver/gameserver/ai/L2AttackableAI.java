@@ -40,6 +40,10 @@ import com.l2jserver.gameserver.data.sql.impl.TerritoryTable;
 import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.enums.AISkillScope;
 import com.l2jserver.gameserver.enums.AIType;
+import com.l2jserver.gameserver.enums.ZoneId;
+import com.l2jserver.gameserver.enums.skills.AbnormalVisualEffect;
+import com.l2jserver.gameserver.enums.skills.L2EffectType;
+import com.l2jserver.gameserver.enums.skills.targets.L2TargetType;
 import com.l2jserver.gameserver.instancemanager.DimensionalRiftManager;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.Location;
@@ -57,15 +61,12 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2RaidBossInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2RiftInvaderInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2StaticObjectInstance;
-import com.l2jserver.gameserver.model.effects.L2EffectType;
+import com.l2jserver.gameserver.model.actor.tasks.attackable.FearTask;
 import com.l2jserver.gameserver.model.events.EventDispatcher;
 import com.l2jserver.gameserver.model.events.impl.character.npc.attackable.OnAttackableFactionCall;
 import com.l2jserver.gameserver.model.events.impl.character.npc.attackable.OnAttackableHate;
 import com.l2jserver.gameserver.model.events.returns.TerminateReturn;
-import com.l2jserver.gameserver.model.skills.AbnormalVisualEffect;
 import com.l2jserver.gameserver.model.skills.Skill;
-import com.l2jserver.gameserver.model.skills.targets.L2TargetType;
-import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.util.Util;
 
 /**
@@ -76,34 +77,7 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
 {
 	private static final Logger LOG = LoggerFactory.getLogger(L2AttackableAI.class);
 	
-	/**
-	 * Fear task.
-	 * @author Zoey76
-	 */
-	public static class FearTask implements Runnable
-	{
-		private final L2AttackableAI _ai;
-		private final L2Character _effector;
-		private boolean _start;
-		
-		public FearTask(L2AttackableAI ai, L2Character effector, boolean start)
-		{
-			_ai = ai;
-			_effector = effector;
-			_start = start;
-		}
-		
-		@Override
-		public void run()
-		{
-			final int fearTimeLeft = _ai.getFearTime() - FEAR_TICKS;
-			_ai.setFearTime(fearTimeLeft);
-			_ai.onEvtAfraid(_effector, _start);
-			_start = false;
-		}
-	}
-	
-	protected static final int FEAR_TICKS = 5;
+	public static final int FEAR_TICKS = 5;
 	private static final int RANDOM_WALK_RATE = 30; // confirmed
 	// private static final int MAX_DRIFT_RANGE = 300;
 	private static final int MAX_ATTACK_TIMEOUT = 1200; // int ticks, i.e. 2min
@@ -431,7 +405,7 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
 	}
 	
 	@Override
-	protected void onEvtAfraid(L2Character effector, boolean start)
+	public void onEvtAfraid(L2Character effector, boolean start)
 	{
 		if ((_fearTime > 0) && (_fearTask == null))
 		{

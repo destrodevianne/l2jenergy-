@@ -39,11 +39,6 @@ public class BoatManager
 	public static final int GLUDIN_HARBOR = 2;
 	public static final int RUNE_HARBOR = 3;
 	
-	public static final BoatManager getInstance()
-	{
-		return SingletonHolder._instance;
-	}
-	
 	protected BoatManager()
 	{
 		for (int i = 0; i < _docksBusy.length; i++)
@@ -200,8 +195,13 @@ public class BoatManager
 		}
 	}
 	
+	public static final BoatManager getInstance()
+	{
+		return SingletonHolder.INSTANCE;
+	}
+	
 	private static class SingletonHolder
 	{
-		protected static final BoatManager _instance = new BoatManager();
+		protected static final BoatManager INSTANCE = new BoatManager();
 	}
 }

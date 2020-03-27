@@ -67,7 +67,7 @@ public final class InstanceManager implements IXmlReader
 	public void load()
 	{
 		_instanceIdNames.clear();
-		parseDatapackFile("data/instancenames.xml");
+		parseDatapackFile("data/xml/instancenames.xml");
 		LOG.info("{}: Loaded {} instance names.", getClass().getSimpleName(), _instanceIdNames.size());
 	}
 	
@@ -379,11 +379,11 @@ public final class InstanceManager implements IXmlReader
 	 */
 	public static final InstanceManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final InstanceManager _instance = new InstanceManager();
+		protected static final InstanceManager INSTANCE = new InstanceManager();
 	}
 }

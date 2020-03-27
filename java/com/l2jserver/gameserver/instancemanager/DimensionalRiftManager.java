@@ -61,11 +61,6 @@ public final class DimensionalRiftManager
 	private final Map<Byte, Map<Byte, DimensionalRiftRoom>> _rooms = new HashMap<>(7);
 	private static final int DIMENSIONAL_FRAGMENT_ITEM_ID = 7079;
 	
-	public static DimensionalRiftManager getInstance()
-	{
-		return SingletonHolder._instance;
-	}
-	
 	protected DimensionalRiftManager()
 	{
 		loadRooms();
@@ -133,7 +128,7 @@ public final class DimensionalRiftManager
 			factory.setValidating(false);
 			factory.setIgnoringComments(true);
 			
-			File file = new File(ServerConfig.DATAPACK_ROOT, "data/dimensionalRift.xml");
+			File file = new File(ServerConfig.DATAPACK_ROOT, "data/xml/dimensionalRift.xml");
 			if (!file.exists())
 			{
 				LOG.warn("{}: Couldn't find data/{}", getClass().getSimpleName(), file.getName());
@@ -465,8 +460,13 @@ public final class DimensionalRiftManager
 		return list;
 	}
 	
+	public static DimensionalRiftManager getInstance()
+	{
+		return SingletonHolder.INSTANCE;
+	}
+	
 	private static class SingletonHolder
 	{
-		protected static final DimensionalRiftManager _instance = new DimensionalRiftManager();
+		protected static final DimensionalRiftManager INSTANCE = new DimensionalRiftManager();
 	}
 }

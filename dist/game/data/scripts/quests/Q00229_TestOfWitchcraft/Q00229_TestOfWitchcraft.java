@@ -18,11 +18,11 @@
  */
 package quests.Q00229_TestOfWitchcraft;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
@@ -137,7 +137,7 @@ public final class Q00229_TestOfWitchcraft extends Quest
 					giveItems(player, ORIMS_DIAGRAM, 1);
 					if (player.getVariables().getInt("2ND_CLASS_DIAMOND_REWARD", 0) == 0)
 					{
-						if (player.getClassId() == ClassId.wizard)
+						if (player.getClassId() == ClassId.HUMAN_WIZARD)
 						{
 							giveItems(player, DIMENSIONAL_DIAMOND, 122);
 						}
@@ -510,11 +510,11 @@ public final class Q00229_TestOfWitchcraft extends Quest
 		{
 			if (npc.getId() == SHADOW_ORIM)
 			{
-				if ((player.getClassId() == ClassId.wizard) || (player.getClassId() == ClassId.knight) || (player.getClassId() == ClassId.palusKnight))
+				if ((player.getClassId() == ClassId.HUMAN_WIZARD) || (player.getClassId() == ClassId.KNIGHT) || (player.getClassId() == ClassId.PALUS_KNIGHT))
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{
-						if (player.getClassId() == ClassId.wizard)
+						if (player.getClassId() == ClassId.HUMAN_WIZARD)
 						{
 							htmltext = "30630-03.htm";
 						}

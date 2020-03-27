@@ -32,10 +32,10 @@ import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.dao.ServitorSkillSaveDAO;
 import com.l2jserver.gameserver.data.sql.impl.SummonEffectsTable;
 import com.l2jserver.gameserver.datatables.SkillData;
+import com.l2jserver.gameserver.enums.skills.AbnormalType;
+import com.l2jserver.gameserver.enums.skills.EffectScope;
 import com.l2jserver.gameserver.model.actor.instance.L2ServitorInstance;
-import com.l2jserver.gameserver.model.skills.AbnormalType;
 import com.l2jserver.gameserver.model.skills.BuffInfo;
-import com.l2jserver.gameserver.model.skills.EffectScope;
 import com.l2jserver.gameserver.model.skills.Skill;
 
 /**

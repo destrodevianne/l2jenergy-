@@ -21,6 +21,7 @@ package com.l2jserver.gameserver.model;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import com.l2jserver.gameserver.enums.SiegeClanType;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 
 public class L2SiegeClan
@@ -28,14 +29,6 @@ public class L2SiegeClan
 	private int _clanId = 0;
 	private final List<L2Npc> _flag = new CopyOnWriteArrayList<>();
 	private SiegeClanType _type;
-	
-	public enum SiegeClanType
-	{
-		OWNER,
-		DEFENDER,
-		ATTACKER,
-		DEFENDER_PENDING
-	}
 	
 	public L2SiegeClan(int clanId, SiegeClanType type)
 	{

@@ -21,9 +21,9 @@ package com.l2jserver.gameserver.network.serverpackets;
 import java.util.Collection;
 
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.enums.items.ItemType1;
 import com.l2jserver.gameserver.model.buylist.L2BuyList;
 import com.l2jserver.gameserver.model.buylist.Product;
-import com.l2jserver.gameserver.model.items.type.ItemType1;
 
 public class ShopPreviewList extends L2GameServerPacket
 {

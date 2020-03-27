@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../xsd/multisell.xsd">
+    <npcs>
+		<npc>-1</npc> <!-- CB -->
+	</npcs>
+    <!-- Agations -->
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="14675"/> <!-- Agathion Seal Bracelet - Saerom -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20212"/> <!-- Agathion Seal Bracelet - Charming Cupid -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20213" /><!-- Agathion Seal Bracelet - Naughty Cupid -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20221"/> <!-- Agathion Seal Bracelet - White Maneki Neko -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20222" /><!-- Agathion Seal Bracelet - Black Maneki Neko -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20223" /><!-- Agathion Seal Bracelet - Brown Maneki Neko -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20230"/> <!-- Agathion Seal Bracelet - One-Eyed Bat Drove -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20236"/> <!-- Agathion Seal Bracelet - Pegasus -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20297"/> <!-- Agathion Seal Bracelet - Red Sumo Wrestler -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20299"/> <!-- Agathion Seal Bracelet - Blue Sumo Wrestler -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20301"/> <!-- Agathion Seal Bracelet - Great Sumo Match -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20303"/> <!-- Agathion Seal Bracelet - Button-Eyed Bear Doll -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20307"/> <!-- Agathion Seal Bracelet - God of Fortune -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20309"/> <!-- Agathion Seal Bracelet - Dryad -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20310"/> <!-- Agathion Seal Bracelet - Wonboso -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20312"/> <!-- Agathion Seal Bracelet - Daewoonso -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20238"/> <!-- Agathion Seal Bracelet - Pegasus Escape - 7 Day Expiration Period -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20245"/> <!-- Agathion Seal Bracelet - Yellow-Robed Tojigong -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20246"/> <!-- Agathion Seal Bracelet - Blue-Robed Tojigong -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20247"/> <!-- Agathion Seal Bracelet - Green-Robed Tojigong -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20252"/> <!-- Agathion Seal Bracelet - Bugbear -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20006"/> <!-- Agathion Seal Bracelet - Majo -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20007"/> <!-- Agathion Seal Bracelet - Gold Majo -->
+    </item>
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20008"/> <!-- Agathion Seal Bracelet - Black Majo -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20012"/> <!-- Agathion Seal Bracelet - Plaipitak -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="13543"/> <!-- Agathion Summon Bracelet - Collection -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="13544"/> <!-- Agathion Summon Bracelet - Boy Teddy Bear -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="13545"/> <!-- Agathion Summon Bracelet - Girl Teddy Bear -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="20253"/> <!-- Agathion of Love (Event) -->
+    </item> 
+    <item>
+        <ingredient count="50" id="13068"/> <!-- Fantasy Isle Coin -->
+        <production count="1" id="14104"/> <!-- Collect -->
+    </item>
+</list>

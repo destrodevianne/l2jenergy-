@@ -84,11 +84,11 @@ public class ChatHandler implements IHandler<IChatHandler, Integer>
 	
 	public static ChatHandler getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final ChatHandler _instance = new ChatHandler();
+		protected static final ChatHandler INSTANCE = new ChatHandler();
 	}
 }

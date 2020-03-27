@@ -19,11 +19,11 @@
 package com.l2jserver.gameserver.model.stats.functions;
 
 import com.l2jserver.gameserver.data.xml.impl.EnchantItemHPBonusData;
+import com.l2jserver.gameserver.enums.actors.Stats;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.conditions.Condition;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.model.skills.Skill;
-import com.l2jserver.gameserver.model.stats.Stats;
 
 /**
  * @author Yamaneko

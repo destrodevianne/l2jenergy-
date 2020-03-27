@@ -28,10 +28,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.gameserver.enums.PunishmentAffect;
+import com.l2jserver.gameserver.enums.PunishmentType;
 import com.l2jserver.gameserver.model.holders.PunishmentHolder;
-import com.l2jserver.gameserver.model.punishment.PunishmentAffect;
 import com.l2jserver.gameserver.model.punishment.PunishmentTask;
-import com.l2jserver.gameserver.model.punishment.PunishmentType;
 
 /**
  * @author UnAfraid
@@ -130,11 +130,11 @@ public final class PunishmentManager
 	 */
 	public static final PunishmentManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final PunishmentManager _instance = new PunishmentManager();
+		protected static final PunishmentManager INSTANCE = new PunishmentManager();
 	}
 }

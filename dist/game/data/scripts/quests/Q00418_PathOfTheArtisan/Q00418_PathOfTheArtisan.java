@@ -18,10 +18,10 @@
  */
 package quests.Q00418_PathOfTheArtisan;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
@@ -83,7 +83,7 @@ public final class Q00418_PathOfTheArtisan extends Quest
 		{
 			case "ACCEPT":
 			{
-				if (player.getClassId() == ClassId.dwarvenFighter)
+				if (player.getClassId() == ClassId.DWARVEN_FIGHTER)
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{
@@ -101,7 +101,7 @@ public final class Q00418_PathOfTheArtisan extends Quest
 						htmltext = "30527-03.htm";
 					}
 				}
-				else if (player.getClassId() == ClassId.artisan)
+				else if (player.getClassId() == ClassId.ARTISAN)
 				{
 					htmltext = "30527-02a.htm";
 				}

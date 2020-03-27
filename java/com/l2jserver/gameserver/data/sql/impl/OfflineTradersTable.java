@@ -30,13 +30,14 @@ import org.slf4j.LoggerFactory;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.LoginServerThread;
 import com.l2jserver.gameserver.configuration.config.custom.OfflineConfig;
+import com.l2jserver.gameserver.enums.GameClientState;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
+import com.l2jserver.gameserver.enums.skills.AbnormalVisualEffect;
 import com.l2jserver.gameserver.model.L2ManufactureItem;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.TradeItem;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.L2GameClient;
-import com.l2jserver.gameserver.network.L2GameClient.GameClientState;
 
 public class OfflineTradersTable
 {
@@ -237,6 +238,11 @@ public class OfflineTradersTable
 					{
 						player.getAppearance().setNameColor(OfflineConfig.OFFLINE_NAME_COLOR);
 					}
+					
+					if (OfflineConfig.OFFLINE_SET_SLEEP)
+					{
+						player.startAbnormalVisualEffect(true, AbnormalVisualEffect.SLEEP);
+					}
 					player.setPrivateStoreType(type);
 					player.setOnlineStatus(true, true);
 					player.restoreEffects();
@@ -273,11 +279,11 @@ public class OfflineTradersTable
 	 */
 	public static OfflineTradersTable getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final OfflineTradersTable _instance = new OfflineTradersTable();
+		protected static final OfflineTradersTable INSTANCE = new OfflineTradersTable();
 	}
 }

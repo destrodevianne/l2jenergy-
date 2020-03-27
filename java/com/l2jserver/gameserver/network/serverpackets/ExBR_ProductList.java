@@ -26,11 +26,11 @@ import com.l2jserver.gameserver.model.primeshop.L2ProductItem;
 
 public class ExBR_ProductList extends L2GameServerPacket
 {
-	private Collection<L2ProductItem> _items = Collections.emptyList();
+	private Collection<L2ProductItem> _itemList = Collections.emptyList();
 	
 	public ExBR_ProductList()
 	{
-		_items = ProductItemData.getInstance().getProducts();
+		_itemList = ProductItemData.getInstance().getProductValues();
 	}
 	
 	@Override
@@ -38,9 +38,9 @@ public class ExBR_ProductList extends L2GameServerPacket
 	{
 		writeC(0xFE);
 		writeH(0xD6);
-		writeD(_items.size());
+		writeD(_itemList.size());
 		
-		for (final L2ProductItem template : _items)
+		for (final L2ProductItem template : _itemList)
 		{
 			if (!ProductItemData.getInstance().calcStartEndTime(template.getProductId()))
 			{

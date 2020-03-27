@@ -18,11 +18,11 @@
  */
 package com.l2jserver.gameserver.model.items;
 
+import com.l2jserver.gameserver.enums.items.ArmorType;
+import com.l2jserver.gameserver.enums.items.ItemType1;
+import com.l2jserver.gameserver.enums.items.ItemType2;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
-import com.l2jserver.gameserver.model.items.type.ArmorType;
-import com.l2jserver.gameserver.model.items.type.ItemType1;
-import com.l2jserver.gameserver.model.items.type.ItemType2;
 import com.l2jserver.gameserver.model.skills.Skill;
 
 /**

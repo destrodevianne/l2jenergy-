@@ -40,11 +40,11 @@ import org.xml.sax.helpers.DefaultHandler;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.enums.ZoneId;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.skills.Skill;
-import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
@@ -433,11 +433,6 @@ public final class BotReportTable
 		}
 	}
 	
-	public static BotReportTable getInstance()
-	{
-		return SingletonHolder.INSTANCE;
-	}
-	
 	/**
 	 * Returns a integer representative number from a connection
 	 * @param player (The L2PcInstance owner of the connection)
@@ -614,6 +609,11 @@ public final class BotReportTable
 			resetPointsAndSchedule();
 			
 		}
+	}
+	
+	public static BotReportTable getInstance()
+	{
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static final class SingletonHolder

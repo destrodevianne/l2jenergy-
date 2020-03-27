@@ -18,11 +18,11 @@
  */
 package com.l2jserver.gameserver.model.zone.type;
 
+import com.l2jserver.gameserver.enums.ZoneId;
 import com.l2jserver.gameserver.instancemanager.ClanHallManager;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.entity.ClanHall;
 import com.l2jserver.gameserver.model.entity.clanhall.AuctionableHall;
-import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.network.serverpackets.AgitDecoInfo;
 
 /**

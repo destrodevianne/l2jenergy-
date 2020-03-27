@@ -19,10 +19,10 @@
 package quests.Q00212_TrialOfDuty;
 
 import com.l2jserver.gameserver.enums.CategoryType;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.holders.ItemHolder;
 import com.l2jserver.gameserver.model.items.L2Weapon;
 import com.l2jserver.gameserver.model.quest.Quest;
@@ -572,7 +572,7 @@ public final class Q00212_TrialOfDuty extends Quest
 		
 		if (vars.getInt("2ND_CLASS_DIAMOND_REWARD", 0) == 0)
 		{
-			if (player.getClassId() == ClassId.knight)
+			if (player.getClassId() == ClassId.KNIGHT)
 			{
 				rewardItems(player, DIMENSIONAL_DIAMOND, 45);
 			}

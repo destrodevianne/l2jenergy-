@@ -22,13 +22,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.datatables.ItemTable;
+import com.l2jserver.gameserver.enums.items.CrystalType;
+import com.l2jserver.gameserver.enums.items.EtcItemType;
+import com.l2jserver.gameserver.enums.items.ItemType2;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
-import com.l2jserver.gameserver.model.items.type.CrystalType;
-import com.l2jserver.gameserver.model.items.type.EtcItemType;
 import com.l2jserver.gameserver.model.items.type.ItemType;
-import com.l2jserver.gameserver.model.items.type.ItemType2;
 import com.l2jserver.gameserver.util.Util;
 
 /**

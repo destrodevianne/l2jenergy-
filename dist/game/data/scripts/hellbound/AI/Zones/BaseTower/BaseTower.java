@@ -22,9 +22,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 
 import ai.npc.AbstractNpcAI;
@@ -57,7 +57,7 @@ public final class BaseTower extends AbstractNpcAI
 	public final String onFirstTalk(L2Npc npc, L2PcInstance player)
 	{
 		final ClassId classId = player.getClassId();
-		if (classId.equalsOrChildOf(ClassId.hellKnight) || classId.equalsOrChildOf(ClassId.soultaker))
+		if (classId.equalsOrChildOf(ClassId.HELL_KNIGHT) || classId.equalsOrChildOf(ClassId.SOULTAKER))
 		{
 			return "32301-02.htm";
 		}

@@ -18,10 +18,10 @@
  */
 package quests.Q00405_PathOfTheCleric;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
@@ -82,7 +82,7 @@ public final class Q00405_PathOfTheCleric extends Quest
 		{
 			case "ACCEPT":
 			{
-				if (player.getClassId() == ClassId.mage)
+				if (player.getClassId() == ClassId.HUMAN_MYSTIC)
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{
@@ -102,7 +102,7 @@ public final class Q00405_PathOfTheCleric extends Quest
 						htmltext = "30022-03.htm";
 					}
 				}
-				else if (player.getClassId() == ClassId.cleric)
+				else if (player.getClassId() == ClassId.CLERIC)
 				{
 					htmltext = "30022-02a.htm";
 				}

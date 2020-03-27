@@ -38,6 +38,7 @@ import com.l2jserver.gameserver.dao.RecipeShopListDAO;
 import com.l2jserver.gameserver.dao.RecommendationBonusDAO;
 import com.l2jserver.gameserver.dao.ServitorSkillSaveDAO;
 import com.l2jserver.gameserver.dao.ShortcutDAO;
+import com.l2jserver.gameserver.dao.SiegeDAO;
 import com.l2jserver.gameserver.dao.SkillDAO;
 import com.l2jserver.gameserver.dao.SubclassDAO;
 import com.l2jserver.gameserver.dao.TeleportBookmarkDAO;
@@ -62,6 +63,7 @@ import com.l2jserver.gameserver.dao.impl.mysql.RecipeShopListDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.RecommendationBonusDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.ServitorSkillSaveDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.ShortcutDAOMySQLImpl;
+import com.l2jserver.gameserver.dao.impl.mysql.SiegeDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.SkillDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.SubclassDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.TeleportBookmarkDAOMySQLImpl;
@@ -94,6 +96,7 @@ enum MySQLDAOFactory implements IDAOFactory
 	private final RecommendationBonusDAO recommendationBonusDAO = new RecommendationBonusDAOMySQLImpl();
 	private final ServitorSkillSaveDAO servitorSkillSaveDAO = new ServitorSkillSaveDAOMySQLImpl();
 	private final ShortcutDAO shortcutDAO = new ShortcutDAOMySQLImpl();
+	private final SiegeDAO siegeDAO = new SiegeDAOMySQLImpl();
 	private final SkillDAO skillDAO = new SkillDAOMySQLImpl();
 	private final SubclassDAO subclassDAO = new SubclassDAOMySQLImpl();
 	private final TeleportBookmarkDAO teleportBookmarkDAO = new TeleportBookmarkDAOMySQLImpl();
@@ -216,6 +219,12 @@ enum MySQLDAOFactory implements IDAOFactory
 	public ShortcutDAO getShortcutDAO()
 	{
 		return shortcutDAO;
+	}
+	
+	@Override
+	public SiegeDAO getSiegeDAO()
+	{
+		return siegeDAO;
 	}
 	
 	@Override

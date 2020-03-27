@@ -23,7 +23,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.l2jserver.gameserver.model.events.ListenerRegisterType;
+import com.l2jserver.gameserver.enums.events.ListenerRegisterType;
 
 /**
  * @author UnAfraid

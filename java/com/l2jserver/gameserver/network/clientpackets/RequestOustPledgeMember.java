@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
-import com.l2jserver.gameserver.model.ClanPrivilege;
+import com.l2jserver.gameserver.enums.ClanPrivilege;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2ClanMember;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -30,10 +30,6 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.PledgeShowMemberListDelete;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
-/**
- * This class ...
- * @version $Revision: 1.3.2.1.2.3 $ $Date: 2005/03/27 15:29:30 $
- */
 public final class RequestOustPledgeMember extends L2GameClientPacket
 {
 	private static final String _C__29_REQUESTOUSTPLEDGEMEMBER = "[C] 29 RequestOustPledgeMember";

@@ -73,7 +73,7 @@ public class MerchantPriceConfigTable implements InstanceListManager
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		factory.setValidating(false);
 		factory.setIgnoringComments(true);
-		File file = new File(ServerConfig.DATAPACK_ROOT + "/data/" + MPCS_FILE);
+		File file = new File(ServerConfig.DATAPACK_ROOT + "/data/xml/" + MPCS_FILE);
 		if (file.exists())
 		{
 			int defaultPriceConfigId;
@@ -282,11 +282,11 @@ public class MerchantPriceConfigTable implements InstanceListManager
 	
 	public static MerchantPriceConfigTable getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final MerchantPriceConfigTable _instance = new MerchantPriceConfigTable();
+		protected static final MerchantPriceConfigTable INSTANCE = new MerchantPriceConfigTable();
 	}
 }

@@ -30,9 +30,7 @@ import org.slf4j.LoggerFactory;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.dao.ItemMallDAO;
 import com.l2jserver.gameserver.data.xml.impl.ProductItemData;
-import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.primeshop.L2ProductItem;
-import com.l2jserver.gameserver.network.serverpackets.ExBR_BuyProduct;
 
 /**
  * @author Мо3олЬ
@@ -41,48 +39,43 @@ public class ItemMallDAOMySQLImpl implements ItemMallDAO
 {
 	private static final Logger LOG = LoggerFactory.getLogger(ItemMallDAOMySQLImpl.class);
 	
-	private static final String INSERT_ITEM_MALL_PRODUCT = "INSERT INTO character_item_mall_transactions (charId, productId, quantity) values (?,?,?)";
+	private static final String INSERT_ITEM_MALL_PRODUCT = "INSERT INTO character_item_mall_transactions (charId, productId, quantity, maxStock) values (?,?,?,?)";
 	private static final String SELECT_ITEM_MALL_PRODUCT = "SELECT productId FROM character_item_mall_transactions WHERE charId=? ORDER BY transactionTime DESC";
+	private static final String SELECT_ITEM_MALL_MAX_STOCK = "SELECT maxStock FROM character_item_mall_transactions WHERE productId=?";
+	private static final String SELECT_ITEM_MALL_ACTUAL_STOCK = "SELECT quantity FROM character_item_mall_transactions WHERE productId=?";
 	
 	private final List<L2ProductItem> _itemsList = new ArrayList<>();
 	
 	@Override
-	public void requestBuyItem(L2PcInstance activeChar, int productId, int count)
+	public void addPoduct(int objectId, int productId, int quantity, int maxStock)
 	{
-		L2ProductItem product = ProductItemData.getInstance().getItem(productId);
-		if (product == null)
-		{
-			activeChar.sendPacket(new ExBR_BuyProduct(ExBR_BuyProduct.RESULT_WRONG_PRODUCT));
-			return;
-		}
-		
-		// Save transaction info at SQL table character_item_mall_transactions
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
-			PreparedStatement statement = con.prepareStatement(INSERT_ITEM_MALL_PRODUCT))
+			PreparedStatement st = con.prepareStatement(INSERT_ITEM_MALL_PRODUCT))
 		{
-			statement.setLong(1, activeChar.getObjectId());
-			statement.setInt(2, product.getProductId());
-			statement.setLong(3, count);
-			statement.executeUpdate();
+			st.setInt(1, objectId);
+			st.setInt(2, productId);
+			st.setInt(3, quantity);
+			st.setInt(4, maxStock);
+			st.executeUpdate();
 		}
 		catch (Exception e)
 		{
-			LOG.error("Could not save Item Mall transaction: {}", e);
+			LOG.error("Could not save Item Mall transaction!", e);
 		}
 	}
 	
 	@Override
-	public void recentListByItem(int objId)
+	public void loadPoducts(int objectId)
 	{
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
 			PreparedStatement statement = con.prepareStatement(SELECT_ITEM_MALL_PRODUCT))
 		{
-			statement.setInt(1, objId);
+			statement.setInt(1, objectId);
 			try (ResultSet rset = statement.executeQuery())
 			{
 				while (rset.next())
 				{
-					final L2ProductItem product = ProductItemData.getInstance().getItem(rset.getInt("productId"));
+					final L2ProductItem product = ProductItemData.getInstance().getProduct(rset.getInt("productId"));
 					if ((product != null) && !_itemsList.contains(product))
 					{
 						_itemsList.add(product);
@@ -92,7 +85,53 @@ public class ItemMallDAOMySQLImpl implements ItemMallDAO
 		}
 		catch (Exception e)
 		{
-			LOG.error("Could not restore Item Mall transaction: {}", e);
+			LOG.error("Could not restore Item Mall transaction!", e);
 		}
+	}
+	
+	@Override
+	public int setMaxStock(int productId)
+	{
+		int maxStock = 0;
+		try (Connection con = ConnectionFactory.getInstance().getConnection();
+			PreparedStatement ps = con.prepareStatement(SELECT_ITEM_MALL_MAX_STOCK))
+		{
+			ps.setInt(1, productId);
+			try (ResultSet rset = ps.executeQuery())
+			{
+				while (rset.next())
+				{
+					return maxStock = rset.getInt("maxStock");
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			LOG.warn("Could not get max stock of products in Item Mall!", e);
+		}
+		return maxStock;
+	}
+	
+	@Override
+	public int setCurrentStock(int productId)
+	{
+		int getCurrentStock = 0;
+		try (Connection con = ConnectionFactory.getInstance().getConnection();
+			PreparedStatement ps = con.prepareStatement(SELECT_ITEM_MALL_ACTUAL_STOCK))
+		{
+			ps.setInt(1, productId);
+			try (ResultSet rset = ps.executeQuery())
+			{
+				while (rset.next())
+				{
+					return getCurrentStock = rset.getInt("quantity");
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			LOG.warn("Could not get actual stock of products in Item Mall!", e);
+		}
+		return getCurrentStock;
 	}
 }

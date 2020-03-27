@@ -20,5 +20,5 @@ package com.l2jserver.gameserver.enums;
 
 public enum AuctionItemType
 {
-	ClanHall
+	CLAN_HALL
 }

@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.datatables.SkillData;
+import com.l2jserver.gameserver.enums.RaidStatusType;
 import com.l2jserver.gameserver.model.L2Spawn;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -275,7 +276,7 @@ public final class DayNightSpawnManager
 					continue;
 				}
 				
-				if ((boss != null) && (boss.getId() == EILHALDER_VON_HELLMANN) && boss.getRaidStatus().equals(RaidBossSpawnManager.StatusEnum.ALIVE))
+				if ((boss != null) && (boss.getId() == EILHALDER_VON_HELLMANN) && boss.getRaidStatus().equals(RaidStatusType.ALIVE))
 				{
 					handleHellmans(boss, mode);
 				}
@@ -297,11 +298,11 @@ public final class DayNightSpawnManager
 	
 	public static DayNightSpawnManager getInstance()
 	{
-		return SingletonHolder.instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final DayNightSpawnManager instance = new DayNightSpawnManager();
+		protected static final DayNightSpawnManager INSTANCE = new DayNightSpawnManager();
 	}
 }

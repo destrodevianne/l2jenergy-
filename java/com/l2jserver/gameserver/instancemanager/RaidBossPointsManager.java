@@ -175,11 +175,11 @@ public class RaidBossPointsManager
 	
 	public static final RaidBossPointsManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final RaidBossPointsManager _instance = new RaidBossPointsManager();
+		protected static final RaidBossPointsManager INSTANCE = new RaidBossPointsManager();
 	}
 }

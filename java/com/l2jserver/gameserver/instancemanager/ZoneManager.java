@@ -380,8 +380,8 @@ public final class ZoneManager implements IXmlReader
 	{
 		_classZones.clear();
 		_spawnTerritories.clear();
-		parseDatapackDirectory("data/zones", false);
-		parseDatapackDirectory("data/zones/npcSpawnTerritories", false);
+		parseDatapackDirectory("data/xml/zones", false);
+		parseDatapackDirectory("data/xml/zones/npcSpawnTerritories", false);
 		LOG.info("{}: Loaded {} zone classes and {} zones.", getClass().getSimpleName(), _classZones.size(), getSize());
 		LOG.info("{}: Loaded {} NPC spawn territoriers.", getClass().getSimpleName(), _spawnTerritories.size());
 	}
@@ -738,11 +738,11 @@ public final class ZoneManager implements IXmlReader
 	 */
 	public static final ZoneManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final ZoneManager _instance = new ZoneManager();
+		protected static final ZoneManager INSTANCE = new ZoneManager();
 	}
 }

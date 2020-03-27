@@ -18,9 +18,9 @@
  */
 package quests.Q00409_PathOfTheElvenOracle;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
@@ -80,7 +80,7 @@ public final class Q00409_PathOfTheElvenOracle extends Quest
 		{
 			case "ACCEPT":
 			{
-				if (player.getClassId() == ClassId.elvenMage)
+				if (player.getClassId() == ClassId.ELVEN_MYSTIC)
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{
@@ -101,7 +101,7 @@ public final class Q00409_PathOfTheElvenOracle extends Quest
 						htmltext = "30293-03.htm";
 					}
 				}
-				else if (player.getClassId() == ClassId.oracle)
+				else if (player.getClassId() == ClassId.ELVEN_ORACLE)
 				{
 					htmltext = "30293-02a.htm";
 				}

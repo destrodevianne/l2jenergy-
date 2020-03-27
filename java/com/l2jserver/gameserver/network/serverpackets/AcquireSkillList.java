@@ -21,7 +21,7 @@ package com.l2jserver.gameserver.network.serverpackets;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.l2jserver.gameserver.model.base.AcquireSkillType;
+import com.l2jserver.gameserver.enums.skills.AcquireSkillType;
 
 /**
  * Acquire Skill List server packet implementation.

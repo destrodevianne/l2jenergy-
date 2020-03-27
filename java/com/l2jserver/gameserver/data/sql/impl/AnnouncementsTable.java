@@ -29,9 +29,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.ConnectionFactory;
+import com.l2jserver.gameserver.enums.AnnouncementType;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.announce.Announcement;
-import com.l2jserver.gameserver.model.announce.AnnouncementType;
 import com.l2jserver.gameserver.model.announce.AutoAnnouncement;
 import com.l2jserver.gameserver.model.announce.IAnnouncement;
 import com.l2jserver.gameserver.network.clientpackets.Say2;
@@ -165,11 +165,11 @@ public final class AnnouncementsTable
 	 */
 	public static AnnouncementsTable getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final AnnouncementsTable _instance = new AnnouncementsTable();
+		protected static final AnnouncementsTable INSTANCE = new AnnouncementsTable();
 	}
 }

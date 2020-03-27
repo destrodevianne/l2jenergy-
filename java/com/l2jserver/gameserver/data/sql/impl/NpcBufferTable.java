@@ -196,11 +196,11 @@ public class NpcBufferTable
 	
 	public static NpcBufferTable getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final NpcBufferTable _instance = new NpcBufferTable();
+		protected static final NpcBufferTable INSTANCE = new NpcBufferTable();
 	}
 }

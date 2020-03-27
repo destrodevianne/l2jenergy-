@@ -33,6 +33,7 @@ import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.FeatureConfig;
+import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
@@ -972,7 +973,7 @@ public final class Castle extends AbstractResidence
 		if (_showNpcCrest != showNpcCrest)
 		{
 			_showNpcCrest = showNpcCrest;
-			updateShowNpcCrest();
+			DAOFactory.getInstance().getSiegeDAO().updateShowNpcCrest(this);
 		}
 	}
 	
@@ -1002,21 +1003,6 @@ public final class Castle extends AbstractResidence
 			{
 				owner.addReputationScore(FeatureConfig.TAKE_CASTLE_POINTS, true);
 			}
-		}
-	}
-	
-	public void updateShowNpcCrest()
-	{
-		try (Connection con = ConnectionFactory.getInstance().getConnection();
-			PreparedStatement ps = con.prepareStatement("UPDATE castle SET showNpcCrest = ? WHERE id = ?"))
-		{
-			ps.setString(1, String.valueOf(getShowNpcCrest()));
-			ps.setInt(2, getResidenceId());
-			ps.execute();
-		}
-		catch (Exception e)
-		{
-			_log.info("Error saving showNpcCrest for castle " + getName() + ": " + e.getMessage());
 		}
 	}
 	

@@ -18,10 +18,10 @@
  */
 package quests.Q00407_PathOfTheElvenScout;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
@@ -81,7 +81,7 @@ public final class Q00407_PathOfTheElvenScout extends Quest
 		{
 			case "ACCEPT":
 			{
-				if (player.getClassId() == ClassId.elvenFighter)
+				if (player.getClassId() == ClassId.ELVEN_FIGHTER)
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{
@@ -102,7 +102,7 @@ public final class Q00407_PathOfTheElvenScout extends Quest
 						htmltext = "30328-03.htm";
 					}
 				}
-				else if (player.getClassId() == ClassId.elvenScout)
+				else if (player.getClassId() == ClassId.ELVEN_SCOUT)
 				{
 					htmltext = "30328-02a.htm";
 				}

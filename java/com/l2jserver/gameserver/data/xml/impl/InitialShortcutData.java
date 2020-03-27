@@ -29,11 +29,11 @@ import org.w3c.dom.Node;
 
 import com.l2jserver.gameserver.enums.MacroType;
 import com.l2jserver.gameserver.enums.ShortcutType;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.Macro;
 import com.l2jserver.gameserver.model.MacroCmd;
 import com.l2jserver.gameserver.model.Shortcut;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.network.serverpackets.ShortCutRegister;
 import com.l2jserver.gameserver.util.IXmlReader;
@@ -359,11 +359,11 @@ public final class InitialShortcutData implements IXmlReader
 	 */
 	public static InitialShortcutData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final InitialShortcutData _instance = new InitialShortcutData();
+		protected static final InitialShortcutData INSTANCE = new InitialShortcutData();
 	}
 }

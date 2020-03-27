@@ -21,8 +21,8 @@ package com.l2jserver.gameserver.model.holders;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.l2jserver.gameserver.enums.PunishmentType;
 import com.l2jserver.gameserver.model.punishment.PunishmentTask;
-import com.l2jserver.gameserver.model.punishment.PunishmentType;
 
 /**
  * @author UnAfraid

@@ -53,10 +53,10 @@ import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.configuration.parser.IPConfigDataParser;
 import com.l2jserver.gameserver.configuration.parser.hexid.HexidConfigParser;
+import com.l2jserver.gameserver.enums.GameClientState;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.L2GameClient;
-import com.l2jserver.gameserver.network.L2GameClient.GameClientState;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.gameserverpackets.AuthRequest;
 import com.l2jserver.gameserver.network.gameserverpackets.BlowFishKey;
@@ -801,17 +801,13 @@ public class LoginServerThread extends Thread
 		}
 	}
 	
-	/**
-	 * Gets the single instance of LoginServerThread.
-	 * @return single instance of LoginServerThread
-	 */
 	public static LoginServerThread getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final LoginServerThread _instance = new LoginServerThread();
+		protected static final LoginServerThread INSTANCE = new LoginServerThread();
 	}
 }

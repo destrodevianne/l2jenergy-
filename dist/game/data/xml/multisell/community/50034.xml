@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../xsd/multisell.xsd">
+    <npcs>
+		<npc>-1</npc> <!-- CB -->
+	</npcs>
+    <!--  -->
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="4822"/> <!-- Eminence Bow - Guidance -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="4824"/> <!-- Eminence Bow - Cheap Shot -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="4823"/> <!-- Eminence Bow - Miser -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="6358"/> <!-- Crystal Dagger - Critical Damage -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="4775"/> <!-- Crystal Dagger - Critical Poison -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="4774"/> <!-- Crystal Dagger - Critical Bleed -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="6349"/> <!-- Berserker Blade - Haste -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="6347"/> <!-- Berserker Blade - Focus -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="6348"/> <!-- Berserker Blade - Critical Damage -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="4708"/> <!-- Samurai Longsword - Focus -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="4710"/> <!-- Samurai Longsword - Haste -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="4709"/> <!-- Samurai Longsword - Critical Damage -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="6313"/>  <!-- Homunkulus's Sword - Acumen -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="6314"/> <!-- Homunkulus's Sword - Conversion -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="6315"/> <!-- Homunkulus's Sword - Magic Paralyze -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="6310"/> <!-- Sword of Whispering Death - Empower -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="6311"/> <!-- Sword of Whispering Death - Magic Power -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="6312"/> <!-- Sword of Whispering Death - Magic Silence -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="4852"/> <!-- Orcish Poleaxe - Critical Stun -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="4853"/> <!-- Orcish Poleaxe - Towering Blow -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="4854"/> <!-- Orcish Poleaxe - Wide Blow -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="4795"/> <!-- Great Pata - Critical Drain -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="4796"/> <!-- Great Pata - Critical Poison -->
+    </item> 
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="4797"/> <!-- Great Pata - Rsk. Haste -->
+    </item> 
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="4745"/> <!-- Yaksa Mace - Health -->
+    </item> 
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="4744"/> <!-- Yaksa Mace - Anger -->
+    </item> 
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="4746"/> <!-- Yaksa Mace - Rsk. Focus -->
+    </item> 
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="2582"/> <!-- Katana*Katana -->
+    </item> 
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="2572"/> <!-- Shamshir*Shamshir -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="2591"/> <!-- Spirit Sword*Spirit Sword -->
+    </item>
+    <item>
+        <ingredient count="7000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="2599"/> <!-- Raid Sword*Raid Sword -->
+    </item>
+</list>

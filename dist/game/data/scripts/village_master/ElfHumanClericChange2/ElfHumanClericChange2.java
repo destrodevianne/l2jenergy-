@@ -19,9 +19,9 @@
 package village_master.ElfHumanClericChange2;
 
 import com.l2jserver.gameserver.enums.CategoryType;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 
 import ai.npc.AbstractNpcAI;
 
@@ -100,7 +100,7 @@ public final class ElfHumanClericChange2 extends AbstractNpcAI
 		{
 			htmltext = "30120-15.htm"; // fnYouAreThirdClass
 		}
-		else if ((classId == BISHOP) && (player.getClassId() == ClassId.cleric))
+		else if ((classId == BISHOP) && (player.getClassId() == ClassId.CLERIC))
 		{
 			if (player.getLevel() < 40)
 			{
@@ -128,7 +128,7 @@ public final class ElfHumanClericChange2 extends AbstractNpcAI
 				htmltext = "30120-19.htm"; // fnNoProof11
 			}
 		}
-		else if ((classId == PROPHET) && (player.getClassId() == ClassId.cleric))
+		else if ((classId == PROPHET) && (player.getClassId() == ClassId.CLERIC))
 		{
 			if (player.getLevel() < 40)
 			{
@@ -156,7 +156,7 @@ public final class ElfHumanClericChange2 extends AbstractNpcAI
 				htmltext = "30120-23.htm"; // fnNoProof12
 			}
 		}
-		else if ((classId == ELDER) && (player.getClassId() == ClassId.oracle))
+		else if ((classId == ELDER) && (player.getClassId() == ClassId.ELVEN_ORACLE))
 		{
 			if (player.getLevel() < 40)
 			{
@@ -198,11 +198,11 @@ public final class ElfHumanClericChange2 extends AbstractNpcAI
 		else if (player.isInCategory(CategoryType.CLERIC_GROUP) && (player.isInCategory(CategoryType.HUMAN_CALL_CLASS) || player.isInCategory(CategoryType.ELF_CALL_CLASS)))
 		{
 			final ClassId classId = player.getClassId();
-			if ((classId == ClassId.cleric) || (classId == ClassId.bishop) || (classId == ClassId.prophet))
+			if ((classId == ClassId.CLERIC) || (classId == ClassId.BISHOP) || (classId == ClassId.PROPHET))
 			{
 				htmltext = "30120-02.htm"; // fnClassList1
 			}
-			else if ((classId == ClassId.oracle) || (classId == ClassId.elder))
+			else if ((classId == ClassId.ELVEN_ORACLE) || (classId == ClassId.ELVEN_ELDER))
 			{
 				htmltext = "30120-09.htm"; // fnClassList2
 			}

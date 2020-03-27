@@ -36,20 +36,20 @@ import org.w3c.dom.Node;
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.enums.Race;
+import com.l2jserver.gameserver.enums.actors.ClassId;
+import com.l2jserver.gameserver.enums.actors.SocialClass;
+import com.l2jserver.gameserver.enums.skills.AcquireSkillType;
+import com.l2jserver.gameserver.enums.skills.CommonSkill;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2SkillLearn;
 import com.l2jserver.gameserver.model.L2SkillLearn.SubClassData;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.AcquireSkillType;
-import com.l2jserver.gameserver.model.base.ClassId;
-import com.l2jserver.gameserver.model.base.SocialClass;
 import com.l2jserver.gameserver.model.base.SubClass;
 import com.l2jserver.gameserver.model.holders.ItemHolder;
 import com.l2jserver.gameserver.model.holders.PlayerSkillHolder;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.interfaces.ISkillsHolder;
-import com.l2jserver.gameserver.model.skills.CommonSkill;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.util.IXmlReader;
 
@@ -129,7 +129,7 @@ public final class SkillTreesData implements IXmlReader
 		_gameMasterAuraSkillTree.clear();
 		
 		// Load files.
-		parseDatapackDirectory("data/skillTrees/", false);
+		parseDatapackDirectory("data/xml/skillTrees/", false);
 		
 		// Generate check arrays.
 		generateCheckArrays();

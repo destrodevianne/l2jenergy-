@@ -173,11 +173,11 @@ public final class SkillData
 	
 	public static SkillData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final SkillData _instance = new SkillData();
+		protected static final SkillData INSTANCE = new SkillData();
 	}
 }

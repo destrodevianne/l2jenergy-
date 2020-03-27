@@ -464,17 +464,13 @@ public final class PetitionManager
 		activeChar.sendPacket(html);
 	}
 	
-	/**
-	 * Gets the single instance of {@code PetitionManager}.
-	 * @return single instance of {@code PetitionManager}
-	 */
 	public static final PetitionManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final PetitionManager _instance = new PetitionManager();
+		protected static final PetitionManager INSTANCE = new PetitionManager();
 	}
 }

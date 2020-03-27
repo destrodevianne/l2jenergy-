@@ -85,7 +85,7 @@ public final class CursedWeaponsManager implements IXmlReader
 	public void load()
 	{
 		_cursedWeapons.clear();
-		parseDatapackFile("data/cursedWeapons.xml");
+		parseDatapackFile("data/xml/cursedWeapons.xml");
 		LOG.info("{}: Loaded: {} cursed weapon(s).", getClass().getSimpleName(), _cursedWeapons.size());
 	}
 	
@@ -410,11 +410,11 @@ public final class CursedWeaponsManager implements IXmlReader
 	
 	public static final CursedWeaponsManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final CursedWeaponsManager _instance = new CursedWeaponsManager();
+		protected static final CursedWeaponsManager INSTANCE = new CursedWeaponsManager();
 	}
 }

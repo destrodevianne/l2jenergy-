@@ -23,10 +23,11 @@ import java.util.Set;
 
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.data.xml.impl.EnchantItemGroupsData;
+import com.l2jserver.gameserver.enums.items.EnchantResultType;
+import com.l2jserver.gameserver.enums.items.EtcItemType;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
-import com.l2jserver.gameserver.model.items.type.EtcItemType;
 import com.l2jserver.gameserver.model.items.type.ItemType;
 import com.l2jserver.gameserver.network.Debug;
 import com.l2jserver.gameserver.util.Util;

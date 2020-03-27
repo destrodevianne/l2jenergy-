@@ -22,7 +22,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
@@ -34,22 +36,21 @@ import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.enums.Race;
+import com.l2jserver.gameserver.enums.ZoneId;
+import com.l2jserver.gameserver.enums.actors.ClassId;
+import com.l2jserver.gameserver.enums.actors.PlayerClass;
+import com.l2jserver.gameserver.enums.skills.AcquireSkillType;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.FortManager;
 import com.l2jserver.gameserver.instancemanager.FortSiegeManager;
-import com.l2jserver.gameserver.instancemanager.SiegeManager;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2ClanMember;
 import com.l2jserver.gameserver.model.L2SkillLearn;
 import com.l2jserver.gameserver.model.actor.templates.L2NpcTemplate;
-import com.l2jserver.gameserver.model.base.AcquireSkillType;
-import com.l2jserver.gameserver.model.base.ClassId;
-import com.l2jserver.gameserver.model.base.PlayerClass;
 import com.l2jserver.gameserver.model.base.SubClass;
 import com.l2jserver.gameserver.model.entity.Castle;
 import com.l2jserver.gameserver.model.entity.Fort;
 import com.l2jserver.gameserver.model.pledge.SubPledge;
-import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.AcquireSkillList;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
@@ -62,13 +63,9 @@ import com.l2jserver.gameserver.network.serverpackets.UserInfo;
 import com.l2jserver.gameserver.util.FloodProtectors;
 import com.l2jserver.gameserver.util.FloodProtectors.Action;
 
-/**
- * This class ...
- * @version $Revision: 1.4.2.3.2.8 $ $Date: 2005/03/29 23:15:15 $
- */
 public class L2VillageMasterInstance extends L2NpcInstance
 {
-	private static Logger _log = Logger.getLogger(L2VillageMasterInstance.class.getName());
+	private static Logger LOG = LoggerFactory.getLogger(L2VillageMasterInstance.class);
 	
 	/**
 	 * Creates a village master.
@@ -350,7 +347,7 @@ public class L2VillageMasterInstance extends L2NpcInstance
 				}
 				catch (Exception NumberFormatException)
 				{
-					_log.warning(L2VillageMasterInstance.class.getName() + ": Wrong numeric values for command " + command);
+					LOG.warn("{}: Wrong numeric values for command {}", L2VillageMasterInstance.class.getName(), command);
 				}
 				
 				Set<PlayerClass> subsAvailable = null;
@@ -491,7 +488,7 @@ public class L2VillageMasterInstance extends L2NpcInstance
 						 */
 						if (!FloodProtectors.performAction(player.getClient(), Action.SUBCLASS))
 						{
-							_log.warning(L2VillageMasterInstance.class.getName() + ": Player " + player.getName() + " has performed a subclass change too fast");
+							LOG.warn("{}: Player {} has performed a subclass change too fast", L2VillageMasterInstance.class.getName(), player.getName());
 							return;
 						}
 						
@@ -557,7 +554,7 @@ public class L2VillageMasterInstance extends L2NpcInstance
 						 */
 						if (!FloodProtectors.performAction(player.getClient(), Action.SUBCLASS))
 						{
-							_log.warning(L2VillageMasterInstance.class.getName() + ": Player " + player.getName() + " has performed a subclass change too fast");
+							LOG.warn("{}: Player {} has performed a subclass change too fast", L2VillageMasterInstance.class.getName(), player.getName());
 							return;
 						}
 						
@@ -636,7 +633,7 @@ public class L2VillageMasterInstance extends L2NpcInstance
 						 */
 						if (!FloodProtectors.performAction(player.getClient(), Action.SUBCLASS))
 						{
-							_log.warning(L2VillageMasterInstance.class.getName() + ": Player " + player.getName() + " has performed a subclass change too fast");
+							LOG.warn("{}: Player {} has performed a subclass change too fast", L2VillageMasterInstance.class.getName(), player.getName());
 							return;
 						}
 						
@@ -893,7 +890,7 @@ public class L2VillageMasterInstance extends L2NpcInstance
 		
 		for (Castle castle : CastleManager.getInstance().getCastles())
 		{
-			if (SiegeManager.getInstance().checkIsRegistered(clan, castle.getResidenceId()))
+			if (DAOFactory.getInstance().getSiegeDAO().checkIsRegistered(clan, castle.getResidenceId()))
 			{
 				player.sendPacket(SystemMessageId.CANNOT_DISSOLVE_WHILE_IN_SIEGE);
 				return;

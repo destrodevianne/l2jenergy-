@@ -18,10 +18,10 @@
  */
 package quests.Q00066_CertifiedArbalester;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
@@ -102,7 +102,7 @@ public final class Q00066_CertifiedArbalester extends Quest
 		{
 			case "ACCEPT":
 			{
-				if ((player.getLevel() >= MIN_LEVEL) && (player.getClassId() == ClassId.warder) && !hasQuestItems(player, KAMAEL_INQUISITOR_MARK))
+				if ((player.getLevel() >= MIN_LEVEL) && (player.getClassId() == ClassId.WARDER) && !hasQuestItems(player, KAMAEL_INQUISITOR_MARK))
 				{
 					qs.startQuest();
 					qs.setMemoState(1);
@@ -735,7 +735,7 @@ public final class Q00066_CertifiedArbalester extends Quest
 		{
 			if (npc.getId() == MASTER_RINDY)
 			{
-				if ((player.getClassId() == ClassId.warder) && !hasQuestItems(player, KAMAEL_INQUISITOR_MARK))
+				if ((player.getClassId() == ClassId.WARDER) && !hasQuestItems(player, KAMAEL_INQUISITOR_MARK))
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{
@@ -1047,7 +1047,7 @@ public final class Q00066_CertifiedArbalester extends Quest
 		{
 			if (npc.getId() == MASTER_RINDY)
 			{
-				if (player.getClassId() == ClassId.arbalester)
+				if (player.getClassId() == ClassId.ARBALESTER)
 				{
 					htmltext = "32201-05.html";
 				}

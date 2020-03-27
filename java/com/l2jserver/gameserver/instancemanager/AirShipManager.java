@@ -318,11 +318,11 @@ public class AirShipManager
 	
 	public static final AirShipManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final AirShipManager _instance = new AirShipManager();
+		protected static final AirShipManager INSTANCE = new AirShipManager();
 	}
 }

@@ -25,12 +25,12 @@ import java.util.Map;
 
 import com.l2jserver.gameserver.data.xml.impl.MultisellData;
 import com.l2jserver.gameserver.enums.Race;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Voice;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.L2Summon;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
@@ -204,7 +204,7 @@ public final class NewbieGuide extends AbstractNpcAI
 							{
 								showPage(talker, "32135-002.htm");
 							}
-							else if (talker.getClassId() == ClassId.maleSoldier)
+							else if (talker.getClassId() == ClassId.MALE_SOLDIER)
 							{
 								if (talker.getLevel() <= 5)
 								{
@@ -223,7 +223,7 @@ public final class NewbieGuide extends AbstractNpcAI
 									showPage(talker, "32135-kmf20.htm");
 								}
 							}
-							else if (talker.getClassId() == ClassId.femaleSoldier)
+							else if (talker.getClassId() == ClassId.FEMALE_SOLDIER)
 							{
 								if (talker.getLevel() <= 5)
 								{
@@ -610,7 +610,7 @@ public final class NewbieGuide extends AbstractNpcAI
 			}
 			if (talker.isMageClass())
 			{
-				if (talker.getClassId() == ClassId.orcMage)
+				if (talker.getClassId() == ClassId.ORC_MYSTIC)
 				{
 					qs.playSound(Voice.TUTORIAL_VOICE_026_1000);
 					qs.giveItems(SOULSHOT_NO_GRADE_FOR_BEGINNERS, 200);

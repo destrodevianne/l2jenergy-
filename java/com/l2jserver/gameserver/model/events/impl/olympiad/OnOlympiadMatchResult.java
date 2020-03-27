@@ -18,9 +18,9 @@
  */
 package com.l2jserver.gameserver.model.events.impl.olympiad;
 
-import com.l2jserver.gameserver.model.events.EventType;
+import com.l2jserver.gameserver.enums.OlympiadType;
+import com.l2jserver.gameserver.enums.events.EventType;
 import com.l2jserver.gameserver.model.events.impl.IBaseEvent;
-import com.l2jserver.gameserver.model.olympiad.CompetitionType;
 import com.l2jserver.gameserver.model.olympiad.Participant;
 
 /**
@@ -30,9 +30,9 @@ public class OnOlympiadMatchResult implements IBaseEvent
 {
 	private final Participant _winner;
 	private final Participant _loser;
-	private final CompetitionType _type;
+	private final OlympiadType _type;
 	
-	public OnOlympiadMatchResult(Participant winner, Participant looser, CompetitionType type)
+	public OnOlympiadMatchResult(Participant winner, Participant looser, OlympiadType type)
 	{
 		_winner = winner;
 		_loser = looser;
@@ -49,7 +49,7 @@ public class OnOlympiadMatchResult implements IBaseEvent
 		return _loser;
 	}
 	
-	public CompetitionType getCompetitionType()
+	public OlympiadType getCompetitionType()
 	{
 		return _type;
 	}

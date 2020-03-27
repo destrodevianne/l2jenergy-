@@ -19,9 +19,9 @@
 package village_master.DarkElfChange2;
 
 import com.l2jserver.gameserver.enums.CategoryType;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 
 import ai.npc.AbstractNpcAI;
 
@@ -137,7 +137,7 @@ public final class DarkElfChange2 extends AbstractNpcAI
 		{
 			htmltext = "30195-29.htm";
 		}
-		else if ((classId == SHILLIEN_KNIGHT) && (player.getClassId() == ClassId.palusKnight))
+		else if ((classId == SHILLIEN_KNIGHT) && (player.getClassId() == ClassId.PALUS_KNIGHT))
 		{
 			if (player.getLevel() < MIN_LEVEL)
 			{
@@ -165,7 +165,7 @@ public final class DarkElfChange2 extends AbstractNpcAI
 				htmltext = "30195-33.htm";
 			}
 		}
-		else if ((classId == BLADEDANCER) && (player.getClassId() == ClassId.palusKnight))
+		else if ((classId == BLADEDANCER) && (player.getClassId() == ClassId.PALUS_KNIGHT))
 		{
 			if (player.getLevel() < MIN_LEVEL)
 			{
@@ -193,7 +193,7 @@ public final class DarkElfChange2 extends AbstractNpcAI
 				htmltext = "30195-37.htm";
 			}
 		}
-		else if ((classId == ABYSS_WALKER) && (player.getClassId() == ClassId.assassin))
+		else if ((classId == ABYSS_WALKER) && (player.getClassId() == ClassId.ASSASSIN))
 		{
 			if (player.getLevel() < MIN_LEVEL)
 			{
@@ -221,7 +221,7 @@ public final class DarkElfChange2 extends AbstractNpcAI
 				htmltext = "30195-41.htm";
 			}
 		}
-		else if ((classId == PHANTOM_RANGER) && (player.getClassId() == ClassId.assassin))
+		else if ((classId == PHANTOM_RANGER) && (player.getClassId() == ClassId.ASSASSIN))
 		{
 			if (player.getLevel() < MIN_LEVEL)
 			{
@@ -249,7 +249,7 @@ public final class DarkElfChange2 extends AbstractNpcAI
 				htmltext = "30195-45.htm";
 			}
 		}
-		else if ((classId == SPELLHOWLER) && (player.getClassId() == ClassId.darkWizard))
+		else if ((classId == SPELLHOWLER) && (player.getClassId() == ClassId.DARK_WIZARD))
 		{
 			if (player.getLevel() < MIN_LEVEL)
 			{
@@ -277,7 +277,7 @@ public final class DarkElfChange2 extends AbstractNpcAI
 				htmltext = "30195-49.htm";
 			}
 		}
-		else if ((classId == PHANTOM_SUMMONER) && (player.getClassId() == ClassId.darkWizard))
+		else if ((classId == PHANTOM_SUMMONER) && (player.getClassId() == ClassId.DARK_WIZARD))
 		{
 			if (player.getLevel() < MIN_LEVEL)
 			{
@@ -305,7 +305,7 @@ public final class DarkElfChange2 extends AbstractNpcAI
 				htmltext = "30195-53.htm";
 			}
 		}
-		else if ((classId == SHILLIEN_ELDER) && (player.getClassId() == ClassId.shillienOracle))
+		else if ((classId == SHILLIEN_ELDER) && (player.getClassId() == ClassId.SHILLIEN_ORACLE))
 		{
 			if (player.getLevel() < MIN_LEVEL)
 			{
@@ -347,19 +347,19 @@ public final class DarkElfChange2 extends AbstractNpcAI
 		else if ((player.isInCategory(CategoryType.DELF_MALL_CLASS) || player.isInCategory(CategoryType.DELF_FALL_CLASS)))
 		{
 			final ClassId classId = player.getClassId();
-			if ((classId == ClassId.palusKnight) || (classId == ClassId.shillienKnight) || (classId == ClassId.bladedancer))
+			if ((classId == ClassId.PALUS_KNIGHT) || (classId == ClassId.SHILLIEN_KNIGHT) || (classId == ClassId.BLADEDANCER))
 			{
 				htmltext = "30195-02.htm";
 			}
-			else if ((classId == ClassId.assassin) || (classId == ClassId.abyssWalker) || (classId == ClassId.phantomRanger))
+			else if ((classId == ClassId.ASSASSIN) || (classId == ClassId.ABYSS_WALKER) || (classId == ClassId.PHANTOM_RANGER))
 			{
 				htmltext = "30195-09.htm";
 			}
-			else if ((classId == ClassId.darkWizard) || (classId == ClassId.spellhowler) || (classId == ClassId.phantomSummoner))
+			else if ((classId == ClassId.DARK_WIZARD) || (classId == ClassId.SPELLHOWLER) || (classId == ClassId.PHANTOM_SUMMONER))
 			{
 				htmltext = "30195-16.htm";
 			}
-			else if ((classId == ClassId.shillienOracle) || (classId == ClassId.shillenElder))
+			else if ((classId == ClassId.SHILLIEN_ORACLE) || (classId == ClassId.SHILLIEN_ELDER))
 			{
 				htmltext = "30195-23.htm";
 			}

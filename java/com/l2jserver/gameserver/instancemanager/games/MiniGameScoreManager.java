@@ -72,11 +72,11 @@ public class MiniGameScoreManager
 	
 	public static MiniGameScoreManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final MiniGameScoreManager _instance = new MiniGameScoreManager();
+		protected static final MiniGameScoreManager INSTANCE = new MiniGameScoreManager();
 	}
 }

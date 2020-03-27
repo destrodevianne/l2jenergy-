@@ -223,8 +223,7 @@ public class FishingChampionshipManager
 		{
 			return _winPlayersName.get(par - 1);
 		}
-		
-		return "-";
+		return "None";
 	}
 	
 	public String getCurrentName(int par)
@@ -233,8 +232,7 @@ public class FishingChampionshipManager
 		{
 			return _playersName.get(par - 1);
 		}
-		
-		return "-";
+		return "None";
 	}
 	
 	public String getFishLength(int par)
@@ -243,7 +241,6 @@ public class FishingChampionshipManager
 		{
 			return _winFishLength.get(par - 1);
 		}
-		
 		return "0";
 	}
 	
@@ -511,11 +508,11 @@ public class FishingChampionshipManager
 	
 	public static FishingChampionshipManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final FishingChampionshipManager _instance = new FishingChampionshipManager();
+		protected static final FishingChampionshipManager INSTANCE = new FishingChampionshipManager();
 	}
 }

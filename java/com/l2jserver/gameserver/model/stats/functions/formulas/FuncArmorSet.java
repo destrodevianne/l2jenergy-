@@ -22,12 +22,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.l2jserver.gameserver.data.xml.impl.ArmorSetsData;
+import com.l2jserver.gameserver.enums.actors.Stats;
 import com.l2jserver.gameserver.model.L2ArmorSet;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.model.skills.Skill;
-import com.l2jserver.gameserver.model.stats.Stats;
 import com.l2jserver.gameserver.model.stats.functions.AbstractFunction;
 
 /**

@@ -18,8 +18,8 @@
  */
 package com.l2jserver.gameserver.model.events.impl.clan;
 
+import com.l2jserver.gameserver.enums.events.EventType;
 import com.l2jserver.gameserver.model.L2Clan;
-import com.l2jserver.gameserver.model.events.EventType;
 import com.l2jserver.gameserver.model.events.impl.IBaseEvent;
 
 /**

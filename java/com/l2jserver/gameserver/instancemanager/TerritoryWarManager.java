@@ -1768,11 +1768,11 @@ public final class TerritoryWarManager implements Siegable
 	
 	public static final TerritoryWarManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final TerritoryWarManager _instance = new TerritoryWarManager();
+		protected static final TerritoryWarManager INSTANCE = new TerritoryWarManager();
 	}
 }

@@ -20,9 +20,9 @@ package com.l2jserver.gameserver.network.clientpackets;
 
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
+import com.l2jserver.gameserver.enums.ZoneId;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.network.serverpackets.GetOnVehicle;
 import com.l2jserver.gameserver.network.serverpackets.ValidateLocation;
 

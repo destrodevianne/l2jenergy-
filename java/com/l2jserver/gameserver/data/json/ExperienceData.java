@@ -93,11 +93,11 @@ public final class ExperienceData
 	 */
 	public static ExperienceData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		static final ExperienceData _instance = new ExperienceData();
+		static final ExperienceData INSTANCE = new ExperienceData();
 	}
 }

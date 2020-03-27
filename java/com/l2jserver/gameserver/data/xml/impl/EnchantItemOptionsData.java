@@ -45,7 +45,7 @@ public class EnchantItemOptionsData implements IXmlReader
 	public synchronized void load()
 	{
 		_data.clear();
-		parseDatapackFile("data/enchantItemOptions.xml");
+		parseDatapackFile("data/xml/enchantItemOptions.xml");
 	}
 	
 	@Override
@@ -119,11 +119,11 @@ public class EnchantItemOptionsData implements IXmlReader
 	 */
 	public static final EnchantItemOptionsData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final EnchantItemOptionsData _instance = new EnchantItemOptionsData();
+		protected static final EnchantItemOptionsData INSTANCE = new EnchantItemOptionsData();
 	}
 }

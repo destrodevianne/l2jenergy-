@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../xsd/multisell.xsd">
+    <npcs>
+		<npc>-1</npc> <!-- CB -->
+	</npcs>
+	<!-- Quests items -->
+    <item>
+        <ingredient count="25" id="13068"/> <!-- Fantasy Isle Coin -->
+	    <ingredient count="5" id="6673"/> <!-- Festival Adena -->
+        <ingredient count="121780000" id="57"/> <!-- Adena -->
+        <production count="1" id="8176"/> <!-- Destruction Tombstone -->
+    </item> 
+    <item>
+        <ingredient count="1" id="13068"/> <!-- Fantasy Isle Coin -->
+	    <ingredient count="1" id="6673"/> <!-- Festival Adena -->
+        <ingredient count="15577000" id="57"/> <!-- Adena -->
+        <production count="1" id="9814"/> <!-- Memento Mori -->
+    </item> 
+    <item>
+        <ingredient count="1" id="13068"/> <!-- Fantasy Isle Coin -->
+	    <ingredient count="1" id="6673"/> <!-- Festival Adena --> 
+        <ingredient count="15577000" id="57"/> <!-- Adena -->
+        <production count="1" id="9815"/> <!-- Dragon Heart -->
+    </item> 
+    <item>
+        <ingredient count="1" id="13068"/> <!-- Fantasy Isle Coin -->
+	    <ingredient count="1" id="6673"/> <!-- Festival Adena --> 
+        <ingredient count="15577000" id="57"/> <!-- Adena -->
+        <production count="1" id="9816"/> <!-- Earth Egg -->
+    </item> 
+    <item>
+        <ingredient count="1" id="13068"/> <!-- Fantasy Isle Coin -->
+	    <ingredient count="1" id="6673"/> <!-- Festival Adena --> 
+        <ingredient count="15577000" id="57"/> <!-- Adena -->
+        <production count="1" id="9817"/> <!-- Nonliving Nucleus -->
+    </item> 
+    <item>
+        <ingredient count="1" id="13068"/> <!-- Fantasy Isle Coin --> 
+	    <ingredient count="1" id="6673"/> <!-- Festival Adena --> 
+        <ingredient count="15577000" id="57"/> <!-- Adena -->
+        <production count="1" id="9818"/> <!-- Angelic Essence -->
+    </item> 
+    <item>
+        <ingredient count="1000000" id="57"/> <!-- Adena -->
+        <production count="1" id="1419"/> <!-- Blood Mark -->
+    </item> 
+    <item>
+        <ingredient count="5000000" id="57"/> <!-- Adena -->
+        <production count="1" id="3874"/> <!-- Alliance Manifesto -->
+    </item> 
+    <item>
+        <ingredient count="15577000" id="57"/> <!-- Adena -->
+        <production count="1" id="3870"/> <!-- Seal of Aspiration -->
+    </item>  
+ 	<item>
+		<ingredient count="121780000" id="57"/> <!-- Adena -->
+		<production count="1" id="7678"/> <!-- Caradine's Letter -->
+	</item>
+	<item>
+		<ingredient count="1" id="6673"/> <!-- Festival Adena -->
+        <ingredient count="30" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="4295"/> <!-- Blood Fabric -->
+	</item>
+	<item>
+		<ingredient count="1" id="6673"/> <!-- Festival Adena -->
+        <ingredient count="30" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="7267"/> <!-- Floating Stone -->
+	</item>
+	<item>
+		<ingredient count="10" id="6673"/> <!-- Festival Adena -->
+        <ingredient count="30" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="3865"/> <!-- Floating Stone -->
+	</item>
+	<item>
+		<ingredient count="50" id="6673"/> <!-- Festival Adena -->
+        <ingredient count="30" id="13068"/> <!-- Fantasy Isle Coin -->
+		<production count="1" id="8073"/> <!-- Frintezza -->
+	</item> 
+</list>

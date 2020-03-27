@@ -18,10 +18,10 @@
  */
 package quests.Q00417_PathOfTheScavenger;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.skills.Skill;
@@ -100,7 +100,7 @@ public final class Q00417_PathOfTheScavenger extends Quest
 		{
 			case "ACCEPT":
 			{
-				if (player.getClassId() == ClassId.dwarvenFighter)
+				if (player.getClassId() == ClassId.DWARVEN_FIGHTER)
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{
@@ -121,7 +121,7 @@ public final class Q00417_PathOfTheScavenger extends Quest
 						htmltext = "30524-02.htm";
 					}
 				}
-				else if (player.getClassId() == ClassId.scavenger)
+				else if (player.getClassId() == ClassId.SCAVENGER)
 				{
 					htmltext = "30524-02a.htm";
 				}
@@ -342,7 +342,7 @@ public final class Q00417_PathOfTheScavenger extends Quest
 		{
 			switch (npc.getId())
 			{
-			
+				
 				case HUNTER_BEAR:
 				{
 					switch (npc.getScriptValue())

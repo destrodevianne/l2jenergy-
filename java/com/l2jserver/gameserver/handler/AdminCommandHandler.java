@@ -72,11 +72,11 @@ public class AdminCommandHandler implements IHandler<IAdminCommandHandler, Strin
 	
 	public static AdminCommandHandler getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final AdminCommandHandler _instance = new AdminCommandHandler();
+		protected static final AdminCommandHandler INSTANCE = new AdminCommandHandler();
 	}
 }

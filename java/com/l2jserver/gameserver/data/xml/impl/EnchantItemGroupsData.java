@@ -53,7 +53,7 @@ public final class EnchantItemGroupsData implements IXmlReader
 	{
 		_itemGroups.clear();
 		_scrollGroups.clear();
-		parseDatapackFile("data/enchantItemGroups.xml");
+		parseDatapackFile("data/xml/enchantItemGroups.xml");
 		LOG.info("{}: Loaded: {} item group templates.", getClass().getSimpleName(), _itemGroups.size());
 		LOG.info("{}: Loaded: {} scroll group templates.", getClass().getSimpleName(), _scrollGroups.size());
 	}
@@ -158,11 +158,11 @@ public final class EnchantItemGroupsData implements IXmlReader
 	
 	public static EnchantItemGroupsData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final EnchantItemGroupsData _instance = new EnchantItemGroupsData();
+		protected static final EnchantItemGroupsData INSTANCE = new EnchantItemGroupsData();
 	}
 }

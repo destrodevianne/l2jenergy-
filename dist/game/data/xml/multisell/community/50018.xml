@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../xsd/multisell.xsd">
+    <npcs>
+		<npc>-1</npc> <!-- CB -->
+	</npcs>
+	<!-- Cloak -->
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="13687"/> <!-- Knight's Cloak - Heavy Armor exclusive -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="13688"/> <!-- Knight's Cloak - Light Armor exclusive -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="13689"/> <!-- Knight's Cloak - Robe exclusive -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="13690"/> <!-- Knight's Cloak - Kamael exclusive -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="13889"/> <!-- Holy Spirit's Cloak - Kamael exclusive -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="13890"/> <!-- Holy Spirit's Cloak -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="13891"/> <!-- Holy Spirit's Cloak - Light Armor exclusive -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="13892"/> <!-- Holy Spirit's Cloak - Robe exclusive -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="14601"/> <!-- Ancient Cloak Kamael Use -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="14608"/> <!-- Ancient Cloak: Light Armor exclusive -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="14609"/> <!-- Ancient Cloak: Heavy Armor exclusive -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="14610"/> <!-- Ancient Cloak: Robe exclusive -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="21716"/> <!-- Cloak of Zaken -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="21719"/> <!-- Soul Cloak of Zaken -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="21717"/> <!-- Cloak of Freya -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="21720"/> <!-- Soul Cloak of Freya -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="21718"/> <!-- Cloak of Frintezza -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="21721"/> <!-- Soul Cloak of Frintezza -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="21583"/> <!-- Festival's Cloak - Pitch Black -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="21587"/> <!-- 7th Anniversary Cloak - Blood Red -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="21588"/> <!-- 7th Anniversary Cloak - Pearl White -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="21585"/> <!-- Festival's Cloak - Pitch Black [Event] -->
+	</item>
+	<item>
+		<ingredient count="32971650" id="57"/> <!-- Adena -->
+		<production count="1" id="21590"/> <!-- Festival's Cloak - Pearl White [Event] -->
+	</item>	
+</list>

@@ -1572,11 +1572,11 @@ public final class FourSepulchersManager
 	
 	public static final FourSepulchersManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final FourSepulchersManager _instance = new FourSepulchersManager();
+		protected static final FourSepulchersManager INSTANCE = new FourSepulchersManager();
 	}
 }

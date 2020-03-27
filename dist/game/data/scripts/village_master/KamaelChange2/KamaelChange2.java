@@ -21,9 +21,9 @@ package village_master.KamaelChange2;
 import com.l2jserver.gameserver.data.xml.impl.CategoryData;
 import com.l2jserver.gameserver.enums.CategoryType;
 import com.l2jserver.gameserver.enums.Race;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.util.Util;
 
@@ -149,7 +149,7 @@ public final class KamaelChange2 extends AbstractNpcAI
 					htmltext = "32145-19.htm"; // master_all_kamael100c
 				}
 			}
-			else if (player.getClassId() == ClassId.trooper)
+			else if (player.getClassId() == ClassId.TROOPER)
 			{
 				if (Util.contains(NPCS_MALE, npc.getId()))
 				{
@@ -217,7 +217,7 @@ public final class KamaelChange2 extends AbstractNpcAI
 					htmltext = "32145-10.htm"; // master_all_kamael002c
 				}
 			}
-			else if (player.getClassId() == ClassId.warder)
+			else if (player.getClassId() == ClassId.WARDER)
 			{
 				if (Util.contains(NPCS_MALE, npc.getId()))
 				{
@@ -299,11 +299,11 @@ public final class KamaelChange2 extends AbstractNpcAI
 		}
 		else if (player.isInCategory(CategoryType.KAMAEL_FIRST_CLASS_GROUP))
 		{
-			if (player.getClassId() == ClassId.maleSoldier)
+			if (player.getClassId() == ClassId.MALE_SOLDIER)
 			{
 				htmltext = "32145-02.htm"; // master_all_kamael012b
 			}
-			else if (player.getClassId() == ClassId.femaleSoldier)
+			else if (player.getClassId() == ClassId.FEMALE_SOLDIER)
 			{
 				htmltext = "32145-03.htm"; // master_all_kamael012c
 			}
@@ -318,11 +318,11 @@ public final class KamaelChange2 extends AbstractNpcAI
 					return htmltext;
 				}
 				
-				if (player.getClassId() == ClassId.trooper)
+				if (player.getClassId() == ClassId.TROOPER)
 				{
 					htmltext = "32145-05.htm"; // master_all_kamael003t
 				}
-				else if (player.getClassId() == ClassId.warder)
+				else if (player.getClassId() == ClassId.WARDER)
 				{
 					htmltext = "32145-02.htm"; // master_all_kamael012b
 				}
@@ -335,11 +335,11 @@ public final class KamaelChange2 extends AbstractNpcAI
 					return htmltext;
 				}
 				
-				if (player.getClassId() == ClassId.trooper)
+				if (player.getClassId() == ClassId.TROOPER)
 				{
 					htmltext = "32145-03.htm"; // master_all_kamael012c
 				}
-				else if (player.getClassId() == ClassId.warder)
+				else if (player.getClassId() == ClassId.WARDER)
 				{
 					htmltext = "32145-11.htm"; // master_all_kamael003w
 				}

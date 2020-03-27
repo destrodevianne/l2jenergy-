@@ -18,8 +18,8 @@
  */
 package com.l2jserver.gameserver.model.events.impl.sieges.castle;
 
+import com.l2jserver.gameserver.enums.events.EventType;
 import com.l2jserver.gameserver.model.entity.Siege;
-import com.l2jserver.gameserver.model.events.EventType;
 import com.l2jserver.gameserver.model.events.impl.IBaseEvent;
 
 /**

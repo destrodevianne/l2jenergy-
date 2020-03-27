@@ -68,6 +68,7 @@ import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.PvPConfig;
 import com.l2jserver.gameserver.configuration.config.RatesConfig;
+import com.l2jserver.gameserver.configuration.config.SiegeConfig;
 import com.l2jserver.gameserver.configuration.config.custom.CustomConfig;
 import com.l2jserver.gameserver.configuration.config.custom.OfflineConfig;
 import com.l2jserver.gameserver.configuration.config.custom.PremiumConfig;
@@ -86,6 +87,7 @@ import com.l2jserver.gameserver.data.xml.impl.PlayerXpPercentLostData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.datatables.SkillData;
+import com.l2jserver.gameserver.enums.ClanPrivilege;
 import com.l2jserver.gameserver.enums.DuelState;
 import com.l2jserver.gameserver.enums.HtmlActionScope;
 import com.l2jserver.gameserver.enums.InstanceType;
@@ -94,11 +96,29 @@ import com.l2jserver.gameserver.enums.PartyDistributionType;
 import com.l2jserver.gameserver.enums.PcCafeType;
 import com.l2jserver.gameserver.enums.PlayerAction;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
+import com.l2jserver.gameserver.enums.PunishmentAffect;
+import com.l2jserver.gameserver.enums.PunishmentType;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.enums.ShortcutType;
 import com.l2jserver.gameserver.enums.ShotType;
-import com.l2jserver.gameserver.enums.Team;
+import com.l2jserver.gameserver.enums.TeleportWhereType;
+import com.l2jserver.gameserver.enums.ZoneId;
+import com.l2jserver.gameserver.enums.actors.ClassId;
+import com.l2jserver.gameserver.enums.actors.ClassLevel;
+import com.l2jserver.gameserver.enums.actors.PlayerClass;
+import com.l2jserver.gameserver.enums.actors.Stats;
 import com.l2jserver.gameserver.enums.audio.Music;
+import com.l2jserver.gameserver.enums.events.Team;
+import com.l2jserver.gameserver.enums.items.ActionType;
+import com.l2jserver.gameserver.enums.items.ArmorType;
+import com.l2jserver.gameserver.enums.items.EtcItemType;
+import com.l2jserver.gameserver.enums.items.ItemType2;
+import com.l2jserver.gameserver.enums.items.WeaponType;
+import com.l2jserver.gameserver.enums.skills.AbnormalType;
+import com.l2jserver.gameserver.enums.skills.CommonSkill;
+import com.l2jserver.gameserver.enums.skills.EffectFlag;
+import com.l2jserver.gameserver.enums.skills.L2EffectType;
+import com.l2jserver.gameserver.enums.skills.targets.L2TargetType;
 import com.l2jserver.gameserver.handler.IItemHandler;
 import com.l2jserver.gameserver.handler.ItemHandler;
 import com.l2jserver.gameserver.idfactory.IdFactory;
@@ -121,7 +141,6 @@ import com.l2jserver.gameserver.instancemanager.SiegeManager;
 import com.l2jserver.gameserver.instancemanager.TerritoryWarManager;
 import com.l2jserver.gameserver.instancemanager.ZoneManager;
 import com.l2jserver.gameserver.model.ArenaParticipantsHolder;
-import com.l2jserver.gameserver.model.ClanPrivilege;
 import com.l2jserver.gameserver.model.L2AccessLevel;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2ClanMember;
@@ -148,7 +167,6 @@ import com.l2jserver.gameserver.model.PcCondOverride;
 import com.l2jserver.gameserver.model.ShortCuts;
 import com.l2jserver.gameserver.model.Shortcut;
 import com.l2jserver.gameserver.model.TeleportBookmark;
-import com.l2jserver.gameserver.model.TeleportWhereType;
 import com.l2jserver.gameserver.model.TerritoryWard;
 import com.l2jserver.gameserver.model.TradeList;
 import com.l2jserver.gameserver.model.UIKeysSettings;
@@ -184,12 +202,7 @@ import com.l2jserver.gameserver.model.actor.tasks.player.WarnUserTakeBreakTask;
 import com.l2jserver.gameserver.model.actor.tasks.player.WaterTask;
 import com.l2jserver.gameserver.model.actor.templates.L2PcTemplate;
 import com.l2jserver.gameserver.model.actor.transform.Transform;
-import com.l2jserver.gameserver.model.base.ClassId;
-import com.l2jserver.gameserver.model.base.ClassLevel;
-import com.l2jserver.gameserver.model.base.PlayerClass;
 import com.l2jserver.gameserver.model.base.SubClass;
-import com.l2jserver.gameserver.model.effects.EffectFlag;
-import com.l2jserver.gameserver.model.effects.L2EffectType;
 import com.l2jserver.gameserver.model.entity.Castle;
 import com.l2jserver.gameserver.model.entity.Duel;
 import com.l2jserver.gameserver.model.entity.Fort;
@@ -240,31 +253,19 @@ import com.l2jserver.gameserver.model.items.L2Henna;
 import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.items.L2Weapon;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
-import com.l2jserver.gameserver.model.items.type.ActionType;
-import com.l2jserver.gameserver.model.items.type.ArmorType;
-import com.l2jserver.gameserver.model.items.type.EtcItemType;
-import com.l2jserver.gameserver.model.items.type.ItemType2;
-import com.l2jserver.gameserver.model.items.type.WeaponType;
 import com.l2jserver.gameserver.model.multisell.PreparedListContainer;
 import com.l2jserver.gameserver.model.olympiad.OlympiadGameManager;
 import com.l2jserver.gameserver.model.olympiad.OlympiadGameTask;
 import com.l2jserver.gameserver.model.olympiad.OlympiadManager;
-import com.l2jserver.gameserver.model.punishment.PunishmentAffect;
-import com.l2jserver.gameserver.model.punishment.PunishmentType;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
-import com.l2jserver.gameserver.model.skills.AbnormalType;
 import com.l2jserver.gameserver.model.skills.BuffInfo;
-import com.l2jserver.gameserver.model.skills.CommonSkill;
 import com.l2jserver.gameserver.model.skills.Skill;
-import com.l2jserver.gameserver.model.skills.targets.L2TargetType;
 import com.l2jserver.gameserver.model.stats.BaseStats;
 import com.l2jserver.gameserver.model.stats.Formulas;
-import com.l2jserver.gameserver.model.stats.Stats;
 import com.l2jserver.gameserver.model.variables.AccountVariables;
 import com.l2jserver.gameserver.model.variables.PlayerVariables;
 import com.l2jserver.gameserver.model.zone.L2ZoneType;
-import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.model.zone.type.L2BossZone;
 import com.l2jserver.gameserver.network.L2GameClient;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -2226,7 +2227,7 @@ public class L2PcInstance extends L2Playable
 		
 		try
 		{
-			if ((getLvlJoinedAcademy() != 0) && (_clan != null) && (PlayerClass.values()[Id].getLevel() == ClassLevel.Third))
+			if ((getLvlJoinedAcademy() != 0) && (_clan != null) && (PlayerClass.values()[Id].getLevel() == ClassLevel.THIRD))
 			{
 				if (getLvlJoinedAcademy() <= 16)
 				{
@@ -2627,7 +2628,7 @@ public class L2PcInstance extends L2Playable
 			L2Clan clan = getClan();
 			clan.addSkillEffects(this);
 			
-			if ((clan.getLevel() >= SiegeManager.getInstance().getSiegeClanMinLevel()) && isClanLeader())
+			if ((clan.getLevel() >= SiegeConfig.SIEGE_CLAN_MIN_LEVEL) && isClanLeader())
 			{
 				SiegeManager.getInstance().addSiegeSkills(this);
 			}

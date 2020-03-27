@@ -21,10 +21,10 @@ package quests.Q00416_PathOfTheOrcShaman;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.holders.ItemChanceHolder;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
@@ -106,9 +106,9 @@ public final class Q00416_PathOfTheOrcShaman extends Quest
 		{
 			case "START":
 			{
-				if (player.getClassId() != ClassId.orcMage)
+				if (player.getClassId() != ClassId.ORC_MYSTIC)
 				{
-					if (player.getClassId() == ClassId.orcShaman)
+					if (player.getClassId() == ClassId.ORC_SHAMAN)
 					{
 						htmltext = "30585-02.htm";
 					}

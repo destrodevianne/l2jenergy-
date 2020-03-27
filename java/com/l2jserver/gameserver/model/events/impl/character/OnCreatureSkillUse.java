@@ -18,9 +18,9 @@
  */
 package com.l2jserver.gameserver.model.events.impl.character;
 
+import com.l2jserver.gameserver.enums.events.EventType;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.L2Character;
-import com.l2jserver.gameserver.model.events.EventType;
 import com.l2jserver.gameserver.model.events.impl.IBaseEvent;
 import com.l2jserver.gameserver.model.skills.Skill;
 

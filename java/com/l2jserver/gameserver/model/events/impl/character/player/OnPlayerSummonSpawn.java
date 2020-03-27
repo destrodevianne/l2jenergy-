@@ -18,8 +18,8 @@
  */
 package com.l2jserver.gameserver.model.events.impl.character.player;
 
+import com.l2jserver.gameserver.enums.events.EventType;
 import com.l2jserver.gameserver.model.actor.L2Summon;
-import com.l2jserver.gameserver.model.events.EventType;
 import com.l2jserver.gameserver.model.events.impl.IBaseEvent;
 
 /**

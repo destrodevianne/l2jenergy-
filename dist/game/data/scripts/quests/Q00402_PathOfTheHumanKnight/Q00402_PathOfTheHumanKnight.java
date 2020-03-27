@@ -18,10 +18,10 @@
  */
 package quests.Q00402_PathOfTheHumanKnight;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
@@ -106,7 +106,7 @@ public final class Q00402_PathOfTheHumanKnight extends Quest
 		{
 			case "ACCEPT":
 			{
-				if (player.getClassId() == ClassId.fighter)
+				if (player.getClassId() == ClassId.HUMAN_FIGHTER)
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{
@@ -124,7 +124,7 @@ public final class Q00402_PathOfTheHumanKnight extends Quest
 						htmltext = "30417-02.htm";
 					}
 				}
-				else if (player.getClassId() == ClassId.knight)
+				else if (player.getClassId() == ClassId.KNIGHT)
 				{
 					htmltext = "30417-02a.htm";
 				}

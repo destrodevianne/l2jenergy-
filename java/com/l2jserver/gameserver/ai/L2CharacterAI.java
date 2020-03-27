@@ -37,6 +37,9 @@ import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.enums.ItemLocation;
+import com.l2jserver.gameserver.enums.items.WeaponType;
+import com.l2jserver.gameserver.enums.skills.L2EffectType;
+import com.l2jserver.gameserver.enums.skills.targets.L2TargetType;
 import com.l2jserver.gameserver.instancemanager.WalkingManager;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.Location;
@@ -46,16 +49,14 @@ import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.L2Playable;
 import com.l2jserver.gameserver.model.actor.instance.L2DoorInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jserver.gameserver.model.actor.tasks.character.CastTask;
 import com.l2jserver.gameserver.model.actor.templates.L2NpcTemplate;
-import com.l2jserver.gameserver.model.effects.L2EffectType;
 import com.l2jserver.gameserver.model.events.EventDispatcher;
 import com.l2jserver.gameserver.model.events.impl.character.npc.OnNpcMoveFinished;
 import com.l2jserver.gameserver.model.interfaces.ILocational;
 import com.l2jserver.gameserver.model.items.L2Weapon;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
-import com.l2jserver.gameserver.model.items.type.WeaponType;
 import com.l2jserver.gameserver.model.skills.Skill;
-import com.l2jserver.gameserver.model.skills.targets.L2TargetType;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.AutoAttackStop;
@@ -93,34 +94,6 @@ public class L2CharacterAI extends AbstractAI
 	}
 	
 	protected static final int FEAR_RANGE = 500;
-	
-	/**
-	 * Cast Task
-	 * @author Zoey76
-	 */
-	public static class CastTask implements Runnable
-	{
-		private final L2Character _activeChar;
-		private final L2Object _target;
-		private final Skill _skill;
-		
-		public CastTask(L2Character actor, Skill skill, L2Object target)
-		{
-			_activeChar = actor;
-			_target = target;
-			_skill = skill;
-		}
-		
-		@Override
-		public void run()
-		{
-			if (_activeChar.isAttackingNow())
-			{
-				_activeChar.abortAttack();
-			}
-			_activeChar.getAI().changeIntentionToCast(_skill, _target);
-		}
-	}
 	
 	/**
 	 * Constructor of L2CharacterAI.
@@ -335,7 +308,7 @@ public class L2CharacterAI extends AbstractAI
 		}
 	}
 	
-	protected void changeIntentionToCast(Skill skill, L2Object target)
+	public void changeIntentionToCast(Skill skill, L2Object target)
 	{
 		// Set the AI cast target
 		setCastTarget((L2Character) target);

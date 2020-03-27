@@ -18,11 +18,11 @@
  */
 package events.LoversJubilee;
 
+import com.l2jserver.gameserver.enums.events.EventType;
+import com.l2jserver.gameserver.enums.events.ListenerRegisterType;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.event.LongTimeEvent;
-import com.l2jserver.gameserver.model.events.EventType;
-import com.l2jserver.gameserver.model.events.ListenerRegisterType;
 import com.l2jserver.gameserver.model.events.annotations.RegisterEvent;
 import com.l2jserver.gameserver.model.events.annotations.RegisterType;
 import com.l2jserver.gameserver.model.events.impl.character.player.OnPlayerLogin;

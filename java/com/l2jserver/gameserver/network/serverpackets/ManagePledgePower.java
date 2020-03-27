@@ -19,7 +19,7 @@
 package com.l2jserver.gameserver.network.serverpackets;
 
 import com.l2jserver.commons.util.EnumIntBitmask;
-import com.l2jserver.gameserver.model.ClanPrivilege;
+import com.l2jserver.gameserver.enums.ClanPrivilege;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
 public class ManagePledgePower extends L2GameServerPacket

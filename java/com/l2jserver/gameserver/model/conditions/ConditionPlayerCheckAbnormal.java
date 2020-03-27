@@ -18,9 +18,9 @@
  */
 package com.l2jserver.gameserver.model.conditions;
 
+import com.l2jserver.gameserver.enums.skills.AbnormalType;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.items.L2Item;
-import com.l2jserver.gameserver.model.skills.AbnormalType;
 import com.l2jserver.gameserver.model.skills.BuffInfo;
 import com.l2jserver.gameserver.model.skills.Skill;
 

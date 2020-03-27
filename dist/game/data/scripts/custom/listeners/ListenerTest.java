@@ -19,10 +19,10 @@
 package custom.listeners;
 
 import com.l2jserver.commons.util.Rnd;
+import com.l2jserver.gameserver.enums.events.EventType;
+import com.l2jserver.gameserver.enums.events.ListenerRegisterType;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.events.Containers;
-import com.l2jserver.gameserver.model.events.EventType;
-import com.l2jserver.gameserver.model.events.ListenerRegisterType;
 import com.l2jserver.gameserver.model.events.annotations.Id;
 import com.l2jserver.gameserver.model.events.annotations.NpcLevelRange;
 import com.l2jserver.gameserver.model.events.annotations.Priority;

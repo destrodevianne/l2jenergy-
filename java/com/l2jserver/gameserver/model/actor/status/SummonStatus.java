@@ -19,11 +19,11 @@
 package com.l2jserver.gameserver.model.actor.status;
 
 import com.l2jserver.gameserver.enums.DuelState;
+import com.l2jserver.gameserver.enums.actors.Stats;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Playable;
 import com.l2jserver.gameserver.model.actor.L2Summon;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.stats.Stats;
 import com.l2jserver.gameserver.util.Util;
 
 public class SummonStatus extends PlayableStatus

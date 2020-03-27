@@ -18,10 +18,10 @@
  */
 package com.l2jserver.gameserver.model.stats.functions;
 
+import com.l2jserver.gameserver.enums.actors.Stats;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.conditions.Condition;
 import com.l2jserver.gameserver.model.skills.Skill;
-import com.l2jserver.gameserver.model.stats.Stats;
 
 /**
  * Returns the initial value plus the function value, if the condition are met.

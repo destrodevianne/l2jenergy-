@@ -18,10 +18,10 @@
  */
 package quests.Q00412_PathOfTheDarkWizard;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
@@ -83,7 +83,7 @@ public final class Q00412_PathOfTheDarkWizard extends Quest
 		{
 			case "ACCEPT":
 			{
-				if (player.getClassId() == ClassId.darkMage)
+				if (player.getClassId() == ClassId.DARK_MYSTIC)
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{
@@ -103,7 +103,7 @@ public final class Q00412_PathOfTheDarkWizard extends Quest
 						htmltext = "30421-02.htm";
 					}
 				}
-				else if (player.getClassId() == ClassId.darkWizard)
+				else if (player.getClassId() == ClassId.DARK_WIZARD)
 				{
 					htmltext = "30421-02a.htm";
 				}

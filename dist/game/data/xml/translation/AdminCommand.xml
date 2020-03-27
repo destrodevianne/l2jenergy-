@@ -1,0 +1,1432 @@
+﻿<?xml version="1.0" encoding="UTF-8"?> 
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xsd/Messages.xsd">
+    <!-- AdminAdmin Messages -->
+	<message id="admin_reg_gm_list">
+        <set lang="en" val="Registered into gm list." />
+		<set lang="ru" val="Зарегистрирований в списке Гм." />
+    </message>
+	<message id="admin_unreg_gm_list">
+        <set lang="en" val="Removed from gm list." />
+		<set lang="ru" val="Удалено из списка Гм." />
+    </message>
+    <message id="admin_save_oly_sys">
+	    <set lang="en" val="Olympiad system saved." />
+		<set lang="ru" val="Система Олимпиады сохранена." />
+	</message>
+	<message id="admin_hero_formed">
+        <set lang="en" val="Heroes formed." />
+		<set lang="ru" val="Герои формируются." />
+    </message>
+	<message id="admin_hero_status_already_claimed">
+        <set lang="en" val="This player has already claimed the hero status." />
+		<set lang="ru" val="Этот игрок уже имеет статус героя." />
+    </message>
+	<message id="admin_hero_status_cannot_claimed">
+        <set lang="en" val="This player cannot claim the hero status." />
+		<set lang="ru" val="Этот игрок не может претендовать на статус героя." />
+    </message>
+	<message id="admin_diet_on">
+        <set lang="en" val="Diet mode on." />
+		<set lang="ru" val="Режим увеличение веса включен." />
+    </message>
+    <message id="admin_diet_off">
+	    <set lang="en" val="Diet mode off." />
+		<set lang="ru" val="Режим увеличение веса выключен." />
+	</message>
+	<message id="admin_trade_on">
+        <set lang="en" val="Trade refusal enabled." />
+		<set lang="ru" val="Запрет торговли включен." />
+    </message>
+	<message id="admin_trade_off">
+        <set lang="en" val="Trade refusal disabled." />
+		<set lang="ru" val="Запрет торговли выключен." />
+    </message>
+	<message id="admin_invalid_parameter">
+	    <set lang="en" val="Invalid parameter!" />
+		<set lang="ru" val="Неверный параметр!" />
+	</message>
+
+	<!-- AdminAnnouncements Messages -->
+	<message id="admin_usage_announce_text">
+        <set lang="en" val="Usage: //announce [text to announce here]" />
+		<set lang="ru" val="Применение: //announce [текст для объявления здесь]" />
+    </message>
+	<message id="admin_usage_announce_add">
+        <set lang="en" val="Usage: //announces add [type] [delay] [repeat] [text]" />
+		<set lang="ru" val="Применение: //announces add [тип] [задержка] [повторение] [текст]" />
+    </message>
+	<message id="admin_announce_delay_cannot_10_sec">
+        <set lang="en" val="Delay cannot be less then 10 seconds!" />
+		<set lang="ru" val="Задержка не может быть меньше 10 секунд!" />
+    </message>
+    <message id="admin_announce_been_successfully_added">
+	    <set lang="en" val="Announcement has been successfully added!" />
+		<set lang="ru" val="Объявление успешно добавлено!" />
+	</message>
+	<message id="admin_announce_type_changed_auto">
+        <set lang="en" val="Announce type can be changed only to AUTO_NORMAL or AUTO_CRITICAL!" />
+		<set lang="ru" val="Тип объявления может быть изменен только на AUTO_NORMAL или AUTO_CRITICAL!" />
+    </message>
+	<message id="admin_announce_type_changed_normal">
+        <set lang="en" val="Announce type can be changed only to NORMAL or CRITICAL!" />
+		<set lang="ru" val="Тип объявления может быть изменен только на NORMAL или CRITICAL!" />
+    </message>
+    <message id="admin_announce_been_successfully_edited">
+	    <set lang="en" val="Announcement has been successfully edited!" />
+		<set lang="ru" val="Объявление успешно изменено!" />
+	</message>
+	<message id="admin_usage_announce_remove">
+        <set lang="en" val="Usage: //announces remove [announcement id]" />
+		<set lang="ru" val="Применение: //announces remove [объявление ид]" />
+    </message>
+	<message id="admin_announce_been_successfully_removed">
+        <set lang="en" val="Announcement has been successfully removed!" />
+		<set lang="ru" val="Объявление успешно удалено!" />
+    </message>
+    <message id="admin_announce_doesnt_exists">
+	    <set lang="en" val="Announcement doesnt exists!" />
+		<set lang="ru" val="Объявление не существует!" />
+	</message>
+	<message id="admin_announce_been_successfully_restarted">
+        <set lang="en" val="Auto announcements has been successfully restarted." />
+		<set lang="ru" val="Авто объявления были успешно перезапущены." />
+    </message>
+	<message id="admin_usage_announce_show">
+        <set lang="en" val="Usage: //announces show [announcement id]" />
+		<set lang="ru" val="Применение: //announces show [объявление ид]" />
+    </message>
+    <message id="admin_announce_option_effect_only_announcements">
+	    <set lang="en" val="This option has effect only on auto announcements!" />
+		<set lang="ru" val="Этот параметр влияет только на авто объявления!" />
+	</message>
+	 <message id="admin_announce_edit">
+	    <set lang="en" val="Usage: //announces edit [id]" />
+		<set lang="ru" val="Применение: //announces edit [ид]" />
+	</message>
+	<!-- AdminBuffs Messages -->
+	<message id="admin_player_not_online">
+	    <set lang="en" val="The player %s% is not online." />
+		<set lang="ru" val="Игрок %s% сейчас не в онлайне." />
+	</message>
+	<message id="admin_failed_removing_effect">
+	    <set lang="en" val="Failed removing effect: %s%" />
+		<set lang="ru" val="Не удалось удалить эффект: %s%" />
+	</message>
+	<message id="admin_usage_stopbuff">
+	    <set lang="en" val="Usage: //stopbuff [objectId] [skillId]" />
+		<set lang="ru" val="Применение: //stopbuff [ид объекта] [ид скилла]" />
+	</message>
+	<message id="admin_failed_removing_all_effect">
+	    <set lang="en" val="Failed removing all effects: %s%" />
+		<set lang="ru" val="Не удалось удалить все эффекты: %s%" />
+	</message>
+	<message id="admin_usage_stopallbuffs">
+	    <set lang="en" val="Usage: //stopallbuffs [objectId]" />
+		<set lang="ru" val="Применение: //stopallbuffs [ид объекта]" />
+	</message>
+	<message id="admin_canceled_all_effect_radius">
+	    <set lang="en" val="All effects canceled within radius %s%" />
+		<set lang="ru" val="Все эффекты, отмененные в радиусе %s%" />
+	</message>
+	<message id="admin_usage_areacancel">
+	    <set lang="en" val="Usage: //areacancel [radius]" />
+		<set lang="ru" val="Применение: //areacancel [радиус]" />
+	</message>
+	<message id="admin_skill_reuse_removed_from">
+	    <set lang="en" val="Skill reuse was removed from %s%" />
+		<set lang="ru" val="Повторное использование умений было удалено из %s%" />
+	</message>
+	<message id="admin_you_have_succefully_changed_target">
+	    <set lang="en" val="You have succefully changed to target %s% special skills." />
+		<set lang="ru" val="Вы успешно изменили у цели %s% специальных навыков." />
+	</message>
+	<message id="admin_nothing_switch">
+	    <set lang="en" val="There is nothing to switch." />
+		<set lang="ru" val="Нечего непроизошло." />
+	</message>
+	<message id="admin_removed_skill_id">
+	    <set lang="en" val="Removed skill ID: %s% effects from %c% (%i%)" />
+		<set lang="ru" val="Удалены умение ID: %s% эффекты от %c% (%i%)" />
+	</message>
+	<message id="admin_removed_all_effects">
+	    <set lang="en" val="Removed all effects from %c% (%i%)" />
+		<set lang="ru" val="Удалены все эффекты из %c% (%i%)" />
+	</message>
+	<!-- AdminCamera Messages -->
+	<message id="admin_usage_cam_1">
+	    <set lang="en" val="Usage: //cam force angle1 angle2 time range duration relYaw relPitch isWide relAngle" />
+		<set lang="ru" val="Применение: //cam force angle1 angle2 time range duration relYaw relPitch isWide relAngle" />
+	</message>
+	<message id="admin_usage_cam_2">
+	    <set lang="en" val="Usage: //camex force angle1 angle2 time duration relYaw relPitch isWide relAngle" />
+		<set lang="ru" val="Применение: //camex force angle1 angle2 time duration relYaw relPitch isWide relAngle" />
+	</message>
+	<message id="admin_usage_cam_3">
+	    <set lang="en" val="Usage: //cam3 force angle1 angle2 time range duration relYaw relPitch isWide relAngle unk" />
+		<set lang="ru" val="Применение: //cam3 force angle1 angle2 time range duration relYaw relPitch isWide relAngle unk" />
+	</message>
+	<!-- AdminChangeAccessLevel -->
+	<message id="admin_usage_changelvl">
+	    <set lang="en" val="Usage: //changelvl [target_new_level] | [player_name] [new_level]" />
+		<set lang="ru" val="Применение: //changelvl [новый уровень цели] | [имя игрока] [новый уровень]" />
+	</message>
+	<message id="admin_character_not_found_access_level">
+	    <set lang="en" val="Character not found or access level unaltered." />
+		<set lang="ru" val="Персонаж не найден или уровень доступа не изменелся." />
+	</message>
+	<message id="admin_character_access_level_now_set">
+	    <set lang="en" val="Character's access level is now set to %s%" />
+		<set lang="ru" val="Уровень доступа персонажа теперь установлен на %s%" />
+	</message>
+	<message id="admin_changing_sqlexception_character_access_level">
+	    <set lang="en" val="SQLException while changing character's access level" />
+		<set lang="ru" val="Исключение SQL при изменении уровня доступа персонажа" />
+	</message>
+	<message id="players_access_level_has_been_changed_to">
+	    <set lang="en" val="%s% 's access level has been changed to %c% (%i%)" />
+		<set lang="ru" val="%s% уровень доступа был изменен на %c% (%i%)" />
+	</message>
+	<message id="admin_your_access_level_has_been_changed_to">
+	    <set lang="en" val="Your access level has been changed to %c% (%i%)" />
+		<set lang="ru" val="Уровень доступа был изменен на %c% (%i%)" />
+	</message>
+	<message id="admin_you_trying_set_unexisting_access_level">
+	    <set lang="en" val="You are trying to set unexisting access level: %s% please try again with a valid one!" />
+		<set lang="ru" val="Вы пытаетесь установить более высокий уровень доступа: %s% повторите попытку с действительным!" />
+	</message>
+	<message id="player_your_character_banned">
+	    <set lang="en" val="Your character has been banned. Bye." />
+		<set lang="ru" val="Ваш персонаж заблокирован. До свидания." />
+	</message>
+	<!-- AdminCHSiege Messages -->
+	<message id="admin_clan_hall_sieges_disabled">
+	    <set lang="en" val="AltDevNoQuests = true; Clan Hall Sieges are disabled!" />
+		<set lang="ru" val="AltDevNoQuests = true; Осада Клан Холлов отключена!" />
+	</message>
+	<message id="admin_have_specify_hall_least">
+	    <set lang="en" val="You have to specify the hall id at least!" />
+		<set lang="ru" val="Вы должны указать хотя бы ИД Клан Холла!" />
+	</message>
+	<message id="admin_couldnt_find_desired_siegable_hall">
+	    <set lang="en" val="Couldnt find he desired siegable hall (%i%)!" />
+		<set lang="ru" val="Не удалось найти нужный Клан Холл для осады (%i%)!" />
+	</message>
+	<message id="admin_given_hall_dont_have_any_attached_siege">
+	    <set lang="en" val="The given hall dont have any attached siege!" />
+		<set lang="ru" val="У данного Клан Холла нет никакой осады!" />
+	</message>
+	<message id="admin_requested_clan_hall_alredy_siege">
+	    <set lang="en" val="The requested clan hall is alredy in siege!" />
+		<set lang="ru" val="Запрошенный Клан Холл уже в состаяние осады!" />
+	</message>
+	<message id="admin_requested_clan_hall_siege">
+	    <set lang="en" val="The requested clan hall isnt in siege!" />
+		<set lang="ru" val="Запрошенный Клан Холл не находится в состаяние осады!" />
+	</message>
+	<message id="admin_cannot_change_siege_date_hall_siege">
+	    <set lang="en" val="Cannot change siege date while hall is in siege!" />
+		<set lang="ru" val="Невозможно изменить дату осады, пока Клан Холл находится в состаяние осады!" />
+	</message>
+	<message id="admin_incorrect_date_format_try_again">
+	    <set lang="en" val="The date format is incorrect. Try again." />
+		<set lang="ru" val="Неверный формат даты. Попробуйте еще раз." />
+	</message>
+	<message id="admin_have_specify_format">
+	    <set lang="en" val="You have to specify this format DD-MM-YYYY;HH:MM!" />
+		<set lang="ru" val="Вы должны указать этот формат ДД-ММ-ГГГГ; ЧЧ:ММ!" />
+	</message>
+	<message id="admin_incomplete_day_hour_both">
+	    <set lang="en" val="Incomplete day, hour or both!" />
+		<set lang="ru" val="Неполный день, час или обе!" />
+	</message>
+	<message id="admin_wrong_day_month_year_gave">
+	    <set lang="en" val="Wrong day/month/year gave!" />
+		<set lang="ru" val="Неверно вказано день/месяц/год!" />
+	</message>
+	<message id="admin_wrong_hour_minutes_gave">
+	    <set lang="en" val="Wrong hour/minutes gave!" />
+		<set lang="ru" val="Неверно вказано час/минуты!" />
+	</message>
+	<message id="admin_hall_siege_time">
+	    <set lang="en" val="%c% siege: %i%" />
+		<set lang="ru" val="%c% осада: %i%" />
+	</message>
+	<message id="admin_given_time_past">
+	    <set lang="en" val="The given time is in the past!" />
+		<set lang="ru" val="Вказаное время в прошлом!" />
+	</message>
+	<message id="admin_сouldnt_find_clan_hall">
+	    <set lang="en" val="Couldnt find the clan hall." />
+		<set lang="ru" val="Не удалось найти Клан Холл." />
+	</message>
+	<message id="admin_wrong_clan_hall_id">
+	    <set lang="en" val="Wrong clan hall id, unparseable id!" />
+		<set lang="ru" val="Неправильный ИД Клан Холла, непонятный ИД!" />
+	</message>
+	<message id="admin_requested_hall_siege_right_now_cannot_clear_attacker_list">
+	    <set lang="en" val="The requested hall is in siege right now, cannot clear attacker list!" />
+		<set lang="ru" val="Запрашиваемый Клан Холл находится в осаде, вы не можете очистить список атакующих!" />
+	</message>
+	<message id="admin_given_clan_not_participating">
+	    <set lang="en" val="The given clan is not participating!" />
+		<set lang="ru" val="Данный клан не участвует!" />
+	</message>
+	<message id="admin_given_clan_alredy_participating">
+	    <set lang="en" val="The given clan is alredy participating!" /> 
+		<set lang="ru" val="Данный клан уже участвует!" />
+	</message>
+	<message id="admin_given_clan_not_exist">
+	    <set lang="en" val="The given clan does not exist!" />
+		<set lang="ru" val="Данный клан не существует!" />
+	</message>
+	<message id="admin_target_clan_not_participating">
+	    <set lang="en" val="Your target's clan is not participating!" />
+		<set lang="ru" val="Клан вашей цели не участвует!" />
+	</message>
+	<message id="admin_target_clan_alredy_participating">
+	    <set lang="en" val="Your target's clan is alredy participating!" />
+		<set lang="ru" val="Клан вашей цели уже участвует!" />
+	</message>
+	<message id="admin_target_does_not_have_any_clan">
+	    <set lang="en" val="Your target does not have any clan!" />
+		<set lang="ru" val="У вашей цели нет клана!" />
+	</message>
+	<message id="admin_must_target_player_with_clan">
+	    <set lang="en" val="You must target a player with clan!" />
+		<set lang="ru" val="Вы должны выбрать игрока с кланом!" />
+	</message>
+	<message id="admin_must_target_clan_member_attacker">
+	    <set lang="en" val="You must target a clan member of the attacker!" />
+		<set lang="ru" val="Вы должны выбрать члена клана атакующего!" />
+	</message>
+	<message id="admin_clan_hall_siege_cannot_remove_attackers_now">
+	    <set lang="en" val="The clan hall is in siege, cannot remove attackers now." />
+		<set lang="ru" val="Клан Холл находится в осаде, теперь вы не можете удалить атакующих!" />
+	</message>
+	<message id="admin_clan_hall_siege_cannot_add_attackers_now">
+	    <set lang="en" val="The clan hall is in siege, cannot add attackers now." />
+		<set lang="ru" val="Клан Холл находится в осаде, теперь вы не можете добавлять атакующих!" />
+	</message>
+	<!-- AdminClan Messages -->
+	<message id="admin_task_have_been_forcely_executed">
+	    <set lang="en" val="Task have been forcely executed" />
+		<set lang="ru" val="Задание выполнено." />  <!-- TODO: Fix message -->
+	</message>
+	<message id="admin_no">
+        <set lang="en" val="No" />
+		<set lang="ru" val="Нет" />
+    </message>
+    <message id="admin_not_in_ally">
+        <set lang="en" val="Not in ally" />
+		<set lang="ru" val="Союза нет" />
+    </message>
+     <message id="admin_forse">
+        <set lang="en" val="Forse" />
+		<set lang="ru" val="Forse" />  <!-- TODO: Fix message -->
+    </message>
+	<!-- AdminCreateItem -->
+	<message id="admin_usage_create_item">
+	    <set lang="en" val="Usage: //create_item [itemId] [amount]" />
+		<set lang="ru" val="Применение: //create_item [ид предмета] [колиствео]" />
+	</message>
+	<message id="admin_usage_create_coin">
+	    <set lang="en" val="Usage: //create_coin [name] [amount]" />
+		<set lang="ru" val="Применение: //create_coin [название] [колиствео]" />
+	</message>
+	<message id="admin_usage_give_item_target">
+	    <set lang="en" val="Usage: //give_item_target [itemId] [amount]" />
+		<set lang="ru" val="Применение: //give_item_target [ид предмета] [колиствео]" />
+	</message>
+	<message id="admin_specify_valid_number">
+	    <set lang="en" val="Specify a valid number." />
+		<set lang="ru" val="Укажите действительное число." />
+	</message>
+	<message id="admin_item_doesnt_exist">
+	    <set lang="en" val="This item doesn't exist." />
+		<set lang="ru" val="Предмет не существует." />
+	</message>
+	<message id="admin_item_does_not_stack">
+	    <set lang="en" val="This item does not stack - Creation aborted." />
+		<set lang="ru" val="Предмет не складывается - создание прервано." />
+	</message>
+	<message id="player_admin_spawned_in_your_inventory">
+	    <set lang="en" val="Admin spawned %s% %i% in your inventory." />
+		<set lang="ru" val="Админ создал %s% %i% в вашем инвентаре." />
+	</message>
+	<message id="admin_players_rewarded_with">
+	    <set lang="en" val="%s% players rewarded with %i%." />
+		<set lang="ru" val="%s% игроки награждаются %i%." />
+	</message>
+	<message id="admin_you_have_spawned_inventory">
+	    <set lang="en" val="You have spawned %s% %c% (%i%) in %n% inventory." />
+		<set lang="ru" val="Вы создали %s% %c% (%i%) игроку %n% в инвентарь." />
+	</message>
+	<!-- AdminCursedWeapons Messages -->
+	<message id="admin_info_cursed_weapons">
+	    <set lang="en" val="====== Cursed Weapons: ======" />
+		<set lang="ru" val="====== Проклятое Оружие: ======" />
+	</message>
+	<message id="admin_info_player">
+	    <set lang="en" val="%i% (%s%)" />
+		<set lang="ru" val="%i% (%s%)" />
+	</message>
+	<message id="admin_info_player_holding">
+	    <set lang="en" val="Player holding: %i%" />
+		<set lang="ru" val="Находится в игрока: %i%" />
+	</message>
+	<message id="admin_info_player_karma">
+	    <set lang="en" val="Player karma: %i%" />
+		<set lang="ru" val="Карма игрока: %i%" />
+	</message>
+	<message id="admin_info_time_remaining">
+	    <set lang="en" val="Time Remaining: %i% min." />
+		<set lang="ru" val="Оставшееся время: %i% минут(ы)." />
+	</message>
+	<message id="admin_info_kills">
+	    <set lang="en" val="Kills: %i%" />
+		<set lang="ru" val="Убийств: %i%" />
+	</message>
+	<message id="admin_info_lying_ground">
+	    <set lang="en" val="Lying on the ground." />
+		<set lang="ru" val="Лежит на земле." />
+	</message>
+	<message id="admin_info_dont_exist_world">
+	    <set lang="en" val="Don't exist in the world." />
+		<set lang="ru" val="Не существует в мире." />
+	</message>
+	<message id="admin_info_null">
+	    <set lang="en" val="null" />
+		<set lang="ru" val="null" /> <!-- TODO: Fix message -->
+	</message>
+	<message id="admin_usage_cw">
+	    <set lang="en" val="Usage: //cw_remove|//cw_goto|//cw_add [itemid|name]" />
+		<set lang="ru" val="Применение: //cw_remove|//cw_goto|//cw_add [ид предмета|название]" />
+	</message>
+	<message id="admin_unknown_cursed_weapon_id">
+	    <set lang="en" val="Unknown cursed weapon ID." />
+		<set lang="ru" val="Неизвестный ИД проклятого оружия." />
+	</message>
+	<message id="admin_this_cursed_weapon_already_active">
+	    <set lang="en" val="This cursed weapon is already active." />
+		<set lang="ru" val="Это проклятое оружие уже активно." />
+	</message>
+	<message id="admin_unknown_command">
+	    <set lang="en" val="Unknown command." />
+		<set lang="ru" val="Неизвестная команда." />
+	</message>
+	 <!-- AdminDebug Messages -->
+	<message id="admin_stop_debugging">
+	    <set lang="en" val="Stop debugging %i%" />
+		<set lang="ru" val="Прекратить режим отладки %i%" />
+	</message>
+	<message id="admin_start_debugging">
+	    <set lang="en" val="Start debugging %i%" />
+		<set lang="ru" val="Начать режим отладки %i%" />
+	</message>
+	<!-- AdminDelete Messages -->
+	<message id="admin_deleted_from">
+	    <set lang="en" val="Deleted %i% from %s%." />
+		<set lang="ru" val="Удалено %i% из %s%." />
+	</message>
+	<!-- AdminDisconnect Messages -->
+	<message id="admin_you_cannot_logout_your_character">
+	    <set lang="en" val="You cannot logout your own character." />
+		<set lang="ru" val="Вы не можете выйти из своего собственного персонажа." />
+	</message>
+	<message id="admin_character_disconnected_server">
+	    <set lang="en" val="Character %i% disconnected from server." />
+		<set lang="ru" val="Персонаж %i% отключен от сервера." />
+	</message>
+	<!-- AdminEditChar Messages -->
+	<message id="admin_usage_show_characters">
+	    <set lang="en" val="Usage: //show_characters [page_number]" />
+		<set lang="ru" val="Применение: //show_characters [номер страницы]" />
+	</message>
+	<message id="admin_usage_find_character">
+	    <set lang="en" val="Usage: //find_character [character_name]" />
+		<set lang="ru" val="Применение: //find_character [имя персонажа]" />
+	</message>
+	<message id="admin_usage_find_ip">
+	    <set lang="en" val="Usage: //find_ip [127.0.0.1]" />
+		<set lang="ru" val="Применение: //find_ip [127.0.0.1]" />
+	</message>
+	<message id="admin_usage_find_account">
+	    <set lang="en" val="Usage: //find_account [player_name]" />
+		<set lang="ru" val="Применение: //find_account [имя игрока]" />
+	</message>
+	<message id="admin_usage_setkarma">
+	    <set lang="en" val="Usage: //setkarma [new_karma_value]" />
+		<set lang="ru" val="Применение: //setkarma [новое значение кармы]" />
+	</message>
+	<message id="admin_usage_setpk">
+	    <set lang="en" val="Usage: //setpk [pk_count]" />
+		<set lang="ru" val="Применение: //setpk [количество пк убийств]" />
+	</message>
+	<message id="admin_pk_count_changed">
+	    <set lang="en" val="%i%'s PK count changed to %s%." />
+		<set lang="ru" val="Игроку %i% количество пк убийств изменено на %s%." />
+	</message>
+	<message id="admin_your_pk_count_changed">
+	    <set lang="en" val="A GM changed your PK count to %s%." />
+		<set lang="ru" val="Администратор изменил количество ваших пк убийств на %s%." />
+	</message>
+	<message id="admin_pvp_count_changed">
+	    <set lang="en" val="%i%'s PvP count changed to %s%." />
+		<set lang="ru" val="Игроку %i% количество ПвП убийств изменено на %s%." />
+	</message>
+	<message id="admin_your_pvp_count_changed">
+	    <set lang="en" val="A GM changed your PvP count to %s%." />
+		<set lang="ru" val="Администратор изменил количество ваших ПвП убийств на %s%." />
+	</message>
+	<message id="admin_usage_setpvp">
+	    <set lang="en" val="Usage: //setpvp [pvp_count]" />
+		<set lang="ru" val="Применение: //setpvp [количество пвп убийств]" />
+	</message>
+	<message id="admin_reputation_points_count_changed">
+	    <set lang="en" val="%i%'s Fame changed to %s%." />
+		<set lang="ru" val="Игроку %i% количество очков Славы изменено на %s%." />
+	</message>
+	<message id="admin_your_reputation_points_count_changed">
+	    <set lang="en" val="A GM changed your Reputation points to %s%." />
+		<set lang="ru" val="Администратор изменил Ваше количество очков Славы на %s%." />
+	</message>
+	<message id="admin_usage_setfame">
+	    <set lang="en" val="Usage: //setfame [new_fame_value]" />
+		<set lang="ru" val="Применение: //setfame [новое значение очков славы]" />
+	</message>
+	<message id="admin_usage_rec">
+	    <set lang="en" val="Usage: //rec number" />
+		<set lang="ru" val="Применение: //rec number" />
+	</message>
+	<message id="admin_your_recommend_points_count_changed">
+	    <set lang="en" val="GM changed your Recommend points to %s%." />
+		<set lang="ru" val="Администратор изменил Ваше количество очков рекомендаций на %s%." />
+	</message>
+	<message id="admin_recommend_points_count_changed">
+	    <set lang="en" val="%i%'s Recommend changed to %s%." />
+		<set lang="ru" val="Игроку %i% количество очков рекомендаций изменено на %s%." />
+	</message>
+	<message id="admin_usage_setclass">
+	    <set lang="en" val="Usage: //setclass [valid_new_classid]" />
+		<set lang="ru" val="Применение: //setclass [действительный новый ид класса]" />
+	</message>
+	<message id="admin_your_class_changed">
+	    <set lang="en" val="A GM changed your class to %s%." />
+		<set lang="ru" val="Администратор изменил Ваш класс на %s%." />
+	</message>
+	<message id="admin_class_changed">
+	    <set lang="en" val="%i% is a %s%." />
+		<set lang="ru" val="Игроку %i% изменен класс на %s%." />
+	</message>
+	<message id="admin_your_title_changed">
+	    <set lang="en" val="Your title has been changed by a GM." />
+		<set lang="ru" val="Ваш титул был изменен Администратором." />
+	</message>
+	<message id="admin_title_changed">
+	    <set lang="en" val="You need to specify the new title." />
+		<set lang="ru" val="Вам необходимо указать новый титул." />
+	</message>
+	<message id="admin_your_name_changed">
+	    <set lang="en" val="Your name has been changed by a GM." />
+		<set lang="ru" val="Ваше имя было изменено Администратором." />
+	</message>
+	<message id="admin_name_changed">
+	    <set lang="en" val="Changed name to %i%." />
+		<set lang="ru" val="Имя было изменено на %i%." />
+	</message>
+	<message id="admin_warning_player_already_exists">
+	    <set lang="en" val="Warning, player %i% already exists!" />
+		<set lang="ru" val="Предупреждение, такое имя игрока %i% уже существует!" />
+	</message>
+	<message id="admin_usage_setname">
+	    <set lang="en" val="Usage: //setname [new_name_for_target]" />
+		<set lang="ru" val="Применение: //setname [новое имя для цели]" />
+	</message>
+	<message id="admin_your_gender_changed">
+	    <set lang="en" val="Your gender has been changed by a GM." />
+		<set lang="ru" val="Ваш пол был изменен Администратором." />
+	</message>
+	<message id="admin_your_name_color_changed">
+	    <set lang="en" val="Your name color has been changed by a GM." />
+		<set lang="ru" val="Ваш цвет имени был изменен Администратором." />
+	</message>
+	<message id="admin_your_title_color_changed">
+	    <set lang="en" val="Your title color has been changed by a GM." />
+		<set lang="ru" val="Ваш цвет титула был изменен Администратором." />
+	</message>
+	<message id="admin_need_specify_valid_new_color">
+	    <set lang="en" val="You need to specify a valid new color." />
+		<set lang="ru" val="Вам необходимо указать действительный новый цвет." />
+	</message>
+	<message id="admin_usage_remove_clan_penalty">
+	    <set lang="en" val="Usage: //remove_clan_penalty join|create charname" />
+		<set lang="ru" val="Применение: //remove_clan_penalty join|create имя персонажа" />
+	</message>
+	<message id="admin_clan_penalty_successfully_removed_character">
+	    <set lang="en" val="Clan penalty successfully removed to character: %i%." />
+		<set lang="ru" val="Штраф клана успешно снят с персонажа: %i%." />
+	</message>
+	<message id="admin_usage_find_dualbox">
+	    <set lang="en" val="Usage: //find_dualbox [number > 0]" />
+		<set lang="ru" val="Применение: //find_dualbox [номер > 0]" />
+	</message>
+	<message id="admin_usage_strict_find_dualbox">
+	    <set lang="en" val="Usage: //strict_find_dualbox [number > 0]" />
+		<set lang="ru" val="Применение: //strict_find_dualbox [номер > 0]" />
+	</message>
+    <message id="admin_player_null">
+	    <set lang="en" val="Player is null." />
+		<set lang="ru" val="Игрок пуст." /> <!-- TODO: Fix message -->
+	</message>
+	<message id="admin_client_null">
+	    <set lang="en" val="Client is null." />
+		<set lang="ru" val="Клиент пуст." />
+	</message>
+	<message id="admin_client_detached">
+	    <set lang="en" val="Client is detached." />
+		<set lang="ru" val="Клиент отсоединен." />
+	</message>
+	<message id="admin_hop">
+	    <set lang="en" val="Hop %i%: %s%" />
+		<set lang="ru" val="Hop %i%: %s%" />  <!-- TODO: Fix message -->
+	</message>
+	<message id="admin_usable_only_with_pets_summons">
+	    <set lang="en" val="Usable only with Pets/Summons" />
+		<set lang="ru" val="Можно использовать только с домашними животными/призывом." />  <!-- TODO: Fix message -->
+	</message>
+	<message id="admin_usable_only_with_pets">
+	    <set lang="en" val="Usable only with Pets" />
+		<set lang="ru" val="Можно использовать только с домашними животными" />
+	</message>
+	<message id="admin_not_party">
+	    <set lang="en" val="Not in party" />
+		<set lang="ru" val="Не в пати" />
+	</message>
+	<message id="admin_nobless_status_changed">
+	    <set lang="en" val="GM changed your nobless status!" />
+		<set lang="ru" val="Администратор изменил ваш статус Дворянина!" />
+	</message>
+	<message id="admin_your_nobless_status_changed">
+	    <set lang="en" val="You've changed nobless status of: %i%!" />
+		<set lang="ru" val="Вы изменили статус Дворянина для игрока %i%!" />
+	</message>
+	<message id="admin_usage_set_hp">
+	    <set lang="en" val="Usage: //set_hp 1000" />
+		<set lang="ru" val="Применение: //set_hp 1000" />
+	</message>
+	<message id="admin_usage_set_mp">
+	    <set lang="en" val="Usage: //set_mp 1000" />
+		<set lang="ru" val="Применение: //set_mp 1000" />
+	</message>
+	<message id="admin_usage_set_cp">
+	    <set lang="en" val="Usage: //set_cp 1000" />
+		<set lang="ru" val="Применение: //set_cp 1000" />
+	</message>
+	<message id="admin_usage_set_pvp_flag">
+	    <set lang="en" val="Usage: //set_pvp_flag" />
+		<set lang="ru" val="Применение: //set_pvp_flag" />
+	</message>
+	<message id="admin_successfully_сhanged_karma_for_player">
+	    <set lang="en" val="Successfully сhanged karma for %i% from (%s%) to (%t%)." />
+		<set lang="ru" val="Успешно изменена карма для игрока %i% из (%s%) на (%t%)." />
+	</message>
+	<message id="admin_you_must_enter_value_for_karma_greater">
+	    <set lang="en" val="You must enter a value for karma greater than or equal to 0." />
+		<set lang="ru" val="Вы должны ввести значение для кармы больше или равно 0." />
+	</message>
+	<message id="admin_htm_please_try_again">
+	    <set lang="en" val="s. Please try again." />
+		<set lang="ru" val="Пожалуйста, попробуйте еще раз." />
+	</message>
+	<message id="admin_htm_please_refine_your_search_see_all_the_results">
+	    <set lang="en" val="Please refine your search to see all of the results." />
+		<set lang="ru" val="Пожалуйста, уточните свой поиск, чтобы увидеть все результаты." />
+	</message>
+	<message id="admin_htm_more_than_20">
+	    <set lang="en" val="more than 20" />
+		<set lang="ru" val="более 20" />
+	</message>
+	<message id="admin_htm_more_than">
+	    <set lang="en" val="more than %i%" />
+		<set lang="ru" val="более %i%" />
+	</message>
+	<message id="admin_htm_in_order_avoid_you_client_crash">
+	    <set lang="en" val="In order to avoid you a client crash I won't" />
+		<set lang="ru" val="Во избежание ошибки клиента я не буду" />
+	</message>
+	<message id="admin_htm_display_results_beyond_20th">
+	    <set lang="en" val="display results beyond the 20th character." />
+		<set lang="ru" val="отображать результаты больше 20-ти персонажей." />
+	</message>
+	<message id="admin_htm_player_doesn_exist">
+	    <set lang="en" val="Player doesn't exist" />
+		<set lang="ru" val="Игрок не существует" />
+	</message>
+	<message id="admin_htm_malformed_number">
+	    <set lang="en" val="Malformed IPv4 number" />
+		<set lang="ru" val="Неверно сформированный номер IPv4" />
+	</message>
+	<message id="admin_htm_maybe_they_got">
+	    <set lang="en" val="Maybe they got d/c? :)" />
+		<set lang="ru" val="Может они получили d/c? :)" />
+	</message>
+	<message id="admin_htm_page">
+        <set lang="en" val="Page" />
+		<set lang="ru" val="Cтр." />
+    </message>
+	<message id="admin_htm_ip">
+        <set lang="en" val="N/A" />
+		<set lang="ru" val="Нет данных" />
+    </message>
+	<message id="admin_htm_yes">
+        <set lang="en" val="Yes" />
+		<set lang="ru" val="Да" />
+    </message>
+	<message id="admin_htm_no">
+        <set lang="en" val="No" />
+		<set lang="ru" val="Нет" />
+    </message>
+	<!-- AdminEffects Messages -->
+	<message id="admin_you_now_invisible">
+	    <set lang="en" val="You are now invisible." />
+		<set lang="ru" val="Вы теперь невидимы." />
+	</message>
+	<message id="admin_you_now_visible">
+	    <set lang="en" val="You are now visible." />
+		<set lang="ru" val="Вы теперь видны." />
+	</message>
+	<message id="admin_you_made">
+	    <set lang="en" val="You've made %i% (%s%)." />
+		<set lang="ru" val="Вы сделали %i% (%s%)." />
+	</message>
+	<message id="admin_invisible">
+	    <set lang="en" val="invisible" />
+		<set lang="ru" val="невидим" />
+	</message>
+	<message id="admin_visible">
+	    <set lang="en" val="visible" />
+		<set lang="ru" val="видимый" />
+	</message>
+	<message id="admin_usage_earthquake">
+	    <set lang="en" val="Usage: //earthquake [intensity] [duration]" />
+		<set lang="ru" val="Применение: //earthquake [интенсивность] [продолжительность]" />
+	</message>
+	<message id="admin_usage_atmosphere">
+	    <set lang="en" val="Usage: //atmosphere [ssqinfo dawn|dusk|red|regular]|[sky day|night|red] [duration]" />
+		<set lang="ru" val="Применение: //atmosphere [знак неба рассвет|сумерки]|[необо день|ночь|красное] [продолжительность]" />
+	</message>
+	<message id="admin_usage_play_sounds_pagenumber">
+	    <set lang="en" val="Usage: //play_sounds [pagenumber]" />
+		<set lang="ru" val="Применение: //play_sounds [номер страницы]" />
+	</message>
+	<message id="admin_usage_play_sounds_soundname">
+	    <set lang="en" val="Usage: //play_sound [soundname]" />
+		<set lang="ru" val="Применение: //play_sound [название мелодии]" />
+	</message>
+	<message id="admin_usage_gmspeed">
+	    <set lang="en" val="Usage: //gmspeed [value] (0=off...4=max)" />
+		<set lang="ru" val="Применение: //gmspeed [значение] (0=выкл...4=макс.)" />
+	</message>
+	<message id="admin_usage_polyself">
+	    <set lang="en" val="Usage: //polyself [npcId]" />
+		<set lang="ru" val="Применение: //polyself [ид нпс]" />
+	</message>
+	<message id="admin_usage_setteam_close">
+	    <set lang="en" val="Usage: //setteam_close [none|blue|red] [radius]" />
+		<set lang="ru" val="Применение: //setteam_close [none|blue|red] [радиус]" />
+	</message>
+	<message id="admin_usage_setteam">
+	    <set lang="en" val="Usage: //setteam [none|blue|red]" />
+		<set lang="ru" val="Применение: //setteam [none|blue|red]" />
+	</message>
+	<message id="admin_player_affected_your_request">
+	    <set lang="en" val="%i% was affected by your request." />
+		<set lang="ru" val="%i% был затронут вашей просьбой." /> <!-- TODO: Fix message -->
+	</message>
+	<message id="admin_units_radius_affected_your_request">
+	    <set lang="en" val="%i% units radius affected by your request." />
+		<set lang="ru" val="%i% радиус единиц зависит от вашего запроса." />
+	</message>
+	<message id="admin_usage_social">
+	    <set lang="en" val="Usage: //social [social_id] [player_name|radius]" />
+		<set lang="ru" val="Применение: //social [социальный ид] [имя игрока|радиус]" />
+	</message>
+	<message id="admin_affected_all_characters_radius_abnormal_visual_effect">
+	    <set lang="en" val="Affected all characters in radius %i% by %s% abnormal visual effect." />
+		<set lang="ru" val="Влияет на всех персонажей в радиусе %i% на %s% ненормальный визуальный эффект." />
+	</message>
+	<message id="admin_affected_abnormal_visual_effect">
+	    <set lang="en" val="%i% affected by %s% abnormal visual effect." />
+		<set lang="ru" val="На %i% влияет %s% ненормальный визуальный эффект." />
+	</message>
+	<message id="admin_usage_abnormal_visual_effect">
+	    <set lang="en" val="Usage: // %i% [AbnormalVisualEffect] [radius]" />
+		<set lang="ru" val="Применение: // %i% [AbnormalVisualEffect] [радиус]" />
+	</message>
+	<message id="admin_performs_msu_your_request">
+	    <set lang="en" val="%i% performs MSU %s%/%t% by your request." />
+		<set lang="ru" val="%i% выполняет MSU %s%/%t% по вашему запросу." />
+	</message>
+	<message id="admin_usage_effect_skill">
+	    <set lang="en" val="Usage: //effect skill [level | level hittime]" />
+		<set lang="ru" val="Применение: //effect skill [уровень | уровень время действия]" />
+	</message>
+	<message id="admin_usage_set_displayeffect">
+	    <set lang="en" val="Usage: //set_displayeffect [id]" />
+		<set lang="ru" val="Применение: //set_displayeffect [ид]" />
+	</message>
+	<message id="admin_playing">
+	    <set lang="en" val="Playing %i%." />
+		<set lang="ru" val="Воспроизведение %i%." />
+	</message>
+	<!-- AdminElement Messages -->
+	<message id="admin_usage_setlh_1">
+	    <set lang="en" val="Usage: //setlh/setlc/setlg/setlb/setll/setlw/setls [element] [value][0-450]" />
+		<set lang="ru" val="Применение: //setlh/setlc/setlg/setlb/setll/setlw/setls [element] [значение][0-450]" />
+	</message>
+	<message id="admin_usage_setlh_2">
+	    <set lang="en" val="Usage: //setlh/setlc/setlg/setlb/setll/setlw/setls [element][0-5] [value][0-450]" />
+		<set lang="ru" val="Применение: //setlh/setlc/setlg/setlb/setll/setlw/setls [елемент][0-5] [значение][0-450]" />
+	</message>
+	<message id="admin_htm_none">  <!-- TODO: Fix message and done message_htm.xml -->
+	    <set lang="en" val="None" />
+		<set lang="ru" val="Нету" />
+	</message>
+	<message id="admin_changed_elemental_power">
+	    <set lang="en" val="Changed elemental power of %i% %s% from %t% to %c%." />
+		<set lang="ru" val="Изменена стихийная сила для %i% в %s% из %t% на %c%." />
+	</message>
+	<message id="admin_has_changed_elemental_power_of_your">
+	    <set lang="en" val="%i% has changed the elemental power of your %s% from %t% to %c%." />
+		<set lang="ru" val="%i% изменил стихийную силу вашего %s% из %t% на %c%." />
+	</message>
+	<!-- AdminEnchant Messages -->
+	<message id="admin_you_must_set_enchant_level_between">
+	    <set lang="en" val="You must set the enchant level to be between 0-65535." />
+		<set lang="ru" val="Вы должны установить уровень зачарования в диапазоне 0-65535." />
+	</message>
+	<message id="admin_please_specify_new_enchant_value">
+	    <set lang="en" val="Please specify a new enchant value." />
+		<set lang="ru" val="Пожалуйста, укажите новое значение зачарования." />
+	</message>
+	<message id="admin_please_specify_valid_new_enchant_value">
+	    <set lang="en" val="Please specify a valid new enchant value." />
+		<set lang="ru" val="Пожалуйста, укажите действительное новое значение зачарования." />
+	</message>
+	<message id="admin_changed_enchantment_player">
+	    <set lang="en" val="Changed enchantment of %i%'s %s% from %t% to %c%." />
+		<set lang="ru" val="Изменено значение зачарования для %i% в %s% из %t% на %c%." />
+	</message>
+	<message id="admin_has_changed_enchantment_your">
+	    <set lang="en" val="Admin has changed the enchantment of your %s% from %t% to %c%." />
+		<set lang="ru" val="Администратор изменил значение зачарования для %s% из %t% на %c%." />
+	</message>
+	<!-- AdminEventEngine Messages --> <!-- TODO: Fix add message -->
+	<!-- AdminEvents Messages --> <!-- TODO: Fix add message -->
+	<!-- AdminExpSp Messages -->
+	<message id="admin_usage_add_exp_sp">
+	    <set lang="en" val="Usage: //add_exp_sp exp sp" />
+		<set lang="ru" val="Применение: //add_exp_sp exp sp" />
+	</message>
+	<message id="admin_usage_remove_exp_sp">
+	    <set lang="en" val="Usage: //remove_exp_sp exp sp" />
+		<set lang="ru" val="Применение: //remove_exp_sp exp sp" />
+	</message>
+	<message id="admin_added_xp_and_sp">
+	    <set lang="en" val="Added %i% xp and %s% sp to %c%." />
+		<set lang="ru" val="Добавлены %i% xp и %s% sp для %c%." />
+	</message>
+	<message id="admin_added_you_xp_and_sp">
+	    <set lang="en" val="Admin is adding you %i% xp and %s% sp." />
+		<set lang="ru" val="Администратор добавил вам %i% xp и %s% sp." />
+	</message>
+	<message id="admin_removing_you_xp_and_sp">
+	    <set lang="en" val="Admin is removing you %i% xp and %s% sp." />
+		<set lang="ru" val="Администратор удалил вам %i% xp и %s% sp." />
+	</message>
+	<message id="admin_removed_xp_and_sp">
+	    <set lang="en" val="Removed %i% xp and %s% sp from %c%." />
+		<set lang="ru" val="Удалено %i% xp и %s% sp для %c%." />
+	</message>
+	<!-- AdminFightCalculator Messages --> <!-- TODO: Fix add message -->
+	<!-- AdminFortSiege Messages -->
+	<message id="admin_during_registering_error_occurred">
+	    <set lang="en" val="During registering error occurred!" />
+		<set lang="ru" val="При регистрации произошла ошибка!" />
+	</message>
+	<message id="admin_not_implemented_yet">
+	    <set lang="en" val="Not implemented yet." />
+		<set lang="ru" val="Не реализовано." />
+	</message>
+	<message id="admin_unable_to_remove_fort">
+	    <set lang="en" val="Unable to remove fort!" />
+		<set lang="ru" val="Не удалось удалить форт!" />
+	</message>
+	<!-- AdminGamePoints Messages-->
+	<message id="admin_invalid_value">
+	    <set lang="en" val="Invalid Value!" />
+		<set lang="ru" val="Неверное значение!" />
+	</message>
+	<message id="target_set_your_prime_point">
+	    <set lang="en" val="Admin set your Prime Point(s) to %s%!" />
+		<set lang="ru" val="Администратор установил ваши Prime Point(s) на значение %s%!" />
+	</message>
+	<message id="admin_set_your_prime_point">
+	    <set lang="en" val="You set %s% Prime Point(s) to player %c%." />
+		<set lang="ru" val="Вы устанавливаете значение Prime Point(s) на %s% игроку %c%." />
+	</message>
+	<message id="target_already_have_max_count_prime_point">
+	    <set lang="en" val="%c% already have max count of Prime Point(s)!" />
+		<set lang="ru" val="Игрок %c% уже имеет максимальное количество Prime Point(s)! " />
+	</message>
+	<message id="target_increase_your_prime_point">
+	    <set lang="en" val="Admin increase your Prime Point(s) by %s%!" />
+		<set lang="ru" val="Администратор увеличил ваше количество Prime Point(s) на %s%!" />
+	</message>
+	<message id="admin_increased_your_prime_point">
+	    <set lang="en" val="You increased Prime Point(s) of %c% by %s%!" />
+		<set lang="ru" val="Вы увеличили игроку %c% количество Prime Point(s) на %s%!" />
+	</message>
+	<message id="target_already_have_min_count_prime_point">
+	    <set lang="en" val="%c% already have min count of Prime Points(s)!" />
+		<set lang="ru" val="%c% уже имеет минимальное количество Prime Point(s)!" />
+	</message>
+	<message id="target_decreased_your_prime_point">
+	    <set lang="en" val="Admin decreased your Prime Point(s) by %s%!" />
+		<set lang="ru" val="Администратор уменьшил ваше количество Prime Point(s) на %s%!" />
+	</message>
+	<message id="admin_decreased_your_prime_point">
+	    <set lang="en" val="You decreased Prime Point(s) of %c% by %s%!" />
+		<set lang="ru" val="Вы уменьшили игроку %c% количество Prime Point(s) на %s%!" />
+	</message>
+	<message id="admin_increased_your_prime_point_all_online">
+	    <set lang="en" val="You increased Prime Point(s) of all online players %i% by %s%!" />
+		<set lang="ru" val="Вы увеличили количество Prime Point(s) для %i% онлайн-игроков на %s%!" />
+	</message>
+	<message id="admin_increased_your_prime_point_all_players">
+	    <set lang="en" val="You increased Prime Point(s) of all players %i% in range %r% by %s%!" />
+		<set lang="ru" val="Вы увеличили количество Prime Point(s) %i% игроков в радиусе %r% на %s%!" />
+	</message>
+	<message id="admin_increase_your_prime_point">
+	    <set lang="en" val="Admin increase your Prime Point(s) by %s%!" />
+		<set lang="ru" val="Администратор увеличил ваше количество Prime Point(s) на %s%!" />
+	</message>
+	<!-- AdminGeodata Messages -->
+	<message id="admin_there_no_geodata_position">
+	    <set lang="en" val="There is no geodata at this position." />
+		<set lang="ru" val="На этой позиции нет геоданных." />
+	</message>
+	<message id="admin_can_move_beeline">
+	    <set lang="en" val="Can move beeline." />
+		<set lang="ru" val="Может двигаться и мчаться." /> <!-- TODO: Fix ru message -->
+	</message>
+	<message id="admin_can_not_move_beeline">
+	    <set lang="en" val="Can not move beeline!" />
+		<set lang="ru" val="Не может двигаться и мчаться." />
+	</message>
+	<message id="admin_can_see_target">
+	    <set lang="en" val="Can see target." />
+		<set lang="ru" val="Можно увидеть цель." />
+	</message>
+	<message id="admin_world_x_y_z_geo_x_y_z">
+	    <set lang="en" val="WorldX: %i%, WorldY: %s%, WorldZ: %c%, GeoX: %t%, GeoY: %y%, GeoZ: %z%" />
+		<set lang="ru" val="МирХ: %i%, МирY: %s%, МирZ: %c%, ГеоX: %t%, ГеоY: %y%, ГеоZ: %z%" />
+	</message>
+	<!-- AdminGm Messages -->
+	<message id="admin_you_no_longer_gm_status">
+	    <set lang="en" val="You no longer have GM status." />
+		<set lang="ru" val="У вас больше нет статуса Гм мастера." />
+	</message>
+	<!-- AdminGrandBoss Messages -->  
+	<message id="admin_wrong_id">
+	    <set lang="en" val="Wrong ID!" />
+		<set lang="ru" val="Неверный ИД!" />
+	</message>
+	<message id="admin_usage_grandboss_skip">
+	    <set lang="en" val="Usage: //grandboss_skip Id" />
+		<set lang="ru" val="Применение: //grandboss_skip Id" />
+	</message>
+	<message id="admin_usage_grandboss_respawn">
+	    <set lang="en" val="Usage: //grandboss_respawn Id" />
+		<set lang="ru" val="Применение: //grandboss_respawn Id" />
+	</message>
+	<message id="admin_usage_grandboss_minions">
+	    <set lang="en" val="Usage: //grandboss_minions Id" />
+		<set lang="ru" val="Применение: //grandboss_minions Id" />
+	</message>
+	<message id="admin_usage_grandboss_abort">
+	    <set lang="en" val="Usage: //grandboss_abort Id" />
+		<set lang="ru" val="Применение: //grandboss_abort Id" />
+	</message>
+	<message id="admin_grandboss_alive"> <!-- TODO: Fix done message_htm.xml -->
+	    <set lang="en" val="Alive" />
+		<set lang="ru" val="Жив" />
+	</message>
+	<message id="admin_grandboss_waiting"> <!-- TODO: Fix done message_htm.xml -->
+	    <set lang="en" val="Waiting" />
+		<set lang="ru" val="Ожидание" />
+	</message>
+	<message id="admin_grandboss_fight"> <!-- TODO: Fix done message_htm.xml -->
+	    <set lang="en" val="In Fight" />
+		<set lang="ru" val="В бою" />
+	</message>
+	<message id="admin_grandboss_dead"> <!-- TODO: Fix done message_htm.xml -->
+	    <set lang="en" val="Dead" />
+		<set lang="ru" val="Мертв" />
+	</message>
+	<message id="admin_already_respawned"> <!-- TODO: Fix done message_htm.xml -->
+	    <set lang="en" val="Already respawned!" />
+		<set lang="ru" val="Уже возродился!" />
+	</message>
+	<message id="admin_zone_not_found"> <!-- TODO: Fix done message_htm.xml -->
+	    <set lang="en" val="Zone not found!" />
+		<set lang="ru" val="Зона не найдена!" />
+	</message>
+	<!-- AdminHeal Messages -->
+	<message id="admin_incorrect_target_radius_specified">
+	    <set lang="en" val="Incorrect target/radius specified." />
+		<set lang="ru" val="Указана неверная цель/радиус." />
+	</message>
+	<message id="admin_healed_within_unit_radius">
+	    <set lang="en" val="Healed within %i% unit radius." />
+		<set lang="ru" val="Исцеление в радиусе %i% единиц(ы)." />
+	</message>
+	<!-- AdminHellbound Messages -->
+	<message id="admin_hellbound_level_set">
+	    <set lang="en" val="Hellbound level set to %i%." />
+		<set lang="ru" val="Уровень Острова Ада установлен на %i%." />
+	</message>
+	<message id="admin_usage_hellbound_setlevel">
+	    <set lang="en" val="Usage: //hellbound_setlevel 0-11" />
+		<set lang="ru" val="Применение: //hellbound_setlevel 0-11" />
+	</message>
+	<!-- AdminHtml Messages -->  
+	<message id="admin_usage_html_path">
+	    <set lang="en" val="Usage: //html path" />
+		<set lang="ru" val="Применение: //html path" />
+	</message>
+	<message id="admin_usage_loadhtml_path">
+	    <set lang="en" val="Usage: //loadhtml path" />
+		<set lang="ru" val="Применение: //loadhtml path" />
+	</message>
+	<message id="admin_htm_text_missing"> <!-- TODO: Fix done message_htm.xml -->
+	    <set lang="en" val="My text is missing:" />
+		<set lang="ru" val="Мой текст отсутствует:" />
+	</message>
+	<!-- AdminInstance Messages -->
+	<message id="admin_usage_create_instance">
+	    <set lang="en" val="Usage: //createinstance [id] [templatefile] - ids => 300000 are reserved for dynamic instances!" />
+		<set lang="ru" val="Применение: //createinstance [ид] [файл шаблона] - ид => 300000 зарезервированы для динамических экземпляров!" />
+	</message>
+	<message id="admin_instance_created">
+	    <set lang="en" val="Instance created." />
+		<set lang="ru" val="Экземпляр создан." />
+	</message>
+	<message id="admin_failed_create_instance">
+	    <set lang="en" val="Failed to create instance." />
+		<set lang="ru" val="Не удалось создать экземпляр." />
+	</message>
+	<message id="admin_failed_loading">
+	    <set lang="en" val="Failed loading: %i% %s%" />
+		<set lang="ru" val="Ошибка загрузки: %i% %s%" />
+	</message>
+	<message id="admin_id_name_instance">
+	    <set lang="en" val="Id: %i% Name: %s%" />
+		<set lang="ru" val="Ид: %i% Имя: %s%" />
+	</message>
+	<message id="admin_instance_doesnt_exist">
+	    <set lang="en" val="Instance %i% doesnt exist." />
+		<set lang="ru" val="Экземпляр %i% не существует." />
+	</message>
+	<message id="admin_set_your_instance_to">
+	    <set lang="en" val="Admin set your instance to: %i%" />
+		<set lang="ru" val="Администратор установил ваш экземпляр на: %i%" />
+	</message>
+	<message id="admin_moved_player_to_instance">
+	    <set lang="en" val="Moved %i% to instance %s%." />
+		<set lang="ru" val="Перемещено %i% в экземпляр %s%." />
+	</message>
+	<message id="admin_usage_setinstance">
+	    <set lang="en" val="Usage: //setinstance id" />
+		<set lang="ru" val="Применение: //setinstance ид" />
+	</message>
+	<message id="admin_usage_destroyinstance">
+	    <set lang="en" val="Usage: //destroyinstance id" />
+		<set lang="ru" val="Применение: //destroyinstance ид" />
+	</message>
+	<message id="admin_instance_destroyed">
+	    <set lang="en" val="Instance destroyed!" />
+		<set lang="ru" val="Экземпляр уничтожен!" />
+	</message>
+	<message id="admin_ghoston_mode_enabled">
+	    <set lang="en" val="Ghost mode enabled" />
+		<set lang="ru" val="Режим призрака включен!" />
+	</message>
+	<message id="admin_ghoston_mode_disabled">
+	    <set lang="en" val="Ghost mode disabled" />
+		<set lang="ru" val="Режим призрака выключен!" />
+	</message>
+	<!-- AdminInstanceZone Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminInvul Messages -->
+	<message id="admin_player_now_mortal">
+	    <set lang="en" val="%i% is now mortal!" />
+		<set lang="ru" val="Игрок %i% сейчас смертный!" />
+	</message>
+	<message id="admin_player_now_invulnerable">
+	    <set lang="en" val="%i% is now invulnerable!" />
+		<set lang="ru" val="Игрок %i% теперь неуязвим!" />
+	</message>
+	<!-- AdminKick Messages -->
+	<message id="admin_you_kicked_from_game">
+	    <set lang="en" val="You kicked %i% from the game." />
+		<set lang="ru" val="Вы выгнали игрока %i% из игры." />
+	</message>
+	<message id="admin_kicked_counter_players">
+	    <set lang="en" val="Kicked %i% players" />
+		<set lang="ru" val="Вы выгнали %i% игроков из игры." />
+	</message>
+	<!-- AdminKill Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminLevel Messages -->
+	<message id="admin_wrong_number_format">
+	    <set lang="en" val="Wrong Number Format!" />
+		<set lang="ru" val="Неверный формат номера!" />
+	</message>
+	<message id="admin_level_require_number_value">
+	    <set lang="en" val="Level require number as value!" />
+		<set lang="ru" val="Уровень требует номер в качестве значения!" />
+	</message>
+	<!-- AdminLogin Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminMammon Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminManor Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminMenu Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminMessages Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminMobGroup Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminPForge Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminPathNode Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminPcCafePoints Messages -->
+	<message id="target_already_have_max_count_pc_cafe_point">
+	    <set lang="en" val="%c% already have max count of Pc Cafe Points!" />
+		<set lang="ru" val="Игрок %c% уже имеет максимальное количество Очков PC-клуба!" />
+	</message>
+	<message id="target_increase_your_pc_cafe_point">
+	    <set lang="en" val="Admin increase your Pc Cafe Point(s) by %s%!" />
+		<set lang="ru" val="Администратор увеличивает ваши Очки PC-клуба на %s%!" />
+	</message>
+	<message id="admin_increased_your_pc_cafe_point">
+	    <set lang="en" val="You increased Pc Cafe Point(s) of %c% by %s%!" />
+		<set lang="ru" val="Вы увеличили Очки PC-клуба для %c% на %s%!" />
+	</message>
+	<message id="target_already_have_min_count_pc_cafe_point">
+	    <set lang="en" val="%c% already have min count of Pc Cafe Points!" />
+		<set lang="ru" val="Игрок %c% уже имеет минимальное количество Очков PC-клуба!" />
+	</message>
+	<message id="target_decreased_your_pc_cafe_point">
+	    <set lang="en" val="Admin decreased your Pc Cafe Point(s) by %s%!" />
+		<set lang="ru" val="Администратор уменьшил ваше количество Очков PC-клуба на %s%!" />
+	</message>
+	<message id="admin_decreased_your_pc_cafe_point">
+	    <set lang="en" val="You decreased Pc Cafe Point(s) of %c% by %s%!" />
+		<set lang="ru" val="Вы уменьшили Очки PC-клуба для %c% на %s%!" />
+	</message>
+	<message id="admin_increased_your_pc_cafe_point_all_online">
+	    <set lang="en" val="You increased Pc Cafe Point(s) of all online players %i% by %s%!" />
+		<set lang="ru" val="Вы увеличили Очки PC-клуба всех онлайн-игроков %i% на %s%!" />
+	</message>
+	<message id="admin_increased_your_pc_cafe_point_all_players">
+	    <set lang="en" val="You increased Pc Cafe Point(s) of all players %i% in range %r% by %s%!" />
+		<set lang="ru" val="Вы увеличили Очки PC-клуба всех игроков %i% в радиусе %r% на %s%!" />
+	</message>
+	<message id="admin_increase_your_pc_cafe_point">
+	    <set lang="en" val="Admin increase your Pc Cafe Point(s) by %s%!" />
+		<set lang="ru" val="Администратор увеличил ваше количество Очков PC-клуба на %s%!" />
+	</message>
+	<!-- AdminPcCondOverride Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminPetition Messages -->   <!-- TODO: Fix add message -->
+	<message id="admin_usage_force_peti">
+	    <set lang="en" val="Usage: //force_peti text" />
+		<set lang="ru" val="Применение: //force_peti текст" />
+	</message>
+	<!-- AdminPledge Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminPolymorph Messages -->   <!-- TODO: Fix add message -->
+	<!-- Admin Premium Messages -->
+	<message id="admin_usage_premium_add1">
+	    <set lang="en" val="Usage: //admin_premium_add1 [account name]" />
+		<set lang="ru" val="Применение: //admin_premium_add1 [имя аккаунта]" />
+	</message>
+	<message id="admin_usage_premium_add2">
+	    <set lang="en" val="Usage: //admin_premium_add2 [account name]" />
+		<set lang="ru" val="Применение: //admin_premium_add2 [имя аккаунта]" />
+	</message>
+	<message id="admin_usage_premium_add3">
+	    <set lang="en" val="Usage: //admin_premium_add3 [account name]" />
+		<set lang="ru" val="Применение: //admin_premium_add3 [имя аккаунта]" />
+	</message>
+	<message id="admin_usage_premium_info">
+	    <set lang="en" val="Usage: //admin_premium_info [account name]" />
+		<set lang="ru" val="Применение: //admin_premium_info [имя аккаунта]" />
+	</message>
+	<message id="admin_usage_premium_remove">
+	    <set lang="en" val="Usage: //admin_premium_remove [account name]" />
+		<set lang="ru" val="Применение: //admin_premium_remove [имя аккаунта]" />
+	</message>
+	<message id="admin_account_will_have_premium_status_ntil">
+	    <set lang="en" val="Account %s% will now have premium status until %i%." />
+		<set lang="ru" val="Аккаунт %s% теперь будет иметь премиум статус до %i%." />
+	</message>
+	<message id="admin_account_has_premium_status_until">
+	    <set lang="en" val="Account %s% has premium status until %i%." />
+		<set lang="ru" val="Аккаунт %s% имеет премиум статус до %i%." />
+	</message>
+	<message id="admin_account_has_no_premium_status">
+	    <set lang="en" val="Account %s% has no premium status." />
+		<set lang="ru" val="Аккаунт %s% не имеет премиум статуса." />
+	</message>
+	<message id="admin_account_has_no_longer_premium_status">
+	    <set lang="en" val="Account %s% has no longer premium status." />
+		<set lang="ru" val="Аккаунт %s% больше не имеет премиум статуса." />
+	</message>
+	<message id="admin_account_has_no_premium_status">
+	    <set lang="en" val="Account %s% has no premium status." />
+		<set lang="ru" val="Аккаунт %s% не имеет премиум статуса." />
+	</message>
+	<!-- AdminPremiumItem Messages -->
+	<message id="admin_usage_create_premium_item">
+	    <set lang="en" val="Usage: //give_premium_item [itemId] [amount]" />
+		<set lang="ru" val="Применение: //give_premium_item [ид предмета] [колиствео]" />
+	</message>
+	<message id="admin_you_have_spawned_dimensional_storage">
+	    <set lang="en" val="You have send %s% (%i%) at %c%'s dimensional storage." />
+		<set lang="ru" val="Вы отправили %s% (%i%) в хранилище к Менеджеру Витаминов для игрока %c%." />
+	</message>
+	<!-- AdminPunishment Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminQuest Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminReload Messages -->
+	<message id="admin_usage_reload">
+	    <set lang="en" val="Usage: //reload [config|access|npc|quest [quest_id|quest_name]|walker|htm[l] [file|directory]|multisell|buylist|teleport|skill|item|door|effect|handler|enchant|creationpoint|itemmall|messages]" />
+		<set lang="ru" val="Применение: //reload [config|access|npc|quest [quest_id|quest_name]|walker|htm[l] [file|directory]|multisell|buylist|teleport|skill|item|door|effect|handler|enchant|creationpoint|itemmall|messages]" />
+	</message>
+	<message id="admin_file_or_directory_does_not_exist">
+	    <set lang="en" val="File or Directory does not exist." />
+		<set lang="ru" val="Файл или каталог не существует." />
+	</message>
+	<message id="admin_all_scripts_have_been_reloaded">
+	    <set lang="en" val="All scripts have been reloaded." />
+		<set lang="ru" val="Все скрипты перезагружены." />
+	</message>
+	<message id="admin_all_walkers_have_been_reloaded">
+	    <set lang="en" val="All walkers have been reloaded." />
+		<set lang="ru" val="Все walkers были перезагружены." />
+	</message>
+	<message id="admin_cache_html_megabytes_on_files_loaded">
+	    <set lang="en" val="Cache[HTML]: %s% megabytes on %i% files loaded" />
+		<set lang="ru" val="Кеш [HTML]: %s% мегабайт на %i% загруженных файлов" />
+	</message>
+	<message id="admin_there_was_error_while_loading_handlers">
+	    <set lang="en" val="There was an error while loading handlers." />
+		<set lang="ru" val="При загрузке обработчиков произошла ошибка." />
+	</message>
+	<message id="admin_warn_reloding">
+	    <set lang="en" val="WARNING: There are several known issues regarding this feature. Reloading server data during runtime is STRONGLY NOT RECOMMENDED for live servers, just for developing environments." />
+		<set lang="ru" val="ВНИМАНИЕ: Существует несколько известных проблем, связанных с этой функцией. Перезагрузка данных сервера во время его работы СИЛЬНО НЕ РЕКОМЕНДУЕТСЯ для открытых серверов, только для среды разработки." />
+	</message>
+	<!-- AdminRes Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminRide Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminScan Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminShop Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminShowQuests Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminShutdown Messages -->
+	<message id="admin_usage_server_shutdown">
+	    <set lang="en" val="Usage: //server_shutdown [seconds]" />
+		<set lang="ru" val="Применение: //server_shutdown [seconds]" />
+	</message>
+	<message id="admin_usage_server_restart">
+	    <set lang="en" val="Usage: //server_restart [seconds]" />
+		<set lang="ru" val="Применение: //server_restart [seconds]" />
+	</message>
+	<message id="admin_geo_loading">
+	    <set lang="en" val="Loading" />
+		<set lang="ru" val="Загружена" />
+	</message>
+	<message id="admin_geo_disabled">
+	    <set lang="en" val="Disabled" />
+		<set lang="ru" val="Выключена" />
+	</message>
+	<message id="admin_game_night">
+	    <set lang="en" val="Night" />
+		<set lang="ru" val="Ночь" />
+	</message>
+	<message id="admin_game_day">
+	    <set lang="en" val="Day" />
+		<set lang="ru" val="День" />
+	</message>
+	<!-- AdminSiege Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminSkill Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminSpawn Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminSummon Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminTarget Messages -->
+	<message id="admin_player_not_found">
+	    <set lang="en" val="Player %i% not found!" />
+		<set lang="ru" val="Игрок %i% не найден!" />
+	</message>
+	<message id="admin_please_specify_correct_name">
+	    <set lang="en" val="Please specify correct name." />
+		<set lang="ru" val="Пожалуйста, укажите правильное имя." />
+	</message>
+	<!-- AdminTargetSay Messages -->
+	<message id="admin_usage_targetsay">
+	    <set lang="en" val="Usage: //targetsay [text]" />
+		<set lang="ru" val="Применение: //targetsay [текст]" />
+	</message>
+	<!-- AdminTeleport Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminTerritoryWar Messages -->   <!-- TODO: Fix add message -->
+	<!-- AdminTest Messages -->
+	<message id="admin_usage_skill_test">
+	    <set lang="en" val="Usage: //skill_test [ID]" />
+		<set lang="ru" val="Применение: //skill_test [ид]" />
+	</message>
+	<!-- AdminTvTEvent Messages -->
+	<message id="admin_should_select_player">
+	    <set lang="en" val="You should select a player!" />
+		<set lang="ru" val="Вы должны выбрать игрока!" />
+	</message>
+	<message id="admin_already_participated_event">
+	    <set lang="en" val="Player already participated in the event!" />
+		<set lang="ru" val="Игрок уже принимает участие в эвенте!" />
+	</message>
+	<message id="admin_instance_could_not_added_null">
+	    <set lang="en" val="Player instance could not be added, it seems to be null!" />
+		<set lang="ru" val="Игрок не может быть добавлен, похоже, он нулевой!" />
+	</message>
+	<message id="admin_player_not_part_event">
+	    <set lang="en" val="Player is not part of the event!" />
+		<set lang="ru" val="Игрок не участвует в эвенте!" />
+	</message>
+	<!-- AdminUnblockIp Messages -->
+	<message id="admin_removed_ip_from_blocklist">
+	    <set lang="en" val="Removed IP %i% from blocklist!" />
+		<set lang="ru" val="Удален IP %i% из черного списка!" />
+	</message>
+	<message id="admin_usage_unblockip">
+	    <set lang="en" val="Usage: //unblockip [ip]" />
+		<set lang="ru" val="Применение: //unblockip [ip]" />
+	</message>
+	<!-- AdminVitality Messages -->
+	<message id="admin_vitality_not_enabled_server">
+	    <set lang="en" val="Vitality is not enabled on the server!" />
+		<set lang="ru" val="Система Виталити (Жизненная сила) не включена на сервере!" />
+	</message>
+	<message id="admin_incorrect_vitality">
+	    <set lang="en" val="Incorrect vitality!" />
+		<set lang="ru" val="Неправильное количство очков жизненной силы!" />
+	</message>
+	<message id="admin_your_set_vitality_points">
+	    <set lang="en" val="Admin set your Vitality points to %i%." />
+		<set lang="ru" val="Администратор установил ваши очки жизненной силы на %i%." />
+	</message>
+	<message id="admin_incorrect_vitality_level">
+	    <set lang="en" val="Incorrect vitality level (0-4)" />
+		<set lang="ru" val="Неправильный уровень жизненной силы (0-4)" />
+	</message>
+	<message id="admin_your_set_vitality_level">
+	    <set lang="en" val="Admin set your Vitality level to %i%." />
+		<set lang="ru" val="Администратор установил ваш уровень жизненной силы на %i%." />
+	</message>
+	<message id="admin_completly_recharged_your_vitality">
+	    <set lang="en" val="Admin completly recharged your Vitality!" />
+		<set lang="ru" val="Администратор полностью востановил вашу жизненную силу!" />
+	</message>
+	<message id="admin_completly_emptied_your_vitality">
+	    <set lang="en" val="Admin completly emptied your Vitality!" />
+		<set lang="ru" val="Администратор полностью опустошил вашу жизненную силу!" />
+	</message>
+	<message id="admin_vitality_level">
+	    <set lang="en" val="Player vitality level: %i%." />
+		<set lang="ru" val="Уровень жизненной силы игрока: %i%." />
+	</message>
+	<message id="admin_vitality_points">
+	    <set lang="en" val="Player vitality points: %i%." />
+		<set lang="ru" val="Очки жизненной силы игрока: %i%." />
+	</message>
+	<message id="admin_target_not_found_not_player">
+	    <set lang="en" val="Target not found or not a player!" />
+		<set lang="ru" val="Цель не найдена или нет игрока!" />
+	</message>
+	<!-- AdminZone Messages -->
+	<message id="admin_map_region">
+	    <set lang="en" val="MapRegion: x: %i% y: %s% (%t%)" />
+		<set lang="ru" val="Карта региона: x: %i% y: %s% (%t%)" />
+	</message>
+	<message id="admin_closest_town">
+	    <set lang="en" val="Closest Town: %i%" />
+		<set lang="ru" val="Ближайший город: %i%" />
+	</message>
+	<message id="admin_teletolocation_castle">
+	    <set lang="en" val="TeleToLocation (Castle): x: %i% y: %s% z: %t%" />
+		<set lang="ru" val="Телепорт в локацию (Замок): x: %i% y: %s% z: %t%" />
+	</message>
+	<message id="admin_teletolocation_clanhall">
+	    <set lang="en" val="TeleToLocation (ClanHall): x: %i% y: %s% z: %t%" />
+		<set lang="ru" val="Телепорт в локацию (Клан Холла): x: %i% y: %s% z: %t%" />
+	</message>
+	<message id="admin_teletolocation_siegeflag">
+	    <set lang="en" val="TeleToLocation (SiegeFlag): x: %i% y: %s% z: %t%" />
+		<set lang="ru" val="Телепорт в локацию (Осадного Флага): x: %i% y: %s% z: %t%" />
+	</message>
+	<message id="admin_teletolocation_town">
+	    <set lang="en" val="TeleToLocation (Town): x: %i% y: %s% z: %t%" />
+		<set lang="ru" val="Телепорт в локацию (Город): x: %i% y: %s% z: %t%" />
+	</message>
+	<message id="admin_geo_region">
+	    <set lang="en" val="GeoRegion: %i%_%s%" />
+		<set lang="ru" val="Гео Регион: %i%_%s%" />
+	</message>
+	<!-- Admin Button -->
+	<message id="admin_button_refresh">
+	    <set lang="en" val="Refresh" />
+		<set lang="ru" val="Обновить" />
+	</message>
+	<message id="admin_announce_button_restart">
+	    <set lang="en" val="Restart" />
+		<set lang="ru" val="Перезагр." />
+	</message>
+	 <message id="admin_announce_button_show">
+	    <set lang="en" val="Show" />
+		<set lang="ru" val="Показ." />
+	</message>
+	 <message id="admin_announce_button_edit">
+	    <set lang="en" val="Edit" />
+		<set lang="ru" val="Измен." />
+	</message>
+	<message id="admin_announce_button_remove">
+	    <set lang="en" val="Remove" />
+		<set lang="ru" val="Удалить" />
+	</message>
+	<message id="admin_html_title_config">
+        <set lang="en" val="Config" />
+		<set lang="ru" val="Настройки" />
+    </message>
+     <message id="admin_html_title_config_panel">
+        <set lang="en" val="Config Server Panel" />
+		<set lang="ru" val="Настройки параметров" />
+    </message>
+    <message id="admin_button_set">
+        <set lang="en" val="Set" />
+		<set lang="ru" val="Уст." />
+    </message>
+    <message id="admin_button_delete">
+        <set lang="en" val="Delete" />
+		<set lang="ru" val="Удалить" />
+    </message>
+    <message id="admin_button_remove_all">
+        <set lang="en" val="Remove All" />
+		<set lang="ru" val="Удалить все" />
+    </message>
+    <message id="admin_button_main">
+        <set lang="en" val="Main" />
+		<set lang="ru" val="Главная" />
+    </message>
+     <message id="admin_no_owner">
+        <set lang="en" val="No Owner" />
+		<set lang="ru" val="Нет владельца" />
+    </message>
+</list>

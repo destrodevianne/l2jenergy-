@@ -28,8 +28,8 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.StatsSet;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.items.PcItemTemplate;
 import com.l2jserver.gameserver.util.IXmlReader;
 
@@ -130,11 +130,11 @@ public final class InitialEquipmentData implements IXmlReader
 	 */
 	public static InitialEquipmentData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final InitialEquipmentData _instance = new InitialEquipmentData();
+		protected static final InitialEquipmentData INSTANCE = new InitialEquipmentData();
 	}
 }

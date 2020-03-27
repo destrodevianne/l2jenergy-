@@ -22,11 +22,11 @@ import java.lang.reflect.Constructor;
 import java.util.logging.Logger;
 
 import com.l2jserver.gameserver.enums.StatFunction;
+import com.l2jserver.gameserver.enums.actors.Stats;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.conditions.Condition;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.model.skills.Skill;
-import com.l2jserver.gameserver.model.stats.Stats;
 
 /**
  * Function template.

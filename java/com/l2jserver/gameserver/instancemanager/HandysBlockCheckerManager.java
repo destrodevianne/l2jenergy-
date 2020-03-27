@@ -27,13 +27,13 @@ import java.util.Set;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
-import com.l2jserver.gameserver.enums.Team;
+import com.l2jserver.gameserver.enums.ZoneId;
+import com.l2jserver.gameserver.enums.events.Team;
 import com.l2jserver.gameserver.instancemanager.tasks.PenaltyRemoveTask;
 import com.l2jserver.gameserver.model.ArenaParticipantsHolder;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.itemcontainer.PcInventory;
 import com.l2jserver.gameserver.model.olympiad.OlympiadManager;
-import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.ExBlockUpSetList;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
@@ -368,17 +368,13 @@ public final class HandysBlockCheckerManager
 		ThreadPoolManager.getInstance().scheduleGeneral(new PenaltyRemoveTask(objId), 10000);
 	}
 	
-	/**
-	 * Gets the single instance of {@code HandysBlockCheckerManager}.
-	 * @return single instance of {@code HandysBlockCheckerManager}
-	 */
 	public static HandysBlockCheckerManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final HandysBlockCheckerManager _instance = new HandysBlockCheckerManager();
+		protected static final HandysBlockCheckerManager INSTANCE = new HandysBlockCheckerManager();
 	}
 }

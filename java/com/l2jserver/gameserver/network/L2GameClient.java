@@ -45,6 +45,9 @@ import com.l2jserver.gameserver.configuration.config.events.WeddingConfig;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.xml.impl.SecondaryAuthData;
+import com.l2jserver.gameserver.enums.GameClientState;
+import com.l2jserver.gameserver.enums.ZoneId;
+import com.l2jserver.gameserver.enums.skills.AbnormalVisualEffect;
 import com.l2jserver.gameserver.instancemanager.AntiFeedManager;
 import com.l2jserver.gameserver.model.CharSelectInfoPackage;
 import com.l2jserver.gameserver.model.L2Clan;
@@ -53,8 +56,6 @@ import com.l2jserver.gameserver.model.PcCondOverride;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.L2Event;
 import com.l2jserver.gameserver.model.olympiad.OlympiadManager;
-import com.l2jserver.gameserver.model.skills.AbnormalVisualEffect;
-import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.L2GameServerPacket;
 import com.l2jserver.gameserver.network.serverpackets.ServerClose;
@@ -74,17 +75,6 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 {
 	protected static final Logger LOG = LoggerFactory.getLogger(L2GameClient.class);
 	protected static final Logger LOG_ACCOUNTING = LoggerFactory.getLogger("accounting");
-	
-	/**
-	 * @author KenM
-	 */
-	public static enum GameClientState
-	{
-		CONNECTED, // Client has just connected.
-		AUTHED, // Client has authed but doesn't has character attached to it yet.
-		ENTERING, // client is currently loading his Player instance, but didn't end
-		IN_GAME // Client has selected a char and is in game.
-	}
 	
 	private GameClientState _state;
 	

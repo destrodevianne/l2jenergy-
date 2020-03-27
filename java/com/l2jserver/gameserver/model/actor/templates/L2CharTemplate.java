@@ -23,11 +23,11 @@ import java.util.Collections;
 import java.util.Map;
 
 import com.l2jserver.gameserver.enums.Race;
+import com.l2jserver.gameserver.enums.actors.MoveType;
+import com.l2jserver.gameserver.enums.items.WeaponType;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.events.ListenersContainer;
-import com.l2jserver.gameserver.model.items.type.WeaponType;
 import com.l2jserver.gameserver.model.skills.Skill;
-import com.l2jserver.gameserver.model.stats.MoveType;
 
 /**
  * Character template.

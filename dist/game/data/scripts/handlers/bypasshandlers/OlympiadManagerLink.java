@@ -25,6 +25,7 @@ import com.l2jserver.gameserver.configuration.config.events.OlympiadConfig;
 import com.l2jserver.gameserver.data.sql.impl.NpcBufferTable;
 import com.l2jserver.gameserver.data.sql.impl.NpcBufferTable.NpcBufferData;
 import com.l2jserver.gameserver.data.xml.impl.MultisellData;
+import com.l2jserver.gameserver.enums.OlympiadType;
 import com.l2jserver.gameserver.handler.IBypassHandler;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -33,7 +34,6 @@ import com.l2jserver.gameserver.model.actor.instance.L2OlympiadManagerInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.entity.Hero;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
-import com.l2jserver.gameserver.model.olympiad.CompetitionType;
 import com.l2jserver.gameserver.model.olympiad.Olympiad;
 import com.l2jserver.gameserver.model.olympiad.OlympiadManager;
 import com.l2jserver.gameserver.model.skills.Skill;
@@ -179,10 +179,10 @@ public class OlympiadManagerLink implements IBypassHandler
 						activeChar.sendPacket(html);
 						break;
 					case 4: // register non classed
-						OlympiadManager.getInstance().registerNoble(activeChar, CompetitionType.NON_CLASSED);
+						OlympiadManager.getInstance().registerNoble(activeChar, OlympiadType.NON_CLASSED);
 						break;
 					case 5: // register classed
-						OlympiadManager.getInstance().registerNoble(activeChar, CompetitionType.CLASSED);
+						OlympiadManager.getInstance().registerNoble(activeChar, OlympiadType.CLASSED);
 						break;
 					case 6: // request tokens reward
 						passes = Olympiad.getInstance().getNoblessePasses(activeChar, false);
@@ -229,7 +229,7 @@ public class OlympiadManagerLink implements IBypassHandler
 						}
 						break;
 					case 11: // register team
-						OlympiadManager.getInstance().registerNoble(activeChar, CompetitionType.TEAMS);
+						OlympiadManager.getInstance().registerNoble(activeChar, OlympiadType.TEAMS);
 						break;
 					default:
 						LOG.warn("Olympiad System: Couldnt send packet for request {}", val);

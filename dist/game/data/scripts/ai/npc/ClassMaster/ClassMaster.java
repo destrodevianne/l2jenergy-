@@ -23,7 +23,7 @@ import static com.l2jserver.gameserver.configuration.config.CharacterConfig.ALLO
 import static com.l2jserver.gameserver.configuration.config.CharacterConfig.ALTERNATE_CLASS_MASTER;
 import static com.l2jserver.gameserver.configuration.config.CharacterConfig.AUTO_LEARN_FS_SKILLS;
 import static com.l2jserver.gameserver.configuration.config.CharacterConfig.CLASS_MASTER_SETTINGS;
-import static com.l2jserver.gameserver.model.events.EventType.ON_PLAYER_LEVEL_CHANGED;
+import static com.l2jserver.gameserver.enums.events.EventType.ON_PLAYER_LEVEL_CHANGED;
 import static com.l2jserver.gameserver.network.SystemMessageId.INVENTORY_LESS_THAN_80_PERCENT;
 import static com.l2jserver.gameserver.network.SystemMessageId.NOT_ENOUGH_ITEMS;
 import static com.l2jserver.gameserver.network.serverpackets.TutorialCloseHtml.STATIC_PACKET;
@@ -31,10 +31,10 @@ import static com.l2jserver.gameserver.network.serverpackets.TutorialCloseHtml.S
 import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.data.xml.impl.ClassListData;
 import com.l2jserver.gameserver.datatables.ItemTable;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.events.Containers;
 import com.l2jserver.gameserver.model.events.impl.character.player.OnPlayerLevelChanged;
 import com.l2jserver.gameserver.model.events.listeners.ConsumerEventListener;
@@ -366,7 +366,7 @@ public final class ClassMaster extends AbstractNpcAI
 			final StringBuilder menu = new StringBuilder(100);
 			for (ClassId cid : ClassId.values())
 			{
-				if ((cid == ClassId.inspector) && (player.getTotalSubClasses() < 2))
+				if ((cid == ClassId.INSPECTOR) && (player.getTotalSubClasses() < 2))
 				{
 					continue;
 				}
@@ -411,7 +411,7 @@ public final class ClassMaster extends AbstractNpcAI
 		final StringBuilder menu = new StringBuilder(100);
 		for (ClassId cid : ClassId.values())
 		{
-			if ((cid == ClassId.inspector) && (player.getTotalSubClasses() < 2))
+			if ((cid == ClassId.INSPECTOR) && (player.getTotalSubClasses() < 2))
 			{
 				continue;
 			}

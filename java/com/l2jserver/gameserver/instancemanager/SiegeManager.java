@@ -18,22 +18,19 @@
  */
 package com.l2jserver.gameserver.instancemanager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import com.l2jserver.commons.database.ConnectionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.l2jserver.commons.util.PropertiesParser;
 import com.l2jserver.gameserver.configuration.config.Config;
+import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.datatables.SkillData;
-import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.TowerSpawn;
@@ -45,18 +42,10 @@ import com.l2jserver.gameserver.model.skills.Skill;
 
 public final class SiegeManager
 {
-	private static final Logger _log = Logger.getLogger(SiegeManager.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(SiegeManager.class);
 	
 	private final Map<Integer, List<TowerSpawn>> _controlTowers = new HashMap<>();
 	private final Map<Integer, List<TowerSpawn>> _flameTowers = new HashMap<>();
-	
-	private int _attackerMaxClans = 500; // Max number of clans
-	private int _attackerRespawnDelay = 0; // Time in ms. Changeable in siege.config
-	private int _defenderMaxClans = 500; // Max number of clans
-	private int _flagMaxCount = 1; // Changeable in siege.config
-	private int _siegeClanMinLevel = 5; // Changeable in siege.config
-	private int _siegeLength = 120; // Time in minute. Changeable in siege.config
-	private int _bloodAllianceReward = 0; // Number of Blood Alliance items reward for successful castle defending
 	
 	protected SiegeManager()
 	{
@@ -69,45 +58,6 @@ public final class SiegeManager
 		{
 			character.addSkill(sk, false);
 		}
-	}
-	
-	/**
-	 * @param clan The L2Clan of the player
-	 * @param castleid
-	 * @return true if the clan is registered or owner of a castle
-	 */
-	public final boolean checkIsRegistered(L2Clan clan, int castleid)
-	{
-		if (clan == null)
-		{
-			return false;
-		}
-		
-		if (clan.getCastleId() > 0)
-		{
-			return true;
-		}
-		
-		boolean register = false;
-		try (Connection con = ConnectionFactory.getInstance().getConnection();
-			PreparedStatement ps = con.prepareStatement("SELECT clan_id FROM siege_clans where clan_id=? and castle_id=?"))
-		{
-			ps.setInt(1, clan.getId());
-			ps.setInt(2, castleid);
-			try (ResultSet rs = ps.executeQuery())
-			{
-				while (rs.next())
-				{
-					register = true;
-					break;
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			_log.log(Level.WARNING, getClass().getSimpleName() + ": Exception: checkIsRegistered(): " + e.getMessage(), e);
-		}
-		return register;
 	}
 	
 	public final void removeSiegeSkills(L2PcInstance character)
@@ -123,13 +73,6 @@ public final class SiegeManager
 		final PropertiesParser siegeSettings = new PropertiesParser(Config.SIEGE_CONFIGURATION_FILE);
 		
 		// Siege setting
-		_attackerMaxClans = siegeSettings.getInt("AttackerMaxClans", 500);
-		_attackerRespawnDelay = siegeSettings.getInt("AttackerRespawn", 0);
-		_defenderMaxClans = siegeSettings.getInt("DefenderMaxClans", 500);
-		_flagMaxCount = siegeSettings.getInt("MaxFlags", 1);
-		_siegeClanMinLevel = siegeSettings.getInt("SiegeClanMinLevel", 5);
-		_siegeLength = siegeSettings.getInt("SiegeLength", 120);
-		_bloodAllianceReward = siegeSettings.getInt("BloodAllianceReward", 1);
 		
 		for (Castle castle : CastleManager.getInstance().getCastles())
 		{
@@ -154,7 +97,7 @@ public final class SiegeManager
 				}
 				catch (Exception e)
 				{
-					_log.warning(getClass().getSimpleName() + ": Error while loading control tower(s) for " + castle.getName() + " castle.");
+					LOG.warn("{}: Error while loading control tower(s) for {} castle.", getClass().getSimpleName(), castle.getName());
 				}
 			}
 			
@@ -185,7 +128,7 @@ public final class SiegeManager
 				}
 				catch (Exception e)
 				{
-					_log.warning(getClass().getSimpleName() + ": Error while loading flame tower(s) for " + castle.getName() + " castle.");
+					LOG.warn("{}: Error while loading flame tower(s) for {} castle.", getClass().getSimpleName(), castle.getName());
 				}
 			}
 			_controlTowers.put(castle.getResidenceId(), controlTowers);
@@ -194,7 +137,7 @@ public final class SiegeManager
 			
 			if (castle.getOwnerId() != 0)
 			{
-				loadTrapUpgrade(castle.getResidenceId());
+				DAOFactory.getInstance().getSiegeDAO().loadTrapUpgrade(castle.getResidenceId());
 			}
 		}
 	}
@@ -207,26 +150,6 @@ public final class SiegeManager
 	public final List<TowerSpawn> getFlameTowers(int castleId)
 	{
 		return _flameTowers.get(castleId);
-	}
-	
-	public final int getAttackerMaxClans()
-	{
-		return _attackerMaxClans;
-	}
-	
-	public final int getAttackerRespawnDelay()
-	{
-		return _attackerRespawnDelay;
-	}
-	
-	public final int getDefenderMaxClans()
-	{
-		return _defenderMaxClans;
-	}
-	
-	public final int getFlagMaxCount()
-	{
-		return _flagMaxCount;
 	}
 	
 	public final Siege getSiege(ILocational loc)
@@ -251,21 +174,6 @@ public final class SiegeManager
 		return null;
 	}
 	
-	public final int getSiegeClanMinLevel()
-	{
-		return _siegeClanMinLevel;
-	}
-	
-	public final int getSiegeLength()
-	{
-		return _siegeLength;
-	}
-	
-	public final int getBloodAllianceReward()
-	{
-		return _bloodAllianceReward;
-	}
-	
 	public final List<Siege> getSieges()
 	{
 		List<Siege> sieges = new ArrayList<>();
@@ -276,33 +184,13 @@ public final class SiegeManager
 		return sieges;
 	}
 	
-	private final void loadTrapUpgrade(int castleId)
-	{
-		try (Connection con = ConnectionFactory.getInstance().getConnection();
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM castle_trapupgrade WHERE castleId=?"))
-		{
-			ps.setInt(1, castleId);
-			try (ResultSet rs = ps.executeQuery())
-			{
-				while (rs.next())
-				{
-					_flameTowers.get(castleId).get(rs.getInt("towerIndex")).setUpgradeLevel(rs.getInt("level"));
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			_log.log(Level.WARNING, "Exception: loadTrapUpgrade(): " + e.getMessage(), e);
-		}
-	}
-	
 	public static final SiegeManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final SiegeManager _instance = new SiegeManager();
+		protected static final SiegeManager INSTANCE = new SiegeManager();
 	}
 }

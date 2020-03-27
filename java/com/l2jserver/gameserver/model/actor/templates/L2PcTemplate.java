@@ -22,8 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.StatsSet;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.itemcontainer.Inventory;
 
 /**

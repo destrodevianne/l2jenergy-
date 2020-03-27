@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.util.Util;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
-import com.l2jserver.gameserver.network.L2GameClient.GameClientState;
+import com.l2jserver.gameserver.enums.GameClientState;
 import com.l2jserver.gameserver.network.clientpackets.*;
 import com.l2jserver.mmocore.IClientFactory;
 import com.l2jserver.mmocore.IMMOExecutor;

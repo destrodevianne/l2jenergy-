@@ -18,8 +18,6 @@
  */
 package com.l2jserver.gameserver.configuration.config;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,8 +36,6 @@ import com.l2jserver.commons.util.PropertiesParser;
 public final class Config
 {
 	private static final Logger LOG = LoggerFactory.getLogger(Config.class);
-	
-	// public static final String EOL = System.lineSeparator();
 	
 	public static final String FORTSIEGE_CONFIGURATION_FILE = "./config/FortSiege.properties";
 	public static final String L2JMOD_CONFIG_FILE = "./config/L2JMods.properties";
@@ -301,99 +297,5 @@ public final class Config
 				}
 			}
 		}
-	}
-	
-	/**
-	 * Set a new value to a config parameter.
-	 * @param pName the name of the parameter whose value to change
-	 * @param pValue the new value of the parameter
-	 * @return {@code true} if the value of the parameter was changed, {@code false} otherwise
-	 */
-	public static boolean setParameterValue(String pName, String pValue)
-	{
-		switch (pName.trim().toLowerCase())
-		{
-			case "checkknownlist":
-				CHECK_KNOWN = Boolean.parseBoolean(pValue);
-				break;
-			case "tvteventenabled":
-				TVT_EVENT_ENABLED = Boolean.parseBoolean(pValue);
-				break;
-			case "tvteventinterval":
-				TVT_EVENT_INTERVAL = pValue.split(",");
-				break;
-			case "tvteventparticipationtime":
-				TVT_EVENT_PARTICIPATION_TIME = Integer.parseInt(pValue);
-				break;
-			case "tvteventrunningtime":
-				TVT_EVENT_RUNNING_TIME = Integer.parseInt(pValue);
-				break;
-			case "tvteventparticipationnpcid":
-				TVT_EVENT_PARTICIPATION_NPC_ID = Integer.parseInt(pValue);
-				break;
-			default:
-				try
-				{
-					// TODO: stupid GB configs...
-					if (!pName.startsWith("Interval_") && !pName.startsWith("Random_"))
-					{
-						pName = pName.toUpperCase();
-					}
-					Field clazField = Config.class.getField(pName);
-					int modifiers = clazField.getModifiers();
-					// just in case :)
-					if (!Modifier.isStatic(modifiers) || !Modifier.isPublic(modifiers) || Modifier.isFinal(modifiers))
-					{
-						throw new SecurityException("Cannot modify non public, non static or final config!");
-					}
-					
-					if (clazField.getType() == int.class)
-					{
-						clazField.setInt(clazField, Integer.parseInt(pValue));
-					}
-					else if (clazField.getType() == short.class)
-					{
-						clazField.setShort(clazField, Short.parseShort(pValue));
-					}
-					else if (clazField.getType() == byte.class)
-					{
-						clazField.setByte(clazField, Byte.parseByte(pValue));
-					}
-					else if (clazField.getType() == long.class)
-					{
-						clazField.setLong(clazField, Long.parseLong(pValue));
-					}
-					else if (clazField.getType() == float.class)
-					{
-						clazField.setFloat(clazField, Float.parseFloat(pValue));
-					}
-					else if (clazField.getType() == double.class)
-					{
-						clazField.setDouble(clazField, Double.parseDouble(pValue));
-					}
-					else if (clazField.getType() == boolean.class)
-					{
-						clazField.setBoolean(clazField, Boolean.parseBoolean(pValue));
-					}
-					else if (clazField.getType() == String.class)
-					{
-						clazField.set(clazField, pValue);
-					}
-					else
-					{
-						return false;
-					}
-				}
-				catch (NoSuchFieldException e)
-				{
-					return false;
-				}
-				catch (Exception e)
-				{
-					LOG.warn("Unable to set parameter value!", e);
-					return false;
-				}
-		}
-		return true;
 	}
 }

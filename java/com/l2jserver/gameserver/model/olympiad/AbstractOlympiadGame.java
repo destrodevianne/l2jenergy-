@@ -26,6 +26,7 @@ import org.slf4j.LoggerFactory;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.configuration.config.events.OlympiadConfig;
 import com.l2jserver.gameserver.configuration.config.protection.BaseProtectionConfig;
+import com.l2jserver.gameserver.enums.OlympiadType;
 import com.l2jserver.gameserver.instancemanager.AntiFeedManager;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.FortManager;
@@ -460,7 +461,7 @@ public abstract class AbstractOlympiadGame
 		}
 	}
 	
-	public abstract CompetitionType getType();
+	public abstract OlympiadType getType();
 	
 	public abstract String[] getPlayerNames();
 	

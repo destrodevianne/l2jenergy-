@@ -18,9 +18,9 @@
  */
 package quests.Q00061_LawEnforcement;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 
@@ -168,7 +168,7 @@ public final class Q00061_LawEnforcement extends Quest
 		{
 			if (player.getLevel() >= MIN_LEVEL)
 			{
-				if (player.getClassId() == ClassId.inspector)
+				if (player.getClassId() == ClassId.INSPECTOR)
 				{
 					final String html = getHtm(player.getHtmlPrefix(), "32222-01.htm");
 					return html.replace("%name%", player.getName());

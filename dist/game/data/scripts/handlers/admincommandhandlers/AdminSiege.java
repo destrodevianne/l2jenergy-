@@ -23,6 +23,7 @@ import java.util.StringTokenizer;
 
 import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.gameserver.SevenSigns;
+import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
 import com.l2jserver.gameserver.instancemanager.AuctionManager;
@@ -224,7 +225,7 @@ public class AdminSiege implements IAdminCommandHandler
 						activeChar.sendAdminMessage("Usage: //add_guard castle npcId");
 						break;
 					case "admin_clear_siege_list":
-						castle.getSiege().clearSiegeClan();
+						DAOFactory.getInstance().getSiegeDAO().clearSiegeClan(castle.getSiege());
 						break;
 					case "admin_endsiege":
 						castle.getSiege().endSiege();

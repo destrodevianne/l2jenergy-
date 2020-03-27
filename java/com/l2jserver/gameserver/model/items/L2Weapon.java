@@ -20,6 +20,9 @@ package com.l2jserver.gameserver.model.items;
 
 import java.util.Objects;
 
+import com.l2jserver.gameserver.enums.items.ItemType1;
+import com.l2jserver.gameserver.enums.items.ItemType2;
+import com.l2jserver.gameserver.enums.items.WeaponType;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -29,9 +32,6 @@ import com.l2jserver.gameserver.model.conditions.ConditionGameChance;
 import com.l2jserver.gameserver.model.events.EventDispatcher;
 import com.l2jserver.gameserver.model.events.impl.character.npc.OnNpcSkillSee;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
-import com.l2jserver.gameserver.model.items.type.ItemType1;
-import com.l2jserver.gameserver.model.items.type.ItemType2;
-import com.l2jserver.gameserver.model.items.type.WeaponType;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.model.stats.Formulas;
 import com.l2jserver.gameserver.network.SystemMessageId;

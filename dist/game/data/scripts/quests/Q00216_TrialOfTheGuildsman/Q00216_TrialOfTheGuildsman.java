@@ -18,10 +18,10 @@
  */
 package quests.Q00216_TrialOfTheGuildsman;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.itemcontainer.Inventory;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
@@ -226,7 +226,7 @@ public final class Q00216_TrialOfTheGuildsman extends Quest
 			}
 			case "30298-04.html":
 			{
-				if (player.getClassId() == ClassId.scavenger)
+				if (player.getClassId() == ClassId.SCAVENGER)
 				{
 					if (hasQuestItems(player, ALLTRANS_2ND_RECOMMENDATION))
 					{
@@ -271,12 +271,12 @@ public final class Q00216_TrialOfTheGuildsman extends Quest
 				if (qs != null)
 				{
 					int count = 0;
-					if ((qs.getPlayer().getClassId() == ClassId.scavenger) && npc.isSweepActive())
+					if ((qs.getPlayer().getClassId() == ClassId.SCAVENGER) && npc.isSweepActive())
 					{
 						count += 5;
 					}
 					
-					if (getRandomBoolean() && (qs.getPlayer().getClassId() == ClassId.artisan))
+					if (getRandomBoolean() && (qs.getPlayer().getClassId() == ClassId.ARTISAN))
 					{
 						giveItems(qs.getPlayer(), AMBER_LUMP, 1);
 						playSound(qs.getPlayer(), Sound.ITEMSOUND_QUEST_MIDDLE);
@@ -415,7 +415,7 @@ public final class Q00216_TrialOfTheGuildsman extends Quest
 		{
 			if (npc.getId() == WAREHOUSE_KEEPER_VALKON)
 			{
-				if ((player.getClassId() == ClassId.artisan) || (player.getClassId() == ClassId.scavenger))
+				if ((player.getClassId() == ClassId.ARTISAN) || (player.getClassId() == ClassId.SCAVENGER))
 				{
 					if (player.getLevel() < MIN_LVL)
 					{

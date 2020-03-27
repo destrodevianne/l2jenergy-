@@ -25,14 +25,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.l2jserver.gameserver.enums.actors.MoveType;
+import com.l2jserver.gameserver.enums.actors.Stats;
+import com.l2jserver.gameserver.enums.items.WeaponType;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.holders.AdditionalItemHolder;
 import com.l2jserver.gameserver.model.holders.AdditionalSkillHolder;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.itemcontainer.Inventory;
-import com.l2jserver.gameserver.model.items.type.WeaponType;
-import com.l2jserver.gameserver.model.stats.MoveType;
-import com.l2jserver.gameserver.model.stats.Stats;
 import com.l2jserver.gameserver.network.serverpackets.ExBasicActionList;
 
 /**

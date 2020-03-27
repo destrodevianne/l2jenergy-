@@ -20,9 +20,9 @@ package village_master.OrcChange1;
 
 import com.l2jserver.gameserver.enums.CategoryType;
 import com.l2jserver.gameserver.enums.Race;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 
 import ai.npc.AbstractNpcAI;
 
@@ -122,7 +122,7 @@ public final class OrcChange1 extends AbstractNpcAI
 		{
 			htmltext = "30500-24.htm"; // fnYouAreFourthClass
 		}
-		else if ((classId == 45) && (player.getClassId() == ClassId.orcFighter))
+		else if ((classId == 45) && (player.getClassId() == ClassId.ORC_FIGHTER))
 		{
 			if (player.getLevel() < 20)
 			{
@@ -150,7 +150,7 @@ public final class OrcChange1 extends AbstractNpcAI
 				htmltext = npc.getId() + "-13.htm"; // fnNoProof11
 			}
 		}
-		else if ((classId == 47) && (player.getClassId() == ClassId.orcFighter))
+		else if ((classId == 47) && (player.getClassId() == ClassId.ORC_FIGHTER))
 		{
 			if (player.getLevel() < 20)
 			{
@@ -178,7 +178,7 @@ public final class OrcChange1 extends AbstractNpcAI
 				htmltext = npc.getId() + "-17.htm"; // fnNoProof12
 			}
 		}
-		else if ((classId == 50) && (player.getClassId() == ClassId.orcMage))
+		else if ((classId == 50) && (player.getClassId() == ClassId.ORC_MYSTIC))
 		{
 			if (player.getLevel() < 20)
 			{

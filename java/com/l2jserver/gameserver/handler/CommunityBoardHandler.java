@@ -233,11 +233,11 @@ public final class CommunityBoardHandler implements IHandler<IParseBoardHandler,
 	
 	public static CommunityBoardHandler getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final CommunityBoardHandler _instance = new CommunityBoardHandler();
+		protected static final CommunityBoardHandler INSTANCE = new CommunityBoardHandler();
 	}
 }

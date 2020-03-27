@@ -124,7 +124,7 @@ public final class CastleManorManager implements IXmlReader, IStorable
 	@Override
 	public final void load()
 	{
-		parseDatapackFile("data/seeds.xml");
+		parseDatapackFile("data/xml/seeds.xml");
 		LOG.info("{}: Loaded {} seeds.", getClass().getSimpleName(), _seeds.size());
 	}
 	
@@ -817,11 +817,11 @@ public final class CastleManorManager implements IXmlReader, IStorable
 	// -------------------------------------------------------
 	public static final CastleManorManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final CastleManorManager _instance = new CastleManorManager();
+		protected static final CastleManorManager INSTANCE = new CastleManorManager();
 	}
 }

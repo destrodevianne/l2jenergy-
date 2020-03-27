@@ -28,6 +28,7 @@ import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.configuration.config.events.OlympiadConfig;
 import com.l2jserver.gameserver.configuration.config.protection.BaseProtectionConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
+import com.l2jserver.gameserver.enums.OlympiadType;
 import com.l2jserver.gameserver.instancemanager.AntiFeedManager;
 import com.l2jserver.gameserver.model.L2Party;
 import com.l2jserver.gameserver.model.L2World;
@@ -216,7 +217,7 @@ public class OlympiadManager
 		return false;
 	}
 	
-	public final boolean registerNoble(L2PcInstance player, CompetitionType type)
+	public final boolean registerNoble(L2PcInstance player, OlympiadType type)
 	{
 		if (!Olympiad._inCompPeriod)
 		{

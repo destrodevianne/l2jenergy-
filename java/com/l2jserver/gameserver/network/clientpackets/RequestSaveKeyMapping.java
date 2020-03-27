@@ -24,9 +24,9 @@ import java.util.Map;
 
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.data.xml.impl.UIData;
+import com.l2jserver.gameserver.enums.GameClientState;
 import com.l2jserver.gameserver.model.ActionKey;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.network.L2GameClient.GameClientState;
 
 /**
  * Request Save Key Mapping client packet.

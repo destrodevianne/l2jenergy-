@@ -18,11 +18,11 @@
  */
 package ai.npc.NpcBuffers;
 
+import com.l2jserver.gameserver.enums.skills.targets.AffectObject;
+import com.l2jserver.gameserver.enums.skills.targets.AffectScope;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.skills.Skill;
-import com.l2jserver.gameserver.model.skills.targets.AffectObject;
-import com.l2jserver.gameserver.model.skills.targets.AffectScope;
 
 /**
  * @author UnAfraid

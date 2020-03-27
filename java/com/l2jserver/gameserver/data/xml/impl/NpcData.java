@@ -38,14 +38,14 @@ import org.w3c.dom.Node;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.enums.AISkillScope;
+import com.l2jserver.gameserver.enums.actors.ClassId;
+import com.l2jserver.gameserver.enums.skills.L2EffectType;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.actor.templates.L2NpcTemplate;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.drops.DropListScope;
 import com.l2jserver.gameserver.model.drops.GeneralDropItem;
 import com.l2jserver.gameserver.model.drops.GroupedGeneralDropItem;
 import com.l2jserver.gameserver.model.drops.IDropItem;
-import com.l2jserver.gameserver.model.effects.L2EffectType;
 import com.l2jserver.gameserver.model.holders.MinionHolder;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.skills.Skill;
@@ -821,7 +821,7 @@ public class NpcData implements IXmlReader
 		public void load()
 		{
 			_tempMinions.clear();
-			parseDatapackFile("data/minionData.xml");
+			parseDatapackFile("data/xml/minionData.xml");
 			LOG.info("{}: Loaded {} minions data.", getClass().getSimpleName(), _tempMinions.size());
 		}
 		
@@ -861,11 +861,11 @@ public class NpcData implements IXmlReader
 	 */
 	public static NpcData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final NpcData _instance = new NpcData();
+		protected static final NpcData INSTANCE = new NpcData();
 	}
 }

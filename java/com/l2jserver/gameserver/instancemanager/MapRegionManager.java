@@ -27,10 +27,10 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import com.l2jserver.gameserver.SevenSigns;
+import com.l2jserver.gameserver.enums.TeleportWhereType;
 import com.l2jserver.gameserver.model.L2MapRegion;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.Location;
-import com.l2jserver.gameserver.model.TeleportWhereType;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -62,7 +62,7 @@ public final class MapRegionManager implements IXmlReader
 	public void load()
 	{
 		_regions.clear();
-		parseDatapackDirectory("data/mapregion", false);
+		parseDatapackDirectory("data/xml/mapregion", false);
 		LOG.info("{}: Loaded {} map regions.", getClass().getSimpleName(), _regions.size());
 	}
 	
@@ -477,17 +477,13 @@ public final class MapRegionManager implements IXmlReader
 		return _regions.get(regionName);
 	}
 	
-	/**
-	 * Gets the single instance of {@code MapRegionManager}.
-	 * @return single instance of {@code MapRegionManager}
-	 */
 	public static MapRegionManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final MapRegionManager _instance = new MapRegionManager();
+		protected static final MapRegionManager INSTANCE = new MapRegionManager();
 	}
 }

@@ -20,9 +20,9 @@ package village_master.DarkElfChange1;
 
 import com.l2jserver.gameserver.enums.CategoryType;
 import com.l2jserver.gameserver.enums.Race;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 
 import ai.npc.AbstractNpcAI;
 
@@ -157,7 +157,7 @@ public final class DarkElfChange1 extends AbstractNpcAI
 		{
 			htmltext = "30290-34.htm";
 		}
-		else if ((classId == PALUS_KNIGHT) && (player.getClassId() == ClassId.darkFighter))
+		else if ((classId == PALUS_KNIGHT) && (player.getClassId() == ClassId.DARK_FIGHTER))
 		{
 			if (player.getLevel() < MIN_LEVEL)
 			{
@@ -185,7 +185,7 @@ public final class DarkElfChange1 extends AbstractNpcAI
 				htmltext = npc.getId() + "-20.htm";
 			}
 		}
-		else if ((classId == ASSASSIN) && (player.getClassId() == ClassId.darkFighter))
+		else if ((classId == ASSASSIN) && (player.getClassId() == ClassId.DARK_FIGHTER))
 		{
 			if (player.getLevel() < MIN_LEVEL)
 			{
@@ -213,7 +213,7 @@ public final class DarkElfChange1 extends AbstractNpcAI
 				htmltext = npc.getId() + "-24.htm";
 			}
 		}
-		else if ((classId == DARK_WIZARD) && (player.getClassId() == ClassId.darkMage))
+		else if ((classId == DARK_WIZARD) && (player.getClassId() == ClassId.DARK_MYSTIC))
 		{
 			if (player.getLevel() < MIN_LEVEL)
 			{
@@ -241,7 +241,7 @@ public final class DarkElfChange1 extends AbstractNpcAI
 				htmltext = npc.getId() + "-28.htm";
 			}
 		}
-		else if ((classId == SHILLIEN_ORACLE) && (player.getClassId() == ClassId.darkMage))
+		else if ((classId == SHILLIEN_ORACLE) && (player.getClassId() == ClassId.DARK_MYSTIC))
 		{
 			if (player.getLevel() < MIN_LEVEL)
 			{

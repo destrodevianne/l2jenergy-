@@ -25,11 +25,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+import com.l2jserver.gameserver.enums.actors.Stats;
+import com.l2jserver.gameserver.enums.skills.OptionsSkillType;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.options.Options;
 import com.l2jserver.gameserver.model.options.OptionsSkillHolder;
-import com.l2jserver.gameserver.model.options.OptionsSkillType;
-import com.l2jserver.gameserver.model.stats.Stats;
 import com.l2jserver.gameserver.model.stats.functions.FuncTemplate;
 import com.l2jserver.gameserver.util.IXmlReader;
 
@@ -152,11 +152,11 @@ public class OptionData implements IXmlReader
 	 */
 	public static final OptionData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final OptionData _instance = new OptionData();
+		protected static final OptionData INSTANCE = new OptionData();
 	}
 }

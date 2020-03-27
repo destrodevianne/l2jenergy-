@@ -39,9 +39,6 @@ public final class StaticObjectData implements IXmlReader
 {
 	private final Map<Integer, L2StaticObjectInstance> _staticObjects = new HashMap<>();
 	
-	/**
-	 * Instantiates a new static objects.
-	 */
 	protected StaticObjectData()
 	{
 		load();
@@ -51,7 +48,7 @@ public final class StaticObjectData implements IXmlReader
 	public void load()
 	{
 		_staticObjects.clear();
-		parseDatapackFile("data/staticObjects.xml");
+		parseDatapackFile("data/xml/staticObjects.xml");
 		LOG.info("{}: Loaded {} static object templates.", getClass().getSimpleName(), _staticObjects.size());
 	}
 	
@@ -109,11 +106,11 @@ public final class StaticObjectData implements IXmlReader
 	 */
 	public static StaticObjectData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final StaticObjectData _instance = new StaticObjectData();
+		protected static final StaticObjectData INSTANCE = new StaticObjectData();
 	}
 }

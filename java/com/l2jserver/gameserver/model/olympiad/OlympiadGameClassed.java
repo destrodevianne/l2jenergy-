@@ -22,6 +22,7 @@ import java.util.List;
 
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.configuration.config.events.OlympiadConfig;
+import com.l2jserver.gameserver.enums.OlympiadType;
 
 /**
  * @author DS
@@ -34,9 +35,9 @@ public class OlympiadGameClassed extends OlympiadGameNormal
 	}
 	
 	@Override
-	public final CompetitionType getType()
+	public final OlympiadType getType()
 	{
-		return CompetitionType.CLASSED;
+		return OlympiadType.CLASSED;
 	}
 	
 	@Override

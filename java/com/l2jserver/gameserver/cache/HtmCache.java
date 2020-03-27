@@ -211,11 +211,11 @@ public class HtmCache
 	
 	public static HtmCache getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final HtmCache _instance = new HtmCache();
+		protected static final HtmCache INSTANCE = new HtmCache();
 	}
 }

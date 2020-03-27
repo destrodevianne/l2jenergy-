@@ -30,11 +30,6 @@ public class ActionHandler implements IHandler<IActionHandler, InstanceType>
 {
 	private final Map<InstanceType, IActionHandler> _actions;
 	
-	public static ActionHandler getInstance()
-	{
-		return SingletonHolder._instance;
-	}
-	
 	protected ActionHandler()
 	{
 		_actions = new HashMap<>();
@@ -73,8 +68,13 @@ public class ActionHandler implements IHandler<IActionHandler, InstanceType>
 		return _actions.size();
 	}
 	
+	public static ActionHandler getInstance()
+	{
+		return SingletonHolder.INSTANCE;
+	}
+	
 	private static class SingletonHolder
 	{
-		protected static final ActionHandler _instance = new ActionHandler();
+		protected static final ActionHandler INSTANCE = new ActionHandler();
 	}
 }

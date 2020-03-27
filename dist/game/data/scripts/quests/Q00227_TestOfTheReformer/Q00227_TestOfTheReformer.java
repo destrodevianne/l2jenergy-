@@ -22,12 +22,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.skills.Skill;
@@ -425,7 +425,7 @@ public final class Q00227_TestOfTheReformer extends Quest
 		{
 			if (npc.getId() == PRIESTESS_PUPINA)
 			{
-				if ((player.getClassId() == ClassId.cleric) || (player.getClassId() == ClassId.shillienOracle))
+				if ((player.getClassId() == ClassId.CLERIC) || (player.getClassId() == ClassId.SHILLIEN_ORACLE))
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{

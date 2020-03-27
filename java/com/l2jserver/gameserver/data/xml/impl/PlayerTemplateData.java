@@ -25,9 +25,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.actor.templates.L2PcTemplate;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
@@ -170,11 +170,11 @@ public final class PlayerTemplateData implements IXmlReader
 	
 	public static final PlayerTemplateData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final PlayerTemplateData _instance = new PlayerTemplateData();
+		protected static final PlayerTemplateData INSTANCE = new PlayerTemplateData();
 	}
 }

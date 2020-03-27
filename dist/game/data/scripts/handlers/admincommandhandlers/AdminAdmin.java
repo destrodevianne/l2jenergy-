@@ -24,7 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
@@ -222,63 +221,18 @@ public class AdminAdmin implements IAdminCommandHandler
 		}
 		else if (command.startsWith("admin_setconfig"))
 		{
-			StringTokenizer st = new StringTokenizer(command);
-			st.nextToken();
-			try
-			{
-				String pName = st.nextToken();
-				String pValue = st.nextToken();
-				if (Config.setParameterValue(pName, pValue))
-				{
-					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_config_parameter_set_to").replace("%s%", pName + "").replace("%i%", pValue + ""));
-				}
-				else
-				{
-					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_invalid_parameter"));
-				}
-			}
-			catch (Exception e)
-			{
-				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_set_config"));
-			}
-			finally
-			{
-				showConfigPage(activeChar);
-			}
+			showConfigPage(activeChar);
 		}
 		else if (command.startsWith("admin_set"))
 		{
 			StringTokenizer st = new StringTokenizer(command);
 			String[] cmd = st.nextToken().split("_");
-			try
+			
+			if (cmd.length == 3)
 			{
-				String[] parameter = st.nextToken().split("=");
-				String pName = parameter[0].trim();
-				String pValue = parameter[1].trim();
-				if (Config.setParameterValue(pName, pValue))
+				if (cmd[2].equalsIgnoreCase("mod"))
 				{
-					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_parameter_succesfully_set_to").replace("%s%", pName + "").replace("%i%", pValue + ""));
-				}
-				else
-				{
-					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_invalid_parameter"));
-				}
-			}
-			catch (Exception e)
-			{
-				if (cmd.length == 2)
-				{
-					activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_usage_set_parameter"));
-				}
-			}
-			finally
-			{
-				if (cmd.length == 3)
-				{
-					if (cmd[2].equalsIgnoreCase("mod"))
-					{
-						AdminHtml.showAdminHtml(activeChar, "mods_menu.htm");
-					}
+					AdminHtml.showAdminHtml(activeChar, "mods_menu.htm");
 				}
 			}
 		}
@@ -360,7 +314,6 @@ public class AdminAdmin implements IAdminCommandHandler
 			+ "\" action=\"bypass -h admin_setconfig EnchantChanceElementJewel $param10\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
 		replyMSG.append("<tr><td><font color=\"LEVEL\">Enchant Element Energy</font> = " + CharacterConfig.ENCHANT_CHANCE_ELEMENT_ENERGY + "</td><td><edit var=\"param11\" width=40 height=15></td><td><button value=\"" + MessagesData.getInstance().getMessage(activeChar, "admin_button_set")
 			+ "\" action=\"bypass -h admin_setconfig EnchantChanceElementEnergy $param11\" width=40 height=25 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\"></td></tr>");
-		
 		replyMSG.append("</table></body></html>");
 		adminReply.setHtml(replyMSG.toString());
 		activeChar.sendPacket(adminReply);

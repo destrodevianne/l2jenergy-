@@ -37,9 +37,6 @@ public final class FishingMonstersData implements IXmlReader
 {
 	private final Map<Integer, L2FishingMonster> _fishingMonstersData = new HashMap<>();
 	
-	/**
-	 * Instantiates a new fishing monsters data.
-	 */
 	protected FishingMonstersData()
 	{
 		load();
@@ -118,11 +115,11 @@ public final class FishingMonstersData implements IXmlReader
 	 */
 	public static FishingMonstersData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final FishingMonstersData _instance = new FishingMonstersData();
+		protected static final FishingMonstersData INSTANCE = new FishingMonstersData();
 	}
 }

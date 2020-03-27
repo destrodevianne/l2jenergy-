@@ -18,10 +18,10 @@
  */
 package quests.Q00225_TestOfTheSearcher;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
@@ -114,7 +114,7 @@ public final class Q00225_TestOfTheSearcher extends Quest
 					giveItems(player, LUTHERS_LETTER, 1);
 					if (player.getVariables().getInt("2ND_CLASS_DIAMOND_REWARD", 0) == 0)
 					{
-						if (player.getClassId() == ClassId.scavenger)
+						if (player.getClassId() == ClassId.SCAVENGER)
 						{
 							giveItems(player, DIMENSIONAL_DIAMOND, 82);
 						}
@@ -331,11 +331,11 @@ public final class Q00225_TestOfTheSearcher extends Quest
 		{
 			if (npc.getId() == MASTER_LUTHER)
 			{
-				if ((player.getClassId() == ClassId.rogue) || (player.getClassId() == ClassId.elvenScout) || (player.getClassId() == ClassId.assassin) || (player.getClassId() == ClassId.scavenger))
+				if ((player.getClassId() == ClassId.ROGUE) || (player.getClassId() == ClassId.ELVEN_SCOUT) || (player.getClassId() == ClassId.ASSASSIN) || (player.getClassId() == ClassId.SCAVENGER))
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{
-						if (player.getClassId() == ClassId.scavenger)
+						if (player.getClassId() == ClassId.SCAVENGER)
 						{
 							htmltext = "30690-04.htm";
 						}

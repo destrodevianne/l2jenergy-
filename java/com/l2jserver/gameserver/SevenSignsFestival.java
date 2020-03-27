@@ -43,6 +43,8 @@ import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.SpawnTable;
+import com.l2jserver.gameserver.enums.TeleportWhereType;
+import com.l2jserver.gameserver.model.FestivalSpawn;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2Party;
 import com.l2jserver.gameserver.model.L2Party.messageType;
@@ -51,7 +53,6 @@ import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.SpawnListener;
 import com.l2jserver.gameserver.model.StatsSet;
-import com.l2jserver.gameserver.model.TeleportWhereType;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2FestivalMonsterInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -804,11 +805,6 @@ public class SevenSignsFestival implements SpawnListener
 		
 		L2Spawn.addSpawnListener(this);
 		startFestivalManager();
-	}
-	
-	public static SevenSignsFestival getInstance()
-	{
-		return SingletonHolder._instance;
 	}
 	
 	/**
@@ -2083,8 +2079,8 @@ public class SevenSignsFestival implements SpawnListener
 						_originalLocations.put(participantObjId, new FestivalSpawn(participant.getX(), participant.getY(), participant.getZ(), participant.getHeading()));
 						
 						// Randomize the spawn point around the specific centerpoint for each player.
-						int x = _startLocation._x;
-						int y = _startLocation._y;
+						int x = _startLocation.getX();
+						int y = _startLocation.getY();
 						
 						isPositive = (Rnd.nextInt(2) == 1);
 						
@@ -2100,7 +2096,7 @@ public class SevenSignsFestival implements SpawnListener
 						}
 						
 						participant.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
-						participant.teleToLocation(new Location(x, y, _startLocation._z), true);
+						participant.teleToLocation(new Location(x, y, _startLocation.getZ()), true);
 						
 						// Remove all buffs from all participants on entry. Works like the skill Cancel.
 						participant.stopAllEffectsExceptThoseThatLastThroughDeath();
@@ -2122,12 +2118,12 @@ public class SevenSignsFestival implements SpawnListener
 			// Spawn the festival witch for this arena
 			try
 			{
-				L2Spawn npcSpawn = new L2Spawn(_witchSpawn._npcId);
+				L2Spawn npcSpawn = new L2Spawn(_witchSpawn.getNpcId());
 				
-				npcSpawn.setX(_witchSpawn._x);
-				npcSpawn.setY(_witchSpawn._y);
-				npcSpawn.setZ(_witchSpawn._z);
-				npcSpawn.setHeading(_witchSpawn._heading);
+				npcSpawn.setX(_witchSpawn.getX());
+				npcSpawn.setY(_witchSpawn.getY());
+				npcSpawn.setZ(_witchSpawn.getZ());
+				npcSpawn.setHeading(_witchSpawn.getHeading());
 				npcSpawn.setAmount(1);
 				npcSpawn.setRespawnDelay(1);
 				
@@ -2139,7 +2135,7 @@ public class SevenSignsFestival implements SpawnListener
 			}
 			catch (Exception e)
 			{
-				LOG.warn("SevenSignsFestival: Error while spawning Festival Witch ID {}!", _witchSpawn._npcId, e);
+				LOG.warn("SevenSignsFestival: Error while spawning Festival Witch ID {}!", _witchSpawn.getNpcId(), e);
 			}
 			
 			// Make it appear as though the Witch has appeared there.
@@ -2178,8 +2174,8 @@ public class SevenSignsFestival implements SpawnListener
 					continue;
 				}
 				
-				int x = _startLocation._x;
-				int y = _startLocation._y;
+				int x = _startLocation.getX();
+				int y = _startLocation.getY();
 				
 				/*
 				 * Random X and Y coords around the player start location, up to half of the maximum allowed offset are generated to prevent the mobs from all moving to the exact same place.
@@ -2198,7 +2194,7 @@ public class SevenSignsFestival implements SpawnListener
 				}
 				
 				festivalMob.setRunning();
-				festivalMob.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, new Location(x, y, _startLocation._z, Rnd.nextInt(65536)));
+				festivalMob.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, new Location(x, y, _startLocation.getZ(), Rnd.nextInt(65536)));
 			}
 		}
 		
@@ -2237,18 +2233,18 @@ public class SevenSignsFestival implements SpawnListener
 				FestivalSpawn currSpawn = new FestivalSpawn(_npcSpawn);
 				
 				// Only spawn archers/marksmen if specified to do so.
-				if ((spawnType == 1) && isFestivalArcher(currSpawn._npcId))
+				if ((spawnType == 1) && isFestivalArcher(currSpawn.getNpcId()))
 				{
 					continue;
 				}
 				
 				try
 				{
-					L2Spawn npcSpawn = new L2Spawn(currSpawn._npcId);
+					L2Spawn npcSpawn = new L2Spawn(currSpawn.getNpcId());
 					
-					npcSpawn.setX(currSpawn._x);
-					npcSpawn.setY(currSpawn._y);
-					npcSpawn.setZ(currSpawn._z);
+					npcSpawn.setX(currSpawn.getX());
+					npcSpawn.setY(currSpawn.getY());
+					npcSpawn.setZ(currSpawn.getZ());
 					npcSpawn.setHeading(Rnd.nextInt(65536));
 					npcSpawn.setAmount(1);
 					npcSpawn.setRespawnDelay(respawnDelay);
@@ -2274,7 +2270,7 @@ public class SevenSignsFestival implements SpawnListener
 				}
 				catch (Exception e)
 				{
-					LOG.warn("SevenSignsFestival: Error while spawning NPC ID {}!", currSpawn._npcId, e);
+					LOG.warn("SevenSignsFestival: Error while spawning NPC ID {}!", currSpawn.getNpcId(), e);
 				}
 			}
 		}
@@ -2379,7 +2375,7 @@ public class SevenSignsFestival implements SpawnListener
 				}
 				
 				participant.getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
-				participant.teleToLocation(new Location(origPosition._x, origPosition._y, origPosition._z), true);
+				participant.teleToLocation(new Location(origPosition.getX(), origPosition.getY(), origPosition.getZ()), true);
 				participant.sendMessage(MessagesData.getInstance().getMessage(participant, "ss_remove_player"));
 			}
 			catch (Exception e)
@@ -2397,52 +2393,18 @@ public class SevenSignsFestival implements SpawnListener
 		}
 	}
 	
-	private static class FestivalSpawn
-	{
-		protected final int _x;
-		protected final int _y;
-		protected final int _z;
-		protected final int _heading;
-		protected final int _npcId;
-		
-		protected FestivalSpawn(int x, int y, int z, int heading)
-		{
-			_x = x;
-			_y = y;
-			_z = z;
-			
-			// Generate a random heading if no positive one given.
-			_heading = (heading < 0) ? Rnd.nextInt(65536) : heading;
-			
-			_npcId = -1;
-		}
-		
-		protected FestivalSpawn(int[] spawnData)
-		{
-			_x = spawnData[0];
-			_y = spawnData[1];
-			_z = spawnData[2];
-			
-			_heading = (spawnData[3] < 0) ? Rnd.nextInt(65536) : spawnData[3];
-			
-			if (spawnData.length > 4)
-			{
-				_npcId = spawnData[4];
-			}
-			else
-			{
-				_npcId = -1;
-			}
-		}
-	}
-	
 	public L2PcInstance getPlayer()
 	{
 		return _player;
 	}
 	
+	public static SevenSignsFestival getInstance()
+	{
+		return SingletonHolder.INSTANCE;
+	}
+	
 	private static class SingletonHolder
 	{
-		protected static final SevenSignsFestival _instance = new SevenSignsFestival();
+		protected static final SevenSignsFestival INSTANCE = new SevenSignsFestival();
 	}
 }

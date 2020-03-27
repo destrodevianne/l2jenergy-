@@ -18,8 +18,8 @@
  */
 package com.l2jserver.gameserver.model.items.enchant;
 
+import com.l2jserver.gameserver.enums.items.EtcItemType;
 import com.l2jserver.gameserver.model.StatsSet;
-import com.l2jserver.gameserver.model.items.type.EtcItemType;
 
 /**
  * @author UnAfraid

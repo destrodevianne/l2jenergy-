@@ -48,7 +48,7 @@ public class UIData implements IXmlReader
 	{
 		_storedKeys.clear();
 		_storedCategories.clear();
-		parseDatapackFile("data/ui/ui_en.xml");
+		parseDatapackFile("data/xml/ui/ui_en.xml");
 		LOG.info("{}: Loaded {} keys {} categories.", getClass().getSimpleName(), _storedKeys.size(), _storedCategories.size());
 	}
 	
@@ -182,11 +182,11 @@ public class UIData implements IXmlReader
 	
 	public static UIData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final UIData _instance = new UIData();
+		protected static final UIData INSTANCE = new UIData();
 	}
 }

@@ -18,10 +18,10 @@
  */
 package com.l2jserver.gameserver.model.zone.type;
 
+import com.l2jserver.gameserver.enums.ZoneId;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.zone.L2ZoneRespawn;
-import com.l2jserver.gameserver.model.zone.ZoneId;
 
 /**
  * based on Kerberos work for custom L2CastleTeleportZone

@@ -18,11 +18,11 @@
  */
 package com.l2jserver.gameserver.model.items;
 
+import com.l2jserver.gameserver.enums.items.CrystalType;
+import com.l2jserver.gameserver.enums.items.ItemType1;
+import com.l2jserver.gameserver.enums.items.ItemType2;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
-import com.l2jserver.gameserver.model.items.type.CrystalType;
 import com.l2jserver.gameserver.model.items.type.ItemType;
-import com.l2jserver.gameserver.model.items.type.ItemType1;
-import com.l2jserver.gameserver.model.items.type.ItemType2;
 
 /**
  * This class contains L2ItemInstance<BR>

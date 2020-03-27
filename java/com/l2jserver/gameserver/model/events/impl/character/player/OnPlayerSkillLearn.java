@@ -18,10 +18,10 @@
  */
 package com.l2jserver.gameserver.model.events.impl.character.player;
 
+import com.l2jserver.gameserver.enums.events.EventType;
+import com.l2jserver.gameserver.enums.skills.AcquireSkillType;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.AcquireSkillType;
-import com.l2jserver.gameserver.model.events.EventType;
 import com.l2jserver.gameserver.model.events.impl.IBaseEvent;
 import com.l2jserver.gameserver.model.skills.Skill;
 

@@ -20,9 +20,9 @@ package village_master.ElfHumanWizardChange1;
 
 import com.l2jserver.gameserver.enums.CategoryType;
 import com.l2jserver.gameserver.enums.Race;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 
 import ai.npc.AbstractNpcAI;
 
@@ -168,7 +168,7 @@ public final class ElfHumanWizardChange1 extends AbstractNpcAI
 		{
 			htmltext = "30037-34.htm"; // fnYouAreFourthClass
 		}
-		else if ((classId == WIZARD) && (player.getClassId() == ClassId.mage))
+		else if ((classId == WIZARD) && (player.getClassId() == ClassId.HUMAN_MYSTIC))
 		{
 			if (player.getLevel() < 20)
 			{
@@ -196,7 +196,7 @@ public final class ElfHumanWizardChange1 extends AbstractNpcAI
 				htmltext = npc.getId() + "-21.htm"; // fnNoProof11
 			}
 		}
-		else if ((classId == CLERIC) && (player.getClassId() == ClassId.mage))
+		else if ((classId == CLERIC) && (player.getClassId() == ClassId.HUMAN_MYSTIC))
 		{
 			if (player.getLevel() < 20)
 			{
@@ -224,7 +224,7 @@ public final class ElfHumanWizardChange1 extends AbstractNpcAI
 				htmltext = npc.getId() + "-25.htm"; // fnNoProof12
 			}
 		}
-		else if ((classId == ELVEN_WIZARD) && (player.getClassId() == ClassId.elvenMage))
+		else if ((classId == ELVEN_WIZARD) && (player.getClassId() == ClassId.ELVEN_MYSTIC))
 		{
 			if (player.getLevel() < 20)
 			{
@@ -252,7 +252,7 @@ public final class ElfHumanWizardChange1 extends AbstractNpcAI
 				htmltext = npc.getId() + "-29.htm"; // fnNoProof21
 			}
 		}
-		else if ((classId == ORACLE) && (player.getClassId() == ClassId.elvenMage))
+		else if ((classId == ORACLE) && (player.getClassId() == ClassId.ELVEN_MYSTIC))
 		{
 			if (player.getLevel() < 20)
 			{

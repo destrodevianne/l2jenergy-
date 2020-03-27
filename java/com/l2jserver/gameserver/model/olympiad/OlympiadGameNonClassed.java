@@ -21,6 +21,7 @@ package com.l2jserver.gameserver.model.olympiad;
 import java.util.List;
 
 import com.l2jserver.gameserver.configuration.config.events.OlympiadConfig;
+import com.l2jserver.gameserver.enums.OlympiadType;
 
 /**
  * @author DS
@@ -33,9 +34,9 @@ public class OlympiadGameNonClassed extends OlympiadGameNormal
 	}
 	
 	@Override
-	public final CompetitionType getType()
+	public final OlympiadType getType()
 	{
-		return CompetitionType.NON_CLASSED;
+		return OlympiadType.NON_CLASSED;
 	}
 	
 	@Override

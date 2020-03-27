@@ -26,7 +26,7 @@ import java.util.Map;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import com.l2jserver.gameserver.model.base.ClassId;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
@@ -46,7 +46,7 @@ public final class SkillLearnData implements IXmlReader
 	public synchronized void load()
 	{
 		_skillLearn.clear();
-		parseDatapackFile("data/skillLearn.xml");
+		parseDatapackFile("data/xml/skillLearn.xml");
 		LOG.info("{}: Loaded {} Skill Learn data.", getClass().getSimpleName(), _skillLearn.size());
 	}
 	
@@ -91,11 +91,11 @@ public final class SkillLearnData implements IXmlReader
 	 */
 	public static SkillLearnData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final SkillLearnData _instance = new SkillLearnData();
+		protected static final SkillLearnData INSTANCE = new SkillLearnData();
 	}
 }

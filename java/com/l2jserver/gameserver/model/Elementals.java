@@ -21,8 +21,8 @@ package com.l2jserver.gameserver.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.l2jserver.gameserver.enums.actors.Stats;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.stats.Stats;
 import com.l2jserver.gameserver.model.stats.functions.FuncAdd;
 
 public final class Elementals

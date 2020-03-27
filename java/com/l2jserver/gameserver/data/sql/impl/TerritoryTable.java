@@ -104,11 +104,11 @@ public class TerritoryTable
 	 */
 	public static TerritoryTable getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final TerritoryTable _instance = new TerritoryTable();
+		protected static final TerritoryTable INSTANCE = new TerritoryTable();
 	}
 }

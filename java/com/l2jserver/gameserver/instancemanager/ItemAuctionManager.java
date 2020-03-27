@@ -55,7 +55,7 @@ public final class ItemAuctionManager implements IXmlReader
 	public void load()
 	{
 		_managerInstances.clear();
-		parseDatapackFile("data/ItemAuctions.xml");
+		parseDatapackFile("data/xml/ItemAuctions.xml");
 		LOG.info("{}: Loaded: {} auction manager instance(s).", getClass().getSimpleName(), _managerInstances.size());
 	}
 	

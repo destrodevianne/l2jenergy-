@@ -23,6 +23,7 @@ import java.util.List;
 
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.configuration.config.events.OlympiadConfig;
+import com.l2jserver.gameserver.enums.OlympiadType;
 import com.l2jserver.gameserver.idfactory.IdFactory;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.Location;
@@ -191,9 +192,9 @@ public class OlympiadGameTeams extends AbstractOlympiadGame
 	}
 	
 	@Override
-	public CompetitionType getType()
+	public OlympiadType getType()
 	{
-		return CompetitionType.TEAMS;
+		return OlympiadType.TEAMS;
 	}
 	
 	@Override

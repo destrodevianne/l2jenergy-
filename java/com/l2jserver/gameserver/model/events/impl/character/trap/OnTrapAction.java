@@ -19,9 +19,9 @@
 package com.l2jserver.gameserver.model.events.impl.character.trap;
 
 import com.l2jserver.gameserver.enums.TrapAction;
+import com.l2jserver.gameserver.enums.events.EventType;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2TrapInstance;
-import com.l2jserver.gameserver.model.events.EventType;
 import com.l2jserver.gameserver.model.events.impl.IBaseEvent;
 
 /**

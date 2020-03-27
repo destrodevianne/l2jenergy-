@@ -21,10 +21,10 @@ package quests.Q00403_PathOfTheRogue;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.holders.ItemChanceHolder;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
@@ -107,7 +107,7 @@ public final class Q00403_PathOfTheRogue extends Quest
 		{
 			case "ACCEPT":
 			{
-				if (player.getClassId() == ClassId.fighter)
+				if (player.getClassId() == ClassId.HUMAN_FIGHTER)
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{
@@ -125,7 +125,7 @@ public final class Q00403_PathOfTheRogue extends Quest
 						htmltext = "30379-03.htm";
 					}
 				}
-				else if (player.getClassId() == ClassId.rogue)
+				else if (player.getClassId() == ClassId.ROGUE)
 				{
 					htmltext = "30379-02a.htm";
 				}

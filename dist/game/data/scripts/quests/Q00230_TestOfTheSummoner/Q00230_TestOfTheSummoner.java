@@ -21,11 +21,11 @@ package quests.Q00230_TestOfTheSummoner;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.L2Summon;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
@@ -853,7 +853,7 @@ public final class Q00230_TestOfTheSummoner extends Quest
 		{
 			if (npc.getId() == HIGH_SUMMONER_GALATEA)
 			{
-				if ((player.getClassId() == ClassId.wizard) || (player.getClassId() == ClassId.elvenWizard) || (player.getClassId() == ClassId.darkWizard))
+				if ((player.getClassId() == ClassId.HUMAN_WIZARD) || (player.getClassId() == ClassId.ELVEN_WIZARD) || (player.getClassId() == ClassId.DARK_WIZARD))
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{

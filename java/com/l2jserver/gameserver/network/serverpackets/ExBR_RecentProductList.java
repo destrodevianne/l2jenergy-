@@ -21,7 +21,6 @@ package com.l2jserver.gameserver.network.serverpackets;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.xml.impl.ProductItemData;
 import com.l2jserver.gameserver.model.primeshop.L2ProductItem;
 
@@ -31,8 +30,7 @@ public class ExBR_RecentProductList extends L2GameServerPacket
 	
 	public ExBR_RecentProductList(int charId)
 	{
-		_itemsList = ProductItemData.getInstance().getRecentListByOID(charId);
-		DAOFactory.getInstance().getItemMallDAO().recentListByItem(charId);
+		_itemsList = ProductItemData.getInstance().getPoducts(charId);
 	}
 	
 	@Override

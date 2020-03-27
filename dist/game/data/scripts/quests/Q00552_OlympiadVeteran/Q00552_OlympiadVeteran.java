@@ -18,10 +18,10 @@
  */
 package quests.Q00552_OlympiadVeteran;
 
+import com.l2jserver.gameserver.enums.OlympiadType;
 import com.l2jserver.gameserver.enums.QuestType;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.olympiad.CompetitionType;
 import com.l2jserver.gameserver.model.olympiad.Participant;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
@@ -82,7 +82,7 @@ public class Q00552_OlympiadVeteran extends Quest
 	}
 	
 	@Override
-	public void onOlympiadMatchFinish(Participant winner, Participant looser, CompetitionType type)
+	public void onOlympiadMatchFinish(Participant winner, Participant looser, OlympiadType type)
 	{
 		if (winner != null)
 		{

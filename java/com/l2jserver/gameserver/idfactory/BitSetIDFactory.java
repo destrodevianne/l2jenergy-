@@ -24,10 +24,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.l2jserver.commons.util.PrimeFinder;
 import com.l2jserver.gameserver.ThreadPoolManager;
 
-/**
- * This class ..
- * @version $Revision: 1.2 $ $Date: 2004/06/27 08:12:59 $
- */
 public class BitSetIDFactory extends IdFactory
 {
 	private BitSet _freeIds;

@@ -149,15 +149,15 @@ public final class SkillTransfer extends AbstractNpcAI
 	{
 		switch (player.getClassId())
 		{
-			case cardinal:
+			case CARDINAL:
 			{
 				return 0;
 			}
-			case evaSaint:
+			case EVAS_SAINT:
 			{
 				return 1;
 			}
-			case shillienSaint:
+			case SHILLIEN_SAINT:
 			{
 				return 2;
 			}

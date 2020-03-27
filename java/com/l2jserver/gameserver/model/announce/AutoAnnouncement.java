@@ -28,6 +28,7 @@ import java.util.logging.Level;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.enums.AnnouncementType;
 import com.l2jserver.gameserver.util.Broadcast;
 
 /**

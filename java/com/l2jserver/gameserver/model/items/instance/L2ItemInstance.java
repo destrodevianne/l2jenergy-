@@ -44,12 +44,14 @@ import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.enums.ItemLocation;
 import com.l2jserver.gameserver.enums.ShotType;
+import com.l2jserver.gameserver.enums.items.EtcItemType;
+import com.l2jserver.gameserver.enums.items.ItemType1;
+import com.l2jserver.gameserver.enums.items.ItemType2;
 import com.l2jserver.gameserver.idfactory.IdFactory;
 import com.l2jserver.gameserver.instancemanager.ItemsOnGroundManager;
 import com.l2jserver.gameserver.instancemanager.MercTicketManager;
 import com.l2jserver.gameserver.model.DropProtection;
 import com.l2jserver.gameserver.model.Elementals;
-import com.l2jserver.gameserver.model.L2Augmentation;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.L2WorldRegion;
@@ -57,6 +59,7 @@ import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.actor.knownlist.NullKnownList;
+import com.l2jserver.gameserver.model.augmentation.L2Augmentation;
 import com.l2jserver.gameserver.model.events.EventDispatcher;
 import com.l2jserver.gameserver.model.events.impl.character.player.OnPlayerAugment;
 import com.l2jserver.gameserver.model.events.impl.character.player.inventory.OnPlayerItemDrop;
@@ -69,10 +72,7 @@ import com.l2jserver.gameserver.model.items.L2Armor;
 import com.l2jserver.gameserver.model.items.L2EtcItem;
 import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.items.L2Weapon;
-import com.l2jserver.gameserver.model.items.type.EtcItemType;
 import com.l2jserver.gameserver.model.items.type.ItemType;
-import com.l2jserver.gameserver.model.items.type.ItemType1;
-import com.l2jserver.gameserver.model.items.type.ItemType2;
 import com.l2jserver.gameserver.model.options.EnchantOptions;
 import com.l2jserver.gameserver.model.options.Options;
 import com.l2jserver.gameserver.model.stats.functions.AbstractFunction;
@@ -86,10 +86,6 @@ import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.util.GMAudit;
 import com.l2jserver.gameserver.util.LoggingUtils;
 
-/**
- * This class manages items.
- * @version $Revision: 1.4.2.1.2.11 $ $Date: 2005/03/31 16:07:50 $
- */
 public final class L2ItemInstance extends L2Object
 {
 	private static final Logger LOG = LoggerFactory.getLogger(L2ItemInstance.class);

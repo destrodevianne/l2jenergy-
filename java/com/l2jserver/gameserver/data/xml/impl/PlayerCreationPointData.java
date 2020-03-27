@@ -28,8 +28,8 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import com.l2jserver.commons.util.Rnd;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.Location;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.util.IXmlReader;
 
 /**
@@ -93,11 +93,11 @@ public class PlayerCreationPointData implements IXmlReader
 	
 	public static final PlayerCreationPointData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final PlayerCreationPointData _instance = new PlayerCreationPointData();
+		protected static final PlayerCreationPointData INSTANCE = new PlayerCreationPointData();
 	}
 }

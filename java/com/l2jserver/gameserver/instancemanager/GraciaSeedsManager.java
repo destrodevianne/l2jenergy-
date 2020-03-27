@@ -209,11 +209,11 @@ public final class GraciaSeedsManager
 	 */
 	public static final GraciaSeedsManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final GraciaSeedsManager _instance = new GraciaSeedsManager();
+		protected static final GraciaSeedsManager INSTANCE = new GraciaSeedsManager();
 	}
 }

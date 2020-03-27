@@ -20,7 +20,7 @@ package handlers.usercommandhandlers;
 
 import static com.l2jserver.gameserver.GameTimeController.MILLIS_IN_TICK;
 import static com.l2jserver.gameserver.ai.CtrlIntention.AI_INTENTION_IDLE;
-import static com.l2jserver.gameserver.model.TeleportWhereType.TOWN;
+import static com.l2jserver.gameserver.enums.TeleportWhereType.TOWN;
 import static com.l2jserver.gameserver.network.SystemMessageId.THIS_SKILL_IS_NOT_AVAILABLE_FOR_THE_OLYMPIAD_EVENT;
 import static com.l2jserver.gameserver.network.serverpackets.ActionFailed.STATIC_PACKET;
 import static java.util.concurrent.TimeUnit.MINUTES;

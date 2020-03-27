@@ -21,10 +21,10 @@ package quests.Q00406_PathOfTheElvenKnight;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.holders.ItemChanceHolder;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
@@ -87,9 +87,9 @@ public final class Q00406_PathOfTheElvenKnight extends Quest
 		{
 			case "ACCEPT":
 			{
-				if (player.getClassId() != ClassId.elvenFighter)
+				if (player.getClassId() != ClassId.ELVEN_FIGHTER)
 				{
-					if (player.getClassId() == ClassId.elvenKnight)
+					if (player.getClassId() == ClassId.ELVEN_KNIGHT)
 					{
 						htmltext = "30327-02a.htm";
 					}

@@ -23,8 +23,9 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.model.holders.MinionHolder;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
@@ -37,7 +38,8 @@ import com.l2jserver.gameserver.model.interfaces.IParserAdvUtils;
  */
 public class StatsSet implements IParserAdvUtils
 {
-	private static final Logger _log = Logger.getLogger(StatsSet.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(StatsSet.class);
+	
 	/** Static empty immutable map, used to avoid multiple null checks over the source. */
 	public static final StatsSet EMPTY_STATSET = new StatsSet(Collections.<String, Object> emptyMap());
 	
@@ -649,9 +651,8 @@ public class StatsSet implements IParserAdvUtils
 		assert !(((min <= max) && ((value < min) || (value >= max))));
 		if ((min <= max) && ((value < min) || (value >= max)))
 		{
-			_log.log(Level.SEVERE, "Incorrect value: " + value + "for: " + key + "Ref: " + reference);
+			LOG.error("Incorrect value: {} for: {} Ref: {}", value, key, reference);
 		}
-		
 		set(key, value);
 	}
 }

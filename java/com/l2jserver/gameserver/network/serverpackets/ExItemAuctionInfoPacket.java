@@ -18,9 +18,9 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
+import com.l2jserver.gameserver.enums.ItemAuctionState;
 import com.l2jserver.gameserver.model.itemauction.ItemAuction;
 import com.l2jserver.gameserver.model.itemauction.ItemAuctionBid;
-import com.l2jserver.gameserver.model.itemauction.ItemAuctionState;
 
 /**
  * @author Forsaiken

@@ -71,15 +71,15 @@ public final class MultisellData implements IXmlReader
 	public void load()
 	{
 		_entries.clear();
-		parseDatapackDirectory("data/multisell", false);
+		parseDatapackDirectory("data/xml/multisell", false);
 		if (GeneralConfig.CUSTOM_MULTISELL_LOAD)
 		{
-			parseDatapackDirectory("data/multisell/custom", false);
+			parseDatapackDirectory("data/xml/multisell/custom", false);
 		}
 		
 		if (CBasicConfig.CUSTOM_CB_ENABLED)
 		{
-			parseDatapackDirectory("data/multisell/community", false);
+			parseDatapackDirectory("data/xml/multisell/community", false);
 		}
 		verify();
 		LOG.info("{}: Loaded {} multisell lists.", getClass().getSimpleName(), _entries.size());
@@ -412,11 +412,11 @@ public final class MultisellData implements IXmlReader
 	
 	public static MultisellData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final MultisellData _instance = new MultisellData();
+		protected static final MultisellData INSTANCE = new MultisellData();
 	}
 }

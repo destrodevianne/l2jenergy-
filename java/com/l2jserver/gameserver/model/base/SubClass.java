@@ -20,6 +20,7 @@ package com.l2jserver.gameserver.model.base;
 
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.data.json.ExperienceData;
+import com.l2jserver.gameserver.enums.actors.PlayerClass;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.actor.stat.PcStat;
 

@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model;
 
-import com.l2jserver.gameserver.model.stats.MoveType;
+import com.l2jserver.gameserver.enums.actors.MoveType;
 
 /**
  * Stats definition for each pet level.

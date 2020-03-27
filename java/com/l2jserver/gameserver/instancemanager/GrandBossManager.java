@@ -373,17 +373,13 @@ public final class GrandBossManager implements IStorable
 		return _zones;
 	}
 	
-	/**
-	 * Gets the single instance of {@code GrandBossManager}.
-	 * @return single instance of {@code GrandBossManager}
-	 */
 	public static GrandBossManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final GrandBossManager _instance = new GrandBossManager();
+		protected static final GrandBossManager INSTANCE = new GrandBossManager();
 	}
 }

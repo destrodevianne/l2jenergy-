@@ -42,6 +42,7 @@ import com.l2jserver.gameserver.communitybbs.BB.Forum;
 import com.l2jserver.gameserver.communitybbs.Manager.ForumsBBSManager;
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.FeatureConfig;
+import com.l2jserver.gameserver.configuration.config.SiegeConfig;
 import com.l2jserver.gameserver.configuration.config.community.CBasicConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
@@ -49,6 +50,8 @@ import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.sql.impl.CrestTable;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.SkillData;
+import com.l2jserver.gameserver.enums.ClanPrivilege;
+import com.l2jserver.gameserver.enums.ZoneId;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.FortManager;
 import com.l2jserver.gameserver.instancemanager.SiegeManager;
@@ -68,7 +71,6 @@ import com.l2jserver.gameserver.model.itemcontainer.ItemContainer;
 import com.l2jserver.gameserver.model.pledge.RankPrivs;
 import com.l2jserver.gameserver.model.pledge.SubPledge;
 import com.l2jserver.gameserver.model.skills.Skill;
-import com.l2jserver.gameserver.model.zone.ZoneId;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
 import com.l2jserver.gameserver.network.serverpackets.ExBrExtraUserInfo;
@@ -246,7 +248,7 @@ public class L2Clan implements IIdentifiable, INamable
 				exLeader.dismount();
 			}
 			
-			if (getLevel() >= SiegeManager.getInstance().getSiegeClanMinLevel())
+			if (getLevel() >= SiegeConfig.SIEGE_CLAN_MIN_LEVEL)
 			{
 				SiegeManager.getInstance().removeSiegeSkills(exLeader);
 			}
@@ -279,7 +281,7 @@ public class L2Clan implements IIdentifiable, INamable
 			newLeader.setPledgeClass(L2ClanMember.calculatePledgeClass(newLeader));
 			newLeader.getClanPrivileges().setAll();
 			
-			if (getLevel() >= SiegeManager.getInstance().getSiegeClanMinLevel())
+			if (getLevel() >= SiegeConfig.SIEGE_CLAN_MIN_LEVEL)
 			{
 				SiegeManager.getInstance().addSiegeSkills(newLeader);
 			}
@@ -842,7 +844,7 @@ public class L2Clan implements IIdentifiable, INamable
 	 */
 	public void increaseBloodAllianceCount()
 	{
-		_bloodAllianceCount += SiegeManager.getInstance().getBloodAllianceReward();
+		_bloodAllianceCount += SiegeConfig.BLOOD_ALLIANCE_REWARD;
 		DAOFactory.getInstance().getClanDAO().updateBloodAllianceCount(getBloodAllianceCount(), getId());
 	}
 	

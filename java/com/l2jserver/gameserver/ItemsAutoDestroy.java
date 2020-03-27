@@ -36,11 +36,6 @@ public final class ItemsAutoDestroy
 		ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(this::removeItems, 5000, 5000);
 	}
 	
-	public static ItemsAutoDestroy getInstance()
-	{
-		return SingletonHolder._instance;
-	}
-	
 	public synchronized void addItem(L2ItemInstance item)
 	{
 		item.setDropTime(System.currentTimeMillis());
@@ -108,8 +103,13 @@ public final class ItemsAutoDestroy
 		}
 	}
 	
+	public static ItemsAutoDestroy getInstance()
+	{
+		return SingletonHolder.INSTANCE;
+	}
+	
 	private static class SingletonHolder
 	{
-		protected static final ItemsAutoDestroy _instance = new ItemsAutoDestroy();
+		protected static final ItemsAutoDestroy INSTANCE = new ItemsAutoDestroy();
 	}
 }

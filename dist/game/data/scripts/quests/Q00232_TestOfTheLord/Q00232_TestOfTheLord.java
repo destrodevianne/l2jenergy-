@@ -19,11 +19,11 @@
 package quests.Q00232_TestOfTheLord;
 
 import com.l2jserver.gameserver.enums.Race;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
@@ -366,7 +366,7 @@ public final class Q00232_TestOfTheLord extends Quest
 				{
 					htmltext = "30565-01.html";
 				}
-				else if (player.getClassId() != ClassId.orcShaman)
+				else if (player.getClassId() != ClassId.ORC_SHAMAN)
 				{
 					htmltext = "30565-02.html";
 				}

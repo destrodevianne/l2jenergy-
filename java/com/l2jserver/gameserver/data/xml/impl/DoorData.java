@@ -60,7 +60,7 @@ public class DoorData implements IXmlReader
 		_doors.clear();
 		_groups.clear();
 		_regions.clear();
-		parseDatapackFile("data/doors.xml");
+		parseDatapackFile("data/xml/doors.xml");
 		LOG.info("{}: Loaded {} Door templates for {} regions.", getClass().getSimpleName(), _doors.size(), _regions.size());
 	}
 	
@@ -248,11 +248,11 @@ public class DoorData implements IXmlReader
 	
 	public static DoorData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final DoorData _instance = new DoorData();
+		protected static final DoorData INSTANCE = new DoorData();
 	}
 }

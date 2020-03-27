@@ -23,8 +23,8 @@ import java.util.List;
 
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.enums.Race;
-import com.l2jserver.gameserver.model.base.ClassId;
-import com.l2jserver.gameserver.model.base.SocialClass;
+import com.l2jserver.gameserver.enums.actors.ClassId;
+import com.l2jserver.gameserver.enums.actors.SocialClass;
 import com.l2jserver.gameserver.model.holders.ItemHolder;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 

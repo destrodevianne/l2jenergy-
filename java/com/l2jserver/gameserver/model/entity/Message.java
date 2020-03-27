@@ -27,6 +27,7 @@ import java.util.concurrent.ScheduledFuture;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
+import com.l2jserver.gameserver.enums.MailMessageType;
 import com.l2jserver.gameserver.idfactory.IdFactory;
 import com.l2jserver.gameserver.instancemanager.MailManager;
 import com.l2jserver.gameserver.model.itemcontainer.Mail;
@@ -59,14 +60,6 @@ public class Message
 	private boolean _hasAttachments;
 	private Mail _attachments = null;
 	private ScheduledFuture<?> _unloadTask = null;
-	
-	public enum SendBySystem
-	{
-		PLAYER,
-		NEWS,
-		NONE,
-		ALEGRIA
-	}
 	
 	/*
 	 * Constructor for restoring from DB.
@@ -109,7 +102,7 @@ public class Message
 	/*
 	 * This constructor used for System Mails
 	 */
-	public Message(int receiverId, String subject, String content, SendBySystem sendBySystem)
+	public Message(int receiverId, String subject, String content, MailMessageType sendBySystem)
 	{
 		_messageId = IdFactory.getInstance().getNextId();
 		_senderId = -1;
@@ -140,7 +133,7 @@ public class Message
 		_unread = true;
 		_deletedBySender = true;
 		_deletedByReceiver = false;
-		_sendBySystem = SendBySystem.NONE.ordinal();
+		_sendBySystem = MailMessageType.NONE.ordinal();
 		_returned = true;
 		_reqAdena = 0;
 		_hasAttachments = true;

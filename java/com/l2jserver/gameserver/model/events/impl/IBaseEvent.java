@@ -18,7 +18,7 @@
  */
 package com.l2jserver.gameserver.model.events.impl;
 
-import com.l2jserver.gameserver.model.events.EventType;
+import com.l2jserver.gameserver.enums.events.EventType;
 
 /**
  * @author UnAfraid

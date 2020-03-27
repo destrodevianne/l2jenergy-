@@ -18,10 +18,10 @@
  */
 package quests.Q00404_PathOfTheHumanWizard;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
@@ -86,7 +86,7 @@ public final class Q00404_PathOfTheHumanWizard extends Quest
 		{
 			case "ACCEPT":
 			{
-				if (player.getClassId() == ClassId.mage)
+				if (player.getClassId() == ClassId.HUMAN_MYSTIC)
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{
@@ -105,7 +105,7 @@ public final class Q00404_PathOfTheHumanWizard extends Quest
 						htmltext = "30391-02.htm";
 					}
 				}
-				else if (player.getClassId() == ClassId.wizard)
+				else if (player.getClassId() == ClassId.HUMAN_WIZARD)
 				{
 					htmltext = "30391-02a.htm";
 				}

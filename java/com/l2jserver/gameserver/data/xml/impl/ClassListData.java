@@ -25,7 +25,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.l2jserver.gameserver.model.base.ClassId;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.base.ClassInfo;
 import com.l2jserver.gameserver.util.IXmlReader;
 
@@ -114,11 +114,11 @@ public final class ClassListData implements IXmlReader
 	 */
 	public static ClassListData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final ClassListData _instance = new ClassListData();
+		protected static final ClassListData INSTANCE = new ClassListData();
 	}
 }

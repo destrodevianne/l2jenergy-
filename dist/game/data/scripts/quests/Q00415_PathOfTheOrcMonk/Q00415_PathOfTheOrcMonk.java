@@ -18,12 +18,12 @@
  */
 package quests.Q00415_PathOfTheOrcMonk;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
+import com.l2jserver.gameserver.enums.items.WeaponType;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
-import com.l2jserver.gameserver.model.items.type.WeaponType;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
@@ -107,7 +107,7 @@ public final class Q00415_PathOfTheOrcMonk extends Quest
 		{
 			case "ACCEPT":
 			{
-				if (player.getClassId() == ClassId.orcFighter)
+				if (player.getClassId() == ClassId.ORC_FIGHTER)
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{
@@ -125,7 +125,7 @@ public final class Q00415_PathOfTheOrcMonk extends Quest
 						htmltext = "30587-03.htm";
 					}
 				}
-				else if (player.getClassId() == ClassId.orcMonk)
+				else if (player.getClassId() == ClassId.MONK)
 				{
 					htmltext = "30587-02a.htm";
 				}

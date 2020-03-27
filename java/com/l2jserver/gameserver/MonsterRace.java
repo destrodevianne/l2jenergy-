@@ -44,11 +44,6 @@ public class MonsterRace
 		_second = new int[2];
 	}
 	
-	public static MonsterRace getInstance()
-	{
-		return SingletonHolder._instance;
-	}
-	
 	public void newRace()
 	{
 		int random = 0;
@@ -145,8 +140,13 @@ public class MonsterRace
 		return _second[0];
 	}
 	
+	public static MonsterRace getInstance()
+	{
+		return SingletonHolder.INSTANCE;
+	}
+	
 	private static class SingletonHolder
 	{
-		protected static final MonsterRace _instance = new MonsterRace();
+		protected static final MonsterRace INSTANCE = new MonsterRace();
 	}
 }

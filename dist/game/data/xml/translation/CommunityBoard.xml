@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xsd/Messages.xsd">
+    <!-- Board Messages -->
+    <message id="community_board_services_disabled_players_private_store">
+        <set lang="en" val="You cannot use Community Board when you are in Private Store." />
+		<set lang="ru" val="Вы не можете использовать АЛТ+Б когда находитесь в режиме торговли." />
+	</message>
+	<message id="community_board_services_disabled_players_olympiad">
+        <set lang="en" val="You cannot use Community Board when you are in Olympiad Match." />
+		<set lang="ru" val="Вы не можете использовать АЛТ+Б когда находитесь на олимпиаде." />
+	</message>
+	<message id="community_board_services_disabled_players_events">
+        <set lang="en" val="You cannot use Community Board when you are in Events." />
+		<set lang="ru" val="Вы не можете использовать АЛТ+Б когда находитесь на Эвенте." />
+	</message>
+	<message id="community_board_services_disabled_players_cursed_weapon">
+        <set lang="en" val="You cannot use Community Board when you have the Cursed Weapon." />
+		<set lang="ru" val="Вы не можете использовать АЛТ+Б когда имеете Проклятое оружие." />
+	</message>
+	<message id="community_board_services_disabled_players_now">
+        <set lang="en" val="You can't be community board now" />
+		<set lang="ru" val="Вы не можете использовать АЛТ+Б сейчас" />
+	</message>
+	<message id="community_board_services_disabled">
+        <set lang="en" val="Services disabled." />
+		<set lang="ru" val="Сервис отключен." />
+	</message>
+	<!-- TeleportBoard Messages -->
+    <message id="communityboard_teleport_personal_point_only_premium">
+        <set lang="en" val="Only Players with premium accounts can use the teleport point." />
+		<set lang="ru" val="Только Игроки с премиум-аккаунтом могут использовать точки телепорта." />
+	</message>
+	<message id="communityboard_teleport_persoanl_point_outofcontrol">
+        <set lang="en" val="You can not save a point in your state." />
+		<set lang="ru" val="Нельзя сохранить точку в вашем состоянии." />
+	</message>
+	<message id="communityboard_teleport_persoanl_point_incombat">
+        <set lang="en" val="You can not store the point in combat mode." />
+		<set lang="ru" val="Нельзя сохранить точку в боевом режиме." />
+	</message>
+	<message id="communityboard_teleport_persoanl_point_state">
+        <set lang="en" val="You can not save a bookmark in your state." />
+		<set lang="ru" val="Вы не можете сохранить закладку в своем состоянии." />
+	</message>
+	<message id="communityboard_teleport_persoanl_point_forbidden_zone">
+        <set lang="en" val="You can not save point in this location." />
+		<set lang="ru" val="Нельзя сохранить точку в данной локации." />
+	</message>
+	<message id="communityboard_teleport_persoanl_point_name">
+        <set lang="en" val="You did not enter the name of the bookmark!" />
+		<set lang="ru" val="Вы не указали имя закладки!" />
+	</message>
+	<message id="communityboard_teleport_personal_point">
+        <set lang="en" val="You can not save more than %s% point." />
+		<set lang="ru" val="Вы не можете сохранить более %s% точок(и)." />
+	</message>
+	<message id="communityboard_teleport_point_level_min_max">
+        <set lang="en" val="This point is only teleport players to the level of %s% to %c%." />
+		<set lang="ru" val="Данная точка телепорта доступна только игрокам с уровнем от %s% до %c%." />
+	</message>
+	<message id="communityboard_teleport_point_pk_denied">
+        <set lang="en" val="Players with karma can not be moved to this location." />
+		<set lang="ru" val="Игроки с кармой не могут перемещаться в данную локацию." />
+	</message>
+	<message id="communityboard_teleport_point_only_premium">
+        <set lang="en" val="Only Players with premium accounts can be moved to this location." />
+		<set lang="ru" val="Только Игроки с премиум-аккаунтом могут перемещаться в данную локацию." />
+	</message>
+	<message id="communityboard_teleport_point_success_location">
+        <set lang="en" val="You have successfully moved to the point %s%." />
+		<set lang="ru" val="Вы успешно перемещены в точку %s%." />
+	</message>
+	<message id="communityboard_teleport_point_success_location">
+        <set lang="en" val="You have successfully moved to the point %s%" />
+		<set lang="ru" val="Вы успешно перемещены в точку %s%" />
+	</message>
+	<message id="communityboard_teleport_dont_have_points">
+        <set lang="en" val="You don't have points!" />
+		<set lang="ru" val="У вас нет сохраненных точек!" />
+	</message>
+</list>

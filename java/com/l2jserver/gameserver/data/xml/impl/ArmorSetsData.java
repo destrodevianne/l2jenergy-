@@ -37,9 +37,6 @@ public final class ArmorSetsData implements IXmlReader
 {
 	private final Map<Integer, L2ArmorSet> _armorSets = new HashMap<>();
 	
-	/**
-	 * Instantiates a new armor sets data.
-	 */
 	protected ArmorSetsData()
 	{
 		load();
@@ -186,11 +183,11 @@ public final class ArmorSetsData implements IXmlReader
 	 */
 	public static ArmorSetsData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final ArmorSetsData _instance = new ArmorSetsData();
+		protected static final ArmorSetsData INSTANCE = new ArmorSetsData();
 	}
 }

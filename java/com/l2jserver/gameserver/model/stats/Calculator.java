@@ -21,6 +21,7 @@ package com.l2jserver.gameserver.model.stats;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.l2jserver.gameserver.enums.actors.Stats;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.model.stats.functions.AbstractFunction;

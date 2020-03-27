@@ -46,7 +46,7 @@ public class RequestExBR_BuyProduct extends L2GameClientPacket
 		{
 			return;
 		}
-		ProductItemData.getInstance().buyItem(activeChar, _productId, _count);
+		ProductItemData.getInstance().giveProduct(activeChar, _productId, _count);
 	}
 	
 	@Override

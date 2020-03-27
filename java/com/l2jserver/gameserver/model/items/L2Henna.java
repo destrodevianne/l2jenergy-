@@ -21,8 +21,8 @@ package com.l2jserver.gameserver.model.items;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.StatsSet;
-import com.l2jserver.gameserver.model.base.ClassId;
 
 /**
  * Class for the Henna object.

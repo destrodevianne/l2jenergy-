@@ -18,14 +18,16 @@
  */
 package com.l2jserver.gameserver.dao;
 
-import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-
 /**
  * @author Мо3олЬ
  */
 public interface ItemMallDAO
 {
-	void requestBuyItem(L2PcInstance player, int productId, int count);
+	void addPoduct(int objectId, int productId, int quantity, int maxStock);
 	
-	void recentListByItem(int objId);
+	void loadPoducts(int objectId);
+	
+	int setMaxStock(int productId);
+	
+	int setCurrentStock(int productId);
 }

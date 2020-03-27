@@ -36,7 +36,9 @@ import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.data.xml.impl.OptionData;
-import com.l2jserver.gameserver.model.L2Augmentation;
+import com.l2jserver.gameserver.model.augmentation.AugmentationChance;
+import com.l2jserver.gameserver.model.augmentation.AugmentationChanceAcc;
+import com.l2jserver.gameserver.model.augmentation.L2Augmentation;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
@@ -89,7 +91,7 @@ public class AugmentationData
 	private final List<List<Integer>> _redSkills = new ArrayList<>();
 	
 	private final List<AugmentationChance> _augmentationChances = new ArrayList<>();
-	private final List<augmentationChanceAcc> _augmentationChancesAcc = new ArrayList<>();
+	private final List<AugmentationChanceAcc> _augmentationChancesAcc = new ArrayList<>();
 	
 	private final Map<Integer, SkillHolder> _allSkills = new HashMap<>();
 	
@@ -114,106 +116,6 @@ public class AugmentationData
 		{
 			LOG.info("{}: Loaded: {} augmentations.", getClass().getSimpleName(), _augmentationChances.size());
 			LOG.info("{}: Loaded: {} accessory augmentations.", getClass().getSimpleName(), _augmentationChancesAcc.size());
-		}
-	}
-	
-	public class AugmentationChance
-	{
-		private final String _WeaponType;
-		private final int _StoneId;
-		private final int _VariationId;
-		private final int _CategoryChance;
-		private final int _AugmentId;
-		private final float _AugmentChance;
-		
-		public AugmentationChance(String WeaponType, int StoneId, int VariationId, int CategoryChance, int AugmentId, float AugmentChance)
-		{
-			_WeaponType = WeaponType;
-			_StoneId = StoneId;
-			_VariationId = VariationId;
-			_CategoryChance = CategoryChance;
-			_AugmentId = AugmentId;
-			_AugmentChance = AugmentChance;
-		}
-		
-		public String getWeaponType()
-		{
-			return _WeaponType;
-		}
-		
-		public int getStoneId()
-		{
-			return _StoneId;
-		}
-		
-		public int getVariationId()
-		{
-			return _VariationId;
-		}
-		
-		public int getCategoryChance()
-		{
-			return _CategoryChance;
-		}
-		
-		public int getAugmentId()
-		{
-			return _AugmentId;
-		}
-		
-		public float getAugmentChance()
-		{
-			return _AugmentChance;
-		}
-	}
-	
-	public class augmentationChanceAcc
-	{
-		private final String _WeaponType;
-		private final int _StoneId;
-		private final int _VariationId;
-		private final int _CategoryChance;
-		private final int _AugmentId;
-		private final float _AugmentChance;
-		
-		public augmentationChanceAcc(String WeaponType, int StoneId, int VariationId, int CategoryChance, int AugmentId, float AugmentChance)
-		{
-			_WeaponType = WeaponType;
-			_StoneId = StoneId;
-			_VariationId = VariationId;
-			_CategoryChance = CategoryChance;
-			_AugmentId = AugmentId;
-			_AugmentChance = AugmentChance;
-		}
-		
-		public String getWeaponType()
-		{
-			return _WeaponType;
-		}
-		
-		public int getStoneId()
-		{
-			return _StoneId;
-		}
-		
-		public int getVariationId()
-		{
-			return _VariationId;
-		}
-		
-		public int getCategoryChance()
-		{
-			return _CategoryChance;
-		}
-		
-		public int getAugmentId()
-		{
-			return _AugmentId;
-		}
-		
-		public float getAugmentChance()
-		{
-			return _AugmentChance;
 		}
 	}
 	
@@ -485,7 +387,7 @@ public class AugmentationData
 																aAugmentId = Integer.parseInt(aNodeAttributes.getNamedItem("id").getNodeValue());
 																aAugmentChance = Float.parseFloat(aNodeAttributes.getNamedItem("chance").getNodeValue());
 																
-																_augmentationChancesAcc.add(new augmentationChanceAcc(aWeaponType, aStoneId, aVariationId, aCategoryChance, aAugmentId, aAugmentChance));
+																_augmentationChancesAcc.add(new AugmentationChanceAcc(aWeaponType, aStoneId, aVariationId, aCategoryChance, aAugmentId, aAugmentChance));
 															}
 														}
 													}
@@ -874,9 +776,9 @@ public class AugmentationData
 		int stat34 = 0;
 		if (CharacterConfig.RETAIL_LIKE_AUGMENTATION_ACCESSORY)
 		{
-			List<augmentationChanceAcc> _selectedChances12 = new ArrayList<>();
-			List<augmentationChanceAcc> _selectedChances34 = new ArrayList<>();
-			for (augmentationChanceAcc ac : _augmentationChancesAcc)
+			List<AugmentationChanceAcc> _selectedChances12 = new ArrayList<>();
+			List<AugmentationChanceAcc> _selectedChances34 = new ArrayList<>();
+			for (AugmentationChanceAcc ac : _augmentationChancesAcc)
 			{
 				if (ac.getWeaponType().equals("warrior") && (ac.getStoneId() == lifeStoneId))
 				{
@@ -892,7 +794,7 @@ public class AugmentationData
 			}
 			int r = Rnd.get(10000);
 			float s = 10000;
-			for (augmentationChanceAcc ac : _selectedChances12)
+			for (AugmentationChanceAcc ac : _selectedChances12)
 			{
 				if (s > r)
 				{
@@ -917,8 +819,8 @@ public class AugmentationData
 			{
 				c = 1;
 			}
-			List<augmentationChanceAcc> _selectedChances34final = new ArrayList<>();
-			for (augmentationChanceAcc ac : _selectedChances34)
+			List<AugmentationChanceAcc> _selectedChances34final = new ArrayList<>();
+			for (AugmentationChanceAcc ac : _selectedChances34)
 			{
 				if (ac.getCategoryChance() == c)
 				{
@@ -927,7 +829,7 @@ public class AugmentationData
 			}
 			r = Rnd.get(10000);
 			s = 10000;
-			for (augmentationChanceAcc ac : _selectedChances34final)
+			for (AugmentationChanceAcc ac : _selectedChances34final)
 			{
 				if (s > r)
 				{
@@ -989,11 +891,11 @@ public class AugmentationData
 	
 	public static final AugmentationData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final AugmentationData _instance = new AugmentationData();
+		protected static final AugmentationData INSTANCE = new AugmentationData();
 	}
 }

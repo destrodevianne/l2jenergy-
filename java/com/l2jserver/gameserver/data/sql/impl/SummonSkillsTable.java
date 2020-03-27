@@ -37,6 +37,7 @@ import com.l2jserver.gameserver.model.actor.L2Summon;
 public class SummonSkillsTable
 {
 	private static Logger LOG = LoggerFactory.getLogger(SummonSkillsTable.class);
+	
 	private final Map<Integer, Map<Integer, L2PetSkillLearn>> _skillTrees = new HashMap<>();
 	
 	protected SummonSkillsTable()
@@ -175,11 +176,11 @@ public class SummonSkillsTable
 	
 	public static SummonSkillsTable getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final SummonSkillsTable _instance = new SummonSkillsTable();
+		protected static final SummonSkillsTable INSTANCE = new SummonSkillsTable();
 	}
 }

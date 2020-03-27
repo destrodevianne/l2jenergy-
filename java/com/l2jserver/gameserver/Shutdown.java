@@ -53,11 +53,6 @@ import com.l2jserver.gameserver.network.serverpackets.ServerClose;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.util.Broadcast;
 
-/**
- * This class provides the functions for shutting down and restarting the server.<br>
- * It closes all open client connections and saves all data.
- * @version $Revision: 1.2.4.5 $ $Date: 2005/03/27 15:29:09 $
- */
 public class Shutdown extends Thread
 {
 	private static final Logger LOG = LoggerFactory.getLogger(Shutdown.class);
@@ -652,11 +647,11 @@ public class Shutdown extends Thread
 	 */
 	public static Shutdown getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final Shutdown _instance = new Shutdown();
+		protected static final Shutdown INSTANCE = new Shutdown();
 	}
 }

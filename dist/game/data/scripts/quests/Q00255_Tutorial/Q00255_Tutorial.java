@@ -20,13 +20,13 @@ package quests.Q00255_Tutorial;
 
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.enums.Race;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.enums.audio.Voice;
+import com.l2jserver.gameserver.enums.events.EventType;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
-import com.l2jserver.gameserver.model.events.EventType;
 import com.l2jserver.gameserver.model.events.impl.character.OnCreatureAttacked;
 import com.l2jserver.gameserver.model.events.impl.character.player.OnPlayerLevelChanged;
 import com.l2jserver.gameserver.model.events.impl.character.player.OnPlayerSit;
@@ -581,44 +581,44 @@ public class Q00255_Tutorial extends Quest
 			{
 				switch (talker.getClassId())
 				{
-					case fighter:
+					case HUMAN_FIGHTER:
 						qs.playSound(Voice.TUTORIAL_VOICE_001A_2000);
 						showTutorialHTML(talker, "tutorial-human-fighter-001.htm");
 						break;
-					case mage:
+					case HUMAN_MYSTIC:
 						qs.playSound(Voice.TUTORIAL_VOICE_001B_2000);
 						showTutorialHTML(talker, "tutorial-human-mage-001.htm");
 						break;
-					case elvenFighter:
+					case ELVEN_FIGHTER:
 						qs.playSound(Voice.TUTORIAL_VOICE_001C_2000);
 						showTutorialHTML(talker, "tutorial-elven-fighter-001.htm");
 						break;
-					case elvenMage:
+					case ELVEN_MYSTIC:
 						qs.playSound(Voice.TUTORIAL_VOICE_001D_2000);
 						showTutorialHTML(talker, "tutorial-elven-mage-001.htm");
 						break;
-					case darkFighter:
+					case DARK_FIGHTER:
 						qs.playSound(Voice.TUTORIAL_VOICE_001E_2000);
 						showTutorialHTML(talker, "tutorial-delf-fighter-001.htm");
 						break;
-					case darkMage:
+					case DARK_MYSTIC:
 						qs.playSound(Voice.TUTORIAL_VOICE_001F_2000);
 						showTutorialHTML(talker, "tutorial-delf-mage-001.htm");
 						break;
-					case orcFighter:
+					case ORC_FIGHTER:
 						qs.playSound(Voice.TUTORIAL_VOICE_001G_2000);
 						showTutorialHTML(talker, "tutorial-orc-fighter-001.htm");
 						break;
-					case orcMage:
+					case ORC_MYSTIC:
 						qs.playSound(Voice.TUTORIAL_VOICE_001H_2000);
 						showTutorialHTML(talker, "tutorial-orc-mage-001.htm");
 						break;
-					case dwarvenFighter:
+					case DWARVEN_FIGHTER:
 						qs.playSound(Voice.TUTORIAL_VOICE_001I_2000);
 						showTutorialHTML(talker, "tutorial-dwarven-fighter-001.htm");
 						break;
-					case maleSoldier:
-					case femaleSoldier:
+					case MALE_SOLDIER:
+					case FEMALE_SOLDIER:
 						qs.playSound(Voice.TUTORIAL_VOICE_001K_2000);
 						showTutorialHTML(talker, "tutorial-kamael-001.htm");
 						break;
@@ -752,29 +752,29 @@ public class Q00255_Tutorial extends Quest
 					qs.playSound(Sound.ITEMSOUND_QUEST_TUTORIAL);
 					switch (talker.getClassId())
 					{
-						case fighter:
+						case HUMAN_FIGHTER:
 							qs.addRadar(-71424, 258336, -3109);
 							break;
-						case mage:
+						case HUMAN_MYSTIC:
 							qs.addRadar(-91036, 248044, -3568);
 							break;
-						case elvenFighter:
-						case elvenMage:
+						case ELVEN_FIGHTER:
+						case ELVEN_MYSTIC:
 							qs.addRadar(46112, 41200, -3504);
 							break;
-						case darkFighter:
-						case darkMage:
+						case DARK_FIGHTER:
+						case DARK_MYSTIC:
 							qs.addRadar(28384, 11056, -4233);
 							break;
-						case orcFighter:
-						case orcMage:
+						case ORC_FIGHTER:
+						case ORC_MYSTIC:
 							qs.addRadar(-56736, -113680, -672);
 							break;
-						case dwarvenFighter:
+						case DWARVEN_FIGHTER:
 							qs.addRadar(108567, -173994, -406);
 							break;
-						case maleSoldier:
-						case femaleSoldier:
+						case MALE_SOLDIER:
+						case FEMALE_SOLDIER:
 							qs.addRadar(-125872, 38016, 1251);
 							break;
 					}
@@ -806,23 +806,23 @@ public class Q00255_Tutorial extends Quest
 				qs.setMemoState(memoState & ~1024);
 				switch (talker.getClassId())
 				{
-					case fighter:
+					case HUMAN_FIGHTER:
 						qs.addRadar(-83020, 242553, -3718);
 						break;
-					case elvenFighter:
+					case ELVEN_FIGHTER:
 						qs.addRadar(45061, 52468, -2796);
 						break;
-					case darkFighter:
+					case DARK_FIGHTER:
 						qs.addRadar(10447, 14620, -4242);
 						break;
-					case orcFighter:
+					case ORC_FIGHTER:
 						qs.addRadar(-46389, -113905, -21);
 						break;
-					case dwarvenFighter:
+					case DWARVEN_FIGHTER:
 						qs.addRadar(115271, -182692, -1445);
 						break;
-					case maleSoldier:
-					case femaleSoldier:
+					case MALE_SOLDIER:
+					case FEMALE_SOLDIER:
 						qs.addRadar(-118132, 42788, 723);
 						break;
 				}
@@ -851,16 +851,16 @@ public class Q00255_Tutorial extends Quest
 					qs.playSound(Sound.ITEMSOUND_QUEST_TUTORIAL);
 					switch (talker.getClassId())
 					{
-						case mage:
+						case HUMAN_MYSTIC:
 							qs.addRadar(-84981, 244764, -3726);
 							break;
-						case elvenMage:
+						case ELVEN_MYSTIC:
 							qs.addRadar(45701, 52459, -2796);
 							break;
-						case darkMage:
+						case DARK_MYSTIC:
 							qs.addRadar(10344, 14445, -4242);
 							break;
-						case orcMage:
+						case ORC_MYSTIC:
 							qs.addRadar(-46225, -113312, -21);
 							break;
 					}
@@ -869,7 +869,7 @@ public class Q00255_Tutorial extends Quest
 				enableTutorialEvent(qs, memoFlag | 268435456);
 				break;
 			case 268435456:
-				if (talker.getClassId() == ClassId.fighter)
+				if (talker.getClassId() == ClassId.HUMAN_FIGHTER)
 				{
 					qs.playSound(Voice.TUTORIAL_VOICE_021_1000);
 					qs.showQuestionMark(talker, 25);
@@ -881,14 +881,14 @@ public class Q00255_Tutorial extends Quest
 			case 536870912:
 				switch (talker.getClassId())
 				{
-					case dwarvenFighter:
-					case mage:
-					case elvenFighter:
-					case elvenMage:
-					case darkMage:
-					case darkFighter:
-					case maleSoldier:
-					case femaleSoldier:
+					case DWARVEN_FIGHTER:
+					case HUMAN_MYSTIC:
+					case ELVEN_FIGHTER:
+					case ELVEN_MYSTIC:
+					case DARK_MYSTIC:
+					case DARK_FIGHTER:
+					case MALE_SOLDIER:
+					case FEMALE_SOLDIER:
 						qs.playSound(Voice.TUTORIAL_VOICE_021_1000);
 						qs.showQuestionMark(talker, 25);
 						qs.playSound(Sound.ITEMSOUND_QUEST_TUTORIAL);
@@ -905,8 +905,8 @@ public class Q00255_Tutorial extends Quest
 			case 1073741824:
 				switch (talker.getClassId())
 				{
-					case orcFighter:
-					case orcMage:
+					case ORC_FIGHTER:
+					case ORC_MYSTIC:
 						qs.playSound(Voice.TUTORIAL_VOICE_021_1000);
 						qs.showQuestionMark(talker, 25);
 						qs.playSound(Sound.ITEMSOUND_QUEST_TUTORIAL);
@@ -1232,58 +1232,58 @@ public class Q00255_Tutorial extends Quest
 			case 26:
 				switch (talker.getClassId())
 				{
-					case warrior:
+					case WARRIOR:
 						showTutorialHTML(talker, "tutorial-22.htm");
 						break;
-					case knight:
+					case KNIGHT:
 						showTutorialHTML(talker, "tutorial-22a.htm");
 						break;
-					case rogue:
+					case ROGUE:
 						showTutorialHTML(talker, "tutorial-22b.htm");
 						break;
-					case wizard:
+					case HUMAN_WIZARD:
 						showTutorialHTML(talker, "tutorial-22c.htm");
 						break;
-					case cleric:
+					case CLERIC:
 						showTutorialHTML(talker, "tutorial-22d.htm");
 						break;
-					case elvenKnight:
+					case ELVEN_KNIGHT:
 						showTutorialHTML(talker, "tutorial-22e.htm");
 						break;
-					case elvenScout:
+					case ELVEN_SCOUT:
 						showTutorialHTML(talker, "tutorial-22f.htm");
 						break;
-					case elvenWizard:
+					case ELVEN_WIZARD:
 						showTutorialHTML(talker, "tutorial-22g.htm");
 						break;
-					case oracle:
+					case ELVEN_ORACLE:
 						showTutorialHTML(talker, "tutorial-22h.htm");
 						break;
-					case orcRaider:
+					case ORC_RAIDER:
 						showTutorialHTML(talker, "tutorial-22i.htm");
 						break;
-					case orcMonk:
+					case MONK:
 						showTutorialHTML(talker, "tutorial-22j.htm");
 						break;
-					case orcShaman:
+					case ORC_SHAMAN:
 						showTutorialHTML(talker, "tutorial-22k.htm");
 						break;
-					case scavenger:
+					case SCAVENGER:
 						showTutorialHTML(talker, "tutorial-22l.htm");
 						break;
-					case artisan:
+					case ARTISAN:
 						showTutorialHTML(talker, "tutorial-22m.htm");
 						break;
-					case palusKnight:
+					case PALUS_KNIGHT:
 						showTutorialHTML(talker, "tutorial-22n.htm");
 						break;
-					case assassin:
+					case ASSASSIN:
 						showTutorialHTML(talker, "tutorial-22o.htm");
 						break;
-					case darkWizard:
+					case DARK_WIZARD:
 						showTutorialHTML(talker, "tutorial-22p.htm");
 						break;
-					case shillienOracle:
+					case SHILLIEN_ORACLE:
 						showTutorialHTML(talker, "tutorial-22q.htm");
 						break;
 					default:
@@ -1305,10 +1305,10 @@ public class Q00255_Tutorial extends Quest
 			case 31:
 				switch (talker.getClassId())
 				{
-					case trooper:
+					case TROOPER:
 						showTutorialHTML(talker, "tutorial-28a.htm");
 						break;
-					case warder:
+					case WARDER:
 						showTutorialHTML(talker, "tutorial-28b.htm");
 						break;
 				}
@@ -1319,10 +1319,10 @@ public class Q00255_Tutorial extends Quest
 			case 33:
 				switch (talker.getClassId())
 				{
-					case trooper:
+					case TROOPER:
 						showTutorialHTML(talker, "tutorial-22qb.htm");
 						break;
-					case warder:
+					case WARDER:
 						showTutorialHTML(talker, "tutorial-22qc.htm");
 						break;
 				}
@@ -1348,35 +1348,35 @@ public class Q00255_Tutorial extends Quest
 				}
 				switch (talker.getClassId())
 				{
-					case fighter:
+					case HUMAN_FIGHTER:
 						showTutorialHTML(talker, "tutorial-human-fighter-007.htm");
 						qs.addRadar(-71424, 258336, -3109);
 						break;
-					case mage:
+					case HUMAN_MYSTIC:
 						showTutorialHTML(talker, "tutorial-human-fighter-007.htm");
 						qs.addRadar(-91036, 248044, -3568);
 						break;
-					case elvenFighter:
-					case elvenMage:
+					case ELVEN_FIGHTER:
+					case ELVEN_MYSTIC:
 						showTutorialHTML(talker, "tutorial-human-fighter-007.htm");
 						qs.addRadar(-91036, 248044, -3568);
 						break;
-					case darkFighter:
-					case darkMage:
+					case DARK_FIGHTER:
+					case DARK_MYSTIC:
 						showTutorialHTML(talker, "tutorial-human-fighter-007.htm");
 						qs.addRadar(28384, 11056, -4233);
 						break;
-					case orcFighter:
-					case orcMage:
+					case ORC_FIGHTER:
+					case ORC_MYSTIC:
 						showTutorialHTML(talker, "tutorial-human-fighter-007.htm");
 						qs.addRadar(-56736, -113680, -672);
 						break;
-					case dwarvenFighter:
+					case DWARVEN_FIGHTER:
 						showTutorialHTML(talker, "tutorial-human-fighter-007.htm");
 						qs.addRadar(108567, -173994, -406);
 						break;
-					case maleSoldier:
-					case femaleSoldier:
+					case MALE_SOLDIER:
+					case FEMALE_SOLDIER:
 						showTutorialHTML(talker, "tutorial-human-fighter-007.htm");
 						qs.addRadar(-125872, 38016, 1251);
 						break;
@@ -1386,29 +1386,29 @@ public class Q00255_Tutorial extends Quest
 			case 2:
 				switch (talker.getClassId())
 				{
-					case fighter:
+					case HUMAN_FIGHTER:
 						showTutorialHTML(talker, "tutorial-human-fighter-008.htm");
 						break;
-					case mage:
+					case HUMAN_MYSTIC:
 						showTutorialHTML(talker, "tutorial-human-mage-008.htm");
 						break;
-					case elvenFighter:
-					case elvenMage:
+					case ELVEN_FIGHTER:
+					case ELVEN_MYSTIC:
 						showTutorialHTML(talker, "tutorial-elf-008.htm");
 						break;
-					case darkFighter:
-					case darkMage:
+					case DARK_FIGHTER:
+					case DARK_MYSTIC:
 						showTutorialHTML(talker, "tutorial-delf-008.htm");
 						break;
-					case orcFighter:
-					case orcMage:
+					case ORC_FIGHTER:
+					case ORC_MYSTIC:
 						showTutorialHTML(talker, "tutorial-orc-008.htm");
 						break;
-					case dwarvenFighter:
+					case DWARVEN_FIGHTER:
 						showTutorialHTML(talker, "tutorial-dwarven-fighter-008.htm");
 						break;
-					case maleSoldier:
-					case femaleSoldier:
+					case MALE_SOLDIER:
+					case FEMALE_SOLDIER:
 						showTutorialHTML(talker, "tutorial-kamael-008.htm");
 						break;
 				}
@@ -1425,29 +1425,29 @@ public class Q00255_Tutorial extends Quest
 			case 5:
 				switch (talker.getClassId())
 				{
-					case fighter:
+					case HUMAN_FIGHTER:
 						qs.addRadar(-71424, 258336, -3109);
 						break;
-					case mage:
+					case HUMAN_MYSTIC:
 						qs.addRadar(-91036, 248044, -3568);
 						break;
-					case elvenFighter:
-					case elvenMage:
+					case ELVEN_FIGHTER:
+					case ELVEN_MYSTIC:
 						qs.addRadar(46112, 41200, -3504);
 						break;
-					case darkFighter:
-					case darkMage:
+					case DARK_FIGHTER:
+					case DARK_MYSTIC:
 						qs.addRadar(28384, 11056, -4233);
 						break;
-					case orcFighter:
-					case orcMage:
+					case ORC_FIGHTER:
+					case ORC_MYSTIC:
 						qs.addRadar(-56736, -113680, -672);
 						break;
-					case dwarvenFighter:
+					case DWARVEN_FIGHTER:
 						qs.addRadar(108567, -173994, -406);
 						break;
-					case maleSoldier:
-					case femaleSoldier:
+					case MALE_SOLDIER:
+					case FEMALE_SOLDIER:
 						qs.addRadar(-125872, 38016, 1251);
 						break;
 				}
@@ -1505,37 +1505,37 @@ public class Q00255_Tutorial extends Quest
 			case 13:
 				switch (talker.getClassId())
 				{
-					case fighter:
+					case HUMAN_FIGHTER:
 						showTutorialHTML(talker, "tutorial-21.htm");
 						break;
-					case mage:
+					case HUMAN_MYSTIC:
 						showTutorialHTML(talker, "tutorial-21a.htm");
 						break;
-					case elvenFighter:
+					case ELVEN_FIGHTER:
 						showTutorialHTML(talker, "tutorial-21b.htm");
 						break;
-					case elvenMage:
+					case ELVEN_MYSTIC:
 						showTutorialHTML(talker, "tutorial-21c.htm");
 						break;
-					case orcFighter:
+					case ORC_FIGHTER:
 						showTutorialHTML(talker, "tutorial-21d.htm");
 						break;
-					case orcMage:
+					case ORC_MYSTIC:
 						showTutorialHTML(talker, "tutorial-21e.htm");
 						break;
-					case dwarvenFighter:
+					case DWARVEN_FIGHTER:
 						showTutorialHTML(talker, "tutorial-21f.htm");
 						break;
-					case darkFighter:
+					case DARK_FIGHTER:
 						showTutorialHTML(talker, "tutorial-21g.htm");
 						break;
-					case darkMage:
+					case DARK_MYSTIC:
 						showTutorialHTML(talker, "tutorial-21h.htm");
 						break;
-					case maleSoldier:
+					case MALE_SOLDIER:
 						showTutorialHTML(talker, "tutorial-21i.htm");
 						break;
-					case femaleSoldier:
+					case FEMALE_SOLDIER:
 						showTutorialHTML(talker, "tutorial-21j.htm");
 						break;
 				}
@@ -1545,11 +1545,11 @@ public class Q00255_Tutorial extends Quest
 				{
 					showTutorialHTML(talker, "tutorial-28.htm");
 				}
-				else if (talker.getClassId() == ClassId.trooper)
+				else if (talker.getClassId() == ClassId.TROOPER)
 				{
 					showTutorialHTML(talker, "tutorial-28a.htm");
 				}
-				else if (talker.getClassId() == ClassId.warder)
+				else if (talker.getClassId() == ClassId.WARDER)
 				{
 					showTutorialHTML(talker, "tutorial-28b.htm");
 				}
@@ -1600,37 +1600,37 @@ public class Q00255_Tutorial extends Quest
 			case 25:
 				switch (talker.getClassId())
 				{
-					case fighter:
+					case HUMAN_FIGHTER:
 						showTutorialHTML(talker, "tutorial-newbie-002a.htm");
 						break;
-					case mage:
+					case HUMAN_MYSTIC:
 						showTutorialHTML(talker, "tutorial-newbie-002b.htm");
 						break;
-					case elvenFighter:
-					case elvenMage:
+					case ELVEN_FIGHTER:
+					case ELVEN_MYSTIC:
 						showTutorialHTML(talker, "tutorial-newbie-002c.htm");
 						break;
-					case darkMage:
+					case DARK_MYSTIC:
 						showTutorialHTML(talker, "tutorial-newbie-002d.htm");
 						break;
-					case darkFighter:
+					case DARK_FIGHTER:
 						showTutorialHTML(talker, "tutorial-newbie-002e.htm");
 						break;
-					case dwarvenFighter:
+					case DWARVEN_FIGHTER:
 						showTutorialHTML(talker, "tutorial-newbie-002g.htm");
 						break;
-					case orcFighter:
-					case orcMage:
+					case ORC_FIGHTER:
+					case ORC_MYSTIC:
 						showTutorialHTML(talker, "tutorial-newbie-002f.htm");
 						break;
-					case maleSoldier:
-					case femaleSoldier:
+					case MALE_SOLDIER:
+					case FEMALE_SOLDIER:
 						showTutorialHTML(talker, "tutorial-newbie-002i.htm");
 						break;
 				}
 				break;
 			case 26:
-				if (!talker.isMageClass() || (talker.getClassId() == ClassId.orcMage))
+				if (!talker.isMageClass() || (talker.getClassId() == ClassId.ORC_MYSTIC))
 				{
 					showTutorialHTML(talker, "tutorial-newbie-004a.htm");
 				}
@@ -1642,9 +1642,9 @@ public class Q00255_Tutorial extends Quest
 			case 27:
 				switch (talker.getClassId())
 				{
-					case fighter:
-					case orcMage:
-					case orcFighter:
+					case HUMAN_FIGHTER:
+					case ORC_MYSTIC:
+					case ORC_FIGHTER:
 						showTutorialHTML(talker, "tutorial-newbie-002h.htm");
 				}
 				break;
@@ -2085,7 +2085,7 @@ public class Q00255_Tutorial extends Quest
 					}
 					if (talker.isMageClass() && (qs.getMemoStateEx(1) <= 3))
 					{
-						if (talker.getClassId() == ClassId.orcMage)
+						if (talker.getClassId() == ClassId.ORC_MYSTIC)
 						{
 							qs.giveItems(SOULSHOT_NO_GRADE_FOR_BEGINNERS, 200);
 							qs.playSound(Voice.TUTORIAL_VOICE_026_1000);
@@ -2128,7 +2128,7 @@ public class Q00255_Tutorial extends Quest
 					}
 					if (talker.isMageClass() && (qs.getQuestItemsCount(SOULSHOT_NO_GRADE_FOR_BEGINNERS) <= 200) && (qs.getQuestItemsCount(SPIRITSHOT_NO_GRADE_FOR_BEGINNERS) <= 100))
 					{
-						if (talker.getClassId() == ClassId.orcMage)
+						if (talker.getClassId() == ClassId.ORC_MYSTIC)
 						{
 							qs.playSound(Voice.TUTORIAL_VOICE_026_1000);
 							qs.giveItems(SOULSHOT_NO_GRADE_FOR_BEGINNERS, 200);
@@ -2175,7 +2175,7 @@ public class Q00255_Tutorial extends Quest
 					}
 					if (talker.isMageClass() && (qs.getQuestItemsCount(SOULSHOT_NO_GRADE_FOR_BEGINNERS) <= 200) && (qs.getQuestItemsCount(SPIRITSHOT_NO_GRADE_FOR_BEGINNERS) <= 100))
 					{
-						if (talker.getClassId() == ClassId.orcMage)
+						if (talker.getClassId() == ClassId.ORC_MYSTIC)
 						{
 							qs.playSound(Voice.TUTORIAL_VOICE_026_1000);
 							qs.giveItems(SOULSHOT_NO_GRADE_FOR_BEGINNERS, 200);
@@ -2364,7 +2364,7 @@ public class Q00255_Tutorial extends Quest
 	{
 		if (qs.getMemoStateEx(1) < 0)
 		{
-			if ((talker.getClassId() == ClassId.fighter) && (talker.getRace() == Race.HUMAN))
+			if ((talker.getClassId() == ClassId.HUMAN_FIGHTER) && (talker.getRace() == Race.HUMAN))
 			{
 				qs.removeRadar(-71424, 258336, -3109);
 				startQuestTimer(npc.getId() + "", 30000, npc, talker);
@@ -2397,7 +2397,7 @@ public class Q00255_Tutorial extends Quest
 			}
 			if (talker.isMageClass() && !qs.hasQuestItems(SOULSHOT_NO_GRADE_FOR_BEGINNERS) && !qs.hasQuestItems(SPIRITSHOT_NO_GRADE_FOR_BEGINNERS))
 			{
-				if (talker.getClassId() == ClassId.orcMage)
+				if (talker.getClassId() == ClassId.ORC_MYSTIC)
 				{
 					qs.playSound(Voice.TUTORIAL_VOICE_026_1000);
 					qs.giveItems(SOULSHOT_NO_GRADE_FOR_BEGINNERS, 200);
@@ -2440,7 +2440,7 @@ public class Q00255_Tutorial extends Quest
 	{
 		if (qs.getMemoStateEx(1) < 0)
 		{
-			if ((talker.getClassId() == ClassId.mage) && (talker.getRace() == Race.HUMAN))
+			if ((talker.getClassId() == ClassId.HUMAN_MYSTIC) && (talker.getRace() == Race.HUMAN))
 			{
 				qs.removeRadar(-91036, 248044, -3568);
 				startQuestTimer(npc.getId() + "", 30000, npc, talker);
@@ -2473,7 +2473,7 @@ public class Q00255_Tutorial extends Quest
 			}
 			if (talker.isMageClass() && !qs.hasQuestItems(SOULSHOT_NO_GRADE_FOR_BEGINNERS) && !qs.hasQuestItems(SPIRITSHOT_NO_GRADE_FOR_BEGINNERS))
 			{
-				if (talker.getClassId() == ClassId.orcMage)
+				if (talker.getClassId() == ClassId.ORC_MYSTIC)
 				{
 					qs.playSound(Voice.TUTORIAL_VOICE_026_1000);
 					qs.giveItems(SOULSHOT_NO_GRADE_FOR_BEGINNERS, 200);
@@ -2575,7 +2575,7 @@ public class Q00255_Tutorial extends Quest
 			}
 			if (talker.isMageClass() && !qs.hasQuestItems(SOULSHOT_NO_GRADE_FOR_BEGINNERS) && !qs.hasQuestItems(SPIRITSHOT_NO_GRADE_FOR_BEGINNERS))
 			{
-				if (talker.getClassId() == ClassId.orcMage)
+				if (talker.getClassId() == ClassId.ORC_MYSTIC)
 				{
 					
 					qs.playSound(Voice.TUTORIAL_VOICE_026_1000);
@@ -2663,7 +2663,7 @@ public class Q00255_Tutorial extends Quest
 			}
 			if (talker.isMageClass() && !qs.hasQuestItems(SOULSHOT_NO_GRADE_FOR_BEGINNERS) && !qs.hasQuestItems(SPIRITSHOT_NO_GRADE_FOR_BEGINNERS))
 			{
-				if (talker.getClassId() == ClassId.orcMage)
+				if (talker.getClassId() == ClassId.ORC_MYSTIC)
 				{
 					qs.playSound(Voice.TUTORIAL_VOICE_026_1000);
 					qs.giveItems(SOULSHOT_NO_GRADE_FOR_BEGINNERS, 200);
@@ -2753,7 +2753,7 @@ public class Q00255_Tutorial extends Quest
 			}
 			if (talker.isMageClass() && !qs.hasQuestItems(SOULSHOT_NO_GRADE_FOR_BEGINNERS) && !qs.hasQuestItems(SPIRITSHOT_NO_GRADE_FOR_BEGINNERS))
 			{
-				if (talker.getClassId() == ClassId.orcMage)
+				if (talker.getClassId() == ClassId.ORC_MYSTIC)
 				{
 					qs.playSound(Voice.TUTORIAL_VOICE_026_1000);
 					qs.giveItems(SOULSHOT_NO_GRADE_FOR_BEGINNERS, 200);

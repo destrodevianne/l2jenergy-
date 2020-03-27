@@ -18,10 +18,10 @@
  */
 package quests.Q00231_TestOfTheMaestro;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
@@ -249,7 +249,7 @@ public final class Q00231_TestOfTheMaestro extends Quest
 		{
 			if (npc.getId() == IRON_GATES_LOCKIRIN)
 			{
-				if (player.getClassId() == ClassId.artisan)
+				if (player.getClassId() == ClassId.ARTISAN)
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{

@@ -42,9 +42,6 @@ public class RecipeData implements IXmlReader
 {
 	private final Map<Integer, L2RecipeList> _recipes = new HashMap<>();
 	
-	/**
-	 * Instantiates a new recipe data.
-	 */
 	protected RecipeData()
 	{
 		load();
@@ -54,7 +51,7 @@ public class RecipeData implements IXmlReader
 	public void load()
 	{
 		_recipes.clear();
-		parseDatapackFile("data/recipes.xml");
+		parseDatapackFile("data/xml/recipes.xml");
 		LOG.info("{}: Loaded {} recipes.", getClass().getSimpleName(), _recipes.size());
 	}
 	
@@ -263,20 +260,13 @@ public class RecipeData implements IXmlReader
 		return recipeList;
 	}
 	
-	/**
-	 * Gets the single instance of RecipeData.
-	 * @return single instance of RecipeData
-	 */
 	public static RecipeData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
-	/**
-	 * The Class SingletonHolder.
-	 */
 	private static class SingletonHolder
 	{
-		protected static final RecipeData _instance = new RecipeData();
+		protected static final RecipeData INSTANCE = new RecipeData();
 	}
 }

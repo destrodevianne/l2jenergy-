@@ -635,11 +635,11 @@ public class GeoData
 	
 	public static GeoData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final GeoData _instance = new GeoData();
+		protected static final GeoData INSTANCE = new GeoData();
 	}
 }

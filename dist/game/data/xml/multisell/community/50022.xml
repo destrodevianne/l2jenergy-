@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../xsd/multisell.xsd">
+    <npcs>
+		<npc>-1</npc> <!-- CB -->
+	</npcs>
+    <!-- B Grade: Earring, Ring, Necklace -->
+	<item>
+		<ingredient count="616000" id="57"/> <!-- Adena -->
+		<production count="1" id="901"/> <!-- Ring of Holy Spirit -->
+	</item> 
+	<item>
+		<ingredient count="924000" id="57"/> <!-- Adena -->
+		<production count="1" id="870"/> <!-- Earring of Holy Spirit -->
+	</item> 
+	<item>
+		<ingredient count="1230000" id="57"/> <!-- Adena -->
+		<production count="1" id="932"/> <!-- Necklace of Holy Spirit -->
+	</item> 
+	<item>
+		<ingredient count="404000" id="57"/> <!-- Adena -->
+		<production count="1" id="900"/> <!-- Ring of Grace -->
+	</item> 
+	<item>
+		<ingredient count="606000" id="57"/> <!-- Adena -->
+		<production count="1" id="869"/> <!-- Earring of Grace -->
+	</item> 
+	<item>
+		<ingredient count="808000" id="57"/> <!-- Adena -->
+		<production count="1" id="931"/> <!-- Necklace of Grace -->
+	</item> 
+	<item>
+		<ingredient count="616000" id="57"/> <!-- Adena -->
+		<production count="1" id="898"/> <!-- Elemental Ring -->
+	</item> 
+	<item>
+		<ingredient count="924000" id="57"/> <!-- Adena -->
+		<production count="1" id="867"/> <!-- Elemental Earring -->
+	</item> 
+	<item>
+		<ingredient count="1230000" id="57"/> <!-- Adena -->
+		<production count="1" id="929"/> <!-- Elemental Necklace -->
+	</item> 
+	<item>
+		<ingredient count="616000" id="57"/> <!-- Adena -->
+		<production count="1" id="897"/> <!-- Otherworldly Ring -->
+	</item> 
+	<item>
+		<ingredient count="924000" id="57"/> <!-- Adena -->
+		<production count="1" id="866"/> <!-- Otherworldly Earring -->
+	</item> 
+	<item>
+		<ingredient count="1230000" id="57"/> <!-- Adena -->
+		<production count="1" id="928"/> <!-- Otherworldly Necklace -->
+	</item> 
+	<item>
+		<ingredient count="404000" id="57"/> <!-- Adena -->
+		<production count="1" id="896"/> <!-- Ring of Summoning -->
+	</item> 
+	<item>
+		<ingredient count="606000" id="57"/> <!-- Adena -->
+		<production count="1" id="865"/> <!-- Earring of Summoning -->
+	</item> 
+	<item>
+		<ingredient count="808000" id="57"/> <!-- Adena -->
+		<production count="1" id="927"/> <!-- Necklace of Summoning -->
+	</item> 
+	<item>
+		<ingredient count="310600" id="57"/> <!-- Adena -->
+		<production count="1" id="887"/> <!-- Adamantite Ring -->
+	</item> 
+	<item>
+		<ingredient count="465900" id="57"/> <!-- Adena -->
+		<production count="1" id="856"/> <!-- Adamantite Earring -->
+	</item> 
+	<item>
+		<ingredient count="621200" id="57"/> <!-- Adena -->
+		<production count="1" id="918"/> <!-- Adamantite Necklace -->
+	</item> 
+	<item>
+		<ingredient count="404000" id="57"/> <!-- Adena -->
+		<production count="1" id="117"/> <!-- Ring of Mana -->
+	</item> 
+	<item>
+		<ingredient count="606000" id="57"/> <!-- Adena -->
+		<production count="1" id="859"/> <!-- Earring of Mana -->
+	</item> 
+	<item>
+		<ingredient count="808000" id="57"/> <!-- Adena -->
+		<production count="1" id="921"/> <!-- Necklace of Mana -->
+	</item> 
+	<item>
+		<ingredient count="616000" id="57"/> <!-- Adena -->
+		<production count="1" id="891"/> <!-- Sage's Ring -->
+	</item> 
+	<item>
+		<ingredient count="924000" id="57"/> <!-- Adena -->
+		<production count="1" id="860"/> <!-- Sage's Earring -->
+	</item> 
+	<item>
+		<ingredient count="1230000" id="57"/> <!-- Adena -->
+		<production count="1" id="922"/> <!-- Sage's Necklace -->
+	</item> 
+	<item>
+		<ingredient count="616000" id="57"/> <!-- Adena -->
+		<production count="1" id="892"/> <!-- Paradia Ring -->
+	</item> 
+	<item>
+		<ingredient count="924000" id="57"/> <!-- Adena -->
+		<production count="1" id="861"/> <!-- Paradia Earring -->
+	</item> 
+	<item>
+		<ingredient count="1230000" id="57"/> <!-- Adena -->
+		<production count="1" id="923"/> <!-- Paradia Necklace -->
+	</item> 
+	<item>
+		<ingredient count="404000" id="57"/> <!-- Adena -->
+		<production count="1" id="894"/> <!-- Ring of Solar Eclipse -->
+	</item> 
+	<item>
+		<ingredient count="606000" id="57"/> <!-- Adena -->
+		<production count="1" id="863"/> <!-- Earring of Solar Eclipse -->
+	</item> 
+	<item>
+		<ingredient count="808000" id="57"/> <!-- Adena -->
+		<production count="1" id="925"/> <!-- Necklace of Solar Eclipse -->
+	</item> 
+	<item>
+		<ingredient count="474000" id="57"/> <!-- Adena -->
+		<production count="1" id="895"/> <!-- Ring of Black Ore -->
+	</item> 
+	<item>
+		<ingredient count="711000" id="57"/> <!-- Adena -->
+		<production count="1" id="864"/> <!-- Earring of Black Ore -->
+	</item> 
+	<item>
+		<ingredient count="948000" id="57"/> <!-- Adena -->
+		<production count="1" id="926"/> <!-- Necklace of Black Ore -->
+	</item> 
+	<item>
+		<ingredient count="310600" id="57"/> <!-- Adena -->
+		<production count="1" id="905"/> <!-- Ring of Blessing -->
+	</item> 
+	<item>
+		<ingredient count="465900" id="57"/> <!-- Adena -->
+		<production count="1" id="874"/> <!-- Earring of Blessing -->
+	</item> 
+	<item>
+		<ingredient count="621200" id="57"/> <!-- Adena -->
+		<production count="1" id="936"/> <!-- Necklace of Blessing -->
+	</item> 
+	<item>
+		<ingredient count="404000" id="57"/> <!-- Adena -->
+		<production count="1" id="904"/> <!-- Ring of Aid -->
+	</item> 
+	<item>
+		<ingredient count="606000" id="57"/> <!-- Adena -->
+		<production count="1" id="873"/> <!-- Earring of Aid -->
+	</item> 
+	<item>
+		<ingredient count="808000" id="57"/> <!-- Adena -->
+		<production count="1" id="935"/> <!-- Necklace of Aid -->
+	</item> 
+</list>

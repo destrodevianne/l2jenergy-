@@ -27,6 +27,7 @@ import java.util.List;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.configuration.config.events.OlympiadConfig;
+import com.l2jserver.gameserver.enums.OlympiadType;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Character;
@@ -778,7 +779,7 @@ public abstract class OlympiadGameNormal extends AbstractOlympiadGame
 		_damageP2 = 0;
 	}
 	
-	protected static final void saveResults(Participant one, Participant two, int winner, long startTime, long fightTime, CompetitionType type)
+	protected static final void saveResults(Participant one, Participant two, int winner, long startTime, long fightTime, OlympiadType type)
 	{
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
 			PreparedStatement ps = con.prepareStatement("INSERT INTO olympiad_fights (charOneId, charTwoId, charOneClass, charTwoClass, winner, start, time, classed) values(?,?,?,?,?,?,?,?)"))
@@ -790,7 +791,7 @@ public abstract class OlympiadGameNormal extends AbstractOlympiadGame
 			ps.setInt(5, winner);
 			ps.setLong(6, startTime);
 			ps.setLong(7, fightTime);
-			ps.setInt(8, (type == CompetitionType.CLASSED ? 1 : 0));
+			ps.setInt(8, (type == OlympiadType.CLASSED ? 1 : 0));
 			ps.execute();
 		}
 		catch (SQLException e)

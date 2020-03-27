@@ -24,11 +24,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.l2jserver.gameserver.GameServer;
+import com.l2jserver.gameserver.enums.TeleportWhereType;
 import com.l2jserver.gameserver.instancemanager.GrandBossManager;
 import com.l2jserver.gameserver.instancemanager.ZoneManager;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.PcCondOverride;
-import com.l2jserver.gameserver.model.TeleportWhereType;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -276,9 +276,9 @@ public class L2BossZone extends L2ZoneType
 					// if inside zone isnt any player, force all boss instance return to its spawn points
 					if ((count == 0) && !getSettings().getRaidList().isEmpty())
 					{
-						for (int i = 0; i < getSettings().getRaidList().size(); i++)
+						for (L2Character element : getSettings().getRaidList())
 						{
-							L2Attackable raid = (L2Attackable) getSettings().getRaidList().get(i);
+							L2Attackable raid = (L2Attackable) element;
 							if ((raid == null) || (raid.getSpawn() == null) || raid.isDead())
 							{
 								continue;

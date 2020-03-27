@@ -21,7 +21,7 @@ package com.l2jserver.gameserver.handler;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.l2jserver.gameserver.model.punishment.PunishmentType;
+import com.l2jserver.gameserver.enums.PunishmentType;
 
 /**
  * This class manages handlers of punishments.
@@ -62,11 +62,11 @@ public class PunishmentHandler implements IHandler<IPunishmentHandler, Punishmen
 	
 	public static PunishmentHandler getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final PunishmentHandler _instance = new PunishmentHandler();
+		protected static final PunishmentHandler INSTANCE = new PunishmentHandler();
 	}
 }

@@ -20,6 +20,7 @@ package com.l2jserver.gameserver.model.announce;
 
 import java.util.Date;
 
+import com.l2jserver.gameserver.enums.AnnouncementType;
 import com.l2jserver.gameserver.idfactory.IdFactory;
 import com.l2jserver.gameserver.script.DateRange;
 

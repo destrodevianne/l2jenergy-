@@ -18,11 +18,11 @@
  */
 package quests.Q00551_OlympiadStarter;
 
+import com.l2jserver.gameserver.enums.OlympiadType;
 import com.l2jserver.gameserver.enums.QuestType;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.olympiad.CompetitionType;
 import com.l2jserver.gameserver.model.olympiad.Participant;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
@@ -97,7 +97,7 @@ public class Q00551_OlympiadStarter extends Quest
 	}
 	
 	@Override
-	public void onOlympiadLose(L2PcInstance loser, CompetitionType type)
+	public void onOlympiadLose(L2PcInstance loser, OlympiadType type)
 	{
 		if (loser != null)
 		{
@@ -131,7 +131,7 @@ public class Q00551_OlympiadStarter extends Quest
 	}
 	
 	@Override
-	public void onOlympiadMatchFinish(Participant winner, Participant looser, CompetitionType type)
+	public void onOlympiadMatchFinish(Participant winner, Participant looser, OlympiadType type)
 	{
 		if (winner != null)
 		{

@@ -18,8 +18,8 @@
  */
 package com.l2jserver.gameserver.model.events.impl.item;
 
+import com.l2jserver.gameserver.enums.events.EventType;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.events.EventType;
 import com.l2jserver.gameserver.model.events.impl.IBaseEvent;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 
@@ -59,5 +59,4 @@ public class OnItemBypassEvent implements IBaseEvent
 	{
 		return EventType.ON_ITEM_BYPASS_EVENT;
 	}
-	
 }

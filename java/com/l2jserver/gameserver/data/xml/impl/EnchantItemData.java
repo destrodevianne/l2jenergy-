@@ -40,9 +40,6 @@ public class EnchantItemData implements IXmlReader
 	private final Map<Integer, EnchantScroll> _scrolls = new HashMap<>();
 	private final Map<Integer, EnchantSupportItem> _supports = new HashMap<>();
 	
-	/**
-	 * Instantiates a new enchant item data.
-	 */
 	public EnchantItemData()
 	{
 		load();
@@ -53,7 +50,7 @@ public class EnchantItemData implements IXmlReader
 	{
 		_scrolls.clear();
 		_supports.clear();
-		parseDatapackFile("data/enchantItemData.xml");
+		parseDatapackFile("data/xml/enchantItemData.xml");
 		LOG.info("{}: Loaded {} Enchant Scrolls.", getClass().getSimpleName(), _scrolls.size());
 		LOG.info("{}: Loaded {} Support Items.", getClass().getSimpleName(), _supports.size());
 	}
@@ -156,11 +153,11 @@ public class EnchantItemData implements IXmlReader
 	 */
 	public static final EnchantItemData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final EnchantItemData _instance = new EnchantItemData();
+		protected static final EnchantItemData INSTANCE = new EnchantItemData();
 	}
 }

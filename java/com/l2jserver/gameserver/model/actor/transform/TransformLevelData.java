@@ -21,8 +21,8 @@ package com.l2jserver.gameserver.model.actor.transform;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.l2jserver.gameserver.enums.actors.Stats;
 import com.l2jserver.gameserver.model.StatsSet;
-import com.l2jserver.gameserver.model.stats.Stats;
 
 /**
  * @author UnAfraid

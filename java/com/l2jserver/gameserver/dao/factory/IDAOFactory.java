@@ -38,6 +38,7 @@ import com.l2jserver.gameserver.dao.RecipeShopListDAO;
 import com.l2jserver.gameserver.dao.RecommendationBonusDAO;
 import com.l2jserver.gameserver.dao.ServitorSkillSaveDAO;
 import com.l2jserver.gameserver.dao.ShortcutDAO;
+import com.l2jserver.gameserver.dao.SiegeDAO;
 import com.l2jserver.gameserver.dao.SkillDAO;
 import com.l2jserver.gameserver.dao.SubclassDAO;
 import com.l2jserver.gameserver.dao.TeleportBookmarkDAO;
@@ -87,6 +88,8 @@ public interface IDAOFactory
 	ServitorSkillSaveDAO getServitorSkillSaveDAO();
 	
 	ShortcutDAO getShortcutDAO();
+	
+	SiegeDAO getSiegeDAO();
 	
 	SkillDAO getSkillDAO();
 	

@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../xsd/multisell.xsd">
+    <npcs>
+		<npc>-1</npc> <!-- CB -->
+	</npcs>
+    <!-- S84 Grade Weapon -->
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14118" /><!-- Vesper slasher [Haste] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14119"/> <!-- Vesper slasher [Health] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14120"/>  <!-- Vesper slasher [focus] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14121"/>  <!-- Vesper slasher [haste] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14122"/>  <!-- Vesper slasher [Health] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14123"/>  <!-- Vesper slasher [Focus] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14124"/> <!-- Vesper Buster [Mana Up]-->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14125"/> <!-- Vesper Buster [Acumen] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14126"/>  <!-- Vesper Buster [Magic Hold] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14127"/> <!-- Vesper Shaper [Focus] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14128"/>  <!-- Vesper Shaper [HP Drain] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14129"/> <!-- Vesper Shaper [Haste] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14130"/> <!-- Vesper Fighter [Focus] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14131"/> <!-- Vesper Fighter [Health] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14132"/> <!-- Vesper Fighter [Crt. Stun] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14133"/> <!-- Vesper Stormer [Health] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14134"/> <!-- Vesper Stormer [Guidance] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14135"/> <!-- Vesper Slasher [Haste] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14136"/> <!-- Vesper Avanger [HP Drain] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14137"/> <!-- Vesper Avenger [HP Regeneration] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14138"/> <!-- Vesper Avenger [HP Regeneration] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14139"/> <!-- Vesper Retributer [HP Regeneration] ] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14140"/> <!-- Vesper Retributer [Health] ] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14141"/> <!-- Vesper Retributer [HP Drain] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14142"/> <!-- Vesper Caster [Acumen]  -->
+    </item>   
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14143"/> <!-- Vesper Caster [MP Regeneration]  -->
+    </item>   
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14144"/> <!-- Vesper Caster [Mana Up]   -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14145"/> <!-- Vesper Singer [Empower] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14146"/> <!-- Vesper Singer [Magic Hold] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14147"/> <!-- Vesper Singer [MP Regeneration] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14148"/> <!-- Vesper Thrower [Cheap Shot] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14149"/> <!-- Vesper Thrower [Focus] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14150"/> <!-- Vesper Thrower [Focus] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14151"/> <!-- Vesper Pincer [Haste] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14152"/> <!-- Vesper Pincer [health] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14153"/> <!-- Vesper Pincer [Focus] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14154"/> <!-- Vesper Sheutjeh [Cheap Shot] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14155"/> <!-- Vesper Sheutjeh [Focus] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14156"/>  <!-- Vesper Sheutjeh [Critical Slow] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14157"/> <!-- Vesper Nagan [Haste] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14158"/> <!-- Vesper Nagan [Health] -->
+    </item> 
+    <item>
+        <ingredient count="143356000" id="57"/> <!-- Adena --> 
+        <production count="1" id="14159"/> <!-- Vesper Nagan [Focus] -->
+    </item>
+    <!-- Freya Weapons -->
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15829"/> <!-- Periel Sword [Health] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15830"/> <!-- Periel Sword [Focus] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15831"/> <!-- Periel Sword [Haste] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15832"/> <!-- Skull Edge [HP Drain] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15833"/> <!-- Skull Edge [Haste] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15834"/> <!-- Skull Edge [Crt. Damage] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15835"/> <!-- Vigwik Axe [Health] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15836"/> <!-- Vigwik Axe [HP Regeneration] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15837"/> <!-- Vigwik Axe [HP Drain] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15838"/> <!-- Devilish Maul [Health] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15839"/> <!-- Devilish Maul [HP Drain] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15840"/> <!-- Devilish Maul [HP Regeneration] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15841"/> <!-- Feather Eye Blade [Health] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15842"/> <!-- Feather Eye Blade [Focus] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15843"/> <!-- Feather Eye Blade [Haste] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15844"/> <!-- Octo Claw [Health] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15845"/> <!-- Octo Claw [Crt. Stun] -->
+	</item>
+	<item>
+  	    <ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15846"/> <!-- Octo Claw [Focus] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15847"/> <!-- Doubletop Spear [Guidance] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15848"/> <!-- Doubletop Spear [Haste] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15849"/> <!-- Doubletop Spear [Health] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15850"/> <!-- Rising Star [MP Regeneration] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15851"/> <!-- Rising Star [Mana Up] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15852"/> <!-- Rising Star [Acumen] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15853"/> <!-- Black Visage [MP Regeneration] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15854"/> <!-- Black Visage [Magic Hold] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15855"/> <!-- Black Visage [Empower] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15856"/> <!-- Veniplant Sword [Acumen] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15857"/> <!-- Veniplant Sword [Magic Hold] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15858"/> <!-- Veniplant Sword [Mana Up] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15859"/> <!-- Skull Carnium Bow [Focus] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15860"/> <!-- Skull Carnium Bow [Crt. Slow] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15861"/> <!-- Skull Carnium Bow [Cheap Shot] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15862"/> <!-- Gemtail Rapier [Health] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15863"/> <!-- Gemtail Rapier [Focus] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15864"/> <!-- Gemtail Rapier [Haste] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15865"/> <!-- Finale Blade [Health] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15866"/> <!-- Finale Blade [Focus] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15867"/> <!-- Finale Blade [Haste] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15868"/> <!-- Dominion Crossbow [Focus] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15869"/> <!-- Dominion Crossbow [Crt. Slow] -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15870"/> <!-- Dominion Crossbow [Cheap Shot] -->
+	</item>
+    <item>
+        <ingredient count="250000000" id="57"/> <!-- Adena --> 
+        <production count="1" id="13884"/> <!-- Vesper Dual Daggers -->
+    </item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="16154" /><!-- Periel Dual Sword -->
+	</item>
+  	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="16152"/> <!-- Skull Edge Dual Daggers -->
+	</item>
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15871"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15872"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15873"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15874"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15875"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15876"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15877"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15878"  />
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15879"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15880"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15881"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15882"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15883"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15884"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15885"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15886"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15887"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15888"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15889"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15890"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15891"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15892"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15893"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15894"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15895"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15896"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15897"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15898"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15899"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15900"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15901"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15902"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15903"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15904"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15905"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15906"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15907"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15908"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15909"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15910"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15911"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="15912"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="16158"/>
+	</item> 
+	<item>
+  		<ingredient count="237930000" id="57"/> <!-- Adena --> 
+		<production count="1" id="16156"/>
+	</item>
+</list>

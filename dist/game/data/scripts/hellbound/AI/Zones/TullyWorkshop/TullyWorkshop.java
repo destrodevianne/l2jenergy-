@@ -31,8 +31,9 @@ import java.util.concurrent.ScheduledFuture;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
+import com.l2jserver.gameserver.enums.RaidStatusType;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.instancemanager.RaidBossSpawnManager;
-import com.l2jserver.gameserver.instancemanager.RaidBossSpawnManager.StatusEnum;
 import com.l2jserver.gameserver.instancemanager.ZoneManager;
 import com.l2jserver.gameserver.model.L2Party;
 import com.l2jserver.gameserver.model.L2Spawn;
@@ -41,7 +42,6 @@ import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2DoorInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2MonsterInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.model.zone.L2ZoneType;
@@ -550,7 +550,7 @@ public final class TullyWorkshop extends AbstractNpcAI
 		
 		if (TULLY_DOORLIST.containsKey(npcId))
 		{
-			if (classId.equalsOrChildOf(ClassId.maestro))
+			if (classId.equalsOrChildOf(ClassId.MAESTRO))
 			{
 				return "doorman-01c.htm";
 			}
@@ -564,7 +564,7 @@ public final class TullyWorkshop extends AbstractNpcAI
 			}
 			else if (!brokenContraptions.contains(npc.getObjectId()))
 			{
-				if (classId.equalsOrChildOf(ClassId.maestro))
+				if (classId.equalsOrChildOf(ClassId.MAESTRO))
 				{
 					return "32371-01a.htm";
 				}
@@ -881,12 +881,12 @@ public final class TullyWorkshop extends AbstractNpcAI
 			if (event.equalsIgnoreCase("touch_device"))
 			{
 				final int i0 = talkedContraptions.contains(npc.getObjectId()) ? 0 : 1;
-				final int i1 = player.getClassId().equalsOrChildOf(ClassId.maestro) ? 6 : 3;
+				final int i1 = player.getClassId().equalsOrChildOf(ClassId.MAESTRO) ? 6 : 3;
 				
 				if (getRandom(1000) < ((i1 - i0) * 100))
 				{
 					talkedContraptions.add(npc.getObjectId());
-					htmltext = player.getClassId().equalsOrChildOf(ClassId.maestro) ? "32371-03a.htm" : "32371-03.htm";
+					htmltext = player.getClassId().equalsOrChildOf(ClassId.MAESTRO) ? "32371-03a.htm" : "32371-03.htm";
 				}
 				else
 				{
@@ -1338,7 +1338,7 @@ public final class TullyWorkshop extends AbstractNpcAI
 				{
 					nextServantIdx = 0;
 					initDeathCounter(roomData[0]);
-					if (RaidBossSpawnManager.getInstance().getRaidBossStatusId(DARION) == StatusEnum.ALIVE)
+					if (RaidBossSpawnManager.getInstance().getRaidBossStatusId(DARION) == RaidStatusType.ALIVE)
 					{
 						allowAgentSpawn = false;
 						allowServantSpawn = false;
@@ -1426,7 +1426,7 @@ public final class TullyWorkshop extends AbstractNpcAI
 		}
 		else if (npc.getId() == PILLAR)
 		{
-			npc.setIsInvul(RaidBossSpawnManager.getInstance().getRaidBossStatusId(DARION) == StatusEnum.ALIVE);
+			npc.setIsInvul(RaidBossSpawnManager.getInstance().getRaidBossStatusId(DARION) == RaidStatusType.ALIVE);
 		}
 		return super.onSpawn(npc);
 	}
@@ -1547,7 +1547,7 @@ public final class TullyWorkshop extends AbstractNpcAI
 	private void doOnLoadSpawn()
 	{
 		// Ghost of Tully and Spooky Tombstone should be spawned, if Tully isn't alive
-		if (RaidBossSpawnManager.getInstance().getRaidBossStatusId(TULLY) != StatusEnum.ALIVE)
+		if (RaidBossSpawnManager.getInstance().getRaidBossStatusId(TULLY) != RaidStatusType.ALIVE)
 		{
 			for (int i = 12; i <= 13; i++)
 			{
@@ -1564,7 +1564,7 @@ public final class TullyWorkshop extends AbstractNpcAI
 		pillarSpawn.startRespawn();
 		
 		// Doors related
-		if (RaidBossSpawnManager.getInstance().getRaidBossStatusId(DARION) != StatusEnum.ALIVE)
+		if (RaidBossSpawnManager.getInstance().getRaidBossStatusId(DARION) != RaidStatusType.ALIVE)
 		{
 			handleDoorsOnDeath();
 		}

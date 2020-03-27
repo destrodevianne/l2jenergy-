@@ -57,10 +57,10 @@ public final class BuyListData implements IXmlReader
 	public synchronized void load()
 	{
 		_buyLists.clear();
-		parseDatapackDirectory("data/buylists", false);
+		parseDatapackDirectory("data/xml/buylists", false);
 		if (GeneralConfig.CUSTOM_BUYLIST_LOAD)
 		{
-			parseDatapackDirectory("data/buylists/custom", false);
+			parseDatapackDirectory("data/xml/buylists/custom", false);
 		}
 		
 		LOG.info("{}: Loaded {} BuyLists.", getClass().getSimpleName(), _buyLists.size());
@@ -183,11 +183,11 @@ public final class BuyListData implements IXmlReader
 	
 	public static BuyListData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final BuyListData _instance = new BuyListData();
+		protected static final BuyListData INSTANCE = new BuyListData();
 	}
 }

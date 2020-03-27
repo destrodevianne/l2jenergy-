@@ -33,11 +33,6 @@ public class PetNameTable
 {
 	private static Logger LOG = LoggerFactory.getLogger(PetNameTable.class);
 	
-	public static PetNameTable getInstance()
-	{
-		return SingletonHolder._instance;
-	}
-	
 	public boolean doesPetNameExist(String name)
 	{
 		try (Connection con = ConnectionFactory.getInstance().getConnection();
@@ -61,8 +56,13 @@ public class PetNameTable
 		return ServerConfig.PET_NAME_TEMPLATE.matcher(name).matches();
 	}
 	
+	public static PetNameTable getInstance()
+	{
+		return SingletonHolder.INSTANCE;
+	}
+	
 	private static class SingletonHolder
 	{
-		protected static final PetNameTable _instance = new PetNameTable();
+		protected static final PetNameTable INSTANCE = new PetNameTable();
 	}
 }

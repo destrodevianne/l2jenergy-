@@ -19,11 +19,11 @@
 package handlers.punishmenthandlers;
 
 import com.l2jserver.gameserver.LoginServerThread;
+import com.l2jserver.gameserver.enums.PunishmentType;
 import com.l2jserver.gameserver.handler.IPunishmentHandler;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.punishment.PunishmentTask;
-import com.l2jserver.gameserver.model.punishment.PunishmentType;
 import com.l2jserver.gameserver.network.L2GameClient;
 
 /**

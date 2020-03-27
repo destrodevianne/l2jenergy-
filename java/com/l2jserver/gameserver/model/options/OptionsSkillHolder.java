@@ -18,6 +18,7 @@
  */
 package com.l2jserver.gameserver.model.options;
 
+import com.l2jserver.gameserver.enums.skills.OptionsSkillType;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 
 /**

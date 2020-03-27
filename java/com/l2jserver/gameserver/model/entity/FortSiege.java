@@ -32,8 +32,11 @@ import java.util.logging.Logger;
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.configuration.config.FortSiegeConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.enums.FortTeleportWhoType;
+import com.l2jserver.gameserver.enums.SiegeClanType;
+import com.l2jserver.gameserver.enums.TeleportWhereType;
 import com.l2jserver.gameserver.instancemanager.FortManager;
 import com.l2jserver.gameserver.instancemanager.FortSiegeGuardManager;
 import com.l2jserver.gameserver.instancemanager.FortSiegeManager;
@@ -43,10 +46,8 @@ import com.l2jserver.gameserver.model.FortSiegeSpawn;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2SiegeClan;
-import com.l2jserver.gameserver.model.L2SiegeClan.SiegeClanType;
 import com.l2jserver.gameserver.model.L2Spawn;
 import com.l2jserver.gameserver.model.PcCondOverride;
-import com.l2jserver.gameserver.model.TeleportWhereType;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2DoorInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2FortCommanderInstance;
@@ -277,7 +278,7 @@ public class FortSiege implements Siegable
 			getSiegeGuardManager().unspawnSiegeGuard(); // Remove all spawned siege guard from this fort
 			getFort().resetDoors(); // Respawn door to fort
 			
-			ThreadPoolManager.getInstance().scheduleGeneral(new ScheduleSuspiciousMerchantSpawn(), FortSiegeManager.getInstance().getSuspiciousMerchantRespawnDelay() * 60 * 1000L); // Prepare 3hr task for suspicious merchant respawn
+			ThreadPoolManager.getInstance().scheduleGeneral(new ScheduleSuspiciousMerchantSpawn(), FortSiegeConfig.SUSPICIOUS_MERCHANT_RESPAWN_DELAY * 60 * 1000L); // Prepare 3hr task for suspicious merchant respawn
 			setSiegeDateTime(true); // store suspicious merchant spawn in DB
 			
 			if (_siegeEnd != null)
@@ -327,7 +328,7 @@ public class FortSiege implements Siegable
 			
 			loadSiegeClan(); // Load siege clan from db
 			updatePlayerSiegeStateFlags(false);
-			teleportPlayer(FortTeleportWhoType.Attacker, TeleportWhereType.TOWN); // Teleport to the closest town
+			teleportPlayer(FortTeleportWhoType.ATTACKER, TeleportWhereType.TOWN); // Teleport to the closest town
 			
 			getFort().despawnNpcCommanders(); // Despawn NPC commanders
 			spawnCommanders(); // Spawn commanders
@@ -339,7 +340,7 @@ public class FortSiege implements Siegable
 			getFort().getZone().updateZoneStatusForCharactersInside();
 			
 			// Schedule a task to prepare auto siege end
-			_siegeEnd = ThreadPoolManager.getInstance().scheduleGeneral(new ScheduleEndSiegeTask(), FortSiegeManager.getInstance().getSiegeLength() * 60 * 1000L); // Prepare auto end task
+			_siegeEnd = ThreadPoolManager.getInstance().scheduleGeneral(new ScheduleEndSiegeTask(), FortSiegeConfig.SIEGE_LENGTH * 60 * 1000L); // Prepare auto end task
 			
 			final SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.THE_FORTRESS_BATTLE_S1_HAS_BEGUN);
 			sm.addCastleId(getFort().getResidenceId());
@@ -658,7 +659,7 @@ public class FortSiege implements Siegable
 				else if (_siegeRestore == null)
 				{
 					getFort().getSiege().announceToPlayer(SystemMessage.getSystemMessage(SystemMessageId.SEIZED_BARRACKS));
-					_siegeRestore = ThreadPoolManager.getInstance().scheduleGeneral(new ScheduleSiegeRestore(), FortSiegeManager.getInstance().getCountDownLength() * 60 * 1000L);
+					_siegeRestore = ThreadPoolManager.getInstance().scheduleGeneral(new ScheduleSiegeRestore(), FortSiegeConfig.COUNT_DOWN_LENGTH * 60 * 1000L);
 				}
 				else
 				{
@@ -903,10 +904,10 @@ public class FortSiege implements Siegable
 		List<L2PcInstance> players;
 		switch (teleportWho)
 		{
-			case Owner:
+			case OWNER:
 				players = getOwnersInZone();
 				break;
-			case Attacker:
+			case ATTACKER:
 				players = getAttackersInZone();
 				break;
 			default:
@@ -919,7 +920,6 @@ public class FortSiege implements Siegable
 			{
 				continue;
 			}
-			
 			player.teleToLocation(teleportWhere);
 		}
 	}
@@ -930,7 +930,7 @@ public class FortSiege implements Siegable
 	 */
 	private void addAttacker(int clanId)
 	{
-		getAttackerClans().add(new L2SiegeClan(clanId, SiegeClanType.ATTACKER)); // Add registered attacker to attacker list
+		getAttackerClans().add(new L2SiegeClan(clanId, SiegeClanType.ATTACKER));// Add registered attacker to attacker list
 	}
 	
 	/**
@@ -967,7 +967,7 @@ public class FortSiege implements Siegable
 		Calendar newDate = Calendar.getInstance();
 		if (merchant)
 		{
-			newDate.add(Calendar.MINUTE, FortSiegeManager.getInstance().getSuspiciousMerchantRespawnDelay());
+			newDate.add(Calendar.MINUTE, FortSiegeConfig.SUSPICIOUS_MERCHANT_RESPAWN_DELAY);
 		}
 		else
 		{
@@ -1061,7 +1061,7 @@ public class FortSiege implements Siegable
 	 */
 	private void saveSiegeClan(L2Clan clan)
 	{
-		if (getAttackerClans().size() >= FortSiegeManager.getInstance().getAttackerMaxClans())
+		if (getAttackerClans().size() >= FortSiegeConfig.ATTACKER_MAX_CLANS)
 		{
 			return;
 		}

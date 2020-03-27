@@ -18,10 +18,10 @@
  */
 package quests.Q00410_PathOfThePalusKnight;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
@@ -76,7 +76,7 @@ public final class Q00410_PathOfThePalusKnight extends Quest
 		{
 			case "ACCEPT":
 			{
-				if (player.getClassId() == ClassId.darkFighter)
+				if (player.getClassId() == ClassId.DARK_FIGHTER)
 				{
 					if (player.getLevel() >= MIN_LEVEL)
 					{
@@ -94,7 +94,7 @@ public final class Q00410_PathOfThePalusKnight extends Quest
 						htmltext = "30329-02.htm";
 					}
 				}
-				else if (player.getClassId() == ClassId.palusKnight)
+				else if (player.getClassId() == ClassId.PALUS_KNIGHT)
 				{
 					htmltext = "30329-02a.htm";
 				}

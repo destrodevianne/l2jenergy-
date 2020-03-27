@@ -19,9 +19,9 @@
 package village_master.DwarfWarehouseChange1;
 
 import com.l2jserver.gameserver.enums.CategoryType;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 
 import ai.npc.AbstractNpcAI;
 
@@ -103,7 +103,7 @@ public final class DwarfWarehouseChange1 extends AbstractNpcAI
 		{
 			htmltext = "30498-12.htm"; // fnYouAreFourthClass
 		}
-		else if ((classId == SCAVENGER) && (player.getClassId() == ClassId.dwarvenFighter))
+		else if ((classId == SCAVENGER) && (player.getClassId() == ClassId.DWARVEN_FIGHTER))
 		{
 			if (player.getLevel() < 20)
 			{

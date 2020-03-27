@@ -45,11 +45,6 @@ public class DocumentEngine
 	private final List<File> _itemFiles = new ArrayList<>();
 	private final List<File> _skillFiles = new ArrayList<>();
 	
-	public static DocumentEngine getInstance()
-	{
-		return SingletonHolder._instance;
-	}
-	
 	protected DocumentEngine()
 	{
 		hashFiles("data/stats/items", _itemFiles);
@@ -130,8 +125,13 @@ public class DocumentEngine
 		return list;
 	}
 	
+	public static DocumentEngine getInstance()
+	{
+		return SingletonHolder.INSTANCE;
+	}
+	
 	private static class SingletonHolder
 	{
-		protected static final DocumentEngine _instance = new DocumentEngine();
+		protected static final DocumentEngine INSTANCE = new DocumentEngine();
 	}
 }

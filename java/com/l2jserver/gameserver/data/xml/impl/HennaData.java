@@ -27,8 +27,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.StatsSet;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.items.L2Henna;
 import com.l2jserver.gameserver.util.IXmlReader;
 
@@ -43,9 +43,6 @@ public final class HennaData implements IXmlReader
 {
 	private final Map<Integer, L2Henna> _hennaList = new HashMap<>();
 	
-	/**
-	 * Instantiates a new henna data.
-	 */
 	protected HennaData()
 	{
 		load();
@@ -170,11 +167,11 @@ public final class HennaData implements IXmlReader
 	 */
 	public static HennaData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final HennaData _instance = new HennaData();
+		protected static final HennaData INSTANCE = new HennaData();
 	}
 }

@@ -40,7 +40,7 @@ import com.l2jserver.gameserver.configuration.config.protection.BaseProtectionCo
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
 import com.l2jserver.gameserver.datatables.SpawnTable;
-import com.l2jserver.gameserver.enums.GameEventState;
+import com.l2jserver.gameserver.enums.events.GameEventState;
 import com.l2jserver.gameserver.instancemanager.AntiFeedManager;
 import com.l2jserver.gameserver.model.L2Spawn;
 import com.l2jserver.gameserver.model.L2World;

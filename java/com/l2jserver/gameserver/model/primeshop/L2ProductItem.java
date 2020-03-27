@@ -150,7 +150,7 @@ public class L2ProductItem
 	
 	public boolean getLimit()
 	{
-		return  getCurrentStock() >= _maxStock;
+		return getCurrentStock() >= _maxStock;
 	}
 	
 	public boolean isLimited()

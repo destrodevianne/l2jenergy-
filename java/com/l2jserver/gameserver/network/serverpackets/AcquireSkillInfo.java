@@ -22,10 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.enums.skills.AcquireSkillType;
+import com.l2jserver.gameserver.enums.skills.CommonSkill;
 import com.l2jserver.gameserver.model.L2SkillLearn;
-import com.l2jserver.gameserver.model.base.AcquireSkillType;
 import com.l2jserver.gameserver.model.holders.ItemHolder;
-import com.l2jserver.gameserver.model.skills.CommonSkill;
 
 /**
  * Acquire Skill Info server packet implementation.

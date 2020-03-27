@@ -19,9 +19,9 @@
 package quests.Q00178_IconicTrinity;
 
 import com.l2jserver.gameserver.enums.Race;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 
@@ -82,7 +82,7 @@ public final class Q00178_IconicTrinity extends Quest
 			}
 			case "32138-14.html":
 			{
-				if ((qs.isMemoState(10) && (player.getLevel() <= TWENTY_LEVEL) && (player.getClassId() == ClassId.maleSoldier)) || (player.getClassId() == ClassId.femaleSoldier))
+				if ((qs.isMemoState(10) && (player.getLevel() <= TWENTY_LEVEL) && (player.getClassId() == ClassId.MALE_SOLDIER)) || (player.getClassId() == ClassId.FEMALE_SOLDIER))
 				{
 					giveItems(player, SCROLL_ENCHANT_ARMOR_D_GRADE, 1);
 					addExpAndSp(player, 20123, 976);
@@ -93,7 +93,7 @@ public final class Q00178_IconicTrinity extends Quest
 			}
 			case "32138-17.html":
 			{
-				if ((qs.isMemoState(10) && (player.getLevel() > TWENTY_LEVEL) && (player.getClassId() != ClassId.maleSoldier)) || (player.getClassId() != ClassId.femaleSoldier))
+				if ((qs.isMemoState(10) && (player.getLevel() > TWENTY_LEVEL) && (player.getClassId() != ClassId.MALE_SOLDIER)) || (player.getClassId() != ClassId.FEMALE_SOLDIER))
 				{
 					giveItems(player, SCROLL_ENCHANT_ARMOR_D_GRADE, 1);
 					qs.exitQuest(false, true);
@@ -438,7 +438,7 @@ public final class Q00178_IconicTrinity extends Quest
 						}
 						case 10:
 						{
-							if (((player.getLevel() <= TWENTY_LEVEL) && (player.getClassId() == ClassId.maleSoldier)) || (player.getClassId() == ClassId.femaleSoldier))
+							if (((player.getLevel() <= TWENTY_LEVEL) && (player.getClassId() == ClassId.MALE_SOLDIER)) || (player.getClassId() == ClassId.FEMALE_SOLDIER))
 							{
 								htmltext = "32138-12.html";
 							}

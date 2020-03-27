@@ -46,7 +46,7 @@ public class TeleportBBSData implements IXmlReader
 	public void load()
 	{
 		_teleport.clear();
-		parseDatapackFile("data/teleports.xml");
+		parseDatapackFile("data/xml/teleports.xml");
 		LOG.info("{}: Loaded {} teleport points.", getClass().getSimpleName(), _teleport.size());
 		
 	}
@@ -124,11 +124,11 @@ public class TeleportBBSData implements IXmlReader
 	
 	public static TeleportBBSData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final TeleportBBSData _instance = new TeleportBBSData();
+		protected static final TeleportBBSData INSTANCE = new TeleportBBSData();
 	}
 }

@@ -19,10 +19,10 @@
 package quests.Q00222_TestOfTheDuelist;
 
 import com.l2jserver.gameserver.enums.Race;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
@@ -115,7 +115,7 @@ public final class Q00222_TestOfTheDuelist extends Quest
 					playSound(player, Sound.ITEMSOUND_QUEST_MIDDLE);
 					if (player.getVariables().getInt("2ND_CLASS_DIAMOND_REWARD", 0) == 0)
 					{
-						if (player.getClassId() == ClassId.palusKnight)
+						if (player.getClassId() == ClassId.PALUS_KNIGHT)
 						{
 							giveItems(player, DIMENSIONAL_DIAMOND, 104);
 						}
@@ -465,7 +465,7 @@ public final class Q00222_TestOfTheDuelist extends Quest
 		String htmltext = getNoQuestMsg(player);
 		if (qs.isCreated())
 		{
-			if ((player.getClassId() == ClassId.warrior) || (player.getClassId() == ClassId.elvenKnight) || (player.getClassId() == ClassId.palusKnight) || (player.getClassId() == ClassId.orcMonk))
+			if ((player.getClassId() == ClassId.WARRIOR) || (player.getClassId() == ClassId.ELVEN_KNIGHT) || (player.getClassId() == ClassId.PALUS_KNIGHT) || (player.getClassId() == ClassId.MONK))
 			{
 				if (player.getLevel() >= MIN_LEVEL)
 				{

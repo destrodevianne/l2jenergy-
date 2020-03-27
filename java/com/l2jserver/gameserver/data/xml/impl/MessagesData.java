@@ -44,7 +44,7 @@ public class MessagesData implements IXmlReader
 	public void load()
 	{
 		_translation.clear();
-		parseDatapackDirectory("data/translation", false);
+		parseDatapackDirectory("data/xml/translation", false);
 		LOG.info("{}: Loaded {} translation messages", getClass().getSimpleName(), _translation.size());
 	}
 	
@@ -92,11 +92,11 @@ public class MessagesData implements IXmlReader
 	
 	public static MessagesData getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final MessagesData _instance = new MessagesData();
+		protected static final MessagesData INSTANCE = new MessagesData();
 	}
 }

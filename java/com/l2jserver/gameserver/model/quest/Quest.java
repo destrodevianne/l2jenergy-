@@ -39,9 +39,13 @@ import com.l2jserver.commons.util.Util;
 import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.enums.CategoryType;
+import com.l2jserver.gameserver.enums.OlympiadType;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.enums.TrapAction;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.IAudio;
+import com.l2jserver.gameserver.enums.events.EventType;
+import com.l2jserver.gameserver.enums.skills.AcquireSkillType;
 import com.l2jserver.gameserver.instancemanager.QuestManager;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2Party;
@@ -51,16 +55,12 @@ import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.L2Summon;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2TrapInstance;
-import com.l2jserver.gameserver.model.base.AcquireSkillType;
-import com.l2jserver.gameserver.model.base.ClassId;
 import com.l2jserver.gameserver.model.events.AbstractScript;
-import com.l2jserver.gameserver.model.events.EventType;
 import com.l2jserver.gameserver.model.events.listeners.AbstractEventListener;
 import com.l2jserver.gameserver.model.events.returns.TerminateReturn;
 import com.l2jserver.gameserver.model.interfaces.IIdentifiable;
 import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
-import com.l2jserver.gameserver.model.olympiad.CompetitionType;
 import com.l2jserver.gameserver.model.olympiad.Participant;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.model.zone.L2ZoneType;
@@ -949,7 +949,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 	 * @param looser
 	 * @param type
 	 */
-	public final void notifyOlympiadMatch(Participant winner, Participant looser, CompetitionType type)
+	public final void notifyOlympiadMatch(Participant winner, Participant looser, OlympiadType type)
 	{
 		try
 		{
@@ -1397,7 +1397,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 	 * @param looser in this match.
 	 * @param type the competition type.
 	 */
-	public void onOlympiadMatchFinish(Participant winner, Participant looser, CompetitionType type)
+	public void onOlympiadMatchFinish(Participant winner, Participant looser, OlympiadType type)
 	{
 		
 	}
@@ -1407,7 +1407,7 @@ public class Quest extends AbstractScript implements IIdentifiable
 	 * @param loser this parameter contains a reference to the exact instance of the player who lose the competition.
 	 * @param type this parameter contains a reference to the competition type.
 	 */
-	public void onOlympiadLose(L2PcInstance loser, CompetitionType type)
+	public void onOlympiadLose(L2PcInstance loser, OlympiadType type)
 	{
 		
 	}

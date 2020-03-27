@@ -19,9 +19,9 @@
 package village_master.DwarfBlacksmithChange2;
 
 import com.l2jserver.gameserver.enums.CategoryType;
+import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.base.ClassId;
 
 import ai.npc.AbstractNpcAI;
 
@@ -88,7 +88,7 @@ public final class DwarfBlacksmithChange2 extends AbstractNpcAI
 		{
 			htmltext = "30512-08.htm"; // fnYouAreThirdClass
 		}
-		else if ((classId == WARSMITH) && (player.getClassId() == ClassId.artisan))
+		else if ((classId == WARSMITH) && (player.getClassId() == ClassId.ARTISAN))
 		{
 			if (player.getLevel() < 40)
 			{
@@ -130,7 +130,7 @@ public final class DwarfBlacksmithChange2 extends AbstractNpcAI
 		else if (player.isInCategory(CategoryType.WARSMITH_GROUP))
 		{
 			final ClassId classId = player.getClassId();
-			if ((classId == ClassId.artisan) || (classId == ClassId.warsmith))
+			if ((classId == ClassId.ARTISAN) || (classId == ClassId.WARSMITH))
 			{
 				htmltext = "30512-02.htm"; // fnClassList1
 			}

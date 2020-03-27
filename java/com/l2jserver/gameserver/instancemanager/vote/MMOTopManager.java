@@ -34,6 +34,7 @@ import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.configuration.config.custom.TopsConfig;
 import com.l2jserver.gameserver.dao.factory.impl.DAOFactory;
+import com.l2jserver.gameserver.enums.MailMessageType;
 import com.l2jserver.gameserver.instancemanager.MailManager;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -164,7 +165,7 @@ public class MMOTopManager
 						
 						String text1 = "Reward MMOTop raiting!"; // TODO: перенести в xml
 						String text2 = "Thank you for your vote in MMOTop raiting. Best regards " + TopsConfig.TOP_SERVER_ADDRESS; // TODO: перенести в xml
-						Message msg = new Message(pl.getObjectId(), text1, text2, Message.SendBySystem.NEWS);
+						Message msg = new Message(pl.getObjectId(), text1, text2, MailMessageType.NEWS);
 						Mail attachments = msg.createAttachments();
 						attachments.addItem("MMOTop", TopsConfig.MMO_TOP_REWARD_ID, TopsConfig.MMO_TOP_REWARD_COUNT * mult, null, null);
 						MailManager.getInstance().sendMessage(msg);
@@ -224,11 +225,11 @@ public class MMOTopManager
 	
 	public static MMOTopManager getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final MMOTopManager _instance = new MMOTopManager();
+		protected static final MMOTopManager INSTANCE = new MMOTopManager();
 	}
 }

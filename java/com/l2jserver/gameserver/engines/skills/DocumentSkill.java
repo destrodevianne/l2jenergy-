@@ -28,9 +28,9 @@ import org.w3c.dom.Node;
 
 import com.l2jserver.gameserver.data.xml.impl.EnchantSkillGroupsData;
 import com.l2jserver.gameserver.engines.DocumentBase;
+import com.l2jserver.gameserver.enums.skills.EffectScope;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.conditions.Condition;
-import com.l2jserver.gameserver.model.skills.EffectScope;
 import com.l2jserver.gameserver.model.skills.Skill;
 
 /**

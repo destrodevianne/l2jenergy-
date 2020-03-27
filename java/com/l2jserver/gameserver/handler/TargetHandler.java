@@ -21,7 +21,7 @@ package com.l2jserver.gameserver.handler;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.l2jserver.gameserver.model.skills.targets.L2TargetType;
+import com.l2jserver.gameserver.enums.skills.targets.L2TargetType;
 
 /**
  * @author UnAfraid
@@ -61,11 +61,11 @@ public class TargetHandler implements IHandler<ITargetTypeHandler, Enum<L2Target
 	
 	public static TargetHandler getInstance()
 	{
-		return SingletonHolder._instance;
+		return SingletonHolder.INSTANCE;
 	}
 	
 	private static class SingletonHolder
 	{
-		protected static final TargetHandler _instance = new TargetHandler();
+		protected static final TargetHandler INSTANCE = new TargetHandler();
 	}
 }
