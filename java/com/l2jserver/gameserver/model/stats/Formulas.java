@@ -1218,9 +1218,14 @@ public final class Formulas
 				skillAnimTime = skillAnimTime * 0.6;
 			}
 			
-			if ((skillAnimTime < 500) && (skill.getHitTime() > 500))
+			if ((skillAnimTime < 550) && (skill.getHitTime() > 500))
 			{
-				skillAnimTime = 500.0;
+				skillAnimTime = 550;
+			}
+			
+			if (skill.getName().contains("Herb"))
+			{
+				skillAnimTime = 0;
 			}
 		}
 		return skillAnimTime;
