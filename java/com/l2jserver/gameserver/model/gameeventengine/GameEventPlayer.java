@@ -24,14 +24,14 @@ public class GameEventPlayer
 {
 	private final L2PcInstance _player;
 	
-	protected GameEventPlayer(L2PcInstance player)
+	protected GameEventPlayer(L2PcInstance player, byte playerCredits)
 	{
 		_player = player;
 	}
 	
 	public boolean isOnEvent()
 	{
-		return GameEventManager.isStarted() && GameEventManager.isPlayerParticipant(getPlayer().getObjectId());
+		return GameEventManager.getInstance().getEvent().isStarted() && GameEventManager.getInstance().getEvent().isParticipant(getPlayer().getObjectId());
 	}
 	
 	public boolean isBlockingExit()

@@ -109,7 +109,7 @@ public class Clan implements ITargetTypeHandler
 						continue;
 					}
 					
-					if (!GameEventManager.checkForEventSkill(player, obj, skill))
+					if (!GameEventManager.getInstance().getEvent().checkForEventsSkill(player, obj, skill))
 					{
 						continue;
 					}

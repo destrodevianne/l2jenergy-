@@ -60,7 +60,7 @@ public class L2PcInstanceAction implements IActionHandler
 	public boolean action(L2PcInstance activeChar, L2Object target, boolean interact)
 	{
 		// See description in GameEventManager.java
-		if (!GameEventManager.onAction(activeChar, target.getObjectId()))
+		if (!GameEventManager.getInstance().getEvent().onAction(activeChar, target.getObjectId()))
 		{
 			return false;
 		}

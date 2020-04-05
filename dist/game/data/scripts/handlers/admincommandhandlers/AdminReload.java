@@ -24,8 +24,8 @@ import java.util.StringTokenizer;
 import javax.script.ScriptException;
 
 import com.l2jserver.gameserver.cache.HtmCache;
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
+import com.l2jserver.gameserver.configuration.loader.ConfigLoader;
 import com.l2jserver.gameserver.data.sql.impl.CrestTable;
 import com.l2jserver.gameserver.data.sql.impl.TeleportLocationTable;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
@@ -79,7 +79,7 @@ public class AdminReload implements IAdminCommandHandler
 			{
 				case "config":
 				{
-					Config.load();
+					ConfigLoader.reloading();
 					AdminData.getInstance().broadcastMessageToGMs(activeChar.getName() + ": Reloaded Configs.");
 					break;
 				}

@@ -46,4 +46,5 @@ public interface IEventListener
 	public boolean canRevive();
 	
 	public L2PcInstance getPlayer();
+	
 }

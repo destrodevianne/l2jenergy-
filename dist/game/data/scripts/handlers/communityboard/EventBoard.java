@@ -19,15 +19,12 @@
 package handlers.communityboard;
 
 import com.l2jserver.gameserver.cache.HtmCache;
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.community.CBasicConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.CommunityBoardHandler;
 import com.l2jserver.gameserver.handler.IParseBoardHandler;
-import com.l2jserver.gameserver.instancemanager.AntiFeedManager;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.gameeventengine.TvT.TvTEvent;
-import com.l2jserver.gameserver.model.olympiad.OlympiadManager;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 
 /**
  * Event board.
@@ -62,91 +59,19 @@ public class EventBoard implements IParseBoardHandler
 				html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/" + customPath + "events/" + path[2] + ".html");
 			}
 		}
-		else if (command.startsWith("_bbsevents:tvt"))
+		else if (command.equalsIgnoreCase("_bbsevents:tvt_reg"))
 		{
-			final String customPath = CBasicConfig.CUSTOM_CB_ENABLED ? "Custom/" : "";
-			
-			if (!Config.TVT_EVENT_ENABLED)
+			if (GameEventManager.getInstance().getEvent().register(activeChar))
 			{
-				activeChar.sendMessage("The event enabled.");
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "communityboard_event_you_reg_for_event"));
 			}
-			
-			if ((activeChar == null) || !TvTEvent.isParticipating())
+		}
+		else if (command.equalsIgnoreCase("_bbsevents:tvt_unreg"))
+		{
+			if (GameEventManager.getInstance().getEvent().unRegister(activeChar))
 			{
-				return false;
+				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "communityboard_event_you_unregistered_for_event"));
 			}
-			
-			if (command.equalsIgnoreCase("_bbsevents:tvt_reg"))
-			{
-				if (TvTEvent.isParticipating())
-				{
-					
-					int playerLevel = activeChar.getLevel();
-					final int team1Count = TvTEvent.getTeamsPlayerCounts()[0];
-					final int team2Count = TvTEvent.getTeamsPlayerCounts()[1];
-					
-					if (activeChar.isCursedWeaponEquipped())
-					{
-						activeChar.sendMessage("Cursed weapon holders are not allowed to participate.");
-					}
-					else if (OlympiadManager.getInstance().isRegistered(activeChar))
-					{
-						activeChar.sendMessage("You can not participate while registered for Olympiad.");
-					}
-					else if (activeChar.getKarma() > 0)
-					{
-						activeChar.sendMessage("Chaotic players are not allowed to participate.");
-					}
-					else if ((playerLevel < Config.TVT_EVENT_MIN_LVL) || (playerLevel > Config.TVT_EVENT_MAX_LVL))
-					{
-						activeChar.sendMessage("Only players from level" + Config.TVT_EVENT_MIN_LVL + " to level " + Config.TVT_EVENT_MAX_LVL + " are allowed to participate.");
-					}
-					else if ((team1Count == Config.TVT_EVENT_MAX_PLAYERS_IN_TEAMS) && (team2Count == Config.TVT_EVENT_MAX_PLAYERS_IN_TEAMS))
-					{
-						activeChar.sendMessage("The event is full! Only " + Config.TVT_EVENT_MAX_PLAYERS_IN_TEAMS + " players are allowed per team.");
-					}
-					else if ((Config.TVT_EVENT_MAX_PARTICIPANTS_PER_IP > 0) && !AntiFeedManager.getInstance().tryAddPlayer(AntiFeedManager.TVT_ID, activeChar, Config.TVT_EVENT_MAX_PARTICIPANTS_PER_IP))
-					{
-						activeChar.sendMessage("Maximum of " + AntiFeedManager.getInstance().getLimit(activeChar, Config.TVT_EVENT_MAX_PARTICIPANTS_PER_IP) + " participant(s) per IP address is allowed.");
-					}
-					else if (TvTEvent.needParticipationFee() && !TvTEvent.hasParticipationFee(activeChar))
-					{
-						activeChar.sendMessage("You need " + TvTEvent.getParticipationFee() + " for participation.");
-					}
-					else if (TvTEvent.addParticipant(activeChar))
-					{
-						activeChar.sendMessage("You are registered for a TvT Event.");
-					}
-				}
-				else
-				{
-					activeChar.sendMessage("The event has not started.");
-				}
-			}
-			else if (command.equalsIgnoreCase("_bbsevents:tvt_unreg"))
-			{
-				if (TvTEvent.isParticipating())
-				{
-					if (TvTEvent.removeParticipant(activeChar.getObjectId()))
-					{
-						if (Config.TVT_EVENT_MAX_PARTICIPANTS_PER_IP > 0)
-						{
-							AntiFeedManager.getInstance().removePlayer(AntiFeedManager.TVT_ID, activeChar);
-						}
-						activeChar.sendMessage("You are unregistered for a TvT Event.");
-					}
-					else
-					{
-						activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "event_no_unregister"));
-					}
-				}
-				else
-				{
-					activeChar.sendMessage("The event has not started.");
-				}
-			}
-			
-			html = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), "data/html/CommunityBoard/" + customPath + "events/event_tvt.html");
 		}
 		CommunityBoardHandler.separateAndSend(html, activeChar);
 		return true;

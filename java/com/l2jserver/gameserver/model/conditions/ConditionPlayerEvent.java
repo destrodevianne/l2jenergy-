@@ -44,10 +44,10 @@ public class ConditionPlayerEvent extends Condition
 	public boolean testImpl(L2Character effector, L2Character effected, Skill skill, L2Item item)
 	{
 		final L2PcInstance player = effector.getActingPlayer();
-		if ((player == null) || !GameEventManager.isStarted())
+		if ((player == null) || !GameEventManager.getInstance().getEvent().isStarted())
 		{
 			return !_val;
 		}
-		return (GameEventManager.isPlayerParticipant(player.getObjectId()) == _val);
+		return (GameEventManager.getInstance().getEvent().isParticipant(player.getObjectId()) == _val);
 	}
 }

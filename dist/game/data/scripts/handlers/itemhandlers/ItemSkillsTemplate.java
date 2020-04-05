@@ -44,7 +44,7 @@ public class ItemSkillsTemplate implements IItemHandler
 			return false;
 		}
 		
-		if (!GameEventManager.onScrollUse(playable.getObjectId()))
+		if (!GameEventManager.getInstance().getEvent().onScrollUse(playable.getObjectId()))
 		{
 			playable.sendPacket(ActionFailed.STATIC_PACKET);
 			return false;

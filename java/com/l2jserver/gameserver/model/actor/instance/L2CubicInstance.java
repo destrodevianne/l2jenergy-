@@ -257,7 +257,7 @@ public final class L2CubicInstance implements IIdentifiable
 				return;
 			}
 			// Event targeting
-			GameEventManager.eventTarget(_owner, _target);
+			GameEventManager.getInstance().getEvent().eventTarget(_owner, _target);
 			
 			// Duel targeting
 			if (_owner.isInDuel())

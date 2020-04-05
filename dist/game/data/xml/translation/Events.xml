@@ -1,48 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Events Messages -->
 <list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xsd/Messages.xsd">
-    <message id="event_no_register_in_other_event">
-        <set lang="en" val="Couldnt register you due other event participation." />
-		<set lang="ru" val="Не удалось зарегистрироватся на участие в других ивентах." />
+    <message id="event_you_want_participate_event">
+        <set lang="en" val="Do you want to participating in the %s%?" />
+		<set lang="ru" val="Желаете ли вы пригять участвие в %s%?" />
 	</message>
-    <message id="event_team_blue_full">
-        <set lang="en" val="The Blue Team is full." />
-		<set lang="ru" val="Синяя команда заполнена." />
-    </message>
-    <message id="event_team_red_full">
-        <set lang="en" val="The Red Team is full." />
-		<set lang="ru" val="Красная команда заполнена." />
-    </message>
-    <message id="event_time_register_over">
-        <set lang="en" val="The registration period for this event is over." />
-		<set lang="ru" val="Период регистрации для этого ивента завершен." />
-    </message>
-    <message id="event_max_ip_reached">
-        <set lang="en" val="You have reached the maximum allowed participants per IP." />
-		<set lang="ru" val="Вы достигли максимально допустимое количество участников на IP-адрес." />
-    </message>
-    <message id="event_no_logout">
-	    <set lang="en" val="A superior power doesn't allow you to leave the event." />
-		<set lang="ru" val="Превосходная мощность не позволяет вам покинуть ивент." />
+    <message id="event_you_alredy_registred">
+        <set lang="en" val="You are already registred!" />
+		<set lang="ru" val="Вы уже зарегистрированы!" />
 	</message>
-	<message id="event_team_need_points">
-	    <set lang="en" val="Your team must have at least 10 points in total." />
-		<set lang="ru" val="Ваша команда должна иметь не менее 10 баллов." />
+	<!-- Status -->
+	<message id="status_started">
+	    <set lang="en" val="START" />
+		<set lang="ru" val="Старт" />
 	</message>
-	<message id="event_no_participant">
-        <set lang="en" val="That player is not an event participant." />
-		<set lang="ru" val="Этот игрок не является участником ивента." />
-    </message>
-    <message id="event_no_observation">
-        <set lang="en" val="Cannot use while current Event." />
-		<set lang="ru" val="Невозможно использовать во время текущего ивента." />
-    </message>
-    <message id="event_no_observe_games">
-	    <set lang="en" val="You can not observe games while registered on an event." />
-		<set lang="ru" val="Вы не можете наблюдать за играми, зарегистрированными на ивента." />
-	</message>
-	<message id="event_no_unregister">
-	    <set lang="en" val="You cannot unregister to this event." />
-		<set lang="ru" val="Вы не можете отменить регистрацию из этого ивента." />
+	<message id="status_finished">
+	    <set lang="en" val="FINISHED" />
+		<set lang="ru" val="Финиш" />
 	</message>
 </list>

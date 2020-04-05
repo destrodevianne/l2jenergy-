@@ -63,9 +63,8 @@ public class RequestUnEquipItem extends L2GameClientPacket
 			return;
 		}
 		
-		// if (!GameEventManager.onRequestUnEquipItem(activeChar))
+		// if (!GameEventManager.getInstance().getEvent().onRequestUnEquipItem(activeChar))
 		// {
-		// TODO: fix
 		// return;
 		// }
 		

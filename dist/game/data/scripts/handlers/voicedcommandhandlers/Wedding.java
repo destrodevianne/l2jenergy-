@@ -57,6 +57,7 @@ import com.l2jserver.gameserver.util.Broadcast;
 public class Wedding implements IVoicedCommandHandler
 {
 	static final Logger _log = Logger.getLogger(Wedding.class.getName());
+	
 	private static final String[] _voicedCommands =
 	{
 		"divorce",
@@ -335,7 +336,7 @@ public class Wedding implements IVoicedCommandHandler
 		}
 		
 		// Thanks nbd
-		if (!GameEventManager.onEscapeUse(activeChar.getObjectId()))
+		if (!GameEventManager.getInstance().getEvent().onEscapeUse(activeChar.getObjectId()))
 		{
 			activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 			return false;
@@ -444,7 +445,7 @@ public class Wedding implements IVoicedCommandHandler
 			}
 		}
 		
-		if (!GameEventManager.onEscapeUse(partner.getObjectId()))
+		if (!GameEventManager.getInstance().getEvent().onEscapeUse(partner.getObjectId()))
 		{
 			activeChar.sendMessage("Your partner is in an event.");
 			return false;

@@ -61,7 +61,8 @@ public class Unstuck implements IUserCommandHandler
 	@Override
 	public boolean useUserCommand(int id, L2PcInstance activeChar)
 	{
-		if (!GameEventManager.onEscapeUse(activeChar.getObjectId()))
+		
+		if (!GameEventManager.getInstance().getEvent().onEscapeUse(activeChar.getObjectId()))
 		{
 			activeChar.sendPacket(STATIC_PACKET);
 			return false;

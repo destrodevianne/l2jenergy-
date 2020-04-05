@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../data/xsd/events.xsd">
+    <!-- Event in instance -->
+    <!-- Default: true -->
+    <EventInInstance val="true"/>
+	
+    <!-- Name of the instance file for TvT -->
+	<!-- Default: coliseum.xml -->
+    <EventInstanceFile val="coliseum.xml"/>
+	
+	<!-- Times TvT will occur (24h format) -->
+    <!-- Default: 9:00,15:00,21:00,3:00 -->
+    <EventTimeInterval val="03:00,06:00,09:00,12:00,15:00,18:00,21:00,00:00"/>
+	
+	<!-- Event running time (in minutes) -->
+    <!-- Default: 5 -->
+    <EventRunningTime val="5"/>
+	
+	<!-- Minimum and Maximum amount of players allowed in each team. -->
+    <!-- Default: min=2 and max=20 -->
+    <EventPlayersInTeams min="2" max="20"/>
+	
+	<!-- Minimum and Maximum level of players that may join the event. -->
+    <!-- Default: min=1 and max=85 -->
+    <EventPlayerLevel min="1" max="85"/>
+	
+	<!-- Registration timer from start of event (in minutes). -->
+	<!-- Default: 3 -->
+    <EventParticipationTime val="3"/>
+	
+	<!-- Respawn delay timer (in seconds). -->
+	<!-- Default: 10 -->
+    <EventRespawnTeleportDelay val="0"/>
+	
+	<!-- Exit delay timer (in seconds). -->
+	<!-- Default: 10 -->
+    <EventStartLeaveTeleportDelay val="10"/>
+
+	<!-- Event Participation not Fee. Fee is not returned. -->
+	<!-- Default: false -->
+    <EventParticipation val="false"/>
+	
+	<!-- (itemId, count) Example: 57,100000 -->
+	<!-- Default: 0,0 -->
+    <EventTakeItem id="0" count="0"/>
+	
+	<!-- Event Kill Bonus -->
+	<!-- Default: false -->
+    <EventEnabledKillBonus val="false"/>
+
+    <!-- Event Kill Bonus Reward -->
+	<!-- Default: 57,2000 -->
+    <EventKillBonusReward id="57" count="2000"/>
+	
+    <!-- Participant's effects handling on teleport/death. -->
+    <!-- Effects lasting through death never removed. -->
+    <!-- 0 - always remove all effects. -->
+    <!-- 1 - remove all effects only during port to event (noblesse blessing can be used) -->
+    <!-- 2 - never remove any effect -->
+    <!-- Default: 0 -->
+    <EventEffectsRemoval val="0"/>
+	
+	<!-- First Team = id, name, color name, coordinates Start/Death x,y,z location. -->
+    <Team id="1" name="Blue" coordinates="148695,46725,-3414"/>
+
+	<!-- Second Team = id, name, color name, coordinates Start/Death x,y,z location. -->
+    <Team id="2" name="Red" coordinates="149999,46728,-3414"/>
+	
+	<!-- Reward for winning team. -->
+    <EventReward id="57" count="10000"/>
+	
+	<!-- Should both teams get reward if there's a tie? -->
+    <EventRewardTeamTie val="false"/>
+	
+	<!-- Mage-class participants will be buffed with those buffs each respawn -->
+	<!-- Format: skill1Id,skill1Level;skill2Id,skill2Level... -->
+	<!-- Example: 1504,1;1500,1;1501,1;1085,3 -->
+    <EventMageBuffs val="1504,1;1500,1;1501,1;1085,3"/>
+	
+	<!-- Fighter-class participants will be buffed with those buffs each respawn -->
+	<!-- Format: skill1Id,skill1Level;skill2Id,skill2Level... -->
+	<!-- Example: 1504,1;1501,1;1502,1;1499,1 -->
+    <EventFighterBuffs val="1504,1;1501,1;1502,1;1499,1"/>
+		
+    <EventRestrictItems val="0,0"/>
+    
+	<!-- Skills will be disabled for the duration of the game.-->
+	<!-- Default: 840,841,842,5982,5983 (Flight transformations).-->
+    <EventRestrictSkills val="840,841,842,5982,5983"/>
+
+	<!-- Event Rules -->
+    <EventPotionsAllowed val="false"/>
+    <EventScrollsAllowed val="false"/>
+    <EventSummonByItemAllowed val="false"/>
+    <EventTargetTeamMembersAllowed val="false"/>
+
+    <!-- Require Min Frags To Reward. -->
+    <EventRequireMinFragsToReward val="false"/>
+	
+	<!-- Min Frags To Reward. -->
+    <EventMinFragsRequired val="1"/>
+</list>

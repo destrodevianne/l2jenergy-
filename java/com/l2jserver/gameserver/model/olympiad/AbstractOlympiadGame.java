@@ -127,7 +127,7 @@ public abstract class AbstractOlympiadGame
 		}
 		
 		// safety precautions
-		if (player.inObserverMode() || GameEventManager.isPlayerParticipant(player.getObjectId()))
+		if (player.inObserverMode() || GameEventManager.getInstance().getEvent().isParticipant(player.getObjectId()))
 		{
 			return SystemMessage.getSystemMessage(SystemMessageId.THE_GAME_HAS_BEEN_CANCELLED_BECAUSE_THE_OTHER_PARTY_DOES_NOT_MEET_THE_REQUIREMENTS_FOR_JOINING_THE_GAME);
 		}

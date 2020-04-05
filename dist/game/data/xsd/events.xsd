@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="list">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="EventInInstance">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventInstanceFile">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventTimeInterval">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventRunningTime">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:unsignedByte" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventPlayersInTeams">
+          <xs:complexType>
+            <xs:attribute name="min" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="max" type="xs:unsignedByte" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventPlayerLevel">
+          <xs:complexType>
+            <xs:attribute name="min" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="max" type="xs:unsignedByte" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventParticipationTime">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:unsignedByte" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventRespawnTeleportDelay">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:unsignedByte" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventStartLeaveTeleportDelay">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:unsignedByte" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventParticipation">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventTakeItem">
+          <xs:complexType>
+            <xs:attribute name="id" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="count" type="xs:unsignedByte" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventEnabledKillBonus">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventKillBonusReward">
+          <xs:complexType>
+            <xs:attribute name="id" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="count" type="xs:unsignedShort" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventEffectsRemoval">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:unsignedByte" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element maxOccurs="unbounded" name="Team">
+          <xs:complexType>
+            <xs:attribute name="id" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="name" type="xs:string" use="required" />
+            <xs:attribute name="coordinates" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventReward">
+          <xs:complexType>
+            <xs:attribute name="id" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="count" type="xs:unsignedShort" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventRewardTeamTie">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventMageBuffs">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventFighterBuffs">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventRestrictItems">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventRestrictSkills">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventPotionsAllowed">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventScrollsAllowed">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventSummonByItemAllowed">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventTargetTeamMembersAllowed">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventRequireMinFragsToReward">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventMinFragsRequired">
+          <xs:complexType>
+            <xs:attribute name="val" type="xs:unsignedByte" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

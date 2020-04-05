@@ -12,7 +12,7 @@
     <property name="build.dist.libs" location="${build.dist}/libs" />
 	
     <property name="build.version" value="1.0" />
-	<property name="build.revision" value="Rev.267" />
+	<property name="build.revision" value="Rev.269" />
 	
     <path id="classpath">
         <fileset dir="${lib}">

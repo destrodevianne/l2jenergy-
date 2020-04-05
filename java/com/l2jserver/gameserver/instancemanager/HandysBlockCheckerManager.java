@@ -188,6 +188,7 @@ public final class HandysBlockCheckerManager
 			// UngerGroundColiseum.getInstance().removeParticipant(player);
 			// player.sendPacket(SystemMessageId.COLISEUM_OLYMPIAD_KRATEIS_APPLICANTS_CANNOT_PARTICIPATE));
 			// }
+			
 			// if(KrateiCubeManager.getInstance().isRegisteredPlayer(player))
 			// {
 			// KrateiCubeManager.getInstance().removeParticipant(player);

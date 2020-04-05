@@ -37,6 +37,7 @@ import com.l2jserver.gameserver.handler.ItemHandler;
 import com.l2jserver.gameserver.instancemanager.FortSiegeManager;
 import com.l2jserver.gameserver.model.PcCondOverride;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.itemcontainer.Inventory;
 import com.l2jserver.gameserver.model.items.L2EtcItem;
@@ -120,6 +121,11 @@ public final class UseItem extends L2GameClientPacket
 			return;
 		}
 		
+		if (GameEventManager.getInstance().getEvent().isParticipating() && GameEventManager.getInstance().getEvent().register(activeChar) && !GameEventManager.getInstance().getEvent().onUseItem(activeChar, item))
+		{
+			return;
+		}
+		
 		_itemId = item.getId();
 		
 		// Char cannot use item when dead
@@ -189,12 +195,6 @@ public final class UseItem extends L2GameClientPacket
 			{
 				return;
 			}
-			
-			// TODO: need fix
-			// if (!GameEventManager.onUseItem(activeChar))
-			// {
-			// return;
-			// }
 			
 			// Equip or unEquip
 			if (FortSiegeManager.getInstance().isCombat(_itemId))

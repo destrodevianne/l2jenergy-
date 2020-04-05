@@ -539,7 +539,7 @@ public class EnterWorld extends L2GameClientPacket
 			}
 		}
 		
-		GameEventManager.onLogin(activeChar);
+		GameEventManager.getInstance().getEvent().onLogin(activeChar);
 		
 		if (CustomConfig.WELCOME_MESSAGE_ENABLED)
 		{

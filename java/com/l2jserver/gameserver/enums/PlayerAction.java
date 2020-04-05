@@ -24,7 +24,8 @@ package com.l2jserver.gameserver.enums;
 public enum PlayerAction
 {
 	ADMIN_COMMAND,
-	USER_ENGAGE;
+	USER_ENGAGE,
+	USER_EVENTS;
 	
 	private final int _mask;
 	

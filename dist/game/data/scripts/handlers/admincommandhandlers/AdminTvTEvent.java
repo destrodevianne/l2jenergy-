@@ -18,18 +18,10 @@
  */
 package handlers.admincommandhandlers;
 
-import com.l2jserver.gameserver.configuration.config.Config;
-import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
-import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
-import com.l2jserver.gameserver.model.gameeventengine.TvT.TvTEvent;
-import com.l2jserver.gameserver.model.gameeventengine.TvT.TvTEventTeleporter;
-import com.l2jserver.gameserver.model.gameeventengine.TvT.TvTManager;
+import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 
-/**
- * @author HorridoJoho
- */
 public class AdminTvTEvent implements IAdminCommandHandler
 {
 	private static final String[] ADMIN_COMMANDS =
@@ -44,31 +36,7 @@ public class AdminTvTEvent implements IAdminCommandHandler
 	{
 		if (command.equals("admin_tvt_add"))
 		{
-			L2Object target = activeChar.getTarget();
-			
-			if (!(target instanceof L2PcInstance))
-			{
-				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_should_select_player"));
-				return true;
-			}
-			
-			add(activeChar, (L2PcInstance) target);
-		}
-		else if (command.equals("admin_tvt_remove"))
-		{
-			L2Object target = activeChar.getTarget();
-			
-			if (!(target instanceof L2PcInstance))
-			{
-				activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_should_select_player"));
-				return true;
-			}
-			
-			remove(activeChar, (L2PcInstance) target);
-		}
-		else if (command.equals("admin_tvt_advance"))
-		{
-			TvTManager.getInstance().skipDelay();
+			GameEventManager.getInstance().useAdminCommand(activeChar, command);
 		}
 		return true;
 	}
@@ -77,36 +45,5 @@ public class AdminTvTEvent implements IAdminCommandHandler
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
-	}
-	
-	private void add(L2PcInstance activeChar, L2PcInstance playerInstance)
-	{
-		if (playerInstance.isOnEvent())
-		{
-			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_already_participated_event"));
-			return;
-		}
-		
-		if (!TvTEvent.addParticipant(playerInstance))
-		{
-			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_instance_could_not_added_null"));
-			return;
-		}
-		
-		if (TvTEvent.isStarted())
-		{
-			new TvTEventTeleporter(playerInstance, TvTEvent.getParticipantTeamCoordinates(playerInstance.getObjectId()), true, false);
-		}
-	}
-	
-	private void remove(L2PcInstance activeChar, L2PcInstance playerInstance)
-	{
-		if (!TvTEvent.removeParticipant(playerInstance.getObjectId()))
-		{
-			activeChar.sendAdminMessage(MessagesData.getInstance().getMessage(activeChar, "admin_player_not_part_event"));
-			return;
-		}
-		
-		new TvTEventTeleporter(playerInstance, Config.TVT_EVENT_PARTICIPATION_NPC_COORDINATES, true, true);
 	}
 }

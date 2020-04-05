@@ -78,4 +78,13 @@
         <set lang="en" val="You don't have points!" />
 		<set lang="ru" val="У вас нет сохраненных точек!" />
 	</message>
+	<!-- EventBoard Messages -->
+	<message id="communityboard_event_you_reg_for_event">
+        <set lang="en" val="You are registered for a Event." />
+		<set lang="ru" val="Вы зарегистрировались на Ивент." />
+	</message>
+	<message id="communityboard_event_you_unregistered_for_event">
+        <set lang="en" val="You are unregistered for a Event." />
+		<set lang="ru" val="Вы отменили регистрацию на Ивент." />
+	</message>
 </list>

@@ -23,17 +23,17 @@ import com.l2jserver.gameserver.model.interfaces.IEventListener;
 
 public final class GameEventListener implements IEventListener
 {
-	private final L2PcInstance _player;
+	private final L2PcInstance _eventPlayer;
 	
-	public GameEventListener(L2PcInstance player)
+	public GameEventListener(L2PcInstance eventPlayer)
 	{
-		_player = player;
+		_eventPlayer = eventPlayer;
 	}
 	
 	@Override
 	public boolean isOnEvent()
 	{
-		return GameEventManager.isStarted() && GameEventManager.isPlayerParticipant(getPlayer().getObjectId());
+		return GameEventManager.getInstance().getEvent().isStarted() && GameEventManager.getInstance().getEvent().isParticipant(getPlayer().getObjectId());
 	}
 	
 	@Override
@@ -57,6 +57,6 @@ public final class GameEventListener implements IEventListener
 	@Override
 	public L2PcInstance getPlayer()
 	{
-		return _player;
+		return _eventPlayer;
 	}
 }

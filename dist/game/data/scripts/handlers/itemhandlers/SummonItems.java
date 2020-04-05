@@ -43,7 +43,7 @@ public class SummonItems extends ItemSkillsTemplate
 			return false;
 		}
 		
-		if (!GameEventManager.onItemSummon(playable.getObjectId()))
+		if (!GameEventManager.getInstance().getEvent().onItemSummon(playable.getObjectId()))
 		{
 			return false;
 		}

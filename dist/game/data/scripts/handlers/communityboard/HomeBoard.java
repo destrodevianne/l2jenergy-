@@ -25,6 +25,7 @@ import java.time.ZonedDateTime;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.cache.HtmCache;
+import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.configuration.config.community.CBasicConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.handler.CommunityBoardHandler;
@@ -68,6 +69,18 @@ public final class HomeBoard implements IParseBoardHandler
 			html = html.replaceAll("%fav_count%", Integer.toString(getFavoriteCount(activeChar)));
 			html = html.replaceAll("%region_count%", Integer.toString(getRegionCount(activeChar)));
 			html = html.replaceAll("%clan_count%", Integer.toString(ClanTable.getInstance().getClanCount()));
+			
+			html = html.replace("<?cb_rate_xp?>", Float.toString(RatesConfig.RATE_XP));
+			html = html.replace("<?cb_rate_sp?>", Float.toString(RatesConfig.RATE_SP));
+			// html = html.replace("<?cb_rate_adena?>" TODO: need fix
+			html = html.replace("<?cb_rate_herb?>", Float.toString(RatesConfig.RATE_HERB_DROP_AMOUNT_MULTIPLIER));
+			html = html.replace("<?cb_rate_spoil?>", Float.toString(RatesConfig.RATE_CORPSE_DROP_AMOUNT_MULTIPLIER));
+			html = html.replace("<?cb_rate_raid?>", Float.toString(RatesConfig.RATE_RAID_DROP_CHANCE_MULTIPLIER));
+			html = html.replace("<?cb_rate_siege?>", Float.toString(RatesConfig.RATE_SIEGE_GUARDS_PRICE));
+			html = html.replace("<?cb_rate_quest?>", Float.toString(RatesConfig.RATE_QUEST_DROP));
+			html = html.replace("<?cb_rate_manor?>", Integer.toString(RatesConfig.RATE_DROP_MANOR));
+			// html = html.replace("<?cb_rate_clanrep?>", ServerConfig.RATE_CLAN_REP_SCORE); TODO: need fix
+			html = html.replace("<?cb_rate_hellbound?>", Float.toString(RatesConfig.RATE_HB_TRUST_INCREASE));
 			
 			html = html.replace("<?cb_player_name?>", activeChar.getName());
 			html = html.replace("<?cb_time?>", time.getHour() + ":" + time.getMinute());

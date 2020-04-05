@@ -39,7 +39,6 @@ import com.l2jserver.commons.util.StringUtil;
 import com.l2jserver.commons.util.Util;
 import com.l2jserver.commons.versioning.Version;
 import com.l2jserver.gameserver.cache.HtmCache;
-import com.l2jserver.gameserver.configuration.config.Config;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.configuration.config.MMOConfig;
@@ -153,6 +152,7 @@ import com.l2jserver.gameserver.model.PartyMatchWaitingList;
 import com.l2jserver.gameserver.model.entity.Hero;
 import com.l2jserver.gameserver.model.events.EventDispatcher;
 import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
+import com.l2jserver.gameserver.model.gameeventengine.types.TeamVsTeam;
 import com.l2jserver.gameserver.model.olympiad.Olympiad;
 import com.l2jserver.gameserver.network.L2GameClient;
 import com.l2jserver.gameserver.network.L2GamePacketHandler;
@@ -419,7 +419,10 @@ public final class GameServer
 		Runtime.getRuntime().addShutdownHook(Shutdown.getInstance());
 		
 		LOG.info("IdFactory: Free ObjectID's remaining: {}", IdFactory.getInstance().size());
-		GameEventManager.getEventsInstances();
+		
+		GameEventManager.getInstance();
+		TeamVsTeam.getInstance().init();
+		
 		KnownListUpdateTaskManager.getInstance();
 		
 		if ((OfflineConfig.OFFLINE_TRADE_ENABLE || OfflineConfig.OFFLINE_CRAFT_ENABLE) && OfflineConfig.RESTORE_OFFLINERS)
@@ -502,7 +505,7 @@ public final class GameServer
 		StringUtil.printSection("Config");
 		// Initialize configurations.
 		ConfigLoader.loading();
-		Config.load();
+		
 		final String dp = Util.parseArg(args, DATAPACK, true);
 		if (dp != null)
 		{

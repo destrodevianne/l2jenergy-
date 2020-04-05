@@ -55,7 +55,7 @@ public class Die extends L2GameServerPacket
 			_access = player.getAccessLevel();
 			_clan = player.getClan();
 			_isJailed = player.isJailed();
-			if (GameEventManager.isStarted() && GameEventManager.isPlayerParticipant(_charObjId))
+			if (GameEventManager.getInstance().getEvent().isStarted() && GameEventManager.getInstance().getEvent().isParticipant(_charObjId))
 			{
 				_canTeleport = false;
 			}

@@ -186,9 +186,9 @@ public class JailHandler implements IPunishmentHandler
 		player.setInstanceId(0);
 		player.setIsIn7sDungeon(false);
 		
-		if (!GameEventManager.isInactive() && GameEventManager.isPlayerParticipant(player.getObjectId()))
+		if (!GameEventManager.getInstance().getEvent().isInactive() && GameEventManager.getInstance().getEvent().isParticipant(player.getObjectId()))
 		{
-			GameEventManager.removeParticipant(player.getObjectId());
+			GameEventManager.getInstance().getEvent().removeParticipant(player);
 		}
 		
 		if (OlympiadManager.getInstance().isRegisteredInComp(player))

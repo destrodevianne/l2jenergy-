@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
@@ -133,6 +134,16 @@ public final class Util
 		byte[] array = new byte[size];
 		Rnd.nextBytes(array);
 		return array;
+	}
+	
+	/**
+	 * Hex to string.
+	 * @param hex the hex value
+	 * @return the hex value as string
+	 */
+	public static String hexToString(byte[] hex)
+	{
+		return new BigInteger(hex).toString(16);
 	}
 	
 	/**

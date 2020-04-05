@@ -249,7 +249,7 @@ public class LoginServerThread extends Thread
 							AuthResponse aresp = new AuthResponse(incoming);
 							int serverID = aresp.getServerId();
 							_serverName = aresp.getServerName();
-							Util.saveHexid(serverID, hexToString(_hexID));
+							Util.saveHexid(serverID, Util.hexToString(_hexID));
 							LOG.info("Registered on login as Server {}: {}", serverID, _serverName);
 							ServerStatus st = new ServerStatus();
 							if (GeneralConfig.SERVER_LIST_BRACKET)
@@ -531,16 +531,6 @@ public class LoginServerThread extends Thread
 		catch (IOException e)
 		{
 		}
-	}
-	
-	/**
-	 * Hex to string.
-	 * @param hex the hex value
-	 * @return the hex value as string
-	 */
-	private String hexToString(byte[] hex)
-	{
-		return new BigInteger(hex).toString(16);
 	}
 	
 	/**

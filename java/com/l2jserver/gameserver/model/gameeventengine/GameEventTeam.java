@@ -25,14 +25,15 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
 public class GameEventTeam
 {
+	private final byte _id;
 	private final String _name;
 	private int[] _coordinates = new int[3];
 	private short _points;
-	
 	private final Map<Integer, L2PcInstance> _participatedPlayers = new ConcurrentHashMap<>();
 	
-	public GameEventTeam(String name, int[] coordinates)
+	public GameEventTeam(byte id, String name, int[] coordinates)
 	{
+		_id = id;
 		_name = name;
 		_coordinates = coordinates;
 		_points = 0;
@@ -67,6 +68,11 @@ public class GameEventTeam
 	public boolean containsPlayer(int playerObjectId)
 	{
 		return _participatedPlayers.containsKey(playerObjectId);
+	}
+	
+	public byte getId()
+	{
+		return _id;
 	}
 	
 	public String getName()

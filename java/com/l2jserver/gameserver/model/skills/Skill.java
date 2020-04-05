@@ -1106,7 +1106,7 @@ public class Skill implements IIdentifiable
 					}
 				}
 				
-				if (!GameEventManager.checkForEventSkill(player, targetPlayer, skill))
+				if (!GameEventManager.getInstance().getEvent().checkForEventsSkill(player, targetPlayer, skill))
 				{
 					return false;
 				}

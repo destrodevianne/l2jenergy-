@@ -48,7 +48,7 @@ public class ConditionPlayerCanEscape extends Condition
 		{
 			canTeleport = false;
 		}
-		else if (!GameEventManager.onEscapeUse(player.getObjectId()))
+		else if (!GameEventManager.getInstance().getEvent().onEscapeUse(player.getObjectId()))
 		{
 			canTeleport = false;
 		}

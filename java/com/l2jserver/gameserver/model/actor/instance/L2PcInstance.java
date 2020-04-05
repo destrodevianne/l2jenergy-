@@ -232,6 +232,7 @@ import com.l2jserver.gameserver.model.events.returns.TerminateReturn;
 import com.l2jserver.gameserver.model.fishing.L2Fish;
 import com.l2jserver.gameserver.model.fishing.L2Fishing;
 import com.l2jserver.gameserver.model.friend.BlockList;
+import com.l2jserver.gameserver.model.gameeventengine.GameEvent;
 import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.holders.AdditionalSkillHolder;
 import com.l2jserver.gameserver.model.holders.ItemHolder;
@@ -5245,7 +5246,7 @@ public class L2PcInstance extends L2Playable
 			{
 				EventDispatcher.getInstance().notifyEventAsync(new OnPlayerPvPKill(pk, this), this);
 				
-				GameEventManager.onKill(killer, this);
+				GameEventManager.getInstance().getEvent().onKill(killer, this);
 				
 				if (L2Event.isParticipant(pk))
 				{
@@ -5901,6 +5902,7 @@ public class L2PcInstance extends L2Playable
 		stopChargeTask();
 		stopFameTask();
 		stopVitalityTask();
+		stopPcBangPointsTask();
 		stopRecoBonusTask();
 		stopRecoGiveTask();
 	}
@@ -9922,8 +9924,7 @@ public class L2PcInstance extends L2Playable
 			summon.setFollowStatus(true);
 			summon.updateAndBroadcastStatus(0);
 		}
-		
-		GameEventManager.onTeleported(this);
+		GameEventManager.getInstance().getEvent().onTeleported(this);
 	}
 	
 	@Override
@@ -10566,7 +10567,7 @@ public class L2PcInstance extends L2Playable
 		// TvT Event removal
 		try
 		{
-			GameEventManager.onLogout(this);
+			GameEventManager.getInstance().getEvent().onLogout(this);
 		}
 		catch (Exception e)
 		{
@@ -13475,7 +13476,7 @@ public class L2PcInstance extends L2Playable
 			return false;
 		}
 		
-		if (target.isFestivalParticipant() || target.isFlyingMounted() || target.isCombatFlagEquipped() || !GameEventManager.onEscapeUse(target.getObjectId()))
+		if (target.isFestivalParticipant() || target.isFlyingMounted() || target.isCombatFlagEquipped() || !GameEventManager.getInstance().getEvent().onEscapeUse(target.getObjectId()))
 		{
 			sendPacket(SystemMessageId.YOUR_TARGET_IS_IN_AN_AREA_WHICH_BLOCKS_SUMMONING);
 			return false;
@@ -13700,5 +13701,34 @@ public class L2PcInstance extends L2Playable
 			return true;
 		}
 		return false;
+	}
+	
+	private GameEvent _event;
+	
+	public GameEvent getEvent()
+	{
+		return _event;
+	}
+	
+	public void setEvent(GameEvent event)
+	{
+		_event = event;
+	}
+	
+	private int _kills;
+	
+	public int getKills()
+	{
+		return _kills;
+	}
+	
+	public void setKills(int kills)
+	{
+		_kills = kills;
+	}
+	
+	public void increaseKills()
+	{
+		++_kills;
 	}
 }
