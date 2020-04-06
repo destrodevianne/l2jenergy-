@@ -18,6 +18,9 @@
  */
 package com.l2jserver.gameserver.configuration.config.custom;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.l2jserver.commons.configuration.annotations.Configuration;
 import com.l2jserver.commons.configuration.annotations.Setting;
 
@@ -65,4 +68,103 @@ public class TopsConfig
 	
 	@Setting(name = "TopSaveDays")
 	public static int TOP_SAVE_DAYS;
+	
+	@Setting(name = "EnableVoteSystem")
+	public static boolean ENABLE_VOTE_SYSTEM;
+	
+	@Setting(name = "AllowNetworkVoteReward")
+	public static boolean ALLOW_NETWORK_VOTE_REWARD;
+	
+	@Setting(name = "NetworkServerLink", canNull = true)
+	public static String NETWORK_SERVER_LINK;
+	
+	@Setting(name = "NetworkVotesDifference")
+	public static int NETWORK_VOTES_DIFFERENCE;
+	
+	@Setting(name = "NetworkRewardCheckTime")
+	public static int NETWORK_REWARD_CHECK_TIME;
+	
+	@Setting(name = "NetworkReward", method = "networkReward")
+	public static Map<Integer, Integer> NETWORK_REWARD;
+	
+	@Setting(name = "NetworkDualboxesAllowed")
+	public static int NETWORK_DUALBOXES_ALLOWED;
+	
+	@Setting(name = "AllowNetworkGameServerReport")
+	public static boolean ALLOW_NETWORK_GAME_SERVER_REPORT;
+	
+	@Setting(name = "AllowTopzoneVoteReward")
+	public static boolean ALLOW_TOPZONE_VOTE_REWARD;
+	
+	@Setting(name = "TopzoneServerLink", canNull = true)
+	public static String TOPZONE_SERVER_LINK;
+	
+	@Setting(name = "TopzoneVotesDifference")
+	public static int TOPZONE_VOTES_DIFFERENCE;
+	
+	@Setting(name = "TopzoneRewardCheckTime")
+	public static int TOPZONE_REWARD_CHECK_TIME;
+	
+	@Setting(name = "TopzoneReward", method = "topzoneReward")
+	public static Map<Integer, Integer> TOPZONE_REWARD;
+	
+	@Setting(name = "TopzoneDualboxesAllowed")
+	public static int TOPZONE_DUALBOXES_ALLOWED;
+	
+	@Setting(name = "AllowTopzoneGameServerReport")
+	public static boolean ALLOW_TOPZONE_GAME_SERVER_REPORT;
+	
+	@Setting(name = "AllowHopzoneVoteReward")
+	public static boolean ALLOW_HOPZONE_VOTE_REWARD;
+	
+	@Setting(name = "HopzoneServerLink", canNull = true)
+	public static String HOPZONE_SERVER_LINK;
+	
+	@Setting(name = "HopzoneVotesDifference")
+	public static int HOPZONE_VOTES_DIFFERENCE;
+	
+	@Setting(name = "HopzoneRewardCheckTime")
+	public static int HOPZONE_REWARD_CHECK_TIME;
+	
+	@Setting(name = "HopzoneReward", method = "hopzoneReward")
+	public static Map<Integer, Integer> HOPZONE_REWARD;
+	
+	@Setting(name = "HopzoneDualboxesAllowed")
+	public static int HOPZONE_DUALBOXES_ALLOWED;
+	
+	@Setting(name = "AllowHopzoneGameServerReport")
+	public static boolean ALLOW_HOPZONE_GAME_SERVER_REPORT;
+	
+	public void networkReward(String value)
+	{
+		String[] array = value.split(";");
+		NETWORK_REWARD = new HashMap<>(array.length);
+		for (String i : array)
+		{
+			String[] small_reward = i.split(",");
+			NETWORK_REWARD.put(Integer.parseInt(small_reward[0]), Integer.parseInt(small_reward[1]));
+		}
+	}
+	
+	public void topzoneReward(String value)
+	{
+		String[] array = value.split(";");
+		TOPZONE_REWARD = new HashMap<>(array.length);
+		for (String i : array)
+		{
+			String[] small_reward = i.split(",");
+			TOPZONE_REWARD.put(Integer.parseInt(small_reward[0]), Integer.parseInt(small_reward[1]));
+		}
+	}
+	
+	public void hopzoneReward(String value)
+	{
+		String[] array = value.split(";");
+		HOPZONE_REWARD = new HashMap<>(array.length);
+		for (String i : array)
+		{
+			String[] small_reward = i.split(",");
+			HOPZONE_REWARD.put(Integer.parseInt(small_reward[0]), Integer.parseInt(small_reward[1]));
+		}
+	}
 }

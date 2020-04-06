@@ -1,6 +1,6 @@
 {
     # =====================================================================
-    #                        Ranking Server Settings
+    #                        Voting Server Settings
     # =====================================================================
     # This system is designed for automatic voting on L2Top.ru
     # Is the system automatically started?
@@ -39,5 +39,94 @@
     "TopServerAddress" : "L2jEnergy.ru",
 
     # L2top and MMOTop Days to keep voting
-    "TopSaveDays" : "30"
+    "TopSaveDays" : "30",
+
+    # =====================================================================
+    # vote system Hopzone/topzone/Network
+    # =====================================================================
+    # This system is designed for automatic voting on Hopzone/topzone/Network
+    # Is the system automatically started?
+    "EnableVoteSystem" : "false",
+
+    # =====================================================================
+    # vote system Network
+    # =====================================================================
+    # Vote reward for Network.
+    "AllowNetworkVoteReward" : "false",
+
+    # Vote reward server link. (IMPORTANT!!!! Always add .html at the end of the link)
+    "NetworkServerLink" : "null",
+
+    # Votes for next reward needed.
+    "NetworkVotesDifference" : "4",
+
+    # Minutes between rewards.
+    # Eg. You put 5 it checks every 5 minutes for reward.
+    "NetworkRewardCheckTime" : "5",
+
+    # Reward(s).
+    "NetworkReward" : "57,1000",
+
+    # Network reward max dual boxes reward.
+    # For example if you put 2 and someone has 3 boxes open 2 will be rewarded.
+    "NetworkDualboxesAllowed" : "1",
+
+    # Game server console report.
+    # If set to true, game server console will get a report of
+    # current vote count, votes needed for next reward and votes needed for first page.
+    "AllowNetworkGameServerReport" : "false",
+
+    # =====================================================================
+    # vote system topzone
+    # =====================================================================
+    "AllowTopzoneVoteReward" : "false",
+
+    # Vote reward server link. (IMPORTANT!!!! Always add .html at the end of the link)
+    "TopzoneServerLink" : "null",
+
+    # Votes for next reward needed.
+    "TopzoneVotesDifference" : "4",
+
+    # Minutes between rewards.
+    # Eg. You put 5 it checks every 5 minutes for reward.
+    "TopzoneRewardCheckTime" : "5",
+
+    # Reward(s).
+    "TopzoneReward" : "57,1000",
+
+    # Topzone reward max dual boxes reward.
+    # For example if you put 2 and someone has 3 boxes open 2 will be rewarded.
+    "TopzoneDualboxesAllowed" : "1",
+
+    # Game server console report.
+    # If set to true, game server console will get a report of
+    # current vote count, votes needed for next reward and votes needed for first page.
+    "AllowTopzoneGameServerReport" : "false",
+
+    # =====================================================================
+    # vote system Hopzone
+    # =====================================================================
+    "AllowHopzoneVoteReward" : "false",
+    
+    # Vote reward server link. (IMPORTANT!!!! Always add .html at the end of the link)
+    "HopzoneServerLink" : "null",
+
+    # Votes for next reward needed.
+    "HopzoneVotesDifference" : "4",
+
+    # Minutes between rewards.
+    # Eg. You put 5 it checks every 5 minutes for reward.
+    "HopzoneRewardCheckTime" : "5",
+
+    # Reward(s).
+    "HopzoneReward" : "57,1000",
+
+    # Topzone reward max dual boxes reward.
+    # For example if you put 2 and someone has 3 boxes open 2 will be rewarded.
+    "HopzoneDualboxesAllowed" : "1",
+
+    # Game server console report.
+    # If set to true, game server console will get a report of
+    # current vote count, votes needed for next reward and votes needed for first page.
+    "AllowHopzoneGameServerReport" : "false"
 }
