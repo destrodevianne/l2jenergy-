@@ -22,7 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.pool.PooledConnectionFactory;
-import com.l2jserver.commons.database.pool.impl.BoneCPPooledConnectionFactory;
 import com.l2jserver.commons.database.pool.impl.C3P0PooledConnectionFactory;
 import com.l2jserver.commons.database.pool.impl.HikariCPPooledConnectionFactory;
 
@@ -72,11 +71,6 @@ public class ConnectionFactory
 			case "C3P0":
 			{
 				pooledConnectionFactory = new C3P0PooledConnectionFactory(driver, url, user, password, maxPoolSize, maxIdleTime);
-				break;
-			}
-			case "BoneCP":
-			{
-				pooledConnectionFactory = new BoneCPPooledConnectionFactory(driver, url, user, password, maxPoolSize, maxIdleTime);
 				break;
 			}
 		}

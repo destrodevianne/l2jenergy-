@@ -68,7 +68,7 @@
 
     # Database Connection Pool
     # Default: HikariCP
-    # Available: BoneCP, C3P0, HikariCP
+    # Available: C3P0, HikariCP
     "ConnectionPool" : "HikariCP",
 
     # Default: 100

@@ -116,33 +116,33 @@
     # Default: 12
     "MaximumSlotsForPet" : "12",
 
-    # HP/MP Regen Multiplier for Pets
-    # Default: 100, 100
-    "PetHpRegenMultiplier" : "100",
-    "PetMpRegenMultiplier" : "100",
+    # HP/MP Regen Multiplier for Pets 1 = 100%
+    # Default: 1, 1
+    "PetHpRegenMultiplier" : "1",
+    "PetMpRegenMultiplier" : "1",
 
     # ===================================================================== 
     #                                  Raid Bosses
     # ===================================================================== 
     # Percent of HP and MP regeneration for raid bosses.
-    # Example: Setting HP to 10 will cause raid boss HP to regenerate 90% slower than normal.
-    # Default: 100, 100
-    "RaidHpRegenMultiplier" : "100",
-    "RaidMpRegenMultiplier" : "100",
+    # Example: Setting HP to 0.1 will cause raid boss HP to regenerate 90% slower than normal.
+    # Default: 1, 1
+    "RaidHpRegenMultiplier" : "1",
+    "RaidMpRegenMultiplier" : "1",
 
     # Percent of physical and magical defense for raid bosses.
-    # Example: A setting of 10 will cause defense to be 90% lower than normal, 
-    # while 110 will cause defense to be 10% higher than normal.
-    # Default: 100, 100
-    "RaidPDefenceMultiplier" : "100",
-    "RaidMDefenceMultiplier" : "100",
+    # Example: A setting of 0.1 will cause defense to be 90% lower than normal, 
+    # while 1.1 will cause defense to be 10% higher than normal.
+    # Default: 1, 1
+    "RaidPDefenceMultiplier" : "1",
+    "RaidMDefenceMultiplier" : "1",
 
     # Percent of physical and magical attack for raid bosses.
-    # Example: A setting of 10 will cause attack to be 90% lower than normal, 
-    # while 110 will cause attack to be 10% higher than normal.
-    # Default: 100, 100
-    "RaidPAttackMultiplier" : "100",
-    "RaidMAttackMultiplier" : "100",
+    # Example: A setting of 0.1 will cause attack to be 90% lower than normal, 
+    # while 1.1 will cause attack to be 10% higher than normal.
+    # Default: 1, 1
+    "RaidPAttackMultiplier" : "1",
+    "RaidMAttackMultiplier" : "1",
 
     # Configure Minimum and Maximum time multiplier between raid boss re-spawn.
     # By default 12Hours*1.0 for Minimum Time and 24Hours*1.0 for Maximum Time.

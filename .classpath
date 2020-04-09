@@ -3,7 +3,6 @@
 	<classpathentry kind="src" path="java"/>
 	<classpathentry kind="src" path="dist/game/data/scripts"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/bonecp-0.8.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/c3p0-0.9.5.2.jar"/>
 	<classpathentry kind="lib" path="lib/ecj-4.6.1.jar"/>
 	<classpathentry kind="lib" path="lib/gson-2.8.5.jar"/>

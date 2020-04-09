@@ -57,23 +57,23 @@ public class CharacterConfig
 	@Setting(name = "DeathPenaltyChance")
 	public static int DEATH_PENALTY_CHANCE;
 	
-	@Setting(name = "RespawnRestoreCP", decrease = 100)
-	public static double RESPAWN_RESTORE_CP; // character.getDouble("RespawnRestoreCP", 0) / 100;
+	@Setting(name = "RespawnRestoreCP")
+	public static double RESPAWN_RESTORE_CP;
 	
-	@Setting(name = "RespawnRestoreHP", decrease = 100)
-	public static double RESPAWN_RESTORE_HP; // character.getDouble("RespawnRestoreHP", 65) / 100;
+	@Setting(name = "RespawnRestoreHP")
+	public static double RESPAWN_RESTORE_HP;
 	
-	@Setting(name = "RespawnRestoreMP", decrease = 100)
-	public static double RESPAWN_RESTORE_MP; // character.getDouble("RespawnRestoreMP", 0) / 100;
+	@Setting(name = "RespawnRestoreMP")
+	public static double RESPAWN_RESTORE_MP;
 	
-	@Setting(name = "HpRegenMultiplier", decrease = 100)
-	public static double HP_REGEN_MULTIPLIER; // character.getDouble("HpRegenMultiplier", 100) / 100;
+	@Setting(name = "HpRegenMultiplier")
+	public static double HP_REGEN_MULTIPLIER;
 	
-	@Setting(name = "MpRegenMultiplier", decrease = 100)
-	public static double MP_REGEN_MULTIPLIER; // character.getDouble("MpRegenMultiplier", 100) / 100;
+	@Setting(name = "MpRegenMultiplier")
+	public static double MP_REGEN_MULTIPLIER;
 	
-	@Setting(name = "CpRegenMultiplier", decrease = 100)
-	public static double CP_REGEN_MULTIPLIER; // character.getDouble("CpRegenMultiplier", 100) / 100;
+	@Setting(name = "CpRegenMultiplier")
+	public static double CP_REGEN_MULTIPLIER;
 	
 	@Setting(name = "EnableModifySkillDuration")
 	public static boolean ENABLE_MODIFY_SKILL_DURATION;

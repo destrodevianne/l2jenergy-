@@ -107,23 +107,23 @@ public class NpcConfig
 	@Setting(name = "ListPetRentNpc", method = "listPet")
 	public static List<Integer> LIST_PET_RENT_NPC;
 	
-	@Setting(name = "RaidHpRegenMultiplier", decrease = 100)
-	public static double RAID_HP_REGEN_MULTIPLIER; // RAID_HP_REGEN_MULTIPLIER = NPC.getDouble("RaidHpRegenMultiplier", 100) / 100;
+	@Setting(name = "RaidHpRegenMultiplier")
+	public static double RAID_HP_REGEN_MULTIPLIER;
 	
-	@Setting(name = "RaidMpRegenMultiplier", decrease = 100)
-	public static double RAID_MP_REGEN_MULTIPLIER; /// RAID_MP_REGEN_MULTIPLIER = NPC.getDouble("RaidMpRegenMultiplier", 100) / 100;
+	@Setting(name = "RaidMpRegenMultiplier")
+	public static double RAID_MP_REGEN_MULTIPLIER;
 	
-	@Setting(name = "RaidPDefenceMultiplier", decrease = 100)
-	public static double RAID_PDEFENCE_MULTIPLIER; // RAID_PDEFENCE_MULTIPLIER = NPC.getDouble("RaidPDefenceMultiplier", 100) / 100;
+	@Setting(name = "RaidPDefenceMultiplier")
+	public static double RAID_PDEFENCE_MULTIPLIER;
 	
-	@Setting(name = "RaidMDefenceMultiplier", decrease = 100)
-	public static double RAID_MDEFENCE_MULTIPLIER; // RAID_MDEFENCE_MULTIPLIER = NPC.getDouble("RaidMDefenceMultiplier", 100) / 100;
+	@Setting(name = "RaidMDefenceMultiplier")
+	public static double RAID_MDEFENCE_MULTIPLIER;
 	
-	@Setting(name = "RaidPAttackMultiplier", decrease = 100)
-	public static double RAID_PATTACK_MULTIPLIER; // RAID_PATTACK_MULTIPLIER = NPC.getDouble("RaidPAttackMultiplier", 100) / 100;
+	@Setting(name = "RaidPAttackMultiplier")
+	public static double RAID_PATTACK_MULTIPLIER;
 	
-	@Setting(name = "RaidMAttackMultiplier", decrease = 100)
-	public static double RAID_MATTACK_MULTIPLIER; // RAID_MATTACK_MULTIPLIER = NPC.getDouble("RaidMAttackMultiplier", 100) / 100;
+	@Setting(name = "RaidMAttackMultiplier")
+	public static double RAID_MATTACK_MULTIPLIER;
 	
 	@Setting(name = "RaidMinionRespawnTime")
 	public static double RAID_MINION_RESPAWN_TIMER;
@@ -152,11 +152,11 @@ public class NpcConfig
 	@Setting(name = "MaximumSlotsForPet")
 	public static int INVENTORY_MAXIMUM_PET;
 	
-	@Setting(name = "PetHpRegenMultiplier", decrease = 100)
-	public static double PET_HP_REGEN_MULTIPLIER; // PET_HP_REGEN_MULTIPLIER = NPC.getDouble("PetHpRegenMultiplier", 100) / 100;
+	@Setting(name = "PetHpRegenMultiplier")
+	public static double PET_HP_REGEN_MULTIPLIER;
 	
-	@Setting(name = "PetMpRegenMultiplier", decrease = 100)
-	public static double PET_MP_REGEN_MULTIPLIER; // PET_MP_REGEN_MULTIPLIER = NPC.getDouble("PetMpRegenMultiplier", 100) / 100;
+	@Setting(name = "PetMpRegenMultiplier")
+	public static double PET_MP_REGEN_MULTIPLIER;
 	
 	@Setting(name = "DropAdenaMinLevelDifference")
 	public static int DROP_ADENA_MIN_LEVEL_DIFFERENCE;

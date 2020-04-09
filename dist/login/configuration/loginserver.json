@@ -77,6 +77,7 @@
     # Driver = org.mariadb.jdbc.Driver
     # Default: com.mysql.jdbc.Driver
     "Driver" : "org.mariadb.jdbc.Driver",
+
     # Database URL
     # URL = jdbc:mysql://localhost/l2jenergy?useSSL=false&serverTimezone=UTC
     # URL = jdbc:hsqldb:hsql://localhost/l2jenergy
@@ -84,6 +85,7 @@
     # URL = jdbc:mariadb://localhost/l2jenergy
     # Default: jdbc:mariadb://localhost/l2jenergy
     "URL" : "jdbc:mariadb://localhost/l2jenergy",
+
     # Database user info (default is "root" but it's not recommended)
     "Login" : "root",
 
@@ -92,7 +94,7 @@
 
     # Database Connection Pool
     # Default: HikariCP
-    # Available: BoneCP, C3P0, HikariCP
+    # Available: C3P0, HikariCP
     "ConnectionPool" : "HikariCP",
 
     # Default: 10
