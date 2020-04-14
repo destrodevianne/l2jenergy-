@@ -48,7 +48,7 @@ public class PlayerCreationPointData implements IXmlReader
 	public void load()
 	{
 		_creationPointData.clear();
-		parseDatapackFile("data/stats/chars/pcCreationPoints.xml");
+		parseDatapackFile("data/xml/stats/chars/pcCreationPoints.xml");
 		LOG.info("{}: Loaded {} character creation points.", getClass().getSimpleName(), _creationPointData.values().stream().mapToInt(array -> array.length).sum());
 	}
 	

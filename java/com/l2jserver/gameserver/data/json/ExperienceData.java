@@ -56,7 +56,7 @@ public final class ExperienceData
 	public void load()
 	{
 		_expTable.clear();
-		try (JsonReader reader = new JsonReader(new FileReader(new File(ServerConfig.DATAPACK_ROOT, "data/stats/expData.json"))))
+		try (JsonReader reader = new JsonReader(new FileReader(new File(ServerConfig.DATAPACK_ROOT, "data/xml/stats/expData.json"))))
 		{
 			_expTable.putAll(GSON.fromJson(reader, TYPE_MAP_INTEGER_LONG));
 		}

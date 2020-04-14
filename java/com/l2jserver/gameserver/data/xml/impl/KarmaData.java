@@ -44,7 +44,7 @@ public class KarmaData implements IXmlReader
 	public synchronized void load()
 	{
 		_karmaTable.clear();
-		parseDatapackFile("data/stats/chars/pcKarmaIncrease.xml");
+		parseDatapackFile("data/xml/stats/chars/pcKarmaIncrease.xml");
 		LOG.info("{}: Loaded {} karma modifiers.", getClass().getSimpleName(), _karmaTable.size());
 	}
 	

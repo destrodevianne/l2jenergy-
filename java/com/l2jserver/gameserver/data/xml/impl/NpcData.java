@@ -72,13 +72,13 @@ public class NpcData implements IXmlReader
 	{
 		_minionData = new MinionData();
 		
-		parseDatapackDirectory("data/stats/npcs", false);
+		parseDatapackDirectory("data/xml/stats/npcs", false);
 		LOG.info("{}: Loaded {} NPCs.", getClass().getSimpleName(), _npcs.size());
 		
 		if (GeneralConfig.CUSTOM_NPC_DATA)
 		{
 			final int npcCount = _npcs.size();
-			parseDatapackDirectory("data/stats/npcs/custom", true);
+			parseDatapackDirectory("data/xml/stats/npcs/custom", true);
 			LOG.info("{}: Loaded {} custom NPCs.", getClass().getSimpleName(), (_npcs.size() - npcCount));
 		}
 		

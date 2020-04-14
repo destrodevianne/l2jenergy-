@@ -52,7 +52,7 @@ public final class PetDataTable implements IXmlReader
 	public void load()
 	{
 		_pets.clear();
-		parseDatapackDirectory("data/stats/pets", false);
+		parseDatapackDirectory("data/xml/stats/pets", false);
 		LOG.info("{}: Loaded {} Pets.", getClass().getSimpleName(), _pets.size());
 	}
 	

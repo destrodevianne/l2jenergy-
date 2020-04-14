@@ -50,7 +50,7 @@ public class OptionData implements IXmlReader
 	public synchronized void load()
 	{
 		_optionData.clear();
-		parseDatapackDirectory("data/stats/options", false);
+		parseDatapackDirectory("data/xml/stats/options", false);
 		LOG.info("{}: Loaded: {} Options.", getClass().getSimpleName(), _optionData.size());
 	}
 	

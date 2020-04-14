@@ -46,7 +46,7 @@ public final class ArmorSetsData implements IXmlReader
 	public void load()
 	{
 		_armorSets.clear();
-		parseDatapackDirectory("data/stats/armorsets", false);
+		parseDatapackDirectory("data/xml/stats/armorsets", false);
 		LOG.info("{}: Loaded {} Armor sets.", getClass().getSimpleName(), _armorSets.size());
 	}
 	

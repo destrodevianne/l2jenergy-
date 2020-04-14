@@ -51,7 +51,7 @@ public final class HitConditionBonusData implements IXmlReader
 	@Override
 	public void load()
 	{
-		parseDatapackFile("data/stats/hitConditionBonus.xml");
+		parseDatapackFile("data/xml/stats/hitConditionBonus.xml");
 		LOG.info("{}: Loaded Hit Condition bonuses.", getClass().getSimpleName());
 		LOG.debug("{}: Front bonus: {}", getClass().getSimpleName(), frontBonus);
 		LOG.debug("{}: Side bonus: {}", getClass().getSimpleName(), sideBonus);

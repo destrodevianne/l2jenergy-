@@ -63,7 +63,7 @@ public final class InitialShortcutData implements IXmlReader
 		_initialShortcutData.clear();
 		_initialGlobalShortcutList.clear();
 		
-		parseDatapackFile("data/stats/initialShortcuts.xml");
+		parseDatapackFile("data/xml/stats/initialShortcuts.xml");
 		
 		LOG.info("{}: Loaded {} Initial Global Shortcuts data.", getClass().getSimpleName(), _initialGlobalShortcutList.size());
 		LOG.info("{}: Loaded {} Initial Shortcuts data.", getClass().getSimpleName(), _initialShortcutData.size());

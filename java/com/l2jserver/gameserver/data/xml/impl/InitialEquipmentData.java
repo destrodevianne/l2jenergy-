@@ -41,8 +41,8 @@ import com.l2jserver.gameserver.util.IXmlReader;
 public final class InitialEquipmentData implements IXmlReader
 {
 	private final Map<ClassId, List<PcItemTemplate>> _initialEquipmentList = new HashMap<>();
-	private static final String NORMAL = "data/stats/initialEquipment.xml";
-	private static final String EVENT = "data/stats/initialEquipmentEvent.xml";
+	private static final String NORMAL = "data/xml/stats/initialEquipment.xml";
+	private static final String EVENT = "data/xml/stats/initialEquipmentEvent.xml";
 	
 	/**
 	 * Instantiates a new initial equipment data.
