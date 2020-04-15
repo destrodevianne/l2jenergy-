@@ -54,7 +54,7 @@ public class TarBeetleSpawn implements IXmlReader
 	@Override
 	public void load()
 	{
-		parseDatapackFile("data/spawnZones/tar_beetle.xml");
+		parseDatapackFile("data/xml/spawnZones/tar_beetle.xml");
 		if (!zones.isEmpty())
 		{
 			spawnTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(() -> zones.forEach(SpawnZone::refreshSpawn), 1000, 60000);

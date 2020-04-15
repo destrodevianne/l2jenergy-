@@ -178,6 +178,7 @@ import handlers.chathandlers.ChatPetition;
 import handlers.chathandlers.ChatShout;
 import handlers.chathandlers.ChatTell;
 import handlers.chathandlers.ChatTrade;
+import handlers.communityboard.CareerBoard;
 import handlers.communityboard.ClanBoard;
 import handlers.communityboard.EventBoard;
 import handlers.communityboard.FavoriteBoard;
@@ -476,6 +477,7 @@ public class MasterHandler
 		},
 		{
 			// Community Board
+			CareerBoard.class,
 			ClanBoard.class,
 			EventBoard.class,
 			FavoriteBoard.class,

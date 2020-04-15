@@ -118,6 +118,24 @@ public class DifferentMethods
 		return ItemTable.getInstance().getTemplate(itemId).getName();
 	}
 	
+	public static String formatPay(final L2PcInstance player, final long count, final int item)
+	{
+		if (count > 0L)
+		{
+			return Util.formatAdena(count) + " " + getItemName(item);
+		}
+		return MessagesData.getInstance().getMessage(player, "community_board_price_free");
+	}
+	
+	public static String className(L2PcInstance player, int classId)
+	{
+		if (((classId < 0) || (classId > 136)) || ((classId > 118) && (classId < 123)) || ((classId > 57) && (classId < 88)))
+		{
+			return MessagesData.getInstance().getMessage(player, "community_board_utils_classId_name_default");
+		}
+		return MessagesData.getInstance().getMessage(player, "community_board_utils_classId_name_" + classId + "");
+	}
+	
 	public static boolean getPay(L2PcInstance activeChar, int itemid, long count)
 	{
 		if (activeChar == null)

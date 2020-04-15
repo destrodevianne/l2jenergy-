@@ -7614,7 +7614,7 @@ public final class SystemMessageId
 	 * ID: 1308<br>
 	 * Message: Congratulations - You've completed a class transfer!
 	 */
-	public static final SystemMessageId CLASS_TRANSFER = new SystemMessageId(1308);
+	public static final SystemMessageId CONGRATULATIONS_YOU_HAVE_COMPLETED_A_CLASS_TRANSFER = new SystemMessageId(1308);
 	
 	/**
 	 * ID: 1309<br>
@@ -9396,7 +9396,7 @@ public final class SystemMessageId
 	 * ID: 1606<br>
 	 * Message: Congratulations - You've completed your third-class transfer quest!
 	 */
-	public static final SystemMessageId THIRD_CLASS_TRANSFER = new SystemMessageId(1606);
+	public static final SystemMessageId YOU_HAVE_COMPLETED_THE_QUEST_FOR_3RD_OCCUPATION_CHANGE_AND_MOVED_TO_ANOTHER_CLASS_CONGRATULATIONS = new SystemMessageId(1606);
 	
 	/**
 	 * ID: 1607<br>

@@ -1,0 +1,22 @@
+{
+	#======================================================
+    #            Setting Community Board Career
+    #======================================================
+    # Enable Community Board Class Master.
+	"CommunityClassMasterEnable" : "true",
+
+	# What professions to include? (A value of 0 disables the purchase option)
+	"CommunityClassMasterLevel" : "1,2,3",
+
+	# Item id charged as payment.
+	"CommunityClassMasterItemId" : "57,57,57",
+
+	# Cost of changing a profession.
+	"CommunityClassMasterCount" : "300000,3000000,50000000",
+
+	# An alternative Id item charged as payment.
+	"CommunityClassMasterSecondItemId" : "0,0,0",
+
+	# The opportunity cost of changing a profession.
+	"CommunityClassMasterSecondCount" : "3,7,15"
+}

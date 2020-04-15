@@ -25,6 +25,426 @@
         <set lang="en" val="Services disabled." />
 		<set lang="ru" val="Сервис отключен." />
 	</message>
+	<message id="community_board_price_free">
+        <set lang="en" val="Free" />
+		<set lang="ru" val="Бесплатно" />
+	</message>
+	<message id="community_board_utils_classId_name_default">
+        <set lang="en" val="Unknown" />
+		<set lang="ru" val="Неизвесно" />
+	</message>
+	<message id="community_board_utils_classId_name_0">
+        <set lang="en" val="Human Fighter" />
+		<set lang="ru" val="Воин" />
+	</message>
+	<message id="community_board_utils_classId_name_1">
+        <set lang="en" val="Warrior" />
+		<set lang="ru" val="Воитель" />
+	</message>
+	<message id="community_board_utils_classId_name_2">
+        <set lang="en" val="Gladiator" />
+		<set lang="ru" val="Гладиатор" />
+	</message>
+	<message id="community_board_utils_classId_name_3">
+        <set lang="en" val="Warlord" />
+		<set lang="ru" val="Копейщик" />
+	</message>
+	<message id="community_board_utils_classId_name_4">
+        <set lang="en" val="Human Knight" />
+		<set lang="ru" val="Рыцарь" />
+	</message>
+	<message id="community_board_utils_classId_name_5">
+        <set lang="en" val="Paladin" />
+		<set lang="ru" val="Паладин" />
+	</message>
+	<message id="community_board_utils_classId_name_6">
+        <set lang="en" val="Dark Avenger" />
+		<set lang="ru" val="Мститель" />
+	</message>
+	<message id="community_board_utils_classId_name_7">
+        <set lang="en" val="Rogue" />
+		<set lang="ru" val="Разбойник" />
+	</message>
+	<message id="community_board_utils_classId_name_8">
+        <set lang="en" val="Treasure Hunter" />
+		<set lang="ru" val="Искатель Сокровищ" />
+	</message>
+	<message id="community_board_utils_classId_name_9">
+        <set lang="en" val="Hawkeye" />
+		<set lang="ru" val="Стрелок" />
+	</message>
+	<message id="community_board_utils_classId_name_10">
+        <set lang="en" val="Human Mystic" />
+		<set lang="ru" val="Мистик" />
+	</message>
+	<message id="community_board_utils_classId_name_11">
+        <set lang="en" val="Human Wizard" />
+		<set lang="ru" val="Маг" />
+	</message>
+	<message id="community_board_utils_classId_name_12">
+        <set lang="en" val="Sorcerer" />
+		<set lang="ru" val="Властитель Огня" />
+	</message>
+	<message id="community_board_utils_classId_name_13">
+        <set lang="en" val="Necromancer" />
+		<set lang="ru" val="Некромант" />
+	</message>
+	<message id="community_board_utils_classId_name_14">
+        <set lang="en" val="Warlock" />
+		<set lang="ru" val="Колдун" />
+	</message>
+	<message id="community_board_utils_classId_name_15">
+        <set lang="en" val="Cleric" />
+		<set lang="ru" val="Клерик" />
+	</message>
+	<message id="community_board_utils_classId_name_16">
+        <set lang="en" val="Bishop" />
+		<set lang="ru" val="Епископ" />
+	</message>
+	<message id="community_board_utils_classId_name_17">
+        <set lang="en" val="Prophet" />
+		<set lang="ru" val="Проповедник" />
+	</message>
+	<message id="community_board_utils_classId_name_18">
+        <set lang="en" val="Elven Fighter" />
+		<set lang="ru" val="Светлый Воин" />
+	</message>
+	<message id="community_board_utils_classId_name_19">
+        <set lang="en" val="Elven Knight" />
+		<set lang="ru" val="Светлый Рыцарь" />
+	</message>
+	<message id="community_board_utils_classId_name_20">
+        <set lang="en" val="Temple Knight" />
+		<set lang="ru" val="Рыцарь Евы" />
+	</message>
+	<message id="community_board_utils_classId_name_21">
+        <set lang="en" val="Sword Singer" />
+		<set lang="ru" val="Менестрель" />
+	</message>
+	<message id="community_board_utils_classId_name_22">
+        <set lang="en" val="Elven Scout" />
+		<set lang="ru" val="Разведчик" />
+	</message>
+	<message id="community_board_utils_classId_name_23">
+        <set lang="en" val="Plains Walker" />
+		<set lang="ru" val="Следопыт" />
+	</message>
+	<message id="community_board_utils_classId_name_24">
+        <set lang="en" val="Silver Ranger" />
+		<set lang="ru" val="Серебряный Рейнджер" />
+	</message>
+	<message id="community_board_utils_classId_name_25">
+        <set lang="en" val="Elven Mystic" />
+		<set lang="ru" val="Светлый Мистик" />
+	</message>
+	<message id="community_board_utils_classId_name_26">
+        <set lang="en" val="Elven Wizard" />
+		<set lang="ru" val="Светлый Маг" />
+	</message>
+	<message id="community_board_utils_classId_name_27">
+        <set lang="en" val="Spellsinger" />
+		<set lang="ru" val="Певец Заклинаний" />
+	</message>
+	<message id="community_board_utils_classId_name_28">
+        <set lang="en" val="Elemental Summoner" />
+		<set lang="ru" val="Последователь Стихий" />
+	</message>
+	<message id="community_board_utils_classId_name_29">
+        <set lang="en" val="Elven Oracle" />
+		<set lang="ru" val="Оракул Евы" />
+	</message>
+	<message id="community_board_utils_classId_name_30">
+        <set lang="en" val="Elven Elder" />
+		<set lang="ru" val="Мудрец Евы" />
+	</message>
+	<message id="community_board_utils_classId_name_31">
+        <set lang="en" val="Dark Fighter" />
+		<set lang="ru" val="Темный Воин" />
+	</message>
+	<message id="community_board_utils_classId_name_32">
+        <set lang="en" val="Palus Knight" />
+		<set lang="ru" val="Темный Рыцарь" />
+	</message>
+	<message id="community_board_utils_classId_name_33">
+        <set lang="en" val="Shillien Knight" />
+		<set lang="ru" val="Рыцарь Шилен" />
+	</message>
+	<message id="community_board_utils_classId_name_34">
+        <set lang="en" val="Bladedancer" />
+		<set lang="ru" val="Танцор Смерти" />
+	</message>
+	<message id="community_board_utils_classId_name_35">
+        <set lang="en" val="Assassin" />
+		<set lang="ru" val="Ассасин" />
+	</message>
+	<message id="community_board_utils_classId_name_36">
+        <set lang="en" val="Abyss Walker" />
+		<set lang="ru" val="Странник Бездны" />
+	</message>
+	<message id="community_board_utils_classId_name_37">
+        <set lang="en" val="Phantom Ranger" />
+		<set lang="ru" val="Призрачный Рейнджер" />
+	</message>
+	<message id="community_board_utils_classId_name_38">
+        <set lang="en" val="Dark Mystic" />
+		<set lang="ru" val="Темный Мистик" />
+	</message>
+	<message id="community_board_utils_classId_name_39">
+        <set lang="en" val="Dark Wizard" />
+		<set lang="ru" val="Темный Маг" />
+	</message>
+	<message id="community_board_utils_classId_name_40">
+        <set lang="en" val="Spellhowler" />
+		<set lang="ru" val="Заклинатель Ветра" />
+	</message>
+	<message id="community_board_utils_classId_name_41">
+        <set lang="en" val="Phantom Summoner" />
+		<set lang="ru" val="Последователь Тьмы" />
+	</message>
+	<message id="community_board_utils_classId_name_42">
+        <set lang="en" val="Shillien Oracle" />
+		<set lang="ru" val="Оракул Шилен" />
+	</message>
+	<message id="community_board_utils_classId_name_43">
+        <set lang="en" val="Shillien Elder" />
+		<set lang="ru" val="Мудрец Шилен" />
+	</message>
+	<message id="community_board_utils_classId_name_44">
+        <set lang="en" val="Orc Fighter" />
+		<set lang="ru" val="Орк Боец" />
+	</message>
+	<message id="community_board_utils_classId_name_45">
+		<set lang="en" val="Orc Raider" />
+		<set lang="ru" val="Орк Налетчик" />
+	</message>
+	<message id="community_board_utils_classId_name_46">
+        <set lang="en" val="Destroyer" />
+		<set lang="ru" val="Разрушитель" />
+	</message>
+	<message id="community_board_utils_classId_name_47">
+        <set lang="en" val="Monk" />
+		<set lang="ru" val="Монах" />
+	</message>
+	<message id="community_board_utils_classId_name_48">
+        <set lang="en" val="Tyrant" />
+		<set lang="ru" val="Отшельник" />
+	</message>
+	<message id="community_board_utils_classId_name_49">
+        <set lang="en" val="Orc Mystic" />
+		<set lang="ru" val="Орк Адепт" />
+	</message>
+	<message id="community_board_utils_classId_name_50">
+        <set lang="en" val="Orc Shaman" />
+		<set lang="ru" val="Орк Шаман" />
+	</message>
+	<message id="community_board_utils_classId_name_51">
+        <set lang="en" val="Overlord" />
+		<set lang="ru" val="Верховный Шаман" />
+	</message>
+	<message id="community_board_utils_classId_name_52">
+        <set lang="en" val="Warcryer" />
+		<set lang="ru" val="Вестник Войны" />
+	</message>
+	<message id="community_board_utils_classId_name_53">
+        <set lang="en" val="Dwarven Fighter" />
+		<set lang="ru" val="Подмастерье" />
+	</message>
+	<message id="community_board_utils_classId_name_54">
+        <set lang="en" val="Scavenger" />
+		<set lang="ru" val="Собиратель" />
+	</message>
+	<message id="community_board_utils_classId_name_55">
+        <set lang="en" val="Bounty Hunter" />
+		<set lang="ru" val="Охотник за Наградой" />
+	</message>
+	<message id="community_board_utils_classId_name_56">
+        <set lang="en" val="Artisan" />
+		<set lang="ru" val="Ремесленник" />
+	</message>
+	<message id="community_board_utils_classId_name_57">
+        <set lang="en" val="Warsmith" />
+		<set lang="ru" val="Кузнец" />
+	</message>
+	<message id="community_board_utils_classId_name_88">
+        <set lang="en" val="Duelist" />
+		<set lang="ru" val="Дуэлист" />
+	</message>
+	<message id="community_board_utils_classId_name_89">
+        <set lang="en" val="Dreadnought" />
+		<set lang="ru" val="Полководец" />
+	</message>
+	<message id="community_board_utils_classId_name_90">
+        <set lang="en" val="Phoenix Knight" />
+		<set lang="ru" val="Рыцарь Феникса" />
+	</message>
+	<message id="community_board_utils_classId_name_91">
+        <set lang="en" val="Hell Knight" />
+		<set lang="ru" val="Рыцарь Ада" />
+	</message>
+	<message id="community_board_utils_classId_name_92">
+        <set lang="en" val="Sagittarius" />
+		<set lang="ru" val="Снайпер" />
+	</message>
+	<message id="community_board_utils_classId_name_93">
+        <set lang="en" val="Adventurer" />
+		<set lang="ru" val="Авантюрист" />
+	</message>
+	<message id="community_board_utils_classId_name_94">
+        <set lang="en" val="Archmage" />
+		<set lang="ru" val="Архимаг" />
+	</message>
+	<message id="community_board_utils_classId_name_95">
+        <set lang="en" val="Soultaker" />
+		<set lang="ru" val="Пожиратель Душ" />
+	</message>
+	<message id="community_board_utils_classId_name_96">
+        <set lang="en" val="Arcana Lord" />
+		<set lang="ru" val="Чернокнижник" />
+	</message>
+	<message id="community_board_utils_classId_name_97">
+        <set lang="en" val="Cardinal" />
+		<set lang="ru" val="Кардинал" />
+	</message>
+	<message id="community_board_utils_classId_name_98">
+        <set lang="en" val="Hierophant" />
+		<set lang="ru" val="Апостол" />
+	</message>
+	<message id="community_board_utils_classId_name_99">
+        <set lang="en" val="Eva's Templar" />
+		<set lang="ru" val="Храмовник Евы" />
+	</message>
+	<message id="community_board_utils_classId_name_100">
+        <set lang="en" val="Sword Muse" />
+		<set lang="ru" val="Виртуоз" />
+	</message>
+	<message id="community_board_utils_classId_name_101">
+        <set lang="en" val="Wind Rider" />
+		<set lang="ru" val="Странник Ветра" />
+	</message>
+	<message id="community_board_utils_classId_name_102">
+        <set lang="en" val="Moonlight Sentinel" />
+		<set lang="ru" val="Страж Лунного Света" />
+	</message>
+	<message id="community_board_utils_classId_name_103">
+        <set lang="en" val="Mystic Muse" />
+		<set lang="ru" val="Магистр Магии" />
+	</message>
+	<message id="community_board_utils_classId_name_104">
+        <set lang="en" val="Elemental Master" />
+		<set lang="ru" val="Мастер Стихий" />
+	</message>
+	<message id="community_board_utils_classId_name_105">
+        <set lang="en" val="Eva's Saint" />
+		<set lang="ru" val="Жрец Евы" />
+	</message>
+	<message id="community_board_utils_classId_name_106">
+        <set lang="en" val="Shillien Templar" />
+		<set lang="ru" val="Храмовник Шилен" />
+	</message>
+	<message id="community_board_utils_classId_name_107">
+        <set lang="en" val="Spectral Dancer" />
+		<set lang="ru" val="Призрачный Танцор" />
+	</message>
+	<message id="community_board_utils_classId_name_108">
+        <set lang="en" val="Ghost Hunter" />
+		<set lang="ru" val="Призрачный Охотник" />
+	</message>
+	<message id="community_board_utils_classId_name_109">
+        <set lang="en" val="Ghost Sentinel" />
+		<set lang="ru" val="Страж Теней" />
+	</message>
+	<message id="community_board_utils_classId_name_110">
+        <set lang="en" val="Storm Screamer" />
+		<set lang="ru" val="Повелитель Бури" />
+	</message>
+	<message id="community_board_utils_classId_name_111">
+        <set lang="en" val="Spectral Master" />
+		<set lang="ru" val="Владыка Теней" />
+	</message>
+	<message id="community_board_utils_classId_name_112">
+        <set lang="en" val="Shillien Saint" />
+		<set lang="ru" val="Жрец Шилен" />
+	</message>
+	<message id="community_board_utils_classId_name_113">
+        <set lang="en" val="Titan" />
+		<set lang="ru" val="Титан" />
+	</message>
+	<message id="community_board_utils_classId_name_114">
+        <set lang="en" val="Grand Khavatari" />
+		<set lang="ru" val="Аватар" />
+	</message>
+	<message id="community_board_utils_classId_name_115">
+        <set lang="en" val="Dominator" />
+		<set lang="ru" val="Деспот" />
+	</message>
+	<message id="community_board_utils_classId_name_116">
+        <set lang="en" val="Doom Cryer" />
+		<set lang="ru" val="Глас Судьбы" />
+	</message>
+	<message id="community_board_utils_classId_name_117">
+        <set lang="en" val="Fortune Seeker" />
+		<set lang="ru" val="Кладоискатель" />
+	</message>
+	<message id="community_board_utils_classId_name_118">
+        <set lang="en" val="Maestro" />
+		<set lang="ru" val="Мастер" />
+	</message>
+	<message id="community_board_utils_classId_name_123">
+        <set lang="en" val="Kamael Soldier" />
+		<set lang="ru" val="Грешник" />
+	</message>
+	<message id="community_board_utils_classId_name_124">
+        <set lang="en" val="Kamael Soldier" />
+		<set lang="ru" val="Грешница" />
+	</message>
+	<message id="community_board_utils_classId_name_125">
+        <set lang="en" val="Trooper" />
+		<set lang="ru" val="Солдат" />
+	</message>
+	<message id="community_board_utils_classId_name_126">
+        <set lang="en" val="Warder" />
+		<set lang="ru" val="Надзиратель" />
+	</message>
+	<message id="community_board_utils_classId_name_127">
+        <set lang="en" val="Berserker" />
+		<set lang="ru" val="Берсерк" />
+	</message>
+	<message id="community_board_utils_classId_name_128">
+        <set lang="en" val="Soul Breaker" />
+		<set lang="ru" val="Палач" />
+	</message>
+	<message id="community_board_utils_classId_name_129">
+        <set lang="en" val="Soul Breaker" />
+		<set lang="ru" val="Палач" />
+	</message>
+	<message id="community_board_utils_classId_name_130">
+        <set lang="en" val="Arbalester" />
+		<set lang="ru" val="Арбалетчик" />
+	</message>
+	<message id="community_board_utils_classId_name_131">
+        <set lang="en" val="Doombringer" />
+		<set lang="ru" val="Каратель" />
+	</message>
+	<message id="community_board_utils_classId_name_132">
+        <set lang="en" val="Soul Hound" />
+		<set lang="ru" val="Инквизитор" />
+	</message>
+	<message id="community_board_utils_classId_name_133">
+        <set lang="en" val="Soul Hound" />
+		<set lang="ru" val="Инквизитор" />
+	</message>
+	<message id="community_board_utils_classId_name_134">
+        <set lang="en" val="Trickster" />
+		<set lang="ru" val="Диверсант" />
+	</message>
+	<message id="community_board_utils_classId_name_135">
+        <set lang="en" val="Inspector" />
+		<set lang="ru" val="Инспектор" />
+	</message>
+	<message id="community_board_utils_classId_name_136">
+        <set lang="en" val="Judicator" />
+		<set lang="ru" val="Арбитр" />
+	</message>
 	<!-- TeleportBoard Messages -->
     <message id="communityboard_teleport_personal_point_only_premium">
         <set lang="en" val="Only Players with premium accounts can use the teleport point." />
@@ -77,6 +497,43 @@
 	<message id="communityboard_teleport_dont_have_points">
         <set lang="en" val="You don't have points!" />
 		<set lang="ru" val="У вас нет сохраненных точек!" />
+	</message>
+	<!-- CareerBoard Messages -->
+	<message id="community_board_classMaster_choiceClass">
+        <set lang="en" val="» Select a new profession «" />
+		<set lang="ru" val="» Выберите новую профессию «" />
+	</message>
+	<message id="community_board_classMaster_cost">
+        <set lang="en" val="Cost: %s%." />
+		<set lang="ru" val="Стоимость: %s%." />
+	</message>
+	<message id="community_board_classMaster_costChoice">
+        <set lang="en" val="Cost: Choice." />
+		<set lang="ru" val="Стоимость: На выбор." />
+	</message>
+	<message id="community_board_classMaster_change">
+        <set lang="en" val="Change" />
+		<set lang="ru" val="Сменить" />
+	</message>
+	<message id="community_board_classMaster_needLevel_20">
+        <set lang="en" val="To change your profession you have to reach: 20 level." />
+		<set lang="ru" val="Для того, чтобы сменить вашу профессию, вы должны достичь: 20-го уровня." />
+	</message>
+	<message id="community_board_classMaster_needLevel_40">
+        <set lang="en" val="To change your profession you have to reach: 40 level." />
+		<set lang="ru" val="Для того, чтобы сменить вашу профессию, вы должны достичь: 40-го уровня." />
+	</message>
+	<message id="community_board_classMaster_needLevel_76">
+        <set lang="en" val="To change your profession you have to reach: 76 level." />
+		<set lang="ru" val="Для того, чтобы сменить вашу профессию, вы должны достичь: 76-го уровня." />
+	</message>
+	<message id="community_board_classMaster_needLevel_76">
+        <set lang="en" val="To change your profession you have to reach: 76 level." />
+		<set lang="ru" val="Для того, чтобы сменить вашу профессию, вы должны достичь: 76-го уровня." />
+	</message>
+	<message id="community_board_classMaster_you_have_learned_all_available_professions">
+        <set lang="en" val="You have learned all available professions!" />
+		<set lang="ru" val="Вы изучили все доступные профессии!" />
 	</message>
 	<!-- EventBoard Messages -->
 	<message id="communityboard_event_you_reg_for_event">

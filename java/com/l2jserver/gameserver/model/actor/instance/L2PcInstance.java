@@ -2263,11 +2263,11 @@ public class L2PcInstance extends L2Playable
 			setClassTemplate(Id);
 			if (getClassId().level() == 3)
 			{
-				sendPacket(SystemMessageId.THIRD_CLASS_TRANSFER);
+				sendPacket(SystemMessageId.YOU_HAVE_COMPLETED_THE_QUEST_FOR_3RD_OCCUPATION_CHANGE_AND_MOVED_TO_ANOTHER_CLASS_CONGRATULATIONS);
 			}
 			else
 			{
-				sendPacket(SystemMessageId.CLASS_TRANSFER);
+				sendPacket(SystemMessageId.CONGRATULATIONS_YOU_HAVE_COMPLETED_A_CLASS_TRANSFER);
 			}
 			
 			// Update class icon in party and clan
