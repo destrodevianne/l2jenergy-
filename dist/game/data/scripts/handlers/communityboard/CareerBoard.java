@@ -70,6 +70,7 @@ public class CareerBoard implements IParseBoardHandler
 			parseCommunityBoardCommand("_bbshome", player);
 			return;
 		}
+		
 		final ClassId classId = player.getClassId();
 		int jobLevel = classId.level();
 		final int level = player.getLevel();
@@ -78,12 +79,14 @@ public class CareerBoard implements IParseBoardHandler
 		
 		if (CClassMasterConfig.ALLOW_CLASS_MASTERS_LIST.isEmpty() || !CClassMasterConfig.ALLOW_CLASS_MASTERS_LIST.contains(jobLevel))
 		{
-			jobLevel = 4;
+			jobLevel = 3;
 		}
+		
 		String content = HtmCache.getInstance().getHtm(player.getHtmlPrefix(), "data/html/CommunityBoard/" + customPath + "classMaster/index.html");
 		String template = HtmCache.getInstance().getHtm(player.getHtmlPrefix(), "data/html/CommunityBoard/" + customPath + "classMaster/template.html");
 		String block;
-		if (((level >= 20) && (jobLevel == 1)) || ((level >= 40) && (jobLevel == 2)) || (((level >= 76) && (jobLevel == 3)) && (CClassMasterConfig.ALLOW_CLASS_MASTERS_LIST.contains(jobLevel))))
+		
+		if (((level >= 20) && (jobLevel == 0)) || ((level >= 40) && (jobLevel == 1)) || (((level >= 76) && (jobLevel == 2)) && (CClassMasterConfig.ALLOW_CLASS_MASTERS_LIST.contains(jobLevel))))
 		{
 			html = html + "<table width=755>";
 			html = html + page("<center><font color=FF6600>" + MessagesData.getInstance().getMessage(player, "community_board_classMaster_choiceClass") + "</font></center>");
@@ -133,22 +136,22 @@ public class CareerBoard implements IParseBoardHandler
 			
 			switch (jobLevel)
 			{
-				case 1:
+				case 0:
 				{
 					info = info.replace("{info}", MessagesData.getInstance().getMessage(player, "community_board_classMaster_needLevel_20"));
 					break;
 				}
-				case 2:
+				case 1:
 				{
 					info = info.replace("{info}", MessagesData.getInstance().getMessage(player, "community_board_classMaster_needLevel_40"));
 					break;
 				}
-				case 3:
+				case 2:
 				{
 					info = info.replace("{info}", MessagesData.getInstance().getMessage(player, "community_board_classMaster_needLevel_76"));
 					break;
 				}
-				case 4:
+				case 3:
 				{
 					info = info.replace("{info}", MessagesData.getInstance().getMessage(player, "community_board_classMaster_you_have_learned_all_available_professions"));
 					break;
