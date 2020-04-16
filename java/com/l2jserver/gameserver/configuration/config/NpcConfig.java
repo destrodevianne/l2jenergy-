@@ -71,20 +71,20 @@ public class NpcConfig
 	@Setting(name = "MinNPCLevelForDmgPenalty")
 	public static int MIN_NPC_LVL_DMG_PENALTY;
 	
-	@Setting(name = "DmgPenaltyForLvLDifferences", method = "parseConfigLine")
+	@Setting(name = "DmgPenaltyForLvLDifferences", method = "parseDmgPenalty")
 	public static Map<Integer, Float> NPC_DMG_PENALTY;
 	
-	@Setting(name = "CritDmgPenaltyForLvLDifferences", method = "parseConfigLine")
+	@Setting(name = "CritDmgPenaltyForLvLDifferences", method = "parseCritDmg")
 	public static Map<Integer, Float> NPC_CRIT_DMG_PENALTY;
 	
-	@Setting(name = "SkillDmgPenaltyForLvLDifferences", method = "parseConfigLine")
+	@Setting(name = "SkillDmgPenaltyForLvLDifferences", method = "parseSkillDmg")
 	public static Map<Integer, Float> NPC_SKILL_DMG_PENALTY;
+	
+	@Setting(name = "SkillChancePenaltyForLvLDifferences", method = "parseSkillChance")
+	public static Map<Integer, Float> NPC_SKILL_CHANCE_PENALTY;
 	
 	@Setting(name = "MinNPCLevelForMagicPenalty")
 	public static int MIN_NPC_LVL_MAGIC_PENALTY;
-	
-	@Setting(name = "SkillChancePenaltyForLvLDifferences", method = "parseConfigLine")
-	public static Map<Integer, Float> NPC_SKILL_CHANCE_PENALTY;
 	
 	@Setting(name = "DecayTimeTask")
 	public static int DECAY_TIME_TASK;
@@ -212,15 +212,47 @@ public class NpcConfig
 		}
 	}
 	
-	public Map<Integer, Float> parseConfigLine(String line)
+	public void parseDmgPenalty(String line)
 	{
 		String[] propertySplit = line.split(",");
-		Map<Integer, Float> ret = new HashMap<>(propertySplit.length);
+		NPC_DMG_PENALTY = new HashMap<>(propertySplit.length);
 		int i = 0;
 		for (String value : propertySplit)
 		{
-			ret.put(i++, Float.parseFloat(value));
+			NPC_DMG_PENALTY.put(i++, Float.parseFloat(value));
 		}
-		return ret;
+	}
+	
+	public void parseCritDmg(String line)
+	{
+		String[] propertySplit = line.split(",");
+		NPC_CRIT_DMG_PENALTY = new HashMap<>(propertySplit.length);
+		int i = 0;
+		for (String value : propertySplit)
+		{
+			NPC_CRIT_DMG_PENALTY.put(i++, Float.parseFloat(value));
+		}
+	}
+	
+	public void parseSkillChance(String line)
+	{
+		String[] propertySplit = line.split(",");
+		NPC_SKILL_CHANCE_PENALTY = new HashMap<>(propertySplit.length);
+		int i = 0;
+		for (String value : propertySplit)
+		{
+			NPC_SKILL_CHANCE_PENALTY.put(i++, Float.parseFloat(value));
+		}
+	}
+	
+	public void parseSkillDmg(String line)
+	{
+		String[] propertySplit = line.split(",");
+		NPC_SKILL_DMG_PENALTY = new HashMap<>(propertySplit.length);
+		int i = 0;
+		for (String value : propertySplit)
+		{
+			NPC_SKILL_DMG_PENALTY.put(i++, Float.parseFloat(value));
+		}
 	}
 }
