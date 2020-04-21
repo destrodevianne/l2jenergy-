@@ -141,16 +141,19 @@ public class TeleportBoard implements IParseBoardHandler
 			player.sendMessage(MessagesData.getInstance().getMessage(player, "communityboard_teleport_point_level_min_max").replace("%s%", minLevel + "").replace("%c%", maxLevel + ""));
 			return;
 		}
+		
 		if ((pk) && (player.getKarma() > 0))
 		{
 			player.sendMessage(MessagesData.getInstance().getMessage(player, "communityboard_teleport_point_pk_denied"));
 			return;
 		}
+		
 		if ((premium) && (!player.isPremium()))
 		{
 			player.sendMessage(MessagesData.getInstance().getMessage(player, "communityboard_teleport_personal_point_only_premium"));
 			return;
 		}
+		
 		if (!DifferentMethods.checkFirstConditions(player))
 		{
 			return;

@@ -50,6 +50,7 @@ public class CareerBoard implements IParseBoardHandler
 			parseCommunityBoardCommand("_bbshome", player);
 			return false;
 		}
+		
 		if (command.equals("_bbscareer"))
 		{
 			showClassPage(player);
@@ -93,6 +94,7 @@ public class CareerBoard implements IParseBoardHandler
 			html = html + "</table>";
 			int id = jobLevel - 1;
 			final List<ClassId> classIds = getAvailClasses(classId);
+			
 			if (classIds.isEmpty())
 			{
 				content = content.replace("{info}", "");
@@ -104,6 +106,7 @@ public class CareerBoard implements IParseBoardHandler
 					block = template;
 					block = block.replace("{icon}", "icon.etc_royal_membership_i00");
 					block = block.replace("{name}", DifferentMethods.className(player, cid.getId()));
+					
 					switch (payType(id))
 					{
 						case 0:
@@ -124,8 +127,6 @@ public class CareerBoard implements IParseBoardHandler
 					html += block.replace("{value}", MessagesData.getInstance().getMessage(player, "community_board_classMaster_change"));
 				}
 				content = content.replace("{info}", "");
-				
-				;
 			}
 		}
 		else
@@ -180,6 +181,7 @@ public class CareerBoard implements IParseBoardHandler
 		
 		int item = 0;
 		long count = -1L;
+		
 		switch (pay)
 		{
 			case 0:
@@ -204,10 +206,12 @@ public class CareerBoard implements IParseBoardHandler
 					break;
 				}
 			}
+			
 			if (!RequestClassId.isPresent())
 			{
 				return;
 			}
+			
 			if (player.getClassId().level() == 3)
 			{
 				player.sendPacket(SystemMessageId.YOU_HAVE_COMPLETED_THE_QUEST_FOR_3RD_OCCUPATION_CHANGE_AND_MOVED_TO_ANOTHER_CLASS_CONGRATULATIONS);
@@ -216,7 +220,9 @@ public class CareerBoard implements IParseBoardHandler
 			{
 				player.sendPacket(SystemMessageId.CONGRATULATIONS_YOU_HAVE_COMPLETED_A_CLASS_TRANSFER);
 			}
+			
 			player.setClassId(classID);
+			
 			if (player.isSubClassActive())
 			{
 				player.getSubClasses().get(player.getClassIndex()).setClassId(player.getActiveClass());

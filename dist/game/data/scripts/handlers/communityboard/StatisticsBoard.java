@@ -26,9 +26,7 @@ import com.l2jserver.gameserver.handler.CommunityBoardHandler;
 import com.l2jserver.gameserver.handler.IParseBoardHandler;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 
-/**
- * @author Мо3олЬ TODO: add
- */
+// TODO: add
 public class StatisticsBoard implements IParseBoardHandler
 {
 	public long update = System.currentTimeMillis() / 1000;

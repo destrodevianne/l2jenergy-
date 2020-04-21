@@ -544,4 +544,29 @@
         <set lang="en" val="You are unregistered for a Event." />
 		<set lang="ru" val="Вы отменили регистрацию на Ивент." />
 	</message>
+	<!-- BufferBoard Messages -->
+	<message id="community_board_buffer_peaceZone">
+        <set lang="en" val="You must be in Peace zone!" />
+		<set lang="ru" val="Вы должны быть в мирной зоне!" />
+	</message>
+	<message id="community_board_combat_enable">
+        <set lang="en" val="You can not use this function in combat." />
+		<set lang="ru" val="Нельзя использовать данную функцию в состоянии боя." />
+	</message>
+	<message id="community_board_minMaxLevel">
+        <set lang="en" val="Your level should be between %s%-%c%." />
+		<set lang="ru" val="Ваш уровень должен быть между %s%-%c%." />
+	</message>
+	<message id="community_board_events">
+        <set lang="en" val="You can not use this function in event." />
+		<set lang="ru" val="Нельзя использовать данную функцию на Ивенте." />
+	</message>
+	<message id="community_board_siege_disable">
+        <set lang="en" val="Can't do that because siege in progress." />
+		<set lang="ru" val="Невозможно во время осады." />
+	</message>
+	<message id="community_board_olympiad_enable">
+        <set lang="en" val="You can not use this function participated in the Olympiad." />
+		<set lang="ru" val="Нельзя использовать данную функцию участвовая в Олимпиаде." />
+	</message>
 </list>

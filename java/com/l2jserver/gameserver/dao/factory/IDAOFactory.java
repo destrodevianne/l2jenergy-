@@ -19,6 +19,7 @@
 package com.l2jserver.gameserver.dao.factory;
 
 import com.l2jserver.gameserver.dao.ClanDAO;
+import com.l2jserver.gameserver.dao.CommunityBufferDAO;
 import com.l2jserver.gameserver.dao.FriendDAO;
 import com.l2jserver.gameserver.dao.HennaDAO;
 import com.l2jserver.gameserver.dao.ItemAuctionDAO;
@@ -49,6 +50,8 @@ import com.l2jserver.gameserver.dao.TeleportBookmarkDAO;
  */
 public interface IDAOFactory
 {
+	CommunityBufferDAO getCommunityBufferDAO();
+	
 	ClanDAO getClanDAO();
 	
 	FriendDAO getFriendDAO();

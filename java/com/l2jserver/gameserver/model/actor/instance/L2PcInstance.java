@@ -30,6 +30,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
 import java.util.TreeMap;
@@ -69,6 +70,7 @@ import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.configuration.config.PvPConfig;
 import com.l2jserver.gameserver.configuration.config.RatesConfig;
 import com.l2jserver.gameserver.configuration.config.SiegeConfig;
+import com.l2jserver.gameserver.configuration.config.community.CBufferConfig;
 import com.l2jserver.gameserver.configuration.config.custom.CustomConfig;
 import com.l2jserver.gameserver.configuration.config.custom.OfflineConfig;
 import com.l2jserver.gameserver.configuration.config.custom.PremiumConfig;
@@ -341,6 +343,7 @@ import com.l2jserver.gameserver.network.serverpackets.ValidateLocation;
 import com.l2jserver.gameserver.taskmanager.AttackStanceTaskManager;
 import com.l2jserver.gameserver.util.Broadcast;
 import com.l2jserver.gameserver.util.Util;
+import com.l2jserver.gameserver.util.bbs.Scheme;
 
 /**
  * This class represents all player characters in the world.<br>
@@ -852,6 +855,12 @@ public class L2PcInstance extends L2Playable
 			
 			// Load player's recommendations and bonus time
 			DAOFactory.getInstance().getRecommendationBonusDAO().load(player);
+			
+			// Load player's Community shems
+			if (CBufferConfig.ALLOW_CB_BUFFER)
+			{
+				// DAOFactory.getInstance().getCommunityBufferDAO().select(player); //TODO: need fix
+			}
 			return player;
 		}
 		catch (Exception e)
@@ -13730,5 +13739,27 @@ public class L2PcInstance extends L2Playable
 	public void increaseKills()
 	{
 		++_kills;
+	}
+	
+	private final Map<String, Scheme> bufferScheme = new LinkedHashMap<>();
+	
+	public void deleteBuffScheme(final String schemeName)
+	{
+		bufferScheme.remove(schemeName);
+	}
+	
+	public void addBuffScheme(final Scheme scheme)
+	{
+		bufferScheme.put(scheme.getName(), scheme);
+	}
+	
+	public Map<String, Scheme> getBuffSchemes()
+	{
+		return bufferScheme;
+	}
+	
+	public Optional<Scheme> getBuffScheme(final String schemeName)
+	{
+		return Optional.ofNullable(bufferScheme.get(schemeName));
 	}
 }

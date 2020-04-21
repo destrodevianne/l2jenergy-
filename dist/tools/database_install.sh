@@ -83,6 +83,7 @@ $MYL < sql/game/announcements.sql &> /dev/null
 $MYL < sql/game/auction.sql &> /dev/null
 $MYL < sql/game/auction_bid.sql &> /dev/null
 $MYL < sql/game/auction_watch.sql &> /dev/null
+$MYL < sql/game/bbs_buffer.sql &> /dev/null
 $MYL < sql/game/bbs_favorite.sql  &> /dev/null
 $MYL < sql/game/bbs_mail.sql  &> /dev/null
 $MYL < sql/game/bbs_memo.sql  &> /dev/null

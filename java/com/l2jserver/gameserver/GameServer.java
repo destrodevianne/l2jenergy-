@@ -44,6 +44,7 @@ import com.l2jserver.gameserver.configuration.config.GeoDataConfig;
 import com.l2jserver.gameserver.configuration.config.MMOConfig;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
 import com.l2jserver.gameserver.configuration.config.TelnetConfig;
+import com.l2jserver.gameserver.configuration.config.community.CBufferConfig;
 import com.l2jserver.gameserver.configuration.config.community.CTeleportConfig;
 import com.l2jserver.gameserver.configuration.config.custom.OfflineConfig;
 import com.l2jserver.gameserver.configuration.config.custom.PremiumConfig;
@@ -62,6 +63,7 @@ import com.l2jserver.gameserver.data.sql.impl.SummonSkillsTable;
 import com.l2jserver.gameserver.data.sql.impl.TeleportLocationTable;
 import com.l2jserver.gameserver.data.xml.impl.AdminData;
 import com.l2jserver.gameserver.data.xml.impl.ArmorSetsData;
+import com.l2jserver.gameserver.data.xml.impl.BufferBBSData;
 import com.l2jserver.gameserver.data.xml.impl.BuyListData;
 import com.l2jserver.gameserver.data.xml.impl.CategoryData;
 import com.l2jserver.gameserver.data.xml.impl.ClassListData;
@@ -296,6 +298,10 @@ public final class GameServer
 		DoorData.getInstance();
 		CastleManager.getInstance().loadInstances();
 		NpcBufferTable.getInstance();
+		if (CBufferConfig.ALLOW_CB_BUFFER)
+		{
+			BufferBBSData.getInstance();
+		}
 		GrandBossManager.getInstance().initZones();
 		EventDroplist.getInstance();
 		StringUtil.printSection("Auction Manager");

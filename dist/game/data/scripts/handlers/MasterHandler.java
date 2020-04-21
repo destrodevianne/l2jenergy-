@@ -178,6 +178,7 @@ import handlers.chathandlers.ChatPetition;
 import handlers.chathandlers.ChatShout;
 import handlers.chathandlers.ChatTell;
 import handlers.chathandlers.ChatTrade;
+import handlers.communityboard.BufferBoard;
 import handlers.communityboard.CareerBoard;
 import handlers.communityboard.ClanBoard;
 import handlers.communityboard.EventBoard;
@@ -187,6 +188,7 @@ import handlers.communityboard.HomeBoard;
 import handlers.communityboard.HomepageBoard;
 import handlers.communityboard.MailBoard;
 import handlers.communityboard.MemoBoard;
+import handlers.communityboard.PrivateOfficeBoard;
 import handlers.communityboard.RegionBoard;
 import handlers.communityboard.SellBoard;
 import handlers.communityboard.ShopBoard;
@@ -477,6 +479,7 @@ public class MasterHandler
 		},
 		{
 			// Community Board
+			BufferBoard.class,
 			CareerBoard.class,
 			ClanBoard.class,
 			EventBoard.class,
@@ -486,6 +489,7 @@ public class MasterHandler
 			HomepageBoard.class,
 			MailBoard.class,
 			MemoBoard.class,
+			PrivateOfficeBoard.class,
 			RegionBoard.class,
 			SellBoard.class,
 			ShopBoard.class,
