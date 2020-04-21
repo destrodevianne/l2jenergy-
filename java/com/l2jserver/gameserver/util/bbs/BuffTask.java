@@ -29,7 +29,7 @@ import com.l2jserver.gameserver.model.skills.Skill;
 
 public class BuffTask implements Runnable
 {
-	private static final double enchantedMultiplier = 1;
+	private static final double enchantedMultiplier = 2;
 	private final List<Buff> _buffList;
 	private int _index;
 	private final L2Playable _playable;
@@ -58,7 +58,7 @@ public class BuffTask implements Runnable
 		{
 			time *= enchantedMultiplier;
 		}
-		skill.applyEffects(playable, playable, true, false, false, time);
+		skill.applyEffects(playable, playable, false, false, false, time);
 	}
 	
 	public void decreaseHealth(L2Playable target)
