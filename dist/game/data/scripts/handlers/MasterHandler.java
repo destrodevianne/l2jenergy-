@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.configuration.config.custom.CustomConfig;
+import com.l2jserver.gameserver.configuration.config.custom.OfflineConfig;
 import com.l2jserver.gameserver.configuration.config.custom.PremiumConfig;
 import com.l2jserver.gameserver.configuration.config.events.WeddingConfig;
 import com.l2jserver.gameserver.handler.ActionHandler;
@@ -291,11 +292,13 @@ import handlers.usercommandhandlers.SiegeStatus;
 import handlers.usercommandhandlers.Time;
 import handlers.usercommandhandlers.Unstuck;
 import handlers.voicedcommandhandlers.Banking;
+import handlers.voicedcommandhandlers.Cfg;
 import handlers.voicedcommandhandlers.ChangePassword;
 import handlers.voicedcommandhandlers.ChatAdmin;
 import handlers.voicedcommandhandlers.Debug;
 import handlers.voicedcommandhandlers.Help;
 import handlers.voicedcommandhandlers.Lang;
+import handlers.voicedcommandhandlers.OfflineShop;
 import handlers.voicedcommandhandlers.Premium;
 import handlers.voicedcommandhandlers.Repair;
 import handlers.voicedcommandhandlers.StatsVCmd;
@@ -564,11 +567,13 @@ public class MasterHandler
 			(CustomConfig.BANKING_SYSTEM_ENABLED ? Banking.class : null),
 			(CustomConfig.CHAT_ADMIN ? ChatAdmin.class : null),
 			(CustomConfig.ENABLE_MULTILANG && CustomConfig.MULTILANG_VOICED_ALLOW ? Lang.class : null),
+			(OfflineConfig.ALLOW_OFFLINE_VOICE_COMMAND ? OfflineShop.class : null),
 			(CustomConfig.DEBUG_VOICE_COMMAND ? Debug.class : null),
 			(CustomConfig.ALLOW_CHANGE_PASSWORD ? ChangePassword.class : null),
 			(PremiumConfig.PREMIUM_ALLOW_VOICED ? Premium.class : null),
 			(CustomConfig.ALLOW_REPAIR_VOICE_COMMAND ? Repair.class : null),
 			(CustomConfig.ALLOW_HELP_VOICE_COMMAND ? Help.class : null),
+			Cfg.class,
 		},
 		{
 			// Target Handlers

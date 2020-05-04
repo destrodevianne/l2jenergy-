@@ -239,7 +239,7 @@ public class OfflineTradersTable
 						player.getAppearance().setNameColor(OfflineConfig.OFFLINE_NAME_COLOR);
 					}
 					
-					if (OfflineConfig.OFFLINE_SET_SLEEP)
+					if (OfflineConfig.OFFLINE_SLEEP_EFFECT)
 					{
 						player.startAbnormalVisualEffect(true, AbnormalVisualEffect.SLEEP);
 					}

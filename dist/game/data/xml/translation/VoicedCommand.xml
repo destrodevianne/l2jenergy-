@@ -133,4 +133,49 @@
         <set lang="en" val="You cannot repair a character so often, you need to wait 30 minute(s) to use it again!" />
 		<set lang="ru" val="Вы не можете так часто востанавливать персонажа, нужно подождать 30 минут, чтобы воспользоватся снова!" />
     </message>
+    <!-- OfflineShop Messages -->
+    <message id="offline_voiced_you_not_running_private_store_or_private_work_shop">
+        <set lang="en" val="You are not running a private store or private work shop." />
+		<set lang="ru" val="Вы не запустили частный магазин или мастерскую." />
+    </message>
+    <message id="offline_voiced_you_cannot_logout_while_registered_event">
+        <set lang="en" val="You cannot Logout while in registered in an Event!" />
+		<set lang="ru" val="Вы не можете выйти из игры, когда зарегистрированы на эвент!" />
+    </message>
+    <message id="offline_voiced_you_buy_list_empty">
+        <set lang="en" val="Your buy list is empty." />
+		<set lang="ru" val="Ваш список покупок пуст." />
+    </message>
+    <message id="offline_voiced_you_sell_list_empty">
+        <set lang="en" val="Your sell list is empty." />
+		<set lang="ru" val="Ваш список продаж пуст." />
+    </message>
+    <message id="offline_voiced_you_cannot_logout_while_combat_mode">
+        <set lang="en" val="You cannot Logout while is in Combat mode." />
+		<set lang="ru" val="Вы не можете выйти из игры, находясь в боевом режиме." />
+    </message>
+    <message id="offline_voiced_you_cannot_logout_while_teleporting">
+        <set lang="en" val="You cannot Logout while is Teleporting." />
+		<set lang="ru" val="Вы не можете выйти из игры, пока телепортируетесь." />
+    </message>
+    <message id="offline_voiced_superior_power_doesnt_allow_leave_event">
+        <set lang="en" val="A superior power doesn't allow you to leave the event." />
+		<set lang="ru" val="Превосходящая сила не позволяет вам покинуть эвент." />
+    </message>
+    <message id="offline_voiced_you_cannot_logout_while_olympiad">
+        <set lang="en" val="You can't Logout in Olympiad mode." />
+		<set lang="ru" val="Вы не можете выйти из игры, находясь на олимпиаде." />
+    </message>
+    <message id="offline_voiced_you_cannot_logout_while_festival">
+        <set lang="en" val="You cannot Logout while you are a participant in a Festival." />
+		<set lang="ru" val="Вы не можете выйти из игры, пока вы являетесь участником Фестиваля." />
+    </message>
+    <message id="offline_voiced_has_been_removed_from_festival">
+        <set lang="en" val="%s% has been removed from the upcoming Festival." />
+		<set lang="ru" val="Игрок %s% был удален из предстоящего фестиваля." />
+    </message>
+    <message id="offline_voiced_you_private_store_has_succesfully_been">
+        <set lang="en" val="Your private store has succesfully been flagged as an offline shop and will remain active for ever." />
+		<set lang="ru" val="Ваш частный магазин был успешно помечен как офлайн-магазин и останется активной навсегда." />
+    </message>
 </list>

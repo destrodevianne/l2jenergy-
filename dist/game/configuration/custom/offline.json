@@ -20,7 +20,7 @@
     # Color of the name in offline mode (if OfflineSetNameColor = True)
     "OfflineNameColor" : "808080",
 
-    "OfflineSetSleep" : "true",
+    "OfflineSleepEffect" : "true",
 
     # Allow fame for characters in offline mode 
     "OfflineFame" : "true",
@@ -34,5 +34,9 @@
     "OfflineMaxDays" : "10",
 
     #Disconnect shop after finished selling, buying. 
-    "OfflineDisconnectFinished" : "true"
+    "OfflineDisconnectFinished" : "true",
+
+    # Enables voice command .offline
+    # Default: false
+    "AllowOfflineVoiceCommand" : "false"
 }

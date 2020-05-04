@@ -29,26 +29,39 @@ public class OfflineConfig
 {
 	@Setting(name = "OfflineTradeEnable")
 	public static boolean OFFLINE_TRADE_ENABLE;
+	
 	@Setting(name = "OfflineCraftEnable")
 	public static boolean OFFLINE_CRAFT_ENABLE;
+	
 	@Setting(name = "OfflineModeInPeaceZone")
 	public static boolean OFFLINE_MODE_IN_PEACE_ZONE;
+	
 	@Setting(name = "OfflineModeNoDamage")
 	public static boolean OFFLINE_MODE_NO_DAMAGE;
+	
 	@Setting(name = "RestoreOffliners")
 	public static boolean RESTORE_OFFLINERS;
+	
 	@Setting(name = "OfflineMaxDays")
 	public static int OFFLINE_MAX_DAYS;
+	
 	@Setting(name = "OfflineDisconnectFinished")
 	public static boolean OFFLINE_DISCONNECT_FINISHED;
+	
 	@Setting(name = "OfflineSetNameColor")
 	public static boolean OFFLINE_SET_NAME_COLOR;
+	
 	@Setting(name = "OfflineNameColor", method = "NameColor")
 	public static int OFFLINE_NAME_COLOR;
-	@Setting(name = "OfflineSetSleep")
-	public static boolean OFFLINE_SET_SLEEP;
+	
+	@Setting(name = "OfflineSleepEffect")
+	public static boolean OFFLINE_SLEEP_EFFECT;
+	
 	@Setting(name = "OfflineFame")
 	public static boolean OFFLINE_FAME;
+	
+	@Setting(name = "AllowOfflineVoiceCommand")
+	public static boolean ALLOW_OFFLINE_VOICE_COMMAND;
 	
 	public void NameColor(final String value)
 	{
