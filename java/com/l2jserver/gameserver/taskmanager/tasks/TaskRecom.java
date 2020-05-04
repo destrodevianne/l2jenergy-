@@ -64,10 +64,12 @@ public class TaskRecom extends Task
 		{
 			if ((player != null))
 			{
-				player.stopRecoBonusTask();
 				player.setRecomBonusTime(3600);
 				player.setRecomLeft(20);
 				player.setRecomHave(player.getRecomHave() - 20);
+				player.stopRecomBonusTask();
+				player.startRecomBonusTask();
+				
 				if (!player.isInOfflineMode())
 				{
 					player.sendPacket(new UserInfo(player));

@@ -851,7 +851,7 @@ public class L2PcInstance extends L2Playable
 			}
 			
 			// Starting recommendations give task, init Task give = 10 reco 2hs & 1 every 1hs.
-			player.startRecoGiveTask();
+			player.startRecomGiveTask();
 			
 			// Load player's recommendations and bonus time
 			DAOFactory.getInstance().getRecommendationBonusDAO().load(player);
@@ -5718,11 +5718,6 @@ public class L2PcInstance extends L2Playable
 		long baseExp = addToExp;
 		int baseSp = addToSp;
 		
-		if ((addToExp > 0) && !isInsideZone(ZoneId.PEACE))
-		{
-			getNevitSystem().startAdventTask();
-		}
-		
 		if (useBonuses)
 		{
 			addToExp *= getStat().getExpBonusMultiplier();
@@ -5733,6 +5728,11 @@ public class L2PcInstance extends L2Playable
 		{
 			addToExp *= PremiumConfig.PREMIUM_RATE_XP;
 			addToSp *= PremiumConfig.PREMIUM_RATE_SP;
+		}
+		
+		if ((addToExp > 0) && !isInsideZone(ZoneId.PEACE))
+		{
+			getNevitSystem().startAdventTask();
 		}
 		
 		float ratioTakenByPlayer = 0;
@@ -5912,7 +5912,7 @@ public class L2PcInstance extends L2Playable
 		stopFameTask();
 		stopVitalityTask();
 		stopPcBangPointsTask();
-		stopRecoBonusTask();
+		stopRecomBonusTask();
 		stopRecoGiveTask();
 	}
 	
@@ -12934,12 +12934,12 @@ public class L2PcInstance extends L2Playable
 		return _nevitSystem;
 	}
 	
-	public void startRecoGiveTask()
+	public void startRecomGiveTask()
 	{
 		_recoGiveTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new RecoGiveTask(this), 7200000, 3600000);
 	}
 	
-	public void startRecoBonusTask()
+	public void startRecomBonusTask()
 	{
 		if ((_recoBonusTask == null) && (_recoBonusTime > 0) && isRecomTimerActive() && !isHourglassEffected())
 		{
@@ -12960,14 +12960,14 @@ public class L2PcInstance extends L2Playable
 	public void startHourglassEffect()
 	{
 		setHourlassEffected(true);
-		stopRecoBonusTask();
+		stopRecomBonusTask();
 		sendPacket(new ExVoteSystemInfo(this));
 	}
 	
 	public void stopHourglassEffect()
 	{
 		setHourlassEffected(false);
-		startRecoBonusTask();
+		startRecomBonusTask();
 		sendPacket(new ExVoteSystemInfo(this));
 	}
 	
@@ -12987,21 +12987,21 @@ public class L2PcInstance extends L2Playable
 		
 		if (val)
 		{
-			startRecoBonusTask();
+			startRecomBonusTask();
 		}
 		else
 		{
-			stopRecoBonusTask();
+			stopRecomBonusTask();
 		}
 		
 		sendPacket(new ExVoteSystemInfo(this));
 	}
 	
-	public void stopRecoBonusTask()
+	public void stopRecomBonusTask()
 	{
 		if (_recoBonusTask != null)
 		{
-			_recoBonusTime = (int) Math.max(0, _recoBonusTask.getDelay(TimeUnit.SECONDS));
+			setRecomBonusTime((int) Math.max(0, _recoBonusTask.getDelay(TimeUnit.SECONDS)));
 			_recoBonusTask.cancel(false);
 			_recoBonusTask = null;
 		}
@@ -13022,7 +13022,7 @@ public class L2PcInstance extends L2Playable
 		return (getRecomBonusTime() > 0) || isHourglassEffected() ? RecoBonus.getRecoBonus(this) : 0;
 	}
 	
-	public double getRecomBonusMul()
+	public double getNevitHourglassMultiplier()
 	{
 		return (getRecomBonusTime() > 0) || isHourglassEffected() ? RecoBonus.getRecoMultiplier(this) : 0;
 	}

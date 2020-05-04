@@ -18,6 +18,8 @@
  */
 package handlers.effecthandlers.instant;
 
+import com.l2jserver.gameserver.enums.ZoneId;
+import com.l2jserver.gameserver.enums.skills.L2EffectType;
 import com.l2jserver.gameserver.model.StatsSet;
 import com.l2jserver.gameserver.model.conditions.Condition;
 import com.l2jserver.gameserver.model.effects.AbstractEffect;
@@ -36,7 +38,7 @@ public final class NevitHourglass extends AbstractEffect
 	{
 		super(attachCond, applyCond, set, params);
 		
-		_value = params.getFloat("value", 0);
+		_value = params.getFloat("amount", 0);
 	}
 	
 	@Override
@@ -46,12 +48,28 @@ public final class NevitHourglass extends AbstractEffect
 	}
 	
 	@Override
+	public L2EffectType getEffectType()
+	{
+		return L2EffectType.NEVIT_HOURGLASS;
+	}
+	
+	@Override
 	public void onStart(BuffInfo info)
 	{
 		if ((info.getEffected() != null) && info.getEffected().isPlayer())
 		{
+			info.getEffected().getActingPlayer().startHourglassEffect();
 			info.getEffected().getActingPlayer().updateVitalityPoints(_value, false, false);
 			info.getEffected().getActingPlayer().sendPacket(new UserInfo(info.getEffected().getActingPlayer()));
+		}
+	}
+	
+	@Override
+	public void onExit(BuffInfo info)
+	{
+		if (!info.getEffected().getActingPlayer().isInsideZone(ZoneId.PEACE))
+		{
+			info.getEffected().getActingPlayer().stopHourglassEffect();
 		}
 	}
 }

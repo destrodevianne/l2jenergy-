@@ -458,7 +458,7 @@ public class PcStat extends PlayableStat
 		vitality = getVitalityMultiplier();
 		
 		// Bonus from Nevit's Blessing
-		nevits = getActiveChar().getRecomBonusMul();
+		nevits = getActiveChar().getNevitHourglassMultiplier();
 		
 		// Bonus exp from skills
 		bonusExp = 1 + (calcStat(Stats.BONUS_EXP, 0, null, null) / 100);
@@ -499,7 +499,7 @@ public class PcStat extends PlayableStat
 		vitality = getVitalityMultiplier();
 		
 		// Bonus from Nevit's Blessing
-		nevits = getActiveChar().getRecomBonusMul();
+		nevits = getActiveChar().getNevitHourglassMultiplier();
 		
 		// Bonus sp from skills
 		bonusSp = 1 + (calcStat(Stats.BONUS_SP, 0, null, null) / 100);

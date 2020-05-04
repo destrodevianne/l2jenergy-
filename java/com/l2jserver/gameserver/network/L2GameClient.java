@@ -804,7 +804,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 							getActiveChar().broadcastUserInfo();
 						}
 						
-						if (OfflineConfig.OFFLINE_SET_SLEEP)
+						if (OfflineConfig.OFFLINE_SLEEP_EFFECT)
 						{
 							getActiveChar().startAbnormalVisualEffect(true, AbnormalVisualEffect.SLEEP);
 							getActiveChar().broadcastUserInfo();

@@ -43,6 +43,7 @@ import com.l2jserver.gameserver.configuration.config.custom.PremiumConfig;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.enums.PartyDistributionType;
 import com.l2jserver.gameserver.enums.ZoneId;
+import com.l2jserver.gameserver.enums.skills.AbnormalType;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Summon;
@@ -52,6 +53,7 @@ import com.l2jserver.gameserver.model.entity.DimensionalRift;
 import com.l2jserver.gameserver.model.holders.ItemHolder;
 import com.l2jserver.gameserver.model.itemcontainer.Inventory;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
+import com.l2jserver.gameserver.model.skills.BuffInfo;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.ExAskModifyPartyLooting;
 import com.l2jserver.gameserver.network.serverpackets.ExCloseMPCC;
@@ -802,8 +804,13 @@ public class L2Party extends AbstractPlayerGroup
 					if (!member.isInsideZone(ZoneId.PEACE) && ((member.getLevel() - target.getLevel()) <= 9))
 					{
 						member.getNevitSystem().startAdventTask();
-						member.setRecomTimerActive(true);
 						member.updateVitalityPoints(vitalityPoints, true, false);
+						
+						BuffInfo info = member.getEffectList().getBuffInfoByAbnormalType(AbnormalType.NEVIT_HOURGLASS);
+						if (info == null)
+						{
+							member.setRecomTimerActive(true);
+						}
 					}
 					
 				}

@@ -48,6 +48,7 @@ import com.l2jserver.gameserver.datatables.EventDroplist.DateDrop;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.enums.ZoneId;
+import com.l2jserver.gameserver.enums.skills.AbnormalType;
 import com.l2jserver.gameserver.instancemanager.CursedWeaponsManager;
 import com.l2jserver.gameserver.instancemanager.WalkingManager;
 import com.l2jserver.gameserver.model.AbsorberInfo;
@@ -73,6 +74,7 @@ import com.l2jserver.gameserver.model.events.impl.character.npc.attackable.OnAtt
 import com.l2jserver.gameserver.model.holders.ItemHolder;
 import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
+import com.l2jserver.gameserver.model.skills.BuffInfo;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.clientpackets.Say2;
@@ -503,8 +505,13 @@ public class L2Attackable extends L2Npc
 									if (!attacker.isInsideZone(ZoneId.PEACE) && ((attacker.getLevel() - getLevel()) <= 9))
 									{
 										attacker.getNevitSystem().startAdventTask();
-										attacker.setRecomTimerActive(true);
 										attacker.updateVitalityPoints(getVitalityPoints(damage), true, false);
+										
+										BuffInfo info = attacker.getEffectList().getBuffInfoByAbnormalType(AbnormalType.NEVIT_HOURGLASS);
+										if (info == null)
+										{
+											attacker.setRecomTimerActive(true);
+										}
 									}
 									
 								}

@@ -58,5 +58,5 @@ public enum L2EffectType
 	STUN,
 	SUMMON,
 	SUMMON_NPC,
-	TELEPORT,
+	TELEPORT
 }
