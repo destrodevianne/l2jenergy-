@@ -44,7 +44,7 @@ import ai.npc.AbstractNpcAI;
  */
 public final class TerritoryManagers extends AbstractNpcAI
 {
-	private static final int[] preciousSoul1ItemIds =
+	private static final int[] PRECIOUS_SOUL_1_ITEM_IDS =
 	{
 		7587,
 		7588,
@@ -53,11 +53,13 @@ public final class TerritoryManagers extends AbstractNpcAI
 		7598,
 		7599
 	};
-	private static final int[] preciousSoul2ItemIds =
+	
+	private static final int[] PRECIOUS_SOUL_2_ITEM_IDS =
 	{
 		7595
 	};
-	private static final int[] preciousSoul3ItemIds =
+	
+	private static final int[] PRECIOUS_SOUL_3_ITEM_IDS =
 	{
 		7678,
 		7591,
@@ -80,9 +82,9 @@ public final class TerritoryManagers extends AbstractNpcAI
 	@Override
 	public String onFirstTalk(L2Npc npc, L2PcInstance player)
 	{
+		// If the player does not have the second class transfer or is under level 40, it cannot continue.
 		if ((player.getClassId().level() < 2) || (player.getLevel() < 40))
 		{
-			// If the player does not have the second class transfer or is under level 40, it cannot continue.
 			return "36490-08.html";
 		}
 		return npc.getId() + ".html";
@@ -142,11 +144,11 @@ public final class TerritoryManagers extends AbstractNpcAI
 				{
 					// Complete the Noblesse related quests.
 					// Possessor of a Precious Soul - 1 (241)
-					processNoblesseQuest(player, 241, preciousSoul1ItemIds);
+					processNoblesseQuest(player, 241, PRECIOUS_SOUL_1_ITEM_IDS);
 					// Possessor of a Precious Soul - 2 (242)
-					processNoblesseQuest(player, 242, preciousSoul2ItemIds);
+					processNoblesseQuest(player, 242, PRECIOUS_SOUL_2_ITEM_IDS);
 					// Possessor of a Precious Soul - 3 (246)
-					processNoblesseQuest(player, 246, preciousSoul3ItemIds);
+					processNoblesseQuest(player, 246, PRECIOUS_SOUL_3_ITEM_IDS);
 					// Possessor of a Precious Soul - 4 (247)
 					processNoblesseQuest(player, 247, null);
 					

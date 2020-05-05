@@ -292,7 +292,6 @@ import handlers.usercommandhandlers.SiegeStatus;
 import handlers.usercommandhandlers.Time;
 import handlers.usercommandhandlers.Unstuck;
 import handlers.voicedcommandhandlers.Banking;
-import handlers.voicedcommandhandlers.Cfg;
 import handlers.voicedcommandhandlers.ChangePassword;
 import handlers.voicedcommandhandlers.ChatAdmin;
 import handlers.voicedcommandhandlers.Debug;
@@ -573,7 +572,6 @@ public class MasterHandler
 			(PremiumConfig.PREMIUM_ALLOW_VOICED ? Premium.class : null),
 			(CustomConfig.ALLOW_REPAIR_VOICE_COMMAND ? Repair.class : null),
 			(CustomConfig.ALLOW_HELP_VOICE_COMMAND ? Help.class : null),
-			Cfg.class,
 		},
 		{
 			// Target Handlers

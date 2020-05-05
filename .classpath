@@ -23,7 +23,7 @@
 	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.13.jar"/>
 	<classpathentry kind="lib" path="lib/reflections-0.9.11.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.8.0-beta2.jar"/>
-	<classpathentry kind="lib" path="lib/weupnp-0.1.4.jar"/>
 	<classpathentry kind="lib" path="lib/trove4j-3.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/weupnp-0.1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
