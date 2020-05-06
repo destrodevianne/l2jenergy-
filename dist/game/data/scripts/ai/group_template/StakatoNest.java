@@ -110,8 +110,8 @@ public final class StakatoNest extends AbstractNpcAI
 					mob.setHeading(Util.calculateHeadingFrom(mob, _follower));
 					mob.doCast(EATING_FOLLOWER_HEAL);
 					mob.setCurrentHp(mob.getCurrentHp() + _hp);
-					_follower.doDie(_follower);
-					_follower.deleteMe();
+					_follower.doDie(mob);
+					// _follower.deleteMe();
 				}
 			}
 		}

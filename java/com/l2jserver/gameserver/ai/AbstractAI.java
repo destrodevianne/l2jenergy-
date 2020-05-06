@@ -548,6 +548,12 @@ public abstract class AbstractAI implements Ctrl
 				return;
 			}
 			
+			// Prevent Corpses not disappear.
+			if (_actor.isDead())
+			{
+				return;
+			}
+			
 			// Calculate movement data for a move to location action and add the actor to movingObjects of GameTimeController
 			_actor.moveToLocation(pawn.getX(), pawn.getY(), pawn.getZ(), offset);
 			
@@ -593,6 +599,12 @@ public abstract class AbstractAI implements Ctrl
 		// Chek if actor can move
 		if (!_actor.isMovementDisabled())
 		{
+			// Prevent Corpses not disappear.
+			if (_actor.isDead())
+			{
+				return;
+			}
+			
 			// Set AI movement data
 			_clientMoving = true;
 			_clientMovingToPawnOffset = 0;

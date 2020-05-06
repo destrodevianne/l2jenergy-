@@ -571,6 +571,12 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
 			return;
 		}
 		
+		// Prevent Corpses not disappear.
+		if (npc.isDead())
+		{
+			return;
+		}
+		
 		// Check if the actor is a L2GuardInstance
 		if ((npc instanceof L2GuardInstance) && !npc.isWalker())
 		{
@@ -1231,6 +1237,12 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
 				LOG.debug("{} used long range skill {} on {}", this, longRangeSkill, npc.getTarget());
 				return;
 			}
+		}
+		
+		// Prevent Corpses not disappear.
+		if (npc.isDead())
+		{
+			return;
 		}
 		
 		// Starts melee attack
