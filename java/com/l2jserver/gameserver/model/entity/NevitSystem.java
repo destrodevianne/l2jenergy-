@@ -23,8 +23,10 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.configuration.config.custom.NevitConfig;
 import com.l2jserver.gameserver.enums.events.EventType;
 import com.l2jserver.gameserver.enums.skills.AbnormalVisualEffect;
+import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.events.annotations.RegisterEvent;
 import com.l2jserver.gameserver.model.events.impl.character.player.OnPlayerLogin;
@@ -41,13 +43,6 @@ import com.l2jserver.gameserver.network.serverpackets.ExNavitAdventTimeChange;
  */
 public class NevitSystem implements IUniqueId
 {
-	// Settings
-	private static final int MAX_POINTS = 7200;
-	private static final int BONUS_EFFECT_TIME = 180;
-	protected static final int REFRESH_RATE = 30;
-	protected static final int REFRESH_POINTS = 72;
-	public static final int ADVENT_TIME = 14400; // Nevit Hour
-	
 	private final L2PcInstance _player;
 	
 	private volatile ScheduledFuture<?> _adventTask;
@@ -110,10 +105,10 @@ public class NevitSystem implements IUniqueId
 		setAdventPoints(getEffectTime() > 0 ? 0 : getAdventPoints() + val);
 		// setAdventPoints(getAdventPoints() + val);
 		
-		if (getAdventPoints() > MAX_POINTS)
+		if (getAdventPoints() > NevitConfig.NEVIT_BONUS_MAX_POINTS)
 		{
 			setAdventPoints(0);
-			startNevitEffect(BONUS_EFFECT_TIME);
+			startNevitEffect(NevitConfig.NEVIT_BONUS_EFFECT_TIME);
 		}
 		
 		switch (calcPercent(getAdventPoints()))
@@ -139,9 +134,9 @@ public class NevitSystem implements IUniqueId
 	
 	public void startAdventTask()
 	{
-		if ((_adventTask == null) && (getAdventTime() < ADVENT_TIME))
+		if ((_adventTask == null) && (getAdventTime() < NevitConfig.NEVIT_BONUS_MAX_TIME))
 		{
-			_adventTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new AdventTask(), REFRESH_RATE * 1000, REFRESH_RATE * 1000);
+			_adventTask = ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new AdventTask(), NevitConfig.NEVIT_BONUS_REFRESH_RATE * 1000, NevitConfig.NEVIT_BONUS_REFRESH_RATE * 1000);
 			getPlayer().sendPacket(new ExNavitAdventTimeChange(getAdventTime(), false));
 		}
 	}
@@ -151,16 +146,16 @@ public class NevitSystem implements IUniqueId
 		@Override
 		public void run()
 		{
-			setAdventTime(getAdventTime() + REFRESH_RATE);
+			setAdventTime(getAdventTime() + NevitConfig.NEVIT_BONUS_REFRESH_RATE);
 			
-			if (getAdventTime() >= ADVENT_TIME)
+			if (getAdventTime() >= NevitConfig.NEVIT_BONUS_MAX_TIME)
 			{
-				setAdventTime(ADVENT_TIME);
+				setAdventTime(NevitConfig.NEVIT_BONUS_MAX_TIME);
 				stopAdventTask(true);
 			}
 			else
 			{
-				addPoints(REFRESH_POINTS);
+				addPoints(NevitConfig.NEVIT_BONUS_POINTS_ON_REFRESH);
 				if ((getAdventTime() % 60) == 0)
 				{
 					getPlayer().sendPacket(new ExNavitAdventTimeChange(getAdventTime(), false));
@@ -192,7 +187,7 @@ public class NevitSystem implements IUniqueId
 			time += getEffectTime();
 		}
 		
-		if ((getAdventTime() < ADVENT_TIME) && (time > 0))
+		if ((getAdventTime() < NevitConfig.NEVIT_BONUS_MAX_TIME) && (time > 0))
 		{
 			getPlayer().getVariables().set("nevit_b", time);
 			getPlayer().sendPacket(new ExNavitAdventEffect(time));
@@ -237,6 +232,18 @@ public class NevitSystem implements IUniqueId
 		}
 	}
 	
+	public void checkIfMustGivePoints(long baseExp, L2Attackable l2Attackable)
+	{
+		if (NevitConfig.NEVIT_BONUS_EXTRA_POINTS)
+		{
+			if (((_adventTask != null) && NevitConfig.NEVIT_BONUS_EXTRA_POINTS_ALL_TIME) || (_adventTask == null))
+			{
+				int nevitPoints = Math.round(((baseExp / (l2Attackable.getLevel() * l2Attackable.getLevel())) * 100) / 20);
+				addPoints(nevitPoints);
+			}
+		}
+	}
+	
 	public L2PcInstance getPlayer()
 	{
 		return _player;
@@ -260,7 +267,7 @@ public class NevitSystem implements IUniqueId
 	
 	public static int calcPercent(int points)
 	{
-		return (int) ((100.0D / MAX_POINTS) * points);
+		return (int) ((100.0D / NevitConfig.NEVIT_BONUS_MAX_POINTS) * points);
 	}
 	
 	public void setAdventPoints(int points)

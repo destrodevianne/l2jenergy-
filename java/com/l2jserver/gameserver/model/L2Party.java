@@ -804,6 +804,7 @@ public class L2Party extends AbstractPlayerGroup
 					if (!member.isInsideZone(ZoneId.PEACE) && ((member.getLevel() - target.getLevel()) <= 9))
 					{
 						member.getNevitSystem().startAdventTask();
+						member.getNevitSystem().checkIfMustGivePoints(addexp, target);
 						member.updateVitalityPoints(vitalityPoints, true, false);
 						
 						BuffInfo info = member.getEffectList().getBuffInfoByAbnormalType(AbnormalType.NEVIT_HOURGLASS);

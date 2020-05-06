@@ -505,6 +505,7 @@ public class L2Attackable extends L2Npc
 									if (!attacker.isInsideZone(ZoneId.PEACE) && ((attacker.getLevel() - getLevel()) <= 9))
 									{
 										attacker.getNevitSystem().startAdventTask();
+										attacker.getNevitSystem().checkIfMustGivePoints(exp, this);
 										attacker.updateVitalityPoints(getVitalityPoints(damage), true, false);
 										
 										BuffInfo info = attacker.getEffectList().getBuffInfoByAbnormalType(AbnormalType.NEVIT_HOURGLASS);

@@ -18,6 +18,8 @@
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
+import com.l2jserver.gameserver.configuration.config.custom.NevitConfig;
+
 /**
  * @author mochitto, IrLex
  */
@@ -28,7 +30,7 @@ public class ExNavitAdventTimeChange extends L2GameServerPacket
 	
 	public ExNavitAdventTimeChange(int time, boolean paused)
 	{
-		_time = Math.min(time, 14400);
+		_time = Math.min(time, NevitConfig.NEVIT_BONUS_MAX_TIME);
 		_paused = paused;
 	}
 	
