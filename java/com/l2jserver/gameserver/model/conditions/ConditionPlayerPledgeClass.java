@@ -19,6 +19,7 @@
 package com.l2jserver.gameserver.model.conditions;
 
 import com.l2jserver.gameserver.model.actor.L2Character;
+import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.skills.Skill;
 
@@ -47,10 +48,17 @@ public final class ConditionPlayerPledgeClass extends Condition
 	@Override
 	public boolean testImpl(L2Character effector, L2Character effected, Skill skill, L2Item item)
 	{
-		if ((effector.getActingPlayer() == null) || (effector.getActingPlayer().getClan() == null))
+		final L2PcInstance player = effector.getActingPlayer();
+		if ((player == null) || (player.getClan() == null))
 		{
 			return false;
 		}
-		return (_pledgeClass == -1) ? effector.getActingPlayer().isClanLeader() : (effector.getActingPlayer().getPledgeClass() >= _pledgeClass);
+		
+		final boolean isClanLeader = player.isClanLeader();
+		if ((_pledgeClass == -1) && !isClanLeader)
+		{
+			return false;
+		}
+		return isClanLeader || (player.getPledgeClass() >= _pledgeClass);
 	}
 }
