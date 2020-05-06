@@ -6369,11 +6369,6 @@ public class L2PcInstance extends L2Playable
 				arrows.changeCountWithoutTrace(-1, this, null);
 				arrows.setLastChange(L2ItemInstance.MODIFIED);
 				
-				// could do also without saving, but let's save approx 1 of 10
-				if ((GameTimeController.getInstance().getGameTicks() % 10) == 0)
-				{
-					arrows.updateDatabase();
-				}
 				_inventory.refreshWeight();
 			}
 		}
