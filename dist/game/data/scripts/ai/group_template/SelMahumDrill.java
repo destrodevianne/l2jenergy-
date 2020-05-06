@@ -187,7 +187,8 @@ public final class SelMahumDrill extends AbstractNpcAI
 					for (L2Spawn npcSpawn : SpawnTable.getInstance().getSpawns(npcId))
 					{
 						final L2Npc soldier = npcSpawn.getLastSpawn();
-						if ((soldier != null) && !soldier.isDead() && (npcSpawn.getName() != null) && npcSpawn.getName().startsWith("smtg_drill_group") && !soldier.staysInSpawnLoc() && ((soldier.getAI().getIntention() == CtrlIntention.AI_INTENTION_ACTIVE) || (soldier.getAI().getIntention() == CtrlIntention.AI_INTENTION_IDLE)))
+						if ((soldier != null) && !soldier.isDead() && (npcSpawn.getName() != null) && npcSpawn.getName().startsWith("smtg_drill_group") && !soldier.staysInSpawnLoc()
+							&& ((soldier.getAI().getIntention() == CtrlIntention.AI_INTENTION_ACTIVE) || (soldier.getAI().getIntention() == CtrlIntention.AI_INTENTION_IDLE)))
 						{
 							soldier.setHeading(npcSpawn.getHeading());
 							soldier.teleToLocation(npcSpawn.getLocation(), false);
@@ -229,6 +230,11 @@ public final class SelMahumDrill extends AbstractNpcAI
 				}
 				case "CHIEF_DIED":
 				{
+					if (!receiver.isAttackable())
+					{
+						return null;
+					}
+					
 					if (Util.contains(MAHUM_SOLDIERS, receiver.getId()))
 					{
 						if (getRandom(4) < 1)
