@@ -80,6 +80,12 @@ public class PcCafeConfig
 	@Setting(name = "AltPcBangWiwernRentTime")
 	public static int ALT_PC_BANG_WIVERN_TIME;
 	
+	@Setting(name = "AltPcBangNewPlayerPointIsPremium")
+	public static int START_PC_CAFE_POINTS_PREMIUM_PLAYER;
+	
+	@Setting(name = "AltPcBangNewPlayerPointIsNormal")
+	public static int START_PC_CAFE_POINTS_NORM_PLAYER;
+	
 	public void patternPcBangPointsCoupon(final String value)
 	{
 		ALT_PCBANG_POINTS_COUPON_TEMPLATE = Pattern.compile(value);

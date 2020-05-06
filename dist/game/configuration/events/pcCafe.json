@@ -25,6 +25,10 @@
 
 	# Amount of Pc Bang points for daily entrance
     "AltPcBangDailyBonusPoints" : "1000",
+
+    # Get PC Point in start game new char
+    "AltPcBangNewPlayerPointIsPremium" : "100",
+    "AltPcBangNewPlayerPointIsNormal" : "50",
     
     # The maximum number of attempts to enter a promo code
     "AltPcBangPointsMaxEnterAttempts" : "5",

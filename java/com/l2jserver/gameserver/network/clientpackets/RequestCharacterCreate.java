@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.ServerConfig;
+import com.l2jserver.gameserver.configuration.config.events.PcCafeConfig;
 import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.xml.impl.InitialEquipmentData;
 import com.l2jserver.gameserver.data.xml.impl.InitialShortcutData;
@@ -176,6 +177,11 @@ public final class RequestCharacterCreate extends L2GameClientPacket
 		{
 			sendPacket(CharacterCreateFail.REASON_CREATION_FAILED);
 			return;
+		}
+		
+		if (PcCafeConfig.ALT_PCBANG_POINTS_ENABLED)
+		{
+			player.increasePcCafePoints(player.isPremium() ? PcCafeConfig.START_PC_CAFE_POINTS_PREMIUM_PLAYER : PcCafeConfig.START_PC_CAFE_POINTS_NORM_PLAYER);
 		}
 		
 		// HP and MP are at maximum and CP is zero by default.
