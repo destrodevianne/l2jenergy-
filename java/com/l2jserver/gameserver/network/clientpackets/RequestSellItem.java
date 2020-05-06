@@ -134,7 +134,7 @@ public final class RequestSellItem extends L2GameClientPacket
 			}
 		}
 		
-		if ((merchant == null) && !player.isGM())
+		if ((merchant == null) && !player.isGM() && (_listId != CUSTOM_CB_SELL_LIST))
 		{
 			sendPacket(ActionFailed.STATIC_PACKET);
 			return;
