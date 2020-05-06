@@ -237,7 +237,7 @@ public final class WalkingManager implements IXmlReader
 	 * @param npc NPC to check
 	 * @return {@code true} if given NPC controlled by Walking Manager.
 	 */
-	public boolean isRegistered(L2Npc npc)
+	private boolean isRegistered(L2Npc npc)
 	{
 		return _activeRoutes.containsKey(npc.getObjectId());
 	}
@@ -297,7 +297,7 @@ public final class WalkingManager implements IXmlReader
 					walk.setWalkCheckTask(ThreadPoolManager.getInstance().scheduleAiAtFixedRate(new StartMovingTask(npc, routeName), 60000, 60000)); // start walk check task, for resuming walk after fight
 					
 					npc.getKnownList().startTrackingTask();
-					
+					npc.setWalker();
 					_activeRoutes.put(npc.getObjectId(), walk); // register route
 				}
 				else

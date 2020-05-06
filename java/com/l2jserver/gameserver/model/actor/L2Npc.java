@@ -141,6 +141,7 @@ public class L2Npc extends L2Character
 	/** Support for random animation switching */
 	private boolean _isRandomAnimationEnabled = true;
 	private boolean _isTalking = true;
+	private boolean _isWalker = false;
 	
 	protected RandomAnimationTask _rAniTask = null;
 	private int _currentLHandId; // normally this shouldn't change from the template, but there exist exceptions
@@ -1576,7 +1577,12 @@ public class L2Npc extends L2Character
 	@Override
 	public boolean isWalker()
 	{
-		return WalkingManager.getInstance().isRegistered(this);
+		return _isWalker;
+	}
+	
+	public void setWalker()
+	{
+		_isWalker = true;
 	}
 	
 	@Override
