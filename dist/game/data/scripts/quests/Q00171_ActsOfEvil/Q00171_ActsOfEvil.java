@@ -18,13 +18,13 @@
  */
 package quests.Q00171_ActsOfEvil;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.util.Util;
 
@@ -84,7 +84,7 @@ public final class Q00171_ActsOfEvil extends Quest
 		{
 			if (npc != null)
 			{
-				npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.YOU_SHOULD_CONSIDER_GOING_BACK));
+				npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.YOU_SHOULD_CONSIDER_GOING_BACK));
 				npc.deleteMe();
 			}
 			return super.onAdvEvent(event, npc, player);

@@ -20,6 +20,7 @@ package ai.group_template;
 
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.handler.IItemHandler;
 import com.l2jserver.gameserver.handler.ItemHandler;
 import com.l2jserver.gameserver.model.Location;
@@ -32,7 +33,6 @@ import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.util.Util;
 
 import ai.npc.AbstractNpcAI;
@@ -311,7 +311,7 @@ public final class PrimevalIsle extends AbstractNpcAI
 		if (npc.isScriptValue(0))
 		{
 			npc.setScriptValue(1);
-			broadcastNpcSay(npc, Say2.NPC_ALL, "?");
+			broadcastNpcSay(npc, ChatType.NPC_ALL, "?");
 			((L2Attackable) npc).clearAggroList();
 			startQuestTimer("TREX_ATTACK", 6000, npc, player);
 		}

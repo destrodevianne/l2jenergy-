@@ -18,13 +18,13 @@
  */
 package quests.Q00503_PursuitOfClanAmbition;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.L2Clan;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.util.Util;
 
@@ -261,7 +261,7 @@ public final class Q00503_PursuitOfClanAmbition extends Quest
 			{
 				qs.setMemoState(8100);
 				qs.setCond(9, true);
-				npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.BLOOD_AND_HONOR));
+				npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.BLOOD_AND_HONOR));
 				startQuestTimer("SPAWN_WITCH", 5000, npc, player);
 				htmltext = event;
 				break;
@@ -810,7 +810,7 @@ public final class Q00503_PursuitOfClanAmbition extends Quest
 				if (npc.isScriptValue(50301))
 				{
 					startQuestTimer("DESPAWN_WITCH_ATHREA", 5000, npc, null);
-					npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.WAR_AND_DEATH));
+					npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.WAR_AND_DEATH));
 				}
 				break;
 			}
@@ -819,14 +819,14 @@ public final class Q00503_PursuitOfClanAmbition extends Quest
 				if (npc.isScriptValue(50302))
 				{
 					startQuestTimer("DESPAWN_WITCH_KALIS", 5000, npc, null);
-					npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.AMBITION_AND_POWER));
+					npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.AMBITION_AND_POWER));
 				}
 				break;
 			}
 			case IMPERIAL_COFFER:
 			{
 				startQuestTimer("DESPAWN_IMPERIAL_COFFER", 180000, npc, null);
-				npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.CURSE_OF_THE_GODS_ON_THE_ONE_THAT_DEFILES_THE_PROPERTY_OF_THE_EMPIRE));
+				npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.CURSE_OF_THE_GODS_ON_THE_ONE_THAT_DEFILES_THE_PROPERTY_OF_THE_EMPIRE));
 				break;
 			}
 			case BLITZ_WYRM:

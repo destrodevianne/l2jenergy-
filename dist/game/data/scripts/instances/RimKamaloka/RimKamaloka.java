@@ -36,6 +36,7 @@ import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.data.xml.impl.NpcData;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.idfactory.IdFactory;
 import com.l2jserver.gameserver.instancemanager.InstanceManager;
 import com.l2jserver.gameserver.model.L2Party;
@@ -52,7 +53,6 @@ import com.l2jserver.gameserver.model.entity.Instance;
 import com.l2jserver.gameserver.model.instancezone.InstanceWorld;
 import com.l2jserver.gameserver.network.NpcStringId;
 import com.l2jserver.gameserver.network.SystemMessageId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 
@@ -506,7 +506,7 @@ public final class RimKamaloka extends AbstractInstance
 			{
 				if (getRandom(100) < 15)
 				{
-					npc.broadcastPacket(new NpcSay(npc, 0, KANABION_STRING[getRandom(KANABION_STRING.length)]));
+					npc.broadcastPacket(new NpcSay(npc, ChatType.GENERAL, KANABION_STRING[getRandom(KANABION_STRING.length)]));
 				}
 				world.kanabionsCount++;
 				if (((L2Attackable) npc).isOverhit())
@@ -529,7 +529,7 @@ public final class RimKamaloka extends AbstractInstance
 			{
 				if (getRandom(100) < 15)
 				{
-					npc.broadcastPacket(new NpcSay(npc, 0, KANABION_STRING[getRandom(KANABION_STRING.length)]));
+					npc.broadcastPacket(new NpcSay(npc, ChatType.GENERAL, KANABION_STRING[getRandom(KANABION_STRING.length)]));
 				}
 				world.dopplersCount++;
 				if (((L2Attackable) npc).isOverhit())
@@ -559,7 +559,7 @@ public final class RimKamaloka extends AbstractInstance
 			{
 				if (getRandom(100) < 15)
 				{
-					npc.broadcastPacket(new NpcSay(npc, 0, KANABION_STRING[getRandom(KANABION_STRING.length)]));
+					npc.broadcastPacket(new NpcSay(npc, ChatType.GENERAL, KANABION_STRING[getRandom(KANABION_STRING.length)]));
 				}
 				world.voidersCount++;
 				if (((L2Attackable) npc).isOverhit())
@@ -588,7 +588,7 @@ public final class RimKamaloka extends AbstractInstance
 	{
 		if (npc.getId() == START_NPC)
 		{
-			broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.VERY_GOOD_YOUR_SKILL_MAKES_YOU_A_MODEL_FOR_OTHER_ADVENTURERS_TO_FOLLOW);
+			broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.VERY_GOOD_YOUR_SKILL_MAKES_YOU_A_MODEL_FOR_OTHER_ADVENTURERS_TO_FOLLOW);
 			return npc.getCastle().getName() + ".html";
 		}
 		else if (npc.getId() == REWARDER)
@@ -606,14 +606,14 @@ public final class RimKamaloka extends AbstractInstance
 				{
 					case 0:
 					{
-						broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.F_GRADE);
-						broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.HOW_DISAPPOINTING_IT_LOOKS_LIKE_I_MADE_A_MISTAKE_IN_SENDING_YOU_INSIDE_RIM_KAMALOKA);
+						broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.F_GRADE);
+						broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.HOW_DISAPPOINTING_IT_LOOKS_LIKE_I_MADE_A_MISTAKE_IN_SENDING_YOU_INSIDE_RIM_KAMALOKA);
 						return "GradeF.html";
 					}
 					case 1:
 					{
-						broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.D_GRADE);
-						broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.GOOD_WORK_IF_ALL_ADVENTURERS_PRODUCE_RESULTS_LIKE_YOU_WE_WILL_SLOWLY_START_TO_SEE_THE_GLIMMER_OF_HOPE);
+						broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.D_GRADE);
+						broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.GOOD_WORK_IF_ALL_ADVENTURERS_PRODUCE_RESULTS_LIKE_YOU_WE_WILL_SLOWLY_START_TO_SEE_THE_GLIMMER_OF_HOPE);
 						String left;
 						if (world.grade != 1)
 						{
@@ -634,8 +634,8 @@ public final class RimKamaloka extends AbstractInstance
 					}
 					case 2:
 					{
-						broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.C_GRADE);
-						broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.GOOD_WORK_IF_ALL_ADVENTURERS_PRODUCE_RESULTS_LIKE_YOU_WE_WILL_SLOWLY_START_TO_SEE_THE_GLIMMER_OF_HOPE);
+						broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.C_GRADE);
+						broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.GOOD_WORK_IF_ALL_ADVENTURERS_PRODUCE_RESULTS_LIKE_YOU_WE_WILL_SLOWLY_START_TO_SEE_THE_GLIMMER_OF_HOPE);
 						String left;
 						if (world.grade != 2)
 						{
@@ -656,8 +656,8 @@ public final class RimKamaloka extends AbstractInstance
 					}
 					case 3:
 					{
-						broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.B_GRADE);
-						broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.GOOD_WORK_IF_ALL_ADVENTURERS_PRODUCE_RESULTS_LIKE_YOU_WE_WILL_SLOWLY_START_TO_SEE_THE_GLIMMER_OF_HOPE);
+						broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.B_GRADE);
+						broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.GOOD_WORK_IF_ALL_ADVENTURERS_PRODUCE_RESULTS_LIKE_YOU_WE_WILL_SLOWLY_START_TO_SEE_THE_GLIMMER_OF_HOPE);
 						String left;
 						if (world.grade != 3)
 						{
@@ -678,8 +678,8 @@ public final class RimKamaloka extends AbstractInstance
 					}
 					case 4:
 					{
-						broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.A_GRADE);
-						broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.ADMIRABLE_YOU_GREATLY_DECREASED_THE_SPEED_OF_INVASION_THROUGH_KAMALOKA);
+						broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.A_GRADE);
+						broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.ADMIRABLE_YOU_GREATLY_DECREASED_THE_SPEED_OF_INVASION_THROUGH_KAMALOKA);
 						String left;
 						if (world.grade != 4)
 						{
@@ -696,8 +696,8 @@ public final class RimKamaloka extends AbstractInstance
 					}
 					case 5:
 					{
-						broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.S_GRADE);
-						broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.THIS_IS_THIS_IS_A_GREAT_ACHIEVEMENT_THAT_IS_WORTHY_OF_THE_TRUE_HEROES_OF_LEGEND);
+						broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.S_GRADE);
+						broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.THIS_IS_THIS_IS_A_GREAT_ACHIEVEMENT_THAT_IS_WORTHY_OF_THE_TRUE_HEROES_OF_LEGEND);
 						String left;
 						if (world.grade != 5)
 						{

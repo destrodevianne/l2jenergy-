@@ -19,6 +19,7 @@
 package quests.Q00198_SevenSignsEmbryo;
 
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2MonsterInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -28,7 +29,6 @@ import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.quest.State;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 
 import quests.Q00197_SevenSignsTheSacredBookOfSeal.Q00197_SevenSignsTheSacredBookOfSeal;
@@ -69,7 +69,7 @@ public final class Q00198_SevenSignsEmbryo extends Quest
 			if (!npc.isDead())
 			{
 				isBusy = false;
-				npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.NEXT_TIME_YOU_WILL_NOT_ESCAPE));
+				npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.NEXT_TIME_YOU_WILL_NOT_ESCAPE));
 				npc.deleteMe();
 			}
 			return super.onAdvEvent(event, npc, player);
@@ -106,10 +106,10 @@ public final class Q00198_SevenSignsEmbryo extends Quest
 				if (st.isCond(1))
 				{
 					isBusy = true;
-					npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.S1_THAT_STRANGER_MUST_BE_DEFEATED_HERE_IS_THE_ULTIMATE_HELP).addStringParameter(player.getName()));
+					npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.S1_THAT_STRANGER_MUST_BE_DEFEATED_HERE_IS_THE_ULTIMATE_HELP).addStringParameter(player.getName()));
 					startQuestTimer("heal", 30000 - getRandom(20000), npc, player);
 					L2MonsterInstance monster = (L2MonsterInstance) addSpawn(SHILENS_EVIL_THOUGHTS, -23734, -9184, -5384, 0, false, 0, false, npc.getInstanceId());
-					monster.broadcastPacket(new NpcSay(monster.getObjectId(), Say2.NPC_ALL, monster.getId(), NpcStringId.YOU_ARE_NOT_THE_OWNER_OF_THAT_ITEM));
+					monster.broadcastPacket(new NpcSay(monster.getObjectId(), ChatType.NPC_ALL, monster.getId(), NpcStringId.YOU_ARE_NOT_THE_OWNER_OF_THAT_ITEM));
 					monster.setRunning();
 					monster.addDamageHate(player, 0, 999);
 					monster.getAI().setIntention(CtrlIntention.AI_INTENTION_ATTACK, player);
@@ -121,7 +121,7 @@ public final class Q00198_SevenSignsEmbryo extends Quest
 			{
 				if (!npc.isInsideRadius(player, 600, true, false))
 				{
-					NpcSay ns = new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.LOOK_HERE_S1_DONT_FALL_TOO_FAR_BEHIND);
+					NpcSay ns = new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.LOOK_HERE_S1_DONT_FALL_TOO_FAR_BEHIND);
 					ns.addStringParameter(player.getName());
 					npc.broadcastPacket(ns);
 				}
@@ -150,7 +150,7 @@ public final class Q00198_SevenSignsEmbryo extends Quest
 					st.takeItems(SCULPTURE_OF_DOUBT, -1);
 					st.setCond(3, true);
 					htmltext = event;
-					npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.WE_WILL_BE_WITH_YOU_ALWAYS));
+					npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.WE_WILL_BE_WITH_YOU_ALWAYS));
 				}
 				break;
 			}
@@ -182,7 +182,7 @@ public final class Q00198_SevenSignsEmbryo extends Quest
 		isBusy = false;
 		cancelQuestTimers("despawn");
 		cancelQuestTimers("heal");
-		npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.S1_YOU_MAY_HAVE_WON_THIS_TIME_BUT_NEXT_TIME_I_WILL_SURELY_CAPTURE_YOU).addStringParameter(partyMember.getName()));
+		npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.S1_YOU_MAY_HAVE_WON_THIS_TIME_BUT_NEXT_TIME_I_WILL_SURELY_CAPTURE_YOU).addStringParameter(partyMember.getName()));
 		npc.deleteMe();
 		partyMember.showQuestMovie(14);
 		return super.onKill(npc, player, isSummon);

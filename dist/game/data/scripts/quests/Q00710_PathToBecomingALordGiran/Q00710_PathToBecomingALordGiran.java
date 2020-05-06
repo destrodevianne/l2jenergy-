@@ -18,6 +18,7 @@
  */
 package quests.Q00710_PathToBecomingALordGiran;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.FortManager;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -27,7 +28,6 @@ import com.l2jserver.gameserver.model.entity.Fort;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 
 /**
@@ -100,7 +100,7 @@ public class Q00710_PathToBecomingALordGiran extends Quest
 		{
 			if (castle.getOwner().getLeader().getPlayerInstance() != null)
 			{
-				final NpcSay packet = new NpcSay(npc.getObjectId(), Say2.NPC_SHOUT, npc.getId(), NpcStringId.S1_HAS_BECOME_THE_LORD_OF_THE_TOWN_OF_GIRAN_MAY_THERE_BE_GLORY_IN_THE_TERRITORY_OF_GIRAN);
+				final NpcSay packet = new NpcSay(npc.getObjectId(), ChatType.NPC_SHOUT, npc.getId(), NpcStringId.S1_HAS_BECOME_THE_LORD_OF_THE_TOWN_OF_GIRAN_MAY_THERE_BE_GLORY_IN_THE_TERRITORY_OF_GIRAN);
 				packet.addStringParameter(player.getName());
 				npc.broadcastPacket(packet);
 				// Territory terr = TerritoryWarManager.getInstance().getTerritory(castle.getOwnerId()); //TODO: fix Support for TerritoryWars

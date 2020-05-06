@@ -18,6 +18,7 @@
  */
 package ai.individual;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.events.EventType;
 import com.l2jserver.gameserver.enums.events.ListenerRegisterType;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -29,7 +30,6 @@ import com.l2jserver.gameserver.model.events.annotations.RegisterType;
 import com.l2jserver.gameserver.model.events.impl.character.OnCreatureAttacked;
 import com.l2jserver.gameserver.model.events.impl.character.OnCreatureKill;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 
 import ai.npc.AbstractNpcAI;
@@ -168,7 +168,7 @@ public final class SinEater extends AbstractNpcAI
 	
 	private void broadcastSummonSay(L2Summon summon, NpcStringId npcstringId)
 	{
-		summon.broadcastPacket(new NpcSay(summon.getObjectId(), Say2.NPC_ALL, summon.getId(), npcstringId));
+		summon.broadcastPacket(new NpcSay(summon.getObjectId(), ChatType.NPC_ALL, summon.getId(), npcstringId));
 	}
 	
 	public static void main(String[] args)

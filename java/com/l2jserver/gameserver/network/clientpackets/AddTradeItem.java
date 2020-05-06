@@ -71,7 +71,7 @@ public final class AddTradeItem extends L2GameClientPacket
 			{
 				LOG.warn("Character: {} requested invalid trade object: {}", player.getName(), _objectId);
 			}
-			player.sendPacket(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME);
+			player.sendPacket(SystemMessageId.THAT_PLAYER_IS_NOT_ONLINE);
 			player.cancelActiveTrade();
 			return;
 		}

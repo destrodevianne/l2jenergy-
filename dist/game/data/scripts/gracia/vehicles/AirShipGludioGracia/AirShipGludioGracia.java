@@ -19,6 +19,7 @@
 package gracia.vehicles.AirShipGludioGracia;
 
 import com.l2jserver.gameserver.ThreadPoolManager;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.instancemanager.AirShipManager;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2World;
@@ -29,7 +30,6 @@ import com.l2jserver.gameserver.model.actor.instance.L2AirShipInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.NpcStringId;
 import com.l2jserver.gameserver.network.SystemMessageId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 
 import gracia.vehicles.AirShipController;
@@ -213,7 +213,7 @@ public final class AirShipGludioGracia extends AirShipController
 		}
 		if (_atcGludio != null)
 		{
-			_atcGludio.broadcastPacket(new NpcSay(_atcGludio.getObjectId(), Say2.NPC_SHOUT, _atcGludio.getId(), npcString));
+			_atcGludio.broadcastPacket(new NpcSay(_atcGludio.getObjectId(), ChatType.NPC_SHOUT, _atcGludio.getId(), npcString));
 		}
 	}
 	
@@ -226,7 +226,7 @@ public final class AirShipGludioGracia extends AirShipController
 		}
 		if (_atcGracia != null)
 		{
-			_atcGracia.broadcastPacket(new NpcSay(_atcGracia.getObjectId(), Say2.NPC_SHOUT, _atcGracia.getId(), npcStringId));
+			_atcGracia.broadcastPacket(new NpcSay(_atcGracia.getObjectId(), ChatType.NPC_SHOUT, _atcGracia.getId(), npcStringId));
 		}
 	}
 	

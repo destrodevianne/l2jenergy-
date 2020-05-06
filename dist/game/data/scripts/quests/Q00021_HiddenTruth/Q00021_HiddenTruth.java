@@ -18,6 +18,7 @@
  */
 package quests.Q00021_HiddenTruth;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.instancemanager.WalkingManager;
 import com.l2jserver.gameserver.model.L2World;
@@ -29,7 +30,6 @@ import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.quest.State;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 
 import quests.Q00022_TragedyInVonHellmannForest.Q00022_TragedyInVonHellmannForest;
@@ -138,7 +138,7 @@ public class Q00021_HiddenTruth extends Quest
 					else
 					{
 						final L2Npc ghost = addSpawn(GHOST_OF_VON_HELLMAN, GHOST_LOC, false, 0);
-						ghost.broadcastPacket(new NpcSay(ghost.getObjectId(), 0, ghost.getId(), NpcStringId.WHO_AWOKE_ME));
+						ghost.broadcastPacket(new NpcSay(ghost.getObjectId(), ChatType.GENERAL, ghost.getId(), NpcStringId.WHO_AWOKE_ME));
 						GHOST_SPAWNED = true;
 						st.startQuestTimer("DESPAWN_GHOST", 1000 * 300, ghost);
 						st.setCond(2);
@@ -153,7 +153,7 @@ public class Q00021_HiddenTruth extends Quest
 					{
 						final L2Npc page = addSpawn(GHOST_OF_VON_HELLMANS_PAGE, PAGE_LOC, false, 0);
 						page.setScriptValue(player.getObjectId());
-						page.broadcastPacket(new NpcSay(page.getObjectId(), Say2.NPC_ALL, page.getId(), NpcStringId.MY_MASTER_HAS_INSTRUCTED_ME_TO_BE_YOUR_GUIDE_S1).addStringParameter(player.getName()));
+						page.broadcastPacket(new NpcSay(page.getObjectId(), ChatType.NPC_ALL, page.getId(), NpcStringId.MY_MASTER_HAS_INSTRUCTED_ME_TO_BE_YOUR_GUIDE_S1).addStringParameter(player.getName()));
 						WalkingManager.getInstance().startMoving(page, PAGE_ROUTE_NAME);
 						PAGE_COUNT++;
 						st.setCond(3);

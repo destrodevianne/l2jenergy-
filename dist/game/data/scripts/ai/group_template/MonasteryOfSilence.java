@@ -19,6 +19,7 @@
 package ai.group_template;
 
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.skills.L2EffectType;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
@@ -28,7 +29,6 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 
 import ai.npc.AbstractNpcAI;
 
@@ -97,7 +97,7 @@ public final class MonasteryOfSilence extends AbstractNpcAI
 						if ((character.getId() == CAPTAIN) && (getRandom(100) < 10) && npc.isScriptValue(0))
 						{
 							final L2Npc captain = (L2Npc) character;
-							broadcastNpcSay(captain, Say2.NPC_ALL, SOLINA_KNIGHTS_MSG[getRandom(SOLINA_KNIGHTS_MSG.length)]);
+							broadcastNpcSay(captain, ChatType.NPC_ALL, SOLINA_KNIGHTS_MSG[getRandom(SOLINA_KNIGHTS_MSG.length)]);
 							captain.setScriptValue(1);
 							startQuestTimer("TIMER", 10000, captain, null);
 						}
@@ -162,7 +162,7 @@ public final class MonasteryOfSilence extends AbstractNpcAI
 						npc.doCast(KNIGHT_BLESS);
 					}
 					npc.setScriptValue(1);
-					broadcastNpcSay(npc, Say2.ALL, NpcStringId.FOR_THE_GLORY_OF_SOLINA);
+					broadcastNpcSay(npc, ChatType.GENERAL, NpcStringId.FOR_THE_GLORY_OF_SOLINA);
 					addAttackDesire(addSpawn(KNIGHT, npc), player);
 				}
 				break;
@@ -254,7 +254,7 @@ public final class MonasteryOfSilence extends AbstractNpcAI
 			
 			if (!npc.isInCombat())
 			{
-				broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.YOU_CANNOT_CARRY_A_WEAPON_WITHOUT_AUTHORIZATION);
+				broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.YOU_CANNOT_CARRY_A_WEAPON_WITHOUT_AUTHORIZATION);
 			}
 			
 			addAttackDesire(npc, player);
@@ -271,7 +271,7 @@ public final class MonasteryOfSilence extends AbstractNpcAI
 			{
 				if (obj.equals(npc))
 				{
-					broadcastNpcSay(npc, Say2.NPC_ALL, DIVINITY_MSG[getRandom(DIVINITY_MSG.length)], caster.getName());
+					broadcastNpcSay(npc, ChatType.NPC_ALL, DIVINITY_MSG[getRandom(DIVINITY_MSG.length)], caster.getName());
 					addAttackDesire(npc, caster);
 					break;
 				}

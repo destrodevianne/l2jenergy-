@@ -18,6 +18,7 @@
  */
 package instances.PailakaSongOfIceAndFire;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.instancemanager.InstanceManager;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Character;
@@ -26,7 +27,6 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.instancezone.InstanceWorld;
 import com.l2jserver.gameserver.model.zone.L2ZoneType;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 
 import instances.AbstractInstance;
 
@@ -92,7 +92,7 @@ public final class PailakaSongOfIceAndFire extends AbstractInstance
 			}
 			case "GARGOS_LAUGH":
 			{
-				broadcastNpcSay(npc, Say2.NPC_SHOUT, NpcStringId.OHHOHOH);
+				broadcastNpcSay(npc, ChatType.NPC_SHOUT, NpcStringId.OHHOHOH);
 				break;
 			}
 			case "TELEPORT":

@@ -20,6 +20,7 @@ package quests.Q00065_CertifiedSoulBreaker;
 
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.enums.CategoryType;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -27,7 +28,6 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
 import com.l2jserver.gameserver.util.Util;
@@ -104,7 +104,7 @@ public final class Q00065_CertifiedSoulBreaker extends Quest
 					npc0.getVariables().set("SPAWNED", false);
 					if (c0 != null)
 					{
-						npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.S1_I_WILL_BE_BACK_SOON_STAY_THERE_AND_DONT_YOU_DARE_WANDER_OFF).addStringParameter(c0.getAppearance().getVisibleName()));
+						npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.S1_I_WILL_BE_BACK_SOON_STAY_THERE_AND_DONT_YOU_DARE_WANDER_OFF).addStringParameter(c0.getAppearance().getVisibleName()));
 					}
 				}
 			}
@@ -329,7 +329,7 @@ public final class Q00065_CertifiedSoulBreaker extends Quest
 								katenar.getVariables().set("player0", killer);
 								katenar.getVariables().set("npc0", npc);
 								qs.setMemoState(13);
-								npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.GRR_IVE_BEEN_HIT));
+								npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.GRR_IVE_BEEN_HIT));
 							}
 						}
 					}
@@ -342,7 +342,7 @@ public final class Q00065_CertifiedSoulBreaker extends Quest
 								npc0.getVariables().set("SPAWNED", false);
 							}
 						}
-						npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.GRR_WHO_ARE_YOU_AND_WHY_HAVE_YOU_STOPPED_ME));
+						npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.GRR_WHO_ARE_YOU_AND_WHY_HAVE_YOU_STOPPED_ME));
 					}
 				}
 			}
@@ -739,7 +739,7 @@ public final class Q00065_CertifiedSoulBreaker extends Quest
 		if (npc.getId() == SUSPICIOUS_MAN)
 		{
 			startQuestTimer("DESPAWN_5", 5000, npc, null);
-			npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.DRATS_HOW_COULD_I_BE_SO_WRONG));
+			npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.DRATS_HOW_COULD_I_BE_SO_WRONG));
 			npc.setIsRunning(true);
 			npc.getAI().setIntention(CtrlIntention.AI_INTENTION_MOVE_TO, MOVE_TO);
 		}
@@ -749,7 +749,7 @@ public final class Q00065_CertifiedSoulBreaker extends Quest
 			startQuestTimer("DESPAWN_70", 70000, npc, null);
 			if (c0 != null)
 			{
-				npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.S1_STEP_BACK_FROM_THE_CONFOUNDED_BOX_I_WILL_TAKE_IT_MYSELF).addStringParameter(c0.getAppearance().getVisibleName()));
+				npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.S1_STEP_BACK_FROM_THE_CONFOUNDED_BOX_I_WILL_TAKE_IT_MYSELF).addStringParameter(c0.getAppearance().getVisibleName()));
 			}
 		}
 		return super.onSpawn(npc);

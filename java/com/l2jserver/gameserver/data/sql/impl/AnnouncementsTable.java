@@ -30,11 +30,11 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.gameserver.enums.AnnouncementType;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.announce.Announcement;
 import com.l2jserver.gameserver.model.announce.AutoAnnouncement;
 import com.l2jserver.gameserver.model.announce.IAnnouncement;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
 
 /**
@@ -114,7 +114,7 @@ public final class AnnouncementsTable
 			if (announce.isValid() && (announce.getType() == type))
 			{
 				player.sendPacket(new CreatureSay(0, //
-					type == AnnouncementType.CRITICAL ? Say2.CRITICAL_ANNOUNCE : Say2.ANNOUNCEMENT, //
+					type == AnnouncementType.CRITICAL ? ChatType.CRITICAL_ANNOUNCE : ChatType.ANNOUNCEMENT, //
 					player.getName(), announce.getContent()));
 			}
 		}

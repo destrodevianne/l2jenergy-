@@ -21,6 +21,7 @@ package handlers.chathandlers;
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.handler.IChatHandler;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.PcCondOverride;
@@ -28,31 +29,30 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.friend.BlockList;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
-import com.l2jserver.gameserver.util.Util;
 
 /**
  * Tell chat handler.
  * @author durgus
  */
-public class ChatTell implements IChatHandler
+public class ChatWhisper implements IChatHandler
 {
-	private static final int[] COMMAND_IDS =
+	private static final ChatType[] CHAT_TYPES =
 	{
-		2
+		ChatType.WHISPER
 	};
 	
 	@Override
-	public void handleChat(int type, L2PcInstance activeChar, String target, String text)
+	public void handleChat(ChatType type, L2PcInstance activeChar, String target, String text)
 	{
-		if (activeChar.isChatBanned() && Util.contains(GeneralConfig.BAN_CHAT_CHANNELS, type))
+		if (activeChar.isChatBanned() && GeneralConfig.BAN_CHAT_CHANNELS.contains(type))
 		{
-			activeChar.sendPacket(SystemMessageId.CHATTING_IS_CURRENTLY_PROHIBITED);
+			activeChar.sendPacket(SystemMessageId.CHATTING_IS_CURRENTLY_PROHIBITED_IF_YOU_TRY_TO_CHAT_BEFORE_THE_PROHIBITION_IS_REMOVED_THE_PROHIBITION_TIME_WILL_INCREASE_EVEN_FURTHER);
 			return;
 		}
 		
 		if (GeneralConfig.JAIL_DISABLE_CHAT && activeChar.isJailed() && !activeChar.canOverrideCond(PcCondOverride.CHAT_CONDITIONS))
 		{
-			activeChar.sendPacket(SystemMessageId.CHATTING_PROHIBITED);
+			activeChar.sendPacket(SystemMessageId.CHATTING_IS_CURRENTLY_PROHIBITED);
 			return;
 		}
 		
@@ -62,11 +62,7 @@ public class ChatTell implements IChatHandler
 			return;
 		}
 		
-		CreatureSay cs = new CreatureSay(activeChar.getObjectId(), type, activeChar.getName(), text);
-		L2PcInstance receiver = null;
-		
-		receiver = L2World.getInstance().getPlayer(target);
-		
+		final L2PcInstance receiver = L2World.getInstance().getPlayer(target);
 		if ((receiver != null) && !receiver.isSilenceMode(activeChar.getObjectId()))
 		{
 			if (GeneralConfig.JAIL_DISABLE_CHAT && receiver.isJailed() && !activeChar.canOverrideCond(PcCondOverride.CHAT_CONDITIONS))
@@ -74,16 +70,19 @@ public class ChatTell implements IChatHandler
 				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "player_jailed"));
 				return;
 			}
+			
 			if (receiver.isChatBanned())
 			{
-				activeChar.sendPacket(SystemMessageId.THE_PERSON_IS_IN_MESSAGE_REFUSAL_MODE);
+				activeChar.sendPacket(SystemMessageId.THAT_PERSON_IS_IN_MESSAGE_REFUSAL_MODE);
 				return;
 			}
+			
 			if ((receiver.getClient() == null) || receiver.getClient().isDetached())
 			{
 				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "player_offline"));
 				return;
 			}
+			
 			if (!BlockList.isBlocked(receiver, activeChar))
 			{
 				// Allow reciever to send PMs to this char, which is in silence mode.
@@ -92,23 +91,23 @@ public class ChatTell implements IChatHandler
 					activeChar.addSilenceModeExcluded(receiver.getObjectId());
 				}
 				
-				receiver.sendPacket(cs);
+				receiver.sendPacket(new CreatureSay(activeChar.getObjectId(), type, activeChar.getName(), text));
 				activeChar.sendPacket(new CreatureSay(activeChar.getObjectId(), type, "->" + receiver.getName(), text));
 			}
 			else
 			{
-				activeChar.sendPacket(SystemMessageId.THE_PERSON_IS_IN_MESSAGE_REFUSAL_MODE);
+				activeChar.sendPacket(SystemMessageId.THAT_PERSON_IS_IN_MESSAGE_REFUSAL_MODE);
 			}
 		}
 		else
 		{
-			activeChar.sendPacket(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME);
+			activeChar.sendPacket(SystemMessageId.THAT_PLAYER_IS_NOT_ONLINE);
 		}
 	}
 	
 	@Override
-	public int[] getChatTypeList()
+	public ChatType[] getChatTypeList()
 	{
-		return COMMAND_IDS;
+		return CHAT_TYPES;
 	}
 }

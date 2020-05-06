@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.instancemanager.InstanceManager;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.Location;
@@ -33,7 +34,6 @@ import com.l2jserver.gameserver.model.instancezone.InstanceWorld;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
 import com.l2jserver.gameserver.network.SystemMessageId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.MagicSkillUse;
 
 import instances.AbstractInstance;
@@ -115,17 +115,17 @@ public final class SanctumOftheLordsOfDawn extends AbstractInstance
 				{
 					case GUARDS_OF_THE_DAWN:
 					{
-						broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.INTRUDER_PROTECT_THE_PRIESTS_OF_DAWN);
+						broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.INTRUDER_PROTECT_THE_PRIESTS_OF_DAWN);
 						break;
 					}
 					case GUARDS_OF_THE_DAWN_2:
 					{
-						broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.HOW_DARE_YOU_INTRUDE_WITH_THAT_TRANSFORMATION_GET_LOST);
+						broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.HOW_DARE_YOU_INTRUDE_WITH_THAT_TRANSFORMATION_GET_LOST);
 						break;
 					}
 					case GUARDS_OF_THE_DAWN_3:
 					{
-						broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.WHO_ARE_YOU_A_NEW_FACE_LIKE_YOU_CAN_T_APPROACH_THIS_PLACE);
+						broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.WHO_ARE_YOU_A_NEW_FACE_LIKE_YOU_CAN_T_APPROACH_THIS_PLACE);
 						break;
 					}
 				}

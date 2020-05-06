@@ -18,6 +18,7 @@
  */
 package quests.Q00229_TestOfWitchcraft;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.Location;
@@ -27,7 +28,6 @@ import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
 import com.l2jserver.gameserver.util.Util;
@@ -312,7 +312,7 @@ public final class Q00229_TestOfWitchcraft extends Quest
 					if (npc.isScriptValue(0) && hasQuestItems(attacker, ALEXANDRIAS_BOOK, LARAS_MEMO) && !hasQuestItems(attacker, AKLANTOTH_3RD_GEM))
 					{
 						npc.setScriptValue(1);
-						npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.I_ABSOLUTELY_CANNOT_GIVE_IT_TO_YOU_IT_IS_MY_PRECIOUS_JEWEL));
+						npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.I_ABSOLUTELY_CANNOT_GIVE_IT_TO_YOU_IT_IS_MY_PRECIOUS_JEWEL));
 					}
 					break;
 				}
@@ -321,7 +321,7 @@ public final class Q00229_TestOfWitchcraft extends Quest
 					if (npc.isScriptValue(0) && hasQuestItems(attacker, LEOPOLDS_JOURNAL) && !hasQuestItems(attacker, AKLANTOTH_4TH_GEM, AKLANTOTH_5TH_GEM, AKLANTOTH_6TH_GEM))
 					{
 						npc.setScriptValue(1);
-						npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.I_ABSOLUTELY_CANNOT_GIVE_IT_TO_YOU_IT_IS_MY_PRECIOUS_JEWEL));
+						npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.I_ABSOLUTELY_CANNOT_GIVE_IT_TO_YOU_IT_IS_MY_PRECIOUS_JEWEL));
 					}
 					break;
 				}
@@ -329,7 +329,7 @@ public final class Q00229_TestOfWitchcraft extends Quest
 				{
 					if (hasQuestItems(attacker, BRIMSTONE_1ST))
 					{
-						npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.ILL_TAKE_YOUR_LIVES_LATER));
+						npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.ILL_TAKE_YOUR_LIVES_LATER));
 						npc.deleteMe();
 						qs.setCond(5, true);
 					}
@@ -338,7 +338,7 @@ public final class Q00229_TestOfWitchcraft extends Quest
 						if (npc.isScriptValue(0) && checkWeapon(attacker))
 						{
 							npc.setScriptValue(1);
-							npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.THAT_SWORD_IS_REALLY));
+							npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.THAT_SWORD_IS_REALLY));
 						}
 					}
 					break;
@@ -485,7 +485,7 @@ public final class Q00229_TestOfWitchcraft extends Quest
 					{
 						if (npc.getKillingBlowWeapon() == SWORD_OF_BINDING)
 						{
-							npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.NO_I_HAVENT_COMPLETELY_FINISHED_THE_COMMAND_FOR_DESTRUCTION_AND_SLAUGHTER_YET));
+							npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.NO_I_HAVENT_COMPLETELY_FINISHED_THE_COMMAND_FOR_DESTRUCTION_AND_SLAUGHTER_YET));
 							takeItems(killer, SOULTRAP_CRYSTAL, 1);
 							giveItems(killer, PURGATORY_KEY, 1);
 							giveItems(killer, ZERUEL_BIND_CRYSTAL, 1);

@@ -21,6 +21,7 @@ package quests.Q00316_DestroyPlagueCarriers;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -28,7 +29,6 @@ import com.l2jserver.gameserver.model.holders.ItemHolder;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 
 /**
@@ -111,7 +111,7 @@ public final class Q00316_DestroyPlagueCarriers extends Quest
 	{
 		if (npc.isScriptValue(0))
 		{
-			npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.WHY_DO_YOU_OPPRESS_US_SO));
+			npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.WHY_DO_YOU_OPPRESS_US_SO));
 			npc.setScriptValue(1);
 		}
 		return super.onAttack(npc, attacker, damage, isSummon);

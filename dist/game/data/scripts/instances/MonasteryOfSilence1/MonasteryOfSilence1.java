@@ -19,6 +19,7 @@
 package instances.MonasteryOfSilence1;
 
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.instancemanager.InstanceManager;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
@@ -28,7 +29,6 @@ import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.instancezone.InstanceWorld;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 
 import instances.AbstractInstance;
 import quests.Q10294_SevenSignsToTheMonasteryOfSilence.Q10294_SevenSignsToTheMonasteryOfSilence;
@@ -287,12 +287,12 @@ public final class MonasteryOfSilence1 extends AbstractInstance
 					final QuestState st_Q10295 = player.getQuestState(Q10295_SevenSignsSolinasTomb.class.getSimpleName());
 					if ((st_Q10294 != null) && st_Q10294.isStarted())
 					{
-						broadcastNpcSay(npc, Say2.NPC_ALL, ELCADIA_DIALOGS_Q010294[getRandom(ELCADIA_DIALOGS_Q010294.length)]);
+						broadcastNpcSay(npc, ChatType.NPC_ALL, ELCADIA_DIALOGS_Q010294[getRandom(ELCADIA_DIALOGS_Q010294.length)]);
 					}
 					
 					if ((st_Q10295 != null) && st_Q10295.isMemoState(1))
 					{
-						broadcastNpcSay(npc, Say2.NPC_ALL, ELCADIA_DIALOGS_Q010295[getRandom(ELCADIA_DIALOGS_Q010295.length)]);
+						broadcastNpcSay(npc, ChatType.NPC_ALL, ELCADIA_DIALOGS_Q010295[getRandom(ELCADIA_DIALOGS_Q010295.length)]);
 					}
 					startQuestTimer("DIALOG", 10000, npc, player);
 					break;

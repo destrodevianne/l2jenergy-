@@ -85,17 +85,13 @@ public class LoggingUtils
 		itemLogger.info(stringBuilder.toString());
 	}
 	
-	public static void logChat(Logger chatLogger, String senderName, String receiverName, String message, String chatName)
+	public static void logChat(Logger chatLogger, String senderName, String receiverName, String message) // TODO: rework
 	{
 		final StringBuilder stringBuilder = new StringBuilder();
 		
 		stringBuilder.append('[');
-		stringBuilder.append(chatName);
-		stringBuilder.append("] ");
-		
-		stringBuilder.append('\'');
 		stringBuilder.append(senderName);
-		stringBuilder.append('\'');
+		stringBuilder.append("] ");
 		
 		if (receiverName != null)
 		{

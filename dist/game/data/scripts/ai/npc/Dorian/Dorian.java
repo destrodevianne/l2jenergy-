@@ -18,12 +18,12 @@
  */
 package ai.npc.Dorian;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 
 import ai.npc.AbstractNpcAI;
 import quests.Q00024_InhabitantsOfTheForestOfTheDead.Q00024_InhabitantsOfTheForestOfTheDead;
@@ -58,7 +58,7 @@ public final class Dorian extends AbstractNpcAI
 				takeItems(pl, SILVER_CROSS, -1);
 				giveItems(pl, BROKEN_SILVER_CROSS, 1);
 				qs.setCond(4, true);
-				broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.THAT_SIGN);
+				broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.THAT_SIGN);
 			}
 		}
 		return super.onSeeCreature(npc, creature, isSummon);

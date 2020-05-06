@@ -37,6 +37,7 @@ import com.l2jserver.gameserver.cache.HtmCache;
 import com.l2jserver.gameserver.configuration.config.ConquerableHallSiegeConfig;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.datatables.SpawnTable;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.SiegeStatus;
 import com.l2jserver.gameserver.enums.TeleportWhereType;
 import com.l2jserver.gameserver.instancemanager.CHSiegeManager;
@@ -54,7 +55,6 @@ import com.l2jserver.gameserver.model.entity.clanhall.SiegableHall;
 import com.l2jserver.gameserver.model.items.L2Item;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.model.skills.Skill;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.util.Broadcast;
 import com.l2jserver.gameserver.util.Util;
@@ -806,9 +806,7 @@ public final class RainbowSpringsChateau extends ClanHallSiegeEngine
 		else
 		{
 			_usedTextPassages.put(message, new ArrayList<L2Clan>());
-			int shout = Say2.NPC_SHOUT;
-			int objId = npc.getObjectId();
-			NpcSay say = new NpcSay(objId, shout, npc.getId(), message);
+			NpcSay say = new NpcSay(npc.getObjectId(), ChatType.NPC_SHOUT, npc.getId(), message);
 			npc.broadcastPacket(say);
 		}
 	}

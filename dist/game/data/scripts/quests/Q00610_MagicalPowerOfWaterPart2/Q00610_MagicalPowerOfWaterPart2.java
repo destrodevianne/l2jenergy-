@@ -19,13 +19,13 @@
 package quests.Q00610_MagicalPowerOfWaterPart2;
 
 import com.l2jserver.gameserver.configuration.config.NpcConfig;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.quest.State;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.util.Util;
 
@@ -129,7 +129,7 @@ public class Q00610_MagicalPowerOfWaterPart2 extends Quest
 		{
 			if (event.equals("despawn_ashutar"))
 			{
-				npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.THE_POWER_OF_CONSTRAINT_IS_GETTING_WEAKER_YOUR_RITUAL_HAS_FAILED));
+				npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.THE_POWER_OF_CONSTRAINT_IS_GETTING_WEAKER_YOUR_RITUAL_HAS_FAILED));
 				npc.deleteMe();
 				addSpawn(VARKA_TOTEM, 105452, -36775, -1050, 34000, false, 0, true);
 			}
@@ -206,7 +206,7 @@ public class Q00610_MagicalPowerOfWaterPart2 extends Quest
 		}
 		npc.deleteMe();
 		final L2Npc ashutar = addSpawn(ASHUTAR, 104825, -36926, -1136, 0, false, 0);
-		ashutar.broadcastPacket(new NpcSay(ashutar, Say2.NPC_ALL, NpcStringId.THE_MAGICAL_POWER_OF_WATER_COMES_FROM_THE_POWER_OF_STORM_AND_HAIL_IF_YOU_DARE_TO_CONFRONT_IT_ONLY_DEATH_WILL_AWAIT_YOU));
+		ashutar.broadcastPacket(new NpcSay(ashutar, ChatType.NPC_ALL, NpcStringId.THE_MAGICAL_POWER_OF_WATER_COMES_FROM_THE_POWER_OF_STORM_AND_HAIL_IF_YOU_DARE_TO_CONFRONT_IT_ONLY_DEATH_WILL_AWAIT_YOU));
 		startQuestTimer("despawn_ashutar", 1200000, ashutar, null);
 		return "31560-02.html";
 	}

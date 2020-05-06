@@ -25,6 +25,7 @@ import java.util.Map;
 
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2Party;
 import com.l2jserver.gameserver.model.L2World;
@@ -1007,7 +1008,7 @@ public abstract class AbstractSagaQuest extends Quest
 	
 	private static void autoChat(L2Npc npc, String text)
 	{
-		npc.broadcastPacket(new NpcSay(npc.getObjectId(), 0, npc.getId(), text));
+		npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.GENERAL, npc.getId(), text));
 	}
 	
 	private static void cast(L2Npc npc, L2Character target, int skillId, int level)

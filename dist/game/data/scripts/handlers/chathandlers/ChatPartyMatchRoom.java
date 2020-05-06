@@ -19,13 +19,14 @@
 package handlers.chathandlers;
 
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.handler.IChatHandler;
 import com.l2jserver.gameserver.model.PartyMatchRoom;
 import com.l2jserver.gameserver.model.PartyMatchRoomList;
+import com.l2jserver.gameserver.model.PcCondOverride;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
-import com.l2jserver.gameserver.util.Util;
 
 /**
  * A chat handler
@@ -33,48 +34,47 @@ import com.l2jserver.gameserver.util.Util;
  */
 public class ChatPartyMatchRoom implements IChatHandler
 {
-	private static final int[] COMMAND_IDS =
+	private static final ChatType[] CHAT_TYPES =
 	{
-		14
+		ChatType.PARTYMATCH_ROOM,
 	};
 	
-	/**
-	 * Handle chat type 'partymatchroom'
-	 */
 	@Override
-	public void handleChat(int type, L2PcInstance activeChar, String target, String text)
+	public void handleChat(ChatType type, L2PcInstance activeChar, String target, String text)
 	{
-		if (activeChar.isInPartyMatchRoom())
+		if (!activeChar.isInPartyMatchRoom())
 		{
-			PartyMatchRoom _room = PartyMatchRoomList.getInstance().getPlayerRoom(activeChar);
-			if (_room != null)
-			{
-				if (activeChar.isChatBanned() && Util.contains(GeneralConfig.BAN_CHAT_CHANNELS, type))
-				{
-					activeChar.sendPacket(SystemMessageId.CHATTING_IS_CURRENTLY_PROHIBITED);
-					return;
-				}
-				
-				CreatureSay cs = new CreatureSay(activeChar.getObjectId(), type, activeChar.getName(), text);
-				for (L2PcInstance _member : _room.getPartyMembers())
-				{
-					_member.sendPacket(cs);
-				}
-			}
+			return;
+		}
+		
+		final PartyMatchRoom room = PartyMatchRoomList.getInstance().getPlayerRoom(activeChar);
+		if (room == null)
+		{
+			return;
+		}
+		
+		if (activeChar.isChatBanned() && GeneralConfig.BAN_CHAT_CHANNELS.contains(type))
+		{
+			activeChar.sendPacket(SystemMessageId.CHATTING_IS_CURRENTLY_PROHIBITED_IF_YOU_TRY_TO_CHAT_BEFORE_THE_PROHIBITION_IS_REMOVED_THE_PROHIBITION_TIME_WILL_INCREASE_EVEN_FURTHER);
+			return;
+		}
+		
+		if (GeneralConfig.JAIL_DISABLE_CHAT && activeChar.isJailed() && !activeChar.canOverrideCond(PcCondOverride.CHAT_CONDITIONS))
+		{
+			activeChar.sendPacket(SystemMessageId.CHATTING_IS_CURRENTLY_PROHIBITED);
+			return;
+		}
+		
+		final CreatureSay cs = new CreatureSay(activeChar.getObjectId(), type, activeChar.getName(), text);
+		for (L2PcInstance member : room.getPartyMembers())
+		{
+			member.sendPacket(cs);
 		}
 	}
 	
-	/**
-	 * Returns the chat types registered to this handler
-	 */
 	@Override
-	public int[] getChatTypeList()
+	public ChatType[] getChatTypeList()
 	{
-		return COMMAND_IDS;
-	}
-	
-	public static void main(String[] args)
-	{
-		new ChatPartyMatchRoom();
+		return CHAT_TYPES;
 	}
 }

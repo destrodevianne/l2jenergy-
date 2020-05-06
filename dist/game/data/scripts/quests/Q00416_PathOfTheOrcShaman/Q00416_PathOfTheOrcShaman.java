@@ -21,6 +21,7 @@ package quests.Q00416_PathOfTheOrcShaman;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -29,7 +30,6 @@ import com.l2jserver.gameserver.model.holders.ItemChanceHolder;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
 
@@ -300,7 +300,7 @@ public final class Q00416_PathOfTheOrcShaman extends Quest
 					st.setCond(15, true);
 					if (getRandom(100) < 66)
 					{
-						npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.MY_DEAR_FRIEND_OF_S1_WHO_HAS_GONE_ON_AHEAD_OF_ME).addStringParameter(st.getPlayer().getName()));
+						npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.MY_DEAR_FRIEND_OF_S1_WHO_HAS_GONE_ON_AHEAD_OF_ME).addStringParameter(st.getPlayer().getName()));
 					}
 					break;
 				}
@@ -310,7 +310,7 @@ public final class Q00416_PathOfTheOrcShaman extends Quest
 					st.setCond(17, true);
 					if (getRandom(100) < 66)
 					{
-						npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.LISTEN_TO_TEJAKAR_GANDI_YOUNG_OROKA_THE_SPIRIT_OF_THE_SLAIN_LEOPARD_IS_CALLING_YOU_S1).addStringParameter(st.getPlayer().getName()));
+						npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.LISTEN_TO_TEJAKAR_GANDI_YOUNG_OROKA_THE_SPIRIT_OF_THE_SLAIN_LEOPARD_IS_CALLING_YOU_S1).addStringParameter(st.getPlayer().getName()));
 					}
 					break;
 				}

@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.l2jserver.gameserver.configuration.config.GrandBossConfig;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.audio.Music;
 import com.l2jserver.gameserver.instancemanager.GrandBossManager;
 import com.l2jserver.gameserver.model.StatsSet;
@@ -30,7 +31,6 @@ import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2GrandBossInstance;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 
 import ai.npc.AbstractNpcAI;
@@ -170,14 +170,14 @@ public final class Core extends AbstractNpcAI
 			{
 				if (getRandom(100) == 0)
 				{
-					npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.REMOVING_INTRUDERS));
+					npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.REMOVING_INTRUDERS));
 				}
 			}
 			else
 			{
 				_firstAttacked = true;
-				npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.A_NON_PERMITTED_TARGET_HAS_BEEN_DISCOVERED));
-				npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.INTRUDER_REMOVAL_SYSTEM_INITIATED));
+				npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.A_NON_PERMITTED_TARGET_HAS_BEEN_DISCOVERED));
+				npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.INTRUDER_REMOVAL_SYSTEM_INITIATED));
 			}
 		}
 		return super.onAttack(npc, attacker, damage, isSummon);
@@ -190,9 +190,9 @@ public final class Core extends AbstractNpcAI
 		{
 			int objId = npc.getObjectId();
 			npc.broadcastPacket(Music.BS02_D_10000.getPacket());
-			npc.broadcastPacket(new NpcSay(objId, Say2.NPC_ALL, npc.getId(), NpcStringId.A_FATAL_ERROR_HAS_OCCURRED));
-			npc.broadcastPacket(new NpcSay(objId, Say2.NPC_ALL, npc.getId(), NpcStringId.SYSTEM_IS_BEING_SHUT_DOWN));
-			npc.broadcastPacket(new NpcSay(objId, Say2.NPC_ALL, npc.getId(), NpcStringId.DOT_DOT_DOT_DOT_DOT_DOT));
+			npc.broadcastPacket(new NpcSay(objId, ChatType.NPC_ALL, npc.getId(), NpcStringId.A_FATAL_ERROR_HAS_OCCURRED));
+			npc.broadcastPacket(new NpcSay(objId, ChatType.NPC_ALL, npc.getId(), NpcStringId.SYSTEM_IS_BEING_SHUT_DOWN));
+			npc.broadcastPacket(new NpcSay(objId, ChatType.NPC_ALL, npc.getId(), NpcStringId.DOT_DOT_DOT_DOT_DOT_DOT));
 			_firstAttacked = false;
 			GrandBossManager.getInstance().setBossStatus(CORE, DEAD);
 			// Calculate Min and Max respawn times randomly.

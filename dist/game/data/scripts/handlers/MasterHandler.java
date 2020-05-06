@@ -166,10 +166,10 @@ import handlers.bypasshandlers.TerritoryStatus;
 import handlers.bypasshandlers.TutorialClose;
 import handlers.bypasshandlers.VoiceCommand;
 import handlers.bypasshandlers.Wear;
-import handlers.chathandlers.ChatAll;
 import handlers.chathandlers.ChatAlliance;
 import handlers.chathandlers.ChatBattlefield;
 import handlers.chathandlers.ChatClan;
+import handlers.chathandlers.ChatGeneral;
 import handlers.chathandlers.ChatHeroVoice;
 import handlers.chathandlers.ChatParty;
 import handlers.chathandlers.ChatPartyMatchRoom;
@@ -177,8 +177,8 @@ import handlers.chathandlers.ChatPartyRoomAll;
 import handlers.chathandlers.ChatPartyRoomCommander;
 import handlers.chathandlers.ChatPetition;
 import handlers.chathandlers.ChatShout;
-import handlers.chathandlers.ChatTell;
 import handlers.chathandlers.ChatTrade;
+import handlers.chathandlers.ChatWhisper;
 import handlers.communityboard.BufferBoard;
 import handlers.communityboard.CareerBoard;
 import handlers.communityboard.ClanBoard;
@@ -465,10 +465,10 @@ public class MasterHandler
 		},
 		{
 			// Chat Handlers
-			ChatAll.class,
 			ChatAlliance.class,
 			ChatBattlefield.class,
 			ChatClan.class,
+			ChatGeneral.class,
 			ChatHeroVoice.class,
 			ChatParty.class,
 			ChatPartyMatchRoom.class,
@@ -476,8 +476,8 @@ public class MasterHandler
 			ChatPartyRoomCommander.class,
 			ChatPetition.class,
 			ChatShout.class,
-			ChatTell.class,
 			ChatTrade.class,
+			ChatWhisper.class,
 		},
 		{
 			// Community Board

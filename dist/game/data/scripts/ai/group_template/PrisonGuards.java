@@ -18,6 +18,7 @@
  */
 package ai.group_template;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -25,7 +26,6 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 
 import ai.npc.AbstractNpcAI;
 
@@ -94,7 +94,7 @@ public final class PrisonGuards extends AbstractNpcAI
 			{
 				npc.setTarget(player);
 				npc.doCast(STONE);
-				broadcastNpcSay(npc, Say2.ALL, NpcStringId.ITS_NOT_EASY_TO_OBTAIN);
+				broadcastNpcSay(npc, ChatType.GENERAL, NpcStringId.ITS_NOT_EASY_TO_OBTAIN);
 			}
 		}
 		else
@@ -103,7 +103,7 @@ public final class PrisonGuards extends AbstractNpcAI
 			{
 				npc.setTarget(player);
 				npc.doCast(STONE);
-				broadcastNpcSay(npc, Say2.ALL, NpcStringId.YOURE_OUT_OF_YOUR_MIND_COMING_HERE);
+				broadcastNpcSay(npc, ChatType.GENERAL, NpcStringId.YOURE_OUT_OF_YOUR_MIND_COMING_HERE);
 			}
 		}
 		return super.onAttack(npc, player, damage, isSummon);

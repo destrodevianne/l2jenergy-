@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.Location;
@@ -32,7 +33,6 @@ import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
 import com.l2jserver.gameserver.util.Util;
@@ -250,7 +250,7 @@ public final class Q00227_TestOfTheReformer extends Quest
 				{
 					if ((skill == null) || !SKILLS.contains(skill.getId()))
 					{
-						npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.COWARDLY_GUY));
+						npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.COWARDLY_GUY));
 						npc.deleteMe();
 					}
 					if (attacker.isPlayer())
@@ -364,7 +364,7 @@ public final class Q00227_TestOfTheReformer extends Quest
 				{
 					if (!hasQuestItems(killer, HUGE_NAIL))
 					{
-						npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.THE_CONCEALED_TRUTH_WILL_ALWAYS_BE_REVEALED));
+						npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.THE_CONCEALED_TRUTH_WILL_ALWAYS_BE_REVEALED));
 						giveItems(killer, HUGE_NAIL, 1);
 						playSound(killer, Sound.ITEMSOUND_QUEST_ITEMGET);
 						qs.setMemoState(3);

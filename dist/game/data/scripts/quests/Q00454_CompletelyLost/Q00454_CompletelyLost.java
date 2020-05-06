@@ -19,6 +19,7 @@
 package quests.Q00454_CompletelyLost;
 
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.QuestType;
 import com.l2jserver.gameserver.enums.events.EventType;
 import com.l2jserver.gameserver.enums.events.ListenerRegisterType;
@@ -36,7 +37,6 @@ import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.quest.State;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.util.Broadcast;
 import com.l2jserver.gameserver.util.Util;
@@ -784,7 +784,7 @@ public final class Q00454_CompletelyLost extends Quest
 	 */
 	private static void broadcastNpcSay(L2Npc npc, NpcStringId stringId)
 	{
-		Broadcast.toKnownPlayers(npc, new NpcSay(npc, Say2.NPC_ALL, stringId));
+		Broadcast.toKnownPlayers(npc, new NpcSay(npc, ChatType.NPC_ALL, stringId));
 	}
 	
 	/**
@@ -795,6 +795,6 @@ public final class Q00454_CompletelyLost extends Quest
 	 */
 	private static void whisper(L2Npc npc, L2PcInstance player, NpcStringId stringId)
 	{
-		player.sendPacket(new NpcSay(npc.getObjectId(), Say2.TELL, npc.getId(), stringId));
+		player.sendPacket(new NpcSay(npc.getObjectId(), ChatType.WHISPER, npc.getId(), stringId));
 	}
 }

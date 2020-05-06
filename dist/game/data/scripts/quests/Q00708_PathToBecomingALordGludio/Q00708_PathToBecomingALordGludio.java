@@ -18,6 +18,7 @@
  */
 package quests.Q00708_PathToBecomingALordGludio;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.FortManager;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -27,7 +28,6 @@ import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.quest.State;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.util.Util;
 
@@ -158,7 +158,7 @@ public class Q00708_PathToBecomingALordGludio extends Quest
 				if (qs.isCond(7) && (getQuestItemsCount(player, HEADLESS_ARMOR) >= 1))
 				{
 					takeItems(player, HEADLESS_ARMOR, -1);
-					npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_SHOUT, npc.getId(), NpcStringId.LISTEN_YOU_VILLAGERS_OUR_LIEGE_WHO_WILL_SOON_BECOME_A_LORD_HAS_DEFEATED_THE_HEADLESS_KNIGHT_YOU_CAN_NOW_REST_EASY));
+					npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_SHOUT, npc.getId(), NpcStringId.LISTEN_YOU_VILLAGERS_OUR_LIEGE_WHO_WILL_SOON_BECOME_A_LORD_HAS_DEFEATED_THE_HEADLESS_KNIGHT_YOU_CAN_NOW_REST_EASY));
 					qs.setCond(9);
 					htmltext = event;
 				}
@@ -187,7 +187,7 @@ public class Q00708_PathToBecomingALordGludio extends Quest
 					
 					// DeclareLord(gludio_dominion, player);
 					CastleManager.getInstance().getCastleById(GLUDIO_CASTLE).setShowNpcCrest(true);
-					NpcSay packet = new NpcSay(npc.getObjectId(), Say2.NPC_SHOUT, npc.getId(), NpcStringId.S1_HAS_BECOME_LORD_OF_THE_TOWN_OF_GLUDIO_LONG_MAY_HE_REIGN);
+					NpcSay packet = new NpcSay(npc.getObjectId(), ChatType.NPC_SHOUT, npc.getId(), NpcStringId.S1_HAS_BECOME_LORD_OF_THE_TOWN_OF_GLUDIO_LONG_MAY_HE_REIGN);
 					packet.addStringParameter(player.getName());
 					npc.broadcastPacket(packet);
 					qs.exitQuest(false, true);
@@ -401,7 +401,7 @@ public class Q00708_PathToBecomingALordGludio extends Quest
 		{
 			if (npc.getId() == HEADLESS_KNIGHT)
 			{
-				npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.DOES_MY_MISSION_TO_BLOCK_THE_SUPPLIES_END_HERE));
+				npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.DOES_MY_MISSION_TO_BLOCK_THE_SUPPLIES_END_HERE));
 				giveItems(killer, HEADLESS_ARMOR, 1);
 				qs.setCond(7);
 			}

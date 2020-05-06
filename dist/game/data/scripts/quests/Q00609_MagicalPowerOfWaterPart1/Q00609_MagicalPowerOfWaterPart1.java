@@ -18,6 +18,7 @@
  */
 package quests.Q00609_MagicalPowerOfWaterPart1;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
@@ -25,7 +26,6 @@ import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.quest.State;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 
 /**
@@ -129,7 +129,7 @@ public class Q00609_MagicalPowerOfWaterPart1 extends Quest
 				}
 				break;
 			case "eye_despawn":
-				npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.UDAN_HAS_ALREADY_SEEN_YOUR_FACE));
+				npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.UDAN_HAS_ALREADY_SEEN_YOUR_FACE));
 				npc.deleteMe();
 				break;
 		}
@@ -146,7 +146,7 @@ public class Q00609_MagicalPowerOfWaterPart1 extends Quest
 			npc.setTarget(attacker);
 			npc.doCast(GOW);
 			final L2Npc eye = addSpawn(UDANS_EYE, npc);
-			eye.broadcastPacket(new NpcSay(eye, Say2.NPC_ALL, NpcStringId.YOU_CANT_AVOID_THE_EYES_OF_UDAN));
+			eye.broadcastPacket(new NpcSay(eye, ChatType.NPC_ALL, NpcStringId.YOU_CANT_AVOID_THE_EYES_OF_UDAN));
 			startQuestTimer("eye_despawn", 10000, eye, attacker);
 		}
 		return super.onAttack(npc, attacker, damage, isSummon);

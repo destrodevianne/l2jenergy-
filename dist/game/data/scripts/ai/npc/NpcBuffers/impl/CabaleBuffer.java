@@ -23,12 +23,12 @@ import java.util.Collection;
 import com.l2jserver.gameserver.SevenSigns;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.datatables.SkillData;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.skills.BuffInfo;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 
 import ai.npc.AbstractNpcAI;
 
@@ -282,11 +282,11 @@ public final class CabaleBuffer extends AbstractNpcAI
 	{
 		if (chance == -1)
 		{
-			broadcastNpcSay(npc, Say2.NPC_ALL, message);
+			broadcastNpcSay(npc, ChatType.NPC_ALL, message);
 		}
 		else if (getRandom(10000) < chance)
 		{
-			broadcastNpcSay(npc, Say2.NPC_ALL, message, param);
+			broadcastNpcSay(npc, ChatType.NPC_ALL, message, param);
 		}
 	}
 	

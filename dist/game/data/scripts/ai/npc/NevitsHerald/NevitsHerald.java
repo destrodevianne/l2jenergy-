@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.l2jserver.commons.util.Rnd;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.skills.L2EffectType;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.Location;
@@ -29,7 +30,6 @@ import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.ExShowScreenMessage;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 
@@ -105,7 +105,7 @@ public final class NevitsHerald extends AbstractNpcAI
 		else if (event.equalsIgnoreCase("text_spam"))
 		{
 			cancelQuestTimer("text_spam", npc, player);
-			npc.broadcastPacket(new NpcSay(NEVITS_HERALD, Say2.SHOUT, NEVITS_HERALD, SPAM[Rnd.get(0, SPAM.length - 1)]));
+			npc.broadcastPacket(new NpcSay(NEVITS_HERALD, ChatType.SHOUT, NEVITS_HERALD, SPAM[Rnd.get(0, SPAM.length - 1)]));
 			startQuestTimer("text_spam", 60000, npc, player);
 			return null;
 		}

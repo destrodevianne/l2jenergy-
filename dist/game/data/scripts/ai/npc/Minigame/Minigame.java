@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.l2jserver.gameserver.datatables.SpawnTable;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.events.EventType;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2Spawn;
@@ -32,7 +33,6 @@ import com.l2jserver.gameserver.model.events.impl.character.OnCreatureSkillUse;
 import com.l2jserver.gameserver.model.events.listeners.ConsumerEventListener;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.util.Util;
 
 import ai.npc.AbstractNpcAI;
@@ -90,7 +90,7 @@ public final class Minigame extends AbstractNpcAI
 				
 				takeItems(player, UNLIT_TORCHLIGHT, 1);
 				giveItems(player, TORCHLIGHT, 1);
-				broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.THE_FURNACE_WILL_GO_OUT_WATCH_AND_SEE);
+				broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.THE_FURNACE_WILL_GO_OUT_WATCH_AND_SEE);
 				
 				room.getManager().setTarget(player);
 				room.setParticipant(player);
@@ -155,7 +155,7 @@ public final class Minigame extends AbstractNpcAI
 				}
 				else
 				{
-					broadcastNpcSay(room.getManager(), Say2.NPC_ALL, NpcStringId.NOW_LIGHT_THE_FURNACES_FIRE);
+					broadcastNpcSay(room.getManager(), ChatType.NPC_ALL, NpcStringId.NOW_LIGHT_THE_FURNACES_FIRE);
 					room.burnThemAll();
 					startQuestTimer("off", 2000, npc, null);
 					final ConsumerEventListener listener = new ConsumerEventListener(room.getParticipant(), EventType.ON_CREATURE_SKILL_USE, (OnCreatureSkillUse listenerEvent) -> onSkillUse(listenerEvent), room);
@@ -166,19 +166,19 @@ public final class Minigame extends AbstractNpcAI
 			}
 			case "hurry_up":
 			{
-				broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.THERES_ABOUT_1_MINUTE_LEFT);
+				broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.THERES_ABOUT_1_MINUTE_LEFT);
 				startQuestTimer("hurry_up2", 60000, npc, null);
 				break;
 			}
 			case "hurry_up2":
 			{
-				broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.THERES_JUST_10_SECONDS_LEFT);
+				broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.THERES_JUST_10_SECONDS_LEFT);
 				startQuestTimer("expire", 10000, npc, null);
 				break;
 			}
 			case "expire":
 			{
-				broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.TIME_IS_UP_AND_YOU_HAVE_FAILED_ANY_MORE_WILL_BE_DIFFICULT);
+				broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.TIME_IS_UP_AND_YOU_HAVE_FAILED_ANY_MORE_WILL_BE_DIFFICULT);
 			}
 			case "end":
 			{
@@ -283,7 +283,7 @@ public final class Minigame extends AbstractNpcAI
 							else
 							{
 								addSpawn(TREASURE_BOX, room.getParticipant().getLocation(), true, 0);
-								broadcastNpcSay(room.getManager(), Say2.NPC_ALL, NpcStringId.OH_YOUVE_SUCCEEDED);
+								broadcastNpcSay(room.getManager(), ChatType.NPC_ALL, NpcStringId.OH_YOUVE_SUCCEEDED);
 								room.setCurrentPot(0);
 								room.burnThemAll();
 								startQuestTimer("off", 2000, room.getManager(), null);
@@ -294,7 +294,7 @@ public final class Minigame extends AbstractNpcAI
 						{
 							if (room.getAttemptNumber() == MAX_ATTEMPTS)
 							{
-								broadcastNpcSay(room.getManager(), Say2.NPC_ALL, NpcStringId.AH_IVE_FAILED_GOING_FURTHER_WILL_BE_DIFFICULT);
+								broadcastNpcSay(room.getManager(), ChatType.NPC_ALL, NpcStringId.AH_IVE_FAILED_GOING_FURTHER_WILL_BE_DIFFICULT);
 								room.burnThemAll();
 								startQuestTimer("off", 2000, room.getManager(), null);
 								room.getParticipant().removeListenerIf(EventType.ON_CREATURE_SKILL_USE, listener -> listener.getOwner() == room);
@@ -302,7 +302,7 @@ public final class Minigame extends AbstractNpcAI
 							}
 							else if (room.getAttemptNumber() < MAX_ATTEMPTS)
 							{
-								broadcastNpcSay(room.getManager(), Say2.NPC_ALL, NpcStringId.AH_IS_THIS_FAILURE_BUT_IT_LOOKS_LIKE_I_CAN_KEEP_GOING);
+								broadcastNpcSay(room.getManager(), ChatType.NPC_ALL, NpcStringId.AH_IS_THIS_FAILURE_BUT_IT_LOOKS_LIKE_I_CAN_KEEP_GOING);
 								room.burnThemAll();
 								startQuestTimer("off", 2000, room.getManager(), null);
 								room.setAttemptNumber(room.getAttemptNumber() + 1);

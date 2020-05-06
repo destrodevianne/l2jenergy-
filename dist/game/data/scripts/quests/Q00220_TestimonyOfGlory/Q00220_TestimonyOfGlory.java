@@ -19,6 +19,7 @@
 package quests.Q00220_TestimonyOfGlory;
 
 import com.l2jserver.gameserver.enums.CategoryType;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -26,7 +27,6 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
 import com.l2jserver.gameserver.util.Util;
@@ -386,7 +386,7 @@ public final class Q00220_TestimonyOfGlory extends Quest
 							npc.getVariables().set("lastAttacker", attacker.getObjectId());
 							if (!hasQuestItems(attacker, SCEPTER_OF_TANTOS))
 							{
-								npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.IS_IT_A_LACKEY_OF_KAKAI));
+								npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.IS_IT_A_LACKEY_OF_KAKAI));
 								npc.setScriptValue(1);
 							}
 							break;
@@ -408,7 +408,7 @@ public final class Q00220_TestimonyOfGlory extends Quest
 							npc.getVariables().set("lastAttacker", attacker.getObjectId());
 							if (!hasQuestItems(attacker, SCEPTER_OF_TANTOS))
 							{
-								npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.HOW_REGRETFUL_UNJUST_DISHONOR));
+								npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.HOW_REGRETFUL_UNJUST_DISHONOR));
 								npc.setScriptValue(1);
 							}
 							break;
@@ -417,7 +417,7 @@ public final class Q00220_TestimonyOfGlory extends Quest
 						{
 							if (!hasQuestItems(attacker, SCEPTER_OF_TANTOS) && (npc.getCurrentHp() < (npc.getMaxHp() / 3)))
 							{
-								npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.INDIGNANT_AND_UNFAIR_DEATH));
+								npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.INDIGNANT_AND_UNFAIR_DEATH));
 								npc.setScriptValue(2);
 							}
 							break;
@@ -573,7 +573,7 @@ public final class Q00220_TestimonyOfGlory extends Quest
 					if (hasQuestItems(killer, TANAPIS_ORDER) && !hasQuestItems(killer, SCEPTER_OF_TANTOS))
 					{
 						addSpawn(REVENANT_OF_TANTOS_CHIEF, npc, true, 200000);
-						npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.TOO_LATE));
+						npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.TOO_LATE));
 					}
 					break;
 				}
@@ -654,7 +654,7 @@ public final class Q00220_TestimonyOfGlory extends Quest
 					if (hasQuestItems(killer, TANAPIS_ORDER) && !hasQuestItems(killer, SCEPTER_OF_TANTOS))
 					{
 						giveItems(killer, SCEPTER_OF_TANTOS, 1);
-						npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.ILL_GET_REVENGE_SOMEDAY));
+						npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.ILL_GET_REVENGE_SOMEDAY));
 						qs.setCond(10, true);
 					}
 					break;

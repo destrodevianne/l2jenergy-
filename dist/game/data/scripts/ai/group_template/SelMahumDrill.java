@@ -20,6 +20,7 @@ package ai.group_template;
 
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.datatables.SpawnTable;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.L2Spawn;
 import com.l2jserver.gameserver.model.Location;
@@ -27,7 +28,6 @@ import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.util.Util;
 
 import ai.npc.AbstractNpcAI;
@@ -239,7 +239,7 @@ public final class SelMahumDrill extends AbstractNpcAI
 					{
 						if (getRandom(4) < 1)
 						{
-							broadcastNpcSay(receiver, Say2.NPC_ALL, SOLDIER_FSTRINGS[getRandom(2)]);
+							broadcastNpcSay(receiver, ChatType.NPC_ALL, SOLDIER_FSTRINGS[getRandom(2)]);
 						}
 						if (receiver.canBeAttacked())
 						{
@@ -257,7 +257,7 @@ public final class SelMahumDrill extends AbstractNpcAI
 				{
 					if (Util.contains(MAHUM_CHIEFS, receiver.getId()))
 					{
-						broadcastNpcSay(receiver, Say2.NPC_ALL, CHIEF_FSTRINGS[getRandom(2)]);
+						broadcastNpcSay(receiver, ChatType.NPC_ALL, CHIEF_FSTRINGS[getRandom(2)]);
 					}
 					break;
 				}

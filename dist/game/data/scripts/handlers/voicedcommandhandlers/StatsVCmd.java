@@ -50,7 +50,7 @@ public class StatsVCmd implements IVoicedCommandHandler
 		final L2PcInstance pc = L2World.getInstance().getPlayer(params);
 		if ((pc == null))
 		{
-			activeChar.sendPacket(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME);
+			activeChar.sendPacket(SystemMessageId.THAT_PLAYER_IS_NOT_ONLINE);
 			return false;
 		}
 		

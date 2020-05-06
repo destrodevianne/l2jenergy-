@@ -18,11 +18,11 @@
  */
 package ai.npc.Katenar;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 
 import ai.npc.AbstractNpcAI;
 import quests.Q00065_CertifiedSoulBreaker.Q00065_CertifiedSoulBreaker;
@@ -77,7 +77,7 @@ public final class Katenar extends AbstractNpcAI
 						if (!npc.getVariables().getBoolean("SPAWNED", false))
 						{
 							npc0.getVariables().set("SPAWNED", false);
-							broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.GOOD_LUCK);
+							broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.GOOD_LUCK);
 						}
 					}
 					npc.deleteMe();
@@ -132,7 +132,7 @@ public final class Katenar extends AbstractNpcAI
 		final L2PcInstance player = npc.getVariables().getObject("player0", L2PcInstance.class);
 		if (player != null)
 		{
-			broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.I_AM_LATE);
+			broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.I_AM_LATE);
 		}
 		return super.onSpawn(npc);
 	}

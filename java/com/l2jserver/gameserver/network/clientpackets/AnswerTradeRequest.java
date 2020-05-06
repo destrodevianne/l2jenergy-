@@ -62,7 +62,7 @@ public final class AnswerTradeRequest extends L2GameClientPacket
 		{
 			// Trade partner not found, cancel trade
 			player.sendPacket(new TradeDone(0));
-			player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME));
+			player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.THAT_PLAYER_IS_NOT_ONLINE));
 			player.setActiveRequester(null);
 			return;
 		}
@@ -70,7 +70,7 @@ public final class AnswerTradeRequest extends L2GameClientPacket
 		{
 			// Trade partner not found, cancel trade
 			player.sendPacket(new TradeDone(0));
-			player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME));
+			player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.THAT_PLAYER_IS_NOT_ONLINE));
 			player.setActiveRequester(null);
 			return;
 		}

@@ -18,6 +18,7 @@
  */
 package ai.group_template;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -25,7 +26,6 @@ import com.l2jserver.gameserver.model.actor.L2Summon;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 
 import ai.npc.AbstractNpcAI;
 
@@ -104,7 +104,7 @@ public final class SilentValley extends AbstractNpcAI
 				if (!isSummon && npc.isScriptValue(0))
 				{
 					npc.setScriptValue(1);
-					broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.YOU_WILL_BE_CURSED_FOR_SEEKING_THE_TREASURE);
+					broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.YOU_WILL_BE_CURSED_FOR_SEEKING_THE_TREASURE);
 					npc.setTarget(player);
 					npc.doCast(BETRAYAL);
 				}

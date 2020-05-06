@@ -20,9 +20,9 @@ package handlers.chathandlers;
 
 import java.util.Collection;
 import java.util.StringTokenizer;
-import java.util.logging.Logger;
 
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.handler.IChatHandler;
 import com.l2jserver.gameserver.handler.IVoicedCommandHandler;
 import com.l2jserver.gameserver.handler.VoicedCommandHandler;
@@ -32,23 +32,20 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
 import com.l2jserver.gameserver.util.FloodProtectors;
 import com.l2jserver.gameserver.util.FloodProtectors.Action;
-import com.l2jserver.gameserver.util.Util;
 
 /**
  * A chat handler
  * @author durgus
  */
-public class ChatAll implements IChatHandler
+public class ChatGeneral implements IChatHandler
 {
-	private static Logger _log = Logger.getLogger(ChatAll.class.getName());
-	
-	private static final int[] COMMAND_IDS =
+	private static final ChatType[] CHAT_TYPES =
 	{
-		0
+		ChatType.GENERAL,
 	};
 	
 	@Override
-	public void handleChat(int type, L2PcInstance activeChar, String params, String text)
+	public void handleChat(ChatType type, L2PcInstance activeChar, String params, String text)
 	{
 		boolean vcd_used = false;
 		if (text.startsWith("."))
@@ -61,17 +58,14 @@ public class ChatAll implements IChatHandler
 			{
 				command = st.nextToken().substring(1);
 				params = text.substring(command.length() + 2);
-				vch = VoicedCommandHandler.getInstance().getHandler(command);
 			}
 			else
 			{
 				command = text.substring(1);
-				if (GeneralConfig.DEBUG)
-				{
-					_log.info("Command: " + command);
-				}
-				vch = VoicedCommandHandler.getInstance().getHandler(command);
 			}
+			
+			vch = VoicedCommandHandler.getInstance().getHandler(command);
+			
 			if (vch != null)
 			{
 				vch.useVoicedCommand(command, activeChar, params);
@@ -79,18 +73,15 @@ public class ChatAll implements IChatHandler
 			}
 			else
 			{
-				if (GeneralConfig.DEBUG)
-				{
-					_log.warning("No handler registered for bypass '" + command + "'");
-				}
 				vcd_used = false;
 			}
 		}
+		
 		if (!vcd_used)
 		{
-			if (activeChar.isChatBanned() && Util.contains(GeneralConfig.BAN_CHAT_CHANNELS, type))
+			if (activeChar.isChatBanned() && GeneralConfig.BAN_CHAT_CHANNELS.contains(type))
 			{
-				activeChar.sendPacket(SystemMessageId.CHATTING_IS_CURRENTLY_PROHIBITED);
+				activeChar.sendPacket(SystemMessageId.CHATTING_IS_CURRENTLY_PROHIBITED_IF_YOU_TRY_TO_CHAT_BEFORE_THE_PROHIBITION_IS_REMOVED_THE_PROHIBITION_TIME_WILL_INCREASE_EVEN_FURTHER);
 				return;
 			}
 			
@@ -108,7 +99,7 @@ public class ChatAll implements IChatHandler
 					return;
 				}
 				
-				CreatureSay cs = new CreatureSay(activeChar.getObjectId(), type, activeChar.getAppearance().getVisibleName(), text);
+				final CreatureSay cs = new CreatureSay(activeChar.getObjectId(), type, activeChar.getAppearance().getVisibleName(), text);
 				Collection<L2PcInstance> plrs = activeChar.getKnownList().getKnownPlayers().values();
 				for (L2PcInstance player : plrs)
 				{
@@ -117,15 +108,14 @@ public class ChatAll implements IChatHandler
 						player.sendPacket(cs);
 					}
 				}
-				
 				activeChar.sendPacket(cs);
 			}
 		}
 	}
 	
 	@Override
-	public int[] getChatTypeList()
+	public ChatType[] getChatTypeList()
 	{
-		return COMMAND_IDS;
+		return CHAT_TYPES;
 	}
 }

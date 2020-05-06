@@ -21,6 +21,7 @@ package com.l2jserver.gameserver.network.serverpackets;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.NpcStringId;
 import com.l2jserver.gameserver.network.SystemMessageId;
@@ -28,7 +29,7 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 public final class CreatureSay extends L2GameServerPacket
 {
 	private final int _objectId;
-	private final int _textType;
+	private final ChatType _chatType;
 	private String _charName = null;
 	private int _charId = 0;
 	private String _text = null;
@@ -41,34 +42,34 @@ public final class CreatureSay extends L2GameServerPacket
 	 * @param charName
 	 * @param text
 	 */
-	public CreatureSay(int objectId, int messageType, String charName, String text)
+	public CreatureSay(int objectId, ChatType chatType, String charName, String text)
 	{
 		_objectId = objectId;
-		_textType = messageType;
+		_chatType = chatType;
 		_charName = charName;
 		_text = text;
 	}
 	
-	public CreatureSay(int objectId, int messageType, int charId, NpcStringId npcString)
+	public CreatureSay(int objectId, ChatType chatType, int charId, NpcStringId npcString)
 	{
 		_objectId = objectId;
-		_textType = messageType;
+		_chatType = chatType;
 		_charId = charId;
 		_npcString = npcString.getId();
 	}
 	
-	public CreatureSay(int objectId, int messageType, String charName, NpcStringId npcString)
+	public CreatureSay(int objectId, ChatType chatType, String charName, NpcStringId npcString)
 	{
 		_objectId = objectId;
-		_textType = messageType;
+		_chatType = chatType;
 		_charName = charName;
 		_npcString = npcString.getId();
 	}
 	
-	public CreatureSay(int objectId, int messageType, int charId, SystemMessageId sysString)
+	public CreatureSay(int objectId, ChatType chatType, int charId, SystemMessageId sysString)
 	{
 		_objectId = objectId;
-		_textType = messageType;
+		_chatType = chatType;
 		_charId = charId;
 		_npcString = sysString.getId();
 	}
@@ -91,7 +92,7 @@ public final class CreatureSay extends L2GameServerPacket
 	{
 		writeC(0x4a);
 		writeD(_objectId);
-		writeD(_textType);
+		writeD(_chatType.getClientId());
 		if (_charName != null)
 		{
 			writeS(_charName);
@@ -120,7 +121,7 @@ public final class CreatureSay extends L2GameServerPacket
 		L2PcInstance _pci = getClient().getActiveChar();
 		if (_pci != null)
 		{
-			_pci.broadcastSnoop(_textType, _charName, _text);
+			_pci.broadcastSnoop(_chatType, _charName, _text);
 		}
 	}
 }

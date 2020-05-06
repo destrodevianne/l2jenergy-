@@ -21,6 +21,7 @@ package quests.Q00403_PathOfTheRogue;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -30,7 +31,6 @@ import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
 import com.l2jserver.gameserver.util.Util;
@@ -190,7 +190,7 @@ public final class Q00403_PathOfTheRogue extends Quest
 					{
 						if (npc.getId() == CATS_EYE_BANDIT)
 						{
-							attacker.sendPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.YOU_CHILDISH_FOOL_DO_YOU_THINK_YOU_CAN_CATCH_ME));
+							attacker.sendPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.YOU_CHILDISH_FOOL_DO_YOU_THINK_YOU_CAN_CATCH_ME));
 						}
 						npc.setScriptValue(1);
 					}
@@ -221,7 +221,7 @@ public final class Q00403_PathOfTheRogue extends Quest
 		{
 			if (npc.getId() == CATS_EYE_BANDIT)
 			{
-				npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.I_MUST_DO_SOMETHING_ABOUT_THIS_SHAMEFUL_INCIDENT));
+				npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.I_MUST_DO_SOMETHING_ABOUT_THIS_SHAMEFUL_INCIDENT));
 				if (hasQuestItems(killer, MOST_WANTED_LIST))
 				{
 					int randomItem = STOLEN_ITEMS[getRandom(STOLEN_ITEMS.length)];

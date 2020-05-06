@@ -22,10 +22,10 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import com.l2jserver.gameserver.datatables.SpawnTable;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 
 import ai.npc.AbstractNpcAI;
 
@@ -65,13 +65,13 @@ public class Lindvior extends AbstractNpcAI
 		switch (event)
 		{
 			case "tomaris_shout1":
-				broadcastNpcSay(npc, Say2.NPC_SHOUT, NpcStringId.HUH_THE_SKY_LOOKS_FUNNY_WHATS_THAT);
+				broadcastNpcSay(npc, ChatType.NPC_SHOUT, NpcStringId.HUH_THE_SKY_LOOKS_FUNNY_WHATS_THAT);
 				break;
 			case "artius_shout":
-				broadcastNpcSay(npc, Say2.NPC_SHOUT, NpcStringId.A_POWERFUL_SUBORDINATE_IS_BEING_HELD_BY_THE_BARRIER_ORB_THIS_REACTION_MEANS);
+				broadcastNpcSay(npc, ChatType.NPC_SHOUT, NpcStringId.A_POWERFUL_SUBORDINATE_IS_BEING_HELD_BY_THE_BARRIER_ORB_THIS_REACTION_MEANS);
 				break;
 			case "tomaris_shout2":
-				broadcastNpcSay(npc, Say2.NPC_SHOUT, NpcStringId.BE_CAREFUL_SOMETHINGS_COMING);
+				broadcastNpcSay(npc, ChatType.NPC_SHOUT, NpcStringId.BE_CAREFUL_SOMETHINGS_COMING);
 				break;
 			case "lindvior_scene":
 				if (npc != null)

@@ -19,6 +19,7 @@
 package quests.Q00060_GoodWorksReward;
 
 import com.l2jserver.gameserver.enums.CategoryType;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -27,7 +28,6 @@ import com.l2jserver.gameserver.model.itemcontainer.Inventory;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.util.Util;
 
@@ -117,7 +117,7 @@ public final class Q00060_GoodWorksReward extends Quest
 		
 		if ("DESPAWN".equals(event))
 		{
-			npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.YOU_HAVE_GOOD_LUCK_I_SHALL_RETURN));
+			npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.YOU_HAVE_GOOD_LUCK_I_SHALL_RETURN));
 			final L2Npc npc0 = npc.getVariables().getObject("npc0", L2Npc.class);
 			if (npc0 != null)
 			{
@@ -1093,11 +1093,11 @@ public final class Q00060_GoodWorksReward extends Quest
 					{
 						qs.setMemoState(2);
 						qs.setCond(2, true);
-						npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.YOU_ARE_STRONG_THIS_WAS_A_MISTAKE));
+						npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.YOU_ARE_STRONG_THIS_WAS_A_MISTAKE));
 					}
 					else
 					{
-						npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.WHO_ARE_YOU_TO_JOIN_IN_THE_BATTLE_HOW_UPSETTING));
+						npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.WHO_ARE_YOU_TO_JOIN_IN_THE_BATTLE_HOW_UPSETTING));
 					}
 				}
 			}
@@ -1287,7 +1287,7 @@ public final class Q00060_GoodWorksReward extends Quest
 		{
 			if (player.isPlayer())
 			{
-				npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.S1_I_MUST_KILL_YOU_BLAME_YOUR_OWN_CURIOSITY).addStringParameter(player.getAppearance().getVisibleName()));
+				npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.S1_I_MUST_KILL_YOU_BLAME_YOUR_OWN_CURIOSITY).addStringParameter(player.getAppearance().getVisibleName()));
 			}
 		}
 		return super.onSpawn(npc);

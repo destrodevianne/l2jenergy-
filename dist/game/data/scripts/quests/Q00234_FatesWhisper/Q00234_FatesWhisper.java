@@ -20,12 +20,12 @@ package quests.Q00234_FatesWhisper;
 
 import static com.l2jserver.gameserver.network.NpcStringId.WHO_DARES_TO_TRY_AND_STEAL_MY_NOBLE_BLOOD;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 
 /**
@@ -1126,7 +1126,7 @@ public final class Q00234_FatesWhisper extends Quest
 				qs.takeItems(Q_PIPETTE_KNIFE, 1);
 				qs.giveItems(Q_RED_PIPETTE_KNIFE, 1);
 				qs.playSound(Sound.ITEMSOUND_QUEST_ITEMGET);
-				npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.ALL, npc.getId(), WHO_DARES_TO_TRY_AND_STEAL_MY_NOBLE_BLOOD));
+				npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.GENERAL, npc.getId(), WHO_DARES_TO_TRY_AND_STEAL_MY_NOBLE_BLOOD));
 			}
 		}
 		return super.onAttack(npc, attacker, damage, isSummon);

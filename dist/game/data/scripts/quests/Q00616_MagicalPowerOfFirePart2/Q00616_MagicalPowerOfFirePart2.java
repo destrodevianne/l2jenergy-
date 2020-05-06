@@ -19,13 +19,13 @@
 package quests.Q00616_MagicalPowerOfFirePart2;
 
 import com.l2jserver.gameserver.configuration.config.NpcConfig;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.quest.State;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.util.Util;
 
@@ -129,7 +129,7 @@ public class Q00616_MagicalPowerOfFirePart2 extends Quest
 		{
 			if (event.equals("despawn_nastron"))
 			{
-				npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.THE_POWER_OF_CONSTRAINT_IS_GETTING_WEAKER_YOUR_RITUAL_HAS_FAILED));
+				npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.THE_POWER_OF_CONSTRAINT_IS_GETTING_WEAKER_YOUR_RITUAL_HAS_FAILED));
 				npc.deleteMe();
 				addSpawn(KETRA_TOTEM, 142368, -82512, -6487, 58000, false, 0, true);
 			}
@@ -206,7 +206,7 @@ public class Q00616_MagicalPowerOfFirePart2 extends Quest
 		}
 		npc.deleteMe();
 		final L2Npc nastron = addSpawn(NASTRON, 142528, -82528, -6496, 0, false, 0);
-		nastron.broadcastPacket(new NpcSay(nastron, Say2.NPC_ALL, NpcStringId.THE_MAGICAL_POWER_OF_FIRE_IS_ALSO_THE_POWER_OF_FLAMES_AND_LAVA_IF_YOU_DARE_TO_CONFRONT_IT_ONLY_DEATH_WILL_AWAIT_YOU));
+		nastron.broadcastPacket(new NpcSay(nastron, ChatType.NPC_ALL, NpcStringId.THE_MAGICAL_POWER_OF_FIRE_IS_ALSO_THE_POWER_OF_FLAMES_AND_LAVA_IF_YOU_DARE_TO_CONFRONT_IT_ONLY_DEATH_WILL_AWAIT_YOU));
 		startQuestTimer("despawn_nastron", 1200000, nastron, null);
 		return "31558-02.html";
 	}

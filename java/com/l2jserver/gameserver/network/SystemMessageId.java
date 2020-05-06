@@ -910,7 +910,7 @@ public final class SystemMessageId
 	 * ID: 145<br>
 	 * Message: That player is not online.
 	 */
-	public static final SystemMessageId TARGET_IS_NOT_FOUND_IN_THE_GAME = new SystemMessageId(145);
+	public static final SystemMessageId THAT_PLAYER_IS_NOT_ONLINE = new SystemMessageId(145);
 	
 	/**
 	 * ID: 146<br>
@@ -922,7 +922,7 @@ public final class SystemMessageId
 	 * ID: 147<br>
 	 * Message: Chatting is currently prohibited.
 	 */
-	public static final SystemMessageId CHATTING_PROHIBITED = new SystemMessageId(147);
+	public static final SystemMessageId CHATTING_IS_CURRENTLY_PROHIBITED = new SystemMessageId(147);
 	
 	/**
 	 * ID: 148<br>
@@ -1096,7 +1096,7 @@ public final class SystemMessageId
 	 * ID: 176<br>
 	 * Message: That person is in message refusal mode.
 	 */
-	public static final SystemMessageId THE_PERSON_IS_IN_MESSAGE_REFUSAL_MODE = new SystemMessageId(176);
+	public static final SystemMessageId THAT_PERSON_IS_IN_MESSAGE_REFUSAL_MODE = new SystemMessageId(176);
 	
 	/**
 	 * ID: 177<br>
@@ -4294,7 +4294,7 @@ public final class SystemMessageId
 	 * ID: 745<br>
 	 * Message: You are currently not in a petition chat.
 	 */
-	public static final SystemMessageId YOU_ARE_NOT_IN_PETITION_CHAT = new SystemMessageId(745);
+	public static final SystemMessageId YOU_ARE_CURRENTLY_NOT_IN_A_PETITION_CHAT = new SystemMessageId(745);
 	
 	/**
 	 * ID: 746<br>
@@ -5566,7 +5566,7 @@ public final class SystemMessageId
 	 * ID: 966<br>
 	 * Message: Chatting is currently prohibited. If you try to chat before the prohibition is removed, the prohibition time will increase even further.
 	 */
-	public static final SystemMessageId CHATTING_IS_CURRENTLY_PROHIBITED = new SystemMessageId(966);
+	public static final SystemMessageId CHATTING_IS_CURRENTLY_PROHIBITED_IF_YOU_TRY_TO_CHAT_BEFORE_THE_PROHIBITION_IS_REMOVED_THE_PROHIBITION_TIME_WILL_INCREASE_EVEN_FURTHER = new SystemMessageId(966);
 	
 	/**
 	 * ID: 967<br>

@@ -20,6 +20,7 @@ package ai.group_template;
 
 import com.l2jserver.gameserver.GameTimeController;
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -28,7 +29,6 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.holders.SkillHolder;
 import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.util.Util;
 
 import ai.npc.AbstractNpcAI;
@@ -236,7 +236,7 @@ public final class SelMahumSquad extends AbstractNpcAI
 					final L2Npc stove = addSpawn(STOVE, receiver.getX(), receiver.getY(), receiver.getZ() + 100, 0, false, 0);
 					stove.setSummoner(receiver);
 					startQuestTimer("notify_dinner", 2000, receiver, null); // @SCE_DINNER_EAT
-					broadcastNpcSay(sender, Say2.NPC_ALL, CHEF_FSTRINGS[getRandom(2)], 1250);
+					broadcastNpcSay(sender, ChatType.NPC_ALL, CHEF_FSTRINGS[getRandom(2)], 1250);
 				}
 				break;
 			}
@@ -281,7 +281,7 @@ public final class SelMahumSquad extends AbstractNpcAI
 					receiver.setIsNoRndWalk(true); // Moving to fire - i_ai0 = 1
 					receiver.getVariables().set("BUSY_STATE", 1); // Eating - i_ai3 = 1
 					receiver.setIsRunning(true);
-					broadcastNpcSay(receiver, Say2.NPC_ALL, (getRandom(3) < 1) ? NpcStringId.LOOKS_DELICIOUS : NpcStringId.LETS_GO_EAT);
+					broadcastNpcSay(receiver, ChatType.NPC_ALL, (getRandom(3) < 1) ? NpcStringId.LOOKS_DELICIOUS : NpcStringId.LETS_GO_EAT);
 					final Location loc = sender.getPointInRange(100, 200);
 					loc.setHeading(receiver.getHeading());
 					receiver.stopMove(null);

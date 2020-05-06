@@ -93,7 +93,7 @@ public class RequestGiveNickName extends L2GameClientPacket
 				}
 				else
 				{
-					activeChar.sendPacket(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME);
+					activeChar.sendPacket(SystemMessageId.THAT_PLAYER_IS_NOT_ONLINE);
 				}
 			}
 			else

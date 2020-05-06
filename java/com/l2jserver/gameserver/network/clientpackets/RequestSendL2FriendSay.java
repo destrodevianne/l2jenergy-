@@ -61,13 +61,13 @@ public final class RequestSendL2FriendSay extends L2GameClientPacket
 		final L2PcInstance targetPlayer = L2World.getInstance().getPlayer(_reciever);
 		if ((targetPlayer == null) || !targetPlayer.isFriend(activeChar.getObjectId()))
 		{
-			activeChar.sendPacket(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME);
+			activeChar.sendPacket(SystemMessageId.THAT_PLAYER_IS_NOT_ONLINE);
 			return;
 		}
 		
 		if (GeneralConfig.LOG_CHAT)
 		{
-			LoggingUtils.logChat(LOG_CHAT, activeChar.getName(), _reciever, _message, "PRIV_MSG");
+			LoggingUtils.logChat(LOG_CHAT, activeChar.getName(), _reciever, _message);
 		}
 		targetPlayer.sendPacket(new L2FriendSay(activeChar.getName(), _reciever, _message));
 	}

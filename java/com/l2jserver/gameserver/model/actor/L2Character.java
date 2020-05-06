@@ -55,6 +55,7 @@ import com.l2jserver.gameserver.data.xml.impl.ChampionData;
 import com.l2jserver.gameserver.data.xml.impl.DoorData;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.enums.CategoryType;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.InstanceType;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.enums.ShotType;
@@ -135,7 +136,6 @@ import com.l2jserver.gameserver.model.stats.Formulas;
 import com.l2jserver.gameserver.model.stats.functions.AbstractFunction;
 import com.l2jserver.gameserver.network.NpcStringId;
 import com.l2jserver.gameserver.network.SystemMessageId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.AbstractNpcInfo;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.Attack;
@@ -6904,7 +6904,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 	 */
 	public void say(String msg)
 	{
-		broadcastPacket(new CreatureSay(getObjectId(), isPlayer() ? Say2.ALL : Say2.NPC_ALL, getName(), msg));
+		broadcastPacket(new CreatureSay(getObjectId(), isPlayer() ? ChatType.GENERAL : ChatType.NPC_ALL, getName(), msg));
 	}
 	
 	/**
@@ -6913,7 +6913,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 	 */
 	public void say(NpcStringId msg)
 	{
-		broadcastPacket(new CreatureSay(getObjectId(), isPlayer() ? Say2.ALL : Say2.NPC_ALL, getName(), msg));
+		broadcastPacket(new CreatureSay(getObjectId(), isPlayer() ? ChatType.GENERAL : ChatType.NPC_ALL, getName(), msg));
 	}
 	
 	/**
@@ -6922,7 +6922,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 	 */
 	public void shout(String msg)
 	{
-		broadcastPacket(new CreatureSay(getObjectId(), isPlayer() ? Say2.SHOUT : Say2.NPC_SHOUT, getName(), msg));
+		broadcastPacket(new CreatureSay(getObjectId(), isPlayer() ? ChatType.SHOUT : ChatType.NPC_SHOUT, getName(), msg));
 	}
 	
 	/**
@@ -6931,6 +6931,6 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 	 */
 	public void shout(NpcStringId msg)
 	{
-		broadcastPacket(new CreatureSay(getObjectId(), isPlayer() ? Say2.SHOUT : Say2.NPC_SHOUT, getName(), msg));
+		broadcastPacket(new CreatureSay(getObjectId(), isPlayer() ? ChatType.SHOUT : ChatType.NPC_SHOUT, getName(), msg));
 	}
 }

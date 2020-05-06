@@ -497,30 +497,32 @@
     "ChatFilterChars" : "^_^",
 
     # Banchat for channels, split ";"
-    # 0 = ALL (white)
-    # 1 = SHOUT (!)
-    # 2 = TELL (")
-    # 3 = PARTY (#)
-    # 4 = CLAN (@)
-    # 5 = GM (//gmchat)
-    # 6 = PETITION_PLAYER (*)
-    # 7 = PETITION_GM (*)
-    # 8 = TRADE (+)
-    # 9 = ALLIANCE ($)
-    # 10 = ANNOUNCEMENT
-    # 11 = BOAT
-    # 12 = L2FRIEND
-    # 13 = MSNCHAT
-    # 14 = PARTYMATCH_ROOM
-    # 15 = PARTYROOM_COMMANDER (Yellow)
-    # 16 = PARTYROOM_ALL (Red)
-    # 17 = HERO_VOICE (&)
-    # 18 = CRITICAL_ANNOUNCE
-    # 19 = SCREEN_ANNOUNCE
-    # 20 = BATTLEFIELD
-    # 21 = MPCC_ROOM
-    # Default: 0;1;8;17
-    "BanChatChannels" : "0;1;8;17",
+    # GENERAL (white)
+    # SHOUT (!)
+    # WHISPER (")
+    # PARTY (#)
+    # CLAN (@)
+    # GM (//gmchat)
+    # PETITION_PLAYER (*)
+    # PETITION_GM (*)
+    # TRADE (+)
+    # ALLIANCE ($)
+    # ANNOUNCEMENT
+    # BOAT
+    # FRIEND
+    # MSNCHAT
+    # PARTYMATCH_ROOM
+    # PARTYROOM_COMMANDER (Yellow)
+    # PARTYROOM_ALL (Red)
+    # HERO_VOICE (%)
+    # CRITICAL_ANNOUNCE
+    # SCREEN_ANNOUNCE
+    # BATTLEFIELD
+    # MPCC_ROOM
+    # NPC_GENERAL
+    # NPC_SHOUT
+    # Default: GENERAL;SHOUT;TRADE;HERO_VOICE
+    "BanChatChannels" : "GENERAL;SHOUT;TRADE;HERO_VOICE",
 
     # =====================================================================
     # Item Auction

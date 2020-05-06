@@ -18,6 +18,7 @@
  */
 package quests.Q00348_AnArrogantSearch;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -25,7 +26,6 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 
 /**
@@ -334,7 +334,7 @@ public class Q00348_AnArrogantSearch extends Quest
 				if (!npc.getVariables().getBoolean(I_QUEST0, false))
 				{
 					npc.getVariables().set(I_QUEST0, true);
-					npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.SORRY_ABOUT_THIS_BUT_I_MUST_KILL_YOU_NOW));
+					npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.SORRY_ABOUT_THIS_BUT_I_MUST_KILL_YOU_NOW));
 				}
 				break;
 			}
@@ -343,7 +343,7 @@ public class Q00348_AnArrogantSearch extends Quest
 				if (!npc.getVariables().getBoolean(I_QUEST0, false))
 				{
 					npc.getVariables().set(I_QUEST0, true);
-					npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.I_SHALL_DRENCH_THIS_MOUNTAIN_WITH_YOUR_BLOOD));
+					npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.I_SHALL_DRENCH_THIS_MOUNTAIN_WITH_YOUR_BLOOD));
 				}
 				break;
 			}
@@ -367,19 +367,19 @@ public class Q00348_AnArrogantSearch extends Quest
 								st.setCond(19, true);
 							}
 							
-							npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.HA_THAT_WAS_FUN_IF_YOU_WISH_TO_FIND_THE_KEY_SEARCH_THE_CORPSE));
+							npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.HA_THAT_WAS_FUN_IF_YOU_WISH_TO_FIND_THE_KEY_SEARCH_THE_CORPSE));
 							npc.deleteMe();
 						}
 					}
 					else if ((((st.getMemoStateEx(1) % 100) / 10) == 2))
 					{
-						npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.WE_DONT_HAVE_ANY_FURTHER_BUSINESS_TO_DISCUSS_HAVE_YOU_SEARCHED_THE_CORPSE_FOR_THE_KEY));
+						npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.WE_DONT_HAVE_ANY_FURTHER_BUSINESS_TO_DISCUSS_HAVE_YOU_SEARCHED_THE_CORPSE_FOR_THE_KEY));
 						npc.deleteMe();
 					}
 				}
 				else if (hasAtLeastOneQuestItem(attacker, FIRST_KEY_OF_ARK, BLOOD_OF_SAINT))
 				{
-					npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.WE_DONT_HAVE_ANY_FURTHER_BUSINESS_TO_DISCUSS_HAVE_YOU_SEARCHED_THE_CORPSE_FOR_THE_KEY));
+					npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.WE_DONT_HAVE_ANY_FURTHER_BUSINESS_TO_DISCUSS_HAVE_YOU_SEARCHED_THE_CORPSE_FOR_THE_KEY));
 					npc.deleteMe();
 				}
 				break;
@@ -478,7 +478,7 @@ public class Q00348_AnArrogantSearch extends Quest
 							
 							giveItems(st.getPlayer(), SECOND_KEY_OF_ARK, 1);
 							st.playSound(Sound.ITEMSOUND_QUEST_ITEMGET);
-							npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.YOU_FOOLS_WILL_GET_WHATS_COMING_TO_YOU));
+							npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.YOU_FOOLS_WILL_GET_WHATS_COMING_TO_YOU));
 						}
 					}
 					break;
@@ -497,7 +497,7 @@ public class Q00348_AnArrogantSearch extends Quest
 							
 							giveItems(st.getPlayer(), THIRD_KEY_OF_ARK, 1);
 							st.playSound(Sound.ITEMSOUND_QUEST_ITEMGET);
-							npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.YOU_GUYS_WOULDNT_KNOW_THE_SEVEN_SEALS_ARE_ARRRGH));
+							npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.YOU_GUYS_WOULDNT_KNOW_THE_SEVEN_SEALS_ARE_ARRRGH));
 						}
 					}
 					break;
@@ -603,20 +603,20 @@ public class Q00348_AnArrogantSearch extends Quest
 			case ARK_GUARDIAN_ELBEROTH:
 			{
 				npc.getVariables().set(I_QUEST0, false);
-				npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.THAT_DOESNT_BELONG_TO_YOU_DONT_TOUCH_IT));
+				npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.THAT_DOESNT_BELONG_TO_YOU_DONT_TOUCH_IT));
 				startQuestTimer("DESPAWN", 600000, npc, null);
 				break;
 			}
 			case ARK_GUARDIAN_SHADOWFANG:
 			{
 				npc.getVariables().set(I_QUEST0, false);
-				npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.GET_OUT_OF_MY_SIGHT_YOU_INFIDELS));
+				npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.GET_OUT_OF_MY_SIGHT_YOU_INFIDELS));
 				startQuestTimer("DESPAWN", 600000, npc, null);
 				break;
 			}
 			case ANGEL_KILLER:
 			{
-				npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.I_HAVE_THE_KEY_WHY_DONT_YOU_COME_AND_TAKE_IT));
+				npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.I_HAVE_THE_KEY_WHY_DONT_YOU_COME_AND_TAKE_IT));
 				startQuestTimer("DESPAWN", 600000, npc, null);
 			}
 		}

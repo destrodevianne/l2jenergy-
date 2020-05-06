@@ -19,13 +19,16 @@
 package com.l2jserver.gameserver.configuration.config;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.configuration.annotations.Configuration;
 import com.l2jserver.commons.configuration.annotations.Setting;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.IllegalActionPunishmentType;
 
 /**
@@ -401,7 +404,7 @@ public class GeneralConfig
 	public static String CHAT_FILTER_CHARS;
 	
 	@Setting(name = "BanChatChannels", method = "banChat")
-	public static int[] BAN_CHAT_CHANNELS;
+	public static Set<ChatType> BAN_CHAT_CHANNELS;
 	
 	@Setting(name = "AltItemAuctionEnabled")
 	public static boolean ALT_ITEM_AUCTION_ENABLED;
@@ -566,14 +569,13 @@ public class GeneralConfig
 	
 	public void banChat(String value)
 	{
-		String[] propertySplit4 = value.split(";");
-		BAN_CHAT_CHANNELS = new int[propertySplit4.length];
+		final String[] propertySplit4 = value.split(";");
+		BAN_CHAT_CHANNELS = new HashSet<>();
 		try
 		{
-			int i = 0;
 			for (String chatId : propertySplit4)
 			{
-				BAN_CHAT_CHANNELS[i++] = Integer.parseInt(chatId);
+				BAN_CHAT_CHANNELS.add(Enum.valueOf(ChatType.class, chatId));
 			}
 		}
 		catch (NumberFormatException nfe)

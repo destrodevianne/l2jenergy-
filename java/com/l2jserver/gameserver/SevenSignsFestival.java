@@ -43,6 +43,7 @@ import com.l2jserver.gameserver.data.sql.impl.CharNameTable;
 import com.l2jserver.gameserver.data.sql.impl.ClanTable;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.SpawnTable;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.TeleportWhereType;
 import com.l2jserver.gameserver.model.FestivalSpawn;
 import com.l2jserver.gameserver.model.L2Clan;
@@ -59,7 +60,6 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.items.instance.L2ItemInstance;
 import com.l2jserver.gameserver.network.NpcStringId;
 import com.l2jserver.gameserver.network.SystemMessageId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
 import com.l2jserver.gameserver.network.serverpackets.MagicSkillUse;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
@@ -1691,7 +1691,7 @@ public class SevenSignsFestival implements SpawnListener
 	 */
 	public void sendMessageToAll(String senderName, NpcStringId npcString, L2Npc npc)
 	{
-		CreatureSay cs = new CreatureSay(npc.getObjectId(), Say2.NPC_SHOUT, senderName, npcString);
+		CreatureSay cs = new CreatureSay(npc.getObjectId(), ChatType.NPC_SHOUT, senderName, npcString);
 		if (npcString.getParamCount() == 1)
 		{
 			cs.addStringParameter(String.valueOf(getMinsToNextFestival()));
@@ -2294,7 +2294,7 @@ public class SevenSignsFestival implements SpawnListener
 		{
 			if ((_participants != null) && !_participants.isEmpty())
 			{
-				_witchInst.broadcastPacket(new CreatureSay(_witchInst.getObjectId(), Say2.NPC_ALL, "Festival Witch", npcStringId));
+				_witchInst.broadcastPacket(new CreatureSay(_witchInst.getObjectId(), ChatType.NPC_ALL, "Festival Witch", npcStringId));
 			}
 		}
 		
@@ -2302,7 +2302,7 @@ public class SevenSignsFestival implements SpawnListener
 		{
 			if ((_participants != null) && !_participants.isEmpty())
 			{
-				_witchInst.broadcastPacket(new CreatureSay(_witchInst.getObjectId(), Say2.NPC_ALL, "Festival Witch", npcString));
+				_witchInst.broadcastPacket(new CreatureSay(_witchInst.getObjectId(), ChatType.NPC_ALL, "Festival Witch", npcString));
 			}
 		}
 		

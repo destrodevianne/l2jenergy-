@@ -18,6 +18,7 @@
  */
 package quests.Q00713_PathToBecomingALordAden;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.FortManager;
 import com.l2jserver.gameserver.model.L2ClanMember;
@@ -28,7 +29,6 @@ import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.quest.State;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 
 import quests.Q00359_ForASleeplessDeadman.Q00359_ForASleeplessDeadman;
@@ -116,7 +116,7 @@ public class Q00713_PathToBecomingALordAden extends Quest
 					
 					// DeclareLord(aden_dominion, player);
 					CastleManager.getInstance().getCastleById(CASTLE_ID).setShowNpcCrest(true);
-					NpcSay packet = new NpcSay(npc.getObjectId(), Say2.NPC_SHOUT, npc.getId(), NpcStringId.S1_HAS_BECOME_THE_LORD_OF_THE_TOWN_OF_ADEN_MAY_THERE_BE_GLORY_IN_THE_TERRITORY_OF_ADEN);
+					NpcSay packet = new NpcSay(npc.getObjectId(), ChatType.NPC_SHOUT, npc.getId(), NpcStringId.S1_HAS_BECOME_THE_LORD_OF_THE_TOWN_OF_ADEN_MAY_THERE_BE_GLORY_IN_THE_TERRITORY_OF_ADEN);
 					packet.addStringParameter(player.getName());
 					npc.broadcastPacket(packet);
 					qs.exitQuest(false, true);

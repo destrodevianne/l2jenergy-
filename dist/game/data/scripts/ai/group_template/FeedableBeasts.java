@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.L2Object;
 import com.l2jserver.gameserver.model.actor.L2Attackable;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -439,7 +440,7 @@ public final class FeedableBeasts extends AbstractNpcAI
 			if (getRandom(20) == 0)
 			{
 				NpcStringId message = NpcStringId.getNpcStringId(getRandom(2024, 2029));
-				NpcSay packet = new NpcSay(nextNpc, 0, message);
+				NpcSay packet = new NpcSay(nextNpc, ChatType.GENERAL, message);
 				if (message.getParamCount() > 0) // player name, $s1
 				{
 					packet.addStringParameter(player.getName());
@@ -568,7 +569,7 @@ public final class FeedableBeasts extends AbstractNpcAI
 			if (getRandom(20) == 0)
 			{
 				NpcStringId message = TEXT[growthLevel][getRandom(TEXT[growthLevel].length)];
-				NpcSay packet = new NpcSay(npc, 0, message);
+				NpcSay packet = new NpcSay(npc, ChatType.GENERAL, message);
 				if (message.getParamCount() > 0) // player name, $s1
 				{
 					packet.addStringParameter(caster.getName());
@@ -596,7 +597,7 @@ public final class FeedableBeasts extends AbstractNpcAI
 			{
 				beast.onReceiveFood();
 				NpcStringId message = TAMED_TEXT[getRandom(TAMED_TEXT.length)];
-				NpcSay packet = new NpcSay(npc, 0, message);
+				NpcSay packet = new NpcSay(npc, ChatType.GENERAL, message);
 				if (message.getParamCount() > 0)
 				{
 					packet.addStringParameter(caster.getName());

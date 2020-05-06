@@ -18,6 +18,7 @@
  */
 package ai.npc;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2MonsterInstance;
@@ -79,7 +80,7 @@ public abstract class AbstractNpcAI extends Quest
 	 * @param type
 	 * @param text
 	 */
-	protected void broadcastNpcSay(L2Npc npc, int type, String text)
+	protected void broadcastNpcSay(L2Npc npc, ChatType type, String text)
 	{
 		Broadcast.toKnownPlayers(npc, new NpcSay(npc.getObjectId(), type, npc.getTemplate().getDisplayId(), text));
 	}
@@ -90,7 +91,7 @@ public abstract class AbstractNpcAI extends Quest
 	 * @param type
 	 * @param stringId
 	 */
-	protected void broadcastNpcSay(L2Npc npc, int type, NpcStringId stringId)
+	protected void broadcastNpcSay(L2Npc npc, ChatType type, NpcStringId stringId)
 	{
 		Broadcast.toKnownPlayers(npc, new NpcSay(npc.getObjectId(), type, npc.getTemplate().getDisplayId(), stringId));
 	}
@@ -102,7 +103,7 @@ public abstract class AbstractNpcAI extends Quest
 	 * @param stringId
 	 * @param parameters
 	 */
-	protected void broadcastNpcSay(L2Npc npc, int type, NpcStringId stringId, String... parameters)
+	protected void broadcastNpcSay(L2Npc npc, ChatType type, NpcStringId stringId, String... parameters)
 	{
 		final NpcSay say = new NpcSay(npc.getObjectId(), type, npc.getTemplate().getDisplayId(), stringId);
 		if (parameters != null)
@@ -122,7 +123,7 @@ public abstract class AbstractNpcAI extends Quest
 	 * @param text
 	 * @param radius
 	 */
-	protected void broadcastNpcSay(L2Npc npc, int type, String text, int radius)
+	protected void broadcastNpcSay(L2Npc npc, ChatType type, String text, int radius)
 	{
 		Broadcast.toKnownPlayersInRadius(npc, new NpcSay(npc.getObjectId(), type, npc.getTemplate().getDisplayId(), text), radius);
 	}
@@ -134,7 +135,7 @@ public abstract class AbstractNpcAI extends Quest
 	 * @param stringId
 	 * @param radius
 	 */
-	protected void broadcastNpcSay(L2Npc npc, int type, NpcStringId stringId, int radius)
+	protected void broadcastNpcSay(L2Npc npc, ChatType type, NpcStringId stringId, int radius)
 	{
 		Broadcast.toKnownPlayersInRadius(npc, new NpcSay(npc.getObjectId(), type, npc.getTemplate().getDisplayId(), stringId), radius);
 	}

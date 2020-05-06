@@ -185,7 +185,7 @@ public class AdminClan implements IAdminCommandHandler
 				player = L2World.getInstance().getPlayer(Integer.parseInt(val));
 				if (player == null)
 				{
-					activeChar.sendPacket(SystemMessageId.TARGET_IS_NOT_FOUND_IN_THE_GAME);
+					activeChar.sendPacket(SystemMessageId.THAT_PLAYER_IS_NOT_ONLINE);
 					return null;
 				}
 			}

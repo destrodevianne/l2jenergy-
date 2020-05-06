@@ -27,6 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.l2jserver.gameserver.GeoData;
 import com.l2jserver.gameserver.ai.CtrlIntention;
 import com.l2jserver.gameserver.configuration.config.RatesConfig;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.TrapAction;
 import com.l2jserver.gameserver.enums.skills.targets.L2TargetType;
 import com.l2jserver.gameserver.instancemanager.InstanceManager;
@@ -51,7 +52,6 @@ import com.l2jserver.gameserver.model.skills.Skill;
 import com.l2jserver.gameserver.model.zone.L2ZoneType;
 import com.l2jserver.gameserver.network.NpcStringId;
 import com.l2jserver.gameserver.network.SystemMessageId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
 import com.l2jserver.gameserver.network.serverpackets.FlyToLocation;
@@ -1305,7 +1305,7 @@ public final class CrystalCaverns extends AbstractInstance
 					world._alarm = addSpawn(ALARM, spawnLoc[0], spawnLoc[1], spawnLoc[2], 10800, false, 0, false, world.getInstanceId());
 					world._alarm.disableCoreAI(true);
 					world._alarm.setIsImmobilized(true);
-					world._alarm.broadcastPacket(new CreatureSay(world._alarm.getObjectId(), 1, world._alarm.getName(), NpcStringId.AN_ALARM_HAS_BEEN_SET_OFF_EVERYBODY_WILL_BE_IN_DANGER_IF_THEY_ARE_NOT_TAKEN_CARE_OF_IMMEDIATELY));
+					world._alarm.broadcastPacket(new CreatureSay(world._alarm.getObjectId(), ChatType.SHOUT, world._alarm.getName(), NpcStringId.AN_ALARM_HAS_BEEN_SET_OFF_EVERYBODY_WILL_BE_IN_DANGER_IF_THEY_ARE_NOT_TAKEN_CARE_OF_IMMEDIATELY));
 				}
 			}
 			else if (event.equalsIgnoreCase("baylor_skill"))
@@ -1325,12 +1325,12 @@ public final class CrystalCaverns extends AbstractInstance
 						if ((nowHp < (maxHp * 0.15)) && (world._raidStatus == 2))
 						{
 							npc.doCast(INVINCIBLE);
-							npc.broadcastPacket(new CreatureSay(npc.getObjectId(), 1, npc.getName(), NpcStringId.DEMON_KING_BELETH_GIVE_ME_THE_POWER_AAAHH));
+							npc.broadcastPacket(new CreatureSay(npc.getObjectId(), ChatType.SHOUT, npc.getName(), NpcStringId.DEMON_KING_BELETH_GIVE_ME_THE_POWER_AAAHH));
 						}
 						else if ((rand < 10) || (nowHp < (maxHp * 0.15)))
 						{
 							npc.doCast(INVINCIBLE);
-							npc.broadcastPacket(new CreatureSay(npc.getObjectId(), 1, npc.getName(), NpcStringId.DEMON_KING_BELETH_GIVE_ME_THE_POWER_AAAHH));
+							npc.broadcastPacket(new CreatureSay(npc.getObjectId(), ChatType.SHOUT, npc.getName(), NpcStringId.DEMON_KING_BELETH_GIVE_ME_THE_POWER_AAAHH));
 							startQuestTimer("baylor_remove_invul", 30000, world._baylor, null);
 						}
 					}
@@ -1397,7 +1397,7 @@ public final class CrystalCaverns extends AbstractInstance
 				{
 					if (getRandom(100) < 5)
 					{
-						npc.broadcastPacket(new CreatureSay(npc.getObjectId(), 1, npc.getName(), NpcStringId.AH_IM_HUNGRY));
+						npc.broadcastPacket(new CreatureSay(npc.getObjectId(), ChatType.SHOUT, npc.getName(), NpcStringId.AH_IM_HUNGRY));
 					}
 					startQuestTimer("autoFood", 2000, npc, null);
 				}
@@ -1634,7 +1634,7 @@ public final class CrystalCaverns extends AbstractInstance
 					world.setStatus(8);
 					// first door opener trap
 					L2Npc trap = addTrap(DOOR_OPENING_TRAP[0], DOOR_OPENING_TRAP[1], DOOR_OPENING_TRAP[2], DOOR_OPENING_TRAP[3], DOOR_OPENING_TRAP[4], null, world.getInstanceId());
-					broadcastNpcSay(trap, Say2.NPC_SHOUT, NpcStringId.YOU_HAVE_FINALLY_COME_HERE_BUT_YOU_WILL_NOT_BE_ABLE_TO_FIND_THE_SECRET_ROOM);
+					broadcastNpcSay(trap, ChatType.NPC_SHOUT, NpcStringId.YOU_HAVE_FINALLY_COME_HERE_BUT_YOU_WILL_NOT_BE_ABLE_TO_FIND_THE_SECRET_ROOM);
 				}
 			}
 			else if (world.getStatus() == 8)

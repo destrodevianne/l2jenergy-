@@ -18,13 +18,13 @@
  */
 package quests.Q00158_SeedOfEvil;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.quest.State;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 
 /**
@@ -70,7 +70,7 @@ public class Q00158_SeedOfEvil extends Quest
 	{
 		if (npc.isScriptValue(0))
 		{
-			npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId._HOW_DARE_YOU_CHALLENGE_ME));
+			npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId._HOW_DARE_YOU_CHALLENGE_ME));
 			npc.setScriptValue(1);
 		}
 		return super.onAttack(npc, attacker, damage, isSummon);
@@ -85,7 +85,7 @@ public class Q00158_SeedOfEvil extends Quest
 			st.giveItems(CLAY_TABLET, 1);
 			st.setCond(2, true);
 		}
-		npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.THE_POWER_OF_LORD_BELETH_RULES_THE_WHOLE_WORLD));
+		npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.THE_POWER_OF_LORD_BELETH_RULES_THE_WHOLE_WORLD));
 		return super.onKill(npc, killer, isSummon);
 	}
 	

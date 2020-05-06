@@ -89,6 +89,7 @@ import com.l2jserver.gameserver.data.xml.impl.PlayerXpPercentLostData;
 import com.l2jserver.gameserver.data.xml.impl.SkillTreesData;
 import com.l2jserver.gameserver.datatables.ItemTable;
 import com.l2jserver.gameserver.datatables.SkillData;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.ClanPrivilege;
 import com.l2jserver.gameserver.enums.DuelState;
 import com.l2jserver.gameserver.enums.HtmlActionScope;
@@ -272,7 +273,6 @@ import com.l2jserver.gameserver.model.zone.L2ZoneType;
 import com.l2jserver.gameserver.model.zone.type.L2BossZone;
 import com.l2jserver.gameserver.network.L2GameClient;
 import com.l2jserver.gameserver.network.SystemMessageId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.AbstractHtmlPacket;
 import com.l2jserver.gameserver.network.serverpackets.ActionFailed;
 import com.l2jserver.gameserver.network.serverpackets.ChangeWaitType;
@@ -8630,12 +8630,12 @@ public class L2PcInstance extends L2Playable
 	
 	public void sendAdminMessage(final String message)
 	{
-		sendPacket(new CreatureSay(0, Say2.ALL, "SYS", message));
+		sendPacket(new CreatureSay(0, ChatType.GENERAL, "SYS", message));
 	}
 	
 	public void sendHTMLMessage(final String message)
 	{
-		sendPacket(new CreatureSay(0, Say2.ALL, "HTML", message));
+		sendPacket(new CreatureSay(0, ChatType.GENERAL, "HTML", message));
 	}
 	
 	public void enterObserverMode(Location loc)
@@ -10004,11 +10004,11 @@ public class L2PcInstance extends L2Playable
 		}
 	}
 	
-	public void broadcastSnoop(int type, String name, String _text)
+	public void broadcastSnoop(ChatType chatType, String name, String _text)
 	{
 		if (!_snoopListener.isEmpty())
 		{
-			Snoop sn = new Snoop(getObjectId(), getName(), type, name, _text);
+			Snoop sn = new Snoop(getObjectId(), getName(), chatType, name, _text);
 			
 			for (L2PcInstance pci : _snoopListener)
 			{

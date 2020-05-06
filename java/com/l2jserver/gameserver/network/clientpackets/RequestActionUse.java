@@ -31,6 +31,7 @@ import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.data.xml.impl.PetDataTable;
 import com.l2jserver.gameserver.datatables.BotReportTable;
 import com.l2jserver.gameserver.datatables.SkillData;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.MountType;
 import com.l2jserver.gameserver.enums.PrivateStoreType;
 import com.l2jserver.gameserver.enums.skills.AbnormalType;
@@ -419,7 +420,7 @@ public final class RequestActionUse extends L2GameClientPacket
 			case 1001: // Sin Eater - Ultimate Bombastic Buster
 				if (validateSummon(summon, true) && (summon.getId() == SIN_EATER_ID))
 				{
-					summon.broadcastPacket(new NpcSay(summon.getObjectId(), Say2.NPC_ALL, summon.getId(), NPC_STRINGS[Rnd.get(NPC_STRINGS.length)]));
+					summon.broadcastPacket(new NpcSay(summon.getObjectId(), ChatType.NPC_ALL, summon.getId(), NPC_STRINGS[Rnd.get(NPC_STRINGS.length)]));
 				}
 				break;
 			case 1003: // Wind Hatchling/Strider - Wild Stun

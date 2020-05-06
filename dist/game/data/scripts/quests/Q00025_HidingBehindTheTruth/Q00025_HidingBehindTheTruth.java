@@ -22,6 +22,7 @@ import java.util.HashMap;
 
 import com.l2jserver.commons.util.Rnd;
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -31,7 +32,6 @@ import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.quest.State;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 
 import quests.Q00024_InhabitantsOfTheForestOfTheDead.Q00024_InhabitantsOfTheForestOfTheDead;
@@ -326,7 +326,7 @@ public class Q00025_HidingBehindTheTruth extends Quest
 			}
 			case "SAY_TRIYOL":
 			{
-				npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.ALL, npc.getId(), NpcStringId.THAT_BOX_WAS_SEALED_BY_MY_MASTER_S1_DONT_TOUCH_IT).addStringParameter(player.getName()));
+				npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.GENERAL, npc.getId(), NpcStringId.THAT_BOX_WAS_SEALED_BY_MY_MASTER_S1_DONT_TOUCH_IT).addStringParameter(player.getName()));
 				break;
 			}
 			case "DESPAWN_TRIYOL":
@@ -441,7 +441,7 @@ public class Q00025_HidingBehindTheTruth extends Quest
 			{
 				giveItems(attacker, TOTEM_DOLL3, 1);
 				qs.setCond(8, true);
-				npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.ALL, npc.getId(), NpcStringId.YOUVE_ENDED_MY_IMMORTAL_LIFE_YOURE_PROTECTED_BY_THE_FEUDAL_LORD_ARENT_YOU));
+				npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.GENERAL, npc.getId(), NpcStringId.YOUVE_ENDED_MY_IMMORTAL_LIFE_YOURE_PROTECTED_BY_THE_FEUDAL_LORD_ARENT_YOU));
 				
 				final L2Npc brokenDesk = npc.getVariables().getObject("Q00025", L2Npc.class);
 				if (brokenDesk != null)

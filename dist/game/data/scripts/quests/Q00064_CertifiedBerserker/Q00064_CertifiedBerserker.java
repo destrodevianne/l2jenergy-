@@ -18,6 +18,7 @@
  */
 package quests.Q00064_CertifiedBerserker;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
@@ -26,7 +27,6 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
 import com.l2jserver.gameserver.util.Util;
@@ -282,7 +282,7 @@ public final class Q00064_CertifiedBerserker extends Quest
 						if (getRandom(100) < 20)
 						{
 							final L2Npc kamael = addSpawn(HARKILGAMED, npc, true, 60000);
-							kamael.broadcastPacket(new NpcSay(kamael, Say2.NPC_ALL, NpcStringId.S1_DID_YOU_COME_TO_HELP_ME).addStringParameter(killer.getAppearance().getVisibleName()));
+							kamael.broadcastPacket(new NpcSay(kamael, ChatType.NPC_ALL, NpcStringId.S1_DID_YOU_COME_TO_HELP_ME).addStringParameter(killer.getAppearance().getVisibleName()));
 							playSound(killer, Sound.ITEMSOUND_QUEST_MIDDLE);
 						}
 					}

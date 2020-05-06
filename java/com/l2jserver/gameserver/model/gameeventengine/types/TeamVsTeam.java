@@ -21,6 +21,7 @@ package com.l2jserver.gameserver.model.gameeventengine.types;
 import java.util.List;
 
 import com.l2jserver.gameserver.configuration.config.events.TvTConfig;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.events.GameEventState;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Summon;
@@ -31,7 +32,6 @@ import com.l2jserver.gameserver.model.gameeventengine.GameEventManager;
 import com.l2jserver.gameserver.model.gameeventengine.GameEventTeam;
 import com.l2jserver.gameserver.model.gameeventengine.GameEventTeleporter;
 import com.l2jserver.gameserver.model.gameeventengine.TeamGameEvent;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
 import com.l2jserver.gameserver.network.serverpackets.ExBlockUpSetState;
 
@@ -109,7 +109,7 @@ public class TeamVsTeam extends TeamGameEvent
 			
 			killerTeam.increasePoints();
 			
-			CreatureSay cs = new CreatureSay(killerPlayerInstance.getObjectId(), Say2.TELL, killerPlayerInstance.getName(), "I have killed " + killedPlayerInstance.getName() + "!");
+			CreatureSay cs = new CreatureSay(killerPlayerInstance.getObjectId(), ChatType.WHISPER, killerPlayerInstance.getName(), "I have killed " + killedPlayerInstance.getName() + "!");
 			
 			for (L2PcInstance playerInstance : _teams[killerTeamId].getParticipatedPlayers().values())
 			{

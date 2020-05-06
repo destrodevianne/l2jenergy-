@@ -18,6 +18,7 @@
  */
 package quests.Q00228_TestOfMagus;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -25,7 +26,6 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
 import com.l2jserver.gameserver.util.Util;
@@ -322,7 +322,7 @@ public final class Q00228_TestOfMagus extends Quest
 					if (hasQuestItems(killer, LILAC_CHARM) && !hasQuestItems(killer, GOLDEN_SEED_1ST))
 					{
 						giveItems(killer, GOLDEN_SEED_1ST, 1);
-						npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.I_AM_A_TREE_OF_NOTHING_A_TREE_THAT_KNOWS_WHERE_TO_RETURN));
+						npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.I_AM_A_TREE_OF_NOTHING_A_TREE_THAT_KNOWS_WHERE_TO_RETURN));
 						playSound(killer, Sound.ITEMSOUND_QUEST_MIDDLE);
 						if (hasQuestItems(killer, GOLDEN_SEED_2ND, GOLDEN_SEED_3RD))
 						{
@@ -336,7 +336,7 @@ public final class Q00228_TestOfMagus extends Quest
 					if (hasQuestItems(killer, LILAC_CHARM) && !hasQuestItems(killer, GOLDEN_SEED_2ND))
 					{
 						giveItems(killer, GOLDEN_SEED_2ND, 1);
-						npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.I_AM_A_CREATURE_THAT_SHOWS_THE_TRUTH_OF_THE_PLACE_DEEP_IN_MY_HEART));
+						npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.I_AM_A_CREATURE_THAT_SHOWS_THE_TRUTH_OF_THE_PLACE_DEEP_IN_MY_HEART));
 						playSound(killer, Sound.ITEMSOUND_QUEST_MIDDLE);
 						if (hasQuestItems(killer, GOLDEN_SEED_1ST, GOLDEN_SEED_3RD))
 						{
@@ -350,7 +350,7 @@ public final class Q00228_TestOfMagus extends Quest
 					if (hasQuestItems(killer, LILAC_CHARM) && !hasQuestItems(killer, GOLDEN_SEED_3RD))
 					{
 						giveItems(killer, GOLDEN_SEED_3RD, 1);
-						npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.I_AM_A_MIRROR_OF_DARKNESS_A_VIRTUAL_IMAGE_OF_DARKNESS));
+						npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.I_AM_A_MIRROR_OF_DARKNESS_A_VIRTUAL_IMAGE_OF_DARKNESS));
 						playSound(killer, Sound.ITEMSOUND_QUEST_MIDDLE);
 						if (hasQuestItems(killer, GOLDEN_SEED_1ST, GOLDEN_SEED_2ND))
 						{

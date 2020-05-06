@@ -19,6 +19,7 @@
 package quests.Q00022_TragedyInVonHellmannForest;
 
 import com.l2jserver.gameserver.ai.CtrlIntention;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -27,7 +28,6 @@ import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.quest.QuestTimer;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.util.Util;
 
@@ -178,7 +178,7 @@ public final class Q00022_TragedyInVonHellmannForest extends Quest
 						final L2Npc ghost2 = addSpawn(GHOST_OF_PRIEST, PRIEST_LOC, true, 0);
 						ghost2.setScriptValue(player.getObjectId());
 						qs.startQuestTimer("DESPAWN_GHOST2", 1000 * 120, ghost2);
-						ghost2.broadcastPacket(new NpcSay(ghost2.getObjectId(), Say2.NPC_ALL, ghost2.getId(), NpcStringId.DID_YOU_CALL_ME_S1).addStringParameter(player.getName()));
+						ghost2.broadcastPacket(new NpcSay(ghost2.getObjectId(), ChatType.NPC_ALL, ghost2.getId(), NpcStringId.DID_YOU_CALL_ME_S1).addStringParameter(player.getName()));
 						if (((cond == 5) || (cond == 6)) && hasQuestItems(player, LOST_SKULL_OF_ELF))
 						{
 							takeItems(player, LOST_SKULL_OF_ELF, -1);
@@ -221,7 +221,7 @@ public final class Q00022_TragedyInVonHellmannForest extends Quest
 				_tifarenOwner = 0;
 				if (npc.getScriptValue() != 0)
 				{
-					npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getId(), NpcStringId.IM_CONFUSED_MAYBE_ITS_TIME_TO_GO_BACK));
+					npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getId(), NpcStringId.IM_CONFUSED_MAYBE_ITS_TIME_TO_GO_BACK));
 				}
 				npc.deleteMe();
 				break;

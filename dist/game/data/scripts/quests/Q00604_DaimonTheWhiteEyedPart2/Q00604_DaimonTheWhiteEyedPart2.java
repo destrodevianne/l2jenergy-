@@ -19,6 +19,7 @@
 package quests.Q00604_DaimonTheWhiteEyedPart2;
 
 import com.l2jserver.gameserver.datatables.SpawnTable;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Npc;
@@ -26,7 +27,6 @@ import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.util.Util;
 
@@ -94,7 +94,7 @@ public final class Q00604_DaimonTheWhiteEyedPart2 extends Quest
 		{
 			if (isDaimonSpawned())
 			{
-				npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getTemplate().getDisplayId(), NpcStringId.CAN_LIGHT_EXIST_WITHOUT_DARKNESS));
+				npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getTemplate().getDisplayId(), NpcStringId.CAN_LIGHT_EXIST_WITHOUT_DARKNESS));
 				npc.deleteMe();
 			}
 			return super.onAdvEvent(event, npc, player);
@@ -199,7 +199,7 @@ public final class Q00604_DaimonTheWhiteEyedPart2 extends Quest
 	public String onSpawn(L2Npc npc)
 	{
 		startQuestTimer("DESPAWN", 1200000, npc, null);
-		npc.broadcastPacket(new NpcSay(npc.getObjectId(), Say2.NPC_ALL, npc.getTemplate().getDisplayId(), NpcStringId.WHO_IS_CALLING_ME));
+		npc.broadcastPacket(new NpcSay(npc.getObjectId(), ChatType.NPC_ALL, npc.getTemplate().getDisplayId(), NpcStringId.WHO_IS_CALLING_ME));
 		return super.onSpawn(npc);
 	}
 	

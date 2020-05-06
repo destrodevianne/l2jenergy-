@@ -19,6 +19,7 @@
 package quests.Q00709_PathToBecomingALordDion;
 
 import com.l2jserver.commons.util.Rnd;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.FortManager;
 import com.l2jserver.gameserver.model.L2Clan;
@@ -30,7 +31,6 @@ import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.quest.State;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.util.Util;
 
@@ -156,7 +156,7 @@ public class Q00709_PathToBecomingALordDion extends Quest
 			
 			// DeclareLord(gludio_dominion, player);
 			CastleManager.getInstance().getCastleById(CASTLE_ID).setShowNpcCrest(true);
-			NpcSay packet = new NpcSay(npc.getObjectId(), Say2.NPC_SHOUT, npc.getId(), NpcStringId.S1_HAS_BECOME_LORD_OF_THE_TOWN_OF_DION_LONG_MAY_HE_REIGN);
+			NpcSay packet = new NpcSay(npc.getObjectId(), ChatType.NPC_SHOUT, npc.getId(), NpcStringId.S1_HAS_BECOME_LORD_OF_THE_TOWN_OF_DION_LONG_MAY_HE_REIGN);
 			packet.addStringParameter(player.getName());
 			npc.broadcastPacket(packet);
 			qs.exitQuest(false, true);

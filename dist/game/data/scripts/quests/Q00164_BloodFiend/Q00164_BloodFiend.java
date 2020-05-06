@@ -18,6 +18,7 @@
  */
 package quests.Q00164_BloodFiend;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.Race;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
@@ -25,7 +26,6 @@ import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.model.quest.State;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 
 /**
@@ -70,7 +70,7 @@ public class Q00164_BloodFiend extends Quest
 		final QuestState st = getQuestState(killer, false);
 		if ((st != null) && st.isCond(1))
 		{
-			npc.broadcastPacket(new NpcSay(npc, Say2.ALL, NpcStringId.I_HAVE_FULFILLED_MY_CONTRACT_WITH_TRADER_CREAMEES));
+			npc.broadcastPacket(new NpcSay(npc, ChatType.GENERAL, NpcStringId.I_HAVE_FULFILLED_MY_CONTRACT_WITH_TRADER_CREAMEES));
 			st.giveItems(KIRUNAK_SKULL, 1);
 			st.setCond(2, true);
 		}

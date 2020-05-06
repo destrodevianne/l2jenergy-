@@ -18,12 +18,12 @@
  */
 package ai.npc.ForgeOfTheGods;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.model.Location;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 
 import ai.npc.AbstractNpcAI;
 
@@ -71,7 +71,7 @@ public final class Rooney extends AbstractNpcAI
 			{
 				if (!npc.isDecayed())
 				{
-					broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.HURRY_HURRY);
+					broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.HURRY_HURRY);
 					startQuestTimer("message2", 60000, npc, null);
 				}
 				break;
@@ -80,7 +80,7 @@ public final class Rooney extends AbstractNpcAI
 			{
 				if (!npc.isDecayed())
 				{
-					broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.I_AM_NOT_THAT_TYPE_OF_PERSON_WHO_STAYS_IN_ONE_PLACE_FOR_A_LONG_TIME);
+					broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.I_AM_NOT_THAT_TYPE_OF_PERSON_WHO_STAYS_IN_ONE_PLACE_FOR_A_LONG_TIME);
 					startQuestTimer("message3", 60000, npc, null);
 				}
 				break;
@@ -89,7 +89,7 @@ public final class Rooney extends AbstractNpcAI
 			{
 				if (!npc.isDecayed())
 				{
-					broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.ITS_HARD_FOR_ME_TO_KEEP_STANDING_LIKE_THIS);
+					broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.ITS_HARD_FOR_ME_TO_KEEP_STANDING_LIKE_THIS);
 					startQuestTimer("message4", 60000, npc, null);
 				}
 				break;
@@ -98,7 +98,7 @@ public final class Rooney extends AbstractNpcAI
 			{
 				if (!npc.isDecayed())
 				{
-					broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.WHY_DONT_I_GO_THAT_WAY_THIS_TIME);
+					broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.WHY_DONT_I_GO_THAT_WAY_THIS_TIME);
 				}
 				break;
 			}
@@ -111,7 +111,7 @@ public final class Rooney extends AbstractNpcAI
 	{
 		if (creature.isPlayer() && npc.isScriptValue(0))
 		{
-			broadcastNpcSay(npc, Say2.NPC_ALL, NpcStringId.WELCOME);
+			broadcastNpcSay(npc, ChatType.NPC_ALL, NpcStringId.WELCOME);
 			startQuestTimer("teleport", 3600000, npc, null);
 			startQuestTimer("message1", 60000, npc, null);
 			npc.setScriptValue(1);

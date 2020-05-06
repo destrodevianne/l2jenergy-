@@ -20,6 +20,7 @@ package handlers.chathandlers;
 
 import com.l2jserver.gameserver.configuration.config.GeneralConfig;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.handler.IChatHandler;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.PcCondOverride;
@@ -29,7 +30,6 @@ import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
 import com.l2jserver.gameserver.util.FloodProtectors;
 import com.l2jserver.gameserver.util.FloodProtectors.Action;
-import com.l2jserver.gameserver.util.Util;
 
 /**
  * Hero chat handler.
@@ -37,42 +37,51 @@ import com.l2jserver.gameserver.util.Util;
  */
 public class ChatHeroVoice implements IChatHandler
 {
-	private static final int[] COMMAND_IDS =
+	private static final ChatType[] CHAT_TYPES =
 	{
-		17
+		ChatType.HERO_VOICE,
 	};
 	
 	@Override
-	public void handleChat(int type, L2PcInstance activeChar, String target, String text)
+	public void handleChat(ChatType type, L2PcInstance activeChar, String target, String text)
 	{
-		if (activeChar.isHero() || activeChar.canOverrideCond(PcCondOverride.CHAT_CONDITIONS))
+		if (!activeChar.isHero() && !activeChar.canOverrideCond(PcCondOverride.CHAT_CONDITIONS))
 		{
-			if (activeChar.isChatBanned() && Util.contains(GeneralConfig.BAN_CHAT_CHANNELS, type))
+			activeChar.sendMessage("Only Heroes can enter the Hero channel.");
+			return;
+		}
+		
+		if (activeChar.isChatBanned() && GeneralConfig.BAN_CHAT_CHANNELS.contains(type))
+		{
+			activeChar.sendPacket(SystemMessageId.CHATTING_IS_CURRENTLY_PROHIBITED_IF_YOU_TRY_TO_CHAT_BEFORE_THE_PROHIBITION_IS_REMOVED_THE_PROHIBITION_TIME_WILL_INCREASE_EVEN_FURTHER);
+			return;
+		}
+		
+		if (GeneralConfig.JAIL_DISABLE_CHAT && activeChar.isJailed() && !activeChar.canOverrideCond(PcCondOverride.CHAT_CONDITIONS))
+		{
+			activeChar.sendPacket(SystemMessageId.CHATTING_IS_CURRENTLY_PROHIBITED);
+			return;
+		}
+		
+		if (!FloodProtectors.performAction(activeChar.getClient(), Action.HERO_VOICE))
+		{
+			activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "no_hero_speak"));
+			return;
+		}
+		
+		final CreatureSay cs = new CreatureSay(activeChar.getObjectId(), type, activeChar.getName(), text);
+		for (L2PcInstance player : L2World.getInstance().getPlayers())
+		{
+			if ((player != null) && !BlockList.isBlocked(player, activeChar))
 			{
-				activeChar.sendPacket(SystemMessageId.CHATTING_IS_CURRENTLY_PROHIBITED);
-				return;
-			}
-			
-			if (!FloodProtectors.performAction(activeChar.getClient(), Action.HERO_VOICE))
-			{
-				activeChar.sendMessage(MessagesData.getInstance().getMessage(activeChar, "no_hero_speak"));
-				return;
-			}
-			
-			CreatureSay cs = new CreatureSay(activeChar.getObjectId(), type, activeChar.getName(), text);
-			for (L2PcInstance player : L2World.getInstance().getPlayers())
-			{
-				if ((player != null) && !BlockList.isBlocked(player, activeChar))
-				{
-					player.sendPacket(cs);
-				}
+				player.sendPacket(cs);
 			}
 		}
 	}
 	
 	@Override
-	public int[] getChatTypeList()
+	public ChatType[] getChatTypeList()
 	{
-		return COMMAND_IDS;
+		return CHAT_TYPES;
 	}
 }

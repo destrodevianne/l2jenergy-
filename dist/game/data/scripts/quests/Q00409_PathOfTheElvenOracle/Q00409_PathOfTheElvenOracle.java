@@ -18,13 +18,13 @@
  */
 package quests.Q00409_PathOfTheElvenOracle;
 
+import com.l2jserver.gameserver.enums.ChatType;
 import com.l2jserver.gameserver.enums.actors.ClassId;
 import com.l2jserver.gameserver.model.actor.L2Npc;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.model.quest.Quest;
 import com.l2jserver.gameserver.model.quest.QuestState;
 import com.l2jserver.gameserver.network.NpcStringId;
-import com.l2jserver.gameserver.network.clientpackets.Say2;
 import com.l2jserver.gameserver.network.serverpackets.NpcSay;
 import com.l2jserver.gameserver.network.serverpackets.SocialAction;
 import com.l2jserver.gameserver.util.Util;
@@ -168,22 +168,22 @@ public final class Q00409_PathOfTheElvenOracle extends Quest
 					{
 						case lIZARDMAN_WARRIOR:
 						{
-							npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.THE_SACRED_FLAME_IS_OURS));
+							npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.THE_SACRED_FLAME_IS_OURS));
 							break;
 						}
 						case LIZARDMAN_SCOUT:
 						{
-							npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.THE_SACRED_FLAME_IS_OURS));
+							npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.THE_SACRED_FLAME_IS_OURS));
 							break;
 						}
 						case LIZARDMAN_SOLDIER:
 						{
-							npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.THE_SACRED_FLAME_IS_OURS));
+							npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.THE_SACRED_FLAME_IS_OURS));
 							break;
 						}
 						case TAMIL:
 						{
-							npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.AS_YOU_WISH_MASTER));
+							npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.AS_YOU_WISH_MASTER));
 							break;
 						}
 					}
@@ -217,7 +217,7 @@ public final class Q00409_PathOfTheElvenOracle extends Quest
 				{
 					if (!hasQuestItems(killer, LIZARD_CAPTAIN_ORDER))
 					{
-						npc.broadcastPacket(new NpcSay(npc, Say2.NPC_ALL, NpcStringId.ARRGHHWE_SHALL_NEVER_SURRENDER));
+						npc.broadcastPacket(new NpcSay(npc, ChatType.NPC_ALL, NpcStringId.ARRGHHWE_SHALL_NEVER_SURRENDER));
 						giveItems(killer, LIZARD_CAPTAIN_ORDER, 1);
 						qs.setCond(3, true);
 					}
