@@ -43,6 +43,7 @@ public class ExShowScreenMessage extends L2GameServerPacket
 	private final int _time;
 	private final int _npcString;
 	private List<String> _parameters = null;
+	
 	// Positions
 	public static final byte TOP_LEFT = 0x01;
 	public static final byte TOP_CENTER = 0x02;
@@ -52,6 +53,10 @@ public class ExShowScreenMessage extends L2GameServerPacket
 	public static final byte MIDDLE_RIGHT = 0x06;
 	public static final byte BOTTOM_CENTER = 0x07;
 	public static final byte BOTTOM_RIGHT = 0x08;
+	
+	// Sizes
+	public static final byte NORMAL_SIZE = 0x00;
+	public static final byte SMALL_SIZE = 0x01;
 	
 	/**
 	 * Display a String on the screen for a given time.
@@ -160,7 +165,7 @@ public class ExShowScreenMessage extends L2GameServerPacket
 	 * @param npcString
 	 * @param params the String parameters
 	 */
-	public ExShowScreenMessage(int type, int messageId, int position, int unk1, int size, int unk2, int unk3, boolean showEffect, int time, boolean fade, String text, NpcStringId npcString, String params)
+	public ExShowScreenMessage(int type, int messageId, int position, int unk1, int size, int unk2, int unk3, boolean showEffect, int time, boolean fade, String text, NpcStringId npcString, String... params)
 	{
 		_type = type;
 		_sysMessageId = messageId;
@@ -174,6 +179,11 @@ public class ExShowScreenMessage extends L2GameServerPacket
 		_size = size;
 		_effect = showEffect;
 		_npcString = npcString.getId();
+		
+		if (params != null)
+		{
+			addStringParameter(params);
+		}
 	}
 	
 	/**
