@@ -20,6 +20,7 @@ package com.l2jserver.gameserver.dao.factory.impl;
 
 import com.l2jserver.gameserver.dao.ClanDAO;
 import com.l2jserver.gameserver.dao.CommunityBufferDAO;
+import com.l2jserver.gameserver.dao.ForumDAO;
 import com.l2jserver.gameserver.dao.FriendDAO;
 import com.l2jserver.gameserver.dao.HennaDAO;
 import com.l2jserver.gameserver.dao.ItemAuctionDAO;
@@ -34,6 +35,7 @@ import com.l2jserver.gameserver.dao.PlayerDAO;
 import com.l2jserver.gameserver.dao.PlayerMinigameScoreDAO;
 import com.l2jserver.gameserver.dao.PlayerPostFriendDAO;
 import com.l2jserver.gameserver.dao.PlayerSkillSaveDAO;
+import com.l2jserver.gameserver.dao.PostDAO;
 import com.l2jserver.gameserver.dao.PremiumItemDAO;
 import com.l2jserver.gameserver.dao.RecipeBookDAO;
 import com.l2jserver.gameserver.dao.RecipeShopListDAO;
@@ -44,9 +46,11 @@ import com.l2jserver.gameserver.dao.SiegeDAO;
 import com.l2jserver.gameserver.dao.SkillDAO;
 import com.l2jserver.gameserver.dao.SubclassDAO;
 import com.l2jserver.gameserver.dao.TeleportBookmarkDAO;
+import com.l2jserver.gameserver.dao.TopicDAO;
 import com.l2jserver.gameserver.dao.factory.IDAOFactory;
 import com.l2jserver.gameserver.dao.impl.mysql.ClanDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.CommunityBufferDAOMySQLImpl;
+import com.l2jserver.gameserver.dao.impl.mysql.ForumDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.FriendDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.HennaDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.ItemAuctionDAOMySQLImpl;
@@ -61,6 +65,7 @@ import com.l2jserver.gameserver.dao.impl.mysql.PlayerDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.PlayerMinigameScoreDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.PlayerPostFriendDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.PlayerSkillSaveDAOMySQLImpl;
+import com.l2jserver.gameserver.dao.impl.mysql.PostDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.PremiumItemDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.RecipeBookDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.RecipeShopListDAOMySQLImpl;
@@ -71,6 +76,7 @@ import com.l2jserver.gameserver.dao.impl.mysql.SiegeDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.SkillDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.SubclassDAOMySQLImpl;
 import com.l2jserver.gameserver.dao.impl.mysql.TeleportBookmarkDAOMySQLImpl;
+import com.l2jserver.gameserver.dao.impl.mysql.TopicDAOMySQLImpl;
 
 /**
  * MySQL DAO Factory implementation.
@@ -82,6 +88,7 @@ enum MySQLDAOFactory implements IDAOFactory
 	
 	private final ClanDAO clanDAO = new ClanDAOMySQLImpl();
 	private final CommunityBufferDAO communityBufferDAO = new CommunityBufferDAOMySQLImpl();
+	private final ForumDAO forumDAO = new ForumDAOMySQLImpl();
 	private final FriendDAO friendDAO = new FriendDAOMySQLImpl();
 	private final HennaDAO hennaDAO = new HennaDAOMySQLImpl();
 	private final ItemAuctionDAO itemAuctionDAO = new ItemAuctionDAOMySQLImpl();
@@ -96,6 +103,7 @@ enum MySQLDAOFactory implements IDAOFactory
 	private final PlayerPostFriendDAO playerPostFriendDAO = new PlayerPostFriendDAOMySQLImpl();
 	private final PlayerMinigameScoreDAO playerMinigameScoreDAO = new PlayerMinigameScoreDAOMySQLImpl();
 	private final PlayerSkillSaveDAO playerSkillSaveDAO = new PlayerSkillSaveDAOMySQLImpl();
+	private final PostDAO postDAO = new PostDAOMySQLImpl();
 	private final PremiumItemDAO premiumItemDAO = new PremiumItemDAOMySQLImpl();
 	private final RecipeBookDAO recipeBookDAO = new RecipeBookDAOMySQLImpl();
 	private final RecipeShopListDAO recipeShopListDAO = new RecipeShopListDAOMySQLImpl();
@@ -106,6 +114,7 @@ enum MySQLDAOFactory implements IDAOFactory
 	private final SkillDAO skillDAO = new SkillDAOMySQLImpl();
 	private final SubclassDAO subclassDAO = new SubclassDAOMySQLImpl();
 	private final TeleportBookmarkDAO teleportBookmarkDAO = new TeleportBookmarkDAOMySQLImpl();
+	private final TopicDAO topicDAO = new TopicDAOMySQLImpl();
 	
 	@Override
 	public ClanDAO getClanDAO()
@@ -117,6 +126,12 @@ enum MySQLDAOFactory implements IDAOFactory
 	public CommunityBufferDAO getCommunityBufferDAO()
 	{
 		return communityBufferDAO;
+	}
+	
+	@Override
+	public ForumDAO getForumDAO()
+	{
+		return forumDAO;
 	}
 	
 	@Override
@@ -204,6 +219,12 @@ enum MySQLDAOFactory implements IDAOFactory
 	}
 	
 	@Override
+	public PostDAO getPostDAO()
+	{
+		return postDAO;
+	}
+	
+	@Override
 	public PremiumItemDAO getPremiumItemDAO()
 	{
 		return premiumItemDAO;
@@ -261,5 +282,11 @@ enum MySQLDAOFactory implements IDAOFactory
 	public TeleportBookmarkDAO getTeleportBookmarkDAO()
 	{
 		return teleportBookmarkDAO;
+	}
+	
+	@Override
+	public TopicDAO getTopicDAO()
+	{
+		return topicDAO;
 	}
 }

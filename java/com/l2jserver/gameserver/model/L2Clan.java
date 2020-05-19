@@ -38,8 +38,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l2jserver.commons.database.ConnectionFactory;
 import com.l2jserver.commons.util.EnumIntBitmask;
-import com.l2jserver.gameserver.communitybbs.BB.Forum;
-import com.l2jserver.gameserver.communitybbs.Manager.ForumsBBSManager;
+import com.l2jserver.gameserver.bbs.ForumsBBSManager;
 import com.l2jserver.gameserver.configuration.config.CharacterConfig;
 import com.l2jserver.gameserver.configuration.config.FeatureConfig;
 import com.l2jserver.gameserver.configuration.config.SiegeConfig;
@@ -51,6 +50,8 @@ import com.l2jserver.gameserver.data.sql.impl.CrestTable;
 import com.l2jserver.gameserver.data.xml.impl.MessagesData;
 import com.l2jserver.gameserver.datatables.SkillData;
 import com.l2jserver.gameserver.enums.ClanPrivilege;
+import com.l2jserver.gameserver.enums.ForumType;
+import com.l2jserver.gameserver.enums.ForumVisibility;
 import com.l2jserver.gameserver.enums.ZoneId;
 import com.l2jserver.gameserver.instancemanager.CastleManager;
 import com.l2jserver.gameserver.instancemanager.FortManager;
@@ -58,6 +59,7 @@ import com.l2jserver.gameserver.instancemanager.SiegeManager;
 import com.l2jserver.gameserver.instancemanager.TerritoryWarManager;
 import com.l2jserver.gameserver.instancemanager.TerritoryWarManager.Territory;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jserver.gameserver.model.bbs.Forum;
 import com.l2jserver.gameserver.model.events.EventDispatcher;
 import com.l2jserver.gameserver.model.events.impl.character.player.clan.OnPlayerClanJoin;
 import com.l2jserver.gameserver.model.events.impl.character.player.clan.OnPlayerClanLeaderChange;
@@ -709,13 +711,13 @@ public class L2Clan implements IIdentifiable, INamable
 		_level = level;
 		if ((_level >= 2) && (_forum == null) && CBasicConfig.ENABLE_COMMUNITY_BOARD)
 		{
-			final Forum forum = ForumsBBSManager.getInstance().getForumByName("ClanRoot");
-			if (forum != null)
+			final Forum clanRootForum = ForumsBBSManager.getInstance().getForumByName("ClanRoot");
+			if (clanRootForum != null)
 			{
-				_forum = forum.getChildByName(_name);
+				_forum = clanRootForum.getChildByName(_name);
 				if (_forum == null)
 				{
-					_forum = ForumsBBSManager.getInstance().createNewForum(_name, ForumsBBSManager.getInstance().getForumByName("ClanRoot"), Forum.CLAN, Forum.CLANMEMBERONLY, getId());
+					_forum = ForumsBBSManager.getInstance().createNewForum(_name, clanRootForum, ForumType.CLAN, ForumVisibility.CLAN_MEMBER_ONLY, getId());
 				}
 			}
 		}

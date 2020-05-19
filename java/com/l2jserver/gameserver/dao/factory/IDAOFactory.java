@@ -20,6 +20,7 @@ package com.l2jserver.gameserver.dao.factory;
 
 import com.l2jserver.gameserver.dao.ClanDAO;
 import com.l2jserver.gameserver.dao.CommunityBufferDAO;
+import com.l2jserver.gameserver.dao.ForumDAO;
 import com.l2jserver.gameserver.dao.FriendDAO;
 import com.l2jserver.gameserver.dao.HennaDAO;
 import com.l2jserver.gameserver.dao.ItemAuctionDAO;
@@ -34,6 +35,7 @@ import com.l2jserver.gameserver.dao.PlayerDAO;
 import com.l2jserver.gameserver.dao.PlayerMinigameScoreDAO;
 import com.l2jserver.gameserver.dao.PlayerPostFriendDAO;
 import com.l2jserver.gameserver.dao.PlayerSkillSaveDAO;
+import com.l2jserver.gameserver.dao.PostDAO;
 import com.l2jserver.gameserver.dao.PremiumItemDAO;
 import com.l2jserver.gameserver.dao.RecipeBookDAO;
 import com.l2jserver.gameserver.dao.RecipeShopListDAO;
@@ -44,6 +46,7 @@ import com.l2jserver.gameserver.dao.SiegeDAO;
 import com.l2jserver.gameserver.dao.SkillDAO;
 import com.l2jserver.gameserver.dao.SubclassDAO;
 import com.l2jserver.gameserver.dao.TeleportBookmarkDAO;
+import com.l2jserver.gameserver.dao.TopicDAO;
 
 /**
  * DAO Factory interface.
@@ -51,9 +54,11 @@ import com.l2jserver.gameserver.dao.TeleportBookmarkDAO;
  */
 public interface IDAOFactory
 {
+	ClanDAO getClanDAO();
+	
 	CommunityBufferDAO getCommunityBufferDAO();
 	
-	ClanDAO getClanDAO();
+	ForumDAO getForumDAO();
 	
 	FriendDAO getFriendDAO();
 	
@@ -83,6 +88,8 @@ public interface IDAOFactory
 	
 	PlayerSkillSaveDAO getPlayerSkillSaveDAO();
 	
+	PostDAO getPostDAO();
+	
 	PremiumItemDAO getPremiumItemDAO();
 	
 	RecipeBookDAO getRecipeBookDAO();
@@ -102,4 +109,6 @@ public interface IDAOFactory
 	SubclassDAO getSubclassDAO();
 	
 	TeleportBookmarkDAO getTeleportBookmarkDAO();
+	
+	TopicDAO getTopicDAO();
 }
