@@ -4666,79 +4666,79 @@ public final class SystemMessageId
 	 * ID: 816<br>
 	 * Message: Tickets are now available for Monster Race $s1!
 	 */
-	public static final SystemMessageId MONSRACE_TICKETS_AVAILABLE_FOR_S1_RACE = new SystemMessageId(816);
+	public static final SystemMessageId TICKETS_ARE_NOW_AVAILABLE_FOR_MONSTER_RACE_S1 = new SystemMessageId(816);
 	
 	/**
 	 * ID: 817<br>
 	 * Message: Now selling tickets for Monster Race $s1!
 	 */
-	public static final SystemMessageId MONSRACE_TICKETS_NOW_AVAILABLE_FOR_S1_RACE = new SystemMessageId(817);
+	public static final SystemMessageId NOW_SELLING_TICKETS_FOR_MONSTER_RACE_S1 = new SystemMessageId(817);
 	
 	/**
 	 * ID: 818<br>
 	 * Message: Ticket sales for the Monster Race will end in $s1 minute(s).
 	 */
-	public static final SystemMessageId MONSRACE_TICKETS_STOP_IN_S1_MINUTES = new SystemMessageId(818);
+	public static final SystemMessageId TICKET_SALES_FOR_THE_MONSTER_RACE_WILL_END_IN_S1_MINUTE_S = new SystemMessageId(818);
 	
 	/**
 	 * ID: 819<br>
 	 * Message: Tickets sales are closed for Monster Race $s1. Odds are posted.
 	 */
-	public static final SystemMessageId MONSRACE_S1_TICKET_SALES_CLOSED = new SystemMessageId(819);
+	public static final SystemMessageId TICKETS_SALES_ARE_CLOSED_FOR_MONSTER_RACE_S1_ODDS_ARE_POSTED = new SystemMessageId(819);
 	
 	/**
 	 * ID: 820<br>
 	 * Message: Monster Race $s2 will begin in $s1 minute(s)!
 	 */
-	public static final SystemMessageId MONSRACE_S2_BEGINS_IN_S1_MINUTES = new SystemMessageId(820);
+	public static final SystemMessageId MONSTER_RACE_S2_WILL_BEGIN_IN_S1_MINUTE_S = new SystemMessageId(820);
 	
 	/**
 	 * ID: 821<br>
 	 * Message: Monster Race $s1 will begin in 30 seconds!
 	 */
-	public static final SystemMessageId MONSRACE_S1_BEGINS_IN_30_SECONDS = new SystemMessageId(821);
+	public static final SystemMessageId MONSTER_RACE_S1_WILL_BEGIN_IN_30_SECONDS = new SystemMessageId(821);
 	
 	/**
 	 * ID: 822<br>
 	 * Message: Monster Race $s1 is about to begin! Countdown in five seconds!
 	 */
-	public static final SystemMessageId MONSRACE_S1_COUNTDOWN_IN_FIVE_SECONDS = new SystemMessageId(822);
+	public static final SystemMessageId MONSTER_RACE_S1_IS_ABOUT_TO_BEGIN_COUNTDOWN_IN_FIVE_SECONDS = new SystemMessageId(822);
 	
 	/**
 	 * ID: 823<br>
 	 * Message: The race will begin in $s1 second(s)!
 	 */
-	public static final SystemMessageId MONSRACE_BEGINS_IN_S1_SECONDS = new SystemMessageId(823);
+	public static final SystemMessageId THE_RACE_WILL_BEGIN_IN_S1_SECOND_S = new SystemMessageId(823);
 	
 	/**
 	 * ID: 824<br>
 	 * Message: They're off!
 	 */
-	public static final SystemMessageId MONSRACE_RACE_START = new SystemMessageId(824);
+	public static final SystemMessageId THEY_RE_OFF = new SystemMessageId(824);
 	
 	/**
 	 * ID: 825<br>
 	 * Message: Monster Race $s1 is finished!
 	 */
-	public static final SystemMessageId MONSRACE_S1_RACE_END = new SystemMessageId(825);
+	public static final SystemMessageId MONSTER_RACE_S1_IS_FINISHED = new SystemMessageId(825);
 	
 	/**
 	 * ID: 826<br>
 	 * Message: First prize goes to the player in lane $s1. Second prize goes to the player in lane $s2.
 	 */
-	public static final SystemMessageId MONSRACE_FIRST_PLACE_S1_SECOND_S2 = new SystemMessageId(826);
+	public static final SystemMessageId FIRST_PRIZE_GOES_TO_THE_PLAYER_IN_LANE_S1_SECOND_PRIZE_GOES_TO_THE_PLAYER_IN_LANE_S2 = new SystemMessageId(826);
 	
 	/**
 	 * ID: 827<br>
 	 * Message: You may not impose a block on a GM.
 	 */
-	public static final SystemMessageId YOU_MAY_NOT_IMPOSE_A_BLOCK_ON_GM = new SystemMessageId(827);
+	public static final SystemMessageId YOU_MAY_NOT_IMPOSE_A_BLOCK_ON_A_GM = new SystemMessageId(827);
 	
 	/**
 	 * ID: 828<br>
 	 * Message: Are you sure you wish to delete the $s1 macro?
 	 */
-	public static final SystemMessageId WISH_TO_DELETE_S1_MACRO = new SystemMessageId(828);
+	public static final SystemMessageId ARE_YOU_SURE_YOU_WISH_TO_DELETE_THE_S1_MACRO = new SystemMessageId(828);
 	
 	/**
 	 * ID: 829<br>
@@ -6034,13 +6034,13 @@ public final class SystemMessageId
 	 * ID: 1044<br>
 	 * Message: Monster race payout information is not available while tickets are being sold.
 	 */
-	public static final SystemMessageId MONSRACE_NO_PAYOUT_INFO = new SystemMessageId(1044);
+	public static final SystemMessageId MONSTER_RACE_PAYOUT_INFORMATION_IS_NOT_AVAILABLE_WHILE_TICKETS_ARE_BEING_SOLD = new SystemMessageId(1044);
 	
 	/**
 	 * ID: 1046<br>
 	 * Message: Monster race tickets are no longer available.
 	 */
-	public static final SystemMessageId MONSRACE_TICKETS_NOT_AVAILABLE = new SystemMessageId(1046);
+	public static final SystemMessageId MONSTER_RACE_TICKETS_ARE_NO_LONGER_AVAILABLE = new SystemMessageId(1046);
 	
 	/**
 	 * ID: 1047<br>

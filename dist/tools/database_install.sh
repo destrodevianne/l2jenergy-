@@ -164,6 +164,8 @@ $MYL < sql/game/item_elementals.sql &> /dev/null
 $MYL < sql/game/items.sql &> /dev/null
 $MYL < sql/game/itemsonground.sql &> /dev/null
 $MYL < sql/game/locations.sql &> /dev/null
+$MYL < sql/game/mdt_bets.sql &> /dev/null
+$MYL < sql/game/mdt_history.sql &> /dev/null
 $MYL < sql/game/merchant_lease.sql &> /dev/null
 $MYL < sql/game/messages.sql &> /dev/null
 $MYL < sql/game/npc_buffer.sql &> /dev/null

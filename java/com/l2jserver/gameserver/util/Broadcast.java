@@ -23,9 +23,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.l2jserver.gameserver.enums.ChatType;
+import com.l2jserver.gameserver.instancemanager.ZoneManager;
 import com.l2jserver.gameserver.model.L2World;
 import com.l2jserver.gameserver.model.actor.L2Character;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
+import com.l2jserver.gameserver.model.zone.L2ZoneType;
 import com.l2jserver.gameserver.network.serverpackets.CharInfo;
 import com.l2jserver.gameserver.network.serverpackets.CreatureSay;
 import com.l2jserver.gameserver.network.serverpackets.ExShowScreenMessage;
@@ -217,5 +219,30 @@ public final class Broadcast
 	public static void toAllOnlinePlayersOnScreen(String text)
 	{
 		toAllOnlinePlayers(new ExShowScreenMessage(text, 10000));
+	}
+	
+	/**
+	 * Send a packet to all players in a specific zone type.
+	 * @param <T> ZoneType.
+	 * @param zoneType : The zone type to send packets.
+	 * @param packets : The packets to send.
+	 */
+	public static <T extends L2ZoneType> void toAllPlayersInZoneType(Class<T> zoneType, L2GameServerPacket... packets)
+	{
+		for (L2ZoneType zone : ZoneManager.getInstance().getAllZones(zoneType))
+		{
+			for (L2Character creature : zone.getCharactersInside())
+			{
+				if (creature == null)
+				{
+					continue;
+				}
+				
+				for (L2GameServerPacket packet : packets)
+				{
+					creature.sendPacket(packet);
+				}
+			}
+		}
 	}
 }

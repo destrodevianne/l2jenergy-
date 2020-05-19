@@ -18,11 +18,11 @@
  */
 package handlers.admincommandhandlers;
 
-import com.l2jserver.gameserver.MonsterRace;
 import com.l2jserver.gameserver.ThreadPoolManager;
 import com.l2jserver.gameserver.enums.audio.Music;
 import com.l2jserver.gameserver.enums.audio.Sound;
 import com.l2jserver.gameserver.handler.IAdminCommandHandler;
+import com.l2jserver.gameserver.instancemanager.games.MonsterRace;
 import com.l2jserver.gameserver.model.actor.instance.L2PcInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.DeleteObject;
@@ -100,7 +100,7 @@ public class AdminMonsterRace implements IAdminCommandHandler
 		else if (state == 0)
 		{
 			state++;
-			SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.MONSRACE_RACE_START);
+			SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.THEY_RE_OFF);
 			sm.addInt(0);
 			activeChar.sendPacket(sm);
 			PlaySound SRace = Music.S_RACE.getPacket();

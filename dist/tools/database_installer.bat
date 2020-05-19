@@ -261,6 +261,8 @@ echo Installing empty GameServer tables.
 %mysqlPath% -h %gshost% -u %gsuser% --password=%gspass% -D %gsdb% < sql/game/items.sql
 %mysqlPath% -h %gshost% -u %gsuser% --password=%gspass% -D %gsdb% < sql/game/itemsonground.sql
 %mysqlPath% -h %gshost% -u %gsuser% --password=%gspass% -D %gsdb% < sql/game/locations.sql
+%mysqlPath% -h %gshost% -u %gsuser% --password=%gspass% -D %gsdb% < sql/game/mdt_bets.sql
+%mysqlPath% -h %gshost% -u %gsuser% --password=%gspass% -D %gsdb% < sql/game/mdt_history.sql
 %mysqlPath% -h %gshost% -u %gsuser% --password=%gspass% -D %gsdb% < sql/game/merchant_lease.sql
 %mysqlPath% -h %gshost% -u %gsuser% --password=%gspass% -D %gsdb% < sql/game/messages.sql
 %mysqlPath% -h %gshost% -u %gsuser% --password=%gspass% -D %gsdb% < sql/game/npc_buffer.sql
