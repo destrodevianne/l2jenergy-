@@ -29,6 +29,7 @@ public final class NonLethalableNpcs extends AbstractNpcAI
 {
 	private static final int[] NPCS =
 	{
+		22857, // Knoriks
 		35062, // Headquarters
 	};
 	

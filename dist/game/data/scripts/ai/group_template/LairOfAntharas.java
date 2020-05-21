@@ -34,7 +34,6 @@ import ai.npc.AbstractNpcAI;
 public final class LairOfAntharas extends AbstractNpcAI
 {
 	// NPC
-	final private static int KNORIKS = 22857;
 	final private static int DRAGON_KNIGHT = 22844;
 	final private static int DRAGON_KNIGHT2 = 22845;
 	final private static int ELITE_DRAGON_KNIGHT = 22846;
@@ -43,8 +42,6 @@ public final class LairOfAntharas extends AbstractNpcAI
 	final private static int DRAGON_MAGE = 22853;
 	// Misc
 	final private static int KNIGHT_CHANCE = 30;
-	final private static int KNORIKS_CHANCE = 60;
-	final private static int KNORIKS_CHANCE2 = 50;
 	
 	private LairOfAntharas()
 	{
@@ -52,7 +49,6 @@ public final class LairOfAntharas extends AbstractNpcAI
 		addKillId(DRAGON_KNIGHT, DRAGON_KNIGHT2, DRAGON_GUARD, DRAGON_MAGE);
 		addSpawnId(DRAGON_KNIGHT, DRAGON_KNIGHT2, DRAGON_GUARD, DRAGON_MAGE);
 		addMoveFinishedId(DRAGON_GUARD, DRAGON_MAGE);
-		addAggroRangeEnterId(KNORIKS);
 	}
 	
 	@Override
@@ -71,20 +67,6 @@ public final class LairOfAntharas extends AbstractNpcAI
 			}
 		}
 		return super.onAdvEvent(event, npc, player);
-	}
-	
-	@Override
-	public String onAggroRangeEnter(L2Npc npc, L2PcInstance player, boolean isSummon)
-	{
-		if (npc.isScriptValue(0) && (getRandom(100) < KNORIKS_CHANCE))
-		{
-			if (getRandom(100) < KNORIKS_CHANCE2)
-			{
-				npc.setScriptValue(1);
-			}
-			broadcastNpcSay(npc, ChatType.NPC_SHOUT, NpcStringId.WHOS_THERE_IF_YOU_DISTURB_THE_TEMPER_OF_THE_GREAT_LAND_DRAGON_ANTHARAS_I_WILL_NEVER_FORGIVE_YOU);
-		}
-		return super.onAggroRangeEnter(npc, player, isSummon);
 	}
 	
 	@Override
